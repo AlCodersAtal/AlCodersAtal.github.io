@@ -1,4 +1,4 @@
-
+<?php
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -157,6 +157,7 @@
       </div>
     </div>
     <script src="login.js"></script>
+    ?>
     <script src="responsive.js"></script>
   </body>
 </html>
