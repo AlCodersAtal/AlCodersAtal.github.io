@@ -18,19 +18,19 @@
                     </svg>
                 </a>
             </li>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="More info.html">More Info</a></li>
-            <li><a href="about us.html">About Us</a></li>
-            <li><a href="Courses.html">Courses</a></li>
-            <li><a href="loginpage.html">Login</a></li>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="More info.php">More Info</a></li>
+            <li><a href="about us.php">About Us</a></li>
+            <li><a href="Courses.php">Courses</a></li>
+            <li><a href="loginpage.php">Login</a></li>
         </ul>
         <ul>
-            <li><a href="index.html">AlCoders</a></li>
-            <li class="hideOnMobile"><a href="index.html">Home</a></li>
-            <li class="hideOnMobile"><a href="More info.html">More Info</a></li>
-            <li class="hideOnMobile"><a href="about us.html">About Us</a></li>
-            <li class="hideOnMobile"><a href="Courses.html">Courses</a></li>
-            <li class="hideOnMobile"><a href="loginpage.html">Login</a></li>
+            <li><a href="index.php">AlCoders</a></li>
+            <li class="hideOnMobile"><a href="index.php">Home</a></li>
+            <li class="hideOnMobile"><a href="More info.php">More Info</a></li>
+            <li class="hideOnMobile"><a href="about us.php">About Us</a></li>
+            <li class="hideOnMobile"><a href="Courses.php">Courses</a></li>
+            <li class="hideOnMobile"><a href="loginpage.php">Login</a></li>
             <li class="menu-button" onclick="showSidebar()">
                 <a href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26">
