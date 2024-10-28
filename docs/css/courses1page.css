@@ -1,0 +1,49 @@
+  h1 {
+    padding-right: 10%;
+    border-right: 10%;
+    padding-bottom: 3%;
+  }
+  h2 {
+    padding-bottom: 2%;
+  }
+  h3 {
+    padding-bottom: 2%;
+  }
+  .content {
+    font-size: x-large;
+    padding-bottom: 2%;
+  }
+  .content2 {
+    font-size: x-large;
+    padding-bottom: 2%;
+  }
+  .content3 strong {
+    font-size: x-large;
+  }
+
+  .content3 p {
+    font-size: x-large;
+    padding-bottom: 1%;
+  }
+  h5 {
+    font-size: xx-large;
+  }
+  .tittle1 h2 {
+    width: 650px;
+  }
+  img {
+    height: 450px;
+    width: 100%;
+  
+  }
+  .joinus button {
+    height: 50px;
+    font-size: medium;
+    color: blue;
+  }
+  .joinus button:hover {
+    color: red;
+  }
+  button{
+    color: blue;
+  }
