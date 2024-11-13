@@ -1,112 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register & Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/loginpage.css" />
-</head>
-<body>
-    <nav>
-        <ul class="sidebar">
-            <li onclick="hideSidebar()">
-                <a href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26">
-                        <path d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z" />
-                    </svg>
-                </a>
-            </li>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="More info.php">More Info</a></li>
-            <li><a href="about us.php">About Us</a></li>
-            <li><a href="Courses.php">Courses</a></li>
-            <li><a href="loginpage.php">Login</a></li>
-        </ul>
-        <ul>
-            <li><a href="index.php">AlCoders</a></li>
-            <li class="hideOnMobile"><a href="index.php">Home</a></li>
-            <li class="hideOnMobile"><a href="More info.php">More Info</a></li>
-            <li class="hideOnMobile"><a href="about us.php">About Us</a></li>
-            <li class="hideOnMobile"><a href="Courses.php">Courses</a></li>
-            <li class="hideOnMobile"><a href="loginpage.php">Login</a></li>
-            <li class="menu-button" onclick="showSidebar()">
-                <a href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 96 960 960" width="26">
-                        <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
-                    </svg>
-                </a>
-            </li>
-        </ul>
-    </nav>
+<?php
+// Connect to the database
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "your_database_name"; // Replace with your database name
 
-    <div class="container" id="signup" style="display: none">
-        <h1 class="form-title">Register</h1>
-        <form method="post" action="register.php">
-            <div class="input-group">
-                <i class="fas fa-user"></i>
-                <input type="text" name="fName" id="fName" placeholder="First Name" required />
-                <label for="fName">First Name</label>
-            </div>
-            <div class="input-group">
-                <i class="fas fa-user"></i>
-                <input type="text" name="lName" id="lName" placeholder="Last Name" required />
-                <label for="lName">Last Name</label>
-            </div>
-            <div class="input-group">
-                <i class="fas fa-envelope"></i>
-                <input type="email" name="email" id="email" placeholder="Email" required />
-                <label for="email">Email</label>
-            </div>
-            <div class="input-group">
-                <i class="fas fa-lock"></i>
-                <input type="password" name="password" id="password" placeholder="Password" required />
-                <label for="password">Password</label>
-            </div>
-            <input type="submit" class="btn" value="Sign Up" name="signUp" />
-        </form>
-        <p class="or">----------or--------</p>
-        <div class="icons">
-            <i class="fab fa-google"></i>
-            <i class="fab fa-facebook"></i>
-        </div>
-        <div class="links">
-            <p>Already Have Account?</p>
-            <button id="signInButton">Sign In</button>
-        </div>
-    </div>
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
 
-    <div class="container" id="signIn">
-        <h1 class="form-title">Sign In</h1>
-        <form method="post" action="login.php">
-            <div class="input-group">
-                <i class="fas fa-envelope"></i>
-                <input type="email" name="email" id="email" placeholder="Email" required />
-                <label for="email">Email</label>
-            </div>
-            <div class="input-group">
-                <i class="fas fa-lock"></i>
-                <input type="password" name="password" id="password" placeholder="Password" required />
-                <label for="password">Password</label>
-            </div>
-            <p class="recover">
-                <a href="#">Recover Password</a>
-            </p>
-            <input type="submit" class="btn" value="Sign In" name="signIn" />
-        </form>
-        <p class="or">----------or--------</p>
-        <div class="icons">
-            <i class="fab fa-google"></i>
-            <i class="fab fa-facebook"></i>
-        </div>
-        <div class="links">
-            <p>Don't have account yet?</p>
-            <button id="signUpButton">Sign Up</button>
-        </div>
-    </div>
+// Registration process
+if (isset($_POST['signUp'])) {
+  $firstName = $_POST['fName'];
+  $lastName = $_POST['lName'];
+  $email = $_POST['email'];
+  $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-    <script src="login.js"></script>
-    <script src="responsive.js"></script>
-</body>
-</html>
+  $sql = "INSERT INTO users (first_name, last_name, email, password) VALUES ('$firstName', '$lastName', '$email', '$password')";
+
+  if ($conn->query($sql) === TRUE) {
+    echo "Registration successful!";
+  } else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+  }
+}
+
+// Login process
+if (isset($_POST['signIn'])) {
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+
+  $sql = "SELECT * FROM users WHERE email = '$email'";
+  $result = $conn->query($sql);
+
+  if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    if (password_verify($password, $row['password'])) {
+      echo "Login successful!";
+      // Redirect or start session as needed
+    } else {
+      echo "Incorrect password!";
+    }
+  } else {
+    echo "No user found with that email!";
+  }
+}
+
+$conn->close();
