@@ -1,57 +1,44 @@
-let availableKeywords = [
- 'Who are AlCoders',
-    'What is HTML',
-    'What is CSS',
-    'How to learn HTML',
-    'How to learn CSS',
-    'How to learn Python.What is its use',
-    'What is JavaScript',
-    'How to Learn JavaScript',
-    'What is coding',
-    'What is Arduino',
-    'How to use Arduino',
-    'Home',
-];
-
-const resultsBox = document.querySelector(".result-box");
-const inputBox = document.getElementById("input-box");
-
-inputBox.onkeyup = function(){
-    let result = [];
-    let input = inputBox.value;
-    if(input.length){
-        result = availableKeywords.filter((keyword)=>{
-           return  keyword.toLowerCase().includes(input.toLowerCase());
-        });
-        console.log(result);
+// Show the search pop-up
+function showSearchPopup() {
+    document.getElementById("searchPopup").style.display = "flex";
+  }
+  
+  // Hide the search pop-up
+  function hideSearchPopup() {
+    document.getElementById("searchPopup").style.display = "none";
+  }
+  
+  // Show recommendations
+  function showRecommendations() {
+    const searchInput = document.getElementById("searchBar").value.toLowerCase();
+    const resultBox = document.getElementById("resultBox");
+  
+    // Sample recommendations (these could be dynamically fetched)
+    const keywords = ["Home", "Home Page", "More Info", "About Us", "Who are Alcoders", "Courses", "What is an Arduino", "WHat is Sensors", "Login Page", "How to Login In this Website"];
+    const filtered = keywords.filter((word) =>
+      word.toLowerCase().includes(searchInput)
+    );
+  
+    // Render recommendations
+    resultBox.innerHTML = filtered
+      .map((word) => `<li onclick="redirectToPage('${word}')">${word}</li>`)
+      .join("");
+      
+  }
+  
+  // Redirect to the selected page
+  function redirectToPage(keyword) {
+    const pages = {
+      Home: "index.html",
+      "More Info": "More info.html",
+      "About Us": "about us.html",
+      Courses: "Courses.html",
+      Login: "loginpage.html",
+      "Home Page": "index.html"
+    };
+  
+    if (pages[keyword]) {
+      window.location.href = pages[keyword];
     }
-    display(result);
-
-    if(!result.length){
-        resultsBox.innerHTML = '';
-    }
-
-}
-
-function display(result){
-    const content = result.map((list)=>{    
-        return "<li onclick=selectInput(this)>" + list + "</li>";
-});
-
-    resultsBox.innerHTML = "<ul>" + content.join('') + "</ul>";
-}
-function selectInput(list){
-    inputBox.value = list.innerHTML;
-    resultsBox.innerHTML = '';
-}
-
-
-
-
-
-
-
-
-
-
-
+  }
+  

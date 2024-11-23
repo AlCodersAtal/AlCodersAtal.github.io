@@ -1,22 +1,25 @@
 img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    object-position: 10;
-    margin-top:1%;
-  }
-  button {
-    color: blue;
-  }
-  .content {
-    font-weight: normal;
-    width: 89%;
-    font-size: larger;
-    font-style: normal;
+  padding-top: 55px;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: 10;
+  margin-top: 1%;
+}
 
-  }
- 
-  .more button {
-    height: 50px;
-    font-size: medium;
-  }
+button {
+  color: blue;
+}
+
+.content {
+  font-weight: normal;
+  width: 89%;
+  font-size: larger;
+  font-style: normal;
+
+}
+
+.more button {
+  height: 50px;
+  font-size: medium;
+}
