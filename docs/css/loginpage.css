@@ -2,85 +2,109 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
+
 body {
   background-color: #c9d6ff;
   background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding-top: 50px;
 }
+
 .container {
   background: #fff;
   width: 450px;
-  padding: 1.5rem;
-  margin: 50px auto;
-  border-radius: 10px;
-  box-shadow: 0 20px 35px rgba(0, 0, 1, 0.9);
+  padding: 2rem;
+  margin: 20px auto;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
+
 form {
-  margin: 0 2rem;
+  margin: 1rem 0;
 }
+
 .form-title {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
   text-align: center;
-  padding: 1.3rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 1.5rem;
+  color: hsl(327, 90%, 28%);
 }
-input {
-  color: inherit;
-  width: 100%;
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid #757575;
-  padding-left: 1.5rem;
-  font-size: 15px;
-}
+
 .input-group {
-  padding: 1% 0;
   position: relative;
+  margin-bottom: 1.5rem;
 }
+
 .input-group i {
   position: absolute;
-  color: black;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #757575;
 }
+
+input {
+  width: 100%;
+  padding: 10px 40px;
+  font-size: 1rem;
+  border: none;
+  border-bottom: 2px solid #dfe9f5;
+  transition: 0.3s;
+}
+
 input:focus {
-  background-color: transparent;
-  outline: transparent;
   border-bottom: 2px solid hsl(327, 90%, 28%);
+  outline: none;
 }
+
 input::placeholder {
-  color: transparent;
+  color: #aaa;
 }
+
 label {
   color: #757575;
-  position: relative;
-  left: 1.2em;
-  top: -1.3em;
-  cursor: auto;
-  transition: 0.3s ease all;
+  position: absolute;
+  left: 40px;
+  top: -20px;
+  font-size: 0.9rem;
+  transition: 0.3s ease-in-out;
+  background: #fff;
+  padding: 0 5px;
 }
-input:focus ~ label,
-input:not(:placeholder-shown) ~ label {
-  top: -3em;
+
+input:focus~label,
+input:not(:placeholder-shown)~label {
+  top: -40px;
+  font-size: 0.8rem;
   color: hsl(327, 90%, 28%);
-  font-size: 15px;
 }
+
 .recover {
   text-align: right;
-  font-size: 1rem;
-  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
 }
+
 .recover a {
   text-decoration: none;
   color: rgb(125, 125, 235);
 }
+
 .recover a:hover {
   color: blue;
   text-decoration: underline;
 }
+
 .btn {
   font-size: 1.1rem;
-  padding: 8px 0;
+  padding: 10px;
   border-radius: 5px;
   outline: none;
   border: none;
@@ -88,49 +112,71 @@ input:not(:placeholder-shown) ~ label {
   background: rgb(125, 125, 235);
   color: white;
   cursor: pointer;
-  transition: 0.9s;
+  transition: 0.3s;
 }
+
 .btn:hover {
-  background: #07001f;
+  background: hsl(327, 90%, 28%);
 }
+
 .or {
-  font-size: 1.1rem;
-  margin-top: 0.5rem;
-  text-align: center;
+  font-size: 1rem;
+  margin: 1rem 0;
+  color: #757575;
 }
+
 .icons {
   text-align: center;
+  margin: 1rem 0;
 }
+
 .icons i {
   color: rgb(125, 125, 235);
-  padding: 0.8rem 1.5rem;
-  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  border-radius: 50%;
   font-size: 1.5rem;
   cursor: pointer;
   border: 2px solid #dfe9f5;
-  margin: 0 15px;
-  transition: 1s;
+  margin: 0 10px;
+  transition: 0.3s;
 }
+
 .icons i:hover {
-  background: #07001f;
-  font-size: 1.6rem;
-  border: 2px solid rgb(125, 125, 235);
+  background: hsl(327, 90%, 28%);
+  color: #fff;
+  border: 2px solid hsl(327, 90%, 28%);
 }
+
 .links {
   display: flex;
-  justify-content: space-around;
-  padding: 0 4rem;
-  margin-top: 0.9rem;
-  font-weight: bold;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+  font-size: 1rem;
 }
+
 button {
   color: rgb(125, 125, 235);
   border: none;
-  background-color: transparent;
+  background: none;
   font-size: 1rem;
-  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
 }
+
 button:hover {
-  text-decoration: underline;
   color: blue;
+  text-decoration: underline;
+}
+
+/* Added Media Query for Better Responsiveness */
+@media screen and (max-width: 500px) {
+  .container {
+    width: 95%;
+  }
+
+  .icons i {
+    font-size: 1.2rem;
+    padding: 0.6rem 0.8rem;
+  }
 }
