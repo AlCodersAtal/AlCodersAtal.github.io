@@ -1,0 +1,15 @@
+h1 {
+    padding-top: 5%;
+}
+
+.content {
+    font-size: larger;
+}
+
+.content h1,
+h2,
+h3,
+h4,
+h5 {
+    padding-bottom: 15px;
+}
