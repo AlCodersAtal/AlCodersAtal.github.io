@@ -37,7 +37,7 @@ function showSearchPopup() {
       "Home Page": "index.html",
       "Who are Alcoders": "about us.html",
       "What is an Arduino": "arduinoCourse.html",
-      "WHat is Sensors": "sensorCourse.html.html",
+      "What is Sensors": "sensorCourse.html.html",
       "Login Page":"loginpage.html", 
       "How to Login In this Website": "loginpage.html"
     };
