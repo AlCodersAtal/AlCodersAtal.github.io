@@ -12,9 +12,10 @@
 
 .content {
   text-align: center;
+
   /* Aligns the inline-block items horizontally */
 }
 
-h1 {
+h2 {
   padding-top: 40px;
 }

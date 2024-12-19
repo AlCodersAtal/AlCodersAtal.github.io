@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>An Automatic LED cntrolled by LDR</title>
+    <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
+  </head>
+  <style>
+    .code pre {
+      background-color: rgb(65, 55, 55);
+      color: antiquewhite;
+      font-size: larger;
+      border: 20px;
+      width: 800px;
+    }
+    p,
+    pre {
+      width: 800px;
+      font-size: 20px;
+    }
+  </style>
+  <body>
+    <h2>How to make an LDR controlled LED</h2>
+
+    <p>
+      An LDR-controlled LED uses a Light Dependent Resistor to sense light
+      levels and control an LED's state based on the surrounding brightness. The
+      LDR forms a voltage divider with a resistor, and its output voltage
+      changes with light intensity. This voltage is read by the Arduino through
+      an analog pin. The Arduino compares the reading to a predefined threshold
+      to decide whether to turn the LED on or off. If the environment is dark
+      (high LDR resistance, higher voltage), the LED turns on; in bright
+      conditions (low LDR resistance, lower voltage), the LED turns off. The
+      circuit consists of an LDR connected to a 10kΩ resistor forming a voltage
+      divider, with one end connected to 5V, the other to ground, and the
+      midpoint connected to the Arduino’s analog pin. The LED is connected to a
+      digital pin via a 220Ω resistor.
+    </p>
+    <h2>Here's the code:</h2>
+    <h3>You can copy it and paste it in the Arduino IDE.</h3>
+    <div class="code">
+      <pre>
+            1  const int ldrPin = A0;       // LDR connected to analog pin A0
+            2  const int ledPin = 13;       // LED connected to digital pin 13
+            3  int threshold = 500;         // Threshold value to determine light/dark
+            4
+            5  void setup() {
+            6      pinMode(ledPin, OUTPUT);   // Set the LED pin as OUTPUT
+            7      Serial.begin(9600);        // Start serial communication for debugging
+            8  }
+            9
+            10 void loop() {
+            11     int ldrValue = analogRead(ldrPin); // Read the value from LDR
+            12     Serial.println(ldrValue);         // Print the LDR value for debugging
+            13
+            14     if (ldrValue < threshold) {       // If light is bright (low resistance)
+            15         digitalWrite(ledPin, LOW);    // Turn off the LED
+            16     } else {                          // If it is dark (high resistance)
+            17         digitalWrite(ledPin, HIGH);   // Turn on the LED
+            18     }
+            19
+            20     delay(100);  // Small delay for stability
+            21 }
+        
+            </pre
+      >
+    </div>
+    <pre>
+Explanation of Code with Line Numbers:
+    Lines 1-3: Define the pins for the LDR and LED and set the light/dark threshold.
+    Lines 5-8: Initialize the LED pin as output and start the serial communication for debugging.
+    Lines 10-21: Continuously read the LDR value, compare it to the threshold, and control the LED accordingly.
+    Debugging information is printed on the Serial Monitor.</pre
+    >
+    <a href="projects.html"><button>Go Back</button></a>
+  </body>
+</html>

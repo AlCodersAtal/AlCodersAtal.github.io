@@ -1,0 +1,26 @@
+.head h2 {
+    padding-top: 90px;
+    margin-left: 350px;
+
+}
+
+.head p {
+    margin-left: 30px;
+}
+
+.course1,
+.course2 {
+    display: inline-block;
+    /* Makes each course container inline-block for horizontal alignment */
+    text-align: center;
+    /* Centers the text below the image */
+    vertical-align: top;
+    /* Aligns the items at the top */
+    padding-top: 30px;
+    padding: 40px;
+}
+
+.content {
+    text-align: center;
+    /* Aligns the inline-block items horizontally */
+}
