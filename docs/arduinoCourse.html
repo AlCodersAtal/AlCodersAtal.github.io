@@ -15,74 +15,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <script src="navigation.js" defer></script>
   </head>
-  <body>
-    <!-- the Starting of the navigation -->
-    <nav>
-      <ul class="sidebar">
-        <li onclick="hideSidebar()">
-          <a href="#"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="26"
-              viewBox="0 96 960 960"
-              width="26"
-            >
-              <path
-                d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"
-              /></svg>
-</a>
-        </li>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="More info.html">More Info</a></li>
-        <li><a href="about us.html">About Us</a></li>
-        <li><a href="Courses.html">Courses</a></li>
-        <li><a href="loginpage.html">Login</a></li>
-      </ul>
-      <ul>
-        <li><a href="index.html">AlCoders</a></li>
-        <li class="hideOnMobile"><a href="index.html">Home</a></li>
-        <li class="hideOnMobile"><a href="More info.html">More Info</a></li>
-        <li class="hideOnMobile"><a href="about us.html">About Us</a></li>
-        <li class="hideOnMobile"><a href="Courses.html">Courses</a></li>
-        <li class="hideOnMobile"><a href="loginpage.html">Login</a></li>
-        <!-- Search icon -->
-        <li class="search-icon">
-          <a href="#" id="searchIcon" onclick="showSearchPopup()">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </a>
-        </li>
-        <li class="menu-button" onclick="showSidebar()">
-          <a href="#"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="26"
-              viewBox="0 96 960 960"
-              width="26"
-            >
-              <path
-                d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"
-              /></svg>
-          </a>
-        </li>
-      </ul>
-    </nav>
+  <body onload="loadNavigation()">
+    <div id="navigationContainer"></div>
 
-    <!-- Search pop-up -->
-    <div id="searchPopup" class="search-popup">
-      <div class="popup-content">
-        <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
-        <input
-          type="text"
-          id="searchBar"
-          placeholder="Search here..."
-          oninput="showRecommendations()"
-        />
-        <div class="result-box" id="resultBox"></div>
-      </div>
-    </div>
-
-    <!--  The End of the navigation -->
    <br>
    <br>
    <br>

@@ -14,7 +14,7 @@ function showSearchPopup() {
     const resultBox = document.getElementById("resultBox");
   
     // Sample recommendations (these could be dynamically fetched)
-    const keywords = ["Home", "Home Page", "More Info", "About Us", "Who are Alcoders", "Courses", "What is an Arduino", "WHat is Sensors", "Login Page", "How to Login In this Website"];
+    const keywords = ["Home", "Home Page", "More Info", "About Us", "Who are Alcoders", "Courses", "What is an Arduino", "What is Sensors", "Login Page", "How to Login In this Website"];
     const filtered = keywords.filter((word) =>
       word.toLowerCase().includes(searchInput)
     );
@@ -23,7 +23,13 @@ function showSearchPopup() {
     resultBox.innerHTML = filtered
       .map((word) => `<li onclick="redirectToPage('${word}')">${word}</li>`)
       .join("");
-      
+
+    // Show or hide the result box based on the filtered results
+    if (filtered.length > 0) {
+      resultBox.style.display = "block";
+    } else {
+      resultBox.style.display = "none";
+    }
   }
   
   // Redirect to the selected page
@@ -46,4 +52,28 @@ function showSearchPopup() {
       window.location.href = pages[keyword];
     }
   }
-  
+
+// Add event listener for Enter key press
+document.getElementById("searchBar").addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    const searchInput = document.getElementById("searchBar").value.toLowerCase();
+    const keywords = ["Home", "Home Page", "More Info", "About Us", "Who are Alcoders", "Courses", "What is an Arduino", "What is Sensors", "Login Page", "How to Login In this Website"];
+    const filtered = keywords.filter((word) =>
+      word.toLowerCase().includes(searchInput)
+    );
+
+    if (filtered.length > 0) {
+      redirectToPage(filtered[0]);
+    }
+  }
+});
+
+
+function loadNavigation() {
+  fetch('navigation.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navigationContainer').innerHTML = data;
+    })
+    .catch(error => console.error('Error loading navigation:', error));
+}

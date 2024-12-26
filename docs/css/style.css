@@ -191,3 +191,44 @@ nav li:first-child {
 .search-popup .close-btn:hover {
   color: red;
 }
+
+/* ...existing code... */
+
+#resultBox {
+  list-style-type: none;
+  /* Remove bullets */
+  padding: 0;
+  /* Remove default padding */
+  margin: 0;
+  /* Remove default margin */
+  display: none;
+  /* Initially hidden */
+}
+
+#resultBox li {
+  padding: 10px;
+  /* Add padding */
+  border: 1px solid #ddd;
+  /* Add border */
+  margin-bottom: 5px;
+  /* Add space between items */
+  cursor: pointer;
+  /* Change cursor to pointer */
+  background-color: #f9f9f9;
+  /* Add background color */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* Add shadow */
+  transition: background-color 0.3s, transform 0.3s;
+  /* Add transition effect */
+}
+
+#resultBox li:hover {
+  background-color: #e0e0e0;
+  /* Change background color on hover */
+  transform: scale(1.02);
+  /* Slightly enlarge on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  /* Enhance shadow on hover */
+}
+
+/* ...existing code... */
