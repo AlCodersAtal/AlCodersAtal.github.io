@@ -68,7 +68,6 @@ document.getElementById("searchBar").addEventListener("keydown", function(event)
   }
 });
 
-
 function loadNavigation() {
   fetch('navigation.html')
     .then(response => response.text())
