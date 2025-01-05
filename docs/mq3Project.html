@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gas Leakage Detector</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
+        <script src="copyCode.js" defer></script>
+        <style>
+            .code {
+                position: relative;
+                width: 800px;
+            }
+            .code pre {
+                background-color: rgb(65, 55, 55);
+                color: antiquewhite;
+                font-size: larger;
+                border: 20px;
+                padding: 20px;
+                width: 100%;
+                overflow-x: auto;
+                position: relative;
+                
+            }
+            .code button {
+                background-color: #007bff;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+            .code button:hover {
+                background-color: #0056b3;
+            }
+            p,
+            pre {
+                width: 800px;
+                font-size: 20px;
+            }
+            .back-button {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                position: relative;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+            .back-button::before {
+                content: "←";
+                position: absolute;
+                left: -20px;
+                font-size: 20px;
+            }
+            .back-button:hover {
+                background-color: #0056b3;
+            }
+            ul li{
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>How to make a Gas Leakage Detector and Buzzer Alarm System</h2>
+
+        <p>
+            A gas leakage detector and buzzer alarm system uses a gas sensor to detect the presence of gas in the environment and triggers a buzzer alarm if the gas concentration exceeds a certain threshold. The gas sensor forms a voltage divider with a resistor, and its output voltage changes with gas concentration. This voltage is read by the Arduino through an analog pin. The Arduino compares the reading to a predefined threshold to decide whether to activate the buzzer. If the gas concentration is high (high sensor output voltage), the buzzer turns on; otherwise, it remains off. The circuit consists of a gas sensor connected to a 10kΩ resistor forming a voltage divider, with one end connected to 5V, the other to ground, and the midpoint connected to the Arduino’s analog pin. The buzzer is connected to a digital pin via a 220Ω resistor.
+        </p>
+        <h2>Here's the code:</h2>
+        <h3>You can copy it and paste it in the Arduino IDE.</h3>
+        <div class="code">
+            <pre id="codeBlock">
+ const int gasSensorPin = A0;  // Gas sensor connected to analog pin A0
+ const int buzzerPin = 13;     // Buzzer connected to digital pin 13
+ int threshold = 300;          // Threshold value to determine gas presence
+
+  void setup() {
+ pinMode(buzzerPin, OUTPUT);  // Set the buzzer pin as OUTPUT
+ Serial.begin(9600);          // Start serial communication for debugging
+  }
+  void loop() {
+  int gasValue = analogRead(gasSensorPin); // Read the value from gas sensor
+  Serial.println(gasValue);                // Print the gas sensor value for debuggi
+  if (gasValue > threshold) {              // If gas concentration is high
+          digitalWrite(buzzerPin, HIGH);       // Turn on the buzzer
+  } else {                                 // If gas concentration is low
+          digitalWrite(buzzerPin, LOW);        // Turn off the buzzer
+
+  delay(100);  // Small delay for stability
+  }
+}
+        </pre>
+            <button onclick="copyCode()">Copy Code</button>
+        </div>
+        <h2>Components Required:</h2>
+        <ul>
+            <li>Arduino Uno</li>
+            <li>Gas Sensor (e.g., MQ-2)</li>
+            <li>Buzzer</li>
+            <li>Jumper Wires</li>
+        </ul>
+        <h2>Circuit Diagram:</h2>
+        <img
+            src="images/mq3Project.png"
+            alt="Gas Leakage Detector Circuit"
+            height="700px"
+            width="100%"
+        />
+        <h2>Working:</h2>
+        <p>
+            The gas leakage detector and buzzer alarm system uses a gas sensor to detect gas levels. The gas sensor is connected to an analog pin of the Arduino, which reads the voltage across the sensor. The Arduino compares this voltage to a predefined threshold value to determine whether the gas concentration is high or low. If the gas concentration is high (high sensor output voltage), the buzzer is turned on. If the gas concentration is low (low sensor output voltage), the buzzer is turned off. This system can be used for applications like gas leakage detection in homes, industries, and more.
+        </p>
+        <h2>Applications:</h2>
+        <ul>
+            <li>Home Gas Leakage Detection</li>
+            <li>Industrial Gas Leakage Detection</li>
+            <li>Safety Alarm Systems</li>
+            <li>Environmental Monitoring</li>
+        </ul>
+        <h2>Conclusion:</h2>
+        <p>
+            The gas leakage detector and buzzer alarm system is a simple and effective way to detect gas leaks and alert users. By using a gas sensor and an Arduino, you can create a responsive alarm system that activates when gas concentration exceeds a certain threshold. This system can be used in various applications, including home and industrial gas leakage detection, safety alarm systems, and environmental monitoring. Experiment with different threshold values and sensor configurations to customize the system for your specific needs.
+        </p>
+        <h2>References:</h2>
+        <ul>
+            <li>
+                <a
+                    href="https://www.arduino.cc/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Arduino Official Website</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://www.electronicwings.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >ElectronicWings Tutorials</a
+                >
+            </li>
+            <li>
+                <a
+                    href="https://www.instructables.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Instructables Arduino Projects</a
+                >
+            </li>
+        </ul>
+        <br />
+        <a href="projects.html" class="back-button">Go Back</a>
+    </body>
+</html></html>
