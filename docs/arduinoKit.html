@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AlCoders Light Lab – Arduino Physics Kit Manual</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <script src="js/loadNavigation.js" defer></script>
+  <script src="js/navigation.js" defer></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+    h1, h2, h3 {
+      color: #333;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      background: #f4f4f4;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .download-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .download-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body onload="loadNavigation()">
+  <div id="navigationContainer"></div>
+
+  <div class="container">
+    <h1>AlCoders Light Lab – Arduino Physics Kit Manual</h1>
+    <h2>Introduction</h2>
+    <p>
+      Welcome to the <strong>AlCoders Light Lab</strong>! This kit helps you explore two exciting projects using Arduino:
+      <ol>
+        <li><strong>Laser Security System</strong> – Detects intrusions using a laser and an LDR.</li>
+        <li><strong>RGB Color Mixer</strong> – Controls an RGB LED using potentiometers.</li>
+      </ol>
+      Each project demonstrates fundamental physics concepts related to <strong>light, optics, and electronics</strong>.
+    </p>
+
+    <hr>
+
+    <h2>1. Laser Security System</h2>
+    <h3>Project Overview:</h3>
+    <p>
+      The <strong>Laser Security System</strong> detects when an object interrupts a laser beam. When the laser is blocked, the LDR detects a drop in light intensity, triggering an alarm. This concept is used in security alarms, automated door systems, and light-based sensors.
+    </p>
+
+    <h3>Components Required:</h3>
+    <ul>
+      <li>1 x Arduino Uno</li>
+      <li>1 x Laser module (5V)</li>
+      <li>1 x LDR (Light Dependent Resistor)</li>
+      <li>1 x 10kΩ Resistor</li>
+      <li>1 x Buzzer</li>
+      <li>Jumper wires</li>
+      <li>Breadboard</li>
+    </ul>
+
+    <h3>Physics Concept:</h3>
+    <p>
+      <strong>Light Detection:</strong> LDRs vary their resistance based on light intensity. More light means lower resistance, while less light increases resistance.<br>
+      <strong>Security Systems:</strong> Used in real-world alarm systems to detect unauthorized entry.<br>
+      <strong>Ohm’s Law (V = IR):</strong> Resistance change in the LDR alters voltage, which the Arduino detects.
+    </p>
+
+    <h3>Circuit Connections:</h3>
+    <ol>
+      <li>Connect one end of the <strong>LDR</strong> to <strong>5V</strong>.</li>
+      <li>Connect the other end of the <strong>LDR</strong> to <strong>A0</strong> and also to <strong>GND</strong> via a <strong>10kΩ resistor</strong>.</li>
+      <li>Connect the <strong>Laser module</strong> to <strong>digital pin 9</strong> and <strong>GND</strong>.</li>
+      <li>Connect the <strong>Buzzer</strong> to <strong>digital pin 8</strong>.</li>
+    </ol>
+
+    <h3>Arduino Code:</h3>
+    <pre>
+const int LDR = A0;
+const int buzzer = 8;
+const int laser = 9;
+
+void setup() {
+    pinMode(buzzer, OUTPUT);
+    pinMode(laser, OUTPUT);
+    pinMode(LDR, INPUT);
+    Serial.begin(9600);
+    digitalWrite(laser, HIGH); // Turn on the laser
+}
+
+void loop() {
+    int lightValue = analogRead(LDR);
+    Serial.println(lightValue);
+    
+    if (lightValue < 300) { // Adjust threshold based on ambient light
+        digitalWrite(buzzer, HIGH);
+    } else {
+        digitalWrite(buzzer, LOW);
+    }
+    delay(500);
+}
+    </pre>
+
+    <h3>How to Test:</h3>
+    <ol>
+      <li>Upload the code to Arduino.</li>
+      <li>Ensure the laser points directly at the LDR.</li>
+      <li>Block the laser beam with an object.</li>
+      <li>If the buzzer sounds, the system is working correctly.</li>
+    </ol>
+
+    <h3>Possible Improvements:</h3>
+    <ul>
+      <li>Use a relay to trigger a <strong>stronger alarm or LED indicator</strong>.</li>
+      <li>Implement a <strong>wireless notification system</strong> using <strong>Bluetooth or Wi-Fi</strong>.</li>
+    </ul>
+
+    <hr>
+
+    <h2>2. RGB Color Mixer</h2>
+    <h3>Project Overview:</h3>
+    <p>
+      The <strong>RGB Color Mixer</strong> allows users to mix different colors using an <strong>RGB LED</strong> and three potentiometers, each controlling the intensity of Red, Green, and Blue light.
+    </p>
+
+    <h3>Components Required:</h3>
+    <ul>
+      <li>1 x Arduino Uno</li>
+      <li>1 x RGB LED (Common Cathode)</li>
+      <li>3 x Potentiometers (10kΩ each)</li>
+      <li>Jumper wires</li>
+      <li>Breadboard</li>
+    </ul>
+
+    <h3>Physics Concept:</h3>
+    <p>
+      <strong>Color Mixing:</strong> Red, Green, and Blue light combine to form different colors.<br>
+      <strong>Additive Color Model:</strong> Used in TVs and displays.<br>
+      <strong>Voltage Control:</strong> Potentiometers adjust PWM values, which control LED brightness.
+    </p>
+
+    <h3>Circuit Connections:</h3>
+    <ol>
+      <li>Connect the <strong>RGB LED</strong>:</li>
+      <ul>
+        <li>Red pin to <strong>D9</strong></li>
+        <li>Green pin to <strong>D10</strong></li>
+        <li>Blue pin to <strong>D11</strong></li>
+        <li>Common Cathode to <strong>GND</strong></li>
+      </ul>
+      <li>Connect the <strong>Potentiometers</strong>:</li>
+      <ul>
+        <li>Middle pins to <strong>A0, A1, A2</strong></li>
+        <li>One side to <strong>5V</strong>, other to <strong>GND</strong></li>
+      </ul>
+    </ol>
+
+    <h3>Arduino Code:</h3>
+    <pre>
+const int redPin = 9;
+const int greenPin = 10;
+const int bluePin = 11;
+const int potRed = A0;
+const int potGreen = A1;
+const int potBlue = A2;
+
+void setup() {
+    pinMode(redPin, OUTPUT);
+    pinMode(greenPin, OUTPUT);
+    pinMode(bluePin, OUTPUT);
+    Serial.begin(9600);
+}
+
+void loop() {
+    int redVal = analogRead(potRed) / 4;
+    int greenVal = analogRead(potGreen) / 4;
+    int blueVal = analogRead(potBlue) / 4;
+    
+    analogWrite(redPin, redVal);
+    analogWrite(greenPin, greenVal);
+    analogWrite(bluePin, blueVal);
+    
+    Serial.print("Red: "); Serial.print(redVal);
+    Serial.print(" Green: "); Serial.print(greenVal);
+    Serial.print(" Blue: "); Serial.println(blueVal);
+    delay(500);
+}
+    </pre>
+
+    <h3>How to Test:</h3>
+    <ol>
+      <li>Upload the code to Arduino.</li>
+      <li>Turn the potentiometers to change Red, Green, and Blue intensity.</li>
+      <li>Observe the <strong>color change</strong> on the LED.</li>
+    </ol>
+
+    <h3>Possible Improvements:</h3>
+    <ul>
+      <li>Add <strong>predefined colors</strong> using buttons.</li>
+      <li>Control colors using a <strong>Bluetooth app</strong>.</li>
+    </ul>
+
+    <hr>
+
+    <h2>Conclusion</h2>
+    <p>
+      <strong>Laser Security System</strong> teaches light detection and real-world security applications.<br>
+      <strong>RGB Color Mixer</strong> demonstrates color theory and light intensity control.
+    </p>
+    <p>
+      These projects provide hands-on learning about physics, electronics, and programming! 🚀
+    </p>
+
+    <hr>
+
+    <h2>Next Steps</h2>
+    <p>
+      Would you like additional <strong>experiments, troubleshooting tips, or documentation on sensors</strong>? Let us know!
+    </p>
+
+    <a href="Manual For AlKit.pdf" class="download-btn" download>Download PDF Manual</a>
+  </div>
+
+  <script src="responsive.js"></script>
+</body>
+</html>

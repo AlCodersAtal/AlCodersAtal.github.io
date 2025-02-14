@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/indexpage.css" />
+
     <title>Atal Lab with Al Coders</title>
 
     <link
@@ -14,6 +14,113 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
   </head>
+  <style>
+    img {
+  width: 100%;
+  height: 300;
+  margin-right: 0;
+  padding-top: 70px;
+}
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+
+  text-align: center;
+}
+p{
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #ffffff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Animated Background */
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('circuit.gif') repeat;
+    opacity: 0.1; /* Reduced for a subtle effect */
+    z-index: -1;
+}
+
+/* Header */
+header {
+    padding: 50px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #000;
+}
+
+.cta-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cta-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Dashboard */
+.dashboard {
+    margin: 30px;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.category {
+    background-color: #e9ecef;
+    padding: 15px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+.category:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Sections */
+.featured, .events {
+    background-color: #f8f9fa;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+footer {
+    background-color: #ddd;
+    padding: 20px;
+}
+
+
+
+  </style>
   <body>
     <nav>
       <ul class="sidebar">
@@ -82,8 +189,58 @@
       </div>
     </div>
 
-    <img src="images/banner.jpg" alt="Logo of AlCoders" />
+  <!-- Animated Background -->
+  <div class="animated-bg"></div>
+
+  <!-- Header -->
+  <header>
+      <h1>🚀 Welcome to AlCoders Atal Lab</h1>
+      <p>Where students turn ideas into reality with technology!</p>
+      <button class="cta-btn">Explore Projects</button>
+  </header>
+
+  <!-- Interactive Dashboard -->
+  <section class="dashboard">
+      <h2>🔬 Explore Our Innovation Hub</h2>
+      <div class="categories">
+          <div class="category">🤖 Robotics</div>
+          <div class="category">🌍 IoT & Smart Systems</div>
+          <div class="category">💡 Electronics</div>
+          <div class="category">🖥️ Web Development</div>
+      </div>
+  </section>
+
+  <!-- Featured Project -->
+  <section class="featured">
+      <h2>🏆 Project of the Month</h2>
+      <p>📌 "Smart Door Lock with RFID & IoT Integration"</p>
+      <button>📜 Read Guide</button>
+  </section>
+
+  <!-- Upcoming Events -->
+  <section class="events">
+      <h2>📅 Upcoming Events</h2>
+      <ul>
+          <li>🛠️ IoT Workshop – Register Now!</li>
+          <li>🎯 Coding Challenge: Build a Line-Following Robot!</li>
+      </ul>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+      <p>🚀 Join AlCoders Today! | Contact: <a href="mailto:contact@alcodersatal.com">Email Us</a></p>
+  </footer>
+
+    <div class="container">
+      <p>
+        Atal Lab with AlCoders is a platform for students to learn coding and
+        programming. We provide courses on various programming languages and
+        tools. Our aim is to make coding fun and easy for students. We believe
+        that coding is an essential skill in today's world and everyone should
+        learn it. So, join us and start your coding journey today!
+      </p>
     <script src="responsive.js"></script>
     <script src="navigation.js"></script>
+ 
   </body>
 </html>
