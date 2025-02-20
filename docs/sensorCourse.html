@@ -2,234 +2,412 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>What are Sensors?</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
+    <style>
+      /* General styles */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f9f9f9;
+        color: #333;
+      }
 
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/courses2.css">
-  <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
+      .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
 
-  <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-/>
-</head>
-<body>
-  <nav>
-    <ul class="sidebar">
-      <li onclick="hideSidebar()">
-        <a href="#">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="26"
-            viewBox="0 96 960 960"
-            width="26"
-          >
-            <path
-              d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"
-            />
-          </svg>
-        </a>
-      </li>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="More info.html">More Info</a></li>
-      <li><a href="about us.html">About Us</a></li>
-      <li><a href="Courses.html">Courses</a></li>
-      <li><a href="loginpage.html">Login</a></li>
-      <li><a href="projects.html">Projects</a></li>
-    </ul>
-    <ul>
-      <li><a href="index.html">AlCoders</a></li>
-      <li class="hideOnMobile"><a href="index.html">Home</a></li>
-      <li class="hideOnMobile"><a href="More info.html">More Info</a></li>
-      <li class="hideOnMobile"><a href="about us.html">About Us</a></li>
-      <li class="hideOnMobile"><a href="Courses.html">Courses</a></li>
-      <li class="hideOnMobile"><a href="loginpage.html">Login</a></li>
-      <li class="hideOnMobile"><a href="projects.html">Projects</a></li>
-      <li class="search-icon">
-        <a href="#" id="searchIcon" onclick="showSearchPopup()">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </a>
-      </li>
-      <li class="menu-button" onclick="showSidebar()">
-        <a href="#">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="26"
-            viewBox="0 96 960 960"
-            width="26"
-          >
-            <path
-              d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"
-            />
-          </svg>
-        </a>
-      </li>
-    </ul>
-  </nav>
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: #333;
+      }
 
-  <!-- Search pop-up -->
-  <div id="searchPopup" class="search-popup">
-    <div class="popup-content">
-      <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
-      <input
-        type="text"
-        id="searchBar"
-        placeholder="Search here..."
-        oninput="showRecommendations()"
-      />
-      <div class="result-box" id="resultBox"></div>
+      p {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+      }
+
+      .content {
+        text-align: justify;
+        margin-bottom: 20px;
+      }
+
+      .content strong {
+        font-weight: bold;
+      }
+
+      .content h4 {
+        margin-top: 20px;
+      }
+
+      .content ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .content ul li {
+        background: #f4f4f4;
+        margin: 5px 0;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .joinus {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .joinus button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .joinus button:hover {
+        background-color: #0056b3;
+      }
+
+      .search-popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+
+      .popup-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 500px;
+        margin: 100px auto;
+        position: relative;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      .result-box {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <ul class="sidebar">
+        <li onclick="hideSidebar()">
+          <a href="#">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="26"
+              viewBox="0 96 960 960"
+              width="26"
+            >
+              <path
+                d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"
+              />
+            </svg>
+          </a>
+        </li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="More info.html">More Info</a></li>
+        <li><a href="about us.html">About Us</a></li>
+        <li><a href="Courses.html">Courses</a></li>
+        <li><a href="loginpage.html">Login</a></li>
+        <li><a href="projects.html">Projects</a></li>
+      </ul>
+      <ul>
+        <li><a href="index.html">AlCoders</a></li>
+        <li class="hideOnMobile"><a href="index.html">Home</a></li>
+        <li class="hideOnMobile"><a href="More info.html">More Info</a></li>
+        <li class="hideOnMobile"><a href="about us.html">About Us</a></li>
+        <li class="hideOnMobile"><a href="Courses.html">Courses</a></li>
+        <li class="hideOnMobile"><a href="loginpage.html">Login</a></li>
+        <li class="hideOnMobile"><a href="projects.html">Projects</a></li>
+        <li class="search-icon">
+          <a href="#" id="searchIcon" onclick="showSearchPopup()">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </a>
+        </li>
+        <li class="menu-button" onclick="showSidebar()">
+          <a href="#">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="26"
+              viewBox="0 96 960 960"
+              width="26"
+            >
+              <path
+                d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"
+              />
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Search pop-up -->
+    <div id="searchPopup" class="search-popup">
+      <div class="popup-content">
+        <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
+        <input
+          type="text"
+          id="searchBar"
+          placeholder="Search here..."
+          oninput="showRecommendations()"
+        />
+        <div class="result-box" id="resultBox"></div>
+      </div>
     </div>
-  </div>
 
+    <div class="container">
+      <div class="content">
+        <br />
+        <br />
 
-
-
-    <div class="content">
-      <h1>Understanding Sensors and Their Use with Arduino</h1>
-      <p>
-        Sensors are the foundation of any interactive or automated system,
-        enabling machines to sense, analyze, and respond to the surrounding
-        environment. From robots that navigate autonomously to smart homes that
-        adjust lighting and temperature based on human presence, sensors are the
-        building blocks that make this level of intelligent control possible.
-        Understanding how to use these devices can empower anyone to create
-        responsive and dynamic electronic projects.
-      </p>
-      <h3>What Exactly Are Sensors?</h3>
-      <p>
-        In technical terms, a sensor is a device that measures physical
-        phenomena such as light, temperature, pressure, sound, distance, motion,
-        or even gases and converts these measurements into a signal that can be
-        read and processed by another system—typically an electronic
-        microcontroller like Arduino. The type of signal a sensor outputs
-        depends on the nature of the measurement. The signals could be in the
-        form of voltage levels (analog signals), digital pulses (on/off states),
-        or more complex communication protocols like I2C and SPI. For example,
-        an ultrasonic sensor emits sound waves and measures the time it takes
-        for the waves to bounce back from an object. This time is then converted
-        into a distance measurement. Similarly, a gas sensor like the MQ-2
-        detects changes in the concentration of certain gases (like methane or
-        LPG) and outputs a voltage proportional to the concentration of the gas
-        in the air.
-      </p>
-      <h3>Types of Sensors: Detailed Overview</h3>
-      <p>
-        <strong
-          >Let’s look at some of the most widely used sensor categories and
-          their applications in Arduino projects:
-        </strong>
-      </p>
-      <h4>
-        1.Let’s look at some of the most widely used sensor categories and their
-        applications in Arduino projects:
-      </h4>
-      <p>
-        These sensors are used to monitor environmental parameters like
-        temperature, humidity, air quality, and light levels. They are essential
-        for weather stations, agricultural monitoring systems, and smart home
-        projects.
-      </p>
-      <p>
-        <strong>&bull;</strong>DHT11 and DHT22: These are popular temperature
-        and humidity sensors used to measure atmospheric conditions. The DHT11
-        is cheaper but less accurate, while the DHT22 offers higher precision
-        and range.
-      </p>
-      <p>
-        <strong>&bull;</strong>BMP180 or BMP280: Barometric pressure sensors
-        that also measure altitude, making them ideal for environmental sensing
-        and weather prediction projects.
-      </p>
-      <p>
-        <strong>&bull;</strong>UV and Radiation Sensors: Measure ultraviolet
-        light or other forms of radiation and are often used in safety and
-        scientific research projects.
-      </p>
-      <h4>
-        2.Motion and Position Sensors: Motion sensors are widely used in
-        robotics, automation, and security systems.
-      </h4>
-      <p>
-        <strong>&bull;</strong>PIR Motion Sensor: Passive Infrared (PIR) sensors detect human motion by sensing infrared radiation. They are a key component in security systems, automatic lighting, and even in robotics for human detection.
-      </p>
-      <strong>&bull;</strong>Accelerometers (e.g., ADXL335, MPU6050): Measure the acceleration and orientation in three dimensions. Used in balancing robots, gesture recognition, and gaming applications. </p>
-    <strong>&bull;</strong>gyroscopes: Measure the rate of rotation around an axis. Often combined with accelerometers, they are used for detecting angular movement and stabilizing systems.
-</p>
-<h4>3.Distance and Proximity Sensors: Distance sensors allow robots and other devices to perceive their environment and navigate around obstacles.</h4>
-<p> <strong>&bull;</strong> HC-SR04 Ultrasonic Sensor: Emits sound waves and measures their echo to determine distance. Commonly used in robotic navigation.
- </p>
-<p> <strong>&bull;</strong> IR Sensors: Infrared sensors work by emitting and detecting IR light, used for proximity detection, obstacle avoidance, and line following in robots.
- </p>
-<p> <strong>&bull;</strong> Sharp GP2Y0A: An infrared distance sensor that provides accurate short-range distance measurements, useful in small autonomous robots.
- </p>
- <h4>4.Touch and Pressure Sensors: These sensors detect mechanical pressure, touch, or force.
- 
- </h4>
- <p> <strong>&bull;</strong> Capacitive Touch Sensors: Detect touch or proximity without physical contact, commonly used in touch panels and interactive displays.
-  </p>
- <p> <strong>&bull;</strong> Force Sensitive Resistors (FSRs): Change resistance based on the pressure applied, used in applications such as pressure-sensitive robot grippers and weighing scales.
-  </p>
-  <h4>5.Sound and Vibration Sensors: Sound sensors and vibration detectors are used to create interactive audio-based projects or to monitor vibrations in a mechanical system.
-  
-  </h4>
-  <p> <strong>&bull;</strong> Microphone Sensors: Capture sound intensity, allowing the Arduino to respond to sound events like claps, knocks, or voice commands.
-   </p>
-  <p> <strong>&bull;</strong> Vibration Sensors: Such as piezoelectric sensors that detect vibrations and are used in security systems or to monitor machinery health.
-   </p>
-   <h4>6.Gas and Chemical Sensors: Gas sensors can detect hazardous gases, monitor air quality, and provide safety alerts.
-   
-   </h4>
-   <p> <strong>&bull;</strong> MQ Series Sensors: Detect specific gases like CO2, LPG, Methane, and smoke. Each sensor type in the MQ series has its own target gases and sensitivity levels. </p>
-   <p> <strong>&bull;</strong> pH and Chemical Sensors: Measure acidity or basicity levels in liquids, commonly used in lab experiments and agricultural monitoring.
-   </p>
-   <h4>7.Imaging and Vision Sensors: Vision sensors add advanced capabilities to projects, allowing them to see and recognize objects, colors, or even faces.
-   
-   </h4>
-   <p> <strong>&bull;</strong> Color Sensors (e.g., TCS3200): Measure color values in RGB format, useful in color-sorting robots and artistic installations.
-    </p>
-   <p> <strong>&bull;</strong> Camera Modules: Such as the OV7670 or Raspberry Pi camera module for image and video capture, used in facial recognition and computer vision applications.
-    </p>
-    <h3>How to Use Sensors with Arduino
-    </h3>
-    <strong>Using sensors with Arduino involves connecting them correctly and programming the Arduino to interpret the sensor data. Here’s a systematic approach:
-
-    </strong>
-    <p>1.Wiring the Sensor: Each sensor has specific pins for power (VCC), ground (GND), and signal output. For analog sensors, the signal pin connects to an analog input pin (e.g., A0 to A5 on Arduino Uno). For digital sensors, connect the output pin to a digital input pin (e.g., D2 or D4). Always check the datasheet for the correct voltage requirements and pin configurations.
-    
-    </p>
-    <p>2.Processing and Using Sensor Data: Depending on the application, sensor data can be used for logging (recording the data), controlling actuators (like turning on a fan if the temperature is too high), or triggering events (like sending an alert if gas is detected).</p>
-    <h3>Choosing the Right Sensor for Your Project</h3>
-    <strong>When selecting a sensor for an Arduino project, consider the following factors:</strong>
-    <p>1.Application Requirements: What parameters do you want to measure? For example, if building a weather station, consider temperature, humidity, and pressure sensors.
-
-    </p>
-    <p>2.Accuracy and Precision: Choose sensors with the necessary resolution and accuracy for your application. For instance, an environmental monitoring system needs high precision, while a basic obstacle-avoiding robot can use a low-accuracy distance sensor.
-    
-    </p>
-    <p>3.Compatibility and Libraries: Check if there are existing libraries for your sensor. Popular sensors have robust libraries that simplify integration, making it easier to start building your project.
-    
-    </p>
-    <p>4.Power Consumption: For battery-powered or portable projects, select sensors that consume less power or have low-power modes.
-    
-    </p>
-    <p>In essence, sensors are the senses of an electronic system. They enable your Arduino to perceive the world and perform intelligent tasks based on real-world data. With the right combination of sensors and programming logic, you can build innovative solutions that range from simple automations to complex robotics and IoT systems. The possibilities are endless, limited only by imagination and creativity!
-
-
-
-
-
-
-    </p>
-   
-
- 
+        <h1>Understanding Sensors and Their Use with Arduino</h1>
+        <p>
+          Sensors are the foundation of any interactive or automated system,
+          enabling machines to sense, analyze, and respond to the surrounding
+          environment. From robots that navigate autonomously to smart homes
+          that adjust lighting and temperature based on human presence, sensors
+          are the building blocks that make this level of intelligent control
+          possible. Understanding how to use these devices can empower anyone to
+          create responsive and dynamic electronic projects.
+        </p>
+        <h3>What Exactly Are Sensors?</h3>
+        <p>
+          In technical terms, a sensor is a device that measures physical
+          phenomena such as light, temperature, pressure, sound, distance,
+          motion, or even gases and converts these measurements into a signal
+          that can be read and processed by another system—typically an
+          electronic microcontroller like Arduino. The type of signal a sensor
+          outputs depends on the nature of the measurement. The signals could be
+          in the form of voltage levels (analog signals), digital pulses (on/off
+          states), or more complex communication protocols like I2C and SPI. For
+          example, an ultrasonic sensor emits sound waves and measures the time
+          it takes for the waves to bounce back from an object. This time is
+          then converted into a distance measurement. Similarly, a gas sensor
+          like the MQ-2 detects changes in the concentration of certain gases
+          (like methane or LPG) and outputs a voltage proportional to the
+          concentration of the gas in the air.
+        </p>
+        <h3>Types of Sensors: Detailed Overview</h3>
+        <p>
+          <strong
+            >Let’s look at some of the most widely used sensor categories and
+            their applications in Arduino projects:</strong
+          >
+        </p>
+        <h4>1. Environmental Sensors</h4>
+        <p>
+          These sensors are used to monitor environmental parameters like
+          temperature, humidity, air quality, and light levels. They are
+          essential for weather stations, agricultural monitoring systems, and
+          smart home projects.
+        </p>
+        <p>
+          <strong>&bull;</strong> DHT11 and DHT22: These are popular temperature
+          and humidity sensors used to measure atmospheric conditions. The DHT11
+          is cheaper but less accurate, while the DHT22 offers higher precision
+          and range.
+        </p>
+        <p>
+          <strong>&bull;</strong> BMP180 or BMP280: Barometric pressure sensors
+          that also measure altitude, making them ideal for environmental
+          sensing and weather prediction projects.
+        </p>
+        <p>
+          <strong>&bull;</strong> UV and Radiation Sensors: Measure ultraviolet
+          light or other forms of radiation and are often used in safety and
+          scientific research projects.
+        </p>
+        <h4>2. Motion and Position Sensors</h4>
+        <p>
+          Motion sensors are widely used in robotics, automation, and security
+          systems.
+        </p>
+        <p>
+          <strong>&bull;</strong> PIR Motion Sensor: Passive Infrared (PIR)
+          sensors detect human motion by sensing infrared radiation. They are a
+          key component in security systems, automatic lighting, and even in
+          robotics for human detection.
+        </p>
+        <p>
+          <strong>&bull;</strong> Accelerometers (e.g., ADXL335, MPU6050):
+          Measure the acceleration and orientation in three dimensions. Used in
+          balancing robots, gesture recognition, and gaming applications.
+        </p>
+        <p>
+          <strong>&bull;</strong> Gyroscopes: Measure the rate of rotation
+          around an axis. Often combined with accelerometers, they are used for
+          detecting angular movement and stabilizing systems.
+        </p>
+        <h4>3. Distance and Proximity Sensors</h4>
+        <p>
+          Distance sensors allow robots and other devices to perceive their
+          environment and navigate around obstacles.
+        </p>
+        <p>
+          <strong>&bull;</strong> HC-SR04 Ultrasonic Sensor: Emits sound waves
+          and measures their echo to determine distance. Commonly used in
+          robotic navigation.
+        </p>
+        <p>
+          <strong>&bull;</strong> IR Sensors: Infrared sensors work by emitting
+          and detecting IR light, used for proximity detection, obstacle
+          avoidance, and line following in robots.
+        </p>
+        <p>
+          <strong>&bull;</strong> Sharp GP2Y0A: An infrared distance sensor that
+          provides accurate short-range distance measurements, useful in small
+          autonomous robots.
+        </p>
+        <h4>4. Touch and Pressure Sensors</h4>
+        <p>These sensors detect mechanical pressure, touch, or force.</p>
+        <p>
+          <strong>&bull;</strong> Capacitive Touch Sensors: Detect touch or
+          proximity without physical contact, commonly used in touch panels and
+          interactive displays.
+        </p>
+        <p>
+          <strong>&bull;</strong> Force Sensitive Resistors (FSRs): Change
+          resistance based on the pressure applied, used in applications such as
+          pressure-sensitive robot grippers and weighing scales.
+        </p>
+        <h4>5. Sound and Vibration Sensors</h4>
+        <p>
+          Sound sensors and vibration detectors are used to create interactive
+          audio-based projects or to monitor vibrations in a mechanical system.
+        </p>
+        <p>
+          <strong>&bull;</strong> Microphone Sensors: Capture sound intensity,
+          allowing the Arduino to respond to sound events like claps, knocks, or
+          voice commands.
+        </p>
+        <p>
+          <strong>&bull;</strong> Vibration Sensors: Such as piezoelectric
+          sensors that detect vibrations and are used in security systems or to
+          monitor machinery health.
+        </p>
+        <h4>6. Gas and Chemical Sensors</h4>
+        <p>
+          Gas sensors can detect hazardous gases, monitor air quality, and
+          provide safety alerts.
+        </p>
+        <p>
+          <strong>&bull;</strong> MQ Series Sensors: Detect specific gases like
+          CO2, LPG, Methane, and smoke. Each sensor type in the MQ series has
+          its own target gases and sensitivity levels.
+        </p>
+        <p>
+          <strong>&bull;</strong> pH and Chemical Sensors: Measure acidity or
+          basicity levels in liquids, commonly used in lab experiments and
+          agricultural monitoring.
+        </p>
+        <h4>7. Imaging and Vision Sensors</h4>
+        <p>
+          Vision sensors add advanced capabilities to projects, allowing them to
+          see and recognize objects, colors, or even faces.
+        </p>
+        <p>
+          <strong>&bull;</strong> Color Sensors (e.g., TCS3200): Measure color
+          values in RGB format, useful in color-sorting robots and artistic
+          installations.
+        </p>
+        <p>
+          <strong>&bull;</strong> Camera Modules: Such as the OV7670 or
+          Raspberry Pi camera module for image and video capture, used in facial
+          recognition and computer vision applications.
+        </p>
+        <h3>How to Use Sensors with Arduino</h3>
+        <p>
+          <strong
+            >Using sensors with Arduino involves connecting them correctly and
+            programming the Arduino to interpret the sensor data. Here’s a
+            systematic approach:</strong
+          >
+        </p>
+        <p>
+          1. Wiring the Sensor: Each sensor has specific pins for power (VCC),
+          ground (GND), and signal output. For analog sensors, the signal pin
+          connects to an analog input pin (e.g., A0 to A5 on Arduino Uno). For
+          digital sensors, connect the output pin to a digital input pin (e.g.,
+          D2 or D4). Always check the datasheet for the correct voltage
+          requirements and pin configurations.
+        </p>
+        <p>
+          2. Processing and Using Sensor Data: Depending on the application,
+          sensor data can be used for logging (recording the data), controlling
+          actuators (like turning on a fan if the temperature is too high), or
+          triggering events (like sending an alert if gas is detected).
+        </p>
+        <h3>Choosing the Right Sensor for Your Project</h3>
+        <p>
+          <strong
+            >When selecting a sensor for an Arduino project, consider the
+            following factors:</strong
+          >
+        </p>
+        <p>
+          1. Application Requirements: What parameters do you want to measure?
+          For example, if building a weather station, consider temperature,
+          humidity, and pressure sensors.
+        </p>
+        <p>
+          2. Accuracy and Precision: Choose sensors with the necessary
+          resolution and accuracy for your application. For instance, an
+          environmental monitoring system needs high precision, while a basic
+          obstacle-avoiding robot can use a low-accuracy distance sensor.
+        </p>
+        <p>
+          3. Compatibility and Libraries: Check if there are existing libraries
+          for your sensor. Popular sensors have robust libraries that simplify
+          integration, making it easier to start building your project.
+        </p>
+        <p>
+          4. Power Consumption: For battery-powered or portable projects, select
+          sensors that consume less power or have low-power modes.
+        </p>
+        <p>
+          In essence, sensors are the senses of an electronic system. They
+          enable your Arduino to perceive the world and perform intelligent
+          tasks based on real-world data. With the right combination of sensors
+          and programming logic, you can build innovative solutions that range
+          from simple automations to complex robotics and IoT systems. The
+          possibilities are endless, limited only by imagination and creativity!
+        </p>
+      </div>
     </div>
 
     <script src="responsive.js"></script>
     <script src="navigation.js"></script>
   </body>
 </html>
-
-

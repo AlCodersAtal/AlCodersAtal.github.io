@@ -2,22 +2,97 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>What is Arduino</title>
     <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
-
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/courses1page.css">
-    </style>
- 
+    <link rel="stylesheet" href="css/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <style>
+      /* General styles */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f9f9f9;
+        color: #333;
+      }
 
+      .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      h1,
+      h2,
+      h3,
+      h5 {
+        color: #333;
+      }
+
+      p {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+      }
+
+      img {
+        margin-top: 72px;
+        width: 100%;
+        height: auto; /* Adjust height to auto to maintain aspect ratio */
+        max-height: 300px; /* Set a maximum height */
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+
+      .content,
+      .content2,
+      .content3 {
+        text-align: justify;
+        margin-bottom: 20px;
+      }
+
+      .tittle1 {
+        margin-top: 40px;
+      }
+
+      .joinus {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .joinus button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .joinus button:hover {
+        background-color: #0056b3;
+      }
+
+      video {
+        display: block;
+        margin: 20px auto;
+        border-radius: 8px;
+      }
+
+      strong {
+        font-weight: bold;
+      }
+    </style>
   </head>
-  <body >
+  <body>
     <nav>
       <ul class="sidebar">
         <li onclick="hideSidebar()">
@@ -70,7 +145,7 @@
         </li>
       </ul>
     </nav>
-    
+
     <!-- Search pop-up -->
     <div id="searchPopup" class="search-popup">
       <div class="popup-content">
@@ -84,214 +159,212 @@
         <div class="result-box" id="resultBox"></div>
       </div>
     </div>
-    
-   <br>
-   <br>
-   <br>
-   <a href="https://en.wikipedia.org/wiki/Arduino" title="Redirects to WikiPedia" target="_blank"> <img src="images/arduino.jpg" alt="A picture of arduino and a laptop." /> </a>
-    <h1>Introduction</h1>
-    <h2>
-       So what is Microprocessor.What is microcontroller.Whats the difference?
-    </h2>
 
-    <h3>Microprocessor</h3>
-    <div class="content">
-      <p>
-        So a microprocessor is the central processing unit (CPU) of a computer,
-        typically without any integrated memory or input/output (I/O)
-        peripherals. It performs arithmetic and logic operations and controls
-        data flow within a system.
-      </p>
-      <p>
-        The primary function of a microprocessor is to execute a set of
-        instructions (software) and process data. It is designed to handle
-        complex computational tasks, making it the brain of computers and other
-        devices.
-      </p>
-      <p>
-        Typically consists of an arithmetic logic unit (ALU), control unit, and
-        various registers. However, it requires external components such as
-        memory (RAM, ROM) and I/O interfaces to function.
-      </p>
-      <p>
-        Commonly used in personal computers, servers, and other devices where
-        high processing power is needed. Examples include Intel's Core series,
-        AMD's Ryzen processors, etc.
-      </p>
-    </div>
-    <h3>Microcontroller</h3>
-    <div class="content2">
-      <p>
-        A microcontroller is a compact integrated circuit designed to govern a
-        specific operation in an embedded system. It includes a CPU (like a
-        microprocessor), along with memory (RAM, ROM, or flash), and I/O
-        peripherals on a single chip.
-      </p>
-      <p>
-        Microcontrollers are designed to perform specific tasks, such as
-        controlling the operation of a device. They are optimized for managing
-        I/O tasks and are used in situations where dedicated, low-power, and
-        real-time control is required.
-      </p>
-      <p>
-        A microcontroller typically contains a CPU, memory (both volatile and
-        non-volatile), and various I/O interfaces, all embedded on the same
-        chip.
-      </p>
-      <p>
-        Widely used in embedded systems such as household appliances, automotive
-        systems, medical devices, and consumer electronics. Examples include the
-        Arduino (based on the ATmega microcontroller), PIC microcontrollers, and
-        ARM Cortex-M series.
-      </p>
-    </div>
-    <h2>Both of them have many differences</h2>
-    <h5>Purpose</h5>
-    <div class="content3">
-      <p>
-        <strong>&bull;</strong>Microprocessors are used in systems requiring
-        substantial processing power and flexibility.
-      </p>
-      <p>
-        <strong>&bull;</strong>Microcontrollers are used in systems where
-        dedicated, real-time control is needed.
-      </p>
-      <h5>Components:</h5>
-      <p>
-        <strong>&bull;</strong>Microprocessors need external components for
-        memory and I/O.
-      </p>
-      <p>
-        <strong>&bull;</strong>Microcontrollers have integrated memory and I/O,
-        making them more self-contained.
-      </p>
-      <h5>Complexity:</h5>
-      <p>
-        <strong>&bull;</strong>Microprocessors are more complex and powerful.
-      </p>
-      <p>
-        <strong>&bull;</strong>Microcontrollers are simpler and designed for
-        specific control tasks.
-      </p>
-      <h5>Power Consumption:</h5>
-      <p>
-        <strong>&bull;</strong>Microprocessors generally consume more power.
-      </p>
-      <p>
-        <strong>&bull;</strong>Microcontrollers are designed to be
-        energy-efficient, suitable for battery-operated devices.
-      </p>
-    </div>
-    <div class="tittle1">
-      <h2>What is Arduino.How to use it?</h2>
-    </div>
-    <div class="content3">
-      <p>
-        Arduino is an open-source electronics platform that has revolutionized
-        how people interact with electronics, making it accessible for everyone
-        from hobbyists to professionals. The platform is built around
-        microcontroller-based development boards, such as the Arduino Uno, Nano,
-        and Mega, each designed to facilitate the rapid prototyping of
-        electronic projects. These boards feature a central microcontroller,
-        like the ATmega328 on the Arduino Uno, which acts as the brain of the
-        board, processing data and controlling inputs and outputs. The boards
-        also come equipped with a variety of digital and analog I/O pins, which
-        allow users to connect an array of components such as sensors, LEDs,
-        motors, and other actuators. Additionally, the Arduino board includes a
-        USB interface, used for programming and communication with a computer,
-        and can be powered via USB or an external power source.
-      </p>
-      <p>
-        Central to the Arduino experience is the Arduino Integrated Development
-        Environment (IDE), a user-friendly software application that allows
-        users to write, compile, and upload code—known as sketches—to the
-        Arduino board. The IDE is built around a simplified version of C++, with
-        built-in functions specifically designed to make it easy to control the
-        hardware. This makes the platform particularly attractive to beginners,
-        as it abstracts much of the complexity associated with low-level
-        programming and hardware control. Arduino’s simplicity is further
-        enhanced by a wide range of libraries—pre-written code modules that
-        handle common tasks, such as interfacing with sensors, controlling
-        displays, or managing communication protocols like I2C and SPI. These
-        libraries significantly reduce development time and allow users to focus
-        on the creative aspects of their projects rather than getting bogged
-        down by technical details.
-      </p>
-      <p>
-        Getting started with Arduino is a straightforward process. The first
-        step is to install the Arduino IDE, which is freely available for
-        download on the official Arduino website and supports multiple operating
-        systems, including Windows, macOS, and Linux. After installing the IDE,
-        users connect their Arduino board to their computer using a USB cable.
-        The IDE typically auto-detects the board, but users must manually select
-        the correct board model (e.g., Arduino Uno) and communication port from
-        the Tools menu. With the hardware set up, users can begin writing their
-        first sketch. For beginners, a common starting point is the "Blink"
-        sketch, a simple program that makes the onboard LED blink on and off,
-        demonstrating basic control over the hardware.
-      </p>
-      <p>
-        Uploading sketches to the Arduino board is as easy as clicking the
-        "Upload" button in the IDE. The IDE compiles the code, uploads it to the
-        board, and then the board immediately starts executing the uploaded
-        code. This seamless process allows for rapid iteration and
-        experimentation, making it ideal for learning and prototyping. Once
-        users are comfortable with basic sketches, they can expand their
-        projects by connecting various external components, such as temperature
-        sensors, light sensors, buttons, and motors, to the board’s I/O pins.
-        The Arduino platform’s versatility shines here, as it can be used to
-        read data from sensors, control physical devices, and even communicate
-        with other systems, making it a powerful tool for a wide range of
-        applications.
-      </p>
-      <p>
-        Uploading sketches to the Arduino board is as easy as clicking the
-        "Upload" button in the IDE. The IDE compiles the code, uploads it to the
-        board, and then the board immediately starts executing the uploaded
-        code. This seamless process allows for rapid iteration and
-        experimentation, making it ideal for learning and prototyping. Once
-        users are comfortable with basic sketches, they can expand their
-        projects by connecting various external components, such as temperature
-        sensors, light sensors, buttons, and motors, to the board’s I/O pins.
-        The Arduino platform’s versatility shines here, as it can be used to
-        read data from sensors, control physical devices, and even communicate
-        with other systems, making it a powerful tool for a wide range of
-        applications.
-      </p>
-      <p>
-        Arduino’s open-source nature has fostered a large and active community
-        that continuously develops new projects, shares knowledge, and creates
-        tutorials. This community support, combined with extensive documentation
-        and resources available online, makes it easier for users to
-        troubleshoot problems and expand their skills. Whether you are a
-        beginner looking to learn the basics of programming and electronics, a
-        maker developing custom gadgets, or a professional prototyping a new
-        product, Arduino provides the tools, resources, and community support to
-        help you succeed.
-      </p>
-      <p>
-        In conclusion, Arduino is more than just a microcontroller platform;
-        it’s a gateway into the world of electronics and embedded systems. Its
-        ease of use, coupled with powerful capabilities and an extensive library
-        ecosystem, makes it an ideal platform for education, prototyping, and
-        creative exploration. Whether you're building simple projects like
-        automated plant watering systems, complex robotics, or even exploring
-        the burgeoning field of IoT, Arduino equips you with the tools you need
-        to bring your ideas to life. The platform’s widespread adoption and the
-        vibrant community surrounding it ensure that whether you're a novice or
-        an expert, there’s always something new to learn and create with
-        Arduino.
-      </p>
-    </div>
-    <div class="joinus">
-      <a href="mailto:alcodersatal@gmail.com" target="_blank"
-        ><button>To Join us Click here.</button></a
+    <div class="container">
+      <a
+        href="https://en.wikipedia.org/wiki/Arduino"
+        title="Redirects to WikiPedia"
+        target="_blank"
       >
+        <img
+          src="images/arduino.jpg"
+          alt="A picture of arduino and a laptop."
+        />
+      </a>
+      <h1>Introduction</h1>
+      <h2>
+        So what is Microprocessor. What is microcontroller. What's the
+        difference?
+      </h2>
+      <br />
+
+      <h3>Microprocessor</h3>
+      <div class="content">
+        <p>
+          So a microprocessor is the central processing unit (CPU) of a
+          computer, typically without any integrated memory or input/output
+          (I/O) peripherals. It performs arithmetic and logic operations and
+          controls data flow within a system.
+        </p>
+        <p>
+          The primary function of a microprocessor is to execute a set of
+          instructions (software) and process data. It is designed to handle
+          complex computational tasks, making it the brain of computers and
+          other devices.
+        </p>
+        <p>
+          Typically consists of an arithmetic logic unit (ALU), control unit,
+          and various registers. However, it requires external components such
+          as memory (RAM, ROM) and I/O interfaces to function.
+        </p>
+        <p>
+          Commonly used in personal computers, servers, and other devices where
+          high processing power is needed. Examples include Intel's Core series,
+          AMD's Ryzen processors, etc.
+        </p>
+      </div>
+      <h3>Microcontroller</h3>
+      <div class="content2">
+        <p>
+          A microcontroller is a compact integrated circuit designed to govern a
+          specific operation in an embedded system. It includes a CPU (like a
+          microprocessor), along with memory (RAM, ROM, or flash), and I/O
+          peripherals on a single chip.
+        </p>
+        <p>
+          Microcontrollers are designed to perform specific tasks, such as
+          controlling the operation of a device. They are optimized for managing
+          I/O tasks and are used in situations where dedicated, low-power, and
+          real-time control is required.
+        </p>
+        <p>
+          A microcontroller typically contains a CPU, memory (both volatile and
+          non-volatile), and various I/O interfaces, all embedded on the same
+          chip.
+        </p>
+        <p>
+          Widely used in embedded systems such as household appliances,
+          automotive systems, medical devices, and consumer electronics.
+          Examples include the Arduino (based on the ATmega microcontroller),
+          PIC microcontrollers, and ARM Cortex-M series.
+        </p>
+      </div>
+      <h2>Both of them have many differences</h2>
+      <h5>Purpose</h5>
+      <div class="content3">
+        <p>
+          <strong>&bull;</strong> Microprocessors are used in systems requiring
+          substantial processing power and flexibility.
+        </p>
+        <p>
+          <strong>&bull;</strong> Microcontrollers are used in systems where
+          dedicated, real-time control is needed.
+        </p>
+        <h5>Components:</h5>
+        <p>
+          <strong>&bull;</strong> Microprocessors need external components for
+          memory and I/O.
+        </p>
+        <p>
+          <strong>&bull;</strong> Microcontrollers have integrated memory and
+          I/O, making them more self-contained.
+        </p>
+        <h5>Complexity:</h5>
+        <p>
+          <strong>&bull;</strong> Microprocessors are more complex and powerful.
+        </p>
+        <p>
+          <strong>&bull;</strong> Microcontrollers are simpler and designed for
+          specific control tasks.
+        </p>
+        <h5>Power Consumption:</h5>
+        <p>
+          <strong>&bull;</strong> Microprocessors generally consume more power.
+        </p>
+        <p>
+          <strong>&bull;</strong> Microcontrollers are designed to be
+          energy-efficient, suitable for battery-operated devices.
+        </p>
+      </div>
+      <div class="tittle1">
+        <h2>What is Arduino. How to use it?</h2>
+      </div>
+      <div class="content3">
+        <p>
+          Arduino is an open-source electronics platform that has revolutionized
+          how people interact with electronics, making it accessible for
+          everyone from hobbyists to professionals. The platform is built around
+          microcontroller-based development boards, such as the Arduino Uno,
+          Nano, and Mega, each designed to facilitate the rapid prototyping of
+          electronic projects. These boards feature a central microcontroller,
+          like the ATmega328 on the Arduino Uno, which acts as the brain of the
+          board, processing data and controlling inputs and outputs. The boards
+          also come equipped with a variety of digital and analog I/O pins,
+          which allow users to connect an array of components such as sensors,
+          LEDs, motors, and other actuators. Additionally, the Arduino board
+          includes a USB interface, used for programming and communication with
+          a computer, and can be powered via USB or an external power source.
+        </p>
+        <p>
+          Central to the Arduino experience is the Arduino Integrated
+          Development Environment (IDE), a user-friendly software application
+          that allows users to write, compile, and upload code—known as
+          sketches—to the Arduino board. The IDE is built around a simplified
+          version of C++, with built-in functions specifically designed to make
+          it easy to control the hardware. This makes the platform particularly
+          attractive to beginners, as it abstracts much of the complexity
+          associated with low-level programming and hardware control. Arduino’s
+          simplicity is further enhanced by a wide range of
+          libraries—pre-written code modules that handle common tasks, such as
+          interfacing with sensors, controlling displays, or managing
+          communication protocols like I2C and SPI. These libraries
+          significantly reduce development time and allow users to focus on the
+          creative aspects of their projects rather than getting bogged down by
+          technical details.
+        </p>
+        <p>
+          Getting started with Arduino is a straightforward process. The first
+          step is to install the Arduino IDE, which is freely available for
+          download on the official Arduino website and supports multiple
+          operating systems, including Windows, macOS, and Linux. After
+          installing the IDE, users connect their Arduino board to their
+          computer using a USB cable. The IDE typically auto-detects the board,
+          but users must manually select the correct board model (e.g., Arduino
+          Uno) and communication port from the Tools menu. With the hardware set
+          up, users can begin writing their first sketch. For beginners, a
+          common starting point is the "Blink" sketch, a simple program that
+          makes the onboard LED blink on and off, demonstrating basic control
+          over the hardware.
+        </p>
+        <p>
+          Uploading sketches to the Arduino board is as easy as clicking the
+          "Upload" button in the IDE. The IDE compiles the code, uploads it to
+          the board, and then the board immediately starts executing the
+          uploaded code. This seamless process allows for rapid iteration and
+          experimentation, making it ideal for learning and prototyping. Once
+          users are comfortable with basic sketches, they can expand their
+          projects by connecting various external components, such as
+          temperature sensors, light sensors, buttons, and motors, to the
+          board’s I/O pins. The Arduino platform’s versatility shines here, as
+          it can be used to read data from sensors, control physical devices,
+          and even communicate with other systems, making it a powerful tool for
+          a wide range of applications.
+        </p>
+        <p>
+          Arduino’s open-source nature has fostered a large and active community
+          that continuously develops new projects, shares knowledge, and creates
+          tutorials. This community support, combined with extensive
+          documentation and resources available online, makes it easier for
+          users to troubleshoot problems and expand their skills. Whether you
+          are a beginner looking to learn the basics of programming and
+          electronics, a maker developing custom gadgets, or a professional
+          prototyping a new product, Arduino provides the tools, resources, and
+          community support to help you succeed.
+        </p>
+        <p>
+          In conclusion, Arduino is more than just a microcontroller platform;
+          it’s a gateway into the world of electronics and embedded systems. Its
+          ease of use, coupled with powerful capabilities and an extensive
+          library ecosystem, makes it an ideal platform for education,
+          prototyping, and creative exploration. Whether you're building simple
+          projects like automated plant watering systems, complex robotics, or
+          even exploring the burgeoning field of IoT, Arduino equips you with
+          the tools you need to bring your ideas to life. The platform’s
+          widespread adoption and the vibrant community surrounding it ensure
+          that whether you're a novice or an expert, there’s always something
+          new to learn and create with Arduino.
+        </p>
+      </div>
+      <div class="joinus">
+        <a href="mailto:alcodersatal@gmail.com" target="_blank"
+          ><button>To Join us Click here.</button></a
+        >
+      </div>
+      <video width="640" height="360" controls>
+        <source src="videos/arduino video.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
     </div>
-    <video width="640" height="360" controls>
-      <source src="videos/arduino video.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
     <script src="responsive.js"></script>
     <script src="navigation.js"></script>
   </body>

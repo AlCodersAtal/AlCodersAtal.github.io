@@ -7,15 +7,131 @@
     <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
 
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/codingCourse.css" />
-    <title>
-      Unlocking the Power of Coding: Creative Adventures with Arduino
-    </title>
-
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <title>
+      Unlocking the Power of Coding: Creative Adventures with Arduino
+    </title>
+    <style>
+      /* General styles */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f9f9f9;
+        color: #333;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: #333;
+      }
+
+      p {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+      }
+
+      .content {
+        text-align: justify;
+        margin-bottom: 20px;
+      }
+
+      .content strong {
+        font-weight: bold;
+      }
+
+      .content h4 {
+        margin-top: 20px;
+      }
+
+      .content ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .content ul li {
+        background: #f4f4f4;
+        margin: 5px 0;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .joinus {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .joinus button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .joinus button:hover {
+        background-color: #0056b3;
+      }
+
+      .search-popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+
+      .popup-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 500px;
+        margin: 100px auto;
+        position: relative;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      .result-box {
+        margin-top: 20px;
+      }
+
+      .highlight {
+        background-color: #e7f3ff;
+        padding: 10px;
+        border-left: 5px solid #007bff;
+        margin-bottom: 20px;
+      }
+
+      .highlight strong {
+        color: #007bff;
+      }
+    </style>
   </head>
   <body>
     <nav>
@@ -85,145 +201,155 @@
       </div>
     </div>
 
-    <div class="content">
-      <h1>Introduction</h1>
-      <p>
-        Coding isn’t just lines of text; it’s a superpower! With it, you can
-        create apps, automate tasks, build robots, and even control everyday
-        gadgets like lights and cars. In this course, you’ll learn how coding
-        shapes the world, discover its creative potential, and get hands-on
-        experience coding for Arduino. Let’s transform ideas into reality!
-      </p>
-      <h2>Module 1: Why Coding Matters</h2>
-      <p><strong>Goal:</strong> Understand how coding powers our world.</p>
-      <h3>Topics:</h3>
-      <h4>What is Coding?</h4>
-      <p>
-        Coding is the language of the future, used to create aps, websites, and
-        even control hardware. It's what poers the digital tools we use every
-        day.
-      </p>
-      <h4>Impact of Coding in Everday Life</h4>
-      <p>
-        Coding is everywhere/ from smart homesand heathcre technology to
-        AI-powered gadgets. By understanding code, you'll gain insight into how
-        these innovaton work.
-      </p>
-      <h4>Coding as a Creative Tool</h4>
-      <p>
-        Coding isn't just technical-it's creative. Think about innovators like
-        Elon Musk and Bill Gates have used coding to create solutions that
-        change the world.
-      </p>
-      <br />
-      <hr />
-      <br />
-      <h2>Module 2: Tools and Techniques of Coding</h2>
-      <p><strong>Goal:</strong> Get familiar with coding basics and tools</p>
-      <h3>Topics:</h3>
-      <h4>Coding Language 101</h4>
-      <p>
-        Programming language, ike Python, JavaScript, and C++, are the
-        foundation of coding. In this course, we'll focus on C++ because it's
-        ideal for Arduno Projects.
-      </p>
-      <h4>Programming Platforms and Tools</h4>
-      <p>
-        Explore coding environments like the Arduino IDE. earn to install and
-        navigate the software you'll use to bring your projects to life.
-      </p>
-      <h4>Coding Logic</h4>
-      <p>
-        At the heart of coding are principles like variales, loops, conditions,
-        and functions. We'll show you how these concepts can solve problems-like
-        solving a treasure hunt with code
-      </p>
-      <br />
-      <hr />
-      <br />
-      <h2>Module 3: How to code for Arduino</h2>
-      <p>
-        <strong>Goal: </strong>Learn how to write, upload, and test Arduino
-        code.
-      </p>
-      <h3>Topics:</h3>
-      <h4>What is Arduino?</h4>
-      <p>
-        Arduino boards are powerful toolsfor creating interactive electronics
-        projects. They're used in real-life applications like automatic doors
-        and weather stations.
-      </p>
-      <h4>Writing Your First Arduino Code</h4>
-      <p>
-        Arduino programs have two main parts: 'setup()' and 'loop()'. These
-        define how your device initializes and runs repeatedl. You'll start with
-        a simple LED blnk project to learn the basics.
-      </p>
-      <h4>Sensors and Actuators</h4>
-      <p>
-        Sensors gather informtion from the environmen while actuators perform
-        actions. You'll use both to create a motion-activated light demo.
-      </p>
-      <br />
-      <hr />
-      <br />
-      <h2>Module 4: Creative Projects with Arduino</h2>
-      <p>
-        <strong>Goal: </strong>Showcasw creativity and solve real-world
-        problems.
-      </p>
-      <h3>Topics:</h3>
-      <h4>From Idea to Prototype</h4>
-      <p>
-        Brainstorm ideas and transform them into working Arduino porjects.
-        Example include automated plant watering and Bluetooth-controlled cars.
-      </p>
-      <h4>Debugging and Iteration</h4>
-      <p>
-        Debugging is like detective wrk, finding and fixing errors in your code.
-        Learn common mistakes and reslove them efficiently.
-      </p>
-      <h4>Showcase Time</h4>
-      <p>
-        Share yor projects with others. Presnting your work helps refine yor
-        skills and inpires new ideas.
-      </p>
-      <br />
-      <hr />
-      <br />
-      <h2>Module 5: Expanding Your Coding Horizons</h2>
-      <p>
-        <strong>Goal: </strong>Explore how coding skills can lead to excitng
-        opportunities.
-      </p>
-      <h3>Topics:</h3>
-      <h4>Career Pathways with Coding</h4>
-      <p>
-        Coding opens doors to careers in robotics, game development, web design
-        , and AI. You can even use yor skills to freelance or start a tech
-        business.
-      </p>
-      <h4>Coding Communites and Resources</h4>
-      <p>Join online communities like Arduino forums and Github.</p>
-      <h4>Your Next Steps in Coding</h4>
-      <p>
-        Plan your path to mastering advanced Arduino projects. Explore topics
-        like IoT and machine learning for future growth.
-      </p>
-      <br />
-      <hr />
+    <div class="container">
+      <div class="content">
+        <br />
+        <br />
+        <h1>Introduction</h1>
+        <p>
+          Coding isn’t just lines of text; it’s a superpower! With it, you can
+          create apps, automate tasks, build robots, and even control everyday
+          gadgets like lights and cars. In this course, you’ll learn how coding
+          shapes the world, discover its creative potential, and get hands-on
+          experience coding for Arduino. Let’s transform ideas into reality!
+        </p>
+        <div class="highlight">
+          <strong>Goal:</strong> Understand how coding powers our world.
+        </div>
+        <h2>Module 1: Why Coding Matters</h2>
+        <h3>Topics:</h3>
+        <h4>What is Coding?</h4>
+        <p>
+          Coding is the language of the future, used to create apps, websites,
+          and even control hardware. It's what powers the digital tools we use
+          every day.
+        </p>
+        <h4>Impact of Coding in Everyday Life</h4>
+        <p>
+          Coding is everywhere, from smart homes and healthcare technology to
+          AI-powered gadgets. By understanding code, you'll gain insight into
+          how these innovations work.
+        </p>
+        <h4>Coding as a Creative Tool</h4>
+        <p>
+          Coding isn't just technical—it's creative. Think about innovators like
+          Elon Musk and Bill Gates who have used coding to create solutions that
+          change the world.
+        </p>
+        <br />
+        <hr />
+        <br />
+        <h2>Module 2: Tools and Techniques of Coding</h2>
+        <div class="highlight">
+          <strong>Goal:</strong> Get familiar with coding basics and tools.
+        </div>
+        <h3>Topics:</h3>
+        <h4>Coding Language 101</h4>
+        <p>
+          Programming languages, like Python, JavaScript, and C++, are the
+          foundation of coding. In this course, we'll focus on C++ because it's
+          ideal for Arduino projects.
+        </p>
+        <h4>Programming Platforms and Tools</h4>
+        <p>
+          Explore coding environments like the Arduino IDE. Learn to install and
+          navigate the software you'll use to bring your projects to life.
+        </p>
+        <h4>Coding Logic</h4>
+        <p>
+          At the heart of coding are principles like variables, loops,
+          conditions, and functions. We'll show you how these concepts can solve
+          problems—like solving a treasure hunt with code.
+        </p>
+        <br />
+        <hr />
+        <br />
+        <h2>Module 3: How to Code for Arduino</h2>
+        <div class="highlight">
+          <strong>Goal:</strong> Learn how to write, upload, and test Arduino
+          code.
+        </div>
+        <h3>Topics:</h3>
+        <h4>What is Arduino?</h4>
+        <p>
+          Arduino boards are powerful tools for creating interactive electronics
+          projects. They're used in real-life applications like automatic doors
+          and weather stations.
+        </p>
+        <h4>Writing Your First Arduino Code</h4>
+        <p>
+          Arduino programs have two main parts: 'setup()' and 'loop()'. These
+          define how your device initializes and runs repeatedly. You'll start
+          with a simple LED blink project to learn the basics.
+        </p>
+        <h4>Sensors and Actuators</h4>
+        <p>
+          Sensors gather information from the environment while actuators
+          perform actions. You'll use both to create a motion-activated light
+          demo.
+        </p>
+        <br />
+        <hr />
+        <br />
+        <h2>Module 4: Creative Projects with Arduino</h2>
+        <div class="highlight">
+          <strong>Goal:</strong> Showcase creativity and solve real-world
+          problems.
+        </div>
+        <h3>Topics:</h3>
+        <h4>From Idea to Prototype</h4>
+        <p>
+          Brainstorm ideas and transform them into working Arduino projects.
+          Examples include automated plant watering and Bluetooth-controlled
+          cars.
+        </p>
+        <h4>Debugging and Iteration</h4>
+        <p>
+          Debugging is like detective work, finding and fixing errors in your
+          code. Learn common mistakes and resolve them efficiently.
+        </p>
+        <h4>Showcase Time</h4>
+        <p>
+          Share your projects with others. Presenting your work helps refine
+          your skills and inspires new ideas.
+        </p>
+        <br />
+        <hr />
+        <br />
+        <h2>Module 5: Expanding Your Coding Horizons</h2>
+        <div class="highlight">
+          <strong>Goal:</strong> Explore how coding skills can lead to exciting
+          opportunities.
+        </div>
+        <h3>Topics:</h3>
+        <h4>Career Pathways with Coding</h4>
+        <p>
+          Coding opens doors to careers in robotics, game development, web
+          design, and AI. You can even use your skills to freelance or start a
+          tech business.
+        </p>
+        <h4>Coding Communities and Resources</h4>
+        <p>Join online communities like Arduino forums and GitHub.</p>
+        <h4>Your Next Steps in Coding</h4>
+        <p>
+          Plan your path to mastering advanced Arduino projects. Explore topics
+          like IoT and machine learning for future growth.
+        </p>
+        <br />
+        <hr />
 
-      <h1>Conclusion:</h1>
-      <p>
-        Coding is powerful because it lets you cretae, Innovate,and solve
-        problems. With Arduino, you can bulid gadgets that interact with the
-        real world. Keep learning, experimenting, and turning your ideas into
-        reality. The possibilities ar endless!
-      </p>
-      <br />
+        <h1>Conclusion</h1>
+        <p>
+          Coding is powerful because it lets you create, innovate, and solve
+          problems. With Arduino, you can build gadgets that interact with the
+          real world. Keep learning, experimenting, and turning your ideas into
+          reality. The possibilities are endless!
+        </p>
+        <br />
+      </div>
+
+      <script src="responsive.js"></script>
+      <script src="navigation.js"></script>
     </div>
-
-    <script src="responsive.js"></script>
-    <script src="navigation.js"></script>
   </body>
 </html>

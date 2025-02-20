@@ -7,11 +7,71 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
     <script src="copyCode.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
     <style>
+      /* General styles */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f9f9f9;
+        color: #333;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        color: #333;
+      }
+
+      p {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+      }
+
+      .content {
+        text-align: justify;
+        margin-bottom: 20px;
+      }
+
+      .content strong {
+        font-weight: bold;
+      }
+
+      .content h4 {
+        margin-top: 20px;
+      }
+
+      .content ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .content ul li {
+        background: #f4f4f4;
+        margin: 5px 0;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
       .code {
         position: relative;
-        width: 800px;
+        width: 100%;
+        margin-bottom: 20px;
       }
+
       .code pre {
         background-color: rgb(65, 55, 55);
         color: antiquewhite;
@@ -21,7 +81,9 @@
         width: 100%;
         overflow-x: auto;
         position: relative;
+        border-radius: 8px;
       }
+
       .code button {
         background-color: #007bff;
         color: white;
@@ -33,14 +95,11 @@
         top: 10px;
         right: 10px;
       }
+
       .code button:hover {
         background-color: #0056b3;
       }
-      p,
-      pre {
-        width: 800px;
-        font-size: 20px;
-      }
+
       .back-button {
         display: inline-block;
         padding: 10px 20px;
@@ -53,134 +112,196 @@
         font-weight: bold;
         cursor: pointer;
       }
+
       .back-button::before {
         content: "←";
         position: absolute;
         left: -20px;
         font-size: 20px;
       }
+
       .back-button:hover {
         background-color: #0056b3;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+
+      .joinus {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .joinus button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .joinus button:hover {
+        background-color: #0056b3;
+      }
+
+      .search-popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+
+      .popup-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 500px;
+        margin: 100px auto;
+        position: relative;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      .result-box {
+        margin-top: 20px;
       }
     </style>
   </head>
   <body>
-    <h2>How to make an LDR controlled LED</h2>
+    <div class="container">
+      <h2>How to make an LDR controlled LED</h2>
 
-    <p>
-      An LDR-controlled LED uses a Light Dependent Resistor to sense light
-      levels and control an LED's state based on the surrounding brightness. The
-      LDR forms a voltage divider with a resistor, and its output voltage
-      changes with light intensity. This voltage is read by the Arduino through
-      an analog pin. The Arduino compares the reading to a predefined threshold
-      to decide whether to turn the LED on or off. If the environment is dark
-      (high LDR resistance, higher voltage), the LED turns on; in bright
-      conditions (low LDR resistance, lower voltage), the LED turns off. The
-      circuit consists of an LDR connected to a 10kΩ resistor forming a voltage
-      divider, with one end connected to 5V, the other to ground, and the
-      midpoint connected to the Arduino’s analog pin. The LED is connected to a
-      digital pin via a 220Ω resistor.
-    </p>
-    <h2>Here's the code:</h2>
-    <h3>You can copy it and paste it in the Arduino IDE.</h3>
-    <div class="code">
-      <pre id="codeBlock">
-      const int ldrPin = A0;       // LDR connected to analog pin A0
-      const int ledPin = 13;       // LED connected to digital pin 13
-      int threshold = 500;         // Threshold value to determine light/dark
+      <p>
+        An LDR-controlled LED uses a Light Dependent Resistor to sense light
+        levels and control an LED's state based on the surrounding brightness.
+        The LDR forms a voltage divider with a resistor, and its output voltage
+        changes with light intensity. This voltage is read by the Arduino
+        through an analog pin. The Arduino compares the reading to a predefined
+        threshold to decide whether to turn the LED on or off. If the
+        environment is dark (high LDR resistance, higher voltage), the LED turns
+        on; in bright conditions (low LDR resistance, lower voltage), the LED
+        turns off. The circuit consists of an LDR connected to a 10kΩ resistor
+        forming a voltage divider, with one end connected to 5V, the other to
+        ground, and the midpoint connected to the Arduino’s analog pin. The LED
+        is connected to a digital pin via a 220Ω resistor.
+      </p>
+      <h2>Here's the code:</h2>
+      <h3>You can copy it and paste it in the Arduino IDE.</h3>
+      <div class="code">
+        <pre id="codeBlock">
+        const int ldrPin = A0;       // LDR connected to analog pin A0
+        const int ledPin = 13;       // LED connected to digital pin 13
+        int threshold = 500;         // Threshold value to determine light/dark
 
-      void setup() {
-          pinMode(ledPin, OUTPUT);   // Set the LED pin as OUTPUT
-          Serial.begin(9600);        // Start serial communication for debugging
-      }
+        void setup() {
+            pinMode(ledPin, OUTPUT);   // Set the LED pin as OUTPUT
+            Serial.begin(9600);        // Start serial communication for debugging
+        }
 
-      void loop() {
-          int ldrValue = analogRead(ldrPin); // Read the value from LDR
-          Serial.println(ldrValue);         // Print the LDR value for debugging
+        void loop() {
+            int ldrValue = analogRead(ldrPin); // Read the value from LDR
+            Serial.println(ldrValue);         // Print the LDR value for debugging
 
-          if (ldrValue < threshold) {       // If light is bright (low resistance)
-              digitalWrite(ledPin, LOW);    // Turn off the LED
-          } else {                          // If it is dark (high resistance)
-              digitalWrite(ledPin, HIGH);   // Turn on the LED
-          }
+            if (ldrValue < threshold) {       // If light is bright (low resistance)
+                digitalWrite(ledPin, LOW);    // Turn off the LED
+            } else {                          // If it is dark (high resistance)
+                digitalWrite(ledPin, HIGH);   // Turn on the LED
+            }
 
-          delay(100);  // Small delay for stability
-      }
-    </pre
-      >
-      <button onclick="copyCode()">Copy Code</button>
+            delay(100);  // Small delay for stability
+        }
+      </pre
+        >
+        <button onclick="copyCode()">Copy Code</button>
+      </div>
+      <h2>Components Required:</h2>
+      <ul>
+        <li>Arduino Uno</li>
+        <li>Light Dependent Resistor (LDR)</li>
+
+        <li>LED</li>
+
+        <li>Jumper Wires</li>
+      </ul>
+      <h2>Circuit Diagram:</h2>
+      <img src="images/ldrProjects.jpg" alt="LDR Controlled LED Circuit" />
+      <h2>Working:</h2>
+      <p>
+        The LDR-controlled LED circuit uses an LDR to sense light levels. The
+        LDR is connected to an analog pin of the Arduino, which reads the
+        voltage across the LDR. The Arduino compares this voltage to a
+        predefined threshold value to determine whether the environment is
+        bright or dark. If the light is bright (low resistance), the LED is
+        turned off. If the light is dark (high resistance), the LED is turned
+        on. This circuit can be used for applications like automatic night
+        lights, streetlights, and more.
+      </p>
+      <h2>Applications:</h2>
+      <ul>
+        <li>Automatic Night Lights</li>
+        <li>Streetlights</li>
+        <li>Security Lighting</li>
+        <li>Energy-Efficient Lighting Systems</li>
+      </ul>
+      <h2>Conclusion:</h2>
+      <p>
+        The LDR-controlled LED circuit is a simple and effective way to control
+        an LED based on light levels. By using an LDR and an Arduino, you can
+        create a responsive lighting system that adjusts to the surrounding
+        brightness. This circuit can be used in various applications, including
+        automatic night lights, streetlights, and security lighting. Experiment
+        with different threshold values and LED configurations to customize the
+        circuit for your specific needs.
+      </p>
+      <h2>References:</h2>
+      <ul>
+        <li>
+          <a
+            href="https://www.arduino.cc/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Arduino Official Website</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://www.electronicwings.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >ElectronicWings Tutorials</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://www.instructables.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Instructables Arduino Projects</a
+          >
+        </li>
+      </ul>
+      <br />
+      <a href="projects.html" class="back-button">Go Back</a>
     </div>
-    <h2>Components Required:</h2>
-    <ul>
-      <li>Arduino Uno</li>
-      <li>Light Dependent Resistor (LDR)</li>
 
-      <li>LED</li>
-
-      <li>Jumper Wires</li>
-    </ul>
-    <h2>Circuit Diagram:</h2>
-    <img
-      src="images/ldrProjects.jpg"
-      alt="LDR Controlled LED Circuit"
-      height="700px"
-      width="100%"
-    />
-    <h2>Working:</h2>
-    <p>
-      The LDR-controlled LED circuit uses an LDR to sense light levels. The LDR
-      is connected to an analog pin of the Arduino, which reads the voltage
-      across the LDR. The Arduino compares this voltage to a predefined
-      threshold value to determine whether the environment is bright or dark. If
-      the light is bright (low resistance), the LED is turned off. If the light
-      is dark (high resistance), the LED is turned on. This circuit can be used
-      for applications like automatic night lights, streetlights, and more.
-    </p>
-    <h2>Applications:</h2>
-    <ul>
-      <li>Automatic Night Lights</li>
-      <li>Streetlights</li>
-      <li>Security Lighting</li>
-      <li>Energy-Efficient Lighting Systems</li>
-    </ul>
-    <h2>Conclusion:</h2>
-    <p>
-      The LDR-controlled LED circuit is a simple and effective way to control an
-      LED based on light levels. By using an LDR and an Arduino, you can create
-      a responsive lighting system that adjusts to the surrounding brightness.
-      This circuit can be used in various applications, including automatic
-      night lights, streetlights, and security lighting. Experiment with
-      different threshold values and LED configurations to customize the circuit
-      for your specific needs.
-    </p>
-    <h2>References:</h2>
-    <ul>
-      <li>
-        <a
-          href="https://www.arduino.cc/"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Arduino Official Website</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://www.electronicwings.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          >ElectronicWings Tutorials</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://www.instructables.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Instructables Arduino Projects</a
-        >
-      </li>
-    </ul>
-    <br />
-    <a href="projects.html" class="back-button">Go Back</a>
+    <script src="responsive.js"></script>
+    <script src="navigation.js"></script>
   </body>
 </html>
