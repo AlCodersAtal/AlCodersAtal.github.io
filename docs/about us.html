@@ -88,59 +88,8 @@
     </style>
   </head>
   <body>
-    <nav>
-      <ul class="sidebar">
-        <li onclick="hideSidebar()">
-          <a href="#">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="26"
-              viewBox="0 96 960 960"
-              width="26"
-            >
-              <path
-                d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"
-              />
-            </svg>
-          </a>
-        </li>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="More info.html">More Info</a></li>
-        <li><a href="about us.html">About Us</a></li>
-        <li><a href="Courses.html">Courses</a></li>
-        <li><a href="loginpage.html">Login</a></li>
-        <li><a href="projects.html">Projects</a></li>
-      </ul>
-      <ul>
-        <li><a href="index.html">AlCoders</a></li>
-        <li class="hideOnMobile"><a href="index.html">Home</a></li>
-        <li class="hideOnMobile"><a href="More info.html">More Info</a></li>
-        <li class="hideOnMobile"><a href="about us.html">About Us</a></li>
-        <li class="hideOnMobile"><a href="Courses.html">Courses</a></li>
-        <li class="hideOnMobile"><a href="loginpage.html">Login</a></li>
-        <li class="hideOnMobile"><a href="projects.html">Projects</a></li>
-        <li class="search-icon">
-          <a href="#" id="searchIcon" onclick="showSearchPopup()">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </a>
-        </li>
-        <li class="menu-button" onclick="showSidebar()">
-          <a href="#">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="26"
-              viewBox="0 96 960 960"
-              width="26"
-            >
-              <path
-                d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z"
-              />
-            </svg>
-          </a>
-        </li>
-      </ul>
-    </nav>
-
+    <div id="nav"></div>
+    
     <!-- Search pop-up -->
     <div id="searchPopup" class="search-popup">
       <div class="popup-content">
@@ -234,20 +183,7 @@
           to make a positive impact on the world.
         </p>
 
-        <h2>Testimonials</h2>
-        <div class="testimonials">
-          <p>
-            <strong>John Doe:</strong> "AlCoders has transformed the way I think
-            about technology and innovation. The hands-on projects and
-            mentorship have been invaluable in my learning journey."
-          </p>
-          <p>
-            <strong>Jane Smith:</strong> "The Atal Tinkering Lab has been an
-            incredible experience. I've learned so much about robotics, coding,
-            and 3D printing. It's been a game-changer for me."
-          </p>
-        </div>
-
+        
         <h2>Contact Us</h2>
         <p>
           If you have any questions or would like to learn more about AlCoders,
@@ -269,6 +205,7 @@
         </div>
       </div>
     </div>
+    <script src="loadNav.js"></script>
     <script src="responsive.js"></script>
     <script src="navigation.js"></script>
   </body>

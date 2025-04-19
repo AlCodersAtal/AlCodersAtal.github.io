@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+.content {
+    margin-top: 100px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    font-size: 1rem;
+    color: #333;
+}
+
+.settings-section {
+    margin-bottom: 20px;
+}
+
+.settings-section h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.settings-section label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.settings-section input[type="text"],
+.settings-section input[type="email"],
+.settings-section input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.settings-section button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.settings-section button:hover {
+    background-color: #0056b3;
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.theme-toggle label {
+    margin-right: 10px;
+}
+
+/* Light Theme */
+body.light-theme {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+body.light-theme .content {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+/* Dark Theme */
+body.dark-theme {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+body.dark-theme .content {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+</style>
+<body>
+    <div id="nav"></div>
+
+    <!-- Search pop-up -->
+    <div id="searchPopup" class="search-popup">
+        <div class="popup-content">
+          <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
+          <input
+            type="text"
+            id="searchBar"
+            placeholder="Search here..."
+            oninput="showRecommendations()"
+          />
+          <div class="result-box" id="resultBox"></div>
+        </div>
+      </div>
+  
+    <!-- Content -->
+    <div class="content">
+        <h1>Settings</h1>
+
+        <!-- Profile Information Section -->
+        <div class="settings-section">
+            <h2>Profile Information</h2>
+            <label for="profileName">Name</label>
+            <input type="text" id="profileName" placeholder="Enter your name">
+            <button id="userNameBtn">Change Name</button>
+          
+        </div>
+
+    <!--
+        <div class="settings-section">
+            <h2>Change Password</h2>
+            <label for="currentPassword">Current Password</label>
+            <input type="password" id="currentPassword" placeholder="Enter current password">
+            <label for="newPassword">New Password</label>
+            <input type="password" id="newPassword" placeholder="Enter new password">
+            <label for="confirmPassword">Confirm New Password</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm new password">
+            <button onclick="changePassword()">Change Password</button>
+        </div>
+
+        <div class="settings-section">
+            <h2>Notification Preferences</h2>
+            <label>
+                <input type="checkbox" id="emailNotifications"> Email Notifications
+            </label>
+            <label>
+                <input type="checkbox" id="smsNotifications"> SMS Notifications
+            </label>
+            <button onclick="updateNotifications()">Update Preferences</button>
+        </div>
+
+        <div class="settings-section">
+            <h2>Theme Selection</h2>
+            <div class="theme-toggle">
+                <label for="themeSelect">Select Theme:</label>
+                <select id="themeSelect" onchange="changeTheme()">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+            </div>
+        </div>
+    -->
+
+    </div>
+
+
+
+
+    <script src="loadNav.js"></script>
+    <script src="navigation.js"></script>
+    <script src="userName.js"></script>
+    <script>
+        function updateProfile() {
+            const name = document.getElementById('profileName').value;
+            const email = document.getElementById('profileEmail').value;
+            alert('Profile updated: ' + name + ', ' + email);
+        }
+
+        function changePassword() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            if (newPassword === confirmPassword) {
+                alert('Password changed successfully');
+            } else {
+                alert('New passwords do not match');
+            }
+        }
+
+        function updateNotifications() {
+            const emailNotifications = document.getElementById('emailNotifications').checked;
+            const smsNotifications = document.getElementById('smsNotifications').checked;
+            alert('Notification preferences updated: Email - ' + emailNotifications + ', SMS - ' + smsNotifications);
+        }
+
+        function changeTheme() {
+            const theme = document.getElementById('themeSelect').value;
+            if (theme === 'dark') {
+                document.body.classList.add('dark-theme');
+                document.body.classList.remove('light-theme');
+            } else {
+                document.body.classList.add('light-theme');
+                document.body.classList.remove('dark-theme');
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        function setUsername() {
+            const username = document.getElementById('username').value;
+            localStorage.setItem('username', username);
+            alert('Username set: ' + username);
+        }
+
+        // Load saved theme and username on page load
+        window.onload = function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.getElementById('themeSelect').value = savedTheme;
+                changeTheme();
+            }
+
+            const savedUsername = localStorage.getItem('username');
+            if (savedUsername) {
+                document.getElementById('username').value = savedUsername;
+            }
+        }
+
+
+
+
+
+
+        document.getElementById("userNameBtn").onclick = function () {
+  const username = document.getElementById("profileName").value;
+  localStorage.setItem("username", username);  // Save it in localStorage
+  window.location.href = "index.html"; // Redirect to the homepage
+};
+    </script>
+</body>
+</html>

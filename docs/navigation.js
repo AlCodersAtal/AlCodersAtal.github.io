@@ -1,3 +1,14 @@
+//Code for the responsive
+function showSidebar(){
+  const sidebar = document.querySelector('.sidebar')
+  sidebar.style.display = 'flex'
+}
+function hideSidebar(){
+  const sidebar = document.querySelector('.sidebar')
+  sidebar.style.display = 'none'
+}
+
+
 // Show the search pop-up
 function showSearchPopup() {
     document.getElementById("searchPopup").style.display = "flex";
@@ -14,7 +25,7 @@ function showSearchPopup() {
     const resultBox = document.getElementById("resultBox");
   
     // Sample recommendations (these could be dynamically fetched)
-    const keywords = ["Home", "Home Page", "More Info", "About Us", "Who are Alcoders", "Courses", "What is an Arduino", "What is Sensors", "Login Page", "How to Login In this Website"];
+    const keywords = ["Home", "Home Page", "More Info", "About Us", "Who are Alcoders", "Courses", "What is an Arduino", "What is Sensors", "Login Page", "How to Login In this Website" , "Settings"];
     const filtered = keywords.filter((word) =>
       word.toLowerCase().includes(searchInput)
     );
@@ -45,7 +56,9 @@ function showSearchPopup() {
       "What is an Arduino": "arduinoCourse.html",
       "What is Sensors": "sensorCourse.html.html",
       "Login Page":"loginpage.html", 
-      "How to Login In this Website": "loginpage.html"
+      "How to Login In this Website": "loginpage.html",
+      Settings: "menu.html",
+
     };
   
     if (pages[keyword]) {
@@ -57,7 +70,7 @@ function showSearchPopup() {
 document.getElementById("searchBar").addEventListener("keydown", function(event) {
   if (event.key === "Enter") {
     const searchInput = document.getElementById("searchBar").value.toLowerCase();
-    const keywords = ["Home", "Home Page", "More Info", "About Us", "Who are Alcoders", "Courses", "What is an Arduino", "What is Sensors", "Login Page", "How to Login In this Website"];
+    const keywords = ["Home", "Home Page", "More Info", "About Us", "Who are Alcoders", "Courses", "What is an Arduino", "What is Sensors", "Login Page", "How to Login In this Website", "Settings"];
     const filtered = keywords.filter((word) =>
       word.toLowerCase().includes(searchInput)
     );
@@ -76,3 +89,7 @@ function loadNavigation() {
     })
     .catch(error => console.error('Error loading navigation:', error));
 }
+
+
+
+
