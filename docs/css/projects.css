@@ -10,7 +10,8 @@
 }
 
 .course1,
-.course2 {
+.course2,
+.course3 {
     display: inline-block;
     /* Makes each course container inline-block for horizontal alignment */
     text-align: center;

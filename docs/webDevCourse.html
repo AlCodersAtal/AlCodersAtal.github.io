@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlCoders Web Development Course</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    header {
+      background: #0047ab;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+      border-radius: 10px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .section {
+      background: #fff;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      color: #0047ab;
+      margin-bottom: 10px;
+    }
+
+    pre {
+      background: #eee;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-top: 10px;
+    }
+
+    li {
+      margin-bottom: 5px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+
+
+    <div id="nav"></div>
+  
+    <!-- Search pop-up -->
+    <div id="searchPopup" class="search-popup">
+      <div class="popup-content">
+        <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
+        <input
+          type="text"
+          id="searchBar"
+          placeholder="Search here..."
+          oninput="showRecommendations()"
+        />
+        <div class="result-box" id="resultBox"></div>
+      </div>
+    </div>
+
+
+
+
+<br>
+<br>
+<br>
+  <header>
+    <h1>AlCoders Web Development Course</h1>
+    <p>Learn to Build Your First Website Step-by-Step!</p>
+  </header>
+
+  <div class="section">
+    <h2>What is Web Development?</h2>
+    <p>Web development is the process of building websites. It includes:</p>
+    <ul>
+      <li><strong>Frontend:</strong> What users see (HTML, CSS, JavaScript)</li>
+      <li><strong>Backend:</strong> What happens behind the scenes (PHP, Node.js, databases)</li>
+      <li><strong>Full Stack:</strong> Both frontend and backend together</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Languages to Learn</h2>
+    <ul>
+      <li><strong>HTML</strong> – Structure your content</li>
+      <li><strong>CSS</strong> – Style your website</li>
+      <li><strong>JavaScript</strong> – Make it interactive</li>
+      <li><strong>Later:</strong> PHP, MySQL, Node.js (for backend)</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>HTML Basics</h2>
+    <pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;&lt;title&gt;My Site&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+    &lt;p&gt;Welcome to my website.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    </pre>
+    <p>HTML is like the skeleton of your webpage. Everything you want to show on a webpage—text, images, videos, etc.—needs to be written in HTML.</p>
+  </div>
+
+  <div class="section">
+    <h2>CSS Basics</h2>
+    <pre>
+body {
+  background-color: lightblue;
+  font-family: Arial;
+}
+
+h1 {
+  color: darkblue;
+}
+    </pre>
+    <p>CSS makes your webpage look attractive. You can change colors, fonts, layout, and much more using CSS. Think of it like decorating your skeleton with beautiful clothes and colors!</p>
+  </div>
+
+  <div class="section">
+    <h2>JavaScript Basics</h2>
+    <pre>
+&lt;button onclick="greet()"&gt;Click Me!&lt;/button&gt;
+
+&lt;script&gt;
+  function greet() {
+    alert("Hello from JS!");
+  }
+&lt;/script&gt;
+    </pre>
+    <p>JavaScript adds life to your site. It lets you create popups, respond to user actions, validate forms, build games, and even control the backend!</p>
+  </div>
+
+  <div class="section">
+    <h2>Advanced Frontend Tools (Optional)</h2>
+    <ul>
+      <li><strong>Bootstrap:</strong> CSS framework for faster design</li>
+      <li><strong>React:</strong> JavaScript library to build web apps</li>
+      <li><strong>VS Code Extensions:</strong> Prettier, Live Server</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Projects You’ll Build</h2>
+    <ul>
+      <li>Student Profile Page</li>
+      <li>Interactive Quiz</li>
+      <li>Portfolio Website</li>
+      <li>Responsive Contact Form</li>
+      <li>To-do List App</li>
+      <li>Simple Calculator</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Backend Development (Next Level)</h2>
+    <ul>
+      <li><strong>PHP:</strong> Server-side language to process forms</li>
+      <li><strong>MySQL:</strong> Store and manage data (e.g., users)</li>
+      <li><strong>Node.js:</strong> JavaScript backend runtime</li>
+      <li><strong>MongoDB:</strong> NoSQL database for flexibility</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Publishing with GitHub Pages</h2>
+    <p>You can host your website for free using GitHub Pages:</p>
+    <ol>
+      <li>Push your code to a public repository</li>
+      <li>Go to Settings → Pages → Select main branch</li>
+      <li>Your website will be live at: <code>https://yourusername.github.io/repository-name/</code></li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2>Learning Path</h2>
+    <ol>
+      <li>Start with HTML – Build a simple webpage</li>
+      <li>Add CSS – Make it look beautiful</li>
+      <li>Learn JavaScript – Make it interactive</li>
+      <li>Build Projects – Practice and explore</li>
+      <li>Try backend – PHP or Node.js + database</li>
+      <li>Host on GitHub Pages</li>
+    </ol>
+  </div>
+
+  <footer>
+    &copy; 2025 AlCoders | Designed for Students by Students 🚀<br>
+    Keep exploring, keep building, and enjoy coding!
+  </footer>
+
+  <script src="navigation.js"></script>
+  <script src="loadNav.js"></script>
+</body>
+
+</html>
