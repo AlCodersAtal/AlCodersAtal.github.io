@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Robotics Mastery Course | AlCodersAtal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background-color: #f4f6f8;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    header {
+      background: #007BFF;
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+      border-radius: 12px;
+      margin-bottom: 30px;
+    }
+    section {
+      background: #fff;
+      margin-bottom: 20px;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    p, li {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    ul {
+      margin-left: 20px;
+    }
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    .btn {
+      display: inline-block;
+      background: #28a745;
+      color: #fff;
+      padding: 15px 25px;
+      margin-top: 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 18px;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #218838;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      margin: 20px 0;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+    <div id="nav"></div>
+  
+    <!-- Search pop-up -->
+    <div id="searchPopup" class="search-popup">
+      <div class="popup-content">
+        <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
+        <input
+          type="text"
+          id="searchBar"
+          placeholder="Search here..."
+          oninput="showRecommendations()"
+        />
+        <div class="result-box" id="resultBox"></div>
+      </div>
+    </div>
+<br>
+<br>
+<br>
+
+<header>
+  <h1>Master Robotics: Beginner to Advanced</h1>
+  <p>Learn. Build. Innovate. Compete.</p>
+</header>
+
+<section>
+  <h2>📚 Introduction to Robotics</h2>
+  <p>Robotics is the perfect combination of mechanical engineering, electrical engineering, and computer science. Robots are machines that can sense, think, and act.</p>
+  <p><b>Key Parts of Robots:</b> Sensors, Controller, Actuators, Power Source, Mechanical Structure.</p>
+</section>
+
+<section>
+  <h2>⚡ Basics of Electronics for Robotics</h2>
+  <p>Learn about voltage, current, resistance, and important components like resistors, capacitors, transistors, LEDs, motors, sensors, and microcontrollers like Arduino and ESP32.</p>
+</section>
+
+<section>
+  <h2>💻 Programming for Robotics</h2>
+  <p>Control robots using programming languages:</p>
+  <ul>
+    <li>Arduino C++ for microcontrollers</li>
+    <li>Python for advanced control and AI</li>
+  </ul>
+  <p>Master variables, loops, functions, and conditional statements.</p>
+</section>
+
+<section>
+  <h2>🔧 Mechanical Design</h2>
+  <p>Design stable and balanced robots with a proper chassis, wheels, gears, and center of gravity understanding.</p>
+</section>
+
+<section>
+  <h2>🛠️ Robotics Building Blocks</h2>
+  <p>Learn about microcontrollers (Arduino, ESP32), sensors (ultrasonic, IR), and actuators (motors and servos).</p>
+</section>
+
+<section>
+  <h2>🎯 Basic Projects</h2>
+  <ul>
+    <li>Line Follower Robot</li>
+    <li>Obstacle Avoidance Robot</li>
+    <li>Bluetooth Controlled Car</li>
+    <li>Voice Controlled Robot</li>
+  </ul>
+</section>
+
+<section>
+  <h2>🚀 Advanced Robotics</h2>
+  <p>Learn about IoT-based robots, machine vision, AI-enabled robots, and autonomous systems.</p>
+</section>
+
+<section>
+  <h2>🔋 Power Systems</h2>
+  <p>Use Li-ion batteries, manage power with BMS, and explore solar-powered robots.</p>
+</section>
+
+<section>
+  <h2>📡 Communication in Robots</h2>
+  <p>Implement Bluetooth, WiFi, RF modules, and RFID/NFC communications for smarter robots.</p>
+</section>
+
+<section>
+  <h2>🏆 Competitions and Real-World Applications</h2>
+  <p>Get ready for competitions like FIRST Robotics, RoboCup, and understand how robotics is changing healthcare, defense, agriculture, and homes.</p>
+</section>
+
+<section>
+  <h2>🛠️ Hardware and Software Requirements</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>Purpose</th>
+        <th>Examples</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Microcontroller</td>
+        <td>Brain</td>
+        <td>Arduino, ESP32</td>
+      </tr>
+      <tr>
+        <td>Sensors</td>
+        <td>Sense Environment</td>
+        <td>Ultrasonic, IR</td>
+      </tr>
+      <tr>
+        <td>Motors & Drivers</td>
+        <td>Movement</td>
+        <td>DC Motors, Servo, L298N</td>
+      </tr>
+      <tr>
+        <td>Battery</td>
+        <td>Power</td>
+        <td>Li-ion, 9V</td>
+      </tr>
+      <tr>
+        <td>Software</td>
+        <td>Programming</td>
+        <td>Arduino IDE, VS Code, Tinkercad</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>📦 Final Projects</h2>
+  <ul>
+    <li>Smart Trash Collector Robot</li>
+    <li>Fire Fighter Robot</li>
+    <li>Home Automation Robot</li>
+    <li>Surveillance Robot</li>
+    <li>Dancing Entertainment Robot</li>
+  </ul>
+  <a href="#" class="btn">Start Building Your First Robot!</a>
+</section>
+<script src="navigation.js"></script>
+<script src="loadNav.js"></script>
+</body>
+</html>
