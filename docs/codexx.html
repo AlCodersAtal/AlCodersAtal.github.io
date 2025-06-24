@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CodeXX – AlCoders ATAL</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    /* === Site-wide variables (match your theme) === */
+    :root {
+      --primary: #1a73e8;
+      --secondary: #f5f5f5;
+      --dark: #212121;
+      --accent: #ff5722;
+      --font-base: 'Poppins', sans-serif;
+    }
+    body {
+      font-family: var(--font-base);
+      background-color: var(--secondary);
+      color: var(--dark);
+      margin: 0;
+    }
+    header {
+      background-color: var(--dark);
+      color: white;
+      padding: 2rem 0;
+    }
+    .main-heading {
+      font-size: 2.75rem;
+      font-weight: 600;
+    }
+    .lead {
+      color: var(--accent);
+      font-weight: 400;
+    }
+    .section-title {
+      margin-top: 3rem;
+      font-size: 1.75rem;
+      font-weight: 500;
+      border-left: 4px solid var(--primary);
+      padding-left: 1rem;
+      color: var(--dark);
+    }
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 0.5rem;
+    }
+    footer {
+      background-color: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 0;
+      margin-top: 3rem;
+    }
+    button.btn-primary {
+      background-color: var(--primary);
+      border-color: var(--primary);
+    }
+    button.btn-primary:hover {
+      background-color: darken(var(--primary), 10%);
+    }
+    .alert-success {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }
+    .alert-danger {
+      background-color: #ffebee;
+      color: #c62828;
+    }
+  </style>
+</head>
+<body>
+
+<header class="text-center">
+  <h1 class="main-heading">CodeXX Project</h1>
+  <p class="lead">Secure RFID-Based Healthcare System by AlCoders ATAL</p>
+</header>
+
+<div class="container my-5">
+  <!-- [All content sections remain unchanged] -->
+  <!-- What is CodeXX? -->
+  <section>
+    <h2 class="section-title">What is CodeXX?</h2>
+    <p>CodeXX is an advanced, secure, RFID‑based system designed to manage and protect patient medical records, particularly in the distribution of controlled substances like Schedule X drugs. It integrates hardware and software to authenticate users via RFID card and password before providing access.</p>
+  </section>
+
+  <!-- Use Case Scenario -->
+  <section>
+    <h2 class="section-title">Use Case Scenario</h2>
+    <ul>
+      <li><strong>At the hospital:</strong> Doctor issues a prescription, linked to the patient’s RFID and stored securely in Firebase.</li>
+      <li><strong>At the pharmacy:</strong> Patient scans card, enters password — only then prescription data appears.</li>
+      <li><strong>Lost card?</strong> The second factor (password/OTP) blocks access if card is stolen.</li>
+    </ul>
+  </section>
+
+  <!-- Functional Workflow -->
+  <section>
+    <h2 class="section-title">Functional Workflow</h2>
+    <ol>
+      <li>Patient taps RFID; UID is sent via ESP8266 to web interface.</li>
+      <li>Patient enters password (or OTP in future versions).</li>
+      <li>Web app verifies UID + password against Firebase.</li>
+      <li>On success: display patient info, prescription + Drive link; log the access.</li>
+    </ol>
+  </section>
+
+  <!-- Advantages -->
+  <section>
+    <h2 class="section-title">Advantages</h2>
+    <ul>
+      <li><strong>Dual-layer security:</strong> RFID + password.</li>
+      <li><strong>Live updates:</strong> Firebase stores ensure real-time records.</li>
+      <li><strong>Cost-efficient:</strong> ESP8266 + free hosting.</li>
+      <li><strong>Scalable:</strong> Modular for OTP, biometrics, analytics.</li>
+      <li><strong>Traceable:</strong> Full access logs in Firebase.</li>
+    </ul>
+  </section>
+
+  <!-- Limitations -->
+  <section>
+    <h2 class="section-title">Limitations</h2>
+    <ul>
+      <li><strong>Internet only:</strong> Needs reliable connection for Firebase.</li>
+      <li><strong>RFID range:</strong> Very short—no remote access.</li>
+      <li><strong>UI constraints:</strong> Static interface needs enhancement.</li>
+      <li><strong>Password risk:</strong> Susceptible if password is known to others.</li>
+    </ul>
+  </section>
+
+  <!-- Future Applications -->
+  <section>
+    <h2 class="section-title">Future Applications</h2>
+    <ul>
+      <li>Add biometrics (face/fingerprint) for stronger authentication.</li>
+      <li>Mobile apps for easier doctor/pharmacy interactions and notifications.</li>
+      <li>OTP over WhatsApp – password-less login.</li>
+      <li>Prescription consumption tracking and anomaly alerts.</li>
+      <li>NFC card support—use your phone instead of an RFID tag.</li>
+    </ul>
+  </section>
+
+  <!-- Interactive Demo -->
+  <section>
+    <h2 class="section-title">Interactive Demo</h2>
+    <p>Simulate the CodeXX authentication below:</p>
+    <div class="card p-4 shadow-sm">
+      <form id="codexxDemoForm">
+        <div class="mb-3">
+          <label for="rfidUID" class="form-label">RFID UID:</label>
+          <input type="text" id="rfidUID" class="form-control" placeholder="e.g. AB12CD34" required>
+        </div>
+        <div class="mb-3">
+          <label for="passwordInput" class="form-label">Password:</label>
+          <input type="password" id="passwordInput" class="form-control" placeholder="****" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Access Record</button>
+      </form>
+      <div class="mt-3" id="demoResult"></div>
+    </div>
+  </section>
+</div>
+<div class="container text-center mt-5">
+  <a href="projects.html"><button class="btn btn-outline-secondary" >← Go Back</button></a>
+</div>
+
+
+<footer>
+  <p>&copy; 2025 AlCoders ATAL | Designed by Vinso</p>
+</footer>
+  <script src="responsive.js"></script>
+    <script src="navigation.js"></script>
+<script>
+  const demoDatabase = {
+    "AB12CD34": { password: "1234", name: "John Doe", age: 35, gender: "Male", bloodGroup: "O+", prescriptionLink: "#" },
+    "XY99LM77": { password: "7890", name: "Priya Sharma", age: 29, gender: "Female", bloodGroup: "B+", prescriptionLink: "#" }
+  };
+  document.getElementById("codexxDemoForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const uid = document.getElementById("rfidUID").value.trim().toUpperCase();
+    const pw = document.getElementById("passwordInput").value;
+    const user = demoDatabase[uid];
+    const out = document.getElementById("demoResult");
+    out.innerHTML = user && user.password === pw
+      ? `<div class="alert alert-success"><strong>Access Granted</strong><br>Name: ${user.name}<br>Age: ${user.age}<br>Gender: ${user.gender}<br>BG: ${user.bloodGroup}<br><a class="btn btn-outline-primary mt-2" href="${user.prescriptionLink}" target="_blank">View RX</a></div>`
+      : `<div class="alert alert-danger"><strong>Access Denied:</strong> Invalid UID or password.</div>`;
+    document.getElementById("passwordInput").value = "";
+  });
+</script>
+
+</body>
+</html>
