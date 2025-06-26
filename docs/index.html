@@ -195,16 +195,42 @@ footer {
     
     <script src="navigation.js"></script>
     <script src="loadNav.js"></script>
-    <script>
-      window.onload = function () {
-        const savedUsername = localStorage.getItem("username");
-        if (savedUsername) {
-          document.getElementById("changeName").textContent = savedUsername;
-        } else {
-          document.getElementById("changeName").textContent = "";
-        }
-      };
-      </script>
+    
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBIMtf6DXnAxWKdkoLkfxn7b7zBoAr8Ouk",
+    authDomain: "alcodersatal-database.firebaseapp.com",
+    projectId: "alcodersatal-database",
+    storageBucket: "alcodersatal-database.firebasestorage.app",
+    messagingSenderId: "1092849520429",
+    appId: "1:1092849520429:web:ecf950a9aa868e37760da4"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        document.getElementById("changeName").textContent = data.username || "User";
+      } else {
+        document.getElementById("changeName").textContent = "User";
+      }
+    } else {
+      document.getElementById("changeName").textContent = "";
+    }
+  });
+</script>
+
+    
       
  
   </body>

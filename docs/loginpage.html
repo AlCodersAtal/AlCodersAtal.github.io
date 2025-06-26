@@ -1,22 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register & Login</title>
-
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/loginpage.css" />
-    <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <script type="module" src="register.js" defer></script>
-  </head>
-  <body>
-    <div id="nav"></div>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register & Login with Firestore</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/loginpage.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  />
+</head>
+<body>
+  <div id="nav"></div>
+  
     <!-- Search pop-up -->
     <div id="searchPopup" class="search-popup">
       <div class="popup-content">
@@ -30,108 +27,79 @@
         <div class="result-box" id="resultBox"></div>
       </div>
     </div>
-
-    <div class="container" id="signup" style="display: none">
-      <h1 class="form-title">Register</h1>
-      <form method="post" action="register.php">
-        <div class="input-group">
-          <label for="fName">First Name</label>
-          <i class="fas fa-user"></i>
-          <input
-            type="text"
-            name="fName"
-            id="fName"
-            placeholder="Enter your first name"
-            required
-          />
-        </div>
-        <div class="input-group">
-          <label for="lName">Last Name</label>
-          <i class="fas fa-user"></i>
-          <input
-            type="text"
-            name="lName"
-            id="lName"
-            placeholder="Enter your last name"
-            required
-          />
-        </div>
-        <div class="input-group">
-          <label for="email">Email</label>
-          <i class="fas fa-envelope"></i>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Enter your email"
-            required
-          />
-        </div>
-        <div class="input-group">
-          <label for="password">Password</label>
-          <i class="fas fa-lock"></i>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Create a strong password"
-            required
-          />
-        </div>
-        <input type="submit" class="btn" value="Sign Up" name="signUp" />
-      </form>
-      <p class="or">----------or--------</p>
-      <div class="icons">
-        <i class="fab fa-google"></i>
-        <i class="fab fa-facebook"></i>
+  <div class="container" id="signup" style="display: none">
+    <h1 class="form-title">Register</h1>
+    <form id="registerForm">
+      <div class="input-group">
+        <label for="fName">First Name</label>
+        <i class="fas fa-user"></i>
+        <input type="text" id="fName" placeholder="Enter your first name" required />
       </div>
-      <div class="links">
-        <p>Already Have Account?</p>
-        <button id="signInButton">Sign In</button>
+      <div class="input-group">
+        <label for="lName">Last Name</label>
+        <i class="fas fa-user"></i>
+        <input type="text" id="lName" placeholder="Enter your last name" required />
       </div>
+      <div class="input-group">
+        <label for="username">Username</label>
+        <i class="fas fa-user"></i>
+        <input type="text" id="username" placeholder="Choose a username" required />
+      </div>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <i class="fas fa-envelope"></i>
+        <input type="email" id="registerEmail" placeholder="Enter your email" required />
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <i class="fas fa-lock"></i>
+        <input type="password" id="registerPassword" placeholder="Create a strong password" required />
+      </div>
+      <input type="submit" class="btn" value="Sign Up" />
+    </form>
+    <p class="or">----------or--------</p>
+    <div class="links">
+      <p>Already Have Account?</p>
+      <button id="signInButton">Sign In</button>
     </div>
+  </div>
 
-    <div class="container" id="signIn">
-      <h1 class="form-title">Sign In</h1>
-      <form method="post" action="register.php">
-        <div class="input-group">
-          <label for="email">Email</label>
-          <i class="fas fa-envelope"></i>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Enter your email"
-            required
-          />
-        </div>
-        <div class="input-group">
-          <label for="password">Password</label>
-          <i class="fas fa-lock"></i>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Enter your password"
-            required
-          />
-        </div>
-        <p class="recover"><a href="#">Recover Password</a></p>
-        <input type="submit" class="btn" value="Sign In" name="signIn" id="submit"/>
-      </form>
-      <p class="or">----------or--------</p>
-      <div class="icons">
-        <i class="fab fa-google"></i>
-        <i class="fab fa-facebook"></i>
+  <div class="container" id="signIn">
+    <h1 class="form-title">Sign In</h1>
+    <form id="loginForm">
+      <div class="input-group">
+        <label for="email">Email</label>
+        <i class="fas fa-envelope"></i>
+        <input type="email" id="loginEmail" placeholder="Enter your email" required />
       </div>
-      <div class="links">
-        <p>Don't have an account yet?</p>
-        <button id="signUpButton">Sign Up</button>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <i class="fas fa-lock"></i>
+        <input type="password" id="loginPassword" placeholder="Enter your password" required />
       </div>
+      <input type="submit" class="btn" value="Sign In" />
+    </form>
+    <p class="or">----------or--------</p>
+    <div class="links">
+      <p>Don't have an account yet?</p>
+      <button id="signUpButton">Sign Up</button>
     </div>
-    <script src="loadNav.js"></script>
-    <script src="login.js"></script>
-    <script src="responsive.js"></script>
-    <script src="navigation.js"></script>
-  </body>
+  </div>
+
+  <!-- Firebase Auth + Firestore -->
+  <script type="module" src="register.js"></script>
+  <script src="loadNav.js"></script>
+
+  <script>
+    // Switch between Sign In and Sign Up forms
+    document.getElementById("signUpButton").onclick = () => {
+      document.getElementById("signup").style.display = "block";
+      document.getElementById("signIn").style.display = "none";
+    };
+    document.getElementById("signInButton").onclick = () => {
+      document.getElementById("signup").style.display = "none";
+      document.getElementById("signIn").style.display = "block";
+    };
+  </script>
+</body>
 </html>
