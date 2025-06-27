@@ -315,3 +315,10 @@ nav li:first-child {
 .dropdown:hover .dropdown-arrow {
   transform: rotate(180deg);
 }
+
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9em;
+  color: #555;
+}

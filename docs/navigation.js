@@ -25,7 +25,7 @@ function showSearchPopup() {
     const resultBox = document.getElementById("resultBox");
   
     // Sample recommendations (these could be dynamically fetched)
-    const keywords = ["Home", "Home Page", "More Info", "About Us", "Who are Alcoders", "Courses", "What is an Arduino", "What is Sensors", "Login Page", "How to Login In this Website" , "Settings"];
+    const keywords = ["Home", "Home Page", "More Info", "About Us", "Who are Alcoders", "Courses", "What is an Arduino", "What is Sensors", "Login Page", "How to Login In this Website" , "Settings","What is Coding ", "What is HTML","WebDevelopment Course" ];
     const filtered = keywords.filter((word) =>
       word.toLowerCase().includes(searchInput)
     );
@@ -58,6 +58,9 @@ function showSearchPopup() {
       "Login Page":"loginpage.html", 
       "How to Login In this Website": "loginpage.html",
       Settings: "menu.html",
+      "WebDevelopment Course": "webDevCourse.html",
+      "What is HTML ": "webDevCourse.html",
+      "What is Coding ": "codingCourse.html",
 
     };
   
@@ -70,7 +73,7 @@ function showSearchPopup() {
 document.getElementById("searchBar").addEventListener("keydown", function(event) {
   if (event.key === "Enter") {
     const searchInput = document.getElementById("searchBar").value.toLowerCase();
-    const keywords = ["Home", "Home Page", "More Info", "About Us", "Who are Alcoders", "Courses", "What is an Arduino", "What is Sensors", "Login Page", "How to Login In this Website", "Settings"];
+    const keywords = ["Home", "Home Page", "More Info", "About Us", "Who are Alcoders", "Courses", "What is an Arduino", "What is Sensors", "Login Page", "How to Login In this Website", "Settings", "What is Coding ", "What is HTML", "WebDevelopment Course "];
     const filtered = keywords.filter((word) =>
       word.toLowerCase().includes(searchInput)
     );
