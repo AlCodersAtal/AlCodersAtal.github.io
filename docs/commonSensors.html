@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ATL Lab Sensors - Complete Guide</title>
+   <link rel="stylesheet" href="css/style.css">
+      <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
+
+  <style>
+    body { 
+  font-family: Arial, sans-serif; 
+  background: #f4f4f9; 
+  margin: 0; 
+  padding: 0; 
+  color: #333; 
+  font-size: 16px; /* Base font size for body text */
+  line-height: 1.5;
+}
+header { 
+  background-color: #003366; 
+  color: white; 
+  padding: 20px; 
+  text-align: center; 
+  font-size: 24px; /* Header title font size */
+}
+.sensor-card {
+  background: white; 
+  max-width: 900px; 
+  margin: 20px auto; 
+  padding: 20px; 
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  font-size: 16px; /* text inside card */
+}
+.sensor-card img {
+  width: 100%; 
+  max-height: 300px; 
+  object-fit: contain; 
+  border-radius: 6px;
+}
+h2 { 
+  color: #003366; 
+  font-size: 22px; /* Subheading font size */
+  margin-top: 0;
+}
+pre { 
+  background: #efefef; 
+  padding: 10px; 
+  overflow-x: auto; 
+  border-radius: 4px; 
+  font-size: 14px; /* Code font size */
+  font-family: 'Courier New', Courier, monospace;
+}
+
+
+  </style>
+</head>
+<body>
+     <div id="nav"></div>
+
+    <!-- Search pop-up -->
+    <div id="searchPopup" class="search-popup">
+        <div class="popup-content">
+          <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
+          <input
+            type="text"
+            id="searchBar"
+            placeholder="Search here..."
+            oninput="showRecommendations()"
+          />
+          <div class="result-box" id="resultBox"></div>
+        </div>
+      </div>
+
+
+      <br><br><br>
+
+  <header>
+    <h1>ATL Lab Sensors - Complete Guide</h1>
+    <p>Includes images, working, Arduino code, and real-world applications</p>
+  </header>
+
+  <!-- 1. Ultrasonic Sensor -->
+  <div class="sensor-card">
+    <img src="images/ultrasonic.webp" alt="Ultrasonic Sensor" />
+    <h2>1. Ultrasonic Sensor (HC-SR04)</h2>
+    <p><strong>Function:</strong> Measures distance using ultrasonic waves.</p>
+    <p><strong>Working:</strong> Emits ultrasonic pulses and calculates distance based on echo time.</p>
+    <p><strong>Code:</strong></p>
+    <pre>#define trigPin 9
+#define echoPin 10
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+}
+
+void loop() {
+  digitalWrite(trigPin, LOW); delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH); delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  long duration = pulseIn(echoPin, HIGH);
+  float distance = duration * 0.034 / 2;
+  Serial.println(distance);
+  delay(500);
+}</pre>
+    <p><strong>Use Cases:</strong> Robotics, obstacle avoidance, water level measurement.</p>
+  </div>
+
+  <!-- 2. Infrared (IR) Sensor -->
+  <div class="sensor-card">
+    <img src="images/ir_sensor.webp" alt="Infrared Sensor" />
+    <h2>2. Infrared (IR) Sensor</h2>
+    <p><strong>Function:</strong> Detects objects using infrared light reflection.</p>
+    <p><strong>Working:</strong> Emits IR light and detects reflected rays to sense presence.</p>
+    <p><strong>Code:</strong></p>
+    <pre>int sensorPin = 2;
+
+void setup() {
+  pinMode(sensorPin, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int val = digitalRead(sensorPin);
+  if (val == LOW) {
+    Serial.println("Object detected");
+  } else {
+    Serial.println("No object");
+  }
+  delay(300);
+}</pre>
+    <p><strong>Use Cases:</strong> Line-following robots, motion detection, obstacle detection.</p>
+  </div>
+
+  <!-- 3. DHT11 Temperature & Humidity Sensor -->
+  <div class="sensor-card">
+    <img src="images/dht11.webp" alt="DHT11 Sensor" />
+    <h2>3. DHT11 Temperature & Humidity Sensor</h2>
+    <p><strong>Function:</strong> Measures ambient temperature and humidity.</p>
+    <p><strong>Working:</strong> Uses thermistor and capacitive humidity sensor to measure environment.</p>
+    <p><strong>Code:</strong></p>
+    <pre>#include &lt;DHT.h&gt;
+#define DHTPIN 2
+#define DHTTYPE DHT11
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+  Serial.begin(9600);
+  dht.begin();
+}
+
+void loop() {
+  float temp = dht.readTemperature();
+  float hum = dht.readHumidity();
+  Serial.print("Temp: "); Serial.print(temp);
+  Serial.print(" °C, Humidity: "); Serial.print(hum); Serial.println(" %");
+  delay(2000);
+}</pre>
+    <p><strong>Use Cases:</strong> Weather stations, HVAC systems, smart homes.</p>
+  </div>
+
+  <!-- 4. MQ2 Gas Sensor -->
+  <div class="sensor-card">
+    <img src="images/mq2.webp" alt="MQ2 Gas Sensor" />
+    <h2>4. MQ2 Gas Sensor</h2>
+    <p><strong>Function:</strong> Detects flammable gases like LPG, methane, smoke.</p>
+    <p><strong>Working:</strong> Sensor resistance varies with gas concentration.</p>
+    <p><strong>Code:</strong></p>
+    <pre>int sensorPin = A0;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int gasLevel = analogRead(sensorPin);
+  Serial.print("Gas level: ");
+  Serial.println(gasLevel);
+  delay(1000);
+}</pre>
+    <p><strong>Use Cases:</strong> Gas leak detection, safety alarms.</p>
+  </div>
+
+  <!-- 5. Light Dependent Resistor (LDR) -->
+  <div class="sensor-card">
+    <img src="images/ldr.webp" alt="LDR Sensor" />
+    <h2>5. Light Dependent Resistor (LDR)</h2>
+    <p><strong>Function:</strong> Measures light intensity.</p>
+    <p><strong>Working:</strong> Resistance decreases as light intensity increases.</p>
+    <p><strong>Code:</strong></p>
+    <pre>int ldrPin = A0;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int lightLevel = analogRead(ldrPin);
+  Serial.print("Light level: ");
+  Serial.println(lightLevel);
+  delay(500);
+}</pre>
+    <p><strong>Use Cases:</strong> Automatic lighting, street lights, light-following robots.</p>
+  </div>
+
+  <!-- 6. PIR Motion Sensor -->
+  <div class="sensor-card">
+    <img src="images/pir_motion.webp" alt="PIR Motion Sensor" />
+    <h2>6. PIR Motion Sensor</h2>
+    <p><strong>Function:</strong> Detects motion of humans or animals.</p>
+    <p><strong>Working:</strong> Detects IR radiation changes emitted by moving bodies.</p>
+    <p><strong>Code:</strong></p>
+    <pre>int pirPin = 7;
+
+void setup() {
+  pinMode(pirPin, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int motion = digitalRead(pirPin);
+  if(motion == HIGH){
+    Serial.println("Motion Detected");
+  } else {
+    Serial.println("No Motion");
+  }
+  delay(500);
+}</pre>
+    <p><strong>Use Cases:</strong> Security alarms, automatic lighting, intruder detection.</p>
+  </div>
+
+  <!-- 7. Sound Sensor (Microphone) -->
+  <div class="sensor-card">
+    <img src="images/sound_sensor.webp" alt="Sound Sensor" />
+    <h2>7. Sound Sensor</h2>
+    <p><strong>Function:</strong> Detects sound levels.</p>
+    <p><strong>Working:</strong> Converts sound waves to electrical signals.</p>
+    <p><strong>Code:</strong></p>
+    <pre>int soundPin = A0;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int soundLevel = analogRead(soundPin);
+  Serial.print("Sound Level: ");
+  Serial.println(soundLevel);
+  delay(500);
+}</pre>
+    <p><strong>Use Cases:</strong> Noise monitoring, sound activated devices.</p>
+  </div>
+
+  <!-- 8. BMP180 / BMP280 Pressure Sensor -->
+  <div class="sensor-card">
+    <img src="images/bmp280.webp" alt="BMP280 Pressure Sensor" />
+    <h2>8. BMP180 / BMP280 Pressure Sensor</h2>
+    <p><strong>Function:</strong> Measures atmospheric pressure and altitude.</p>
+    <p><strong>Working:</strong> Uses piezo-resistive sensors to detect pressure changes.</p>
+    <p><strong>Code:</strong></p>
+    <pre>#include &lt;Wire.h&gt;
+#include &lt;Adafruit_BMP085.h&gt;
+
+Adafruit_BMP085 bmp;
+
+void setup() {
+  Serial.begin(9600);
+  if (!bmp.begin()) {
+    Serial.println("Could not find sensor");
+    while (1);
+  }
+}
+
+void loop() {
+  Serial.print("Pressure: ");
+  Serial.print(bmp.readPressure());
+  Serial.println(" Pa");
+  delay(2000);
+}</pre>
+    <p><strong>Use Cases:</strong> Weather stations, altimeters, drones.</p>
+  </div>
+
+  <!-- 9. Soil Moisture Sensor -->
+  <div class="sensor-card">
+    <img src="images/soil_moisture.webp" alt="Soil Moisture Sensor" />
+    <h2>9. Soil Moisture Sensor</h2>
+    <p><strong>Function:</strong> Measures soil water content.</p>
+    <p><strong>Working:</strong> Measures resistance or capacitance of soil to determine moisture.</p>
+    <p><strong>Code:</strong></p>
+    <pre>int sensorPin = A0;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int moistureLevel = analogRead(sensorPin);
+  Serial.print("Soil Moisture: ");
+  Serial.println(moistureLevel);
+  delay(1000);
+}</pre>
+    <p><strong>Use Cases:</strong> Automated irrigation, agriculture monitoring.</p>
+  </div>
+
+  <!-- 10. Flame Sensor -->
+  <div class="sensor-card">
+    <img src="images/flame_sensor.webp" alt="Flame Sensor" />
+    <h2>10. Flame Sensor</h2>
+    <p><strong>Function:</strong> Detects presence of flame or fire.</p>
+    <p><strong>Working:</strong> Detects infrared light emitted by fire.</p>
+    <p><strong>Code:</strong></p>
+    <pre>int flamePin = 3;
+
+void setup() {
+  pinMode(flamePin, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int flameDetected = digitalRead(flamePin);
+  if(flameDetected == LOW){
+    Serial.println("Flame Detected!");
+  } else {
+    Serial.println("No Flame");
+  }
+  delay(500);
+}</pre>
+    <p><strong>Use Cases:</strong> Fire alarms, safety systems.</p>
+  </div>
+
+  <!-- 11. Rain Sensor -->
+  <div class="sensor-card">
+    <img src="images/rain_sensor.webp" alt="Rain Sensor" />
+    <h2>11. Rain Sensor</h2>
+    <p><strong>Function:</strong> Detects rain or water drops.</p>
+    <p><strong>Working:</strong> Measures conductivity change on the sensor surface when wet.</p>
+    <p><strong>Code:</strong></p>
+    <pre>int rainPin = A0;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int rainValue = analogRead(rainPin);
+  Serial.print("Rain Level: ");
+  Serial.println(rainValue);
+  delay(1000);
+}</pre>
+    <p><strong>Use Cases:</strong> Automatic windshield wipers, weather stations.</p>
+  </div>
+
+  <!-- 12. Touch Sensor (TTP223) -->
+  <div class="sensor-card">
+    <img src="images/touch_sensor.webp" alt="Touch Sensor" />
+    <h2>12. Touch Sensor (TTP223)</h2>
+    <p><strong>Function:</strong> Detects capacitive touch input.</p>
+    <p><strong>Working:</strong> Changes output when touched due to capacitance variation.</p>
+    <p><strong>Code:</strong></p>
+    <pre>int touchPin = 4;
+
+void setup() {
+  pinMode(touchPin, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int touched = digitalRead(touchPin);
+  if(touched == HIGH){
+    Serial.println("Touched");
+  } else {
+    Serial.println("Not Touched");
+  }
+  delay(300);
+}</pre>
+    <p><strong>Use Cases:</strong> Buttons, user interfaces, smart controls.</p>
+  </div>
+
+  <!-- 13. Hall Effect Sensor -->
+  <div class="sensor-card">
+    <img src="images/hall_sensor.webp" alt="Hall Effect Sensor" />
+    <h2>13. Hall Effect Sensor</h2>
+    <p><strong>Function:</strong> Detects magnetic fields.</p>
+    <p><strong>Working:</strong> Produces voltage change when exposed to a magnetic field.</p>
+    <p><strong>Code:</strong></p>
+    <pre>int hallPin = 2;
+
+void setup() {
+  pinMode(hallPin, INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int magnetic = digitalRead(hallPin);
+  if(magnetic == LOW){
+    Serial.println("Magnet Detected");
+  } else {
+    Serial.println("No Magnet");
+  }
+  delay(500);
+}</pre>
+    <p><strong>Use Cases:</strong> Speed sensors, proximity detection.</p>
+  </div>
+
+  <!-- 14. Temperature Sensor (LM35) -->
+  <div class="sensor-card">
+    <img src="images/lm35.webp" alt="LM35 Temperature Sensor" />
+    <h2>14. Temperature Sensor (LM35)</h2>
+    <p><strong>Function:</strong> Measures temperature precisely.</p>
+    <p><strong>Working:</strong> Outputs voltage proportional to temperature.</p>
+    <p><strong>Code:</strong></p>
+    <pre>int tempPin = A0;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int reading = analogRead(tempPin);
+  float voltage = reading * 5.0 / 1024.0;
+  float temperatureC = voltage * 100;
+  Serial.print("Temperature: ");
+  Serial.print(temperatureC);
+  Serial.println(" °C");
+  delay(1000);
+}</pre>
+    <p><strong>Use Cases:</strong> Thermometers, HVAC systems.</p>
+  </div>
+
+  <!-- 15. Accelerometer (ADXL335 / ADXL345) -->
+  <div class="sensor-card">
+    <img src="images/accelerometer.webp" alt="Accelerometer" />
+    <h2>15. Accelerometer (ADXL335 / ADXL345)</h2>
+    <p><strong>Function:</strong> Measures acceleration and tilt.</p>
+    <p><strong>Working:</strong> Detects changes in velocity and orientation.</p>
+    <p><strong>Code:</strong></p>
+    <pre>// Using ADXL345 with I2C\n#include &lt;Wire.h&gt;\n#include &lt;Adafruit_Sensor.h&gt;\n#include &lt;Adafruit_ADXL345_U.h&gt;\n\nAdafruit_ADXL345_Unified accel = Adafruit_ADXL345_Unified();\n\nvoid setup() {\n  Serial.begin(9600);\n  if(!accel.begin()) {\n    Serial.println(\"No ADXL345 detected\");\n    while(1);\n  }\n}\n\nvoid loop() {\n  sensors_event_t event;\n  accel.getEvent(&event);\n  Serial.print(\"X: \"); Serial.print(event.acceleration.x); Serial.print(\" m/s^2, \");\n  Serial.print(\"Y: \"); Serial.print(event.acceleration.y); Serial.print(\" m/s^2, \");\n  Serial.print(\"Z: \"); Serial.println(event.acceleration.z); Serial.println(\" m/s^2\");\n  delay(1000);\n}</pre>
+    <p><strong>Use Cases:</strong> Motion detection, gaming controllers, smartphones.</p>
+  </div>
+
+   <div id="footer"></div>
+   
+    <script src="loadNav.js"></script>
+    <script src="navigation.js"></script>
+</body>
+</html>

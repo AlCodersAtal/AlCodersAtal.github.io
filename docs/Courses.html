@@ -17,30 +17,37 @@
     
   </head>
   <Style>
-    .course1,
+    .content {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping to next line */
+  justify-content: center; /* Center the items horizontally */
+  gap: 40px; /* Space between items */
+  max-width: 960px; /* Optional: limit overall width */
+  margin: 0 auto; /* Center container */
+}
+
+.course1,
 .course2,
 .course3,
 .course4,
-.course5 {
-  display: inline-block;
-  /* Makes each course container inline-block for horizontal alignment */
+.course5,
+.course6 {
+  flex: 0 1 calc(33.33% - 40px); /* Each takes ~1/3 width minus gap */
+  box-sizing: border-box;
   text-align: center;
-  /* Centers the text below the image */
-  vertical-align: top;
-  /* Aligns the items at the top */
   padding-top: 30px;
-  padding: 40px;
 }
 
-.content {
-  text-align: center;
-
-  /* Aligns the inline-block items horizontally */
+.course1 img,
+.course2 img,
+.course3 img,
+.course4 img,
+.course5 img,
+.course6 img {
+  max-width: 100%; /* Make sure images scale responsively */
+  height: auto;
 }
 
-h2 {
-  padding-top: 40px;
-}
   </Style>
   <body >
   <div id="nav"></div>
@@ -84,6 +91,10 @@ h2 {
     <div class="course5">
       <h2>Robotics Mastery: From Beginner to Expert</h2>
       <a href="roboticsCourse.html"><img src="images/roboticsPic.png" alt="A photo of Arduino with the text What is Arduino" width="200" height="200" title="Redirect to a Wonderful Course about Adruino"></a>
+    </div>
+    <div class="course6">
+      <h2>Exploring ATL Lab Sensors: Functionality, Coding, and Use Cases</h2>
+      <a href="commonSensors.html"><img src="images/ATLlabp1.jpg" alt="A photo of Arduino with the text What is Arduino" width="200" height="200" title="Redirect to a Wonderful Course about Adruino"></a>
     </div>
       <div id="footer"></div>
     
