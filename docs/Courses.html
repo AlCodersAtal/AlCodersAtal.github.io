@@ -4,55 +4,77 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
     <title>Courses</title>
     <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
-
     <link rel="stylesheet" href="css/style.css" />
-  
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
-    
+    <style>
+      .content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        max-width: 1100px;
+        margin: 0 auto 60px;
+        padding: 40px 20px;
+      }
+
+      .course-box {
+        background-color: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        text-align: center;
+        padding: 20px;
+        transition: transform 0.3s ease;
+      }
+
+      .course-box:hover {
+        transform: translateY(-5px);
+      }
+
+      .course-box img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        margin-bottom: 15px;
+      }
+
+      .course-box h2 {
+        font-size: 1.1rem;
+        color: #004080;
+        margin: 0;
+        padding-top: 10px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 100px;
+        font-size: 2rem;
+        color: #003366;
+      }
+
+      h3 {
+        max-width: 1100px;
+        margin: 40px auto 20px;
+        font-size: 1.5rem;
+        color: #004080;
+        border-bottom: 2px solid #004080;
+        padding-bottom: 5px;
+      }
+
+      hr {
+        max-width: 200px;
+        margin: 20px auto;
+        border: 1px solid #004080;
+      }
+    </style>
   </head>
-  <Style>
-    .content {
-  display: flex;
-  flex-wrap: wrap; /* Allow wrapping to next line */
-  justify-content: center; /* Center the items horizontally */
-  gap: 40px; /* Space between items */
-  max-width: 960px; /* Optional: limit overall width */
-  margin: 0 auto; /* Center container */
-}
+  <body>
+    <div id="nav"></div>
 
-.course1,
-.course2,
-.course3,
-.course4,
-.course5,
-.course6,
-.course7 {
-  flex: 0 1 calc(33.33% - 40px); /* Each takes ~1/3 width minus gap */
-  box-sizing: border-box;
-  text-align: center;
-  padding-top: 30px;
-}
-
-.course1 img,
-.course2 img,
-.course3 img,
-.course4 img,
-.course5 img,
-.course6 img,
-.course7 img {
-  max-width: 100%; /* Make sure images scale responsively */
-  height: auto;
-}
-
-  </Style>
-  <body >
-  <div id="nav"></div>
     <!-- Search pop-up -->
     <div id="searchPopup" class="search-popup">
       <div class="popup-content">
@@ -66,45 +88,67 @@
         <div class="result-box" id="resultBox"></div>
       </div>
     </div>
-    <br><br><br><br>
-    
 
+    <h1>Here you can get free courses to learn About Arduino</h1>
+    <hr />
+
+    <h3>Beginner Courses</h3>
     <div class="content">
-      <br>
-      <h1>Here you can get free courses to learn About Arduino</h1>
-      <hr>
-      <div class="course1">
-        <h2>What is Arduino</h2>
-        <a href="arduinoCourse.html"><img src="images/arduinoPic.jpg" alt="A photo of Arduino with the text What is Arduino" width="200" height="200" title="Redirect to a Wonderful Course about Adruino"></a>
+      <div class="course-box">
+        <a href="arduinoCourse.html">
+          <img src="images/arduinoPic.jpg" alt="What is Arduino" />
+        </a>
+        <h2>Arduino Essentials: From Zero to Maker</h2>
       </div>
-      <div class="course2">
-        <h2>What is Sensors</h2>
-        <a href="sensorCourse.html"><img src="images/sensorsPic.png" alt="A photo of Sensors with the text What are Sensors" width="200" height="200" title="Redirect to a Wonderful Course about Sensors"></a>
+
+      <div class="course-box">
+        <a href="sensorCourse.html">
+          <img src="images/sensorsPic.png" alt="What are Sensors" />
+        </a>
+        <h2>Introduction to Sensors: Learn, Connect, Automate</h2>
       </div>
-      <div class="course3">
-        <h2>What is Coding. How it is usefull</h2>
-        <a href="codingCourse.html"><img src="images/CodingPic.jpg" alt="A photo of Laptop running a code" width="200" height="200" title="Redirect to a Wonderful Course about Coding"></a>
+
+      <div class="course-box">
+        <a href="codingCourse.html">
+          <img src="images/CodingPic.jpg" alt="What is Coding" />
+        </a>
+        <h2>What is Coding. How it is useful</h2>
       </div>
-    </div>  
-    <div class="course4">
-      <h2>Code the Web: A Beginner’s Guide to Web Development</h2>
-      <a href="webDevCourse.html"><img src="images/webDevCourse.png" alt="A photo of AlCoders web development course" width="200" height="200" title="Redirect to a Wonderful Course about Adruino"></a>
+
+      <div class="course-box">
+        <a href="commonSensors.html">
+          <img src="images/ATLlabp1.jpg" alt="ATL Lab Sensors" />
+        </a>
+        <h2>Exploring ATL Lab Sensors: Functionality, Coding, and Use Cases</h2>
+      </div>
+      <div class="course-box">
+        <a href="webDevCourse.html">
+          <img src="images/webDevCourse.png" alt="Web Development" />
+        </a>
+        <h2>Code the Web: A Beginner’s Guide to Web Development</h2>
+      </div>
+
+      <div class="course-box">
+        <a href="roboticsCourse.html">
+          <img src="images/roboticsPic.png" alt="Robotics" />
+        </a>
+        <h2>Robotics Mastery: From Beginner to Expert</h2>
+      </div>
+
+      <div class="course-box">
+        <a href="iotCourse.html">
+          <img src="images/iotCourse.png" alt="IoT Course" />
+        </a>
+        <h2>Mastering IoT: From Basics to Real-World Applications</h2>
+      </div>
     </div>
-    <div class="course5">
-      <h2>Robotics Mastery: From Beginner to Expert</h2>
-      <a href="roboticsCourse.html"><img src="images/roboticsPic.png" alt="A photo of Arduino with the text What is Arduino" width="200" height="200" title="Redirect to a Wonderful Course about Adruino"></a>
+
+    <h3>Advanced Courses</h3>
+    <div class="content">
+      
     </div>
-    <div class="course6">
-      <h2>Exploring ATL Lab Sensors: Functionality, Coding, and Use Cases</h2>
-      <a href="commonSensors.html"><img src="images/ATLlabp1.jpg" alt="A photo of Arduino with the text What is Arduino" width="200" height="200" title="Redirect to a Wonderful Course about Adruino"></a>
-    </div>
-       <div class="course7">
-      <h2>Mastering IoT: From Basics to Real-World Applications</h2>
-      <a href="iotCourse.html"><img src="images/iotCourse.png" alt="A photo of Arduino with the text What is Arduino" width="200" height="200" title="Redirect to a Wonderful Course about Adruino"></a>
-    </div>
-      <div id="footer"></div>
-    
-    </body>
+
+    <div id="footer"></div>
     <script src="loadNav.js"></script>
     <script src="responsive.js"></script>
     <script src="navigation.js"></script>

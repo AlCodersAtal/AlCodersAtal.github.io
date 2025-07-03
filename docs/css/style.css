@@ -192,7 +192,37 @@ nav li:first-child {
   color: red;
 }
 
-/* ...existing code... */
+/* User Popup Styling */
+.user-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-popup-content {
+  background: #fff;
+  padding: 32px 28px;
+  border-radius: 12px;
+  min-width: 300px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  text-align: center;
+  position: relative;
+}
+
+.user-popup-content .close-btn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 1.5em;
+  cursor: pointer;
+}
 
 #resultBox {
   list-style-type: none;
@@ -239,68 +269,26 @@ nav li:first-child {
 .dropdown-menu {
   display: none;
   position: absolute;
+  left: 0;
+  top: 100%;
   background-color: #fff;
   min-width: 160px;
   z-index: 1000;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-.dropdown-menu li {
-  list-style: none;
-  border-bottom: 1px solid #ddd;
-}
-
-.dropdown-menu li a {
-  color: #000;
-  padding: 10px 15px;
-  display: block;
-  text-decoration: none;
-}
-
-.dropdown-menu li a:hover {
-  background-color: #f0f0f0;
-}
-
-.dropdown:hover .dropdown-menu {
-  display: block;
-}
-/* Dropdown container */
-.dropdown {
-  position: relative;
-}
-
-/* Hidden by default */
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  background-color: #ffffff;
-  min-width: 160px;
-  z-index: 1000;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   overflow: hidden;
+  margin-top: 0.3em;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.6s ease, visibility 1.6s ease; /* Increased to 1.6s */
 }
 
 /* Show dropdown on hover */
 .dropdown:hover .dropdown-menu {
   display: block;
-}
-
-/* Dropdown menu item style */
-.dropdown-menu li {
-  border-bottom: 1px solid #ddd;
-}
-
-.dropdown-menu li a {
-  color: #000;
-  padding: 10px 15px;
-  display: block;
-  text-decoration: none;
-  transition: background 0.3s ease;
-}
-
-.dropdown-menu li a:hover {
-  background-color: #f0f0f0;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1.6s ease, visibility 1.6s ease; /* Increased to 1.6s */
 }
 
 /* Arrow styling */
@@ -322,3 +310,103 @@ footer {
   font-size: 0.9em;
   color: #555;
 }
+#mainHeader {
+  background-color: #003366;
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 22.5px;
+  font-weight: bold;
+  height: 150px;
+}
+/* Center navbar on small screens */
+.navbar-center {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly; /* changed from flex-end or center */
+  align-items: center;
+  position: relative;
+  padding: 0 10px; /* optional: add a little side padding */
+}
+
+.navbar-center li {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* Remove margin-right from first-child if present */
+.navbar-center li:first-child {
+  margin-right: 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 800px) {
+  .hideOnMobile {
+    display: none;
+  }
+
+  .navbar-center {
+    justify-content: center;
+  }
+
+  .menu-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+}
+
+
+
+
+/*
+
+body.light-theme {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.light-theme .content {
+  background-color: #f1f1f1;
+  color: #000000;
+}
+
+body.light-theme input,
+body.light-theme select,
+body.light-theme textarea {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ccc;
+}
+
+body.light-theme button {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+
+body.dark-theme {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+body.dark-theme .content {
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+body.dark-theme input,
+body.dark-theme select,
+body.dark-theme textarea {
+  background-color: #2c2c2c;
+  color: #ffffff;
+  border: 1px solid #555;
+}
+
+body.dark-theme button {
+  background-color: #0056b3;
+  color: #ffffff;
+}*/

@@ -79,8 +79,8 @@ label {
   padding: 0 5px;
 }
 
-input:focus~label,
-input:not(:placeholder-shown)~label {
+input:focus ~ label,
+input:not(:placeholder-shown) ~ label {
   top: -40px;
   font-size: 0.8rem;
   color: hsl(327, 90%, 28%);

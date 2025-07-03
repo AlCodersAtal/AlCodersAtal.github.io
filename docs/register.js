@@ -28,6 +28,20 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+// Helper popup functions (assumes these exist on your page)
+function showPopup(message) {
+  const overlay = document.getElementById("popupOverlay");
+  const msgElem = document.getElementById("popupMessage");
+  msgElem.textContent = message;
+  overlay.style.display = "flex";
+}
+
+function closePopup() {
+  const overlay = document.getElementById("popupOverlay");
+  overlay.style.display = "none";
+  // Optionally redirect or do something else here
+}
+
 // Register new user
 document.getElementById("registerForm").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -53,12 +67,14 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
       createdAt: new Date()
     });
 
-    alert(`Welcome, ${username}! Registration successful.`);
-    // Switch to login form
+    showPopup(`Welcome, ${username}! Registration successful.`);
+
+    // After popup OK click, switch to login form
     document.getElementById("signup").style.display = "none";
     document.getElementById("signIn").style.display = "block";
+
   } catch (error) {
-    alert("Registration failed: " + error.message);
+    showPopup("Registration failed: " + error.message);
   }
 });
 
@@ -78,14 +94,43 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
     if (docSnap.exists()) {
       const userData = docSnap.data();
-      alert(`Welcome back, ${userData.username}!`);
+      // Store in localStorage for use on all pages
+      localStorage.setItem("username", userData.username);
+      localStorage.setItem("email", userData.email || user.email);
 
-      // Redirect here:
-      window.location.href = "index.html";
+      showPopup(`Welcome back, ${userData.username}!`);
+
+      // After popup OK, redirect to home
+      document.getElementById("popupOverlay").querySelector("button").onclick = () => {
+        closePopup();
+        window.location.href = "index.html";
+      };
+
     } else {
-      alert("User profile not found!");
+      showPopup("User profile not found!");
     }
   } catch (error) {
-    alert("Login failed: " + error.message);
+    showPopup("Login failed: " + error.message);
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

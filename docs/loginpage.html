@@ -1,67 +1,109 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Register & Login with Firestore</title>
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/loginpage.css" />
-     <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
-
+  <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
   />
+  <style>
+    /* Popup styles */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    .popup-box {
+      background: white;
+      padding: 30px 20px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+    .popup-box p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .popup-box button {
+      background: hsl(327, 90%, 28%);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .popup-box button:hover {
+      background: rgb(125, 125, 235);
+    }
+  </style>
 </head>
 <body>
   <div id="nav"></div>
-  
-    <!-- Search pop-up -->
-    <div id="searchPopup" class="search-popup">
-      <div class="popup-content">
-        <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
-        <input
-          type="text"
-          id="searchBar"
-          placeholder="Search here..."
-          oninput="showRecommendations()"
-        />
-        <div class="result-box" id="resultBox"></div>
-      </div>
+
+  <!-- Search pop-up -->
+  <div id="searchPopup" class="search-popup">
+    <div class="popup-content">
+      <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
+      <input
+        type="text"
+        id="searchBar"
+        placeholder="Search here..."
+        oninput="showRecommendations()"
+      />
+      <div class="result-box" id="resultBox"></div>
     </div>
-  <div class="container" id="signup" style="display: none">
+  </div>
+
+  <div class="container" id="signup" style="display: none;">
     <h1 class="form-title">Register</h1>
     <form id="registerForm">
       <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" id="fName" placeholder="First Name" required autocomplete="given-name" />
         <label for="fName">First Name</label>
-        <i class="fas fa-user"></i>
-        <input type="text" id="fName" placeholder="Enter your first name" required />
       </div>
       <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" id="lName" placeholder="Last Name" required autocomplete="family-name" />
         <label for="lName">Last Name</label>
-        <i class="fas fa-user"></i>
-        <input type="text" id="lName" placeholder="Enter your last name" required />
       </div>
       <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" id="username" placeholder="Username" required autocomplete="username" />
         <label for="username">Username</label>
-        <i class="fas fa-user"></i>
-        <input type="text" id="username" placeholder="Choose a username" required />
       </div>
       <div class="input-group">
-        <label for="email">Email</label>
         <i class="fas fa-envelope"></i>
-        <input type="email" id="registerEmail" placeholder="Enter your email" required />
+        <input type="email" id="registerEmail" placeholder="Email" required autocomplete="email" />
+        <label for="registerEmail">Email</label>
       </div>
       <div class="input-group">
-        <label for="password">Password</label>
         <i class="fas fa-lock"></i>
-        <input type="password" id="registerPassword" placeholder="Create a strong password" required />
+        <input type="password" id="registerPassword" placeholder="Password" required autocomplete="new-password" />
+        <label for="registerPassword">Password</label>
       </div>
       <input type="submit" class="btn" value="Sign Up" />
     </form>
-    <p class="or">----------or--------</p>
+    <p class="or">----------or----------</p>
     <div class="links">
-      <p>Already Have Account?</p>
+      <p>Already have an account?</p>
       <button id="signInButton">Sign In</button>
     </div>
   </div>
@@ -70,33 +112,39 @@
     <h1 class="form-title">Sign In</h1>
     <form id="loginForm">
       <div class="input-group">
-        <label for="email">Email</label>
         <i class="fas fa-envelope"></i>
-        <input type="email" id="loginEmail" placeholder="Enter your email" required />
+        <input type="email" id="loginEmail" placeholder="Email" required autocomplete="email" />
+        <label for="loginEmail">Email</label>
       </div>
       <div class="input-group">
-        <label for="password">Password</label>
         <i class="fas fa-lock"></i>
-        <input type="password" id="loginPassword" placeholder="Enter your password" required />
+        <input type="password" id="loginPassword" placeholder="Password" required autocomplete="current-password" />
+        <label for="loginPassword">Password</label>
       </div>
       <input type="submit" class="btn" value="Sign In" />
     </form>
-    <p class="or">----------or--------</p>
+    <p class="or">----------or----------</p>
     <div class="links">
-      <p>Don't have an account yet?</p>
+      <p>Don't have an account?</p>
       <button id="signUpButton">Sign Up</button>
     </div>
   </div>
-  
 
-  <!-- Firebase Auth + Firestore -->
-  <script type="module" src="register.js"></script>
-      <script src="navigation.js"></script>
+  <!-- Popup message -->
+  <div id="popupOverlay" class="popup-overlay">
+    <div class="popup-box">
+      <p id="popupMessage"></p>
+      <button onclick="closePopup()">OK</button>
+    </div>
+  </div>
 
+  <!-- Scripts -->
   <script src="loadNav.js"></script>
+  <script src="navigation.js"></script>
+  <script type="module" src="register.js"></script>
 
   <script>
-    // Switch between Sign In and Sign Up forms
+    // Toggle between signup and signin
     document.getElementById("signUpButton").onclick = () => {
       document.getElementById("signup").style.display = "block";
       document.getElementById("signIn").style.display = "none";
@@ -105,6 +153,17 @@
       document.getElementById("signup").style.display = "none";
       document.getElementById("signIn").style.display = "block";
     };
+
+    // Popup show/hide functions
+    function showPopup(message) {
+      document.getElementById("popupMessage").textContent = message;
+      document.getElementById("popupOverlay").style.display = "flex";
+    }
+
+    function closePopup() {
+      document.getElementById("popupOverlay").style.display = "none";
+      window.location.href = "index.html"; // Redirect after closing popup
+    }
   </script>
 </body>
 </html>

@@ -1,235 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings</title>
-    <link rel="stylesheet" href="css/style.css">
-       <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Settings</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 
+  <style>
+    .content {
+      margin-top: 100px;
+      margin-left: 20px;
+      margin-right: 20px;
+      padding: 20px;
+      background-color: #f1f1f1;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: left;
+      font-size: 1rem;
+      color: #333;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .settings-section {
+      margin-bottom: 20px;
+    }
+
+    .settings-section h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .settings-section label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .settings-section input,
+    .settings-section select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .settings-section button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .settings-section button:hover {
+      background-color: #0056b3;
+    }
+
+    body.light-theme {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    body.light-theme .content {
+      background-color: #f1f1f1;
+      color: #333;
+    }
+
+    body.dark-theme {
+      background-color: #121212;
+      color: #ffffff;
+    }
+
+    body.dark-theme .content {
+      background-color: #1e1e1e;
+      color: #ffffff;
+    }
+
+    /* Modal Styling */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 5000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 15% auto;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      color: #333;
+    }
+
+    body.dark-theme .modal-content {
+      background-color: #2c2c2c;
+      color: #eee;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 15px;
+    }
+
+    .modal-content button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .modal-content button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
-<style>
-.content {
-    margin-top: 100px;
-    margin-left: 20px;
-    margin-right: 20px;
-    padding: 20px;
-    background-color: #f1f1f1;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    font-size: 1rem;
-    color: #333;
-}
 
-.settings-section {
-    margin-bottom: 20px;
-}
-
-.settings-section h2 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-}
-
-.settings-section label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.settings-section input[type="text"],
-.settings-section input[type="email"],
-.settings-section input[type="password"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.settings-section button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.settings-section button:hover {
-    background-color: #0056b3;
-}
-
-.theme-toggle {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.theme-toggle label {
-    margin-right: 10px;
-}
-
-/* Light Theme */
-body.light-theme {
-    background-color: #ffffff;
-    color: #000000;
-}
-
-body.light-theme .content {
-    background-color: #f1f1f1;
-    color: #333;
-}
-
-/* Dark Theme */
-body.dark-theme {
-    background-color: #121212;
-    color: #ffffff;
-}
-
-body.dark-theme .content {
-    background-color: #1e1e1e;
-    color: #ffffff;
-}
-</style>
 <body>
-    <div id="nav"></div>
+  <div id="nav"></div>
 
-    <!-- Search pop-up -->
-    <div id="searchPopup" class="search-popup">
-        <div class="popup-content">
-          <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
-          <input
-            type="text"
-            id="searchBar"
-            placeholder="Search here..."
-            oninput="showRecommendations()"
-          />
-          <div class="result-box" id="resultBox"></div>
-        </div>
-      </div>
-  
-    <!-- Content -->
-    <div class="content">
-        <h1>Settings</h1>
+  <div class="content">
+    <h1>Settings</h1>
 
-        <!-- Profile Information Section -->
-        <div class="settings-section">
-            <h2>Profile Information</h2>
-            <label for="profileName">Name</label>
-            <input type="text" id="profileName" placeholder="Enter your name">
-            <button id="userNameBtn">Change Name</button>
-          <h2>Under Development</h2>
-        </div>
-
-    <!--
-        <div class="settings-section">
-            <h2>Change Password</h2>
-            <label for="currentPassword">Current Password</label>
-            <input type="password" id="currentPassword" placeholder="Enter current password">
-            <label for="newPassword">New Password</label>
-            <input type="password" id="newPassword" placeholder="Enter new password">
-            <label for="confirmPassword">Confirm New Password</label>
-            <input type="password" id="confirmPassword" placeholder="Confirm new password">
-            <button onclick="changePassword()">Change Password</button>
-        </div>
-
-        <div class="settings-section">
-            <h2>Notification Preferences</h2>
-            <label>
-                <input type="checkbox" id="emailNotifications"> Email Notifications
-            </label>
-            <label>
-                <input type="checkbox" id="smsNotifications"> SMS Notifications
-            </label>
-            <button onclick="updateNotifications()">Update Preferences</button>
-        </div>
-
-        <div class="settings-section">
-            <h2>Theme Selection</h2>
-            <div class="theme-toggle">
-                <label for="themeSelect">Select Theme:</label>
-                <select id="themeSelect" onchange="changeTheme()">
-                    <option value="light">Light</option>
-                    <option value="dark">Dark</option>
-                </select>
-            </div>
-        </div>
-    -->
-
+    <!-- Profile Name -->
+    <div class="settings-section">
+      <h2>Profile Information</h2>
+      <label for="profileName">Name</label>
+      <input type="text" id="profileName" placeholder="Enter your name">
+      <button id="userNameBtn">Change Name</button>
     </div>
+
+    <!-- Theme -->
+    <div class="settings-section">
+      <h2>Theme Selection</h2>
+      <label for="themeSelect">Select Theme:</label>
+      <select id="themeSelect">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </div>
+
+    <!-- Logout -->
+    <div class="settings-section">
+      <button id="logoutBtn" style="background-color: #dc3545;">Logout</button>
+    </div>
+  </div>
+
+  <!-- Login Required Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <h2>Login Required</h2>
+      <p>You must be logged in to access the settings page.</p>
+      <button onclick="redirectToLogin()">Go to Login Page</button>
+        <button onclick="window.location.href='index.html'">Close</button>
+    </div>
+  </div>
+
+  <!-- Logout Confirmation Modal -->
+  <div id="logoutModal" class="modal">
+    <div class="modal-content">
+      <h2>Logged Out</h2>
+      <p id="logoutMessage">Goodbye, user!</p>
+    </div>
+  </div>
 
   <div id="footer"></div>
 
+  <!-- Firebase Modules and Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      getDoc,
+      setDoc,
+      updateDoc
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    <script src="loadNav.js"></script>
-    <script src="navigation.js"></script>
-    <script src="userName.js"></script>
-    <script>
-        function updateProfile() {
-            const name = document.getElementById('profileName').value;
-            const email = document.getElementById('profileEmail').value;
-            alert('Profile updated: ' + name + ', ' + email);
+    const firebaseConfig = {
+      apiKey: "AIzaSyBIMtf6DXnAxWKdkoLkfxn7b7zBoAr8Ouk",
+      authDomain: "alcodersatal-database.firebaseapp.com",
+      projectId: "alcodersatal-database",
+      storageBucket: "alcodersatal-database.firebasestorage.app",
+      messagingSenderId: "1092849520429",
+      appId: "1:1092849520429:web:ecf950a9aa868e37760da4"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const nameInput = document.getElementById("profileName");
+    const themeSelect = document.getElementById("themeSelect");
+    const userNameBtn = document.getElementById("userNameBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    const loginModal = document.getElementById("loginModal");
+    const logoutModal = document.getElementById("logoutModal");
+    const logoutMessage = document.getElementById("logoutMessage");
+
+    function applyTheme(theme) {
+      document.body.classList.toggle("dark-theme", theme === "dark");
+      document.body.classList.toggle("light-theme", theme === "light");
+    }
+
+    function showLoginModal() {
+      loginModal.style.display = "block";
+    }
+
+    window.redirectToLogin = function () {
+      window.location.href = "loginpage.html";
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        showLoginModal();
+        return;
+      }
+
+      const uid = user.uid;
+      const userDocRef = doc(db, "users", uid);
+
+      try {
+        const docSnap = await getDoc(userDocRef);
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          if (data.name) nameInput.value = data.name;
+          if (data.theme) {
+            themeSelect.value = data.theme;
+            applyTheme(data.theme);
+          }
         }
+      } catch (err) {
+        console.error("Error fetching user data:", err);
+      }
 
-        function changePassword() {
-            const currentPassword = document.getElementById('currentPassword').value;
-            const newPassword = document.getElementById('newPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            if (newPassword === confirmPassword) {
-                alert('Password changed successfully');
-            } else {
-                alert('New passwords do not match');
-            }
+      userNameBtn.onclick = async () => {
+        const newName = nameInput.value.trim();
+        if(newName === "") {
+          alert("Name cannot be empty.");
+          return;
         }
-
-        function updateNotifications() {
-            const emailNotifications = document.getElementById('emailNotifications').checked;
-            const smsNotifications = document.getElementById('smsNotifications').checked;
-            alert('Notification preferences updated: Email - ' + emailNotifications + ', SMS - ' + smsNotifications);
+        try {
+          await setDoc(userDocRef, { name: newName }, { merge: true });
+          alert("Name updated successfully!");
+          // Optionally refresh or redirect if needed
+        } catch (error) {
+          console.error("Failed to update name:", error);
+          alert("Error updating name.");
         }
+      };
 
-        function changeTheme() {
-            const theme = document.getElementById('themeSelect').value;
-            if (theme === 'dark') {
-                document.body.classList.add('dark-theme');
-                document.body.classList.remove('light-theme');
-            } else {
-                document.body.classList.add('light-theme');
-                document.body.classList.remove('dark-theme');
-            }
-            localStorage.setItem('theme', theme);
+      themeSelect.onchange = async () => {
+        const selectedTheme = themeSelect.value;
+        applyTheme(selectedTheme);
+        try {
+          await updateDoc(userDocRef, { theme: selectedTheme });
+        } catch (error) {
+          console.error("Error updating theme:", error);
         }
+      };
 
-        function setUsername() {
-            const username = document.getElementById('username').value;
-            localStorage.setItem('username', username);
-            alert('Username set: ' + username);
+      // Logout functionality with popup showing username
+      logoutBtn.onclick = async () => {
+        try {
+          const docSnap = await getDoc(userDocRef);
+          const username = docSnap.exists() ? docSnap.data().name || "User" : "User";
+
+          logoutMessage.textContent = `Goodbye, ${username}! You have been logged out.`;
+          logoutModal.style.display = "block";
+
+          setTimeout(async () => {
+            await signOut(auth);
+            window.location.href = "loginpage.html";
+          }, 2000);
+        } catch (error) {
+          console.error("Error signing out:", error);
         }
+      };
+    });
+  </script>
 
-        // Load saved theme and username on page load
-        window.onload = function() {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                document.getElementById('themeSelect').value = savedTheme;
-                changeTheme();
-            }
-
-            const savedUsername = localStorage.getItem('username');
-            if (savedUsername) {
-                document.getElementById('username').value = savedUsername;
-            }
-        }
-
-
-
-
-
-
-        document.getElementById("userNameBtn").onclick = function () {
-  const username = document.getElementById("profileName").value;
-  localStorage.setItem("username", username);  // Save it in localStorage
-  window.location.href = "index.html"; // Redirect to the homepage
-};
-    </script>
+  <!-- Navigation/other scripts -->
+  <script src="loadNav.js"></script>
+  <script src="navigation.js"></script>
 </body>
 </html>

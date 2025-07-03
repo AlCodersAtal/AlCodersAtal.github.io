@@ -84,14 +84,29 @@ document.getElementById("searchBar").addEventListener("keydown", function(event)
   }
 });
 
-function loadNavigation() {
-  fetch('navigation.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('navigationContainer').innerHTML = data;
-    })
-    .catch(error => console.error('Error loading navigation:', error));
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -9,31 +9,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Roboto', sans-serif;
-    }
+  
 
     body {
       background-color: #f9f9f9;
       color: #333;
       line-height: 1.6;
-      padding: 20px;
+ 
     }
 
-    header {
-      background: #0047ab;
-      color: #fff;
-      padding: 20px 0;
-      text-align: center;
-      border-radius: 10px;
-    }
+ 
 
     h1 {
       font-size: 2.5em;
       margin-bottom: 10px;
+      padding:  0px;
     }
 
     .section {
@@ -45,7 +35,7 @@
     }
 
     h2 {
-      color: #0047ab;
+      
       margin-bottom: 10px;
     }
 
@@ -56,12 +46,12 @@
       overflow-x: auto;
     }
 
-    ul {
+   .content ul {
       margin-left: 20px;
       margin-top: 10px;
     }
 
-    li {
+  .content  li {
       margin-bottom: 5px;
     }
 
@@ -71,6 +61,13 @@
       font-size: 0.9em;
       color: #555;
     }
+.content{
+  padding : 50px;
+}
+
+header{
+ margin-top: -7px;
+}
   </style>
 </head>
 
@@ -99,11 +96,12 @@
 <br>
 <br>
 <br>
-  <header>
+  <header id="mainHeader">
     <h1>AlCoders Web Development Course</h1>
-    <p>Learn to Build Your First Website Step-by-Step!</p>
+    
   </header>
-
+<div class="content">
+  
   <div class="section">
     <h2>What is Web Development?</h2>
     <p>Web development is the process of building websites. It includes:</p>
@@ -220,6 +218,7 @@ h1 {
       <li>Host on GitHub Pages</li>
     </ol>
   </div>
+</div>
   <div id="footer"></div>
   <script src="navigation.js"></script>
   <script src="loadNav.js"></script>

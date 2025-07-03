@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 
   <style>
-    body {
+      body {
       font-family: Arial, sans-serif;
       margin: 0;
       background-color: #f9f9f9;
@@ -25,7 +25,7 @@
       background: #fff;
     }
 
-    h1, h2, h3 {
+     h2, h3 {
       color: #1a1a1a;
       border-bottom: 2px solid #ccc;
       padding-bottom: 5px;
@@ -57,6 +57,7 @@
       background: #f4f4f4;
       padding: 15px;
       border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     details {
@@ -65,6 +66,7 @@
       padding: 12px;
       border: 1px solid #ccc;
       border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
     summary {
@@ -78,12 +80,24 @@
       border-left: 5px solid #007bff;
       border-radius: 5px;
       margin: 20px 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .section {
+      background: #fefefe;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 30px 0;
     }
 
     @media(max-width: 768px) {
       .pros-cons {
         flex-direction: column;
       }
+    }
+    header{
+      margin-top: 80px;
     }
   </style>
 </head>
@@ -102,89 +116,104 @@
     </div>
   </div>
 
+  <header id="mainHeader"> <h1>What is IoT (Internet of Things)?</h1></header>
+
   <!-- Main IoT Content -->
   <div class="container">
-    <h1>What is IoT (Internet of Things)?</h1>
-    <p>
-      The Internet of Things (IoT) is a system of interconnected devices that communicate and share data with each other over the internet. These devices can be anything from sensors and microcontrollers to smart appliances, vehicles, and even wearable tech.
-    </p>
+    <div class="section">
+     
+      <p>The Internet of Things (IoT) is a system of interconnected devices that communicate and share data with each other over the internet. These devices can be anything from sensors and microcontrollers to smart appliances, vehicles, and even wearable tech.</p>
+    </div>
 
-    <h2>How Does IoT Work?</h2>
-    <ul>
-      <li><strong>Sensors & Devices:</strong> Capture physical parameters like temperature, humidity, motion, or sound.</li>
-      <li><strong>Connectivity:</strong> Transfers the collected data through Wi-Fi, Bluetooth, 4G/5G, LoRa, etc.</li>
-      <li><strong>Data Processing:</strong> On the cloud or edge device using logic, rules, or ML.</li>
-      <li><strong>User Interface:</strong> Data is displayed on mobile apps, dashboards, or notifications.</li>
-    </ul>
+    <div class="section">
+      <h2>How Does IoT Work?</h2>
+      <ul>
+        <li><strong>Sensors & Devices:</strong> Capture physical parameters like temperature, humidity, motion, or sound.</li>
+        <li><strong>Connectivity:</strong> Transfers the collected data through Wi-Fi, Bluetooth, 4G/5G, LoRa, etc.</li>
+        <li><strong>Data Processing:</strong> On the cloud or edge device using logic, rules, or ML.</li>
+        <li><strong>User Interface:</strong> Data is displayed on mobile apps, dashboards, or notifications.</li>
+      </ul>
+    </div>
 
-    <h2>Why IoT?</h2>
-    <p>
-      IoT enables automation, real-time decision-making, and intelligent resource usage in homes, industries, cities, healthcare, and more. It plays a key role in building a smarter and more connected future.
-    </p>
+    <div class="section">
+      <h2>Why IoT?</h2>
+      <p>IoT enables automation, real-time decision-making, and intelligent resource usage in homes, industries, cities, healthcare, and more. It plays a key role in building a smarter and more connected future.</p>
+    </div>
 
-    <h2>Pros and Cons of IoT</h2>
-    <div class="pros-cons">
-      <div class="pros">
-        <h3>Pros</h3>
-        <ul>
-          <li>Improved efficiency through automation</li>
-          <li>Remote access and control</li>
-          <li>Better monitoring and analytics</li>
-          <li>Cost reduction over time</li>
-          <li>Enhanced lifestyle and smart living</li>
-        </ul>
-      </div>
-      <div class="cons">
-        <h3>Cons</h3>
-        <ul>
-          <li>Security vulnerabilities</li>
-          <li>Data privacy issues</li>
-          <li>Internet dependency</li>
-          <li>High initial investment</li>
-          <li>Complexity in large-scale systems</li>
-        </ul>
+    <div class="section">
+      <h2>Pros and Cons of IoT</h2>
+      <div class="pros-cons">
+        <div class="pros">
+          <h3>Pros</h3>
+          <ul>
+            <li>Improved efficiency through automation</li>
+            <li>Remote access and control</li>
+            <li>Better monitoring and analytics</li>
+            <li>Cost reduction over time</li>
+            <li>Enhanced lifestyle and smart living</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h3>Cons</h3>
+          <ul>
+            <li>Security vulnerabilities</li>
+            <li>Data privacy issues</li>
+            <li>Internet dependency</li>
+            <li>High initial investment</li>
+            <li>Complexity in large-scale systems</li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <h2>Applications of IoT</h2>
-    <ul>
-      <li><strong>Smart Homes:</strong> Smart lights, locks, speakers, security systems.</li>
-      <li><strong>Healthcare:</strong> Remote patient monitoring, fitness trackers, smart inhalers.</li>
-      <li><strong>Smart Cities:</strong> Smart parking, traffic monitoring, pollution control.</li>
-      <li><strong>Agriculture:</strong> Soil moisture monitoring, automated irrigation.</li>
-      <li><strong>Industry:</strong> Machine diagnostics, predictive maintenance, energy tracking.</li>
-    </ul>
+    <div class="section">
+      <h2>Applications of IoT</h2>
+      <ul>
+        <li><strong>Smart Homes:</strong> Smart lights, locks, speakers, security systems.</li>
+        <li><strong>Healthcare:</strong> Remote patient monitoring, fitness trackers, smart inhalers.</li>
+        <li><strong>Smart Cities:</strong> Smart parking, traffic monitoring, pollution control.</li>
+        <li><strong>Agriculture:</strong> Soil moisture monitoring, automated irrigation.</li>
+        <li><strong>Industry:</strong> Machine diagnostics, predictive maintenance, energy tracking.</li>
+      </ul>
+    </div>
 
-    <h2>Popular IoT Tools & Platforms</h2>
-    <ul>
-      <li><strong>Arduino + ESP8266/ESP32</strong> – microcontroller platforms for prototyping</li>
-      <li><strong>Raspberry Pi</strong> – full Linux-based computer for advanced projects</li>
-      <li><strong>Node-RED</strong> – flow-based development tool for IoT applications</li>
-      <li><strong>Firebase</strong> – real-time cloud database for IoT web and app integration</li>
-      <li><strong>Blynk</strong> – mobile IoT platform for creating dashboards and controls</li>
-    </ul>
+    <div class="section">
+      <h2>Popular IoT Tools & Platforms</h2>
+      <ul>
+        <li><strong>Arduino + ESP8266/ESP32</strong> – microcontroller platforms for prototyping</li>
+        <li><strong>Raspberry Pi</strong> – full Linux-based computer for advanced projects</li>
+        <li><strong>Node-RED</strong> – flow-based development tool for IoT applications</li>
+        <li><strong>Firebase</strong> – real-time cloud database for IoT web and app integration</li>
+        <li><strong>Blynk</strong> – mobile IoT platform for creating dashboards and controls</li>
+      </ul>
+    </div>
 
-    <h2>Programming Languages Used in IoT</h2>
-    <ul>
-      <li><strong>C/C++:</strong> For embedded microcontroller programming (Arduino)</li>
-      <li><strong>Python:</strong> For Raspberry Pi, AI/ML integration, and scripting</li>
-      <li><strong>JavaScript:</strong> For dashboards, Node.js, and web servers</li>
-      <li><strong>MicroPython:</strong> Lightweight Python for embedded boards</li>
-    </ul>
+    <div class="section">
+      <h2>Programming Languages Used in IoT</h2>
+      <ul>
+        <li><strong>C/C++:</strong> For embedded microcontroller programming (Arduino)</li>
+        <li><strong>Python:</strong> For Raspberry Pi, AI/ML integration, and scripting</li>
+        <li><strong>JavaScript:</strong> For dashboards, Node.js, and web servers</li>
+        <li><strong>MicroPython:</strong> Lightweight Python for embedded boards</li>
+      </ul>
+    </div>
 
-    <h2>Basic Coding Concepts for IoT</h2>
-    <p>Understanding coding is critical to program IoT devices. Here are the basics:</p>
-    <ul>
-      <li><strong>Setup and Loop:</strong> Most IoT devices like Arduino use a <code>setup()</code> function to initialize devices and a <code>loop()</code> function that runs continuously to check sensors and perform actions.</li>
-      <li><strong>Reading Sensors:</strong> Use analog or digital pins to get data from sensors. For example, <code>analogRead(pin)</code> reads a value from a sensor.</li>
-      <li><strong>Controlling Actuators:</strong> Use digital writes or PWM (Pulse Width Modulation) to control devices like LEDs, motors, or buzzers.</li>
-      <li><strong>Communication:</strong> Send or receive data using protocols like Serial (UART), I2C, SPI, or wireless like Wi-Fi and Bluetooth.</li>
-      <li><strong>Cloud Integration:</strong> Data collected can be sent to cloud platforms using HTTP requests or MQTT protocol for remote monitoring and control.</li>
-      <li><strong>Libraries:</strong> Use existing code libraries (e.g., <code>WiFi.h</code>, <code>ESP8266WiFi.h</code>) to simplify complex tasks.</li>
-    </ul>
+    <div class="section">
+      <h2>Basic Coding Concepts for IoT</h2>
+      <p>Understanding coding is critical to program IoT devices. Here are the basics:</p>
+      <ul>
+        <li><strong>Setup and Loop:</strong> Most IoT devices like Arduino use a <code>setup()</code> function to initialize devices and a <code>loop()</code> function that runs continuously to check sensors and perform actions.</li>
+        <li><strong>Reading Sensors:</strong> Use analog or digital pins to get data from sensors. For example, <code>analogRead(pin)</code> reads a value from a sensor.</li>
+        <li><strong>Controlling Actuators:</strong> Use digital writes or PWM (Pulse Width Modulation) to control devices like LEDs, motors, or buzzers.</li>
+        <li><strong>Communication:</strong> Send or receive data using protocols like Serial (UART), I2C, SPI, or wireless like Wi-Fi and Bluetooth.</li>
+        <li><strong>Cloud Integration:</strong> Data collected can be sent to cloud platforms using HTTP requests or MQTT protocol for remote monitoring and control.</li>
+        <li><strong>Libraries:</strong> Use existing code libraries (e.g., <code>WiFi.h</code>, <code>ESP8266WiFi.h</code>) to simplify complex tasks.</li>
+      </ul>
+    </div>
 
-    <h3>Sample Arduino Code to Read a Temperature Sensor (e.g., LM35):</h3>
-    <pre style="background:#eee; padding:10px; border-radius:5px;">
+    <div class="section">
+      <h3>Sample Arduino Code to Read a Temperature Sensor (e.g., LM35):</h3>
+      <pre>
 <code>
 int sensorPin = A0; // analog pin connected to sensor
 float voltage, temperature;
@@ -197,58 +226,69 @@ void loop() {
   int sensorValue = analogRead(sensorPin);
   voltage = sensorValue * (5.0 / 1023.0); // Convert analog reading to voltage
   temperature = voltage * 100; // Convert voltage to temperature in °C (for LM35)
-  
+
   Serial.print("Temperature: ");
   Serial.print(temperature);
   Serial.println(" °C");
-  
+
   delay(1000); // Wait 1 second before next reading
 }
 </code>
-    </pre>
+      </pre>
+    </div>
 
-    <h2>Mini Projects You Can Build</h2>
-    <ul>
-      <li>Smart Plant Watering System using Soil Moisture Sensor</li>
-      <li>RFID-based Attendance System</li>
-      <li>IoT Weather Station using DHT11</li>
-      <li>Smart Door Lock with Firebase and NodeMCU</li>
-      <li>Gas Leak Detector with Buzzer Alerts</li>
-    </ul>
+    <div class="section">
+      <h2>Mini Projects You Can Build</h2>
+      <ul>
+        <li>Smart Plant Watering System using Soil Moisture Sensor</li>
+        <li>RFID-based Attendance System</li>
+        <li>IoT Weather Station using DHT11</li>
+        <li>Smart Door Lock with Firebase and NodeMCU</li>
+        <li>Gas Leak Detector with Buzzer Alerts</li>
+      </ul>
+    </div>
 
     <div class="highlight">
       <strong>Fun Fact:</strong> Over 75 billion IoT devices are expected to be connected by 2025!
     </div>
 
-    <h2>Career Opportunities in IoT</h2>
-    <p>IoT is a booming career field with demand in:</p>
-    <ul>
-      <li>IoT Hardware Developer</li>
-      <li>Embedded Systems Engineer</li>
-      <li>Cloud IoT Developer</li>
-      <li>Data Analyst for IoT Devices</li>
-      <li>IoT Security Specialist</li>
-    </ul>
+    <div class="section">
+      <h2>Career Opportunities in IoT</h2>
+      <p>IoT is a booming career field with demand in:</p>
+      <ul>
+        <li>IoT Hardware Developer</li>
+        <li>Embedded Systems Engineer</li>
+        <li>Cloud IoT Developer</li>
+        <li>Data Analyst for IoT Devices</li>
+        <li>IoT Security Specialist</li>
+      </ul>
+    </div>
 
-    <h2>FAQs</h2>
-    <details>
-      <summary>Is IoT easy to learn?</summary>
-      <p>Yes, beginners can start with Arduino-based kits and gradually learn programming, electronics, and cloud connectivity.</p>
-    </details>
-    <details>
-      <summary>What is the difference between IoT and AI?</summary>
-      <p>IoT focuses on device connectivity and data transfer, while AI is about using that data to make intelligent decisions.</p>
-    </details>
-    <details>
-      <summary>Do I need coding knowledge to build IoT projects?</summary>
-      <p>Basic coding knowledge helps. Arduino (C/C++) or Python is commonly used.</p>
-    </details>
+    <div class="section">
+      <h2>FAQs</h2>
+      <details>
+        <summary>Is IoT easy to learn?</summary>
+        <p>Yes, beginners can start with Arduino-based kits and gradually learn programming, electronics, and cloud connectivity.</p>
+      </details>
+      <details>
+        <summary>What is the difference between IoT and AI?</summary>
+        <p>IoT focuses on device connectivity and data transfer, while AI is about using that data to make intelligent decisions.</p>
+      </details>
+      <details>
+        <summary>Do I need coding knowledge to build IoT projects?</summary>
+        <p>Basic coding knowledge helps. Arduino (C/C++) or Python is commonly used.</p>
+      </details>
+    </div>
+    <div class="section">
+      <iframe width="100%" height="500px" src="https://www.youtube.com/embed/6mBO2vqLv38" title="IoT | Internet of Things | What is IoT ? | How IoT Works? | IoT Explained in 6 Minutes | Simplilearn" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
   </div>
+  
 
   <!-- Footer -->
   <div id="footer"></div>
   <script src="responsive.js"></script>
   <script src="loadNav.js"></script>
-  
+
 </body>
 </html>

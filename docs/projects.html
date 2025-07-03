@@ -1,82 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/projects.css" />
-    <title>Projects</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Projects</title>
+  <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/projects.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  />
+  <style>
+    .content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1100px;
+      margin: 0 auto 60px;
+      padding: 40px 20px;
+    }
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-  </head>
-  <body>
-    <div id="nav"></div>
-    <!-- Search pop-up -->
-    <div id="searchPopup" class="search-popup">
-      <div class="popup-content">
-        <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
-        <input
-          type="text"
-          id="searchBar"
-          placeholder="Search here..."
-          oninput="showRecommendations()"
-        />
-        <div class="result-box" id="resultBox"></div>
-      </div>
+    .course-box {
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      text-align: center;
+      padding: 20px;
+      transition: transform 0.3s ease;
+      height: 340px;           /* Add a fixed height for all boxes */
+      display: flex;           /* Center content vertically */
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .course-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .course-box img {
+      width: 100%;
+      height: 180px;           /* Fixed image height for all */
+      object-fit: cover;       /* Crop images to fit */
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    .course-box h2 {
+      font-size: 1.1rem;
+      color: #004080;
+      margin: 0;
+      padding-top: 10px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 100px;
+      font-size: 2rem;
+      color: #003366;
+    }
+
+    h3 {
+      max-width: 1100px;
+      margin: 40px auto 20px;
+      font-size: 1.5rem;
+      color: #004080;
+      border-bottom: 2px solid #004080;
+      padding-bottom: 5px;
+    }
+
+    hr {
+      max-width: 200px;
+      margin: 20px auto;
+      border: 1px solid #004080;
+    }
+  </style>
+</head>
+<body>
+  <div id="nav"></div>
+
+  <!-- Search pop-up -->
+  <div id="searchPopup" class="search-popup">
+    <div class="popup-content">
+      <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
+      <input
+        type="text"
+        id="searchBar"
+        placeholder="Search here..."
+        oninput="showRecommendations()"
+      />
+      <div class="result-box" id="resultBox"></div>
+    </div>
+  </div>
+
+  <h1>Explore DIY Projects You Can Build with Arduino</h1>
+  <hr />
+
+  <h3>Beginner Projects</h3>
+  <div class="content">
+    <div class="course-box">
+      <a href="ldrProjects.html">
+        <img src="images/ldr.webp" alt="LDR Project" />
+      </a>
+      <h2>LED Control with LDR and Arduino Uno</h2>
     </div>
 
-    <div class="head">
-      <h2>Here you can find Projects which you can make on your own</h2>
-      
+    <div class="course-box">
+      <a href="mq3Project.html">
+        <img src="images/photoOfMq3.webp" alt="MQ3 Gas Sensor Project" />
+      </a>
+      <h2>Gas Leakage Detector and Alarm System using Arduino</h2>
     </div>
-    <!--  The End of the navigation -->
-    <div class="content">
-      <hr />
-      <div class="course1">
-        <h2>LED Control with ldr and Arduino Uno</h2>
-        <a href="ldrProjects.html"
-          ><img
-            src="images/photoOfLdr.jpg"
-            alt="A photo of Arduino with the text What is Arduino"
-            width="200"
-            height="200"
-            title="How to make an LDR controlled LED with Arduino"
-        /></a>
-      </div>
-      <div class="course2">
-        <h2>Gas Leakage Detector and alarm system using Arduino Uno</h2>
-        <a href="mq3Project.html"
-          ><img
-            src="images/photoOfMq3.webp"
-            alt="Photo Of Mq3 sensor"
-            width="200"
-            height="200"
-            title="How to Make a Gas Leakage Detector and alarm system using Arduino Uno"
-        /></a>
-        
-      </div>
-      <div class="course3">
-        <h2> AlCoders Light Lab: Arduino Physics Kit</h2>
-        <a href="arduinoKit.html"><img src="images/AlKit Photo.webp" alt="A picture of the AlCoders Arduino Physics kit" width="200" height="200" title="Redirect to more detials about Arduino Kit by AlCoders"></a>
-      </div>
-           <div class="course4">
-        <h2>Rfid based Healthcare Data Base (RHDB)</h2>
-        <a href="codexx.html"
-          ><img
-            src="images/Codexx.png"
-            alt="A photo of Arduino with the text What is Arduino"
-            width="200"
-            height="200"
-            title="Details about Rfid based Healthcare Data Base (RHDB)"
-        /></a>
+
+    <div class="course-box">
+      <a href="arduinoKit.html">
+        <img src="images/AlKit Photo.webp" alt="Arduino Physics Kit" />
+      </a>
+      <h2>AlCoders Light Lab: Arduino Physics Kit</h2>
     </div>
-      <div id="footer"></div>
-    <script src="loadNav.js"></script>
-    <script src="responsive.js"></script>
-    <script src="navigation.js"></script>
-  </body>
+  </div>
+
+  <h3>Advanced Projects</h3>
+  <div class="content">
+    <div class="course-box">
+      <a href="codexx.html">
+        <img src="images/Codexx.png" alt="RFID Healthcare Project" />
+      </a>
+      <h2>RFID-based Healthcare Database (RHDB)</h2>
+    </div>
+    <!-- Placeholder for future advanced projects -->
+    <div class="course-box">
+      <img src="images/comingSoon.webp" alt="Coming Soon" />
+      <h2>Coming Soon: AI-Driven Automation Projects</h2>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+  <script src="loadNav.js"></script>
+  <script src="responsive.js"></script>
+  <script src="navigation.js"></script>
+</body>
 </html>

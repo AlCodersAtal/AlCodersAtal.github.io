@@ -82,6 +82,10 @@ h1 {
 /* Dashboard */
 .dashboard {
     margin: 30px;
+    background-color: #ddd; /* Same as footer */
+    border-radius: 10px;
+    padding: 30px 0 30px 0;
+    box-shadow: none;
 }
 
 .categories {
@@ -106,17 +110,32 @@ h1 {
 
 /* Sections */
 .featured, .events {
-    background-color: #f8f9fa;
+    background-color: transparent; /* Remove white background */
     padding: 20px;
     margin: 20px 0;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: none; /* Remove box shadow from section */
+}
+.featured-box {
+  background: #ddd; /* Same as footer */
+  border: none; /* Remove bluish outline */
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(24,119,243,0.07);
+  padding: 24px 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 /* Footer */
 footer {
     background-color: #ddd;
     padding: 20px;
+}
+section .featured{
+    margin: 20px 0;
+  padding: 80px 90px;
+ 
 }
 
 
@@ -145,7 +164,7 @@ footer {
   <!-- Header -->
   <header>
     <br><br>
-      <h1>🚀 Welcome to AlCoders Atal Tinkering Lab @ Viswadeepthi English Medium School (CBSE) , <span id="changeName"></span></h1>
+      <h1> Welcome to AlCoders Atal Tinkering Lab @ Viswadeepthi English Medium School (CBSE) <span id="changeName"></span></h1>
       <p>Where students turn ideas into reality with technology!</p>
       <button class="cta-btn"><a href="projects.html" style="color: #e9ecef;">Explore Projects</a></button>
   </header>
@@ -164,40 +183,27 @@ footer {
 
   <!-- Featured Project -->
   <section class="featured">
-      <h2>🏆 Project of the Month</h2>
-      <p>📌 "Rfid based Healthcare DataBase"</p>
-      <button><a href="codexx.html">📜 Read Guide</a></button>
-  </section>
-
-  <!-- Upcoming Events -->
-  <section class="events">
-      <h2>📅 Upcoming Events</h2>
-      <ul>
-          <li>🛠️ IoT Workshop – Register Now!</li>
-          <li>🎯 Coding Challenge: Build a Line-Following Robot!</li>
-      </ul>
-  </section>
-  
-  <div class="container">
-    <p>
-      Atal Lab with AlCoders is a platform for students to learn coding and
-      programming. We provide courses on various programming languages and
-      tools. Our aim is to make coding fun and easy for students. We believe
-      that coding is an essential skill in today's world and everyone should
-      learn it. So, join us and start your coding journey today!
-    </p>
+  <div class="featured-box">
+    <h2>🏆 Our Top Project</h2>
+    <p>📌 "Rfid based Healthcare DataBase"</p>
+    <button style="background-color:#1877f3; color:#fff; border:none; padding:10px 24px; border-radius:6px; cursor:pointer; font-size:16px; margin-top:18px;">
+  <a href="codexx.html" style="color:#fff; text-decoration:none;">📜 Read Guide</a>
+</button>
   </div>
+</section>
 
   <!-- Footer -->
-  <footer>
-      <p>🚀 Join AlCoders Today! | Contact: <a href="mailto:contact@alcodersatal.com">Email Us</a></p>
-  </footer>
+  
     <div id="footer"></div>
 
     
     <script src="navigation.js"></script>
     <script src="loadNav.js"></script>
-    
+    <script>const username = localStorage.getItem("username");
+if (username) {
+  document.getElementById("navUserName").textContent = username;
+}
+</script>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -222,18 +228,17 @@ footer {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const data = docSnap.data();
-        document.getElementById("changeName").textContent = data.username || "User";
+        document.getElementById("changeName").textContent = " - " + (data.username || "User");
       } else {
-        document.getElementById("changeName").textContent = "User";
+        document.getElementById("changeName").textContent = " - User";
       }
     } else {
       document.getElementById("changeName").textContent = "";
     }
   });
 </script>
-
+<script type="module" src="auth.js"></script>
     
-      
  
   </body>
 </html>

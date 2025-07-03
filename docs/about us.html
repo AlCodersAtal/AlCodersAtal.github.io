@@ -7,7 +7,10 @@
     <title>More About Us</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -19,27 +22,45 @@
       .container {
         max-width: 900px;
         margin: auto;
-        padding: 40px 20px;
-        background-color: #fff;
-        border-radius: 10px;
+        background: none;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
         animation: fadeIn 1.5s ease-in;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      }
+
+      .section-box {
+        background: #eaf3fb; /* lighter blue tint */
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.13);
+        padding: 28px 28px;
+        margin-bottom: 32px;
+        border: 1px solid #b3d1f7;
+        transition: none;
+        font-size: 1.18rem; /* increased font size */
+        line-height: 2.1;   /* more space between lines */
       }
 
       h1, h2, h3 {
-        color: #111;
-        margin-top: 40px;
-        border-bottom: 1px solid #ddd;
+        color: #1877f3; /* blue color for titles */
+        /* Remove border-bottom (removes hr effect) */
+        border-bottom: none;
         padding-bottom: 5px;
+        font-size: 2.1rem;
+        line-height: 1.3;
+        margin-top: 0.5em;
+        margin-bottom: 0.7em;
       }
 
-      p {
-        font-size: 1.1rem;
-        margin-bottom: 20px;
-        line-height: 1.7;
+      h2 {
+        font-size: 1.5rem;
       }
 
-      ul {
+      h3 {
+        font-size: 1.2rem;
+      }
+
+      .container ul {
         padding-left: 20px;
         list-style-type: disc;
         margin-bottom: 20px;
@@ -55,13 +76,13 @@
       }
 
       .mail button {
-        background-color: #007bff;
+        background-color: #1877f3;
         color: white;
         border: none;
-        padding: 10px 20px;
+        padding: 10px 24px;
         border-radius: 6px;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 1.1rem;
       }
 
       .mail button:hover {
@@ -81,16 +102,17 @@
 
       .fact-box {
         flex: 1 1 45%;
-        background-color: #f1f1f1;
+        background-color: #f1f6fb;
         padding: 20px;
-        border-left: 5px solid #007bff;
+        border-left: 5px solid #1877f3;
         border-radius: 8px;
-        animation: fadeIn 1s ease-in-out;
+        animation: none;
+        font-size: 1.05rem;
       }
 
       blockquote {
         background: #f0f8ff;
-        border-left: 5px solid #007bff;
+        border-left: 5px solid #1877f3;
         margin: 20px 0;
         padding: 15px;
         font-style: italic;
@@ -98,7 +120,9 @@
     </style>
   </head>
   <body>
-    <div id="nav"></div>
+  <div id="nav"></div>
+
+ 
 
     <div id="searchPopup" class="search-popup">
       <div class="popup-content">
@@ -108,88 +132,113 @@
       </div>
     </div>
 
+    <br><br><br><br><br><br>
     <div class="container">
-      <h1 id="aboutUs" >More About Us</h1>
-      <p>We AlCoders aim to build a tech-savvy generation with strong analytical and innovative skills. Guided by our mentor Mr. Praveen Chandran, we foster the spirit of invention through hands-on learning and futuristic projects.</p>
 
-      <h2>What is ATL?</h2>
-      <p>Atal Tinkering Labs (ATL) are creative workspaces in schools that promote STEM-based learning. Students get access to tools like robotics kits, 3D printers, and IoT modules to explore, experiment, and innovate.</p>
+      <!-- Box 1: More About Us to Tech Stack -->
+      <div class="section-box">
+        <h1 id="aboutUs">More About Us</h1>
+        <p style="margin-bottom:18px;">We AlCoders aim to build a tech-savvy generation with strong analytical and innovative skills. Guided by our mentor Mr. Praveen Chandran, we foster the spirit of invention through hands-on learning and futuristic projects.</p>
 
-      <h3>What You Learn at AlCoders</h3>
-      <ul>
-        <li>Arduino and microcontroller programming</li>
-        <li>3D modeling and printing</li>
-        <li>IoT projects and automation</li>
-        <li>Mobile app development</li>
-        <li>Basic AI and machine learning fundamentals</li>
-        <li>Teamwork, critical thinking, and ethical innovation</li>
-      </ul>
+        <h2>What is ATL?</h2>
+        <p style="margin-bottom:18px;">Atal Tinkering Labs (ATL) are creative workspaces in schools that promote STEM-based learning. Students get access to tools like robotics kits, 3D printers, and IoT modules to explore, experiment, and innovate.</p>
 
-      <h2>Why Join Us?</h2>
-      <p>Because we go beyond books! At AlCoders, learning is experiential. You’ll collaborate on real-life problems, join competitions, and build projects that matter.</p>
+        <h3>What You Learn at AlCoders</h3>
+        <ul style="margin-bottom:18px;">
+          <li>Arduino and microcontroller programming</li>
+          <li>3D modeling and printing</li>
+          <li>IoT projects and automation</li>
+          <li>Mobile app development</li>
+          <li>Basic AI and machine learning fundamentals</li>
+          <li>Teamwork, critical thinking, and ethical innovation</li>
+        </ul>
 
-      <div class="fun-facts">
-        <div class="fact-box">
-          <h3>75+ Projects Built</h3>
-          <p>From automatic irrigation to healthcare monitoring — our students build impactful tech.</p>
+        <h2>Why Join Us?</h2>
+        <p style="margin-bottom:18px;">Because we go beyond books! At AlCoders, learning is experiential. You’ll collaborate on real-life problems, join competitions, and build projects that matter.</p>
+
+        <div class="fun-facts" style="margin-bottom:18px;">
+          <div class="fact-box">
+            <h3>75+ Projects Built</h3>
+            <p>From automatic irrigation to healthcare monitoring — our students build impactful tech.</p>
+          </div>
+          <div class="fact-box">
+            <h3>100+ Students Trained</h3>
+            <p>Students from grades 6–12 have participated and excelled in ATL programs.</p>
+          </div>
         </div>
-        <div class="fact-box">
-          <h3>100+ Students Trained</h3>
-          <p>Students from grades 6–10 have participated and excelled in ATL programs.</p>
+
+        <h2 id="team">Tech Stack We Use</h2>
+        <ul style="margin-bottom:0;">
+          <li><a href="https://www.arduino.cc/en/software/" target="_blank" rel="noopener noreferrer">Arduino IDE</a></li>
+          <li><a href="https://www.tinkercad.com" target="_blank" rel="noopener noreferrer">Tinkercad</a>/<a href="https://www.autodesk.com/products/fusion-360/overview" target="_blank" rel="noopener noreferrer">Fusion 360</a></li>
+          <li><a href="https://firebase.google.com/" target="_blank" rel="noopener noreferrer">Firebase</a> & <a href="https://www.espressif.com/en/products/socs/esp8266"target="_blank" rel="noopener noreferrer">ESP8266</a></li>
+          <li><a href="https://appinventor.mit.edu/"target="_blank" rel="noopener noreferrer">MIT App Inventor</a></li>
+          <li><a href="https://scratch.mit.edu/" target="_blank" rel="noopener noreferrer">Scratch</a> and <a  href="https://www.python.org/"target="_blank" rel="noopener noreferrer">Python</a></li>
+          <li><a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">VS Code</a></li>
+        </ul>
+      </div>
+
+      <!-- Box 2: Crew Members and Success Stories -->
+      <div class="section-box">
+        <h2>AlCoders Crew</h2>
+        <div class="crew" style="margin-bottom:18px;">
+          <p><strong>Team Members:</strong> Krishna Chandra, Nebin Raj J.S, Nikhil John J</p>
+          <p><strong>Mentor:</strong> Mr. Praveen Chandran</p>
+          <p><strong>Incharge:</strong> Mr. Alex</p>
+        </div>
+
+        <h2 id="mission1">Success Stories</h2>
+        <blockquote style="margin-bottom:18px;">“I never imagined building my own robot would be this easy and fun. AlCoders helped me turn ideas into innovation.” – Krishna, Head of Alcoders Hardware team</blockquote>
+        <blockquote>“The IoT workshop changed how I look at technology. I built a smart home prototype within weeks!” – Nikhil, Head of the Alcoders Software team</blockquote>
+      </div>
+
+      <!-- Box 3: Mission -->
+      <div class="section-box">
+        <h2 id="mission">Our Mission</h2>
+        <p style="margin-bottom:14px;">At AlCoders, our mission is to ignite a passion for technology and innovation in young minds. We believe that the future belongs to those who can understand, create, and shape technology—not just use it.</p>
+        <p style="margin-bottom:14px;">That’s why we are committed to providing an ecosystem where students can explore the vast landscape of science, technology, engineering, and mathematics (STEM) through hands-on experiences and real-world problem-solving.</p>
+        <p style="margin-bottom:14px;">We aim to break the boundaries of traditional learning by introducing students to cutting-edge domains like robotics, artificial intelligence, machine learning, Internet of Things (IoT), and 3D design from an early age.</p>
+        <p style="margin-bottom:18px;">Our mission is not just to teach students how to code or build; it’s to develop creators, innovators, and critical thinkers who are equipped to thrive in a technology-driven world. Through workshops, mentorship, and peer collaboration, we help students ask questions, experiment boldly, and build fearlessly.</p>
+        <h2>Our Vision</h2>
+        <p>To empower every student to be a changemaker through technology, innovation, and collaborative learning. We envision a future where students lead India’s next tech revolution.</p>
+      </div>
+
+    
+      <!-- Box 5: Contact Us -->
+      <div class="section-box">
+        <h2>Contact Us</h2>
+        <p style="margin-bottom:18px;">If you're curious, motivated, and ready to build, join us today!</p>
+        <div class="mail">
+          <p><strong>Phone:</strong> +91 12345 67890</p>
+          <p><strong>Address:</strong> Viswadeepthi English Medium School, TVM, Kerala, India</p>
+          <a href="https://www.facebook.com/profile.php?id=61564464459525" target="_blank" style="text-decoration:none;">
+      <button style="background-color:#1877f3; color:white; border:none; padding:10px 24px; border-radius:6px; cursor:pointer; font-size:16px; margin-top:18px;">
+        Visit Us on Facebook
+      </button>
+    </a>
         </div>
       </div>
 
-      <h2 id="team">Tech Stack We Use</h2>
-      <ul>
-        <li>Arduino IDE</li>
-        <li>Tinkercad / Fusion 360</li>
-        <li>Firebase & ESP8266</li>
-        <li>MIT App Inventor</li>
-        <li>Scratch and Python</li>
-      </ul>
-
-      <h2>AlCoders Crew</h2>
-      <div class="crew">
-        <p><strong>Team Members:</strong> Krishna Chandra, Nebin Raj J.S, Nikhil John J</p>
-        <p><strong>Mentor:</strong> Mr. Praveen Chandran</p>
-        <p><strong>Incharge:</strong> Mr. Alex</p>
-      </div>
-
-      <h2 id="mission1">Success Stories</h2>
-      <blockquote>“I never imagined building my own robot would be this easy and fun. AlCoders helped me turn ideas into innovation.” – Krishna, Grade 9</blockquote>
-      <blockquote>“The IoT workshop changed how I look at technology. I built a smart home prototype within weeks!” – Nikhil, Grade 10</blockquote>
-
-      <h2 id="mission">Our Mission</h2>
-      <p>
-        At AlCoders, our mission is to ignite a passion for technology and innovation in young minds. We believe that the future belongs to those who can understand, create, and shape technology—not just use it.
-      </p>
-      <p>
-        That’s why we are committed to providing an ecosystem where students can explore the vast landscape of science, technology, engineering, and mathematics (STEM) through hands-on experiences and real-world problem-solving.
-      </p>
-      <p>
-        We aim to break the boundaries of traditional learning by introducing students to cutting-edge domains like robotics, artificial intelligence, machine learning, Internet of Things (IoT), and 3D design from an early age.
-      </p>
-      <p>
-        Our mission is not just to teach students how to code or build; it’s to develop creators, innovators, and critical thinkers who are equipped to thrive in a technology-driven world. Through workshops, mentorship, and peer collaboration, we help students ask questions, experiment boldly, and build fearlessly.
-      </p>
-
-      <h2>Our Vision</h2>
-      <p>To empower every student to be a changemaker through technology, innovation, and collaborative learning. We envision a future where students lead India’s next tech revolution.</p>
-
-      <h2>Contact Us</h2>
-      <p>If you're curious, motivated, and ready to build, join us today!</p>
-      <div class="mail">
-        <a href="mailto:alcodersatal@gmail.com" target="_blank">
-          <button>Click to Join</button>
-        </a>
-        <p><strong>Phone:</strong> +91 12345 67890</p>
-        <p><strong>Address:</strong> Viswadeepthi English Medium School, TVM, Kerala, India</p>
-      </div>
     </div>
 
     <div id="footer"></div>
     <script src="loadNav.js"></script>
     <script src="responsive.js"></script>
     <script src="navigation.js"></script>
+    <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.body.addEventListener('click', function(e) {
+      if (
+        e.target.matches('a[href="about us.html#aboutUs"]') ||
+        (e.target.closest('a[href="about us.html#aboutUs"]'))
+      ) {
+        e.preventDefault();
+        // Always hide the paragraph when clicked
+        var para = document.getElementById('aboutUsMenuPara');
+        para.style.display = 'none';
+      }
+    });
+  });
+</script>
   </body>
 </html>
