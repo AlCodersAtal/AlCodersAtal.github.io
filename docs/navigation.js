@@ -1,12 +1,12 @@
-//Code for the responsive
-function showSidebar(){
-  const sidebar = document.querySelector('.sidebar')
-  sidebar.style.display = 'flex'
+function toggleSidebar() {
+  const sidebar = document.getElementById("mobileSidebar");
+  if (sidebar.style.display === "flex") {
+    sidebar.style.display = "none";
+  } else {
+    sidebar.style.display = "flex";
+  }
 }
-function hideSidebar(){
-  const sidebar = document.querySelector('.sidebar')
-  sidebar.style.display = 'none'
-}
+
 
 
 // Show the search pop-up
@@ -18,6 +18,7 @@ function showSearchPopup() {
   function hideSearchPopup() {
     document.getElementById("searchPopup").style.display = "none";
   }
+  
   
   // Show recommendations
   function showRecommendations() {

@@ -274,6 +274,7 @@
       themeSelect.onchange = async () => {
         const selectedTheme = themeSelect.value;
         applyTheme(selectedTheme);
+        localStorage.setItem("theme", selectedTheme); // Save globally
         try {
           await updateDoc(userDocRef, { theme: selectedTheme });
         } catch (error) {

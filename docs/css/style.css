@@ -359,54 +359,461 @@ footer {
   }
 }
 
-
-
-
-/*
-
-body.light-theme {
-  background-color: #ffffff;
-  color: #000000;
-}
-
-body.light-theme .content {
-  background-color: #f1f1f1;
-  color: #000000;
-}
-
-body.light-theme input,
-body.light-theme select,
-body.light-theme textarea {
-  background-color: #ffffff;
-  color: #000000;
-  border: 1px solid #ccc;
-}
-
-body.light-theme button {
-  background-color: #007bff;
-  color: #ffffff;
-}
-
-
+/* --- DARK THEME --- */
 body.dark-theme {
-  background-color: #121212;
-  color: #ffffff;
+  background: #111 !important;
+  color: #fff !important; /* Make all body text white */
+}
+
+/* Make all headings and text white in dark theme */
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3,
+body.dark-theme h4,
+body.dark-theme h5,
+body.dark-theme h6,
+body.dark-theme p,
+body.dark-theme span,
+body.dark-theme label,
+body.dark-theme li,
+body.dark-theme a,
+body.dark-theme th,
+body.dark-theme td,
+body.dark-theme .text,
+body.dark-theme .title {
+  color: #fff !important;
+}
+
+/* Main containers and cards */
+body.dark-theme header,
+body.dark-theme .dashboard,
+body.dark-theme label,
+body.dark-theme .featured-box,
+body.dark-theme .category,
+body.dark-theme .content,
+body.dark-theme .course-box,
+body.dark-theme .sidebar,
+body.dark-theme .user-popup-content,
+body.dark-theme .search-popup,
+body.dark-theme .dropdown-menu,
+body.dark-theme footer {
+  background: #18191c !important;
+  color: #fff !important; /* Ensure text inside containers is white */
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.25);
+}
+
+/* Navbar: slightly lighter for separation */
+body.dark-theme nav {
+  background: #23242a !important;
+  color: #fff !important;
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.25);
+}
+
+/* Links and interactive elements */
+body.dark-theme nav a,
+body.dark-theme .dropdown-menu a,
+body.dark-theme .search-icon span {
+  color: #aad7ff !important;
+  transition: color 0.3s;
+}
+
+body.dark-theme nav a:hover,
+body.dark-theme .dropdown-menu a:hover {
+  color: #fff !important;
+  background: #22304a !important;
+}
+
+/* Buttons */
+body.dark-theme .cta-btn {
+  background: linear-gradient(90deg, #0056b3 0%, #1877f3 100%) !important;
+  color: #fff !important;
+  border: none;
+  box-shadow: 0 2px 8px rgba(24,119,243,0.15);
+}
+
+body.dark-theme .cta-btn:hover {
+  background: linear-gradient(90deg, #003366 0%, #0056b3 100%) !important;
+}
+
+/* Cards and boxes */
+body.dark-theme .category,
+body.dark-theme .course-box,
+body.dark-theme .user-popup-content,
+body.dark-theme .search-popup,
+body.dark-theme .dropdown-menu {
+  background: #18191c !important;
+  color: #f3f6fa !important;
+  border: 1px solid #23272f !important;
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.18);
+}
+
+body.dark-theme .category:hover,
+body.dark-theme .course-box:hover,
+body.dark-theme .dropdown-menu a:hover {
+  background: #23242a !important;
+  color: #fff !important;
+}
+
+/* Inputs */
+body.dark-theme input,
+body.dark-theme .search-popup input {
+  background: #23242a !important;
+  color: #aad7ff !important;
+  border: 1px solid #22304a !important;
+}
+
+body.dark-theme input:focus,
+body.dark-theme .search-popup input:focus {
+  border-color: #1877f3 !important;
+}
+
+/* List items in search and results */
+body.dark-theme .search-popup .result-box ul li,
+body.dark-theme #resultBox li {
+  background: #18191c !important;
+  color: #aad7ff !important;
+  border: 1px solid #22304a !important;
+}
+
+body.dark-theme .search-popup .result-box ul li:hover,
+body.dark-theme #resultBox li:hover {
+  background: #23242a !important;
+  color: #fff !important;
+}
+
+/* Footer */
+body.dark-theme footer {
+  background: #18191c !important;
+  color: #aad7ff !important;
+  border-top: 1px solid #23272f !important;
+}
+
+/* --- Force readable text and backgrounds in dark theme for About Us page --- */
+body.dark-theme .container,
+body.dark-theme .section-box,
+body.dark-theme .fact-box,
+body.dark-theme blockquote {
+  background: #18191c !important;
+  color: #fff !important;
+  border-color: #23272f !important;
+}
+
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3,
+body.dark-theme h4,
+body.dark-theme h5,
+body.dark-theme h6,
+body.dark-theme p,
+body.dark-theme span,
+body.dark-theme label,
+body.dark-theme li,
+body.dark-theme a,
+body.dark-theme th,
+body.dark-theme td,
+body.dark-theme .text,
+body.dark-theme .title {
+  color: #fff !important;
+}
+
+body.dark-theme .fact-box {
+  border-left: 5px solid #1877f3 !important;
+}
+
+body.dark-theme blockquote {
+  border-left: 5px solid #1877f3 !important;
+  background: #23242a !important;
+}
+
+body.dark-theme .mail button {
+  background-color: #1877f3 !important;
+  color: #fff !important;
+}
+
+body.dark-theme .mail button:hover {
+  background-color: #0056b3 !important;
+}
+
+/* --- Force readable text and backgrounds in dark theme for More info.html --- */
+body.dark-theme,
+body.dark-theme .section {
+  background: #18191c !important;
+  color: #fff !important;
+}
+
+body.dark-theme header,
+body.dark-theme .hero {
+  background: #23242a !important;
+  color: #fff !important;
+}
+
+body.dark-theme .highlight,
+body.dark-theme .testimonial {
+  background: #23242a !important;
+  color: #fff !important;
+  border-radius: 10px;
+  border-left: 5px solid #1877f3 !important;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+body.dark-theme .highlight h3 {
+  color: #aad7ff !important;
+}
+
+body.dark-theme .btn {
+  background: #1877f3 !important;
+  color: #fff !important;
+}
+
+body.dark-theme .btn:hover {
+  background: #0056b3 !important;
+}
+
+body.dark-theme footer {
+  background: #18191c !important;
+  color: #aad7ff !important;
+  border-top: 1px solid #23272f !important;
+}
+
+body.dark-theme a {
+  color: #aad7ff !important;
+}
+
+/* Smooth transitions for theme change */
+body, nav, .content, .course-box, .category, .sidebar, .user-popup-content, .search-popup, .dropdown-menu, footer {
+  transition: background 0.4s, color 0.4s, box-shadow 0.4s;
+}
+
+/* --- Additional styles for dark theme --- */
+body.dark-theme label,
+body.dark-theme .input-group label {
+  color: #fff !important;
+}
+
+/* --- Force readable text and backgrounds in dark theme for arduinoCourse.html --- */
+body.dark-theme,
+body.dark-theme .sensor-card,
+body.dark-theme .section {
+  background: #18191c !important;
+  color: #fff !important;
+}
+
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3,
+body.dark-theme h4,
+body.dark-theme h5,
+body.dark-theme h6,
+body.dark-theme p,
+body.dark-theme span,
+body.dark-theme label,
+body.dark-theme li,
+body.dark-theme th,
+body.dark-theme td {
+  color: #fff !important;
+}
+
+body.dark-theme .fun-fact {
+  background: #23242a !important;
+  color: #aad7ff !important;
+  border-left: 5px solid #1877f3 !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+body.dark-theme pre {
+  background: #23242a !important;
+  color: #fff !important;
+}
+
+body.dark-theme iframe,
+body.dark-theme video {
+  background: #18191c !important;
+}
+
+body.dark-theme .sensor-card {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.35) !important;
+  border-radius: 8px !important;
+}
+
+body.dark-theme .section {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25) !important;
+  border-radius: 10px !important;
+}
+
+/* --- Force readable text and backgrounds in dark theme for roboticsCourse.html --- */
+body.dark-theme,
+body.dark-theme .content,
+body.dark-theme section,
+body.dark-theme table,
+body.dark-theme th,
+body.dark-theme td {
+  background: #18191c !important;
+  color: #fff !important;
+}
+
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3,
+body.dark-theme h4,
+body.dark-theme h5,
+body.dark-theme h6,
+body.dark-theme p,
+body.dark-theme span,
+body.dark-theme label,
+body.dark-theme li,
+body.dark-theme th,
+body.dark-theme td {
+  color: #fff !important;
+}
+
+body.dark-theme .btn {
+  background: #1877f3 !important;
+  color: #fff !important;
+}
+
+body.dark-theme .btn:hover {
+  background: #0056b3 !important;
+}
+
+body.dark-theme img {
+  filter: brightness(0.85) contrast(1.1);
+  border-radius: 10px;
+}
+
+body.dark-theme iframe {
+  background: #18191c !important;
+}
+
+body.dark-theme a {
+  color: #aad7ff !important;
+}
+
+/* --- Force readable text and backgrounds in dark theme for IoT Course Pros and Cons --- */
+body.dark-theme .pros,
+body.dark-theme .cons {
+  background: #23242a !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+}
+
+body.dark-theme .pros h3,
+body.dark-theme .cons h3 {
+  color: #aad7ff !important;
+}
+
+body.dark-theme .pros ul li,
+body.dark-theme .cons ul li {
+  color: #fff !important;
+}
+
+/* FAQ details and summary */
+body.dark-theme details {
+  background: #23242a !important;
+  color: #fff !important;
+  border: 1px solid #23272f !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.10) !important;
+}
+
+body.dark-theme summary {
+  color: #aad7ff !important;
+}
+
+body.dark-theme details[open] summary {
+  color: #fff !important;
+}
+
+body.dark-theme details p {
+  color: #fff !important;
+}
+
+/* --- Force readable text and backgrounds in dark theme for CodeXX Interactive Demo --- */
+body.dark-theme .main-container {
+  background: #18191c !important;
+  color: #fff !important;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.35) !important;
+}
+
+body.dark-theme .blue-box {
+  background-color: #23242a !important;
+  color: #aad7ff !important;
+}
+
+body.dark-theme .blue-box h1 {
+  color: #fff !important;
+}
+
+body.dark-theme .blue-box p {
+  color: #aad7ff !important;
 }
 
 body.dark-theme .content {
-  background-color: #1e1e1e;
-  color: #ffffff;
+  background: #18191c !important;
+  color: #fff !important;
 }
 
-body.dark-theme input,
-body.dark-theme select,
-body.dark-theme textarea {
-  background-color: #2c2c2c;
-  color: #ffffff;
-  border: 1px solid #555;
+body.dark-theme .section-title {
+  color: #aad7ff !important;
+  border-left: 5px solid #1877f3 !important;
 }
 
-body.dark-theme button {
-  background-color: #0056b3;
-  color: #ffffff;
-}*/
+body.dark-theme .card {
+  background: #23242a !important;
+  color: #fff !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18) !important;
+}
+
+body.dark-theme .form-label,
+body.dark-theme label {
+  color: #fff !important;
+}
+
+body.dark-theme .form-control {
+  background: #18191c !important;
+  color: #aad7ff !important;
+  border: 1px solid #22304a !important;
+}
+
+body.dark-theme .form-control:focus {
+  border-color: #1877f3 !important;
+  background: #23242a !important;
+  color: #fff !important;
+}
+
+body.dark-theme .btn-primary,
+body.dark-theme .btn-outline-primary {
+  background-color: #1877f3 !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+body.dark-theme .btn-primary:hover,
+body.dark-theme .btn-outline-primary:hover {
+  background-color: #0056b3 !important;
+  color: #fff !important;
+}
+
+body.dark-theme .btn-outline-secondary {
+  background: transparent !important;
+  color: #aad7ff !important;
+  border: 1px solid #aad7ff !important;
+}
+
+body.dark-theme .btn-outline-secondary:hover {
+  background: #22304a !important;
+  color: #fff !important;
+  border: 1px solid #aad7ff !important;
+}
+
+body.dark-theme .alert-success {
+  background: #1e2b1e !important;
+  color: #b6ffb6 !important;
+  border: 1px solid #2e7d32 !important;
+}
+
+body.dark-theme .alert-danger {
+  background: #2a1e1e !important;
+  color: #ffb6b6 !important;
+  border: 1px solid #b71c1c !important;
+}
