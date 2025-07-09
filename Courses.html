@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Courses</title>
+      <link rel="stylesheet" href="css/theme.css">
+
+    <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      .content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        max-width: 1100px;
+        margin: 0 auto 60px;
+        padding: 40px 20px;
+      }
+
+      .course-box {
+        background-color: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        text-align: center;
+        padding: 20px;
+        transition: transform 0.3s ease;
+      }
+
+      .course-box:hover {
+        transform: translateY(-5px);
+      }
+
+      .course-box img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        margin-bottom: 15px;
+      }
+
+      .course-box h2 {
+        font-size: 1.1rem;
+        color: #004080;
+        margin: 0;
+        padding-top: 10px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 100px;
+        font-size: 2rem;
+        color: #003366;
+      }
+
+      h3 {
+        max-width: 1100px;
+        margin: 40px auto 20px;
+        font-size: 1.5rem;
+        color: #004080;
+        border-bottom: 2px solid #004080;
+        padding-bottom: 5px;
+      }
+
+      hr {
+        max-width: 200px;
+        margin: 20px auto;
+        border: 1px solid #004080;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="nav"></div>
+
+    <!-- Search pop-up -->
+    <div id="searchPopup" class="search-popup">
+      <div class="popup-content">
+        <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
+        <input
+          type="text"
+          id="searchBar"
+          placeholder="Search here..."
+          oninput="showRecommendations()"
+        />
+        <div class="result-box" id="resultBox"></div>
+      </div>
+    </div>
+
+    <h1>Here you can get free courses to learn About Arduino</h1>
+    <hr />
+
+    <h3>Beginner Courses</h3>
+    <div class="content">
+      <div class="course-box">
+        <a href="arduinoCourse.html">
+          <img src="images/arduinoPic.jpg" alt="What is Arduino" />
+        </a>
+        <h2>Arduino Essentials: From Zero to Maker</h2>
+      </div>
+
+      <div class="course-box">
+        <a href="sensorCourse.html">
+          <img src="images/sensorsPic.png" alt="What are Sensors" />
+        </a>
+        <h2>Introduction to Sensors: Learn, Connect, Automate</h2>
+      </div>
+
+      <div class="course-box">
+        <a href="codingCourse.html">
+          <img src="images/CodingPic.jpg" alt="What is Coding" />
+        </a>
+        <h2>What is Coding. How it is useful</h2>
+      </div>
+
+      <div class="course-box">
+        <a href="commonSensors.html">
+          <img src="images/ATLlabp1.jpg" alt="ATL Lab Sensors" />
+        </a>
+        <h2>Exploring ATL Lab Sensors: Functionality, Coding, and Use Cases</h2>
+      </div>
+      <div class="course-box">
+        <a href="webDevCourse.html">
+          <img src="images/webDevCourse.png" alt="Web Development" />
+        </a>
+        <h2>Code the Web: A Beginner’s Guide to Web Development</h2>
+      </div>
+
+      <div class="course-box">
+        <a href="roboticsCourse.html">
+          <img src="images/roboticsPic.png" alt="Robotics" />
+        </a>
+        <h2>Robotics Mastery: From Beginner to Expert</h2>
+      </div>
+
+      <div class="course-box">
+        <a href="iotCourse.html">
+          <img src="images/iotCourse.png" alt="IoT Course" />
+        </a>
+        <h2>Mastering IoT: From Basics to Real-World Applications</h2>
+      </div>
+    </div>
+
+    <h3>Advanced Courses</h3>
+    <div class="content">
+      <div class="course-box">
+        <a href="codingCourse2.html">
+          <img src="images/CodingCourse.png" alt="What is Coding"/>
+        <h2>Python Mastery: From Fundamentals to Advanced Programming</h2>
+      </div>
+    </div>
+
+    <div id="footer"></div>
+    <script src="loadNav.js"></script>
+    <script src="theme.js"></script>
+    <script src="navigation.js"></script>
+  </body>
+</html>
