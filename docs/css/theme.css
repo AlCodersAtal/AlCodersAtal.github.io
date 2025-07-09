@@ -486,3 +486,30 @@ body.dark-theme .sidebar,
 body.dark-theme .featured-box {
   animation: fadeIn 0.9s ease;
 }
+
+/* --- Make code and pre blocks readable in dark theme --- */
+body.dark-theme code,
+body.dark-theme pre {
+  background: #23242a !important;
+  color: #fff !important;
+  border-radius: 4px !important;
+  border-left: 4px solid #1877f3 !important;
+}
+
+/* Optional: style inline code differently if needed */
+body.dark-theme code {
+  padding: 2px 6px !important;
+}
+
+/* For fun-fact and highlight blocks */
+body.dark-theme .fun-fact {
+  background: #23242a !important;
+  color: #aad7ff !important;
+  border-left: 5px solid #1877f3 !important;
+}
+
+body.dark-theme .highlight {
+  background: #23242a !important;
+  color: #aad7ff !important;
+  border-left: 5px solid #1877f3 !important;
+}
