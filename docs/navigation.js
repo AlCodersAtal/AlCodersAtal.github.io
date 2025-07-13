@@ -26,7 +26,7 @@ function showSearchPopup() {
     const resultBox = document.getElementById("resultBox");
   
     // Sample recommendations (these could be dynamically fetched)
-    const keywords = ["Home", "Home Page", "More Info", "About Us", "Who are Alcoders", "Courses", "What is an Arduino", "What is Sensors", "Login Page", "How to Login In this Website" , "Settings","What is Coding ", "What is HTML","WebDevelopment Course" ];
+    const keywords = ["Home", "Home Page", "More Info", "About Us","Advance Coding Project", "Who are Alcoders", "Courses", "What is an Arduino", "What is Sensors", "Login Page", "How to Login In this Website" , "Settings","What is Coding ", "What is HTML","WebDevelopment Course" ];
     const filtered = keywords.filter((word) =>
       word.toLowerCase().includes(searchInput)
     );
@@ -62,6 +62,8 @@ function showSearchPopup() {
       "WebDevelopment Course": "webDevCourse.html",
       "What is HTML ": "webDevCourse.html",
       "What is Coding ": "codingCourse.html",
+      "Advance Coding Project": "codingCourse2.html",
+
 
     };
   
@@ -74,7 +76,7 @@ function showSearchPopup() {
 document.getElementById("searchBar").addEventListener("keydown", function(event) {
   if (event.key === "Enter") {
     const searchInput = document.getElementById("searchBar").value.toLowerCase();
-    const keywords = ["Home", "Home Page", "More Info", "About Us", "Who are Alcoders", "Courses", "What is an Arduino", "What is Sensors", "Login Page", "How to Login In this Website", "Settings", "What is Coding ", "What is HTML", "WebDevelopment Course "];
+    const keywords = ["Home", "Home Page", "More Info", "About Us", "Who are Alcoders", "Courses","Advance Coding Project", "What is an Arduino", "What is Sensors", "Login Page", "How to Login In this Website", "Settings", "What is Coding ", "What is HTML", "WebDevelopment Course "];
     const filtered = keywords.filter((word) =>
       word.toLowerCase().includes(searchInput)
     );
@@ -84,31 +86,3 @@ document.getElementById("searchBar").addEventListener("keydown", function(event)
     }
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

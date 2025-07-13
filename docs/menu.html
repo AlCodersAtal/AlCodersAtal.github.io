@@ -10,132 +10,352 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 
   <style>
-    .content {
-      margin-top: 100px;
-      margin-left: 20px;
-      margin-right: 20px;
-      padding: 20px;
-      background-color: #f1f1f1;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      text-align: left;
-      font-size: 1rem;
-      color: #333;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+  body {
+    background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    color: #222;
+  }
 
-    .settings-section {
-      margin-bottom: 20px;
-    }
+  .content {
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 40px 32px 32px 32px;
+    background: rgba(255,255,255,0.85);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(60, 60, 120, 0.15), 0 1.5px 8px rgba(0,0,0,0.04);
+    max-width: 520px;
+    text-align: left;
+    backdrop-filter: blur(8px);
+    border: 1.5px solid rgba(180, 180, 255, 0.18);
+    position: relative;
+  }
 
-    .settings-section h2 {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
+  .content h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #2d3a8c;
+  }
 
-    .settings-section label {
-      display: block;
-      margin-bottom: 5px;
-    }
+  .settings-section {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1.5px solid #e5e9f2;
+  }
+  .settings-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
 
-    .settings-section input,
-    .settings-section select {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
+  .settings-section h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #3b4cca;
+    letter-spacing: 0.5px;
+  }
 
-    .settings-section button {
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-right: 10px;
-    }
+  .settings-section label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #444;
+  }
 
-    .settings-section button:hover {
-      background-color: #0056b3;
-    }
+  .settings-section input,
+  .settings-section select {
+    width: 100%;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    border: 1.5px solid #bfc9e0;
+    border-radius: 8px;
+    background: rgba(245, 247, 255, 0.7);
+    font-size: 1rem;
+    transition: border 0.2s;
+    outline: none;
+  }
+  .settings-section input:focus,
+  .settings-section select:focus {
+    border: 1.5px solid #3b4cca;
+    background: #fff;
+  }
 
-    body.light-theme {
-      background-color: #ffffff;
-      color: #000000;
-    }
+  .settings-section button {
+    padding: 10px 28px;
+    background: linear-gradient(90deg, #3b4cca 60%, #6c63ff 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(60, 60, 120, 0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+    margin-right: 10px;
+  }
+  .settings-section button:hover {
+    background: linear-gradient(90deg, #6c63ff 0%, #3b4cca 100%);
+    box-shadow: 0 4px 16px rgba(60, 60, 120, 0.12);
+  }
 
-    body.light-theme .content {
-      background-color: #f1f1f1;
-      color: #333;
-    }
+  /* Danger button */
+  #logoutBtn {
+    background: linear-gradient(90deg, #ff4e50 60%, #f9d423 100%);
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(255, 78, 80, 0.08);
+  }
+  #logoutBtn:hover {
+    background: linear-gradient(90deg, #f9d423 0%, #ff4e50 100%);
+    color: #fff;
+  }
 
-    body.dark-theme {
-      background-color: #121212;
-      color: #ffffff;
-    }
+  /* Modal Styling */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 5000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background: rgba(44, 62, 80, 0.18);
+    backdrop-filter: blur(2px);
+  }
 
-    body.dark-theme .content {
-      background-color: #1e1e1e;
-      color: #ffffff;
-    }
+  .modal-content {
+    background: rgba(255,255,255,0.97);
+    margin: 12% auto;
+    padding: 36px 28px;
+    border-radius: 18px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    color: #2d3a8c;
+    box-shadow: 0 8px 32px rgba(60, 60, 120, 0.18);
+    border: 1.5px solid #e5e9f2;
+  }
 
-    /* Modal Styling */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 5000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.6);
-    }
+  .modal-content h2 {
+    margin-bottom: 18px;
+    font-size: 1.3rem;
+    color: #3b4cca;
+    font-weight: 700;
+  }
 
-    .modal-content {
-      background-color: #fff;
-      margin: 15% auto;
-      padding: 30px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 400px;
-      text-align: center;
-      color: #333;
-    }
+  .modal-content button {
+    margin-top: 18px;
+    padding: 10px 24px;
+    background: linear-gradient(90deg, #3b4cca 60%, #6c63ff 100%);
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(60, 60, 120, 0.08);
+    transition: background 0.2s;
+  }
+  .modal-content button:hover {
+    background: linear-gradient(90deg, #6c63ff 0%, #3b4cca 100%);
+  }
 
-    body.dark-theme .modal-content {
-      background-color: #2c2c2c;
-      color: #eee;
-    }
+  /* Premium Avatar */
+  .premium-avatar {
+    display: block;
+    margin: 0 auto 18px auto;
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #6c63ff;
+    box-shadow: 0 2px 12px rgba(60, 60, 120, 0.12);
+    background: #fff;
+  }
 
-    .modal-content h2 {
-      margin-bottom: 15px;
-    }
+  /* User Card Styles */
+  .user-card {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: rgba(245,247,255,0.85);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(60, 60, 120, 0.10);
+    padding: 24px 24px 18px 24px;
+    margin-bottom: 36px;
+    position: relative;
+    border: 1.5px solid #e5e9f2;
+  }
 
-    .modal-content button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+  .user-card .premium-avatar {
+    width: 96px;
+    height: 96px;
+    margin: 0;
+    border-width: 4px;
+  }
 
-    .modal-content button:hover {
-      background-color: #0056b3;
-    }
+  .user-details {
+    flex: 1;
+  }
+
+  .user-details h2 {
+    margin: 0 0 6px 0;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #3b4cca;
+  }
+
+  .user-details p {
+    margin: 0 0 10px 0;
+    color: #555;
+    font-size: 1rem;
+  }
+
+  .avatar-upload-label {
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 8px;
+  }
+
+  .avatar-upload-btn {
+    display: inline-block;
+    background: linear-gradient(90deg, #3b4cca 60%, #6c63ff 100%);
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+  .avatar-upload-btn:hover {
+    background: linear-gradient(90deg, #6c63ff 0%, #3b4cca 100%);
+  }
+
+  .avatar-remove-btn {
+    display: inline-block;
+    background: linear-gradient(90deg, #ff4e50 60%, #f9d423 100%);
+    color: #fff;
+    padding: 7px 18px;
+    border-radius: 7px;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+  }
+  .avatar-remove-btn:hover {
+    background: linear-gradient(90deg, #f9d423 0%, #ff4e50 100%);
+  }
+
+  body.dark-theme {
+    background: linear-gradient(135deg, #23243a 0%, #181820 100%);
+    color: #f1f1f1;
+  }
+  body.dark-theme .content {
+    background: rgba(34, 36, 58, 0.92);
+    color: #f1f1f1;
+    border: 1.5px solid rgba(108, 99, 255, 0.18);
+  }
+  body.dark-theme .settings-section h2 {
+    color: #aab6ff;
+  }
+  body.dark-theme .settings-section input,
+  body.dark-theme .settings-section select {
+    background: rgba(34, 36, 58, 0.7);
+    color: #fff;
+    border: 1.5px solid #6c63ff;
+  }
+  body.dark-theme .settings-section input:focus,
+  body.dark-theme .settings-section select:focus {
+    background: #23243a;
+    border: 1.5px solid #aab6ff;
+  }
+  body.dark-theme .modal-content {
+    background: rgba(34, 36, 58, 0.97);
+    color: #aab6ff;
+    border: 1.5px solid #6c63ff;
+  }
+  body.dark-theme .user-card {
+    background: rgba(34, 36, 58, 0.92);
+    border: 1.5px solid #6c63ff;
+  }
+  body.dark-theme .user-details h2 {
+    color: #aab6ff;
+  }
+  body.dark-theme .user-details p {
+    color: #ccc;
+  }
+
+  /* Toast Notification */
+  .toast {
+    visibility: hidden;
+    min-width: 240px;
+    max-width: 90vw;
+    background: linear-gradient(90deg, #3b4cca 60%, #6c63ff 100%);
+    color: #fff;
+    text-align: center;
+    border-radius: 12px;
+    padding: 18px 32px;
+    position: fixed;
+    left: 50%;
+    bottom: 40px;
+    font-size: 1.08rem;
+    font-weight: 500;
+    z-index: 9999;
+    transform: translateX(-50%);
+    box-shadow: 0 4px 24px rgba(60, 60, 120, 0.18);
+    opacity: 0;
+    transition: opacity 0.4s, visibility 0.4s;
+  }
+  .toast.show {
+    visibility: visible;
+    opacity: 1;
+  }
   </style>
 </head>
 
 <body>
   <div id="nav"></div>
+   <!-- Search pop-up -->
+    <div id="searchPopup" class="search-popup">
+      <div class="popup-content">
+        <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
+        <input
+          type="text"
+          id="searchBar"
+          placeholder="Search here..."
+          oninput="showRecommendations()"
+        />
+        <div class="result-box" id="resultBox"></div>
+      </div>
+    </div>
 
   <div class="content">
+    <!-- User Profile Card at the very top -->
+    <div class="user-card">
+      <img id="profileAvatar" src="images/default-avatar.png" alt="Profile Picture" class="premium-avatar"
+           onerror="this.onerror=null;this.src='images/default-avatar.png';" />
+      <div class="user-details">
+        <h2 id="userCardName">User Name</h2>
+        <p id="userCardEmail">user@email.com</p>
+        <label class="avatar-upload-label">
+          <input type="file" id="avatarUpload" accept="image/*" style="display:none;">
+          <span class="avatar-upload-btn"><i class="fa fa-camera"></i> Change Photo</span>
+        </label>
+        <button id="removePicBtn" class="avatar-remove-btn" type="button" style="margin-left:10px;">
+          <i class="fa fa-trash"></i> Remove Picture
+        </button>
+      </div>
+    </div>
     <h1>Settings</h1>
 
     <!-- Profile Name -->
@@ -154,6 +374,12 @@
         <option value="light">Light</option>
         <option value="dark">Dark</option>
       </select>
+    </div>
+
+    <!-- Change Password -->
+    <div class="settings-section">
+      <h2>Change Password</h2>
+      <button id="resetPasswordBtn">Send Password Reset Email</button>
     </div>
 
     <!-- Logout -->
@@ -180,6 +406,16 @@
     </div>
   </div>
 
+  <!-- Remove Profile Picture Confirmation Modal -->
+  <div id="removePicModal" class="modal">
+    <div class="modal-content">
+      <h2>Remove Profile Picture</h2>
+      <p>Remove your profile picture and use the default?</p>
+      <button id="confirmRemovePicBtn" style="background:linear-gradient(90deg,#ff4e50 60%,#f9d423 100%);margin-right:10px;">Yes, Remove</button>
+      <button id="cancelRemovePicBtn" style="background:linear-gradient(90deg,#6c63ff 60%,#3b4cca 100%);">Cancel</button>
+    </div>
+  </div>
+
   <div id="footer"></div>
 
   <!-- Firebase Modules and Script -->
@@ -188,7 +424,8 @@
     import {
       getAuth,
       onAuthStateChanged,
-      signOut
+      signOut,
+      sendPasswordResetEmail
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import {
       getFirestore,
@@ -215,10 +452,18 @@
     const themeSelect = document.getElementById("themeSelect");
     const userNameBtn = document.getElementById("userNameBtn");
     const logoutBtn = document.getElementById("logoutBtn");
+    const resetPasswordBtn = document.getElementById("resetPasswordBtn");
 
     const loginModal = document.getElementById("loginModal");
     const logoutModal = document.getElementById("logoutModal");
     const logoutMessage = document.getElementById("logoutMessage");
+
+    // Profile Card Elements    <div id="toast" class="toast"></div>
+    const profileAvatar = document.getElementById("profileAvatar");
+    const avatarUpload = document.getElementById("avatarUpload");
+    const userCardName = document.getElementById("userCardName");
+    const userCardEmail = document.getElementById("userCardEmail");
+    const removePicBtn = document.getElementById("removePicBtn");
 
     function applyTheme(theme) {
       document.body.classList.toggle("dark-theme", theme === "dark");
@@ -246,29 +491,61 @@
         const docSnap = await getDoc(userDocRef);
         if (docSnap.exists()) {
           const data = docSnap.data();
-          if (data.name) nameInput.value = data.name;
+          // Set name and email in card
+          userCardName.textContent = data.name || user.displayName || "User";
+          userCardEmail.textContent = user.email || "";
+          nameInput.value = data.name || "";
           if (data.theme) {
             themeSelect.value = data.theme;
             applyTheme(data.theme);
           }
+          // Set avatar if exists
+          if (data.profilePic && data.profilePic.length > 30) {
+            profileAvatar.src = data.profilePic;
+          } else {
+            profileAvatar.src = "images/default-avatar.png";
+          }
+        } else {
+          userCardName.textContent = user.displayName || "User";
+          userCardEmail.textContent = user.email || "";
+          profileAvatar.src = "images/default-avatar.png";
         }
       } catch (err) {
         console.error("Error fetching user data:", err);
       }
 
+      // Avatar upload
+      avatarUpload.onchange = async function() {
+        const file = avatarUpload.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = async function(e) {
+          const base64 = e.target.result;
+          profileAvatar.src = base64;
+          try {
+            await setDoc(userDocRef, { profilePic: base64 }, { merge: true });
+            showToast("Profile picture updated!");
+          } catch (err) {
+            showToast("Failed to save picture.");
+            profileAvatar.src = "images/default-avatar.png";
+          }
+        };
+        reader.readAsDataURL(file);
+      };
+
       userNameBtn.onclick = async () => {
         const newName = nameInput.value.trim();
         if(newName === "") {
-          alert("Name cannot be empty.");
+          showToast("Name cannot be empty.");
           return;
         }
         try {
           await setDoc(userDocRef, { name: newName }, { merge: true });
-          alert("Name updated successfully!");
-          // Optionally refresh or redirect if needed
+          userCardName.textContent = newName;
+          showToast("Name updated successfully!");
         } catch (error) {
           console.error("Failed to update name:", error);
-          alert("Error updating name.");
+          showToast("Error updating name.");
         }
       };
 
@@ -280,6 +557,7 @@
           await updateDoc(userDocRef, { theme: selectedTheme });
         } catch (error) {
           console.error("Error updating theme:", error);
+          showToast("Error updating theme.");
         }
       };
 
@@ -298,13 +576,69 @@
           }, 2000);
         } catch (error) {
           console.error("Error signing out:", error);
+          showToast("Error signing out.");
         }
       };
+
+      resetPasswordBtn.onclick = async () => {
+        if (!auth.currentUser) return;
+        try {
+          await sendPasswordResetEmail(auth, auth.currentUser.email);
+          showToast("Password reset email sent!");
+        } catch (err) {
+          showToast("Failed to send reset email.");
+        }
+      };
+
+      // Notifications
+      if (typeof saveNotifBtn !== "undefined" && typeof emailNotif !== "undefined") {
+        saveNotifBtn.onclick = async () => {
+          try {
+            await setDoc(userDocRef, { emailNotif: emailNotif.checked }, { merge: true });
+            showToast("Notification preferences saved!");
+          } catch (err) {
+            showToast("Failed to save preferences.");
+          }
+        };
+      }
     });
+
+    const removePicModal = document.getElementById("removePicModal");
+    const confirmRemovePicBtn = document.getElementById("confirmRemovePicBtn");
+    const cancelRemovePicBtn = document.getElementById("cancelRemovePicBtn");
+
+    removePicBtn.onclick = function() {
+      removePicModal.style.display = "block";
+    };
+
+    confirmRemovePicBtn.onclick = async function() {
+      removePicModal.style.display = "none";
+      profileAvatar.src = "images/default-avatar.png";
+      try {
+        await setDoc(userDocRef, { profilePic: "" }, { merge: true });
+        showToast("Profile picture removed.");
+      } catch (err) {
+        showToast("Failed to remove picture.");
+      }
+    };
+
+    cancelRemovePicBtn.onclick = function() {
+      removePicModal.style.display = "none";
+    };
+    function showToast(message, duration = 2500) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.className = "toast show";
+      setTimeout(() => {
+        toast.className = "toast";
+      }, duration);
+    }
   </script>
 
   <!-- Navigation/other scripts -->
   <script src="loadNav.js"></script>
   <script src="navigation.js"></script>
+
+  <div id="toast" class="toast"></div>
 </body>
 </html>

@@ -14,6 +14,7 @@
     />
     <style>
       body {
+        font-size:large;
         font-family: Arial, sans-serif;
         background-color: #f9f9f9;
         color: #333;
@@ -74,11 +75,32 @@
         overflow-x: auto;
         border-radius: 4px;
       }
+      header  {
+        margin-top:80px;
+
+      }
+      ol li, ul li {
+        margin-bottom:10px;
+      }
+
     </style>
   </head>
   <body>
     <div id="nav"></div>
-    <br><br><br>
+     <!-- Search pop-up -->
+    <div id="searchPopup" class="search-popup">
+      <div class="popup-content">
+        <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
+        <input
+          type="text"
+          id="searchBar"
+          placeholder="Search here..."
+          oninput="showRecommendations()"
+        />
+        <div class="result-box" id="resultBox"></div>
+      </div>
+    </div>
+    
     <header id="mainHeader">
       <h1>Python Mastery: Beginner to Advanced Course</h1>
     </header>
