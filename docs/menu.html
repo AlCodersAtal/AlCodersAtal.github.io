@@ -354,6 +354,7 @@
         <button id="removePicBtn" class="avatar-remove-btn" type="button" style="margin-left:10px;">
           <i class="fa fa-trash"></i> Remove Picture
         </button>
+        <p id="lastLogin" style="font-size:0.95em;color:#888;margin-top:4px;">Last login: --</p>
       </div>
     </div>
     <h1>Settings</h1>
@@ -374,6 +375,14 @@
         <option value="light">Light</option>
         <option value="dark">Dark</option>
       </select>
+    </div>
+
+    <!-- Theme Preview -->
+    <div class="settings-section">
+      <h2>Theme Preview</h2>
+      <div id="themePreview" style="padding:20px;border-radius:12px;margin-bottom:10px;">
+        This is a preview of your selected theme.
+      </div>
     </div>
 
     <!-- Change Password -->
@@ -514,6 +523,10 @@
         console.error("Error fetching user data:", err);
       }
 
+      if (user && user.metadata && user.metadata.lastSignInTime) {
+        document.getElementById("lastLogin").textContent = "Last login: " + new Date(user.metadata.lastSignInTime).toLocaleString();
+      }
+
       // Avatar upload
       avatarUpload.onchange = async function() {
         const file = avatarUpload.files[0];
@@ -633,6 +646,14 @@
         toast.className = "toast";
       }, duration);
     }
+
+    const themePreview = document.getElementById("themePreview");
+    themeSelect.oninput = () => {
+      themePreview.style.background = themeSelect.value === "dark"
+        ? "linear-gradient(135deg, #23243a 0%, #181820 100%)"
+        : "linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%)";
+      themePreview.style.color = themeSelect.value === "dark" ? "#fff" : "#222";
+    };
   </script>
 
   <!-- Navigation/other scripts -->

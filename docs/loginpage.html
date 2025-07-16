@@ -129,6 +129,9 @@
         <label for="registerPassword">Password</label>
       </div>
       <input type="submit" class="btn" value="Sign Up" />
+      <button id="googleSignInBtn" class="btn" style="background:#4285F4; color:white; margin: 15px 0;">
+        <i class="fab fa-google" style="margin-right: 8px;"></i> Sign in with Google
+      </button>
     </form>
     <p class="or">----------or----------</p>
     <div class="links">
@@ -151,6 +154,9 @@
         <label for="loginPassword">Password</label>
       </div>
       <input type="submit" class="btn" value="Sign In" />
+      <button id="googleSignInBtn2" class="btn" style="background:#4285F4; color:white; margin: 15px 0;">
+        <i class="fab fa-google" style="margin-right: 8px;"></i> Sign in with Google
+      </button>
     </form>
     <p class="or">----------or----------</p>
     <div class="links">
@@ -172,6 +178,52 @@
   <script src="navigation.js"></script>
   <script src="theme.js"></script>
   <script type="module" src="register.js"></script>
+
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  // Your Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyBIMtf6DXnAxWKdkoLkfxn7b7zBoAr8Ouk",
+    authDomain: "alcodersatal-database.firebaseapp.com",
+    projectId: "alcodersatal-database",
+    storageBucket: "alcodersatal-database.firebasestorage.app",
+    messagingSenderId: "1092849520429",
+    appId: "1:1092849520429:web:ecf950a9aa868e37760da4"
+  };
+
+  // Initialize Firebase app and auth
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  // Google Sign-In handler
+  function handleGoogleSignIn() {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        showPopup(`Welcome, ${user.displayName || "user"}! You have signed in with Google.`);
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1200);
+      })
+      .catch((error) => {
+        console.error("Google Sign-In error:", error);
+        showPopup("Google Sign-In failed: " + error.message);
+      });
+  }
+
+  // Attach to both buttons
+  document.getElementById("googleSignInBtn").onclick = (e) => {
+    e.preventDefault();
+    handleGoogleSignIn();
+  };
+  document.getElementById("googleSignInBtn2").onclick = (e) => {
+    e.preventDefault();
+    handleGoogleSignIn();
+  };
+</script>
 
   <script>
     // Toggle between signup and signin
