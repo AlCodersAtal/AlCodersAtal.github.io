@@ -358,3 +358,89 @@ footer {
     margin: 0 auto;
   }
 }
+
+/* Responsive NavBar & Sidebar */
+@media (max-width: 900px) {
+  nav {
+    padding: 10px 20px;
+  }
+  .navbar-center {
+    display: none !important;
+  }
+  .hamburger {
+    display: flex !important;
+    position: relative;
+    z-index: 1101;
+  }
+  .sidebar {
+    display: flex !important;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 220px;
+    background: #1e293b;
+    box-shadow: 2px 0 16px rgba(0,0,0,0.08);
+    z-index: 1100;
+    padding-top: 60px;
+    transition: transform 0.3s;
+    /* Always off-canvas unless .active */
+    transform: translateX(-100%);
+    /* Hide visually if not active */
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .sidebar.active {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .sidebar li {
+    width: 100%;
+    padding: 1rem 1.5rem;
+  }
+  .sidebar a {
+    width: 100%;
+    color: white;
+    font-size: 1.1rem;
+  }
+}
+
+/* Hide sidebar and hamburger on desktop */
+@media (min-width: 901px) {
+  .sidebar {
+    display: none !important;
+    transform: translateX(-100%);
+  }
+  .hamburger {
+    display: none !important;
+  }
+  .navbar-center {
+    display: flex !important;
+  }
+}
+
+/* Show hamburger only on mobile */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+  margin-right: 10px;
+  z-index: 1101;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 3px 0;
+  border-radius: 2px;
+}
+
+@media (max-width: 900px) {
+  .hamburger {
+    display: flex !important;
+  }
+}

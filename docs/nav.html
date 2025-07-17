@@ -1,20 +1,33 @@
-
 <nav>
-  <ul class="sidebar">
+  <!-- Hamburger for mobile -->
+  <div class="hamburger" onclick="toggleSidebar()" aria-label="Open menu">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <!-- Sidebar (mobile) -->
+  <ul class="sidebar" id="sidebarNav">
     <li><a href="index.html">Home</a></li>
-     <li><a href="Courses.html">Courses</a></li>
+    <li><a href="Courses.html">Courses</a></li>
     <li><a href="projects.html">Projects</a></li>
     <li><a href="More info.html">More Info</a></li>
-    <li><a href="about us.html">About Us</a></li> 
+    <li><a href="about us.html">About Us</a></li>
     <li><a href="menu.html">Settings</a></li>
-       <li><a href="loginpage.html">Login</a></li>
+    <li>
+      <a href="#" onclick="showSearchPopup()">
+        <i class="fa-solid fa-magnifying-glass" style="font-size:1.15rem;color:#38bdf8;margin-right:8px;"></i> Search
+      </a>
+    </li>
+    <li><a href="loginpage.html">Login</a></li>
   </ul>
 
-  <ul class="navbar-center">
+  <!-- Desktop Navbar -->
+  <ul class="navbar-center" id="desktopNav">
     <li class="hideOnMobile"><a href="index.html">Home</a></li>
-       <li class="hideOnMobile"><a href="Courses.html">Courses</a></li>
+    <li class="hideOnMobile"><a href="Courses.html">Courses</a></li>
     <li class="hideOnMobile"><a href="projects.html">Projects</a></li>
-     <li class="hideOnMobile dropdown">
+    <li class="hideOnMobile dropdown">
       <a href="about us.html">About Us <span class="dropdown-arrow">▼</span></a>
       <ul class="dropdown-menu">
         <li><a href="about us.html#team">Our Team</a></li>
@@ -22,25 +35,30 @@
       </ul>
     </li>
     <li class="hideOnMobile"><a href="More info.html">More Info</a></li>
-   
- 
-  
-    <li class="search-icon">
+    <li class="search-icon hideOnMobile">
       <a href="#" id="searchIcon" onclick="showSearchPopup()">
         <i class="fa-solid fa-magnifying-glass"></i>
       </a>
     </li>
-    <li class="menu-button">
+    <li class="menu-button hideOnMobile">
       <a href="menu.html">
         <svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 0 24 24" width="26" fill="currentColor">
           <path d="M19.14,12.94c0-.32,0-.64,0-1s0-.68,0-1l2.11-1.65a.5.5,0,0,0,.12-.65l-2-3.46a.5.5,0,0,0-.61-.22l-2.49,1a7,7,0,0,0-1.7-1l-.38-2.65A.5.5,0,0,0,13,2H11a.5.5,0,0,0-.5.42l-.38,2.65a7,7,0,0,0-1.7,1l-2.49-1a.5.5,0,0,0-.61.22l-2,3.46a.5.5,0,0,0,.12.65L4.86,10c0,.32,0,.64,0,1s0,.68,0,1l-2.11,1.65a.5.5,0,0,0-.12.65l2,3.46a.5.5,0,0,0,.61.22l2.49-1a7,7,0,0,0,1.7,1l.38,2.65A.5.5,0,0,0,11,22h2a.5.5,0,0,0,.5-.42l.38-2.65a7,7,0,0,0,1.7-1l2.49,1a.5.5,0,0,0,.61-.22l2-3.46a.5.5,0,0,0-.12-.65ZM12,15.5A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/>
         </svg>
       </a>
     </li>
-      <li class="hideOnMobile" id="navUserItem">
+    <li class="hideOnMobile" id="navUserItem">
       <a href="loginpage.html" id="navLoginBtn">
         <span id="navLoginText">Login</span>
       </a>
     </li>
   </ul>
 </nav>
+
+<!-- Font Awesome CDN for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<script>
+
+</script>

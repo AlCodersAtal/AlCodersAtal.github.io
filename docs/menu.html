@@ -365,6 +365,10 @@
       <label for="profileName">Name</label>
       <input type="text" id="profileName" placeholder="Enter your name">
       <button id="userNameBtn">Change Name</button>
+
+      <label for="profileUsername">Username</label>
+      <input type="text" id="profileUsername" placeholder="Enter your username">
+      <button id="userUsernameBtn">Change Username</button>
     </div>
 
     <!-- Theme -->
@@ -458,8 +462,10 @@
     const db = getFirestore(app);
 
     const nameInput = document.getElementById("profileName");
+    const usernameInput = document.getElementById("profileUsername");
     const themeSelect = document.getElementById("themeSelect");
     const userNameBtn = document.getElementById("userNameBtn");
+    const userUsernameBtn = document.getElementById("userUsernameBtn");
     const logoutBtn = document.getElementById("logoutBtn");
     const resetPasswordBtn = document.getElementById("resetPasswordBtn");
 
@@ -504,6 +510,7 @@
           userCardName.textContent = data.name || user.displayName || "User";
           userCardEmail.textContent = user.email || "";
           nameInput.value = data.name || "";
+          usernameInput.value = data.username || "";
           if (data.theme) {
             themeSelect.value = data.theme;
             applyTheme(data.theme);
@@ -559,6 +566,21 @@
         } catch (error) {
           console.error("Failed to update name:", error);
           showToast("Error updating name.");
+        }
+      };
+
+      userUsernameBtn.onclick = async () => {
+        const newUsername = usernameInput.value.trim();
+        if(newUsername === "") {
+          showToast("Username cannot be empty.");
+          return;
+        }
+        try {
+          await setDoc(userDocRef, { username: newUsername }, { merge: true });
+          showToast("Username updated successfully!");
+        } catch (error) {
+          console.error("Failed to update username:", error);
+          showToast("Error updating username.");
         }
       };
 
