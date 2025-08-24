@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arduino Uno Motor Driver Car — Complete Project Guide</title>
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="theme.js"></script>
+  <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
+  <style>
+    /* --- Light Theme (default) --- */
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #222;
+      transition: background 0.4s, color 0.4s;
+    }
+    header {
+      background: linear-gradient(90deg, #e3e8ee 0%, #aad7ff 100%);
+      color: #222;
+      padding: 32px 0 20px 0;
+      text-align: center;
+      border-radius: 0 0 18px 18px;
+      box-shadow: 0 8px 32px rgba(24,119,243,0.08);
+      margin-bottom: 0;
+      transition: background 0.4s, color 0.4s;
+    }
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 32px 40px;
+      box-shadow: 0 8px 32px rgba(24,119,243,0.08);
+      border-radius: 18px;
+      animation: fadeIn 1s;
+      transition: background 0.4s, color 0.4s;
+    }
+    h1, h2, h3 {
+      color: #1877f3;
+      margin-top: 0;
+      transition: color 0.4s;
+    }
+    h2 {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+    }
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    code {
+      background: #e3e8ee;
+      color: #1877f3;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.97em;
+      transition: background 0.4s, color 0.4s;
+    }
+    pre {
+      background: #f4f4f4;
+      color: #222;
+      padding: 18px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 1em;
+      border-left: 5px solid #aad7ff;
+      margin-bottom: 24px;
+      transition: background 0.4s, color 0.4s, border-left 0.4s;
+    }
+    ul, ol {
+      margin-left: 24px;
+      margin-bottom: 18px;
+    }
+    .result {
+      background: #e6f7e6;
+      border-left: 5px solid #4fd1c5;
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+      color: #1877f3;
+      box-shadow: 0 2px 12px rgba(24,119,243,0.05);
+      transition: background 0.4s, color 0.4s, border-left 0.4s;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #e3e8ee;
+      color: #1877f3;
+      margin-top: 30px;
+      border-radius: 0 0 18px 18px;
+      border-top: 1px solid #aad7ff;
+      transition: background 0.4s, color 0.4s, border-top 0.4s;
+    }
+    .theme-toggle-btn {
+      background: #aad7ff;
+      color: #1877f3;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin: 18px 0;
+      box-shadow: 0 2px 8px rgba(24,119,243,0.10);
+      transition: background 0.4s, color 0.4s;
+    }
+    /* Fade In Animation */
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+    /* Responsive for mobile */
+    @media (max-width: 700px) {
+      main {
+        padding: 16px 6px;
+        border-radius: 0;
+      }
+      header, footer {
+        border-radius: 0;
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+    }
+    /* --- Dark Theme --- */
+    body.dark-theme {
+      background: #18191c !important;
+      color: #fff !important;
+    }
+    body.dark-theme header {
+      background: linear-gradient(90deg, #23242a 0%, #1877f3 100%) !important;
+      color: #fff !important;
+    }
+    body.dark-theme main {
+      background: #23242a !important;
+      color: #fff !important;
+    }
+    body.dark-theme h1,
+    body.dark-theme h2,
+    body.dark-theme h3 {
+      color: #aad7ff !important;
+    }
+    body.dark-theme code {
+      background: #23242a !important;
+      color: #aad7ff !important;
+    }
+    body.dark-theme pre {
+      background: #18191c !important;
+      color: #fff !important;
+      border-left: 5px solid #1877f3 !important;
+    }
+    body.dark-theme .result {
+      background: #22304a !important;
+      border-left: 5px solid #4fd1c5 !important;
+      color: #aad7ff !important;
+    }
+    body.dark-theme footer {
+      background: #23242a !important;
+      color: #aad7ff !important;
+      border-top: 1px solid #23272f !important;
+    }
+    body.dark-theme .theme-toggle-btn {
+      background: #1877f3 !important;
+      color: #fff !important;
+    }
+    body.dark-theme .copy-btn {
+      background: #1877f3 !important;
+      color: #fff !important;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Arduino Uno Car with Motor Driver</h1>
+    <p>A complete step-by-step guide with wiring, code, and explanation</p>
+  </header>
+  <div style="max-width:900px;margin:30px auto 0 auto;">
+    
+   
+  </div>
+  <main>
+    <h2>1. Introduction</h2>
+    <p>
+      In this project, we will build a simple <b>Arduino-based robotic car</b>. The car uses 
+      <b>DC motors</b> for movement, an <b>L298N Motor Driver</b> for motor control, and 
+      <b>Arduino Uno</b> as the brain to send signals. This project forms the foundation 
+      for advanced robots like line-following cars, Bluetooth-controlled cars, and obstacle-avoiding cars.
+    </p>
+    <h2>2. Components Required</h2>
+    <ul>
+      <li>Arduino Uno (x1)</li>
+      <li>L298N Motor Driver Module (x1)</li>
+      <li>DC Motors (x2 or x4) + Wheels</li>
+      <li>Robot chassis (base frame)</li>
+      <li>Battery pack (9V or 12V depending on motors)</li>
+      <li>Jumper wires, breadboard</li>
+    </ul>
+    <p>
+      <b>How it works:</b>  
+      The Arduino sends control signals → Motor driver interprets and powers the motors → Car moves.
+    </p>
+    <h2>3. Circuit Connections</h2>
+    <ul>
+      <li><b>Arduino Pins 8 & 9</b> → Motor Driver IN1 & IN2 (Left Motor)</li>
+      <li><b>Arduino Pins 10 & 11</b> → Motor Driver IN3 & IN4 (Right Motor)</li>
+      <li><b>Motor Driver OUT1 & OUT2</b> → Left Motor terminals</li>
+      <li><b>Motor Driver OUT3 & OUT4</b> → Right Motor terminals</li>
+      <li><b>Battery pack</b> → Motor Driver VCC (12V) and GND</li>
+      <li><b>Arduino GND</b> → Motor Driver GND (common ground)</li>
+    </ul>
+    <p>
+      <b>Working principle:</b>  
+      Each motor has two control pins. Sending <code>HIGH</code> and <code>LOW</code> spins it one way, reversing them spins it the other way. 
+      When both motors spin forward → car goes straight.
+    </p>
+    <h2>4. Arduino Code</h2>
+    <div style="position:relative;">
+      <button id="copyBtn" class="copy-btn" style="position:absolute;top:10px;right:10px;padding:6px 14px;border-radius:6px;background:#1877f3;color:#fff;border:none;cursor:pointer;font-size:1em;z-index:2;">
+        Copy Code
+      </button>
+      <pre id="arduinoCode">
+#include &lt;Arduino.h&gt;
+
+int motor1Pin1 = 8; 
+int motor1Pin2 = 9;
+int motor2Pin1 = 10; 
+int motor2Pin2 = 11;
+
+void setup() {
+  pinMode(motor1Pin1, OUTPUT);
+  pinMode(motor1Pin2, OUTPUT);
+  pinMode(motor2Pin1, OUTPUT);
+  pinMode(motor2Pin2, OUTPUT);
+}
+
+void loop() {
+  moveForward();
+  delay(2000);
+  moveBackward();
+  delay(2000);
+  turnLeft();
+  delay(2000);
+  turnRight();
+  delay(2000);
+  stopCar();
+  delay(2000);
+}
+
+void moveForward() {
+  digitalWrite(motor1Pin1, HIGH);
+  digitalWrite(motor1Pin2, LOW);
+  digitalWrite(motor2Pin1, HIGH);
+  digitalWrite(motor2Pin2, LOW);
+}
+
+void moveBackward() {
+  digitalWrite(motor1Pin1, LOW);
+  digitalWrite(motor1Pin2, HIGH);
+  digitalWrite(motor2Pin1, LOW);
+  digitalWrite(motor2Pin2, HIGH);
+}
+
+void turnLeft() {
+  digitalWrite(motor1Pin1, LOW);
+  digitalWrite(motor1Pin2, HIGH);
+  digitalWrite(motor2Pin1, HIGH);
+  digitalWrite(motor2Pin2, LOW);
+}
+
+void turnRight() {
+  digitalWrite(motor1Pin1, HIGH);
+  digitalWrite(motor1Pin2, LOW);
+  digitalWrite(motor2Pin1, LOW);
+  digitalWrite(motor2Pin2, HIGH);
+}
+
+void stopCar() {
+  digitalWrite(motor1Pin1, LOW);
+  digitalWrite(motor1Pin2, LOW);
+  digitalWrite(motor2Pin1, LOW);
+  digitalWrite(motor2Pin2, LOW);
+}
+      </pre>
+    </div>
+    <script>
+      document.getElementById('copyBtn').onclick = function() {
+        // Get the code text and decode HTML entities
+        let code = document.getElementById('arduinoCode').innerText
+          .replace(/&lt;/g, "<")
+          .replace(/&gt;/g, ">");
+        navigator.clipboard.writeText(code).then(function() {
+          const btn = document.getElementById('copyBtn');
+          btn.textContent = "Copied!";
+          setTimeout(() => { btn.textContent = "Copy Code"; }, 1500);
+        });
+      };
+      // Theme toggle logic
+      document.getElementById('themeToggleBtn').onclick = function() {
+        document.body.classList.toggle('dark-theme');
+      };
+    </script>
+    <p>
+      <b>Explanation:</b>  
+      - <code>moveForward()</code>: Both motors spin forward.  
+      - <code>moveBackward()</code>: Both motors spin backward.  
+      - <code>turnLeft()</code>: Left motor reverses, right motor moves forward → car rotates left.  
+      - <code>turnRight()</code>: Right motor reverses, left motor moves forward → car rotates right.  
+      - <code>stopCar()</code>: All motor pins LOW → car halts.
+    </p>
+    <h2>5. Step-by-Step Process</h2>
+    <ol>
+      <li>Assemble the chassis and mount the DC motors with wheels.</li>
+      <li>Connect motors to the L298N motor driver.</li>
+      <li>Wire the motor driver IN pins to Arduino pins.</li>
+      <li>Connect battery pack to motor driver for power.</li>
+      <li>Upload the provided Arduino sketch using Arduino IDE.</li>
+      <li>Turn on the power → your car should start moving according to the programmed sequence.</li>
+    </ol>
+    <div class="result">
+      <h3>Result</h3>
+      <p>
+        Once powered, the Arduino controls the car as follows:  
+        - The car moves forward for 2 seconds,  
+        - Then backward for 2 seconds,  
+        - Turns left for 2 seconds,  
+        - Turns right for 2 seconds,  
+        - Stops for 2 seconds.  
+        This cycle repeats endlessly.
+      </p>
+    </div>
+    <h2>6. Possible Upgrades</h2>
+    <ul>
+      <li>
+        <b>Ultrasonic Sensor for Obstacle Detection:</b>
+        <br>
+        Add an HC-SR04 ultrasonic sensor to the front of your car. Connect the sensor’s trigger and echo pins to Arduino digital pins. In your code, measure the distance to obstacles and automatically stop or turn the car if something is detected within a set range. This upgrade lets your car avoid collisions and navigate around objects.
+        <br><i>Tip: Use the <code>NewPing</code> library for easy distance measurement.</i>
+      </li>
+      <li>
+        <b>Bluetooth Module (HC-05) for Smartphone Control:</b>
+        <br>
+        Connect an HC-05 Bluetooth module to your Arduino’s TX/RX pins. Pair the module with your phone and use a Bluetooth controller app to send commands (forward, backward, left, right, stop) to the car. Update your Arduino code to read serial commands and control the motors accordingly. This upgrade allows remote control and interactive fun.
+        <br><i>Tip: Use apps like “Bluetooth RC Car” or “Arduino Bluetooth Controller” for easy setup.</i>
+      </li>
+      <li>
+        <b>Line Following Using IR Sensors:</b>
+        <br>
+        Mount two or more IR sensors underneath the car, facing the ground. These sensors detect the contrast between a black line and a white surface. Program your Arduino to adjust motor speeds based on sensor readings, so the car follows the line automatically. This upgrade is great for robotics competitions and learning about feedback systems.
+        <br><i>Tip: Use the <code>QTRSensors</code> library for advanced line tracking.</i>
+      </li>
+      <li>
+        <b>Speed Control with PWM:</b>
+        <br>
+        Use Arduino’s <code>analogWrite()</code> function to send PWM signals to the motor driver’s enable pins. This lets you control the speed of each motor for smoother turns and acceleration. You can add speed adjustment features to your remote control or obstacle avoidance logic.
+      </li>
+      <li>
+        <b>App/Web-Based Control:</b>
+        <br>
+        Integrate an ESP8266 or ESP32 WiFi module to control your car via a web interface or custom app. Host a simple webpage on the module and send movement commands to the Arduino. This upgrade brings IoT capabilities and remote access from anywhere on your network.
+      </li>
+      <li>
+        <b>Battery Monitoring:</b>
+        <br>
+        Add a voltage divider circuit to monitor battery voltage using an analog pin. Display battery status on an LCD or send alerts via Bluetooth/WiFi when the battery is low. This helps prevent unexpected shutdowns and protects your electronics.
+      </li>
+    </ul>
+    <h2>Conclusion</h2>
+    <p>
+      Building an Arduino-powered car is a fantastic way to learn about electronics, programming, and robotics. By following this guide, you’ve created a foundation for more advanced projects and upgrades. Whether you add sensors, wireless control, or smart features, each enhancement will deepen your understanding and skills. Keep experimenting, keep learning, and enjoy the journey into robotics!
+    </p>
+    <br>
+     <button onclick="window.history.back()" style="background:#1877f3;color:#fff;padding:10px 24px;border:none;border-radius:8px;cursor:pointer;font-size:1rem;box-shadow:0 2px 8px rgba(24,119,243,0.10);margin-bottom:18px;">
+      ← Go Back
+    </button>
+  </main>
+  <footer>
+    <p>© 2025 Arduino Car Project Guide | Made for learning robotics & electronics</p>
+  </footer>
+  <div id="footer"></div>
+  <script src="loadNav.js"></script>
+</body>
+</html>
