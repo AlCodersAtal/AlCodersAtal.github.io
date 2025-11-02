@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Electronics: Comprehensive Beginner Course</title>
+        <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+     <script type="module" src="theme.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      /* spacing variables */
+      :root {
+        --page-gutter: 40px;
+        --section-gap: 28px;
+        --section-padding: 22px;
+      }
+      body {
+        font-size: 1rem;
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        color: #222;
+        margin: 0;
+      }
+      .container {
+        max-width: 960px;
+        margin: var(--page-gutter) auto;
+        padding: 28px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+      }
+      /* consistent section spacing and padding */
+      .section {
+        padding: var(--section-padding);
+        margin-bottom: var(--section-gap);
+        border-radius: 8px;
+        background: linear-gradient(180deg,#ffffff,#fbfdff);
+        box-shadow: 0 4px 18px rgba(0,0,0,0.04);
+      }
+      /* headings & paragraph spacing */
+      h1, h2, h3, h4 {
+        color: #15324a;
+        margin: 0 0 12px 0;
+        line-height: 1.15;
+      }
+      p {
+        line-height: 1.6;
+        font-size: 1.03rem;
+        margin: 0 0 12px 0;
+      }
+      .highlight {
+        background: #eef6ff;
+        padding: 12px;
+        border-left: 6px solid #0b74d1;
+        border-radius: 6px;
+        margin: 12px 0;
+      }
+      .fun-fact {
+        background: #f0fdf4;
+        border-left: 6px solid #1b8a6b;
+        padding: 12px;
+        border-radius: 6px;
+        font-style: italic;
+        margin: 12px 0;
+      }
+      pre {
+        background: #f7f7f7;
+        padding: 14px;
+        border-left: 4px solid #0b74d1;
+        overflow-x: auto;
+        border-radius: 6px;
+        margin: 12px 0;
+      }
+      ol li, ul li {
+        margin-bottom: 10px;
+      }
+      .diagram {
+        width: 100%;
+        max-width: 780px;
+        display: block;
+        margin: 16px 0;
+        border-radius: 6px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      }
+      .module-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+      .code-sample {
+        background: #0f1724;
+        color: #e6eef8;
+        padding: 12px;
+        border-radius: 6px;
+        font-family: monospace;
+        margin: 12px 0;
+      }
+      header {
+        padding-top: 30px;
+        text-align: center;
+        margin-bottom: 18px;
+      }
+      #footer {
+        margin-top: 24px;
+        text-align: center;
+        color: #666;
+      }
+      /* small-screen adjustments */
+      @media (max-width: 720px) {
+        :root { --page-gutter: 20px; --section-gap: 20px; --section-padding: 16px; }
+        .container { margin: 20px; padding: 16px; }
+      }
+  </style>
+  </head>
+  <body>
+      <div id="nav"></div>
+     <!-- Search pop-up -->
+    <div id="searchPopup" class="search-popup">
+      <div class="popup-content">
+        <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
+        <input
+          type="text"
+          id="searchBar"
+          placeholder="Search here..."
+          oninput="showRecommendations()"
+        />
+        <div class="result-box" id="resultBox"></div>
+      </div>
+    </div>
+    <div class="container">
+      <header>
+        <h1>Basic Electronics — From Fundamentals to Practical Projects</h1>
+      </header>
+
+      <!-- Module 1 -->
+      <section class="section">
+        <div class="module-title"><h2>Module 1: Introduction to Electronics</h2></div>
+        <p>This module explains what electronics is, why it's important, and the difference between electronics and electrical engineering. Electronics focuses on the control of electrons in semiconductors and circuits at low voltages and currents. You'll learn common applications — consumer gadgets, sensors, embedded systems, and communications.</p>
+        <p>Learning outcomes: understand the role of components, basic circuit behavior, and the typical workflow of designing and testing a circuit.</p>
+        <p class="fun-fact">Fun fact: The first electronic computer used vacuum tubes — modern devices use semiconductor transistors that are smaller, faster, and more reliable.</p>
+      </section>
+
+      <!-- Module 2 -->
+      <section class="section">
+        <h2>Module 2: Basic Electrical Concepts — Voltage, Current, Resistance, Power</h2>
+        <p>These are the core quantities you will measure and manipulate in every circuit.</p>
+        <ul>
+          <li><strong>Voltage (V):</strong> the potential difference between two points (think of it as electrical pressure).</li>
+          <li><strong>Current (I):</strong> the flow of electric charge measured in amperes (A).</li>
+          <li><strong>Resistance (R):</strong> opposition to current flow; measured in ohms (Ω).</li>
+          <li><strong>Power (P):</strong> rate of energy transfer measured in watts (W). <code>P = V × I</code>.</li>
+        </ul>
+        <div class="highlight">Practical note: Always check voltage and current ratings before connecting components — exceeding ratings damages parts and creates hazards.</div>
+        <p><strong>Practical example:</strong> A 9 V battery powering a small LED circuit that draws 10 mA consumes <code>P = V × I = 9 × 0.01 = 0.09 W</code>, so a tiny fraction of the battery capacity.</p>
+        <img src="images/diagrams/voltage_current_resistance.png" alt="Voltage current resistance diagram" class="diagram" />
+      </section>
+
+      <!-- Module 3 -->
+      <section class="section">
+        <h2>Module 3: Ohm’s Law and Basic Calculations</h2>
+        <p>Ohm's Law relates voltage (V), current (I) and resistance (R):</p>
+        <pre><code>V = I × R</code></pre>
+        <p>Use Ohm's Law to compute component values and verify safe operating points.</p>
+        <p><strong>Worked example:</strong> You have a 5 V supply and an LED that needs 2 mA. To find the resistor: <code>R = V / I = (5 - V_led) / I</code>. If LED forward voltage is 2 V, resistor = (5 - 2) / 0.002 = 1500 Ω (1.5 kΩ).</p>
+        <p>Include a simple calculation table and show how to convert mA ↔ A, kΩ ↔ Ω when doing arithmetic.</p>
+      </section>
+
+      <!-- Module 4 -->
+      <section class="section">
+        <h2>Module 4: Series and Parallel Circuits</h2>
+        <p>Understand how components behave when connected in series vs parallel — affects current, voltage, and total resistance.</p>
+        <ul>
+          <li><strong>Series:</strong> same current through each component; resistances add: <code>R_total = R1 + R2 + ...</code></li>
+          <li><strong>Parallel:</strong> same voltage across each branch; reciprocal rule: <code>1/R_total = 1/R1 + 1/R2 + ...</code></li>
+        </ul>
+        <p><strong>Practical lab:</strong> Build a series LED string and a parallel LED array on a breadboard. Measure voltage across and current through each LED using a multimeter; observe brightness changes when adding/removing LEDs.</p>
+        <img src="images/diagrams/series_parallel.jpg" alt="Series and parallel circuits diagram" class="diagram" />
+      </section>
+
+      <!-- Module 5 -->
+      <section class="section">
+        <h2>Module 5: Resistors — Types, Color Codes, and Applications</h2>
+        <p>Resistors limit current and divide voltages. We'll cover fixed resistors (carbon film, metal film), variable resistors (potentiometers), and power resistors.</p>
+        <h4>Color code</h4>
+        <p>How to read resistor bands (4-band and 5-band). Provide a small interactive table or visual reference image (placeholder below).</p>
+        <img src="images/diagrams/resistor_color_code.jpg" alt="Resistor color code" class="diagram" />
+        <p><strong>Practical example:</strong> Build a simple voltage divider to convert 9 V to 5 V approximate for a sensor. Demonstrate calculation and measured vs theoretical results.</p>
+      </section>
+
+      <!-- Module 6 -->
+      <section class="section">
+        <h2>Module 6: Capacitors and Inductors — Storage and Filtering</h2>
+        <p>Capacitors store charge and are used for filtering, timing, and coupling signals. Inductors store energy in magnetic form and appear in power supplies and filters.</p>
+        <h4>Capacitor types:</h4>
+        <ul>
+          <li>Electrolytic (polarized) — high capacitance, watch polarity.</li>
+          <li>Ceramic — small, non-polarized, good for high-frequency decoupling.</li>
+        </ul>
+        <p><strong>Practical example:</strong> Build an RC low-pass filter and measure the cutoff frequency. Use formula <code>f_c = 1 / (2πRC)</code> to predict behavior and verify with a signal generator or Arduino PWM.</p>
+        <img src="images/diagrams/rc_filter.jpg" alt="RC filter diagram" class="diagram" />
+      </section>
+
+      <!-- Module 7 -->
+      <section class="section">
+        <h2>Module 7: Diodes and LEDs</h2>
+        <p>Diodes enforce one-way current flow. Key concepts: forward voltage drop, reverse breakdown, and diode orientation.</p>
+        <p>LEDs are diodes that produce light — they require a current-limiting resistor to prevent damage.</p>
+        <h4>Practical example:</h4>
+        <ol>
+          <li>Connect an LED with a 470 Ω resistor to 5 V; measure forward current.</li>
+          <li>Build a simple rectifier (bridge diode) to convert AC → DC and add a smoothing capacitor; measure ripple voltage.</li>
+        </ol>
+        <img src="images/diagrams/bridge_rectifier.jpg" alt="Bridge rectifier diagram" class="diagram" />
+      </section>
+
+      <!-- Module 8 -->
+      <section class="section">
+        <h2>Module 8: Transistors — BJT and MOSFET Basics</h2>
+        <p>Transistors are three-terminal devices used as switches and amplifiers.</p>
+        <ul>
+          <li><strong>BJT (Bipolar Junction Transistor):</strong> NPN and PNP types — control current using base current.</li>
+          <li><strong>MOSFET:</strong> Voltage-controlled; common in power switching.</li>
+        </ul>
+        <p><strong>Practical lab:</strong> Use an NPN transistor as a low-side switch to control a motor or LED with a microcontroller. Explain base resistor, saturation, and safe operating area.</p>
+        <pre><code># Example circuit description (not code):
+Microcontroller GPIO -> 1kΩ -> Base (NPN)
+Emitter -> GND
+Collector -> Motor -> +V (with flyback diode across motor)
+        </code></pre>
+        <img src="images/diagrams/transistor_switch.webp" alt="Transistor switch diagram" class="diagram" />
+      </section>
+
+      <!-- Module 9 -->
+      <section class="section">
+        <h2>Module 9: Operational Amplifiers (Op-Amps) — Concepts & Simple Circuits</h2>
+        <p>Op-amps are versatile building blocks used for amplification, filtering, comparisons, and mathematical operations.</p>
+        <p>Covering: inverting amplifier, non-inverting amplifier, voltage follower (buffer), and comparator basics.</p>
+        <p><strong>Practical example:</strong> Build a non-inverting amplifier with gain = 1 + (R2/R1) and verify the amplification of a small audio signal.</p>
+        <img src="images/diagrams/op_amp_basic.jpg" alt="Op amp circuits" class="diagram" />
+      </section>
+
+      <!-- Module 10 -->
+      <section class="section">
+        <h2>Module 10: Sensors and Actuators — Interfacing the Physical World</h2>
+        <p>Sensors convert physical quantities (light, temperature, distance) into electrical signals. Actuators (motors, speakers, relays) perform actions.</p>
+        <ul>
+          <li><strong>LDR:</strong> Light sensor; changes resistance with light.</li>
+          <li><strong>Thermistor / LM35:</strong> Temperature sensors with analog outputs.</li>
+          <li><strong>Ultrasonic:</strong> Distance measurement (HC-SR04).</li>
+        </ul>
+        <p><strong>Practical example:</strong> Build an automatic night light: read LDR on an analog input, use threshold to turn an LED on/off via a transistor or relay.</p>
+        <img src="images/diagrams/sensor_block.webp" alt="Sensor and actuator block diagram" class="diagram" />
+      </section>
+
+      <!-- Module 11 -->
+      <section class="section">
+        <h2>Module 11: Breadboard, Wiring, and Prototyping Methods</h2>
+        <p>How to read a breadboard layout, proper wiring, and best practices to avoid common mistakes (loose connections, short circuits).</p>
+        <p>Include a labelled breadboard image and step-by-step example: assembling an LED + resistor + switch circuit on a breadboard.</p>
+        <img src="images/diagrams/breadboard_layout.jpg" alt="Breadboard layout" class="diagram" />
+      </section>
+
+      <!-- Module 12 -->
+      <section class="section">
+        <h2>Module 12: Measuring Tools — Multimeter and Oscilloscope Essentials</h2>
+        <p>How to use a digital multimeter (DMM) to measure voltage, current, resistance, diode drop, and continuity. Practical tips: start with voltage, then check continuity, then measure current (in series) with correct range.</p>
+        <p>Oscilloscope basics: visualize time-domain signals, measure amplitude, frequency, and observe noise or glitches.</p>
+        <p><strong>Practical lab:</strong> Use a multimeter to verify a battery voltage, test an LED, and measure the output of an RC filter. If you have access to an oscilloscope, view PWM signals and observe the filtered analog output.</p>
+      </section>
+
+      <!-- Module 13 -->
+      <section class="section">
+        <h2>Module 13: Power Supplies, Batteries, and Voltage Regulation</h2>
+        <p>Understand regulated vs unregulated supplies, linear regulators (e.g., 7805), and switching regulators (buck converters).</p>
+        <p>Explain thermal considerations and decoupling capacitors near ICs for stable operation.</p>
+        <p><strong>Practical example:</strong> Use a 9 V adapter and a 7805 regulator to produce 5 V; add input/output capacitors as datasheet suggests and measure stability under load.</p>
+        <img src="images/diagrams/voltage_regulator.webp" alt="Voltage regulator example" class="diagram" />
+      </section>
+
+      <!-- Module 14 -->
+      <section class="section">
+        <h2>Module 14: Digital Electronics — Logic Gates, Truth Tables, and Combinational Logic</h2>
+        <p>Introduce binary, logic levels (TTL/CMOS), basic gates (AND, OR, NOT, NAND, NOR, XOR), and truth tables.</p>
+        <p>Explain how to implement simple combinational logic (e.g., half-adder, multiplexer) using gates or using a microcontroller for more flexibility.</p>
+        <pre><code>Truth table example (AND):
+A B | A AND B
+0 0 | 0
+0 1 | 0
+1 0 | 0
+1 1 | 1
+</code></pre>
+        <p><strong>Practical lab:</strong> Build a simple logic circuit on a breadboard using IC chips (e.g., 7408 AND gate) or simulate in free tools like Logisim or Tinkercad.</p>
+      </section>
+
+      <!-- Module 15 -->
+      <section class="section">
+        <h2>Module 15: Microcontrollers — Introduction to Arduino</h2>
+        <p>Why microcontrollers? They read sensors, run logic, and control actuators. Arduino is an accessible platform for beginners with a simple IDE, extensive libraries, and huge community support.</p>
+        <p>Basic workflow: write sketch → compile → upload → monitor serial output.</p>
+        <pre class="code-sample"><code>// Arduino example: blink LED
+void setup() {
+  pinMode(13, OUTPUT);
+}
+void loop() {
+  digitalWrite(13, HIGH);
+  delay(500);
+  digitalWrite(13, LOW);
+  delay(500);
+}
+</code></pre>
+        <p><strong>Practical project:</strong> Use Arduino to read an LDR (analog) and switch an LED via a transistor when it becomes dark — include wiring diagram and code comments.</p>
+      </section>
+
+      <!-- Module 16 -->
+      <section class="section">
+        <h2>Module 16: Soldering, PCBs, and Permanent Assembly</h2>
+        <p>When breadboard prototypes are stable, you can make permanent assemblies. Cover through-hole soldering technique, SMD basics, and designing simple PCBs (using free tools like KiCad).</p>
+        <p>Safety and quality: proper solder joints look shiny and concave; avoid cold joints and bridges.</p>
+        <p><strong>Practical exercise:</strong> Solder a small LED module onto perfboard; clean flux and test circuit under power.</p>
+      </section>
+
+      <!-- Module 17 -->
+      <section class="section">
+        <h2>Module 17: Safety, Best Practices, and Troubleshooting</h2>
+        <p>Essential safety: disconnect power before re-wiring, use current-limited supplies, and respect mains electricity — do not experiment with mains until trained.</p>
+        <p>Troubleshooting methodology: observe → measure → hypothesize → isolate → fix. Keep a lab notebook and label wires/components.</p>
+        <div class="highlight">
+          <strong>Checklist before powering a new circuit:</strong>
+          <ul>
+            <li>Correct polarity for capacitors/diodes</li>
+            <li>No visible shorts or stray strands</li>
+            <li>Appropriate fuse or current limit in place</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Module 18 -->
+      <section class="section">
+        <h2>Module 18: Capstone Projects and Next Steps</h2>
+        <p>Apply your skills with guided capstone projects that combine multiple modules. Each project includes a list of required parts, wiring diagrams, step-by-step assembly instructions, and testing checklists.</p>
+        <h4>Project ideas (increasing difficulty):</h4>
+        <ol>
+          <li><strong>LED Blinker:</strong> Breadboard LED + resistor + Arduino (modules 3,5,11,15).</li>
+          <li><strong>Light-Activated Night Lamp:</strong> LDR + transistor/Arduino to switch lamp (modules 6,10,15).</li>
+          <li><strong>Temperature Logger:</strong> LM35 + Arduino + SD card (modules 6,10,15).</li>
+          <li><strong>Simple Line-Following Robot:</strong> IR sensors, motor driver, Arduino (modules 8,10,15).</li>
+        </ol>
+        <p>Next steps: simulate circuits in Tinkercad/Falstad, learn PCB design with KiCad, and explore embedded systems, communications (I2C, SPI, UART), and power electronics.</p>
+      </section>
+
+     <div id="footer"></div>
+   
+    </div> 
+    <script src="loadNav.js"></script>
+        <script src="navigation.js"></script>
+  </body>
+</html>
