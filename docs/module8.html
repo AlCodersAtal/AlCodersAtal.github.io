@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlCoders — Module 8: Final Project: Your Portfolio</title>
+<link rel="stylesheet" href="css/theme.css">
+<script type="module" src="theme.js"></script>
+<link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="index.html">
+        <div class="logo-text">Al<span>Coders</span></div>
+        <div class="logo-sub">HTML & CSS Course</div>
+      </a>
+    </div>
+    <a href="index.html" class="sidebar-back">← Course Overview</a>
+    <div class="sidebar-module-block">
+      <div class="sidebar-module-title"><span class="mod-badge">Module 08</span> Final Project: Your Portfolio</div>
+      <a class="sidebar-lesson" data-id="8-1" onclick="goto('8-1')" href="#"><span class="lesson-dot"></span><span class="lesson-link-text">Planning Your Portfolio</span></a>
+<a class="sidebar-lesson" data-id="8-2" onclick="goto('8-2')" href="#"><span class="lesson-dot"></span><span class="lesson-link-text">Building the HTML Structure</span></a>
+<a class="sidebar-lesson" data-id="8-3" onclick="goto('8-3')" href="#"><span class="lesson-dot"></span><span class="lesson-link-text">Styling with CSS</span></a>
+<a class="sidebar-lesson" data-id="8-4" onclick="goto('8-4')" href="#"><span class="lesson-dot"></span><span class="lesson-link-text">Making It Responsive</span></a>
+<a class="sidebar-lesson" data-id="8-5" onclick="goto('8-5')" href="#"><span class="lesson-dot"></span><span class="lesson-link-text">Publishing Your Site with GitHub Pages</span></a>
+
+    </div>
+    <div class="sidebar-module-block"><div class="sidebar-module-title">Navigation</div>
+    <a href="module7.html" class="sidebar-lesson">← Previous Module</a>
+    
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div class="breadcrumb">Module 08 › <strong>Planning Your Portfolio</strong></div>
+      <div class="topbar-nav">
+        <button class="nav-btn" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn primary" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    
+<div class="lesson-page" id="lesson-8-1">
+  <div class="lesson-tag">Module 08 · Lesson 1</div>
+  <h1 class="lesson-title">Planning Your Portfolio</h1>
+  <p class="lesson-intro">Great websites start with a plan, not code. Let's map out your portfolio before touching a keyboard.</p>
+  
+<div class="block"><h2>What Sections Should a Portfolio Have?</h2>
+<ul>
+<li><strong>Header/Navbar</strong> — logo, navigation links</li>
+<li><strong>Hero Section</strong> — your name, title, call-to-action buttons</li>
+<li><strong>About Me</strong> — short bio and skills</li>
+<li><strong>Projects</strong> — cards showing your work</li>
+<li><strong>Contact</strong> — form or links to reach you</li>
+<li><strong>Footer</strong> — copyright</li>
+</ul>
+</div>
+<hr class="divider">
+<div class="block"><h2>Plan Your Design First</h2>
+<p>Before coding, sketch on paper or use a tool like Figma (free). Decide:</p>
+<ol>
+<li>Color scheme — pick 2-3 colours (primary, accent, background)</li>
+<li>Font pairing — one for headings, one for body text</li>
+<li>Layout — how many columns? What goes where?</li>
+<li>Content — what projects will you showcase?</li>
+</ol>
+<div class="callout tip"><div class="callout-head">💡 Start Simple</div>Your first portfolio doesn't need to be perfect. A clean, simple site beats a complicated broken one every time. You can always improve it later!</div>
+</div>
+<hr class="divider">
+<div class="block"><h2>File Structure</h2>
+<div class="code-block"><div class="code-header"><span class="code-lang">Project Files</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="code-body">my-portfolio/
+├── index.html       <span class="cm">← main page</span>
+├── style.css        <span class="cm">← all your CSS</span>
+├── images/          <span class="cm">← your photos</span>
+│   └── profile.jpg
+└── projects/        <span class="cm">← project screenshots</span>
+    └── project1.jpg</div></div>
+</div>
+
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('8-2')">Next: Building the HTML Structure →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-8-2">
+  <div class="lesson-tag">Module 08 · Lesson 2</div>
+  <h1 class="lesson-title">Building the HTML Structure</h1>
+  <p class="lesson-intro">Build the complete semantic HTML skeleton of your portfolio — all sections in the right order.</p>
+  
+<div class="block"><h2>The Full Portfolio HTML</h2>
+<div class="code-block"><div class="code-header"><span class="code-lang">index.html</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="code-body"><span class="t">&lt;!DOCTYPE html&gt;</span>
+<span class="t">&lt;html</span> <span class="a">lang</span>=<span class="v">"en"</span><span class="t">&gt;</span>
+<span class="t">&lt;head&gt;</span>
+  <span class="t">&lt;meta</span> <span class="a">charset</span>=<span class="v">"UTF-8"</span><span class="t">&gt;</span>
+  <span class="t">&lt;meta</span> <span class="a">name</span>=<span class="v">"viewport"</span> <span class="a">content</span>=<span class="v">"width=device-width, initial-scale=1.0"</span><span class="t">&gt;</span>
+  <span class="t">&lt;title&gt;</span>Your Name — Portfolio<span class="t">&lt;/title&gt;</span>
+  <span class="t">&lt;link</span> <span class="a">rel</span>=<span class="v">"stylesheet"</span> <span class="a">href</span>=<span class="v">"style.css"</span><span class="t">&gt;</span>
+<span class="t">&lt;/head&gt;</span>
+<span class="t">&lt;body&gt;</span>
+
+  <span class="t">&lt;header&gt;</span>
+    <span class="t">&lt;nav&gt;</span>...<span class="t">&lt;/nav&gt;</span>
+  <span class="t">&lt;/header&gt;</span>
+
+  <span class="t">&lt;section</span> <span class="a">id</span>=<span class="v">"hero"</span><span class="t">&gt;</span>...<span class="t">&lt;/section&gt;</span>
+
+  <span class="t">&lt;section</span> <span class="a">id</span>=<span class="v">"about"</span><span class="t">&gt;</span>...<span class="t">&lt;/section&gt;</span>
+
+  <span class="t">&lt;section</span> <span class="a">id</span>=<span class="v">"projects"</span><span class="t">&gt;</span>...<span class="t">&lt;/section&gt;</span>
+
+  <span class="t">&lt;section</span> <span class="a">id</span>=<span class="v">"contact"</span><span class="t">&gt;</span>...<span class="t">&lt;/section&gt;</span>
+
+  <span class="t">&lt;footer&gt;</span>...<span class="t">&lt;/footer&gt;</span>
+
+<span class="t">&lt;/body&gt;</span>
+<span class="t">&lt;/html&gt;</span></div></div>
+</div>
+<hr class="divider">
+<div class="block"><h2>✏️ Try It Yourself</h2>
+<div class="tryit-wrap"><div class="tryit-header"><span class="tryit-label">⚡ Live Editor</span><button class="run-btn" onclick="runCode('8-2a')">▶ Run</button></div>
+<div class="tryit-body"><textarea class="tryit-editor" data-tryit="8-2a" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;&lt;meta charset="UTF-8"&gt;&lt;title&gt;My Portfolio&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt;nav&gt;
+      &lt;strong&gt;YourName&lt;/strong&gt;
+      &lt;a href="#about"&gt;About&lt;/a&gt;
+      &lt;a href="#projects"&gt;Projects&lt;/a&gt;
+      &lt;a href="#contact"&gt;Contact&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+  &lt;section id="hero"&gt;
+    &lt;h1&gt;Hi, I'm Your Name 👋&lt;/h1&gt;
+    &lt;p&gt;Frontend Developer | HTML & CSS Learner&lt;/p&gt;
+  &lt;/section&gt;
+  &lt;section id="about"&gt;
+    &lt;h2&gt;About Me&lt;/h2&gt;
+    &lt;p&gt;I love building websites with AlCoders!&lt;/p&gt;
+  &lt;/section&gt;
+  &lt;section id="projects"&gt;
+    &lt;h2&gt;My Projects&lt;/h2&gt;
+    &lt;p&gt;Coming soon...&lt;/p&gt;
+  &lt;/section&gt;
+  &lt;section id="contact"&gt;
+    &lt;h2&gt;Contact&lt;/h2&gt;
+    &lt;a href="mailto:you@email.com"&gt;Email Me&lt;/a&gt;
+  &lt;/section&gt;
+  &lt;footer&gt;&lt;p&gt;© 2025 Your Name&lt;/p&gt;&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+<div class="tryit-preview"><iframe id="preview-8-2a"></iframe></div>
+</div></div>
+</div>
+
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('8-3')">Next: Styling Your Portfolio →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-8-3">
+  <div class="lesson-tag">Module 08 · Lesson 3</div>
+  <h1 class="lesson-title">Styling with CSS</h1>
+  <p class="lesson-intro">Apply all your CSS knowledge to make your portfolio look polished, professional, and uniquely yours.</p>
+  
+<div class="block"><h2>Portfolio CSS Strategy</h2>
+<p>Use CSS variables at the top of your stylesheet so you can easily change your whole theme:</p>
+<div class="code-block"><div class="code-header"><span class="code-lang">style.css</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="code-body"><span class="cm">/* CSS Variables — your theme */</span>
+<span class="p">:root</span> {
+  <span class="a">--primary</span>: <span class="cv">#1a5cff</span>;
+  <span class="a">--dark</span>: <span class="cv">#1a1a2e</span>;
+  <span class="a">--light</span>: <span class="cv">#f7f7f5</span>;
+  <span class="a">--text</span>: <span class="cv">#333</span>;
+  <span class="a">--muted</span>: <span class="cv">#888</span>;
+}
+
+<span class="p">*</span> { <span class="a">margin</span>:<span class="cv">0</span>; <span class="a">padding</span>:<span class="cv">0</span>; <span class="a">box-sizing</span>:<span class="cv">border-box</span>; }
+<span class="p">body</span> { <span class="a">font-family</span>:<span class="cv">Arial, sans-serif</span>; <span class="a">color</span>:<span class="cv">var(--text)</span>; }
+
+<span class="cm">/* Section padding */</span>
+<span class="p">section</span> { <span class="a">padding</span>: <span class="cv">80px 5%</span>; <span class="a">max-width</span>: <span class="cv">1100px</span>; <span class="a">margin</span>: <span class="cv">0 auto</span>; }
+
+<span class="cm">/* Use your variable */</span>
+<span class="p">h1, h2</span> { <span class="a">color</span>: <span class="cv">var(--dark)</span>; }
+<span class="p">.btn</span>   { <span class="a">background</span>: <span class="cv">var(--primary)</span>; }</div></div>
+</div>
+<hr class="divider">
+<div class="block"><h2>✏️ Try It Yourself</h2>
+<div class="tryit-wrap"><div class="tryit-header"><span class="tryit-label">⚡ Live Editor</span><button class="run-btn" onclick="runCode('8-3a')">▶ Run</button></div>
+<div class="tryit-body"><textarea class="tryit-editor" data-tryit="8-3a" spellcheck="false">&lt;style&gt;
+  :root { --primary:#1a5cff; --dark:#1a1a2e; --muted:#888; }
+  * { margin:0; padding:0; box-sizing:border-box; font-family:Arial; }
+  header { background:var(--dark); padding:16px 32px; display:flex; justify-content:space-between; align-items:center; }
+  .logo-n { color:var(--primary); font-weight:bold; font-size:1.1rem; }
+  header a { color:#ccc; text-decoration:none; margin-left:16px; font-size:0.85rem; }
+  .hero { background:linear-gradient(135deg,#e8f0ff,#fff); padding:80px 5%; text-align:center; }
+  .hero h1 { font-size:2.5rem; color:var(--dark); margin-bottom:12px; }
+  .hero p { color:var(--muted); margin-bottom:24px; }
+  .btn { background:var(--primary); color:white; padding:12px 28px; border-radius:8px; border:none; cursor:pointer; font-size:1rem; transition:all .3s; }
+  .btn:hover { background:#0047e0; transform:translateY(-2px); }
+&lt;/style&gt;
+&lt;header&gt;
+  &lt;span class="logo-n"&gt;YourName&lt;/span&gt;
+  &lt;div&gt;&lt;a href="#"&gt;About&lt;/a&gt;&lt;a href="#"&gt;Projects&lt;/a&gt;&lt;a href="#"&gt;Contact&lt;/a&gt;&lt;/div&gt;
+&lt;/header&gt;
+&lt;div class="hero"&gt;
+  &lt;h1&gt;Hi, I'm Your Name 👋&lt;/h1&gt;
+  &lt;p&gt;Frontend Developer · HTML & CSS Learner&lt;/p&gt;
+  &lt;button class="btn"&gt;View My Work →&lt;/button&gt;
+&lt;/div&gt;</textarea>
+<div class="tryit-preview"><iframe id="preview-8-3a"></iframe></div>
+</div></div>
+</div>
+
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('8-4')">Next: Making It Responsive →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-8-4">
+  <div class="lesson-tag">Module 08 · Lesson 4</div>
+  <h1 class="lesson-title">Making It Responsive</h1>
+  <p class="lesson-intro">Your portfolio must work on every screen. Apply mobile-first media queries to every section.</p>
+  
+<div class="block"><h2>Responsive Portfolio Checklist</h2>
+<ul>
+<li><strong>Viewport meta tag</strong> — always include it in &lt;head&gt;</li>
+<li><strong>Fluid widths</strong> — use % and max-width instead of fixed px</li>
+<li><strong>Stack on mobile</strong> — use flex-direction: column on small screens</li>
+<li><strong>Hide the navbar links</strong> — show only the logo on mobile</li>
+<li><strong>Bigger touch targets</strong> — buttons at least 44px tall on mobile</li>
+</ul>
+</div>
+<hr class="divider">
+<div class="block"><h2>Responsive Projects Grid</h2>
+<div class="code-block"><div class="code-header"><span class="code-lang">Responsive Grid</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="code-body"><span class="p">.projects-grid</span> {
+  <span class="a">display</span>: <span class="cv">grid</span>;
+  <span class="a">grid-template-columns</span>: <span class="cv">1fr</span>;  <span class="cm">/* mobile: 1 col */</span>
+  <span class="a">gap</span>: <span class="cv">20px</span>;
+}
+<span class="kw">@media</span>(min-width: 600px) {
+  <span class="p">.projects-grid</span> { <span class="a">grid-template-columns</span>: <span class="cv">repeat(2, 1fr)</span>; }
+}
+<span class="kw">@media</span>(min-width: 900px) {
+  <span class="p">.projects-grid</span> { <span class="a">grid-template-columns</span>: <span class="cv">repeat(3, 1fr)</span>; }
+}</div></div>
+</div>
+<hr class="divider">
+<div class="block"><h2>✏️ Try It Yourself</h2>
+<div class="tryit-wrap"><div class="tryit-header"><span class="tryit-label">⚡ Live Editor</span><button class="run-btn" onclick="runCode('8-4a')">▶ Run</button></div>
+<div class="tryit-body"><textarea class="tryit-editor" data-tryit="8-4a" spellcheck="false">&lt;style&gt;
+  * { box-sizing:border-box; margin:0; padding:0; font-family:Arial; }
+  body { background:#f5f5f5; padding:24px; }
+  h2 { margin-bottom:16px; color:#1a1a2e; }
+  .grid { display:grid; grid-template-columns:1fr; gap:14px; }
+  .card { background:white; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.07); }
+  .card-thumb { height:120px; background:linear-gradient(135deg,#1a5cff,#6fa3ff); display:flex; align-items:center; justify-content:center; color:white; font-size:2rem; }
+  .card-body { padding:14px; }
+  .card-body h3 { color:#1a1a2e; margin-bottom:4px; }
+  .card-body p { color:#888; font-size:0.85rem; }
+  @media(min-width:500px){ .grid { grid-template-columns:repeat(2,1fr); } }
+&lt;/style&gt;
+&lt;h2&gt;My Projects&lt;/h2&gt;
+&lt;div class="grid"&gt;
+  &lt;div class="card"&gt;&lt;div class="card-thumb"&gt;🧑‍💻&lt;/div&gt;&lt;div class="card-body"&gt;&lt;h3&gt;About Me Page&lt;/h3&gt;&lt;p&gt;HTML basics project&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class="card"&gt;&lt;div class="card-thumb"&gt;🃏&lt;/div&gt;&lt;div class="card-body"&gt;&lt;h3&gt;Profile Card&lt;/h3&gt;&lt;p&gt;CSS styling project&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class="card"&gt;&lt;div class="card-thumb"&gt;📰&lt;/div&gt;&lt;div class="card-body"&gt;&lt;h3&gt;Blog Layout&lt;/h3&gt;&lt;p&gt;Grid & Flexbox project&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</textarea>
+<div class="tryit-preview"><iframe id="preview-8-4a"></iframe></div>
+</div></div>
+</div>
+
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('8-5')">Next: Publishing Your Site →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-8-5">
+  <div class="lesson-tag">Module 08 · Lesson 5</div>
+  <h1 class="lesson-title">Publishing Your Site with GitHub Pages</h1>
+  <p class="lesson-intro">The final step — get your portfolio live on the internet for free using GitHub Pages. No server needed.</p>
+  
+<div class="block"><h2>What is GitHub Pages?</h2>
+<p>GitHub Pages is a free hosting service that turns any public GitHub repository into a live website. Perfect for portfolios and static sites.</p>
+</div>
+<hr class="divider">
+<div class="block"><h2>Step-by-Step Deployment</h2>
+<ol>
+<li>Create a free account at <code>https://github.com</code></li>
+<li>Click <strong>New Repository</strong> and name it <code>my-portfolio</code></li>
+<li>Upload your files (index.html, style.css, images folder)</li>
+<li>Go to <strong>Settings → Pages</strong></li>
+<li>Under "Source", select <strong>main branch</strong> and click Save</li>
+<li>Wait 1-2 minutes — your site will be live at:</li>
+</ol>
+<div class="code-block"><div class="code-header"><span class="code-lang">Your Live URL</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="code-body">https://yourusername.github.io/my-portfolio/</div></div>
+<div class="callout tip"><div class="callout-head">💡 Custom Domain</div>You can also connect a custom domain (like yourname.com) in the Pages settings for free — you just need to purchase the domain from a registrar like Namecheap or Google Domains.</div>
+</div>
+<hr class="divider">
+<div class="block">
+<h2>🎉 Congratulations!</h2>
+<p>You've completed the AlCoders HTML & CSS course! Here's what you've learned:</p>
+<ul>
+<li><strong>HTML</strong> — structure, tags, forms, semantic elements</li>
+<li><strong>CSS</strong> — selectors, box model, typography, colors</li>
+<li><strong>Flexbox & Grid</strong> — professional layouts</li>
+<li><strong>Responsive Design</strong> — mobile-first with media queries</li>
+<li><strong>Animations</strong> — transitions, keyframes, hover effects</li>
+<li><strong>Deployment</strong> — live on the internet with GitHub Pages</li>
+</ul>
+<div class="callout tip"><div class="callout-head">💡 What's Next?</div>Ready to go further? Learn JavaScript to add interactivity, then explore React, Node.js, or backend development with PHP and MySQL!</div>
+</div>
+
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><a href="index.html" class="next-btn">🎉 Back to Course Overview</a></div>
+</div>
+
+  </main>
+</div>
+
+<div id="footer"></div>
+<script src="navigation.js"></script>
+<script src="loadNav.js"></script>
+<script src="course.js"></script>
+</body>
+</html>
