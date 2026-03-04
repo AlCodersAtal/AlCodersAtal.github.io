@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlCoders — Module 1: Welcome to the Web</title>
+<link rel="stylesheet" href="css/theme.css">
+<script type="module" src="theme.js"></script>
+<link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+
+
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <a href="index.html">
+        <div class="logo-text">Al<span>Coders</span></div>
+        <div class="logo-sub">HTML & CSS Course</div>
+      </a>
+    </div>
+    <a href="index.html" class="sidebar-back">← Course Overview</a>
+    <div class="sidebar-module-block">
+      <div class="sidebar-module-title"><span class="mod-badge">Module 01</span> Welcome to the Web</div>
+      <a class="sidebar-lesson" data-id="1-1" onclick="goto('1-1')" href="#"><span class="lesson-dot"></span><span class="lesson-link-text">How the Web Works</span></a>
+<a class="sidebar-lesson" data-id="1-2" onclick="goto('1-2')" href="#"><span class="lesson-dot"></span><span class="lesson-link-text">Setting Up Your Tools</span></a>
+<a class="sidebar-lesson" data-id="1-3" onclick="goto('1-3')" href="#"><span class="lesson-dot"></span><span class="lesson-link-text">Your First HTML File</span></a>
+<a class="sidebar-lesson" data-id="1-4" onclick="goto('1-4')" href="#"><span class="lesson-dot"></span><span class="lesson-link-text">What Are HTML Tags?</span></a>
+<a class="sidebar-lesson proj-link" data-id="1-5" onclick="goto('1-5')" href="#"><span class="lesson-dot"></span><span class="lesson-link-text">Mini Project: Hello World Page</span></a>
+
+    </div>
+    <div class="sidebar-module-block"><div class="sidebar-module-title">Navigation</div>
+    <a href="index.html" class="sidebar-lesson">← Previous Module</a>
+    <a href="module2.html" class="sidebar-lesson">Next Module →</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div class="breadcrumb">Module 01 › <strong>How the Web Works</strong></div>
+      <div class="topbar-nav">
+        <button class="nav-btn" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn primary" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    
+<div class="lesson-page" id="lesson-1-1">
+  <div class="lesson-tag">Module 01 · Lesson 1</div>
+  <h1 class="lesson-title">How the Web Works</h1>
+  <p class="lesson-intro">Before writing a single line of code, understand what actually happens when someone types a URL and presses Enter.</p>
+  
+<div class="block">
+<h2>The Web in a Nutshell</h2>
+<p>The web is made up of millions of <strong>servers</strong> (computers that store websites) and <strong>clients</strong> (your browser). When you visit a site, your browser sends a request to a server, and the server sends back files.</p>
+<div class="callout info"><div class="callout-head">ℹ️ Key Terms</div>
+<ul>
+<li><strong>Browser</strong> — Chrome, Firefox, Safari: reads HTML/CSS/JS files and displays them</li>
+<li><strong>Server</strong> — A computer that stores website files and sends them on request</li>
+<li><strong>URL</strong> — The address of a webpage (e.g. https://google.com)</li>
+<li><strong>HTTP/HTTPS</strong> — The protocol browsers use to communicate with servers</li>
+</ul>
+</div>
+</div>
+<hr class="divider">
+<div class="block">
+<h2>What Happens When You Visit a Website?</h2>
+<ol>
+<li>You type a URL (e.g. <code>https://alcoders.com</code>) into your browser</li>
+<li>Your browser looks up the server address using <strong>DNS</strong> (like a phone book for websites)</li>
+<li>Your browser sends an <strong>HTTP request</strong> to that server</li>
+<li>The server sends back HTML, CSS, and JavaScript files</li>
+<li>Your browser reads those files and <strong>renders</strong> the page you see</li>
+</ol>
+<div class="callout tip"><div class="callout-head">💡 Remember This</div>Every webpage you've ever seen is just HTML, CSS, and JavaScript files that your browser downloaded and displayed. That's it!</div>
+</div>
+<hr class="divider">
+<div class="block">
+<h2>Frontend vs Backend</h2>
+<ul>
+<li><strong>Frontend</strong> — What you see in the browser: HTML, CSS, JavaScript. This is what this course teaches.</li>
+<li><strong>Backend</strong> — What runs on the server: databases, logic, security. Languages like PHP, Node.js.</li>
+</ul>
+</div>
+
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('1-2')">Next: Setting Up Your Tools →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-1-2">
+  <div class="lesson-tag">Module 01 · Lesson 2</div>
+  <h1 class="lesson-title">Setting Up Your Tools</h1>
+  <p class="lesson-intro">You only need two things to start building websites: a browser and a code editor. Let's set them up.</p>
+  
+<div class="block">
+<h2>What You Need</h2>
+<ul>
+<li><strong>A web browser</strong> — Chrome or Firefox recommended (you probably already have one)</li>
+<li><strong>VS Code</strong> — A free, powerful code editor made by Microsoft</li>
+</ul>
+</div>
+<hr class="divider">
+<div class="block">
+<h2>Installing VS Code</h2>
+<ol>
+<li>Go to <code>https://code.visualstudio.com</code></li>
+<li>Click the big blue <strong>Download</strong> button for your operating system</li>
+<li>Run the installer and follow the steps</li>
+<li>Open VS Code — you're ready!</li>
+</ol>
+<div class="callout tip"><div class="callout-head">💡 Recommended Extensions</div>
+<ul>
+<li><strong>Live Server</strong> — Auto-refreshes your browser every time you save a file</li>
+<li><strong>Prettier</strong> — Automatically formats your code to look clean</li>
+</ul>
+Install them from the Extensions panel (left sidebar icon that looks like 4 squares).
+</div>
+</div>
+<hr class="divider">
+<div class="block">
+<h2>Setting Up Your First Project Folder</h2>
+<ol>
+<li>Create a new folder on your Desktop called <code>my-website</code></li>
+<li>Open VS Code and click <strong>File → Open Folder</strong></li>
+<li>Select your <code>my-website</code> folder</li>
+<li>You now have a project workspace!</li>
+</ol>
+<div class="callout warn"><div class="callout-head">⚠️ Naming Files</div>Always use lowercase letters and hyphens (no spaces!) when naming files and folders. <code>my-website</code> ✅ &nbsp;&nbsp; <code>My Website</code> ❌</div>
+</div>
+
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('1-3')">Next: Your First HTML File →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-1-3">
+  <div class="lesson-tag">Module 01 · Lesson 3</div>
+  <h1 class="lesson-title">Your First HTML File</h1>
+  <p class="lesson-intro">Time to write your very first HTML. Create a file, add the boilerplate, open it in a browser — and see your first webpage come to life.</p>
+  
+<div class="block">
+<h2>What is an HTML File?</h2>
+<p>An HTML file is just a plain text file with a <code>.html</code> extension. When opened in a browser, it displays as a webpage.</p>
+<div class="callout info"><div class="callout-head">ℹ️ HTML stands for</div>HyperText Markup Language — "markup" means adding labels (tags) to text to tell the browser how to display it.</div>
+</div>
+<hr class="divider">
+<div class="block">
+<h2>The HTML Boilerplate</h2>
+<p>Every HTML page starts with the same basic structure — the <strong>boilerplate</strong>:</p>
+<div class="code-block"><div class="code-header"><span class="code-lang">index.html</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="code-body"><span class="t">&lt;!DOCTYPE html&gt;</span>
+<span class="t">&lt;html</span> <span class="a">lang</span>=<span class="v">"en"</span><span class="t">&gt;</span>
+
+  <span class="t">&lt;head&gt;</span>
+    <span class="t">&lt;meta</span> <span class="a">charset</span>=<span class="v">"UTF-8"</span><span class="t">&gt;</span>
+    <span class="t">&lt;title&gt;</span>My First Webpage<span class="t">&lt;/title&gt;</span>
+  <span class="t">&lt;/head&gt;</span>
+
+  <span class="t">&lt;body&gt;</span>
+    <span class="t">&lt;h1&gt;</span>Hello, World!<span class="t">&lt;/h1&gt;</span>
+    <span class="t">&lt;p&gt;</span>My first webpage is alive.<span class="t">&lt;/p&gt;</span>
+  <span class="t">&lt;/body&gt;</span>
+
+<span class="t">&lt;/html&gt;</span></div></div>
+<ul>
+<li><strong>&lt;!DOCTYPE html&gt;</strong> — tells the browser this is HTML5</li>
+<li><strong>&lt;html&gt;</strong> — root container wrapping everything</li>
+<li><strong>&lt;head&gt;</strong> — settings and info (not shown on screen)</li>
+<li><strong>&lt;title&gt;</strong> — text shown on the browser tab</li>
+<li><strong>&lt;body&gt;</strong> — everything visible on the page goes here</li>
+</ul>
+</div>
+<hr class="divider">
+<div class="block">
+<h2>✏️ Try It Yourself</h2>
+<p>Edit the code and click <strong>Run</strong> to see the result:</p>
+<div class="tryit-wrap"><div class="tryit-header"><span class="tryit-label">⚡ Live Editor</span><button class="run-btn" onclick="runCode('1-3a')">▶ Run</button></div>
+<div class="tryit-body"><textarea class="tryit-editor" data-tryit="1-3a" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;My Page&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+    &lt;p&gt;My first webpage is alive!&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</textarea>
+<div class="tryit-preview"><iframe id="preview-1-3a"></iframe></div>
+</div></div>
+</div>
+
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('1-4')">Next: What Are HTML Tags? →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-1-4">
+  <div class="lesson-tag">Module 01 · Lesson 4</div>
+  <h1 class="lesson-title">What Are HTML Tags?</h1>
+  <p class="lesson-intro">Tags are the building blocks of HTML. Every element on a webpage is created by wrapping content in tags.</p>
+  
+<div class="block">
+<h2>Anatomy of an HTML Tag</h2>
+<p>Most elements have an <strong>opening tag</strong>, <strong>content</strong>, and a <strong>closing tag</strong>:</p>
+<div class="code-block"><div class="code-header"><span class="code-lang">Structure</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="code-body"><span class="cm">&lt;!--  Opening    Content        Closing  --&gt;</span>
+      <span class="t">&lt;p&gt;</span>     This is text.  <span class="t">&lt;/p&gt;</span>
+      <span class="t">&lt;h1&gt;</span>    Big Heading    <span class="t">&lt;/h1&gt;</span>
+      <span class="t">&lt;strong&gt;</span> Bold text      <span class="t">&lt;/strong&gt;</span></div></div>
+<div class="callout tip"><div class="callout-head">💡 Closing Tags</div>Always have a <code>/</code> before the tag name: <code>&lt;/p&gt;</code> means "end paragraph".</div>
+</div>
+<hr class="divider">
+<div class="block">
+<h2>Self-Closing Tags</h2>
+<p>Some tags don't wrap content — they just insert something on their own:</p>
+<div class="code-block"><div class="code-header"><span class="code-lang">Self-closing</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="code-body"><span class="t">&lt;br&gt;</span>   <span class="cm">&lt;!-- line break --&gt;</span>
+<span class="t">&lt;hr&gt;</span>   <span class="cm">&lt;!-- horizontal divider line --&gt;</span>
+<span class="t">&lt;img</span> <span class="a">src</span>=<span class="v">"photo.jpg"</span> <span class="a">alt</span>=<span class="v">"A photo"</span><span class="t">&gt;</span>  <span class="cm">&lt;!-- image --&gt;</span></div></div>
+</div>
+<hr class="divider">
+<div class="block">
+<h2>Attributes</h2>
+<p>Tags can carry extra information called <strong>attributes</strong>, written as <code>name="value"</code> inside the opening tag:</p>
+<div class="code-block"><div class="code-header"><span class="code-lang">Attributes</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="code-body"><span class="t">&lt;a</span> <span class="a">href</span>=<span class="v">"https://google.com"</span><span class="t">&gt;</span>Go to Google<span class="t">&lt;/a&gt;</span>
+<span class="t">&lt;img</span> <span class="a">src</span>=<span class="v">"cat.jpg"</span> <span class="a">alt</span>=<span class="v">"A cute cat"</span> <span class="a">width</span>=<span class="v">"300"</span><span class="t">&gt;</span>
+<span class="t">&lt;p</span> <span class="a">class</span>=<span class="v">"intro"</span> <span class="a">id</span>=<span class="v">"first-para"</span><span class="t">&gt;</span>Hello!<span class="t">&lt;/p&gt;</span></div></div>
+<div class="callout warn"><div class="callout-head">⚠️ Remember</div>Attribute values must always be wrapped in quotes <code>" "</code>. Forgetting this is one of the most common beginner mistakes!</div>
+</div>
+<hr class="divider">
+<div class="block">
+<h2>✏️ Try It Yourself</h2>
+<div class="tryit-wrap"><div class="tryit-header"><span class="tryit-label">⚡ Live Editor</span><button class="run-btn" onclick="runCode('1-4a')">▶ Run</button></div>
+<div class="tryit-body"><textarea class="tryit-editor" data-tryit="1-4a" spellcheck="false">&lt;h2&gt;About HTML Tags&lt;/h2&gt;
+&lt;p&gt;This is &lt;strong&gt;bold&lt;/strong&gt; text.&lt;/p&gt;
+&lt;p&gt;This is &lt;em&gt;italic&lt;/em&gt; text.&lt;/p&gt;
+&lt;a href="https://google.com"&gt;Visit Google&lt;/a&gt;
+&lt;br&gt;
+&lt;hr&gt;
+&lt;p&gt;After the divider line.&lt;/p&gt;</textarea>
+<div class="tryit-preview"><iframe id="preview-1-4a"></iframe></div>
+</div></div>
+</div>
+
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('1-5')">Next: Mini Project: Hello World →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-1-5">
+  <div class="lesson-tag">Module 01 · Project</div>
+  <h1 class="lesson-title">Mini Project: Hello World Page</h1>
+  <p class="lesson-intro">Put everything you've learned together and build your very first complete webpage.</p>
+  
+<div class="block">
+<h2>What You'll Build</h2>
+<p>A simple personal webpage that includes a heading with your name, a short paragraph about yourself, and a fun fact. It uses proper HTML boilerplate.</p>
+</div>
+<hr class="divider">
+<div class="project-box">
+<h3>🎯 Your Challenge</h3>
+<p>Build a page that contains:</p>
+<ol class="project-steps">
+<li>A proper HTML boilerplate (DOCTYPE, html, head, body)</li>
+<li>A title in the &lt;head&gt; that shows on the browser tab</li>
+<li>A big &lt;h1&gt; heading with your name</li>
+<li>A &lt;p&gt; paragraph saying hello and introducing yourself</li>
+<li>A second &lt;p&gt; with a fun fact about yourself, with one word in &lt;strong&gt;</li>
+</ol>
+</div>
+<hr class="divider">
+<div class="block">
+<h2>✏️ Build it here</h2>
+<div class="tryit-wrap"><div class="tryit-header"><span class="tryit-label">⚡ Live Editor</span><button class="run-btn" onclick="runCode('1-5a')">▶ Run</button></div>
+<div class="tryit-body"><textarea class="tryit-editor" data-tryit="1-5a" spellcheck="false">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;title&gt;Your Name Here&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- Start building below! --&gt;
+    &lt;h1&gt;Hello, I'm ...&lt;/h1&gt;
+    &lt;p&gt;Welcome to my page. I am learning web development.&lt;/p&gt;
+    &lt;p&gt;Fun fact: I love &lt;strong&gt;coding&lt;/strong&gt;!&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</textarea>
+<div class="tryit-preview"><iframe id="preview-1-5a"></iframe></div>
+</div></div>
+</div>
+
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><a href="module2.html" class="next-btn">Module 2: HTML Essentials →</a></div>
+</div>
+
+  </main>
+</div>
+
+<div id="footer"></div>
+<script src="navigation.js"></script>
+<script src="loadNav.js"></script>
+<script src="course.js"></script>
+</body>
+</html>
