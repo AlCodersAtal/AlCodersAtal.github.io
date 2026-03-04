@@ -4,79 +4,401 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Projects</title>
-      <link rel="stylesheet" href="css/theme.css">
- <script type="module" src="theme.js"></script>
+  <title>Projects — AlCoders</title>
+  <link rel="stylesheet" href="css/theme.css">
+  <script type="module" src="theme.js"></script>
   <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/projects.css" />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
   <style>
-    .content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      max-width: 1100px;
-      margin: 0 auto 60px;
-      padding: 40px 20px;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f4f6fb;
+      --surface: #ffffff;
+      --surface2: #eaf0fa;
+      --border: rgba(0,0,0,0.08);
+      --accent: #2563eb;
+      --accent2: #7b5cf0;
+      --accent3: #059669;
+      --text: #0f172a;
+      --muted: #64748b;
+      --heading-font: 'Syne', sans-serif;
+      --body-font: 'DM Sans', sans-serif;
     }
 
-    .course-box {
-      background-color: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body-font);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse at center, rgba(37,99,235,0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #nav { position: relative; z-index: 100; }
+
+    /* ── SEARCH POPUP ── */
+    .search-popup {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .search-popup.active { display: flex; }
+    .popup-content {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      width: min(560px, 90vw);
+      position: relative;
+    }
+    .popup-content input {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      color: var(--text);
+      font-family: var(--body-font);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .popup-content input:focus { border-color: var(--accent); }
+    .close-btn {
+      position: absolute; top: 16px; right: 20px;
+      font-size: 1.5rem; color: var(--muted);
+      cursor: pointer; transition: color 0.2s;
+    }
+    .close-btn:hover { color: var(--text); }
+    .result-box { margin-top: 16px; }
+
+    /* ── HERO ── */
+    .page-hero {
+      position: relative;
+      padding: 120px 40px 60px;
       text-align: center;
-      padding: 20px;
-      transition: transform 0.3s ease;
-      height: 340px;           /* Add a fixed height for all boxes */
-      display: flex;           /* Center content vertically */
-      flex-direction: column;
-      justify-content: flex-start;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .page-hero::after {
+      content: 'BUILD';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--heading-font);
+      font-size: clamp(120px, 20vw, 260px);
+      font-weight: 800;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(0,0,0,0.04);
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 0;
+      user-select: none;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(37,99,235,0.08);
+      border: 1px solid rgba(37,99,235,0.2);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      position: relative; z-index: 1;
+    }
+
+    .hero-title {
+      font-family: var(--heading-font);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #0f172a 20%, var(--accent) 60%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 18px;
+      position: relative; z-index: 1;
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      font-weight: 300;
+      max-width: 480px;
+      margin: 0 auto 40px;
+      position: relative; z-index: 1;
+    }
+
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      position: relative; z-index: 1;
+    }
+    .hero-divider::before, .hero-divider::after {
+      content: '';
+      width: 60px; height: 1px;
+      background: linear-gradient(to right, transparent, var(--border));
+    }
+    .hero-divider::after {
+      background: linear-gradient(to left, transparent, var(--border));
+    }
+    .hero-divider span {
+      color: var(--muted); font-size: 0.7rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+    }
+
+    /* ── SECTION LABELS ── */
+    .section-label {
+      max-width: 1160px;
+      margin: 60px auto 28px;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative; z-index: 1;
+    }
+
+    .section-label h3 {
+      font-family: var(--heading-font);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .section-label .label-pill {
+      background: rgba(37,99,235,0.08);
+      border: 1px solid rgba(37,99,235,0.2);
+      color: var(--accent);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 12px;
+      border-radius: 100px;
+    }
+
+    .section-label .label-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── GRID ── */
+    .content {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 32px 80px;
+      position: relative; z-index: 1;
+    }
+
+    /* ── COURSE CARD ── */
+    .course-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1),
+                  border-color 0.35s ease,
+                  box-shadow 0.35s ease;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .course-box:nth-child(1) { animation-delay: 0.05s; }
+    .course-box:nth-child(2) { animation-delay: 0.10s; }
+    .course-box:nth-child(3) { animation-delay: 0.15s; }
+    .course-box:nth-child(4) { animation-delay: 0.20s; }
+    .course-box:nth-child(5) { animation-delay: 0.25s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     .course-box:hover {
-      transform: translateY(-5px);
+      transform: translateY(-6px);
+      border-color: rgba(37,99,235,0.3);
+      box-shadow: 0 20px 50px rgba(37,99,235,0.08), 0 0 0 1px rgba(37,99,235,0.1);
     }
 
-    .course-box img {
+    .course-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(37,99,235,0.04), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 0;
+      border-radius: inherit;
+    }
+    .course-box:hover::before { opacity: 1; }
+
+    .course-box a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .course-img-wrap {
+      position: relative;
       width: 100%;
-      height: 180px;           /* Fixed image height for all */
-      object-fit: cover;       /* Crop images to fit */
-      border-radius: 12px;
-      margin-bottom: 15px;
+      height: 190px;
+      overflow: hidden;
+    }
+
+    .course-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+      display: block;
+    }
+
+    .course-box:hover .course-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    .course-img-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 50%;
+      background: linear-gradient(to top, var(--surface), transparent);
+    }
+
+    .card-arrow {
+      position: absolute;
+      top: 14px; right: 14px;
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent);
+      font-size: 0.75rem;
+      opacity: 0;
+      transform: scale(0.7) rotate(-45deg);
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22,1,0.36,1);
+      z-index: 2;
+    }
+    .course-box:hover .card-arrow {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+
+    .card-body {
+      padding: 20px 22px 22px;
+      position: relative; z-index: 1;
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+      opacity: 0.85;
     }
 
     .course-box h2 {
-      font-size: 1.1rem;
-      color: #004080;
+      font-family: var(--heading-font);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.4;
       margin: 0;
-      padding-top: 10px;
     }
 
-    h1 {
-      text-align: center;
-      margin-top: 100px;
-      font-size: 2rem;
-      color: #003366;
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
     }
 
-    h3 {
-      max-width: 1100px;
-      margin: 40px auto 20px;
-      font-size: 1.5rem;
-      color: #004080;
-      border-bottom: 2px solid #004080;
-      padding-bottom: 5px;
+    .card-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      color: var(--muted);
     }
 
-    hr {
-      max-width: 200px;
-      margin: 20px auto;
-      border: 1px solid #004080;
+    .card-meta i { font-size: 0.65rem; }
+
+    .card-free {
+      margin-left: auto;
+      background: rgba(5,150,105,0.08);
+      border: 1px solid rgba(5,150,105,0.2);
+      color: var(--accent3);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    .advanced-section .course-box::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      border-radius: 20px 20px 0 0;
+    }
+
+    #footer { position: relative; z-index: 1; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    @media (max-width: 600px) {
+      .content { padding: 0 16px 60px; gap: 14px; }
+      .section-label { padding: 0 16px; }
+      .page-hero { padding: 100px 20px 50px; }
     }
   </style>
 </head>
@@ -90,58 +412,135 @@
       <input
         type="text"
         id="searchBar"
-        placeholder="Search here..."
+        placeholder="Search projects..."
         oninput="showRecommendations()"
       />
       <div class="result-box" id="resultBox"></div>
     </div>
   </div>
 
-  <h1>Explore DIY Projects You Can Build with Arduino</h1>
-  <hr />
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="hero-tag">DIY Projects · Arduino &amp; More</div>
+    <h1 class="hero-title">Build Something Real</h1>
+    <p class="hero-sub">Hands-on Arduino projects you can actually build — from simple circuits to smart systems.</p>
+    <div class="hero-divider"><span>5 Projects Available</span></div>
+  </section>
 
-  <h3>Beginner Projects</h3>
+  <!-- Beginner Projects -->
+  <div class="section-label">
+    <h3>Beginner</h3>
+    <div class="label-pill">Start Here</div>
+    <div class="label-line"></div>
+  </div>
+
   <div class="content">
+
     <div class="course-box">
       <a href="ldrProjects.html">
-        <img src="images/ldr.webp" alt="LDR Project" />
+        <div class="course-img-wrap">
+          <img src="images/ldr.webp" alt="LDR Project" />
+          <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Light Sensor</span>
+          <h2>LED Control with LDR and Arduino Uno</h2>
+          <div class="card-meta">
+            <span><i class="fas fa-layer-group"></i> Beginner</span>
+            <span><i class="fas fa-tools"></i> Arduino</span>
+            <span class="card-free">Free</span>
+          </div>
+        </div>
       </a>
-      <h2>LED Control with LDR and Arduino Uno</h2>
     </div>
 
     <div class="course-box">
       <a href="mq3Project.html">
-        <img src="images/photoOfMq3.webp" alt="MQ3 Gas Sensor Project" />
+        <div class="course-img-wrap">
+          <img src="images/photoOfMq3.webp" alt="MQ3 Gas Sensor Project" />
+          <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Gas Sensor</span>
+          <h2>Gas Leakage Detector and Alarm System using Arduino</h2>
+          <div class="card-meta">
+            <span><i class="fas fa-layer-group"></i> Beginner</span>
+            <span><i class="fas fa-tools"></i> Arduino</span>
+            <span class="card-free">Free</span>
+          </div>
+        </div>
       </a>
-      <h2>Gas Leakage Detector and Alarm System using Arduino</h2>
     </div>
 
     <div class="course-box">
       <a href="arduinoKit.html">
-        <img src="images/AlKit Photo.webp" alt="Arduino Physics Kit" />
+        <div class="course-img-wrap">
+          <img src="images/AlKit Photo.webp" alt="Arduino Physics Kit" />
+          <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Kit</span>
+          <h2>AlCoders Light Lab: Arduino Physics Kit</h2>
+          <div class="card-meta">
+            <span><i class="fas fa-layer-group"></i> Beginner</span>
+            <span><i class="fas fa-tools"></i> Arduino</span>
+            <span class="card-free">Free</span>
+          </div>
+        </div>
       </a>
-      <h2>AlCoders Light Lab: Arduino Physics Kit</h2>
     </div>
+
   </div>
 
-  <h3>Advanced Projects</h3>
-  <div class="content">
+  <!-- Advanced Projects -->
+  <div class="section-label">
+    <h3>Advanced</h3>
+    <div class="label-pill" style="background:rgba(123,92,240,0.08);border-color:rgba(123,92,240,0.2);color:var(--accent2);">Level Up</div>
+    <div class="label-line"></div>
+  </div>
+
+  <div class="content advanced-section">
+
     <div class="course-box">
       <a href="codexx.html">
-        <img src="images/Codexx.png" alt="RFID Healthcare Project" />
+        <div class="course-img-wrap">
+          <img src="images/Codexx.png" alt="RFID Healthcare Project" />
+          <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag" style="color:var(--accent2)">RFID</span>
+          <h2>RFID-based Healthcare Database (RHDB)</h2>
+          <div class="card-meta">
+            <span><i class="fas fa-layer-group"></i> Advanced</span>
+            <span><i class="fas fa-tools"></i> Arduino</span>
+            <span class="card-free">Free</span>
+          </div>
+        </div>
       </a>
-      <h2>RFID-based Healthcare Database (RHDB)</h2>
     </div>
-    <!-- Placeholder for future advanced projects -->
+
     <div class="course-box">
-       <a href="ArduinoCarProject.html">
-      <img src="images/ArduinoCarImg.webp" alt="Arduino Based Car" /></a>
-      <h2>Build Your First Arduino Car: A Complete Guide</h2>
+      <a href="ArduinoCarProject.html">
+        <div class="course-img-wrap">
+          <img src="images/ArduinoCarImg.webp" alt="Arduino Based Car" />
+          <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+        </div>
+        <div class="card-body">
+          <span class="card-tag" style="color:var(--accent2)">Robotics</span>
+          <h2>Build Your First Arduino Car: A Complete Guide</h2>
+          <div class="card-meta">
+            <span><i class="fas fa-layer-group"></i> Advanced</span>
+            <span><i class="fas fa-tools"></i> Arduino</span>
+            <span class="card-free">Free</span>
+          </div>
+        </div>
+      </a>
     </div>
+
   </div>
 
   <div id="footer"></div>
   <script src="loadNav.js"></script>
-    <script src="navigation.js"></script>
+  <script src="navigation.js"></script>
 </body>
 </html>
