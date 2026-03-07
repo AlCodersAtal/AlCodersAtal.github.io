@@ -3,209 +3,1122 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Viswadeepthi English Medium School</title>
-    <link rel="stylesheet" href="css/theme.css">
+  <title>Viswadeepthi English Medium School</title>
+  <link rel="stylesheet" href="css/theme.css">
+  <script type="module" src="theme.js"></script>
+  <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
- <script type="module" src="theme.js"></script>
-   <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-/>
   <style>
+    /* ── VARIABLES ── */
+    :root {
+      --teal:       #0d9488;
+      --teal-dark:  #0f766e;
+      --teal-glow:  #2dd4bf;
+      --gold:       #f59e0b;
+      --hero-bg:    #050d14;
+      --surface:    #ffffff;
+      --surface2:   #f0f7f6;
+      --ink:        #0b1a18;
+      --ink2:       #2d4a47;
+      --muted:      #64807d;
+      --border:     #d4e6e3;
+      --rule:       #b8d4d0;
+    }
+    body.dark-theme {
+      --surface:  #0f1f1e;
+      --surface2: #162422;
+      --ink:      #e8f5f3;
+      --ink2:     #a8c5c1;
+      --muted:    #7a9e9a;
+      --border:   #1e3a36;
+      --rule:     #1e3a36;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background: #f4f7fb;
-      color: #333;
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: var(--surface);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.3s, color 0.3s;
+      overflow-x: hidden;
     }
-    header {
-      background-color: #157287;
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
+
+    /* ── PARTICLE CANVAS ── */
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.28;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.8rem;
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1);
     }
-    header p {
-      font-size: 1.2rem;
-      margin-top: 0.5rem;
-    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.17s; }
+    .reveal-d3 { transition-delay: 0.26s; }
+    .reveal-d4 { transition-delay: 0.35s; }
+
+    /* ══════════════════════════════════
+       HERO
+    ══════════════════════════════════ */
     .hero {
-      background: url('images/school.jpg') center/cover no-repeat;
-      color: white;
-      padding: 6rem 2rem;
+      position: relative;
+      background: var(--hero-bg);
+      min-height: 96vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 130px 48px 90px;
+      z-index: 1;
+    }
+
+    /* Animated dot grid */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(13,148,136,0.2) 1px, transparent 1px);
+      background-size: 38px 38px;
+      animation: gridDrift 22s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes gridDrift {
+      0%   { background-position: 0 0; }
+      100% { background-position: 38px 38px; }
+    }
+
+    /* Main orb — teal */
+    .hero-orb {
+      position: absolute;
+      width: 700px; height: 700px;
+      right: -180px; top: -160px;
+      background: radial-gradient(circle at 40% 40%, #0d9488 0%, #2dd4bf 35%, transparent 70%);
+      opacity: 0.11;
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: orbBreath 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    /* Bottom orb — gold accent */
+    .hero-orb2 {
+      position: absolute;
+      width: 380px; height: 380px;
+      left: -60px; bottom: -100px;
+      background: radial-gradient(circle, #f59e0b 0%, transparent 70%);
+      opacity: 0.06;
+      border-radius: 50%;
+      filter: blur(60px);
+      animation: orbBreath 11s ease-in-out 2s infinite;
+      pointer-events: none;
+    }
+    @keyframes orbBreath {
+      0%,100% { transform: scale(1);    opacity: 0.11; }
+      50%      { transform: scale(1.1); opacity: 0.18; }
+    }
+
+    /* Scanning line */
+    .hero-scan {
+      position: absolute;
+      left: 0; top: 0; width: 100%; height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--teal-glow) 50%, transparent 100%);
+      opacity: 0;
+      animation: scan 5s ease-in-out 1.2s infinite;
+      pointer-events: none;
+    }
+    @keyframes scan {
+      0%   { top:0%;   opacity:0; }
+      8%   { opacity:0.45; }
+      92%  { opacity:0.45; }
+      100% { top:100%; opacity:0; }
+    }
+
+    /* Bottom accent line */
+    .hero-line {
+      position: absolute;
+      left:0; bottom:0;
+      width:100%; height:2px;
+      background: linear-gradient(90deg, transparent, var(--teal), var(--teal-glow), transparent);
+      animation: lineGlow 3.5s ease-in-out infinite alternate;
+    }
+    @keyframes lineGlow { from{opacity:0.4} to{opacity:0.9} }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1040px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal-glow);
+      margin-bottom: 22px;
+      animation: fadeUp 0.7s ease 0.2s both;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 28px; height: 1px;
+      background: var(--teal-glow);
+      display: block;
+      animation: growLine 0.6s ease 0.4s both;
+      transform-origin: left;
+    }
+    @keyframes growLine { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+
+    .hero h1 {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.4rem, 5vw, 4.6rem);
+      color: #ffffff;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+      animation: fadeUp 0.7s ease 0.35s both;
+    }
+    .hero h1 .accent { color: var(--teal-glow); }
+    .hero h1 .gold   { color: var(--gold); }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.52);
+      line-height: 1.85;
+      font-weight: 300;
+      max-width: 480px;
+      margin-bottom: 36px;
+      animation: fadeUp 0.7s ease 0.5s both;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s ease 0.65s both;
+    }
+
+    /* Admission badge */
+    .admission-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245,158,11,0.15);
+      border: 1px solid rgba(245,158,11,0.35);
+      color: var(--gold);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 3px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.7s ease 0.1s both;
+    }
+    .admission-badge .dot {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: dotPulse 1.5s ease infinite;
+    }
+    @keyframes dotPulse {
+      0%,100%{opacity:1; transform:scale(1)}
+      50%    {opacity:0.4; transform:scale(0.7)}
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--teal);
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 13px 26px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      border-radius: 3px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.18s, transform 0.14s, box-shadow 0.2s;
+    }
+    .btn-primary::after {
+      content:'';
+      position:absolute; inset:0;
+      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.5s;
+    }
+    .btn-primary:hover::after { transform: translateX(100%); }
+    .btn-primary:hover { background: var(--teal-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,148,136,0.4); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: transparent;
+      color: rgba(255,255,255,0.65);
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border: 1px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: border-color 0.2s, color 0.2s, transform 0.14s;
+    }
+    .btn-ghost:hover { border-color: var(--teal-glow); color: var(--teal-glow); transform: translateY(-2px); }
+
+    /* ── HERO RIGHT PANEL ── */
+    .hero-panel {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 10px;
+      padding: 30px 26px;
+      backdrop-filter: blur(10px);
+      animation: fadeUp 0.7s ease 0.75s both;
+      transition: border-color 0.3s;
+    }
+    .hero-panel:hover { border-color: rgba(13,148,136,0.3); }
+
+    .panel-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      margin-bottom: 18px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .stat-cell {
+      background: rgba(5,13,20,0.75);
+      padding: 18px 14px;
+      text-align: center;
+      transition: background 0.2s;
+    }
+    .stat-cell:hover { background: rgba(13,148,136,0.15); }
+    .stat-num {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--teal);
+      line-height: 1;
+    }
+    .stat-lbl {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* Quick facts */
+    .quick-facts { display: flex; flex-direction: column; gap: 8px; }
+    .qf-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.58);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .qf-item:hover { background: rgba(13,148,136,0.12); border-color: rgba(13,148,136,0.3); }
+    .qf-item i { color: var(--teal-glow); font-size: 0.8rem; width: 16px; text-align: center; }
+
+    /* ══════════════════════════════════
+       PAGE WRAPPER
+    ══════════════════════════════════ */
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 72px 24px 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .s-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .s-label::before { content: '//'; opacity: 0.4; }
+    .s-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1.9rem;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+      line-height: 1.1;
+    }
+    .s-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .s-link {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .s-link:hover { text-decoration: underline; }
+
+    /* ── VISION + MISSION ── */
+    .vm-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .vm-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s cubic-bezier(.22,1,.36,1), box-shadow 0.25s, background 0.3s;
+    }
+    .vm-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--teal);
+    }
+    .vm-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(13,148,136,0.1); }
+    .vm-card h3 {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--ink);
+      letter-spacing: 0.03em;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .vm-card h3 i { color: var(--teal); font-size: 1.1rem; }
+    .vm-card p { font-size: 0.93rem; color: var(--ink2); line-height: 1.8; }
+    .vm-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-top: 4px;
+    }
+    .vm-card ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--ink2);
+      line-height: 1.6;
+    }
+    .vm-card ul li::before {
+      content: '▸';
+      color: var(--teal);
+      font-size: 0.72rem;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    /* ── PRINCIPAL'S MESSAGE ── */
+    .principal-card {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(13,148,136,0.06);
+      transition: box-shadow 0.3s, background 0.3s;
+    }
+    .principal-card:hover { box-shadow: 0 16px 48px rgba(13,148,136,0.13); }
+
+    .principal-visual {
+      background: linear-gradient(160deg, #050d14 0%, #0a2520 50%, #0d4a42 100%);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 40px 24px;
+    }
+    .principal-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(45,212,191,0.12) 1px, transparent 1px);
+      background-size: 22px 22px;
+      animation: gridDrift 16s linear infinite;
+    }
+    /* Orbit rings */
+    .p-ring {
+      position: absolute;
+      border: 1px solid rgba(45,212,191,0.18);
+      border-radius: 50%;
+      animation: spinRing 14s linear infinite;
+    }
+    .p-ring1 { width: 180px; height: 180px; }
+    .p-ring1::after {
+      content: '';
+      position: absolute;
+      width: 7px; height: 7px;
+      background: var(--teal-glow);
+      border-radius: 50%;
+      top: -3.5px; left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 10px var(--teal-glow);
+    }
+    .p-ring2 { width: 130px; height: 130px; animation-direction: reverse; animation-duration: 9s; }
+    @keyframes spinRing { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+    .principal-avatar {
+      position: relative;
+      z-index: 1;
       text-align: center;
     }
-    .hero h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
+    .principal-avatar .av-icon {
+      width: 80px; height: 80px;
+      background: rgba(13,148,136,0.2);
+      border: 2px solid var(--teal-glow);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      font-size: 2.2rem;
     }
-  
-    .section {
-      padding: 3rem 2rem;
-      max-width: 1100px;
+    .principal-avatar .av-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+      letter-spacing: 0.04em;
+    }
+    .principal-avatar .av-role {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal-glow);
+      margin-top: 4px;
+    }
+
+    .principal-body {
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .principal-body .quote-mark {
+      font-family: Georgia, serif;
+      font-size: 5rem;
+      color: var(--teal);
+      opacity: 0.25;
+      line-height: 0.7;
+      margin-bottom: 16px;
+    }
+    .principal-body blockquote {
+      font-size: 1rem;
+      color: var(--ink2);
+      line-height: 1.85;
+      font-style: italic;
+      border: none;
+      background: none;
+      padding: 0;
+      margin: 0 0 20px;
+    }
+    .principal-body cite {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: var(--teal);
+      text-transform: uppercase;
+      font-style: normal;
+    }
+
+    /* ── ACHIEVEMENTS ── */
+    .ach-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .ach-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 26px 22px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s cubic-bezier(.22,1,.36,1), box-shadow 0.25s, border-color 0.2s, background 0.3s;
+    }
+    .ach-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--teal);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .ach-card:hover::before { transform: scaleX(1); }
+    .ach-card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(13,148,136,0.12); border-color: var(--teal); }
+    .ach-icon { font-size: 1.8rem; margin-bottom: 14px; display: block; transition: transform 0.3s; }
+    .ach-card:hover .ach-icon { transform: scale(1.15) rotate(-5deg); }
+    .ach-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+    .ach-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .ach-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── FACILITIES ── */
+    .fac-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--rule);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .fac-cell {
+      background: var(--surface);
+      padding: 28px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: background 0.2s;
+    }
+    .fac-cell:hover { background: var(--surface2); }
+    .fac-icon-wrap {
+      width: 44px; height: 44px;
+      background: rgba(13,148,136,0.1);
+      border: 1px solid rgba(13,148,136,0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .fac-cell:hover .fac-icon-wrap { background: rgba(13,148,136,0.18); transform: scale(1.05); }
+    .fac-info strong {
+      display: block;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+      margin-bottom: 4px;
+    }
+    .fac-info p { font-size: 0.8rem; color: var(--muted); line-height: 1.55; margin: 0; }
+
+    /* ── STATS BANNER ── */
+    .stats-banner {
+      background: var(--ink);
+      border-radius: 12px;
+      padding: 48px 40px;
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+    .stats-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(13,148,136,0.1) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .sb-cell {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      padding: 8px;
+    }
+    .sb-num {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--teal-glow);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .sb-lbl {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+      display: block;
+      margin-top: 6px;
+    }
+    .sb-divider {
+      width: 1px;
+      background: rgba(255,255,255,0.08);
       margin: auto;
     }
-    .highlight {
-      background-color: #e8f0fe;
-      padding: 2rem;
-      border-radius: 10px;
-      margin: 1.5rem 0;
+
+    /* ── FOOTER STRIP ── */
+    .footer-strip {
+      background: var(--hero-bg);
+      padding: 32px 48px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
     }
-    .highlight h3 {
-      color: #003366;
+    .footer-strip p {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.08em;
     }
-    ul {
-      padding-left: 1.5rem;
-    }
-    .btn {
-      display: inline-block;
-      background: #0055aa;
-      color: white;
-      padding: 0.75rem 1.5rem;
-      text-decoration: none;
-      border-radius: 6px;
-      margin-top: 1rem;
+    .footer-strip a { color: var(--teal-glow); text-decoration: none; }
+    .footer-strip a:hover { text-decoration: underline; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(22px); }
+      to   { opacity:1; transform:translateY(0); }
     }
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9em;
-      color: #555;
+    /* RESPONSIVE */
+    @media(max-width:900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-panel { display: none; }
+      .vm-grid { grid-template-columns: 1fr; }
+      .principal-card { grid-template-columns: 1fr; }
+      .principal-visual { min-height: 200px; }
+      .ach-grid { grid-template-columns: 1fr 1fr; }
+      .fac-grid { grid-template-columns: 1fr 1fr; }
+      .stats-banner { grid-template-columns: 1fr 1fr; padding: 32px 24px; }
+      .hero { padding: 100px 24px 60px; min-height: auto; }
     }
-    .testimonial {
-      background-color: #fff;
-      padding: 1rem;
-      margin: 1rem 0;
-      border-left: 5px solid #0055aa;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    @media(max-width:560px) {
+      .ach-grid { grid-template-columns: 1fr; }
+      .fac-grid { grid-template-columns: 1fr; }
+      .stats-banner { grid-template-columns: 1fr 1fr; }
+      .principal-body { padding: 28px 22px; }
     }
-    .testimonial p {
-      font-style: italic;
-    }
-   
   </style>
 </head>
+
 <body>
-
-
-   <div id="nav"></div>
-  
-    <!-- Search pop-up -->
-    <div id="searchPopup" class="search-popup">
-      <div class="popup-content">
-        <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
-        <input
-          type="text"
-          id="searchBar"
-          placeholder="Search here..."
-          oninput="showRecommendations()"
-        />
-        <div class="result-box" id="resultBox"></div>
-      </div>
+  <div id="nav"></div>
+  <div id="searchPopup" class="search-popup">
+    <div class="popup-content">
+      <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
+      <input type="text" id="searchBar" placeholder="Search here..." oninput="showRecommendations()" />
+      <div class="result-box" id="resultBox"></div>
     </div>
+  </div>
 
+  <canvas id="particles"></canvas>
 
-<br>
-<br>
-<br>
-<br>
-  <header>
-    <h1>Viswadeepthi English Medium School</h1>
-    <p>Empowering Young Minds through Knowledge & Values</p>
-  </header>
-
+  <!-- ══ HERO ══════════════════════════════════════════════ -->
   <section class="hero">
-    <h2>Inspiring Excellence in Every Child</h2>
-    <p>Admissions Open for 2025–2026 | Join a legacy of academic brilliance</p>
-  </section>
+    <div class="hero-orb"></div>
+    <div class="hero-orb2"></div>
+    <div class="hero-scan"></div>
+    <div class="hero-line"></div>
 
-  <div class="section">
-    <div class="highlight">
-      <h3>Our Vision</h3>
-      <p>To nurture responsible global citizens by imparting quality education rooted in values and discipline.</p>
-    </div>
-
-    <div class="highlight">
-      <h3>Our Mission</h3>
-      <ul>
-        <li>Provide a safe and intellectually challenging environment</li>
-        <li>Develop creative, independent thinkers</li>
-        <li>Encourage community engagement and moral leadership</li>
-        <li>To nurture in children a strong sense of socialism</li>
-        <li>Applying their learning to diverse and challenging situations to reach their optimum potential.</li>
-      </ul>
-    </div>
-
-    <div class="highlight">
-      <h3>Principal's Message</h3>
-      <p>
-        "At Viswadeepthi, we believe that education is the key to unlock a child’s potential. Our goal is not only to educate minds but also to touch hearts. I welcome all parents and students to be part of our family and grow with us."
-        <br><strong>— Mrs. Rejini S, Principal</strong>
-      </p>
-    </div> 
-
-    <div class="highlight">
-      <h3>Achievements & Recognition</h3>
-      <ul>
-        <li>100% pass rate in CBSE Grade X for 10 consecutive years</li>
-        <li>National Green School Award – 2023</li>
-      </ul>
-    </div>
-
-    <div class="highlight">
-      <h3>Campus & Facilities</h3>
-      <ul>
-        <li>Digital Smart Classrooms</li>
-        <li>Science & Computer Laboratories</li>
-        <li>Kid's Park and Garden of Angels</li>
-        <li>Library with 5000+ books</li>
-        <li>Sports ground, indoor games arena, Basket Ball court, Badminton court and Volley Ball court</li>
-        <li>Transport facilities to different direction for the conveyance of the students</li>
-        <li>Atal Tinkering Lab +++</li>
-      </ul>
-    </div>
-<!--
-    <div class="highlight">
-      <h3>What Our Students Say</h3>
-      <div class="testimonial">
-        <p>“The teachers here are truly supportive and help us excel not just in academics but in life skills too.”</p>
-        <strong>— Rahul, Class 10</strong>
+    <div class="hero-inner">
+      <!-- Left -->
+      <div class="hero-left">
+        <div class="admission-badge">
+          <span class="dot"></span>
+          Admissions Open · 2025–2026
+        </div>
+        <div class="hero-eyebrow">CBSE Affiliated · TVM, Kerala</div>
+        <h1>
+          Viswadeepthi<br>
+          <span class="accent">English</span> Medium<br>
+          <span class="gold">School</span>
+        </h1>
+        <p class="hero-sub">Empowering young minds through knowledge, values, and a legacy of academic brilliance. Where every child is nurtured to become a global citizen.</p>
+        <div class="hero-cta-row">
+          <a href="https://youtube.com/@viswadeepthienglishmediums256" target="_blank" class="btn-primary"><i class="fas fa-play-circle"></i> Visit Us Now</a>
+          <a href="#about" class="btn-ghost"><i class="fas fa-chevron-down"></i> Explore</a>
+        </div>
       </div>
-      <div class="testimonial">
-        <p>“Viswadeepthi gave me confidence and a solid foundation. I’m proud to be an alumnus.”</p>
-        <strong>— Meera, Class of 2022</strong>
+
+      <!-- Right panel -->
+      <div class="hero-panel">
+        <div class="panel-label">// School at a Glance</div>
+        <div class="stat-grid">
+          <div class="stat-cell">
+            <div class="stat-num" data-target="10">0</div>
+            <span class="stat-lbl">Years 100% Pass</span>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num" data-target="5000">0</div>
+            <span class="stat-lbl">Library Books</span>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num" data-target="8">0</div>
+            <span class="stat-lbl">Sports Courts</span>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">ATL</div>
+            <span class="stat-lbl">Tinkering Lab</span>
+          </div>
+        </div>
+        <div class="quick-facts">
+          <div class="qf-item"><i class="fas fa-graduation-cap"></i> CBSE Board · Grades I–XII</div>
+          <div class="qf-item"><i class="fas fa-trophy"></i> National Green School Award 2023</div>
+          <div class="qf-item"><i class="fas fa-flask"></i> Atal Tinkering Lab · AlCoders</div>
+          <div class="qf-item"><i class="fas fa-bus"></i> Transport in All Directions</div>
+        </div>
       </div>
     </div>
-  -->
-    <div class="highlight">
-      <h3>Upcoming Events</h3>
-      <ul>
-        <li><strong>Annual Science Fest:</strong> 07th November 2025</li>
-        <li><strong>Sports Day:</strong> 31th October 2025</li>
-
-      </ul>
-      <a href="https://youtube.com/@viswadeepthienglishmediums256?si=dI9cFvLnjN8VBLdo" target="_blank" class="btn" title="Visit www.viswadeepthischool.com for more info">Visit Us Now !!</a>
-    </div>
-
-    <div class="highlight">
-      <h3>More Info</h3>
-      <p>Be a part of Viswadeepthi Family – where every child is a star.</p>
-      <a href="" class="btn">Learn About Us</a>
-    </div>
-    
   </section>
 
-  <footer>
-    <p>© 2025 Viswadeepthi English Medium School | Powered by <a href="https://alcodersatal.github.io" >AlCoders ATAL</a></p>
-  </footer>
-    <div id="footer"></div>
-    <script src="navigation.js"></script>
-        <script src="loadNav.js"></script>
+  <!-- ══ PAGE ═══════════════════════════════════════════════ -->
+  <div class="page" id="about">
+
+    <!-- STATS BANNER -->
+    <div class="stats-banner reveal">
+      <div class="sb-cell">
+        <div class="sb-num" data-target="10">0</div>
+        <span class="sb-lbl">Consecutive 100% Pass Years</span>
+      </div>
+      <div class="sb-cell">
+        <div class="sb-num" data-target="5000">0</div>
+        <span class="sb-lbl">Books in Library</span>
+      </div>
+      <div class="sb-cell">
+        <div class="sb-num" data-target="6">0</div>
+        <span class="sb-lbl">Sports Facilities</span>
+      </div>
+      <div class="sb-cell">
+        <div class="sb-num" data-target="2">0</div>
+        <span class="sb-lbl">National Awards</span>
+      </div>
+    </div>
+
+    <!-- VISION + MISSION -->
+    <section class="reveal" id="vision">
+      <div class="s-head">
+        <div>
+          <div class="s-label">Foundation</div>
+          <div class="s-title">Vision &amp; Mission</div>
+        </div>
+      </div>
+      <div class="vm-grid">
+        <div class="vm-card reveal reveal-d1">
+          <h3><i class="fas fa-eye"></i> Our Vision</h3>
+          <p>To nurture responsible global citizens by imparting quality education rooted in values, discipline, and a deep respect for learning — shaping future leaders equipped for a changing world.</p>
+        </div>
+        <div class="vm-card reveal reveal-d2">
+          <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+          <ul>
+            <li>Provide a safe and intellectually challenging environment</li>
+            <li>Develop creative, independent thinkers</li>
+            <li>Encourage community engagement and moral leadership</li>
+            <li>Nurture a strong sense of social responsibility</li>
+            <li>Apply learning to diverse, challenging real-world situations</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRINCIPAL'S MESSAGE -->
+    <section class="reveal" id="principal">
+      <div class="s-head">
+        <div>
+          <div class="s-label">Leadership</div>
+          <div class="s-title">Principal's Message</div>
+        </div>
+      </div>
+      <div class="principal-card">
+        <div class="principal-visual">
+          <div class="p-ring p-ring1"></div>
+          <div class="p-ring p-ring2"></div>
+          <div class="principal-avatar">
+            <div class="av-icon">👩‍🏫</div>
+            <div class="av-name">Mrs. Rejini S</div>
+            <div class="av-role">Principal</div>
+          </div>
+        </div>
+        <div class="principal-body">
+          <div class="quote-mark">"</div>
+          <blockquote>At Viswadeepthi, we believe that education is the key to unlock a child's potential. Our goal is not only to educate minds but also to touch hearts. Every student who walks through our doors carries the potential to change the world — and it is our honour to help them discover it. I welcome all parents and students to be part of our family and grow with us.</blockquote>
+          <cite>— Mrs. Rejini S, Principal · Viswadeepthi English Medium School</cite>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section class="reveal" id="achievements">
+      <div class="s-head">
+        <div>
+          <div class="s-label">Recognition</div>
+          <div class="s-title">Achievements &amp; Awards</div>
+        </div>
+      </div>
+      <div class="ach-grid">
+        <div class="ach-card reveal reveal-d1">
+          <span class="ach-icon">🏆</span>
+          <div class="ach-tag">Academic · CBSE</div>
+          <div class="ach-title">100% Pass Rate — 10 Years Running</div>
+          <p class="ach-desc">Viswadeepthi has maintained a flawless CBSE Grade X pass rate for ten consecutive years, reflecting the dedication of students and faculty alike.</p>
+        </div>
+        <div class="ach-card reveal reveal-d2">
+          <span class="ach-icon">🌿</span>
+          <div class="ach-tag">Environment · National</div>
+          <div class="ach-title">National Green School Award 2023</div>
+          <p class="ach-desc">Recognised nationally for outstanding commitment to environmental sustainability, green infrastructure, and eco-conscious education practices.</p>
+        </div>
+        <div class="ach-card reveal reveal-d3">
+          <span class="ach-icon">🤖</span>
+          <div class="ach-tag">Innovation · ATL</div>
+          <div class="ach-title">Atal Tinkering Lab — AlCoders</div>
+          <p class="ach-desc">Home to AlCoders ATL — a student innovation lab producing award-winning projects in robotics, IoT, and AI, recognised at district and national levels.</p>
+        </div>
+        <div class="ach-card reveal reveal-d1">
+          <span class="ach-icon">📚</span>
+          <div class="ach-tag">Academic Excellence</div>
+          <div class="ach-title">District Science Fest Winners</div>
+          <p class="ach-desc">Students consistently place at district and state science fairs, with top honours in mathematics olympiads and science exhibitions.</p>
+        </div>
+        <div class="ach-card reveal reveal-d2">
+          <span class="ach-icon">⚽</span>
+          <div class="ach-tag">Sports · District</div>
+          <div class="ach-title">Inter-School Sports Champions</div>
+          <p class="ach-desc">Multiple district-level championship titles in basketball, volleyball, and athletics. Our sports program builds champions in every sense.</p>
+        </div>
+        <div class="ach-card reveal reveal-d3">
+          <span class="ach-icon">🎭</span>
+          <div class="ach-tag">Arts · Culture</div>
+          <div class="ach-title">State Cultural Competition — Top Honours</div>
+          <p class="ach-desc">Recognised at the state level for excellence in performing arts, literary events, and cultural competitions, nurturing well-rounded students.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FACILITIES -->
+    <section class="reveal" id="facilities">
+      <div class="s-head">
+        <div>
+          <div class="s-label">Campus</div>
+          <div class="s-title">Facilities &amp; Infrastructure</div>
+        </div>
+      </div>
+      <div class="fac-grid">
+        <div class="fac-cell">
+          <div class="fac-icon-wrap">💻</div>
+          <div class="fac-info">
+            <strong>Digital Smart Classrooms</strong>
+            <p>Interactive boards and tech-integrated learning spaces in every classroom.</p>
+          </div>
+        </div>
+        <div class="fac-cell">
+          <div class="fac-icon-wrap">🔬</div>
+          <div class="fac-info">
+            <strong>Science &amp; Computer Labs</strong>
+            <p>Fully equipped laboratories for physics, chemistry, biology, and computing.</p>
+          </div>
+        </div>
+        <div class="fac-cell">
+          <div class="fac-icon-wrap">📚</div>
+          <div class="fac-info">
+            <strong>Library — 5000+ Books</strong>
+            <p>A vast collection of academic texts, literature, and reference materials for all grades.</p>
+          </div>
+        </div>
+        <div class="fac-cell">
+          <div class="fac-icon-wrap">🏀</div>
+          <div class="fac-info">
+            <strong>Sports Complex</strong>
+            <p>Basketball, volleyball, and badminton courts plus a full outdoor sports ground.</p>
+          </div>
+        </div>
+        <div class="fac-cell">
+          <div class="fac-icon-wrap">🌳</div>
+          <div class="fac-info">
+            <strong>Kid's Park &amp; Garden</strong>
+            <p>The Garden of Angels — a green space designed for play, relaxation, and early childhood development.</p>
+          </div>
+        </div>
+        <div class="fac-cell">
+          <div class="fac-icon-wrap">🤖</div>
+          <div class="fac-info">
+            <strong>Atal Tinkering Lab</strong>
+            <p>Robotics kits, 3D printers, IoT modules — powering the next generation of innovators through AlCoders.</p>
+          </div>
+        </div>
+        <div class="fac-cell">
+          <div class="fac-icon-wrap">🚌</div>
+          <div class="fac-info">
+            <strong>Transport Network</strong>
+            <p>Convenient bus routes covering all major directions for safe student commutes.</p>
+          </div>
+        </div>
+        <div class="fac-cell">
+          <div class="fac-icon-wrap">🎭</div>
+          <div class="fac-info">
+            <strong>Indoor Games Arena</strong>
+            <p>Dedicated space for indoor sports, cultural events, and co-curricular activities.</p>
+          </div>
+        </div>
+        <div class="fac-cell">
+          <div class="fac-icon-wrap">🌐</div>
+          <div class="fac-info">
+            <strong>High-Speed Internet</strong>
+            <p>Campus-wide connectivity supporting digital learning, research, and remote collaboration.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- end .page -->
+
+  <!-- ══ FOOTER ═════════════════════════════════════════════ -->
+
+
+  <div id="footer"></div>
+  <script src="navigation.js"></script>
+  <script src="loadNav.js"></script>
+
+  <script>
+    /* ── PARTICLE CANVAS ── */
+    (function(){
+      const canvas = document.getElementById('particles');
+      const ctx = canvas.getContext('2d');
+      let W, H, pts = [];
+      function resize(){ W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
+      window.addEventListener('resize', resize); resize();
+      class P {
+        constructor(){ this.reset(); }
+        reset(){
+          this.x = Math.random()*W; this.y = Math.random()*H;
+          this.r = Math.random()*1.4+0.3;
+          this.dx=(Math.random()-.5)*.35; this.dy=(Math.random()-.5)*.35;
+          this.a = Math.random()*.45+.08;
+        }
+        update(){ this.x+=this.dx; this.y+=this.dy; if(this.x<0||this.x>W)this.dx*=-1; if(this.y<0||this.y>H)this.dy*=-1; }
+        draw(){ ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2); ctx.fillStyle=`rgba(13,148,136,${this.a})`; ctx.fill(); }
+      }
+      for(let i=0;i<70;i++) pts.push(new P());
+      function lines(){
+        for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++){
+          const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);
+          if(d<105){ ctx.beginPath(); ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y); ctx.strokeStyle=`rgba(13,148,136,${.07*(1-d/105)})`; ctx.lineWidth=.5; ctx.stroke(); }
+        }
+      }
+      function loop(){ ctx.clearRect(0,0,W,H); pts.forEach(p=>{p.update();p.draw();}); lines(); requestAnimationFrame(loop); }
+      loop();
+    })();
+
+    /* ── SCROLL REVEAL ── */
+    (function(){
+      const io = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    })();
+
+    /* ── COUNTER ANIMATION ── */
+    (function(){
+      const targets = { 10:'', 5000:'+', 8:'', 6:'', 2:'', 4:'' };
+      function animateCounter(el){
+        const t = +el.dataset.target;
+        const suffix = targets[t] ?? '';
+        const dur = 1600, step = 16, steps = dur/step;
+        let cur = 0; const inc = t/steps;
+        const iv = setInterval(()=>{
+          cur += inc; if(cur>=t){ cur=t; clearInterval(iv); }
+          el.textContent = (t>=1000 ? Math.floor(cur).toLocaleString() : Math.floor(cur)) + suffix;
+        }, step);
+      }
+      const io = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            e.target.querySelectorAll('[data-target]').forEach(animateCounter);
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      document.querySelectorAll('.stats-banner, .hero-panel').forEach(el=>io.observe(el));
+      // Hero panel counters after load
+      setTimeout(()=>{
+        document.querySelectorAll('.hero-panel [data-target]').forEach(animateCounter);
+      }, 900);
+    })();
+  </script>
 </body>
 </html>

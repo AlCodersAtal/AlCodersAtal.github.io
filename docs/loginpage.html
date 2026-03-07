@@ -1,252 +1,948 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Register and Login in AlCodersAtal</title>
-    <link rel="stylesheet" href="css/theme.css">
-      <script type="module" src="theme.js"></script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login — AlCoders ATL</title>
+  <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <script type="module" src="theme.js"></script>
 
-
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/loginpage.css" />
-  <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-  />
   <style>
-    /* Popup styles */
-    .popup-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 9999;
-      display: none;
-      justify-content: center;
-      align-items: center;
-    }
-    .popup-box {
-      background: white;
-      padding: 30px 20px;
-      border-radius: 12px;
-      text-align: center;
-      max-width: 400px;
-      width: 90%;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    }
-    .popup-box p {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      color: #333;
-    }
-    .popup-box button {
-      background: hsl(327, 90%, 28%);
-      color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 25px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    .popup-box button:hover {
-      background: rgb(125, 125, 235);
+    :root {
+      --blue:      #1877f3;
+      --blue-dark: #0f55c8;
+      --cyan:      #00d4ff;
+      --hero-bg:   #060c18;
+      --surface:   rgba(255,255,255,0.04);
+      --border:    rgba(255,255,255,0.09);
+      --ink:       #ffffff;
+      --ink2:      rgba(255,255,255,0.65);
+      --muted:     rgba(255,255,255,0.35);
+      --red:       #ef4444;
+      --green:     #22c55e;
     }
 
-    @media (prefers-color-scheme: dark) {
-  .popup-box,
-  .user-popup-content,
-  .search-popup {
-    background: #23232b !important;
-    color: #fff !important;
-    box-shadow: 0 0 20px #000a;
-  }
-  .popup-box button {
-    background: #6c2eb7 !important;
-    color: #fff !important;
-  }
-  .popup-box button:hover {
-    background: #4e1e8a !important;
-  }
-  .search-popup input,
-  .user-popup-content input {
-    background: #181820 !important;
-    color: #fff !important;
-    border: 1px solid #444 !important;
-  }
-  .search-popup .close-btn,
-  .user-popup-content .close-btn {
-    color: #fff !important;
-  }
-}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: var(--hero-bg);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── CANVAS BG ── */
+    #bgCanvas {
+      position: fixed; inset: 0;
+      z-index: 0; pointer-events: none;
+    }
+
+    /* ── GRID OVERLAY ── */
+    .grid-overlay {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(24,119,243,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(24,119,243,0.07) 1px, transparent 1px);
+      background-size: 48px 48px;
+      animation: gridDrift 30s linear infinite;
+    }
+    @keyframes gridDrift { 0%{background-position:0 0} 100%{background-position:48px 48px} }
+
+    /* ── ORBS ── */
+    .orb {
+      position: fixed; border-radius: 50%;
+      filter: blur(80px); pointer-events: none; z-index: 0;
+    }
+    .orb-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, #1877f3 0%, transparent 70%);
+      top: -180px; left: -120px; opacity: 0.12;
+      animation: orbPulse 10s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, #00d4ff 0%, transparent 70%);
+      bottom: -140px; right: -80px; opacity: 0.08;
+      animation: orbPulse 13s ease-in-out infinite reverse;
+    }
+    @keyframes orbPulse {
+      0%,100%{ transform:scale(1); opacity: 0.10; }
+      50%    { transform:scale(1.15); opacity: 0.18; }
+    }
+
+    /* ── STARTUP ANIMATION ── */
+    .startup-screen {
+      position: fixed; inset: 0; z-index: 500;
+      background: var(--hero-bg);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 20px;
+      animation: startupFadeOut 0.6s ease 2.4s both;
+    }
+    @keyframes startupFadeOut { to { opacity: 0; pointer-events: none; } }
+    .startup-screen.gone { display: none; }
+
+    .startup-logo {
+      width: 64px; height: 64px;
+      background: var(--blue);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700; font-size: 1.6rem; color: #fff;
+      position: relative; overflow: hidden;
+      animation: logoReveal 0.5s cubic-bezier(.22,1,.36,1) 0.3s both;
+    }
+    @keyframes logoReveal {
+      from { transform: scale(0.5) rotate(-15deg); opacity: 0; }
+      to   { transform: scale(1) rotate(0deg);     opacity: 1; }
+    }
+    .startup-logo::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, transparent 60%);
+    }
+
+    .startup-brand {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700; font-size: 2rem;
+      color: #fff; letter-spacing: 0.04em;
+      animation: fadeUp 0.5s ease 0.7s both;
+    }
+    .startup-brand span { color: var(--cyan); }
+
+    .startup-sub {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--muted);
+      animation: fadeUp 0.5s ease 0.9s both;
+    }
+
+    .startup-bar-wrap {
+      width: 160px; height: 2px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px; overflow: hidden;
+      animation: fadeUp 0.4s ease 1.1s both;
+    }
+    .startup-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      border-radius: 2px;
+      animation: barFill 1.1s ease 1.2s both;
+    }
+    @keyframes barFill { from{width:0} to{width:100%} }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── PAGE WRAPPER ── */
+    .page-wrap {
+      position: relative; z-index: 10;
+      width: 100%; max-width: 460px;
+      padding: 24px 20px;
+      animation: pageReveal 0.7s cubic-bezier(.22,1,.36,1) 2.8s both;
+    }
+    @keyframes pageReveal {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── BRAND BAR ── */
+    .brand-bar {
+      display: flex; align-items: center; gap: 12px;
+      justify-content: center; margin-bottom: 36px;
+    }
+    .brand-logo {
+      width: 38px; height: 38px;
+      background: var(--blue); border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700; font-size: 1.1rem; color: #fff;
+      position: relative; overflow: hidden; flex-shrink: 0;
+    }
+    .brand-logo::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 60%);
+    }
+    .brand-text-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700; font-size: 1.25rem;
+      color: #fff; letter-spacing: 0.04em;
+    }
+    .brand-text-name span { color: var(--cyan); }
+    .brand-text-sub {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.55rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--muted);
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 14px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+    }
+
+    /* ── TAB TOGGLE ── */
+    .card-tabs {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+    .card-tab {
+      padding: 16px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700; font-size: 0.9rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); cursor: pointer;
+      background: none; border: none;
+      text-align: center;
+      position: relative;
+      transition: color 0.2s;
+    }
+    .card-tab::after {
+      content: '';
+      position: absolute; bottom: 0; left: 20%; right: 20%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      border-radius: 2px;
+      transform: scaleX(0);
+      transition: transform 0.25s cubic-bezier(.22,1,.36,1);
+    }
+    .card-tab.active { color: #fff; }
+    .card-tab.active::after { transform: scaleX(1); }
+
+    /* ── CARD BODY ── */
+    .card-body { padding: 28px 28px 24px; }
+
+    /* ── FORM PANELS ── */
+    .form-panel { display: none; }
+    .form-panel.active { display: block; }
+
+    .form-heading {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700; font-size: 1.6rem;
+      color: #fff; letter-spacing: 0.02em;
+      margin-bottom: 4px;
+    }
+    .form-sub {
+      font-size: 0.82rem; color: var(--muted);
+      margin-bottom: 24px; line-height: 1.5;
+    }
+
+    /* ── NAME ROW ── */
+    .name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* ── FIELD ── */
+    .field { margin-bottom: 14px; position: relative; }
+    .field-label {
+      display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 7px;
+    }
+    .field-wrap { position: relative; }
+    .field-icon {
+      position: absolute; left: 13px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted); font-size: 0.8rem;
+      pointer-events: none; transition: color 0.2s;
+    }
+    .field-input {
+      width: 100%;
+      padding: 11px 14px 11px 38px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.92rem; color: #fff;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+      -webkit-text-fill-color: #fff;
+    }
+    .field-input::placeholder { color: rgba(255,255,255,0.2); }
+    .field-input:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 1000px #0d1829 inset !important;
+      -webkit-text-fill-color: #fff !important;
+    }
+    .field-input:focus {
+      border-color: var(--blue);
+      background: rgba(24,119,243,0.07);
+      box-shadow: 0 0 0 3px rgba(24,119,243,0.15);
+    }
+    .field-input:focus ~ .field-icon,
+    .field:focus-within .field-icon { color: var(--blue); }
+
+    /* password toggle */
+    .pw-toggle {
+      position: absolute; right: 12px; top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none;
+      color: var(--muted); cursor: pointer;
+      font-size: 0.85rem; padding: 2px 4px;
+      transition: color 0.2s;
+    }
+    .pw-toggle:hover { color: var(--cyan); }
+    .field-input.has-toggle { padding-right: 38px; }
+
+    /* field error */
+    .field-error {
+      font-size: 0.72rem; color: #f87171;
+      font-family: 'IBM Plex Mono', monospace;
+      margin-top: 5px; display: none;
+    }
+    .field.has-error .field-input { border-color: var(--red); box-shadow: 0 0 0 3px rgba(239,68,68,0.12); }
+    .field.has-error .field-error { display: block; }
+
+    /* ── EXTRAS ROW ── */
+    .extras-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px; margin-top: -4px;
+    }
+    .remember-label {
+      display: flex; align-items: center; gap: 8px;
+      cursor: pointer; font-size: 0.82rem; color: var(--ink2);
+    }
+    .remember-cb {
+      width: 16px; height: 16px;
+      accent-color: var(--blue); cursor: pointer;
+    }
+    .forgot-link {
+      font-size: 0.82rem; color: var(--blue);
+      text-decoration: none; font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.06em;
+      transition: color 0.18s;
+    }
+    .forgot-link:hover { color: var(--cyan); }
+
+    /* ── SUBMIT BTN ── */
+    .submit-btn {
+      width: 100%;
+      padding: 13px;
+      background: var(--blue);
+      border: none; border-radius: 8px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700; font-size: 1rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #fff; cursor: pointer;
+      position: relative; overflow: hidden;
+      transition: background 0.18s, transform 0.14s, box-shadow 0.18s;
+      margin-bottom: 12px;
+    }
+    .submit-btn::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+      transform: translateX(-100%); transition: transform 0.4s;
+    }
+    .submit-btn:hover::after { transform: translateX(100%); }
+    .submit-btn:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(24,119,243,0.4); }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn.loading { pointer-events: none; opacity: 0.7; }
+
+    /* ── DIVIDER ── */
+    .or-divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 4px 0 12px;
+    }
+    .or-divider::before, .or-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(255,255,255,0.1);
+    }
+    .or-divider span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+    }
+
+    /* ── GOOGLE BTN ── */
+    .google-btn {
+      width: 100%;
+      padding: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: 600; font-size: 0.9rem;
+      color: #fff; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      transition: background 0.18s, border-color 0.18s, transform 0.14s;
+    }
+    .google-btn:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-1px);
+    }
+    .google-icon { width: 18px; height: 18px; }
+
+    /* ── FOOTER NOTE ── */
+    .card-footer-note {
+      text-align: center; margin-top: 16px;
+      font-size: 0.78rem; color: var(--muted);
+      font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.04em;
+    }
+    .card-footer-note a { color: var(--blue); text-decoration: none; transition: color 0.18s; }
+    .card-footer-note a:hover { color: var(--cyan); }
+
+    /* ── TOAST ── */
+    #toast {
+      position: fixed; bottom: 28px; left: 50%;
+      transform: translateX(-50%) translateY(12px);
+      background: #111827;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.88rem; font-weight: 500;
+      padding: 12px 22px; border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 9999;
+      display: flex; align-items: center; gap: 10px;
+      white-space: nowrap;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    #toast.success { border-left: 3px solid var(--green); }
+    #toast.error   { border-left: 3px solid var(--red); }
+    #toast.info    { border-left: 3px solid var(--blue); }
+
+    /* ── FORGOT MODAL ── */
+    .modal {
+      position: fixed; inset: 0;
+      background: rgba(6,12,24,0.75);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: none; align-items: center; justify-content: center;
+    }
+    .modal.open { display: flex; }
+    .modal-box {
+      background: #0d1829;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px; padding: 36px 32px;
+      max-width: 400px; width: 90%;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+      animation: modalIn 0.3s cubic-bezier(.22,1,.36,1);
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.94) translateY(12px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700; font-size: 1.3rem; color: #fff;
+      margin-bottom: 8px;
+    }
+    .modal-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+    .modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+    .modal-close {
+      position: absolute; top: 0; right: 0; /* handled by modal-actions */
+    }
+
+    /* ── BOTTOM SCANNING LINE ── */
+    .scan-line {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      opacity: 0.3;
+      animation: scanDown 6s ease-in-out infinite;
+      z-index: 1; pointer-events: none;
+    }
+    @keyframes scanDown { 0%{top:0;opacity:.3} 100%{top:100%;opacity:0} }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:480px) {
+      .card-body { padding: 22px 18px 20px; }
+      .name-row  { grid-template-columns: 1fr; }
+      .page-wrap { padding: 16px 12px; }
+    }
   </style>
 </head>
-<body>
-  <div id="nav"></div>
 
-  <!-- Search pop-up -->
+<body>
+<div id="nav"></div>
+  <!-- Startup Screen -->
+  <div class="startup-screen" id="startupScreen">
+    <div class="startup-logo">AC</div>
+    <div>
+      <div class="startup-brand"><span>Al</span>Coders</div>
+      <div class="startup-sub">ATL · Viswadeepthi School</div>
+    </div>
+    <div class="startup-bar-wrap"><div class="startup-bar"></div></div>
+  </div>
+
+  <!-- BG Effects -->
+  <canvas id="bgCanvas"></canvas>
+  <div class="grid-overlay"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="scan-line"></div>
+
+  <!-- Search popup -->
   <div id="searchPopup" class="search-popup">
     <div class="popup-content">
       <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
-      <input
-        type="text"
-        id="searchBar"
-        placeholder="Search here..."
-        oninput="showRecommendations()"
-      />
       <div class="result-box" id="resultBox"></div>
     </div>
   </div>
 
-  <div class="container" id="signup" style="display: none;">
-    <h1 class="form-title">Register</h1>
-    <form id="registerForm">
-      <div class="input-group">
-        <i class="fas fa-user"></i>
-        <input type="text" id="fName" placeholder="First Name" required autocomplete="given-name" />
-        <label for="fName">First Name</label>
+  <!-- Main -->
+  <div class="page-wrap">
+
+    <!-- Brand -->
+    <div class="brand-bar">
+      <div class="brand-logo">AC</div>
+      <div>
+        <div class="brand-text-name"><span>Al</span>Coders</div>
+        <div class="brand-text-sub">ATL · Viswadeepthi</div>
       </div>
-      <div class="input-group">
-        <i class="fas fa-user"></i>
-        <input type="text" id="lName" placeholder="Last Name" required autocomplete="family-name" />
-        <label for="lName">Last Name</label>
+    </div>
+
+    <!-- Card -->
+    <div class="card">
+      <div class="card-tabs">
+        <button class="card-tab active" id="tabSignIn" onclick="switchTab('signin')">Sign In</button>
+        <button class="card-tab"        id="tabSignUp" onclick="switchTab('signup')">Register</button>
       </div>
-      <div class="input-group">
-        <i class="fas fa-user"></i>
-        <input type="text" id="username" placeholder="Username" required autocomplete="username" />
-        <label for="username">Username</label>
+
+      <div class="card-body">
+
+        <!-- ── SIGN IN ── -->
+        <div class="form-panel active" id="panelSignIn">
+          <div class="form-heading">Welcome back</div>
+          <div class="form-sub">Sign in to your AlCoders account to continue.</div>
+
+          <div class="field" id="f-loginEmail">
+            <label class="field-label">Email Address</label>
+            <div class="field-wrap">
+              <i class="fas fa-envelope field-icon"></i>
+              <input type="email" id="loginEmail" class="field-input" placeholder="you@example.com" autocomplete="email"/>
+            </div>
+            <div class="field-error" id="e-loginEmail">Please enter a valid email.</div>
+          </div>
+
+          <div class="field" id="f-loginPassword">
+            <label class="field-label">Password</label>
+            <div class="field-wrap">
+              <i class="fas fa-lock field-icon"></i>
+              <input type="password" id="loginPassword" class="field-input has-toggle" placeholder="Your password" autocomplete="current-password"/>
+              <button type="button" class="pw-toggle" onclick="togglePw('loginPassword',this)" tabindex="-1">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <div class="field-error" id="e-loginPassword">Password is required.</div>
+          </div>
+
+          <div class="extras-row">
+            <label class="remember-label">
+              <input type="checkbox" id="rememberMe" class="remember-cb"> Remember me
+            </label>
+            <a href="#" class="forgot-link" onclick="openForgot();return false;">Forgot password?</a>
+          </div>
+
+          <button class="submit-btn" id="loginSubmitBtn" onclick="doLogin()">
+            <i class="fas fa-right-to-bracket"></i> Sign In
+          </button>
+
+          <div class="or-divider"><span>or</span></div>
+
+          <button class="google-btn" id="googleSignInBtn">
+            <svg class="google-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            Continue with Google
+          </button>
+        </div>
+
+        <!-- ── REGISTER ── -->
+        <div class="form-panel" id="panelSignUp">
+          <div class="form-heading">Create account</div>
+          <div class="form-sub">Join AlCoders ATL and start your coding journey.</div>
+
+          <div class="name-row">
+            <div class="field" id="f-fName">
+              <label class="field-label">First Name</label>
+              <div class="field-wrap">
+                <i class="fas fa-user field-icon"></i>
+                <input type="text" id="fName" class="field-input" placeholder="First" autocomplete="given-name"/>
+              </div>
+              <div class="field-error" id="e-fName">Required.</div>
+            </div>
+            <div class="field" id="f-lName">
+              <label class="field-label">Last Name</label>
+              <div class="field-wrap">
+                <i class="fas fa-user field-icon"></i>
+                <input type="text" id="lName" class="field-input" placeholder="Last" autocomplete="family-name"/>
+              </div>
+              <div class="field-error" id="e-lName">Required.</div>
+            </div>
+          </div>
+
+          <div class="field" id="f-username">
+            <label class="field-label">Username</label>
+            <div class="field-wrap">
+              <i class="fas fa-at field-icon"></i>
+              <input type="text" id="username" class="field-input" placeholder="your_handle" autocomplete="username"/>
+            </div>
+            <div class="field-error" id="e-username">Username is required.</div>
+          </div>
+
+          <div class="field" id="f-registerEmail">
+            <label class="field-label">Email Address</label>
+            <div class="field-wrap">
+              <i class="fas fa-envelope field-icon"></i>
+              <input type="email" id="registerEmail" class="field-input" placeholder="you@example.com" autocomplete="email"/>
+            </div>
+            <div class="field-error" id="e-registerEmail">Please enter a valid email.</div>
+          </div>
+
+          <div class="field" id="f-registerPassword">
+            <label class="field-label">Password</label>
+            <div class="field-wrap">
+              <i class="fas fa-lock field-icon"></i>
+              <input type="password" id="registerPassword" class="field-input has-toggle" placeholder="Min. 6 characters" autocomplete="new-password"/>
+              <button type="button" class="pw-toggle" onclick="togglePw('registerPassword',this)" tabindex="-1">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <div class="field-error" id="e-registerPassword">Password must be at least 6 characters.</div>
+          </div>
+
+          <button class="submit-btn" id="registerSubmitBtn" onclick="doRegister()">
+            <i class="fas fa-user-plus"></i> Create Account
+          </button>
+
+          <div class="or-divider"><span>or</span></div>
+
+          <button class="google-btn" id="googleSignInBtn2">
+            <svg class="google-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            Continue with Google
+          </button>
+        </div>
+
+      </div><!-- card-body -->
+    </div><!-- card -->
+
+    <div class="card-footer-note">
+      By continuing you agree to AlCoders'
+      <a href="#">Terms</a> &amp; <a href="#">Privacy Policy</a>
+    </div>
+
+  </div><!-- page-wrap -->
+
+  <!-- Forgot Password Modal -->
+  <div class="modal" id="forgotModal">
+    <div class="modal-box" style="position:relative;">
+      <div class="modal-title">Reset Password</div>
+      <div class="modal-desc">Enter your email address and we'll send you a link to reset your password.</div>
+      <div class="field">
+        <label class="field-label">Email Address</label>
+        <div class="field-wrap">
+          <i class="fas fa-envelope field-icon"></i>
+          <input type="email" id="forgotEmail" class="field-input" placeholder="you@example.com"/>
+        </div>
       </div>
-      <div class="input-group">
-        <i class="fas fa-envelope"></i>
-        <input type="email" id="registerEmail" placeholder="Email" required autocomplete="email" />
-        <label for="registerEmail">Email</label>
+      <div class="modal-actions">
+        <button class="submit-btn" style="margin:0;flex:1;" onclick="doForgot()">
+          <i class="fas fa-paper-plane"></i> Send Reset Link
+        </button>
+        <button onclick="closeForgot()" style="padding:12px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:0.9rem;letter-spacing:0.06em;text-transform:uppercase;transition:background 0.18s;"
+          onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
+          Cancel
+        </button>
       </div>
-      <div class="input-group">
-        <i class="fas fa-lock"></i>
-        <input type="password" id="registerPassword" placeholder="Password" required autocomplete="new-password" />
-        <label for="registerPassword">Password</label>
-      </div>
-      <input type="submit" class="btn" value="Sign Up" />
-      <button id="googleSignInBtn" class="btn" style="background:#4285F4; color:white; margin: 15px 0;">
-        <i class="fab fa-google" style="margin-right: 8px;"></i> Sign in with Google
-      </button>
-    </form>
-    <p class="or">----------or----------</p>
-    <div class="links">
-      <p>Already have an account?</p>
-      <button id="signInButton">Sign In</button>
     </div>
   </div>
 
-  <div class="container" id="signIn">
-    <h1 class="form-title">Sign In</h1>
-    <form id="loginForm">
-      <div class="input-group">
-        <i class="fas fa-envelope"></i>
-        <input type="email" id="loginEmail" placeholder="Email" required autocomplete="email" />
-        <label for="loginEmail">Email</label>
-      </div>
-      <div class="input-group">
-        <i class="fas fa-lock"></i>
-        <input type="password" id="loginPassword" placeholder="Password" required autocomplete="current-password" />
-        <label for="loginPassword">Password</label>
-      </div>
-      <input type="submit" class="btn" value="Sign In" />
-      <button id="googleSignInBtn2" class="btn" style="background:#4285F4; color:white; margin: 15px 0;">
-        <i class="fab fa-google" style="margin-right: 8px;"></i> Sign in with Google
-      </button>
-    </form>
-    <p class="or">----------or----------</p>
-    <div class="links">
-      <p>Don't have an account?</p>
-      <button id="signUpButton">Sign Up</button>
-    </div>
-  </div>
+  <!-- Toast -->
+  <div id="toast"></div>
 
-  <!-- Popup message -->
-  <div id="popupOverlay" class="popup-overlay">
-    <div class="popup-box">
-      <p id="popupMessage"></p>
-      <button onclick="closePopup()">OK</button>
-    </div>
-  </div>
+  <!-- ── SCRIPTS ── -->
+  <script>
+    /* ── PARTICLE CANVAS ── */
+    (function(){
+      const canvas = document.getElementById('bgCanvas');
+      const ctx    = canvas.getContext('2d');
+      let W, H, particles = [];
 
-  <!-- Scripts -->
+      function resize() {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      function randomParticle() {
+        return {
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          r: Math.random() * 1.5 + 0.5,
+          a: Math.random() * 0.5 + 0.1,
+        };
+      }
+      for (let i = 0; i < 70; i++) particles.push(randomParticle());
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        particles.forEach(p => {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+          if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(24,119,243,${p.a})`;
+          ctx.fill();
+        });
+        // connections
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const d  = Math.sqrt(dx*dx + dy*dy);
+            if (d < 100) {
+              ctx.beginPath();
+              ctx.strokeStyle = `rgba(24,119,243,${0.06 * (1 - d/100)})`;
+              ctx.lineWidth = 0.5;
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    /* ── STARTUP DISMISS ── */
+    setTimeout(() => {
+      document.getElementById('startupScreen').classList.add('gone');
+    }, 3100);
+
+    /* ── TAB SWITCH ── */
+    function switchTab(tab) {
+      const isSignIn = tab === 'signin';
+      document.getElementById('tabSignIn').classList.toggle('active', isSignIn);
+      document.getElementById('tabSignUp').classList.toggle('active', !isSignIn);
+      document.getElementById('panelSignIn').classList.toggle('active', isSignIn);
+      document.getElementById('panelSignUp').classList.toggle('active', !isSignIn);
+    }
+
+    /* ── PASSWORD TOGGLE ── */
+    function togglePw(id, btn) {
+      const input = document.getElementById(id);
+      const icon  = btn.querySelector('i');
+      const shown = input.type === 'text';
+      input.type  = shown ? 'password' : 'text';
+      icon.className = shown ? 'fas fa-eye' : 'fas fa-eye-slash';
+    }
+
+    /* ── TOAST ── */
+    let _toastTimer;
+    function showToast(msg, type = 'info') {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = 'show ' + type;
+      clearTimeout(_toastTimer);
+      _toastTimer = setTimeout(() => { t.className = ''; }, 3500);
+    }
+
+    /* ── FIELD VALIDATION ── */
+    function setError(fieldId, show) {
+      document.getElementById('f-' + fieldId).classList.toggle('has-error', show);
+    }
+    function clearErrors(...ids) { ids.forEach(id => setError(id, false)); }
+
+    /* ── FORGOT MODAL ── */
+    function openForgot() {
+      const email = document.getElementById('loginEmail').value;
+      if (email) document.getElementById('forgotEmail').value = email;
+      document.getElementById('forgotModal').classList.add('open');
+    }
+    function closeForgot() { document.getElementById('forgotModal').classList.remove('open'); }
+    document.getElementById('forgotModal').addEventListener('click', e => {
+      if (e.target === document.getElementById('forgotModal')) closeForgot();
+    });
+
+    /* ── REMEMBER ME ── */
+    window.addEventListener('load', () => {
+      const saved = localStorage.getItem('rememberedEmail');
+      if (saved) {
+        document.getElementById('loginEmail').value = saved;
+        document.getElementById('rememberMe').checked = true;
+      }
+    });
+  </script>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp }                   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+             GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail }
+      from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc }
+      from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey:            "AIzaSyBIMtf6DXnAxWKdkoLkfxn7b7zBoAr8Ouk",
+      authDomain:        "alcodersatal-database.firebaseapp.com",
+      projectId:         "alcodersatal-database",
+      storageBucket:     "alcodersatal-database.firebasestorage.app",
+      messagingSenderId: "1092849520429",
+      appId:             "1:1092849520429:web:ecf950a9aa868e37760da4"
+    };
+
+    const app      = initializeApp(firebaseConfig);
+    const auth     = getAuth(app);
+    const db       = getFirestore(app);
+    const provider = new GoogleAuthProvider();
+
+    /* ── LOGIN ── */
+    window.doLogin = async function() {
+      const email    = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const remember = document.getElementById('rememberMe').checked;
+
+      clearErrors('loginEmail', 'loginPassword');
+      let ok = true;
+      if (!email || !email.includes('@')) { setError('loginEmail', true); ok = false; }
+      if (!password)                       { setError('loginPassword', true); ok = false; }
+      if (!ok) return;
+
+      const btn = document.getElementById('loginSubmitBtn');
+      btn.classList.add('loading');
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in…';
+
+      try {
+        const cred = await signInWithEmailAndPassword(auth, email, password);
+        if (remember) localStorage.setItem('rememberedEmail', email);
+        else          localStorage.removeItem('rememberedEmail');
+        localStorage.setItem('username', cred.user.displayName || email.split('@')[0]);
+        showToast('Welcome back! Redirecting…', 'success');
+        setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+      } catch (err) {
+        btn.classList.remove('loading');
+        btn.innerHTML = '<i class="fas fa-right-to-bracket"></i> Sign In';
+        const msg = err.code === 'auth/invalid-credential' || err.code === 'auth/wrong-password'
+          ? 'Incorrect email or password.'
+          : err.code === 'auth/user-not-found'
+          ? 'No account found with this email.'
+          : err.code === 'auth/too-many-requests'
+          ? 'Too many attempts. Please try again later.'
+          : 'Sign in failed. Please try again.';
+        showToast(msg, 'error');
+      }
+    };
+
+    /* ── REGISTER ── */
+    window.doRegister = async function() {
+      const fName    = document.getElementById('fName').value.trim();
+      const lName    = document.getElementById('lName').value.trim();
+      const uname    = document.getElementById('username').value.trim();
+      const email    = document.getElementById('registerEmail').value.trim();
+      const password = document.getElementById('registerPassword').value;
+
+      clearErrors('fName','lName','username','registerEmail','registerPassword');
+      let ok = true;
+      if (!fName)                           { setError('fName', true); ok = false; }
+      if (!lName)                           { setError('lName', true); ok = false; }
+      if (!uname)                           { setError('username', true); ok = false; }
+      if (!email || !email.includes('@'))   { setError('registerEmail', true); ok = false; }
+      if (password.length < 6)             { setError('registerPassword', true); ok = false; }
+      if (!ok) return;
+
+      const btn = document.getElementById('registerSubmitBtn');
+      btn.classList.add('loading');
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account…';
+
+      try {
+        const cred = await createUserWithEmailAndPassword(auth, email, password);
+        await setDoc(doc(db, 'users', cred.user.uid), {
+          name: fName + ' ' + lName,
+          username: uname,
+          email: email,
+          createdAt: new Date().toISOString(),
+          theme: 'light',
+        });
+        localStorage.setItem('username', uname);
+        showToast('Account created! Welcome to AlCoders 🎉', 'success');
+        setTimeout(() => { window.location.href = 'index.html'; }, 1400);
+      } catch (err) {
+        btn.classList.remove('loading');
+        btn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
+        const msg = err.code === 'auth/email-already-in-use'
+          ? 'An account with this email already exists.'
+          : err.code === 'auth/weak-password'
+          ? 'Password is too weak. Use at least 6 characters.'
+          : 'Registration failed. Please try again.';
+        showToast(msg, 'error');
+      }
+    };
+
+    /* ── FORGOT PASSWORD ── */
+    window.doForgot = async function() {
+      const email = document.getElementById('forgotEmail').value.trim();
+      if (!email || !email.includes('@')) {
+        showToast('Enter a valid email address.', 'error');
+        return;
+      }
+      try {
+        await sendPasswordResetEmail(auth, email);
+        closeForgot();
+        showToast('Reset link sent! Check your inbox.', 'success');
+      } catch (err) {
+        showToast('Failed to send reset email.', 'error');
+      }
+    };
+
+    /* ── GOOGLE SIGN-IN ── */
+    function handleGoogle() {
+      signInWithPopup(auth, provider)
+        .then(result => {
+          const user = result.user;
+          localStorage.setItem('username', user.displayName || user.email.split('@')[0]);
+          showToast(`Welcome, ${user.displayName || 'user'}! Redirecting…`, 'success');
+          setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+        })
+        .catch(err => {
+          showToast('Google sign-in failed: ' + err.message, 'error');
+        });
+    }
+    document.getElementById('googleSignInBtn').onclick  = handleGoogle;
+    document.getElementById('googleSignInBtn2').onclick = handleGoogle;
+
+    /* ── ENTER KEY ── */
+    document.getElementById('loginPassword').addEventListener('keydown', e => {
+      if (e.key === 'Enter') window.doLogin();
+    });
+    document.getElementById('registerPassword').addEventListener('keydown', e => {
+      if (e.key === 'Enter') window.doRegister();
+    });
+  </script>
+
   <script src="loadNav.js"></script>
   <script src="navigation.js"></script>
-  <script type="module" src="register.js"></script>
-
-  <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
-  // Your Firebase config
-  const firebaseConfig = {
-    apiKey: "AIzaSyBIMtf6DXnAxWKdkoLkfxn7b7zBoAr8Ouk",
-    authDomain: "alcodersatal-database.firebaseapp.com",
-    projectId: "alcodersatal-database",
-    storageBucket: "alcodersatal-database.firebasestorage.app",
-    messagingSenderId: "1092849520429",
-    appId: "1:1092849520429:web:ecf950a9aa868e37760da4"
-  };
-
-  // Initialize Firebase app and auth
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
-
-  // Google Sign-In handler
-  function handleGoogleSignIn() {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const user = result.user;
-        showPopup(`Welcome, ${user.displayName || "user"}! You have signed in with Google.`);
-        setTimeout(() => {
-          window.location.href = "index.html";
-        }, 1200);
-      })
-      .catch((error) => {
-        console.error("Google Sign-In error:", error);
-        showPopup("Google Sign-In failed: " + error.message);
-      });
-  }
-
-  // Attach to both buttons
-  document.getElementById("googleSignInBtn").onclick = (e) => {
-    e.preventDefault();
-    handleGoogleSignIn();
-  };
-  document.getElementById("googleSignInBtn2").onclick = (e) => {
-    e.preventDefault();
-    handleGoogleSignIn();
-  };
-</script>
-
-  <script>
-    // Toggle between signup and signin
-    document.getElementById("signUpButton").onclick = () => {
-      document.getElementById("signup").style.display = "block";
-      document.getElementById("signIn").style.display = "none";
-    };
-    document.getElementById("signInButton").onclick = () => {
-      document.getElementById("signup").style.display = "none";
-      document.getElementById("signIn").style.display = "block";
-    };
-
-    // Popup show/hide functions
-    function showPopup(message) {
-      document.getElementById("popupMessage").textContent = message;
-      document.getElementById("popupOverlay").style.display = "flex";
-    }
-
-    function closePopup() {
-      document.getElementById("popupOverlay").style.display = "none";
-      window.location.href = "index.html"; // Redirect after closing popup
-    }
-  </script>
 </body>
 </html>

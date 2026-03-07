@@ -8,258 +8,941 @@
     <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/style.css" />
- <script type="module" src="theme.js"></script>
-    <title>Welcome to Atal Lab with Al Coders</title>
+    <script type="module" src="theme.js"></script>
+    <title>Welcome to Atal Lab with AlCoders</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    
+    <style>
+      :root {
+        --blue:      #1877f3;
+        --blue-dark: #0f55c8;
+        --cyan:      #00d4ff;
+        --hero-bg:   #080e1e;
+        --surface:   #ffffff;
+        --surface2:  #f0f4fb;
+        --ink:       #0b1120;
+        --ink2:      #374151;
+        --muted:     #6b7280;
+        --border:    #dde3ef;
+        --rule:      #c8d3e8;
+      }
+      body.dark-theme {
+        --surface:  #111827;
+        --surface2: #1a2236;
+        --ink:      #f1f5f9;
+        --ink2:     #cbd5e1;
+        --muted:    #94a3b8;
+        --border:   #1e2d47;
+        --rule:     #1e2d47;
+      }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body {
+        font-family: 'IBM Plex Sans', sans-serif;
+        background: var(--surface);
+        color: var(--ink);
+        -webkit-font-smoothing: antialiased;
+        transition: background 0.3s, color 0.3s;
+        overflow-x: hidden;
+      }
+
+      /* ── PARTICLE CANVAS ── */
+      #particles {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.35;
+      }
+
+      /* ── SCROLL REVEAL ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(36px);
+        transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-delay-1 { transition-delay: 0.1s; }
+      .reveal-delay-2 { transition-delay: 0.2s; }
+      .reveal-delay-3 { transition-delay: 0.3s; }
+
+      /* ══════════════════════════════════
+         HERO
+      ══════════════════════════════════ */
+      .hero {
+        position: relative;
+        background: var(--hero-bg);
+        min-height: 96vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        padding: 120px 48px 80px;
+        z-index: 1;
+      }
+
+      /* Animated dot grid */
+      .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(24,119,243,0.22) 1px, transparent 1px);
+        background-size: 36px 36px;
+        animation: gridShift 20s linear infinite;
+        pointer-events: none;
+      }
+      @keyframes gridShift {
+        0%   { background-position: 0 0; }
+        100% { background-position: 36px 36px; }
+      }
+
+      /* Glowing orb */
+      .hero-orb {
+        position: absolute;
+        width: 700px; height: 700px;
+        right: -160px; top: -140px;
+        background: radial-gradient(circle at 40% 40%, #1877f3 0%, #00d4ff 40%, transparent 70%);
+        opacity: 0.13;
+        border-radius: 50%;
+        filter: blur(72px);
+        animation: orbPulse 7s ease-in-out infinite;
+        pointer-events: none;
+      }
+      @keyframes orbPulse {
+        0%,100% { transform: scale(1) rotate(0deg);   opacity: 0.13; }
+        33%      { transform: scale(1.1) rotate(5deg);  opacity: 0.20; }
+        66%      { transform: scale(0.95) rotate(-3deg);opacity: 0.10; }
+      }
+
+      /* Second smaller orb */
+      .hero-orb2 {
+        position: absolute;
+        width: 360px; height: 360px;
+        left: -80px; bottom: -80px;
+        background: radial-gradient(circle, #00d4ff 0%, transparent 70%);
+        opacity: 0.07;
+        border-radius: 50%;
+        filter: blur(50px);
+        animation: orbPulse2 9s ease-in-out infinite;
+        pointer-events: none;
+      }
+      @keyframes orbPulse2 {
+        0%,100% { transform: scale(1);    opacity: 0.07; }
+        50%      { transform: scale(1.15); opacity: 0.13; }
+      }
+
+      /* Scanning line */
+      .hero-scan {
+        position: absolute;
+        left: 0; top: 0;
+        width: 100%; height: 2px;
+        background: linear-gradient(90deg, transparent 0%, var(--cyan) 50%, transparent 100%);
+        opacity: 0;
+        animation: scanLine 4s ease-in-out 1.5s infinite;
+        pointer-events: none;
+      }
+      @keyframes scanLine {
+        0%   { top: 0%;   opacity: 0; }
+        10%  { opacity: 0.5; }
+        90%  { opacity: 0.5; }
+        100% { top: 100%; opacity: 0; }
+      }
+
+      /* Bottom accent */
+      .hero-line {
+        position: absolute;
+        left: 0; bottom: 0;
+        width: 100%; height: 2px;
+        background: linear-gradient(90deg, transparent, var(--blue), var(--cyan), transparent);
+        opacity: 0.7;
+        animation: lineGlow 3s ease-in-out infinite alternate;
+      }
+      @keyframes lineGlow {
+        from { opacity: 0.4; }
+        to   { opacity: 0.9; }
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 2;
+        max-width: 1040px;
+        margin: 0 auto;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+      }
+
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--cyan);
+        margin-bottom: 24px;
+        animation: fadeUp 0.7s ease 0.2s both;
+      }
+      .hero-eyebrow::before {
+        content: '';
+        width: 28px; height: 1px;
+        background: var(--cyan);
+        display: block;
+        animation: expandLine 0.6s ease 0.4s both;
+        transform-origin: left;
+      }
+      @keyframes expandLine {
+        from { transform: scaleX(0); }
+        to   { transform: scaleX(1); }
+      }
+
+      .hero h1 {
+        font-family: 'Rajdhani', sans-serif;
+        font-weight: 700;
+        font-size: clamp(2.8rem, 5.5vw, 5rem);
+        color: #ffffff;
+        line-height: 1.0;
+        letter-spacing: -0.01em;
+        margin-bottom: 24px;
+        animation: fadeUp 0.7s ease 0.35s both;
+      }
+      .hero h1 .accent { color: var(--cyan); }
+      .hero h1 .name-dynamic { color: #fff; }
+
+      /* Typewriter cursor */
+      .cursor {
+        display: inline-block;
+        width: 3px;
+        height: 0.85em;
+        background: var(--cyan);
+        margin-left: 3px;
+        vertical-align: middle;
+        animation: blink 1s step-end infinite;
+      }
+      @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+      .hero-sub {
+        font-size: 1rem;
+        color: rgba(255,255,255,0.55);
+        line-height: 1.85;
+        font-weight: 300;
+        max-width: 420px;
+        margin-bottom: 36px;
+        animation: fadeUp 0.7s ease 0.5s both;
+      }
+
+      .hero-cta-row {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        animation: fadeUp 0.7s ease 0.65s both;
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        background: var(--blue);
+        color: #fff;
+        font-family: 'Rajdhani', sans-serif;
+        font-weight: 700;
+        font-size: 0.95rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 13px 26px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        border-radius: 3px;
+        position: relative;
+        overflow: hidden;
+        transition: background 0.18s, transform 0.14s, box-shadow 0.18s;
+      }
+      .btn-primary::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+        transform: translateX(-100%);
+        transition: transform 0.5s ease;
+      }
+      .btn-primary:hover::after { transform: translateX(100%); }
+      .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(24,119,243,0.4); }
+
+      .btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        background: transparent;
+        color: rgba(255,255,255,0.7);
+        font-family: 'Rajdhani', sans-serif;
+        font-weight: 600;
+        font-size: 0.95rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 12px 24px;
+        border: 1px solid rgba(255,255,255,0.2);
+        cursor: pointer;
+        text-decoration: none;
+        border-radius: 3px;
+        transition: border-color 0.18s, color 0.18s, transform 0.14s;
+      }
+      .btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-2px); }
+
+      /* Hero panel */
+      .hero-panel {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 8px;
+        padding: 32px 28px;
+        backdrop-filter: blur(8px);
+        animation: fadeUp 0.7s ease 0.7s both;
+        transition: border-color 0.3s;
+      }
+      .hero-panel:hover { border-color: rgba(24,119,243,0.35); }
+
+      .hero-panel-label {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.3);
+        margin-bottom: 20px;
+      }
+
+      .hero-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2px;
+        background: rgba(255,255,255,0.06);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 20px;
+      }
+      .hstat {
+        background: rgba(10,18,40,0.7);
+        padding: 20px 16px;
+        text-align: center;
+        transition: background 0.2s;
+      }
+      .hstat:hover { background: rgba(24,119,243,0.15); }
+      .hstat-num {
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--blue);
+        line-height: 1;
+      }
+      .hstat-label {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.4);
+        margin-top: 5px;
+        display: block;
+      }
+
+      .hero-categories { display: flex; flex-direction: column; gap: 8px; }
+      .hero-cat-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 14px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      }
+      .hero-cat-item:hover { background: rgba(24,119,243,0.15); border-color: rgba(24,119,243,0.4); transform: translateX(4px); }
+      .hero-cat-icon { font-size: 1rem; width: 20px; text-align: center; }
+      .hero-cat-name { font-size: 0.85rem; font-weight: 500; color: rgba(255,255,255,0.65); flex: 1; }
+      .hero-cat-arrow { font-size: 0.65rem; color: rgba(255,255,255,0.25); transition: color 0.2s, transform 0.2s; }
+      .hero-cat-item:hover .hero-cat-arrow { color: var(--cyan); transform: translateX(3px); }
+
+      /* ══════════════════════════════════
+         COURSES STRIP
+      ══════════════════════════════════ */
+      .courses-strip {
+        background: var(--ink);
+        padding: 60px 48px;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+      }
+      .courses-strip::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(24,119,243,0.1) 1px, transparent 1px);
+        background-size: 28px 28px;
+      }
+      .courses-inner {
+        max-width: 1040px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+      .courses-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 32px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .courses-header .s-label { color: var(--cyan); }
+      .courses-header .s-title { color: #fff; }
+      .courses-header .s-link { color: rgba(255,255,255,0.5); }
+      .courses-header .s-link:hover { color: var(--cyan); }
+
+      .courses-grid {
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        gap: 16px;
+      }
+      .course-card {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 8px;
+        padding: 28px 22px;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.25s cubic-bezier(.22,1,.36,1), border-color 0.2s, background 0.2s, box-shadow 0.25s;
+      }
+      .course-card::before {
+        content: '';
+        position: absolute;
+        bottom: 0; left: 0;
+        width: 100%; height: 3px;
+        background: var(--course-color, var(--blue));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+      }
+      .course-card:hover::before { transform: scaleX(1); }
+      .course-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(255,255,255,0.2);
+        background: rgba(255,255,255,0.07);
+        box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+      }
+      .course-card-icon {
+        font-size: 2rem;
+        display: block;
+        transition: transform 0.3s ease;
+      }
+      .course-card:hover .course-card-icon { transform: scale(1.15) rotate(-5deg); }
+      .course-card-tag {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--course-color, var(--blue));
+      }
+      .course-card-title {
+        font-family: 'Rajdhani', sans-serif;
+        font-weight: 700;
+        font-size: 1.15rem;
+        color: #ffffff;
+        letter-spacing: 0.01em;
+        line-height: 1.2;
+      }
+      .course-card-desc {
+        font-size: 0.8rem;
+        color: rgba(255,255,255,0.45);
+        line-height: 1.65;
+        flex: 1;
+      }
+      .course-card-footer {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.65rem;
+        color: rgba(255,255,255,0.3);
+        letter-spacing: 0.08em;
+      }
+      .course-card-footer i { font-size: 0.6rem; }
+
+      /* ══════════════════════════════════
+         PAGE BODY
+      ══════════════════════════════════ */
+      .page {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 72px 24px 100px;
+        display: flex;
+        flex-direction: column;
+        gap: 80px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .s-head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 12px; }
+      .s-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; display: flex; align-items: center; gap: 7px; }
+      .s-label::before { content: '//'; opacity: 0.4; }
+      .s-title { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.9rem; color: var(--ink); letter-spacing: 0.01em; line-height: 1.1; }
+      .s-link { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); text-decoration: none; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+      .s-link:hover { text-decoration: underline; }
+
+      /* ── FEATURED PROJECT ── */
+      .featured-card {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 32px rgba(24,119,243,0.07);
+        transition: transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s, background 0.3s;
+      }
+      .featured-card:hover { transform: translateY(-4px); box-shadow: 0 20px 56px rgba(24,119,243,0.14); }
+
+      .feat-visual {
+        background: linear-gradient(135deg, #080e1e 0%, #0f2460 50%, #1877f3 100%);
+        position: relative;
+        min-height: 340px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .feat-visual::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(0,212,255,0.15) 1px, transparent 1px);
+        background-size: 22px 22px;
+        animation: gridShift 15s linear infinite;
+      }
+      /* Rotating ring */
+      .feat-ring {
+        position: absolute;
+        width: 220px; height: 220px;
+        border: 1px solid rgba(0,212,255,0.2);
+        border-radius: 50%;
+        animation: spin 12s linear infinite;
+      }
+      .feat-ring::after {
+        content: '';
+        position: absolute;
+        width: 6px; height: 6px;
+        background: var(--cyan);
+        border-radius: 50%;
+        top: -3px; left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 0 10px var(--cyan);
+      }
+      .feat-ring2 {
+        position: absolute;
+        width: 160px; height: 160px;
+        border: 1px solid rgba(24,119,243,0.3);
+        border-radius: 50%;
+        animation: spin 8s linear infinite reverse;
+      }
+      @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+      .feat-icon-wrap { position: relative; z-index: 1; text-align: center; }
+      .feat-icon-wrap .big-icon { font-size: 4.5rem; display: block; margin-bottom: 12px; filter: drop-shadow(0 0 24px rgba(0,212,255,0.6)); animation: iconFloat 3s ease-in-out infinite; }
+      @keyframes iconFloat {
+        0%,100% { transform: translateY(0);   }
+        50%      { transform: translateY(-8px); }
+      }
+      .feat-badge { display: inline-block; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 5px 12px; border-radius: 2px; }
+
+      .feat-body { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+      .feat-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+      .feat-title { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.8rem; color: var(--ink); line-height: 1.15; letter-spacing: 0.01em; margin-bottom: 16px; }
+      .feat-desc { font-size: 0.93rem; color: var(--ink2); line-height: 1.8; margin-bottom: 28px; }
+      .feat-meta { display: flex; gap: 20px; margin-bottom: 28px; flex-wrap: wrap; }
+      .feat-meta-item { display: flex; align-items: center; gap: 7px; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em; }
+      .feat-meta-item i { color: var(--blue); font-size: 0.75rem; }
+
+      /* ── NEWS GRID ── */
+      .news-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+      .news-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.25s cubic-bezier(.22,1,.36,1), border-color 0.2s, box-shadow 0.25s, background 0.3s;
+        cursor: default;
+      }
+      .news-card:hover { transform: translateY(-6px); border-color: var(--blue); box-shadow: 0 12px 36px rgba(24,119,243,0.12); }
+      .news-card-top {
+        background: linear-gradient(135deg, #080e1e, #0f2460);
+        padding: 24px;
+        position: relative;
+        overflow: hidden;
+      }
+      .news-card-top::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(rgba(24,119,243,0.2) 1px, transparent 1px); background-size: 20px 20px; }
+      .news-card-emoji { position: relative; z-index: 1; font-size: 2rem; display: block; transition: transform 0.3s ease; }
+      .news-card:hover .news-card-emoji { transform: scale(1.2) rotate(8deg); }
+      .news-date { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); position: relative; z-index: 1; margin-top: 8px; display: block; }
+      .news-card-body { padding: 20px 20px 24px; flex: 1; display: flex; flex-direction: column; }
+      .news-type { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+      .news-title { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--ink); line-height: 1.25; margin-bottom: 10px; letter-spacing: 0.01em; }
+      .news-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; flex: 1; }
+
+      /* ── ANIMATIONS ── */
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(22px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      /* ── RESPONSIVE ── */
+      @media(max-width:860px) {
+        .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+        .hero-panel { display: none; }
+        .featured-card { grid-template-columns: 1fr; }
+        .feat-visual { min-height: 200px; }
+        .news-grid { grid-template-columns: 1fr 1fr; }
+        .courses-grid { grid-template-columns: 1fr 1fr; }
+        .hero { padding: 100px 24px 60px; min-height: auto; }
+        .courses-strip { padding: 48px 24px; }
+      }
+      @media(max-width:560px) {
+        .news-grid { grid-template-columns: 1fr; }
+        .courses-grid { grid-template-columns: 1fr; }
+        .feat-body { padding: 28px 22px; }
+      }
+    </style>
   </head>
-  <style>
-    img {
-  width: 100%;
-  height: 300;
-  margin-right: 0;
-  padding-top: 70px;
-}
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
 
-  text-align: center;
-}
-p{
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  text-align: center;
-}
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #ffffff;
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
-
-/* Animated Background */
-.animated-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('circuit.gif') repeat;
-    opacity: 0.4; /* Reduced for a subtle effect */
-    z-index: -1;
-}
-
-/* Header */
-header {
-    padding: 50px;
-}
-
-h1 {
-    font-size: 2.5rem;
-    color: #000;
-}
-
-.cta-btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 15px 25px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.cta-btn:hover {
-    background-color: #0056b3;
-}
-
-/* Dashboard */
-.dashboard {
-    margin: 30px;
-    background-color: #ddd; /* Same as footer */
-    border-radius: 10px;
-    padding: 30px 0 30px 0;
-    box-shadow: none;
-}
-
-.categories {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.category {
-    background-color: #e9ecef;
-    padding: 15px 30px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-    font-weight: bold;
-}
-
-.category:hover {
-    background-color: #007bff;
-    color: white;
-}
-
-/* Sections */
-.featured, .events {
-    background-color: transparent; /* Remove white background */
-    padding: 20px;
-    margin: 20px 0;
-    border-radius: 10px;
-    box-shadow: none; /* Remove box shadow from section */
-}
-.featured-box {
-  background: #ddd; /* Same as footer */
-  border: none; /* Remove bluish outline */
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(24,119,243,0.07);
-  padding: 24px 20px;
-  max-width: 400px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-/* Footer */
-footer {
-    background-color: #ddd;
-    padding: 20px;
-}
-section .featured{
-    margin: 20px 0;
-  padding: 80px 90px;
- 
-}
-
-
-
-  </style>
   <body>
-    <div id="nav"></div>
-  
-    <!-- Search pop-up -->
+  <div id="nav"></div>
+
     <div id="searchPopup" class="search-popup">
       <div class="popup-content">
         <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
-        <input
-          type="text"
-          id="searchBar"
-          placeholder="Search here..."
-          oninput="showRecommendations()"
-        />
+        <input type="text" id="searchBar" placeholder="Search here..." oninput="showRecommendations()" />
         <div class="result-box" id="resultBox"></div>
       </div>
     </div>
 
-  <!-- Animated Background -->
-  <div class="animated-bg"></div>
+    <!-- Particle canvas -->
+    <canvas id="particles"></canvas>
 
-  <!-- Header -->
-  <header>
-    <br><br>
-      <h1>  Viswadeepthi English Medium School (CBSE)@<br> AlCoders Atal Tinkering Lab<span id="changeName"></span></h1>
-      <p>Where students turn ideas into reality with technology!</p>
-      <button class="cta-btn"><a href="projects.html" style="color: #e9ecef;">Explore Projects</a></button>
-  </header>
+    <!-- ══ HERO ══════════════════════════════════════════ -->
+    <section class="hero">
+      <div class="hero-orb"></div>
+      <div class="hero-orb2"></div>
+      <div class="hero-scan"></div>
+      <div class="hero-line"></div>
 
-  <!-- Interactive Dashboard -->
-  <section class="dashboard">
-      <h2>🔬 Explore Our Innovation Hub</h2>
-      <div class="categories">
-          <div class="category"><a href="roboticsCourse.html" style="color:#000;">🤖 Robotics</a></div>
-          <div class="category"><a href="iotCourse.html" style="color:#000;">🌍 IoT & Smart Systems</a></div>
-          <div class="category">💡 Electronics</div>
-          <div class="category"><a href="webDevCourse.html" style="color:#000;">🖥️ Web Development</a ></div>
-            
+      <div class="hero-inner">
+        <div class="hero-left">
+          <div class="hero-eyebrow">Viswadeepthi CBSE &nbsp;·&nbsp; ATL Lab</div>
+          <h1>
+            AlCoders<br>
+            <span class="accent">Atal</span> Tinkering<br>
+            Lab<span id="changeName"></span><span class="cursor"></span>
+          </h1>
+          <p class="hero-sub">Where students turn ideas into reality — through robotics, IoT, AI, and hands-on engineering that goes beyond the textbook.</p>
+          <div class="hero-cta-row">
+            <a href="projects.html" class="btn-primary"><i class="fas fa-rocket"></i> Explore Projects</a>
+            <a href="about us.html" class="btn-ghost"><i class="fas fa-info-circle"></i> Learn More</a>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="hero-panel-label">// Lab Overview</div>
+          <div class="hero-stats">
+            <div class="hstat"><div class="hstat-num" data-target="75">0</div><span class="hstat-label">Projects</span></div>
+            <div class="hstat"><div class="hstat-num" data-target="100">0</div><span class="hstat-label">Students</span></div>
+            <div class="hstat"><div class="hstat-num" data-target="6">0</div><span class="hstat-label">Years</span></div>
+            <div class="hstat"><div class="hstat-num" data-target="4">0</div><span class="hstat-label">Domains</span></div>
+          </div>
+          <div class="hero-categories">
+            <a href="roboticsCourse.html" class="hero-cat-item"><span class="hero-cat-icon">🤖</span><span class="hero-cat-name">Robotics</span><span class="hero-cat-arrow">▸</span></a>
+            <a href="iotCourse.html" class="hero-cat-item"><span class="hero-cat-icon">🌍</span><span class="hero-cat-name">IoT &amp; Smart Systems</span><span class="hero-cat-arrow">▸</span></a>
+            <a href="webDevCourse.html" class="hero-cat-item"><span class="hero-cat-icon">🖥️</span><span class="hero-cat-name">Web Development</span><span class="hero-cat-arrow">▸</span></a>
+            <a href="#" class="hero-cat-item"><span class="hero-cat-icon">💡</span><span class="hero-cat-name">Electronics</span><span class="hero-cat-arrow">▸</span></a>
+          </div>
+        </div>
       </div>
-  </section>
+    </section>
 
-  <!-- Featured Project -->
-  <section class="featured">
-  <div class="featured-box">
-    <h2>🏆 Our Top Project</h2>
-    <p>📌 "Rfid based Healthcare DataBase"</p>
-    <button style="background-color:#1877f3; color:#fff; border:none; padding:10px 24px; border-radius:6px; cursor:pointer; font-size:16px; margin-top:18px;">
-  <a href="codexx.html" style="color:#fff; text-decoration:none;">📜 Read Guide</a>
-</button>
-  </div>
-</section>
+    <!-- ══ COURSES STRIP ═════════════════════════════════ -->
+    <section class="courses-strip">
+      <div class="courses-inner">
+        <div class="courses-header reveal">
+          <div>
+            <div class="s-label" style="color:var(--cyan);">// Learn</div>
+            <div class="s-title" style="color:#fff;">Our Courses</div>
+          </div>
+          <a href="webDevCourse.html" class="s-link" style="color:rgba(255,255,255,0.45);">Browse All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="courses-grid">
+          <a href="roboticsCourse.html" class="course-card reveal reveal-delay-1" style="--course-color:#f97316;">
+            <span class="course-card-icon">🤖</span>
+            <div class="course-card-tag">Robotics</div>
+            <div class="course-card-title">Robotics &amp; Automation</div>
+            <div class="course-card-desc">Build and program autonomous robots using Arduino, sensors, and motor controllers. From line followers to advanced bots.</div>
+            <div class="course-card-footer"><i class="fas fa-book-open"></i> 8 Modules &nbsp;·&nbsp; Beginner–Advanced</div>
+          </a>
+          <a href="iotCourse.html" class="course-card reveal reveal-delay-2" style="--course-color:#22c55e;">
+            <span class="course-card-icon">🌍</span>
+            <div class="course-card-tag">IoT</div>
+            <div class="course-card-title">IoT &amp; Smart Systems</div>
+            <div class="course-card-desc">Design connected devices using ESP8266, Firebase, and sensors to monitor and control real-world systems remotely.</div>
+            <div class="course-card-footer"><i class="fas fa-book-open"></i> 6 Modules &nbsp;·&nbsp; Intermediate</div>
+          </a>
+          <a href="WebDevCourse/index.html" class="course-card reveal reveal-delay-3" style="--course-color:#1877f3;">
+            <span class="course-card-icon">🖥️</span>
+            <div class="course-card-tag">Web Dev</div>
+            <div class="course-card-title">Web Development</div>
+            <div class="course-card-desc">Master HTML, CSS, and JavaScript from the ground up. Build real websites with live editors and project-based learning.</div>
+            <div class="course-card-footer"><i class="fas fa-book-open"></i> 8 Modules &nbsp;·&nbsp; Beginner</div>
+          </a>
+          <a href="#" class="course-card reveal reveal-delay-1" style="--course-color:#a855f7;">
+            <span class="course-card-icon">💡</span>
+            <div class="course-card-tag">Electronics</div>
+            <div class="course-card-title">Electronics &amp; Circuits</div>
+            <div class="course-card-desc">Understand circuits, components, and PCB design. Learn the fundamentals that power every hardware project we build.</div>
+            <div class="course-card-footer"><i class="fas fa-book-open"></i> Coming Soon</div>
+          </a>
+        </div>
+      </div>
+    </section>
 
-  <!-- Footer -->
-  
+    <!-- ══ PAGE BODY ══════════════════════════════════════ -->
+    <div class="page">
+
+      <!-- FEATURED PROJECT -->
+      <section class="reveal">
+        <div class="s-head">
+          <div>
+            <div class="s-label">Spotlight</div>
+            <div class="s-title">Featured Project</div>
+          </div>
+          <a href="projects.html" class="s-link">All Projects <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="featured-card">
+          <div class="feat-visual">
+            <div class="feat-ring"></div>
+            <div class="feat-ring2"></div>
+            <div class="feat-icon-wrap">
+              <span class="big-icon">🏥</span>
+              <span class="feat-badge">Top Project · AlCoders</span>
+            </div>
+          </div>
+          <div class="feat-body">
+            <div class="feat-tag">// Healthcare · RFID · Firebase</div>
+            <div class="feat-title">RFID-Based Healthcare Database</div>
+            <p class="feat-desc">A smart patient management system using RFID cards to instantly retrieve and update medical records stored in Firebase — enabling faster, error-free healthcare data access in real-world clinic scenarios.</p>
+            <div class="feat-meta">
+              <div class="feat-meta-item"><i class="fas fa-microchip"></i> Arduino + RFID RC522</div>
+              <div class="feat-meta-item"><i class="fas fa-database"></i> Firebase Realtime DB</div>
+              <div class="feat-meta-item"><i class="fas fa-mobile-alt"></i> Mobile Dashboard</div>
+            </div>
+            <a href="codexx.html" class="btn-primary" style="align-self:flex-start;"><i class="fas fa-book-open"></i> Read Guide</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- NEWS / EVENTS -->
+      <section class="reveal">
+        <div class="s-head">
+          <div>
+            <div class="s-label">Updates</div>
+            <div class="s-title">Latest News &amp; Events</div>
+          </div>
+        </div>
+        <div class="news-grid">
+          <div class="news-card reveal reveal-delay-1">
+            <div class="news-card-top">
+              <span class="news-card-emoji">🏆</span>
+              <span class="news-date">March 2025</span>
+            </div>
+            <div class="news-card-body">
+              <div class="news-type">Achievement</div>
+              <div class="news-title">ATL Marathon District Finalist</div>
+              <p class="news-desc">AlCoders team selected as district finalists in the Atal Innovation Marathon, competing against schools across Thiruvananthapuram.</p>
+            </div>
+          </div>
+          <div class="news-card reveal reveal-delay-2">
+            <div class="news-card-top">
+              <span class="news-card-emoji">🚀</span>
+              <span class="news-date">February 2025</span>
+            </div>
+            <div class="news-card-body">
+              <div class="news-type">New Course</div>
+              <div class="news-title">Web Development Course Launched</div>
+              <p class="news-desc">Our comprehensive Web Development course covering HTML, CSS, JavaScript, and real project building is now live for all members.</p>
+            </div>
+          </div>
+          <div class="news-card reveal reveal-delay-3">
+            <div class="news-card-top">
+              <span class="news-card-emoji">🤖</span>
+              <span class="news-date">January 2025</span>
+            </div>
+            <div class="news-card-body">
+              <div class="news-type">Workshop</div>
+              <div class="news-title">Robotics Workshop — Grades 6–9</div>
+              <p class="news-desc">A two-day hands-on robotics workshop introduced 30+ junior students to Arduino programming, sensors, and autonomous movement.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
     <div id="footer"></div>
-
-    
     <script src="navigation.js"></script>
-    <script src="loadNav.js"></script>
-    <script>const username = localStorage.getItem("username");
-if (username) {
-  document.getElementById("navUserName").textContent = username;
-}
-</script>
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+<script src="loadNav.js"></script>
+    <script>
+      /* ── 1. PARTICLE CANVAS ── */
+      (function(){
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let W, H, particles = [];
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBIMtf6DXnAxWKdkoLkfxn7b7zBoAr8Ouk",
-    authDomain: "alcodersatal-database.firebaseapp.com",
-    projectId: "alcodersatal-database",
-    storageBucket: "alcodersatal-database.firebasestorage.app",
-    messagingSenderId: "1092849520429",
-    appId: "1:1092849520429:web:ecf950a9aa868e37760da4"
-  };
+        function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize);
+        resize();
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
+        class Particle {
+          constructor(){
+            this.x = Math.random() * W;
+            this.y = Math.random() * H;
+            this.r = Math.random() * 1.5 + 0.3;
+            this.dx = (Math.random() - 0.5) * 0.4;
+            this.dy = (Math.random() - 0.5) * 0.4;
+            this.alpha = Math.random() * 0.5 + 0.1;
+          }
+          update(){
+            this.x += this.dx;
+            this.y += this.dy;
+            if(this.x < 0 || this.x > W) this.dx *= -1;
+            if(this.y < 0 || this.y > H) this.dy *= -1;
+          }
+          draw(){
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+            ctx.fillStyle = `rgba(24,119,243,${this.alpha})`;
+            ctx.fill();
+          }
+        }
 
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      const docRef = doc(db, "users", user.uid);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        document.getElementById("changeName").textContent = " - " + (data.username || "User");
-      } else {
-        document.getElementById("changeName").textContent = " - User";
-      }
-    } else {
-      document.getElementById("changeName").textContent = "";
-    }
-  });
-</script>
-<script>
-window.addEventListener('DOMContentLoaded', function() {
-  // Check login status
-  const username = localStorage.getItem('username');
-  const loginFailed = localStorage.getItem('loginFailed');
+        for(let i=0; i<80; i++) particles.push(new Particle());
 
-  // Hide username if not logged in
-  if (!username) {
-    // Example: document.getElementById('usernameDisplay').style.display = 'none';
-  } else {
-    // Example: document.getElementById('usernameDisplay').textContent = username;
-  }
+        function drawLines(){
+          for(let i=0;i<particles.length;i++){
+            for(let j=i+1;j<particles.length;j++){
+              const dist = Math.hypot(particles[i].x-particles[j].x, particles[i].y-particles[j].y);
+              if(dist < 110){
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.strokeStyle = `rgba(24,119,243,${0.08*(1-dist/110)})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+              }
+            }
+          }
+        }
 
-  // Show popup if login failed
-  if (loginFailed) {
-    alert('Login failed! Please check your credentials and try again.');
-    localStorage.removeItem('loginFailed');
-  }
-});
-</script>
-    
- 
+        function loop(){
+          ctx.clearRect(0,0,W,H);
+          particles.forEach(p=>{ p.update(); p.draw(); });
+          drawLines();
+          requestAnimationFrame(loop);
+        }
+        loop();
+      })();
+
+      /* ── 2. SCROLL REVEAL ── */
+      (function(){
+        const els = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries)=>{
+          entries.forEach(e=>{
+            if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.12 });
+        els.forEach(el => io.observe(el));
+      })();
+
+      /* ── 3. COUNTER ANIMATION ── */
+      (function(){
+        const counters = document.querySelectorAll('.hstat-num[data-target]');
+        const suffixes = { 75:'+', 100:'+', 6:'+', 4:'' };
+        let started = false;
+        function startCounters(){
+          if(started) return;
+          started = true;
+          counters.forEach(el => {
+            const target = +el.dataset.target;
+            const suffix = suffixes[target] || '';
+            const dur = 1400;
+            const step = 16;
+            const steps = dur / step;
+            let cur = 0;
+            const inc = target / steps;
+            const t = setInterval(()=>{
+              cur += inc;
+              if(cur >= target){ cur = target; clearInterval(t); }
+              el.textContent = Math.floor(cur) + suffix;
+            }, step);
+          });
+        }
+        // Start after hero panel animates in
+        setTimeout(startCounters, 900);
+      })();
+
+      /* ── 4. FIREBASE AUTH ── */
+    </script>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+      import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBIMtf6DXnAxWKdkoLkfxn7b7zBoAr8Ouk",
+        authDomain: "alcodersatal-database.firebaseapp.com",
+        projectId: "alcodersatal-database",
+        storageBucket: "alcodersatal-database.firebasestorage.app",
+        messagingSenderId: "1092849520429",
+        appId: "1:1092849520429:web:ecf950a9aa868e37760da4"
+      };
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          const docSnap = await getDoc(doc(db, "users", user.uid));
+          const name = docSnap.exists() ? (docSnap.data().username || "User") : "User";
+          document.getElementById("changeName").textContent = " — " + name;
+        } else {
+          document.getElementById("changeName").textContent = "";
+        }
+      });
+    </script>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', function(){
+        const username = localStorage.getItem("username");
+        if(username){ const el=document.getElementById("navUserName"); if(el) el.textContent=username; }
+        const loginFailed = localStorage.getItem('loginFailed');
+        if(loginFailed){ alert('Login failed! Please check your credentials.'); localStorage.removeItem('loginFailed'); }
+      });
+    </script>
+
   </body>
 </html>

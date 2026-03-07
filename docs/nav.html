@@ -1,64 +1,532 @@
-<nav>
-  <!-- Hamburger for mobile -->
-  <div class="hamburger" onclick="toggleSidebar()" aria-label="Open menu">
-    <div></div>
-    <div></div>
-    <div></div>
+<!-- ═══════════════════════════════════════════════
+     AlCoders Navigation — nav.html
+     Link to any page with loadNav.js
+═══════════════════════════════════════════════ -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous"/>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet"/>
+
+<style>
+  /* ─── VARIABLES ─────────────────────────────── */
+  :root {
+    --blue:      #1877f3;
+    --blue-dark: #0f55c8;
+    --cyan:      #00d4ff;
+    --ink:       #0b1120;
+    --ink2:      #374151;
+    --muted:     #6b7280;
+    --border:    #e2e8f0;
+    --nav-h:     64px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  /* ─── NAV WRAPPER ──────────────────────────── */
+  nav#mainNav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.06), 0 4px 24px rgba(24,119,243,0.07);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 28px;
+    transform: translateY(0);
+    transition: transform 0.38s cubic-bezier(.22,1,.36,1),
+                box-shadow 0.3s;
+  }
+  nav#mainNav::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 2px; width: 100%;
+    background: linear-gradient(90deg, var(--blue), var(--cyan), transparent 80%);
+    opacity: 0.6;
+  }
+  nav#mainNav.nav-hidden  { transform: translateY(calc(-1 * var(--nav-h) - 4px)); }
+  nav#mainNav.nav-scrolled { box-shadow: 0 4px 32px rgba(24,119,243,0.13); }
+
+  /* Pushes page content below fixed nav */
+  body { padding-top: var(--nav-h); }
+
+  /* ─── BRAND ─────────────────────────────────── */
+  .nav-brand {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none; flex-shrink: 0; margin-right: 32px;
+  }
+  .nav-brand-logo {
+    width: 34px; height: 34px;
+    background: var(--blue); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700; font-size: 1rem; color: #fff;
+    flex-shrink: 0; position: relative; overflow: hidden;
+    transition: transform 0.2s;
+  }
+  .nav-brand-logo::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg,rgba(255,255,255,0.2) 0%,transparent 60%);
+  }
+  .nav-brand:hover .nav-brand-logo { transform: rotate(-5deg) scale(1.05); }
+  .nav-brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+  .nav-brand-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700; font-size: 1.15rem; color: var(--ink); letter-spacing: 0.04em;
+  }
+  .nav-brand-name span { color: var(--blue); }
+  .nav-brand-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted);
+  }
+
+  /* ─── DESKTOP LINKS ─────────────────────────── */
+  .nav-links {
+    display: flex; align-items: center;
+    list-style: none; gap: 2px; flex: 1; padding: 0; margin: 0;
+  }
+  .nav-links > li > a {
+    display: flex; align-items: center; gap: 6px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600; font-size: 0.95rem;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--ink2); text-decoration: none;
+    padding: 8px 13px; border-radius: 6px;
+    position: relative;
+    transition: color 0.18s, background 0.18s;
+    white-space: nowrap;
+  }
+  .nav-links > li > a::after {
+    content: '';
+    position: absolute; bottom: 4px; left: 13px; right: 13px;
+    height: 2px; background: var(--blue); border-radius: 2px;
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.22s cubic-bezier(.22,1,.36,1);
+  }
+  .nav-links > li > a:hover::after,
+  .nav-links > li > a.nav-active::after { transform: scaleX(1); }
+  .nav-links > li > a:hover { color: var(--blue); background: rgba(24,119,243,0.06); }
+  .nav-links > li > a.nav-active { color: var(--blue); background: rgba(24,119,243,0.07); }
+
+  .nav-dd-arrow {
+    font-size: 0.55rem; opacity: 0.5;
+    transition: transform 0.22s ease;
+  }
+  .nav-links > li.nav-has-dd:hover .nav-dd-arrow { transform: rotate(180deg); }
+
+  /* ─── DROPDOWN ──────────────────────────────── */
+  .nav-links > li.nav-has-dd { position: relative; }
+  .nav-dropdown {
+    position: absolute; top: calc(100% + 8px); left: 0;
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 12px 40px rgba(24,119,243,0.13);
+    min-width: 200px; list-style: none;
+    padding: 8px; margin: 0;
+    opacity: 0; transform: translateY(-8px) scale(0.97);
+    transform-origin: top left; pointer-events: none;
+    transition: opacity 0.22s cubic-bezier(.22,1,.36,1),
+                transform 0.22s cubic-bezier(.22,1,.36,1);
+  }
+  .nav-links > li.nav-has-dd:hover .nav-dropdown {
+    opacity: 1; transform: translateY(0) scale(1); pointer-events: auto;
+  }
+  .nav-dropdown li a {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.88rem; font-weight: 500;
+    color: var(--ink2); text-decoration: none;
+    padding: 9px 12px; border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-dropdown li a i { color: var(--blue); font-size: 0.8rem; width: 16px; text-align: center; }
+  .nav-dropdown li a:hover { background: rgba(24,119,243,0.07); color: var(--blue); }
+  .nav-dd-sep { height: 1px; background: var(--border); margin: 6px 8px; }
+
+  /* ─── RIGHT SIDE ─────────────────────────────── */
+  .nav-right {
+    display: flex; align-items: center; gap: 6px; margin-left: auto;
+  }
+  .nav-icon-btn {
+    width: 36px; height: 36px; border-radius: 8px;
+    border: 1px solid var(--border); background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--ink2); font-size: 0.9rem;
+    text-decoration: none;
+    transition: background 0.18s, color 0.18s, border-color 0.18s;
+  }
+  .nav-icon-btn:hover { background: rgba(24,119,243,0.07); color: var(--blue); border-color: rgba(24,119,243,0.25); }
+  .nav-gear-btn { transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.35s; }
+  .nav-gear-btn:hover { transform: rotate(65deg); background: rgba(24,119,243,0.07); color: var(--blue); border-color: rgba(24,119,243,0.25); }
+  .nav-gear-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+  .nav-login-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700; font-size: 0.88rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    background: var(--blue); color: #fff;
+    text-decoration: none; padding: 8px 18px;
+    border-radius: 7px; border: none; cursor: pointer;
+    margin-left: 4px; position: relative; overflow: hidden;
+    transition: background 0.18s, transform 0.14s, box-shadow 0.18s;
+  }
+  .nav-login-btn::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(120deg,transparent 30%,rgba(255,255,255,0.15) 50%,transparent 70%);
+    transform: translateX(-100%); transition: transform 0.45s;
+  }
+  .nav-login-btn:hover::after { transform: translateX(100%); }
+  .nav-login-btn:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(24,119,243,0.35); }
+
+  /* ─── USER AVATAR ───────────────────────────── */
+  .nav-avatar-wrap {
+    position: relative; display: none;
+    align-items: center; gap: 8px;
+  }
+  .nav-avatar-wrap.nav-av-visible { display: flex; }
+  .nav-avatar-circle {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700; font-size: 0.95rem; color: #fff;
+    cursor: pointer; border: 2px solid transparent;
+    transition: border-color 0.2s, transform 0.2s; position: relative;
+  }
+  .nav-avatar-circle:hover { border-color: var(--blue); transform: scale(1.05); }
+  .nav-avatar-circle::after {
+    content: ''; position: absolute;
+    width: 9px; height: 9px; background: #22c55e;
+    border-radius: 50%; border: 2px solid #fff;
+    bottom: 0; right: 0;
+  }
+  .nav-av-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600; font-size: 0.9rem; color: var(--ink); letter-spacing: 0.03em;
+  }
+  .nav-av-dropdown {
+    position: absolute; top: calc(100% + 10px); right: 0;
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 10px; box-shadow: 0 12px 40px rgba(24,119,243,0.13);
+    min-width: 200px; padding: 8px; list-style: none; margin: 0;
+    opacity: 0; transform: translateY(-8px) scale(0.97);
+    transform-origin: top right; pointer-events: none;
+    transition: opacity 0.22s cubic-bezier(.22,1,.36,1),
+                transform 0.22s cubic-bezier(.22,1,.36,1);
+  }
+  .nav-avatar-wrap:hover .nav-av-dropdown {
+    opacity: 1; transform: translateY(0) scale(1); pointer-events: auto;
+  }
+  .nav-av-header {
+    padding: 10px 12px 8px; border-bottom: 1px solid var(--border); margin-bottom: 6px;
+  }
+  .nav-av-uname { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1rem; color: var(--ink); }
+  .nav-av-role { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted); }
+  .nav-av-dropdown li a {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.88rem; color: var(--ink2); text-decoration: none;
+    padding: 9px 12px; border-radius: 6px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-av-dropdown li a i { color: var(--blue); width: 14px; text-align: center; font-size: 0.8rem; }
+  .nav-av-dropdown li a:hover { background: rgba(24,119,243,0.07); color: var(--blue); }
+  .nav-av-dropdown li a.nav-danger { color: #ef4444; }
+  .nav-av-dropdown li a.nav-danger i { color: #ef4444; }
+  .nav-av-dropdown li a.nav-danger:hover { background: rgba(239,68,68,0.07); }
+
+  /* ─── HAMBURGER ─────────────────────────────── */
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; padding: 6px; border-radius: 6px;
+    transition: background 0.18s; margin-left: auto; z-index: 10;
+  }
+  .nav-hamburger:hover { background: rgba(24,119,243,0.08); }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: var(--ink2); border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s, background 0.2s;
+  }
+  .nav-hamburger.nav-hb-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--blue); }
+  .nav-hamburger.nav-hb-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger.nav-hb-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--blue); }
+
+  /* ─── SIDEBAR OVERLAY ───────────────────────── */
+  .nav-overlay {
+    position: fixed; inset: 0;
+    background: rgba(11,17,32,0.45);
+    backdrop-filter: blur(3px);
+    z-index: 998; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .nav-overlay.nav-ov-open { opacity: 1; pointer-events: auto; }
+
+  /* ─── SIDEBAR ───────────────────────────────── */
+  .nav-sidebar {
+    position: fixed; top: 0; right: -320px;
+    width: 300px; height: 100vh;
+    background: #fff; border-left: 1px solid var(--border);
+    box-shadow: -8px 0 40px rgba(24,119,243,0.12);
+    z-index: 999;
+    transition: right 0.38s cubic-bezier(.22,1,.36,1);
+    display: flex; flex-direction: column;
+    overflow-y: auto; list-style: none; padding: 0; margin: 0;
+  }
+  .nav-sidebar.nav-sb-open { right: 0; }
+
+  .nav-sb-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 18px 18px 14px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+  }
+  .nav-sb-logo {
+    width: 36px; height: 36px; background: var(--blue); border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.1rem; color: #fff;
+  }
+  .nav-sb-brand-name {
+    font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--ink);
+  }
+  .nav-sb-brand-name span { color: var(--blue); }
+  .nav-sb-brand-sub {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.55rem;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+  }
+  .nav-sb-close {
+    margin-left: auto; width: 30px; height: 30px; border-radius: 6px;
+    border: 1px solid var(--border); background: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); font-size: 0.9rem;
+    transition: background 0.18s, color 0.18s;
+  }
+  .nav-sb-close:hover { background: rgba(24,119,243,0.07); color: var(--blue); }
+
+  .nav-sb-user {
+    display: none; align-items: center; gap: 12px;
+    padding: 14px 18px; background: rgba(24,119,243,0.05);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-sb-user.nav-sb-user-visible { display: flex; }
+  .nav-sb-av {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1rem; color: #fff; flex-shrink: 0;
+  }
+  .nav-sb-uname { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--ink); }
+  .nav-sb-urole { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); }
+
+  .nav-sb-section {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); padding: 14px 18px 6px;
+  }
+  .nav-sb-links {
+    list-style: none; padding: 4px 10px; margin: 0;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .nav-sb-links li a {
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'Rajdhani', sans-serif; font-weight: 600;
+    font-size: 1rem; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--ink2); text-decoration: none;
+    padding: 11px 12px; border-radius: 8px;
+    transition: background 0.18s, color 0.18s, transform 0.15s;
+  }
+  .nav-sb-links li a i { color: var(--blue); width: 18px; text-align: center; font-size: 0.9rem; }
+  .nav-sb-links li a:hover { background: rgba(24,119,243,0.07); color: var(--blue); transform: translateX(4px); }
+  .nav-sb-links li a.nav-active { background: rgba(24,119,243,0.1); color: var(--blue); }
+
+  .nav-sb-login-wrap { padding: 16px 16px 28px; margin-top: auto; }
+  .nav-sb-login-btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; font-family: 'Rajdhani', sans-serif; font-weight: 700;
+    font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase;
+    background: var(--blue); color: #fff; text-decoration: none;
+    padding: 12px; border-radius: 8px;
+    transition: background 0.18s, transform 0.14s, box-shadow 0.18s;
+  }
+  .nav-sb-login-btn:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(24,119,243,0.3); }
+
+  /* ─── RESPONSIVE ─────────────────────────────── */
+  @media (max-width: 860px) {
+    .nav-links,
+    .nav-right .nav-login-btn,
+    .nav-right .nav-avatar-wrap,
+    .nav-av-name { display: none !important; }
+    .nav-hamburger { display: flex; }
+    nav#mainNav { padding: 0 16px; }
+  }
+</style>
+
+<!-- Sidebar overlay -->
+<div class="nav-overlay" id="navOverlay" onclick="navCloseSidebar()"></div>
+
+<!-- MOBILE SIDEBAR -->
+<ul class="nav-sidebar" id="navSidebar">
+  <div class="nav-sb-header">
+    <div class="nav-sb-logo">AC</div>
+    <div>
+      <div class="nav-sb-brand-name"><span>Al</span>Coders</div>
+      <div class="nav-sb-brand-sub">ATL · Viswadeepthi</div>
+    </div>
+    <button class="nav-sb-close" onclick="navCloseSidebar()"><i class="fas fa-times"></i></button>
   </div>
 
-  <!-- Sidebar (mobile) -->
-  <ul class="sidebar" id="sidebarNav">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="Courses.html">Courses</a></li>
-    <li><a href="projects.html">Projects</a></li>
-    <li><a href="More info.html">More Info</a></li>
-    <li><a href="about us.html">About Us</a></li>
-    <li><a href="menu.html">Settings</a></li>
-    <li>
-      <a href="#" onclick="showSearchPopup()">
-        <i class="fa-solid fa-magnifying-glass" style="font-size:1.15rem;color:#38bdf8;margin-right:8px;"></i> Search
-      </a>
-    </li>
-    <li><a href="loginpage.html">Login</a></li>
+  <div class="nav-sb-user" id="navSbUser">
+    <div class="nav-sb-av" id="navSbAvInitial">A</div>
+    <div>
+      <div class="nav-sb-uname" id="navSbUname">AlCoder</div>
+      <div class="nav-sb-urole">Member</div>
+    </div>
+  </div>
+
+  <div class="nav-sb-section">Navigation</div>
+  <ul class="nav-sb-links">
+    <li><a href="index.html"     data-navpage="index">   <i class="fas fa-house"></i>       Home</a></li>
+    <li><a href="Courses.html"   data-navpage="courses"> <i class="fas fa-book-open"></i>   Courses</a></li>
+    <li><a href="projects.html"  data-navpage="projects"><i class="fas fa-rocket"></i>      Projects</a></li>
+    <li><a href="about us.html"  data-navpage="about">   <i class="fas fa-users"></i>       About Us</a></li>
+    <li><a href="More info.html" data-navpage="more">    <i class="fas fa-circle-info"></i> More Info</a></li>
   </ul>
 
-  <!-- Desktop Navbar -->
-  <ul class="navbar-center" id="desktopNav">
-    <li class="hideOnMobile"><a href="index.html">Home</a></li>
-    <li class="hideOnMobile"><a href="Courses.html">Courses</a></li>
-    <li class="hideOnMobile"><a href="projects.html">Projects</a></li>
-    <li class="hideOnMobile dropdown">
-      <a href="about us.html">About Us <span class="dropdown-arrow">▼</span></a>
-      <ul class="dropdown-menu">
-        <li><a href="about us.html#team">Our Team</a></li>
-        <li><a href="about us.html#mission1">Our Mission</a></li>
+  <div class="nav-sb-section">Other</div>
+  <ul class="nav-sb-links">
+    <li><a href="#" onclick="showSearchPopup();navCloseSidebar();return false;"><i class="fas fa-magnifying-glass"></i> Search</a></li>
+    <li><a href="menu.html" data-navpage="settings"><i class="fas fa-gear"></i> Settings</a></li>
+  </ul>
+
+  <div class="nav-sb-login-wrap" id="navSbLoginWrap">
+    <a href="loginpage.html" class="nav-sb-login-btn"><i class="fas fa-right-to-bracket"></i> Login</a>
+  </div>
+</ul>
+
+<!-- DESKTOP NAVBAR -->
+<nav id="mainNav">
+  <a href="index.html" class="nav-brand">
+    <div class="nav-brand-logo">AC</div>
+    <div class="nav-brand-text">
+      <span class="nav-brand-name"><span>Al</span>Coders</span>
+      <span class="nav-brand-sub">ATL · Viswadeepthi</span>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html"     data-navpage="index">Home</a></li>
+    <li><a href="Courses.html"   data-navpage="courses">Courses</a></li>
+    <li><a href="projects.html"  data-navpage="projects">Projects</a></li>
+    <li class="nav-has-dd">
+      <a href="about us.html" data-navpage="about">
+        About Us <i class="fas fa-chevron-down nav-dd-arrow"></i>
+      </a>
+      <ul class="nav-dropdown">
+        <li><a href="about us.html#team">   <i class="fas fa-users"></i>       Our Team</a></li>
+        <li><a href="about us.html#mission1"><i class="fas fa-bullseye"></i>    Our Mission</a></li>
+        <li class="nav-dd-sep"></li>
+        <li><a href="about us.html#aboutUs"><i class="fas fa-circle-info"></i> About AlCoders</a></li>
       </ul>
     </li>
-    <li class="hideOnMobile"><a href="More info.html">More Info</a></li>
-    <li class="search-icon hideOnMobile">
-      <a href="#" id="searchIcon" onclick="showSearchPopup()">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </a>
-    </li>
-    <li class="menu-button hideOnMobile">
-      <a href="menu.html">
-        <svg xmlns="http://www.w3.org/2000/svg" height="26" viewBox="0 0 24 24" width="26" fill="currentColor">
-          <path d="M19.14,12.94c0-.32,0-.64,0-1s0-.68,0-1l2.11-1.65a.5.5,0,0,0,.12-.65l-2-3.46a.5.5,0,0,0-.61-.22l-2.49,1a7,7,0,0,0-1.7-1l-.38-2.65A.5.5,0,0,0,13,2H11a.5.5,0,0,0-.5.42l-.38,2.65a7,7,0,0,0-1.7,1l-2.49-1a.5.5,0,0,0-.61.22l-2,3.46a.5.5,0,0,0,.12.65L4.86,10c0,.32,0,.64,0,1s0,.68,0,1l-2.11,1.65a.5.5,0,0,0-.12.65l2,3.46a.5.5,0,0,0,.61.22l2.49-1a7,7,0,0,0,1.7,1l.38,2.65A.5.5,0,0,0,11,22h2a.5.5,0,0,0,.5-.42l.38-2.65a7,7,0,0,0,1.7-1l2.49,1a.5.5,0,0,0,.61-.22l2-3.46a.5.5,0,0,0-.12-.65ZM12,15.5A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/>
-        </svg>
-      </a>
-    </li>
-    <li class="hideOnMobile" id="navUserItem">
-      <a href="loginpage.html" id="navLoginBtn">
-        <span id="navLoginText">Login</span>
-      </a>
-    </li>
+    <li><a href="More info.html" data-navpage="more">More Info</a></li>
   </ul>
+
+  <div class="nav-right">
+    <a href="#" class="nav-icon-btn" onclick="showSearchPopup();return false;" title="Search">
+      <i class="fas fa-magnifying-glass"></i>
+    </a>
+    <a href="menu.html" class="nav-icon-btn nav-gear-btn" title="Settings">
+      <i class="fas fa-gear"></i>
+    </a>
+    <a href="loginpage.html" class="nav-login-btn" id="navLoginBtn">
+      <i class="fas fa-right-to-bracket"></i> <span>Login</span>
+    </a>
+    <div class="nav-avatar-wrap" id="navAvatarWrap">
+      <div class="nav-avatar-circle" id="navAvatarInitial">A</div>
+      <span class="nav-av-name" id="navUserName"></span>
+      <ul class="nav-av-dropdown">
+        <div class="nav-av-header">
+          <div class="nav-av-uname" id="navAvDropName">AlCoder</div>
+          <div class="nav-av-role">AlCoders Member</div>
+        </div>
+        <li><a href="menu.html">    <i class="fas fa-gear"></i>                  Settings</a></li>
+        <li><a href="projects.html"><i class="fas fa-rocket"></i>                My Projects</a></li>
+        <li class="nav-dd-sep"></li>
+        <li><a href="loginpage.html" class="nav-danger"><i class="fas fa-right-from-bracket"></i> Logout</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="nav-hamburger" id="navHamburger" onclick="navToggleSidebar()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
-<!-- Font Awesome CDN for icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
 <script>
+/* ── HIDE / SHOW ON SCROLL ── */
+(function(){
+  const nav = document.getElementById('mainNav');
+  let lastY = window.scrollY, ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        nav.classList.toggle('nav-scrolled', y > 10);
+        if (y > lastY && y > 80) nav.classList.add('nav-hidden');
+        else nav.classList.remove('nav-hidden');
+        lastY = y;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
 
+/* ── SIDEBAR ── */
+function navToggleSidebar() {
+  const open = document.getElementById('navSidebar').classList.contains('nav-sb-open');
+  open ? navCloseSidebar() : navOpenSidebar();
+}
+function navOpenSidebar() {
+  document.getElementById('navSidebar').classList.add('nav-sb-open');
+  document.getElementById('navOverlay').classList.add('nav-ov-open');
+  document.getElementById('navHamburger').classList.add('nav-hb-open');
+  document.body.style.overflow = 'hidden';
+}
+function navCloseSidebar() {
+  document.getElementById('navSidebar').classList.remove('nav-sb-open');
+  document.getElementById('navOverlay').classList.remove('nav-ov-open');
+  document.getElementById('navHamburger').classList.remove('nav-hb-open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') navCloseSidebar(); });
+
+/* ── ACTIVE PAGE ── */
+(function(){
+  const raw = window.location.pathname.split('/').pop().replace('.html','').toLowerCase();
+  const map = { 'index':'index','':'index','courses':'courses','projects':'projects',
+    'about us':'about','about%20us':'about','more info':'more','more%20info':'more','menu':'settings' };
+  const current = map[decodeURIComponent(raw)] || raw;
+  document.querySelectorAll('[data-navpage]').forEach(el => {
+    if (el.dataset.navpage === current) el.classList.add('nav-active');
+  });
+})();
+
+/* ── USER AVATAR ── */
+(function(){
+  const username = localStorage.getItem('username');
+  if (!username) return;
+  const initial = username.charAt(0).toUpperCase();
+  document.getElementById('navLoginBtn').style.display = 'none';
+  const wrap = document.getElementById('navAvatarWrap');
+  wrap.classList.add('nav-av-visible');
+  document.getElementById('navAvatarInitial').textContent = initial;
+  document.getElementById('navUserName').textContent    = username;
+  document.getElementById('navAvDropName').textContent  = username;
+  document.getElementById('navSbUser').classList.add('nav-sb-user-visible');
+  document.getElementById('navSbAvInitial').textContent = initial;
+  document.getElementById('navSbUname').textContent     = username;
+  document.getElementById('navSbLoginWrap').style.display = 'none';
+})();
 </script>

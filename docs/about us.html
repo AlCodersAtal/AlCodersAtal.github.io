@@ -4,130 +4,137 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>More About Us</title>
-      <link rel="stylesheet" href="css/theme.css">
-
+    <title>More About Us — AlCoders</title>
+    <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/style.css" />
     <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
- <script type="module" src="theme.js"></script>
-  </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script type="module" src="theme.js"></script>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background-color: #f9f9f9;
-        color: #333;
+      :root {
+        --blue:      #1877f3;
+        --blue-dim:  #0f55c8;
+        --cyan:      #00d4ff;
+        --bg:        #f2f4f8;
+        --surface:   #ffffff;
+        --surface2:  #edf1f9;
+        --ink:       #0b1120;
+        --ink2:      #2d3748;
+        --muted:     #64748b;
+        --border:    #d6dde8;
+        --rule:      #c8d3e8;
       }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: 'IBM Plex Sans', sans-serif; background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
 
-      .container {
-        max-width: 900px;
-        margin: auto;
-        background: none;
-        border-radius: 0;
-        box-shadow: none;
-        border: none;
-        animation: fadeIn 1.5s ease-in;
-      }
+      /* HERO */
+      .hero { position: relative; background: var(--ink); overflow: hidden; padding: 120px 40px 80px; }
+      .hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(24,119,243,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(24,119,243,0.08) 1px, transparent 1px); background-size: 48px 48px; }
+      .hero::after { content: ''; position: absolute; right: -60px; top: -60px; width: 420px; height: 420px; background: conic-gradient(from 200deg at 70% 40%, #1877f3 0deg, transparent 60deg, transparent 300deg, #00d4ff 360deg); opacity: 0.18; border-radius: 50%; filter: blur(40px); }
+      .hero-inner { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; }
+      .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cyan); margin-bottom: 22px; }
+      .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--cyan); }
+      .hero h1 { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: clamp(3rem, 7vw, 5.5rem); color: #ffffff; line-height: 1.0; letter-spacing: -0.01em; margin-bottom: 22px; }
+      .hero h1 span { color: var(--cyan); }
+      .hero-desc { font-size: 1.05rem; color: rgba(255,255,255,0.65); max-width: 560px; line-height: 1.8; font-weight: 300; }
+      .hero-badge-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+      .hero-badge { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); color: rgba(255,255,255,0.75); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; padding: 7px 16px; border-radius: 3px; text-transform: uppercase; }
 
-      .section-box {
-        background: #eaf3fb; /* lighter blue tint */
-        border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.13);
-        padding: 28px 28px;
-        margin-bottom: 32px;
-        border: 1px solid #b3d1f7;
-        transition: none;
-        font-size: 1.18rem; /* increased font size */
-        line-height: 2.1;   /* more space between lines */
-      }
+      /* LAYOUT */
+      .page { max-width: 980px; margin: 0 auto; padding: 60px 24px 100px; display: flex; flex-direction: column; gap: 4px; }
 
-      h1, h2, h3 {
-        color: #1877f3; /* blue color for titles */
-        /* Remove border-bottom (removes hr effect) */
-        border-bottom: none;
-        padding-bottom: 5px;
-        font-size: 2.1rem;
-        line-height: 1.3;
-        margin-top: 0.5em;
-        margin-bottom: 0.7em;
-      }
+      /* SECTION */
+      .sec { background: var(--surface); border: 1px solid var(--border); padding: 48px 48px; position: relative; animation: rise 0.55s ease both; }
+      .sec + .sec { border-top: none; }
+      .sec:first-child { border-radius: 8px 8px 0 0; }
+      .sec:last-child  { border-radius: 0 0 8px 8px; }
+      @keyframes rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+      .sec:nth-child(1){animation-delay:0.05s}.sec:nth-child(2){animation-delay:0.12s}.sec:nth-child(3){animation-delay:0.19s}.sec:nth-child(4){animation-delay:0.26s}.sec:nth-child(5){animation-delay:0.33s}.sec:nth-child(6){animation-delay:0.40s}
 
-      h2 {
-        font-size: 1.5rem;
-      }
+      /* TYPOGRAPHY */
+      .sec-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+      .sec-label::before { content: '//'; opacity: 0.45; }
+      .sec h2 { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 2.1rem; color: var(--ink); letter-spacing: 0.01em; line-height: 1.1; margin-bottom: 20px; }
+      .sec h3 { font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 1.15rem; color: var(--blue); letter-spacing: 0.04em; text-transform: uppercase; margin: 28px 0 10px; }
+      .sec p { font-size: 0.97rem; line-height: 1.85; color: var(--ink2); margin-bottom: 14px; font-weight: 400; }
+      hr.rule { border: none; border-top: 1px solid var(--rule); margin: 32px 0; }
 
-      h3 {
-        font-size: 1.2rem;
-      }
+      /* LISTS */
+      .tech-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+      .tech-list li { display: flex; align-items: center; gap: 10px; font-size: 0.93rem; color: var(--ink2); padding: 10px 14px; background: var(--surface2); border-left: 3px solid var(--blue); }
+      .tech-list li a { color: var(--blue-dim); text-decoration: none; font-weight: 500; }
+      .tech-list li a:hover { text-decoration: underline; }
+      .tech-list li::before { content: '▸'; color: var(--blue); font-size: 0.7rem; flex-shrink: 0; }
+      .learn-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+      .learn-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; color: var(--ink2); padding: 10px 0; border-bottom: 1px solid var(--rule); line-height: 1.6; }
+      .learn-list li:last-child { border-bottom: none; }
+      .learn-list li:nth-child(1)::before{content:'01'}.learn-list li:nth-child(2)::before{content:'02'}.learn-list li:nth-child(3)::before{content:'03'}.learn-list li:nth-child(4)::before{content:'04'}.learn-list li:nth-child(5)::before{content:'05'}.learn-list li:nth-child(6)::before{content:'06'}
+      .learn-list li::before { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--blue); opacity: 0.6; flex-shrink: 0; margin-top: 3px; }
 
-      .container ul {
-        padding-left: 20px;
-        list-style-type: disc;
-        margin-bottom: 20px;
-      }
+      /* STATS */
+      .stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--rule); border: 1px solid var(--rule); margin: 28px 0; }
+      .stat-cell { background: var(--surface); padding: 28px 24px; text-align: center; }
+      .stat-num { font-family: 'Rajdhani', sans-serif; font-size: 3rem; font-weight: 700; color: var(--blue); line-height: 1; letter-spacing: -0.02em; }
+      .stat-unit { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); display: block; margin-top: 6px; margin-bottom: 4px; }
+      .stat-cell p { font-size: 0.8rem; color: var(--muted); margin: 0; line-height: 1.4; }
 
-      .crew p {
-        margin: 6px 0;
-      }
+      /* AWARDS */
+      .award-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 16px; margin-top: 8px; }
+      .award-card { border: 1px solid var(--border); padding: 22px 20px; position: relative; background: var(--surface); transition: border-color 0.2s, box-shadow 0.2s; }
+      .award-card:hover { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue); }
+      .award-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--blue); }
+      .award-card .award-icon { font-size: 1.5rem; margin-bottom: 12px; }
+      .award-card .award-title { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--ink); letter-spacing: 0.02em; margin-bottom: 6px; }
+      .award-card .award-sub { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; color: var(--blue); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+      .award-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin: 0; }
 
-      .mail {
-        text-align: center;
-        margin-top: 20px;
-      }
+      /* GALLERY */
+      .gallery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; background: var(--rule); margin-top: 8px; }
+      .proj-card { background: var(--surface); padding: 28px 22px; position: relative; transition: background 0.2s; }
+      .proj-card:hover { background: var(--surface2); }
+      .proj-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 10px; opacity: 0.8; }
+      .proj-card h4 { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--ink); letter-spacing: 0.02em; margin-bottom: 8px; line-height: 1.2; }
+      .proj-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin: 0; }
+      .proj-icon { font-size: 1.4rem; margin-bottom: 14px; display: block; }
 
-      .mail button {
-        background-color: #1877f3;
-        color: white;
-        border: none;
-        padding: 10px 24px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 1.1rem;
-      }
+      /* CREW */
+      .crew-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.9rem; }
+      .crew-table th { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 10px 16px; background: var(--surface2); border-bottom: 2px solid var(--rule); }
+      .crew-table td { padding: 14px 16px; border-bottom: 1px solid var(--rule); color: var(--ink2); }
+      .crew-table tr:last-child td { border-bottom: none; }
+      .crew-table tr:hover td { background: var(--surface2); }
+      .crew-role { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; color: var(--blue); text-transform: uppercase; }
 
-      .mail button:hover {
-        background-color: #0056b3;
-      }
+      /* QUOTES */
+      .quote-block { border-left: 3px solid var(--blue); background: var(--surface2); padding: 20px 24px; margin: 16px 0; }
+      .quote-block p { font-size: 0.97rem; color: var(--ink2); font-style: italic; line-height: 1.75; margin: 0 0 8px; }
+      .quote-block cite { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--blue); letter-spacing: 0.1em; text-transform: uppercase; font-style: normal; }
 
-      @keyframes fadeIn {
-        0% { opacity: 0; transform: translateY(20px); }
-        100% { opacity: 1; transform: translateY(0); }
-      }
+      /* MISSION */
+      .mission-banner { background: var(--ink); color: #fff; padding: 32px 36px; position: relative; overflow: hidden; margin: 20px 0; }
+      .mission-banner::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(0,212,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,255,0.05) 1px, transparent 1px); background-size: 32px 32px; }
+      .mission-banner p { position: relative; z-index: 1; color: rgba(255,255,255,0.85); font-size: 1.05rem; line-height: 1.85; margin: 0; font-weight: 300; }
+      .vision-strip { display: flex; align-items: flex-start; gap: 20px; background: var(--surface2); border: 1px solid var(--border); padding: 22px 24px; margin-top: 20px; }
+      .vision-strip i { color: var(--blue); font-size: 1.3rem; margin-top: 3px; flex-shrink: 0; }
+      .vision-strip p { margin: 0; font-size: 0.95rem; line-height: 1.75; color: var(--ink2); }
 
-      .fun-facts {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-      }
+      /* CONTACT */
+      .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+      .contact-cell { display: flex; align-items: flex-start; gap: 14px; background: var(--surface2); border: 1px solid var(--border); padding: 18px 20px; }
+      .contact-cell i { color: var(--blue); font-size: 1rem; margin-top: 2px; flex-shrink: 0; width: 18px; }
+      .contact-cell strong { display: block; font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 2px; }
+      .contact-cell span { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+      .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--blue); color: #fff; font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 13px 28px; border: none; cursor: pointer; text-decoration: none; transition: background 0.18s, transform 0.14s; border-radius: 2px; }
+      .btn-primary:hover { background: var(--blue-dim); transform: translateY(-2px); }
 
-      .fact-box {
-        flex: 1 1 45%;
-        background-color: #f1f6fb;
-        padding: 20px;
-        border-left: 5px solid #1877f3;
-        border-radius: 8px;
-        animation: none;
-        font-size: 1.05rem;
-      }
-
-      blockquote {
-        background: #f0f8ff;
-        border-left: 5px solid #1877f3;
-        margin: 20px 0;
-        padding: 15px;
-        font-style: italic;
-      }
+      @media(max-width:720px){.sec{padding:32px 22px}.stat-row{grid-template-columns:1fr 1fr}.gallery-grid{grid-template-columns:1fr 1fr}.tech-list{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr}.hero{padding:100px 22px 60px}}
+      @media(max-width:480px){.stat-row{grid-template-columns:1fr}.gallery-grid{grid-template-columns:1fr}}
     </style>
+  </head>
 
   <body>
-  <div id="nav"></div>
-
- 
-
+    <div id="nav"></div>
     <div id="searchPopup" class="search-popup">
       <div class="popup-content">
         <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
@@ -136,162 +143,252 @@
       </div>
     </div>
 
-    <br><br><br><br><br><br>
-    <div class="container">
+    <section class="hero" id="aboutUs">
+      <div class="hero-inner">
+        <div class="hero-eyebrow">AlCoders · ATL · Viswadeepthi School</div>
+        <h1>Building<br><span>Tomorrow's</span><br>Innovators.</h1>
+        <p class="hero-desc">We are AlCoders — a student-led technology lab dedicated to transforming how the next generation thinks, builds, and innovates through STEM.</p>
+        <div class="hero-badge-row">
+          <div class="hero-badge">Est. ATL Lab</div>
+          <div class="hero-badge">Grades 6 – 12</div>
+          <div class="hero-badge">TVM, Kerala</div>
+          <div class="hero-badge">Mentor-Led Program</div>
+        </div>
+      </div>
+    </section>
 
-      <!-- Box 1: More About Us to Tech Stack -->
-      <div class="section-box">
-        <h1 id="aboutUs">More About Us</h1>
-        <p style="margin-bottom:18px;">We AlCoders aim to build a tech-savvy generation with strong analytical and innovative skills. Guided by our mentor Mr. Praveen Chandran, we foster the spirit of invention through hands-on learning and futuristic projects.</p>
+    <div class="page">
 
-        <h2>What is ATL?</h2>
-        <p style="margin-bottom:18px;">Atal Tinkering Labs (ATL) are creative workspaces in schools that promote STEM-based learning. Students get access to tools like robotics kits, 3D printers, and IoT modules to explore, experiment, and innovate.</p>
+      <!-- 1. ABOUT -->
+      <div class="sec">
+        <div class="sec-label">Overview</div>
+        <h2>What is AlCoders?</h2>
+        <p>AlCoders is the technology and innovation wing of the Atal Tinkering Lab at Viswadeepthi English Medium School. Guided by our mentor Mr. Praveen Chandran, we foster the spirit of invention through hands-on learning, real-world problem-solving, and futuristic projects that push beyond the textbook.</p>
+        <p>Atal Tinkering Labs (ATL) are government-funded creative workspaces that give students access to tools like robotics kits, 3D printers, IoT modules, and microcontrollers — everything required to explore, experiment, and engineer.</p>
+
+        <div class="stat-row">
+          <div class="stat-cell">
+            <div class="stat-num">75<span style="font-size:1.5rem">+</span></div>
+            <span class="stat-unit">Projects Built</span>
+            <p>Spanning IoT, robotics, AI, and healthcare automation</p>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">100<span style="font-size:1.5rem">+</span></div>
+            <span class="stat-unit">Students Trained</span>
+            <p>Active members across grades 6 through 12</p>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num">6+</div>
+            <span class="stat-unit">Years Active</span>
+            <p>Continuously innovating since the lab's founding</p>
+          </div>
+        </div>
 
         <h3>What You Learn at AlCoders</h3>
-        <ul style="margin-bottom:18px;">
+        <ul class="learn-list">
           <li>Arduino and microcontroller programming</li>
-          <li>3D modeling and printing</li>
-          <li>IoT projects and automation</li>
-          <li>Mobile app development</li>
-          <li>Basic AI and machine learning fundamentals</li>
+          <li>3D modelling and printing with Tinkercad and Fusion 360</li>
+          <li>IoT projects and real-world automation systems</li>
+          <li>Mobile application development using MIT App Inventor</li>
+          <li>Foundational AI and machine learning concepts</li>
           <li>Teamwork, critical thinking, and ethical innovation</li>
         </ul>
 
-        <h2>Why Join Us?</h2>
-        <p style="margin-bottom:18px;">Because we go beyond books! At AlCoders, learning is experiential. You’ll collaborate on real-life problems, join competitions, and build projects that matter.</p>
+        <hr class="rule">
 
-        <div class="fun-facts" style="margin-bottom:18px;">
-          <div class="fact-box">
-            <h3>75+ Projects Built</h3>
-            <p>From automatic irrigation to healthcare monitoring — our students build impactful tech.</p>
-          </div>
-          <div class="fact-box">
-            <h3>100+ Students Trained</h3>
-            <p>Students from grades 6–12 have participated and excelled in ATL programs.</p>
-          </div>
-        </div>
-
-        <h2 id="team">Tech Stack We Use</h2>
-        <ul style="margin-bottom:0;">
-          <li><a href="https://www.arduino.cc/en/software/" target="_blank" rel="noopener noreferrer">Arduino IDE</a></li>
-          <li><a href="https://www.tinkercad.com" target="_blank" rel="noopener noreferrer">Tinkercad</a>/<a href="https://www.autodesk.com/products/fusion-360/overview" target="_blank" rel="noopener noreferrer">Fusion 360</a></li>
-          <li><a href="https://firebase.google.com/" target="_blank" rel="noopener noreferrer">Firebase</a> & <a href="https://www.espressif.com/en/products/socs/esp8266"target="_blank" rel="noopener noreferrer">ESP8266</a></li>
-          <li><a href="https://appinventor.mit.edu/"target="_blank" rel="noopener noreferrer">MIT App Inventor</a></li>
-          <li><a href="https://scratch.mit.edu/" target="_blank" rel="noopener noreferrer">Scratch</a> and <a  href="https://www.python.org/"target="_blank" rel="noopener noreferrer">Python</a></li>
-          <li><a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">VS Code</a></li>
+        <div class="sec-label" id="team">Technology Stack</div>
+        <h2>Tools We Use</h2>
+        <ul class="tech-list">
+          <li><a href="https://www.arduino.cc/en/software/" target="_blank" rel="noopener">Arduino IDE</a></li>
+          <li><a href="https://www.tinkercad.com" target="_blank" rel="noopener">Tinkercad</a> / <a href="https://www.autodesk.com/products/fusion-360/overview" target="_blank" rel="noopener">Fusion 360</a></li>
+          <li><a href="https://firebase.google.com/" target="_blank" rel="noopener">Firebase</a> &amp; <a href="https://www.espressif.com/en/products/socs/esp8266" target="_blank" rel="noopener">ESP8266</a></li>
+          <li><a href="https://appinventor.mit.edu/" target="_blank" rel="noopener">MIT App Inventor</a></li>
+          <li><a href="https://scratch.mit.edu/" target="_blank" rel="noopener">Scratch</a> &amp; <a href="https://www.python.org/" target="_blank" rel="noopener">Python</a></li>
+          <li><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">Visual Studio Code</a></li>
         </ul>
       </div>
 
-      <!-- Box 2: Crew Members and Success Stories -->
-      <div class="section-box">
+      <!-- 2. ACHIEVEMENTS -->
+      <div class="sec">
+        <div class="sec-label">Recognition</div>
+        <h2>Achievements &amp; Awards</h2>
+        <p>Our work has been recognized at district, state, and national levels. AlCoders members have consistently demonstrated excellence in STEM competitions, innovation challenges, and ATL-organized events across India.</p>
+
+        <div class="award-grid">
+          <div class="award-card">
+            <div class="award-icon">🏆</div>
+            <div class="award-title">ATL Marathon Finalist</div>
+            <div class="award-sub">National · AIM, NITI Aayog</div>
+            <p>Selected among the top teams in India for the annual Atal Innovation Marathon for outstanding project design and impact.</p>
+          </div>
+          <div class="award-card">
+            <div class="award-icon">🥇</div>
+            <div class="award-title">District Science Fair — 1st Place</div>
+            <div class="award-sub">District Level · Kerala</div>
+            <p>First place for an IoT-based smart agriculture monitoring system built entirely by AlCoders students.</p>
+          </div>
+          <div class="award-card">
+            <div class="award-icon">🤖</div>
+            <div class="award-title">Regional Robotics Champion</div>
+            <div class="award-sub">State Level · CBSE Cluster</div>
+            <p>Awarded for autonomous robot design in the CBSE Science Exhibition, competing against 40+ schools across Kerala.</p>
+          </div>
+          <div class="award-card">
+            <div class="award-icon">💡</div>
+            <div class="award-title">Best Innovation — School Expo</div>
+            <div class="award-sub">Institutional · Annual Tech Fest</div>
+            <p>Recognised for designing an AI-assisted healthcare monitoring prototype that tracks vitals and sends emergency alerts.</p>
+          </div>
+          <div class="award-card">
+            <div class="award-icon">🌐</div>
+            <div class="award-title">State ATL Showcase</div>
+            <div class="award-sub">State Level · Kerala</div>
+            <p>Invited to present projects at the Kerala ATL Showcase, representing Thiruvananthapuram district.</p>
+          </div>
+          <div class="award-card">
+            <div class="award-icon">📱</div>
+            <div class="award-title">App Development Award</div>
+            <div class="award-sub">Inter-School · TVM District</div>
+            <p>Top prize in mobile app development for a community safety app built using MIT App Inventor and Firebase.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. PROJECT SHOWCASE -->
+      <div class="sec">
+        <div class="sec-label">Work</div>
+        <h2>Project Showcase</h2>
+        <p>A selection of impactful projects built by AlCoders members — spanning agriculture, healthcare, home automation, and environmental monitoring.</p>
+
+        <div class="gallery-grid">
+          <div class="proj-card">
+            <span class="proj-icon">🌱</span>
+            <div class="proj-tag">IoT · Agriculture</div>
+            <h4>Smart Irrigation System</h4>
+            <p>Soil-moisture-based automated irrigation using ESP8266, Firebase, and a mobile dashboard for real-time monitoring.</p>
+          </div>
+          <div class="proj-card">
+            <span class="proj-icon">🏥</span>
+            <div class="proj-tag">AI · Healthcare</div>
+            <h4>Health Vitals Monitor</h4>
+            <p>Wearable sensor system that tracks pulse and temperature, triggering automated emergency alerts via a mobile app.</p>
+          </div>
+          <div class="proj-card">
+            <span class="proj-icon">🏠</span>
+            <div class="proj-tag">Automation · IoT</div>
+            <h4>Smart Home Prototype</h4>
+            <p>Voice and app-controlled home automation built with Arduino and Bluetooth, controlling lights and appliances.</p>
+          </div>
+          <div class="proj-card">
+            <span class="proj-icon">🤖</span>
+            <div class="proj-tag">Robotics</div>
+            <h4>Autonomous Line Follower</h4>
+            <p>IR-sensor-based autonomous robot capable of navigating complex paths, designed for the CBSE Robotics Exhibition.</p>
+          </div>
+          <div class="proj-card">
+            <span class="proj-icon">🌍</span>
+            <div class="proj-tag">Environment · Sensors</div>
+            <h4>Air Quality Station</h4>
+            <p>IoT device measuring CO₂, humidity, and particulate matter levels, with live data on an LCD and Firebase dashboard.</p>
+          </div>
+          <div class="proj-card">
+            <span class="proj-icon">📦</span>
+            <div class="proj-tag">3D Printing · Design</div>
+            <h4>Custom Prosthetic Hand</h4>
+            <p>A low-cost 3D-printed prosthetic hand prototype designed in Fusion 360, demonstrating accessible manufacturing.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. TEAM + STORIES -->
+      <div class="sec">
+        <div class="sec-label">The People</div>
         <h2>AlCoders Crew</h2>
-        <div class="crew" style="margin-bottom:18px;">
-          <p><strong>Team Members:</strong> Krishna Chandra, Nebin Raj J.S, Nikhil John J, Akshay V.S, Jenin Das J.S</p>
-          <p><strong>Mentor:</strong> Mr. Praveen Chandran</p>
-          <p><strong>Incharge:</strong> Mr. Alex</p>
+
+        <table class="crew-table">
+          <thead>
+            <tr><th>Name</th><th>Role</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Mr. Praveen Chandran</strong></td><td><span class="crew-role">Mentor</span></td></tr>
+            <tr><td><strong>Mr. Alex</strong></td><td><span class="crew-role">Incharge</span></td></tr>
+            <tr><td>Krishna Chandra</td><td><span class="crew-role">Head — Hardware Team</span></td></tr>
+            <tr><td>Nikhil John J</td><td><span class="crew-role">Head — Software Team</span></td></tr>
+            <tr><td>Nebin Raj J.S</td><td><span class="crew-role">Core Team Member</span></td></tr>
+            <tr><td>Akshay V.S</td><td><span class="crew-role">Core Team Member</span></td></tr>
+            <tr><td>Jenin Das J.S</td><td><span class="crew-role">Core Team Member</span></td></tr>
+          </tbody>
+        </table>
+
+        <hr class="rule">
+
+        <div class="sec-label" id="mission1">Testimonials</div>
+        <h2>Success Stories</h2>
+
+        <div class="quote-block">
+          <p>"I never imagined building my own robot would be this easy and fun. AlCoders helped me turn ideas into real innovation."</p>
+          <cite>— Krishna Chandra, Head of Hardware Team</cite>
         </div>
-        <!-- Current ATL Members -->
-<h2>Current ATL Members</h2>
-<ul style="margin-bottom:18px; padding-left:20px; list-style-type: disc;">
-  <li>Titto R (X) </li>
-  <li>Jino J Paul (X A)</li>
-  <li>Vaishnav (VIII B)</li>
-  <li>Ashlin (VII)</li>
-  <li>Achal Raj (9A)</li>
-  <li>Devanshi (VIII)</li>
-  <li>Ajo S. Santh (8C)</li>
-  <li>Nithin (8C)</li>
-  <li>Franklin (8C)</li>
-  <li>Abin Lal S.L. (VII)</li>
-  <li>Sreenag (IX B)</li>
-  <li>Allen V. (IX B)</li>
-  <li>Blessin Raj (9A)</li>
-  <li>Ashwin (9A)</li>
-  <li>Simna Thomas (5B)</li>
-  <li>Anie S.S. (6B)</li>
-  <li>Aaron Joseph (6B)</li>
-  <li>Sofin S.N. (9A)</li>
-  <li>Nivedhya (8A)</li>
-  <li>Kaden (7A)</li>
-  <li>Abid Rahman (6A)</li>
-  <li>Rijul Godfrey (6C)</li>
-  <li>Leksha Vishnu (6A)</li>
-  <li>Misaya Kiran A (6A)</li>
-  <li>Aleya Maria (6B)</li>
-  <li>Devanandan S (6A)</li>
-  <li>Hannah (6B)</li>
-  <li>Reha (10A)</li>
-  <li>Yashin (6C)</li>
-  <li>Ayush (7B)</li>
-  <li>Noel V. Tom (7B)</li>
-  <li>Daarsh (+1 B)</li>
-  <li>Shivakaathiyan (7A)</li>
-  <li>Adith (+1 A)</li>
-  <li>Diya (8B)</li>
-  <li>Aadhya (8B)</li>
-  <li>Joel (6A)</li>
-  <li>Ashwin S. Sabu (7A)</li>
-  <li>Lakshmi A.H. (6C)</li>
-  <li>Merena M. Francis (+1 B)</li>
-  <li>Akshera (8A)</li>
-  <li>Alshara (6A)</li>
-  <li>Rekalaya (6C)</li>
-  <li>Daniel (6A)</li>
-  <li>Shabana (6A)</li>
-</ul>
-
-        <h2 id="mission1">Success Stories</h2>
-        <blockquote style="margin-bottom:18px;">“I never imagined building my own robot would be this easy and fun. AlCoders helped me turn ideas into innovation.” – Krishna, Head of Alcoders Hardware team</blockquote>
-        <blockquote>“The IoT workshop changed how I look at technology. I built a smart home prototype within weeks!” – Nikhil, Head of the Alcoders Software team</blockquote>
+        <div class="quote-block">
+          <p>"The IoT workshop completely changed how I look at technology. I built a fully functional smart home prototype within just a few weeks."</p>
+          <cite>— Nikhil John J, Head of Software Team</cite>
+        </div>
       </div>
 
-      <!-- Box 3: Mission -->
-      <div class="section-box">
-        <h2 id="mission">Our Mission</h2>
-        <p style="margin-bottom:14px;">At AlCoders, our mission is to ignite a passion for technology and innovation in young minds. We believe that the future belongs to those who can understand, create, and shape technology—not just use it.</p>
-        <p style="margin-bottom:14px;">That’s why we are committed to providing an ecosystem where students can explore the vast landscape of science, technology, engineering, and mathematics (STEM) through hands-on experiences and real-world problem-solving.</p>
-        <p style="margin-bottom:14px;">We aim to break the boundaries of traditional learning by introducing students to cutting-edge domains like robotics, artificial intelligence, machine learning, Internet of Things (IoT), and 3D design from an early age.</p>
-        <p style="margin-bottom:18px;">Our mission is not just to teach students how to code or build; it’s to develop creators, innovators, and critical thinkers who are equipped to thrive in a technology-driven world. Through workshops, mentorship, and peer collaboration, we help students ask questions, experiment boldly, and build fearlessly.</p>
-        <h2>Our Vision</h2>
-        <p>To empower every student to be a changemaker through technology, innovation, and collaborative learning. We envision a future where students lead India’s next tech revolution.</p>
+      <!-- 5. MISSION + VISION -->
+      <div class="sec" id="mission">
+        <div class="sec-label">Purpose</div>
+        <h2>Mission &amp; Vision</h2>
+
+        <div class="mission-banner">
+          <p>At AlCoders, our mission is to ignite a passion for technology and innovation in young minds. We believe the future belongs to those who can understand, create, and shape technology — not merely consume it. We are committed to delivering an ecosystem where students explore STEM through hands-on experiences, real-world problem-solving, and mentorship that encourages bold experimentation.</p>
+        </div>
+
+        <p>We aim to break the boundaries of traditional learning by introducing students to robotics, artificial intelligence, machine learning, IoT, and 3D design from an early age. Our goal is to develop not just engineers, but creators, critical thinkers, and ethical innovators.</p>
+
+        <div class="vision-strip">
+          <i class="fas fa-crosshairs"></i>
+          <p><strong>Vision:</strong> To empower every student to be a changemaker through technology, innovation, and collaborative learning — and to lead India's next technological revolution.</p>
+        </div>
       </div>
 
-    
-      <!-- Box 5: Contact Us -->
-      <div class="section-box">
+      <!-- 6. CONTACT -->
+      <div class="sec">
+        <div class="sec-label">Connect</div>
         <h2>Contact Us</h2>
-        <p style="margin-bottom:18px;">If you're curious, motivated, and ready to build, join us today!</p>
-        <div class="mail">
-          <p><strong>Phone:</strong> +91 94477 63150</p>
-          <p><strong>Address:</strong> Viswadeepthi English Medium School, TVM, Kerala, India</p>
-          <a href="https://www.facebook.com/profile.php?id=61564464459525" target="_blank" style="text-decoration:none;">
-      <button style="background-color:#1877f3; color:white; border:none; padding:10px 24px; border-radius:6px; cursor:pointer; font-size:16px; margin-top:18px;">
-        Visit Us on Facebook
-      </button>
-    </a>
+        <p>If you are curious, motivated, and ready to build — we want to hear from you. Reach out to join AlCoders or learn more about our programs.</p>
+
+        <div class="contact-grid">
+          <div class="contact-cell">
+            <i class="fas fa-phone"></i>
+            <div><strong>Phone</strong><span>+91 94477 63150</span></div>
+          </div>
+          <div class="contact-cell">
+            <i class="fas fa-map-marker-alt"></i>
+            <div><strong>Address</strong><span>Viswadeepthi English Medium School, TVM, Kerala, India</span></div>
+          </div>
         </div>
+
+        <a href="https://www.facebook.com/profile.php?id=61564464459525" target="_blank" class="btn-primary">
+          <i class="fab fa-facebook"></i> Visit Us on Facebook
+        </a>
       </div>
 
     </div>
 
     <div id="footer"></div>
-        
     <script src="loadNav.js"></script>
     <script src="navigation.js"></script>
     <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    document.body.addEventListener('click', function(e) {
-      if (
-        e.target.matches('a[href="about us.html#aboutUs"]') ||
-        (e.target.closest('a[href="about us.html#aboutUs"]'))
-      ) {
-        e.preventDefault();
-        // Always hide the paragraph when clicked
-        var para = document.getElementById('aboutUsMenuPara');
-        para.style.display = 'none';
-      }
-    });
-  });
-</script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.body.addEventListener('click', function (e) {
+          if (e.target.matches('a[href="about us.html#aboutUs"]') || e.target.closest('a[href="about us.html#aboutUs"]')) {
+            e.preventDefault();
+            var para = document.getElementById('aboutUsMenuPara');
+            if (para) para.style.display = 'none';
+          }
+        });
+      });
+    </script>
   </body>
 </html>

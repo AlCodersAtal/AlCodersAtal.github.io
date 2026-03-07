@@ -3,450 +3,882 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Settings</title>
+  <title>Settings — AlCoders</title>
   <link rel="stylesheet" href="css/theme.css">
-  <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" href="images/alcodersLogo.jpg" type="image/jpg" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
- <script type="module" src="theme.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <script type="module" src="theme.js"></script>
+
   <style>
-  body {
-    background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
-    min-height: 100vh;
-    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-    color: #222;
-  }
+    /* ── VARIABLES ── */
+    :root {
+      --blue:      #1877f3;
+      --blue-dark: #0f55c8;
+      --cyan:      #00d4ff;
+      --red:       #ef4444;
+      --red-dark:  #dc2626;
+      --green:     #22c55e;
+      --hero-bg:   #080e1e;
+      --surface:   #ffffff;
+      --surface2:  #f0f4fb;
+      --ink:       #0b1120;
+      --ink2:      #374151;
+      --muted:     #6b7280;
+      --border:    #dde3ef;
+      --rule:      #c8d3e8;
+    }
+    body.dark-theme {
+      --surface:  #111827;
+      --surface2: #1a2236;
+      --ink:      #f1f5f9;
+      --ink2:     #cbd5e1;
+      --muted:    #94a3b8;
+      --border:   #1e2d47;
+      --rule:     #1e2d47;
+    }
 
-  .content {
-    margin-top: 100px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 40px 32px 32px 32px;
-    background: rgba(255,255,255,0.85);
-    border-radius: 24px;
-    box-shadow: 0 8px 32px rgba(60, 60, 120, 0.15), 0 1.5px 8px rgba(0,0,0,0.04);
-    max-width: 520px;
-    text-align: left;
-    backdrop-filter: blur(8px);
-    border: 1.5px solid rgba(180, 180, 255, 0.18);
-    position: relative;
-  }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: var(--surface2);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.3s, color 0.3s;
+      min-height: 100vh;
+    }
 
-  .content h1 {
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 32px;
-    letter-spacing: 1px;
-    text-align: center;
-    color: #2d3a8c;
-  }
+    /* ── HERO HEADER ── */
+    .settings-hero {
+      background: var(--hero-bg);
+      padding: 100px 40px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .settings-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(24,119,243,0.15) 1px, transparent 1px);
+      background-size: 36px 36px;
+      animation: gridDrift 22s linear infinite;
+    }
+    @keyframes gridDrift { 0%{background-position:0 0} 100%{background-position:36px 36px} }
+    .settings-hero::after {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      right: -120px; top: -120px;
+      background: radial-gradient(circle, #1877f3 0%, #00d4ff 40%, transparent 70%);
+      opacity: 0.09; border-radius: 50%; filter: blur(60px);
+      animation: orbPulse 8s ease-in-out infinite;
+    }
+    @keyframes orbPulse { 0%,100%{transform:scale(1);opacity:.09} 50%{transform:scale(1.1);opacity:.15} }
 
-  .settings-section {
-    margin-bottom: 32px;
-    padding-bottom: 24px;
-    border-bottom: 1.5px solid #e5e9f2;
-  }
-  .settings-section:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-  }
+    .hero-bottom-line {
+      position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--blue), var(--cyan), transparent);
+      opacity: 0.7;
+    }
 
-  .settings-section h2 {
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin-bottom: 12px;
-    color: #3b4cca;
-    letter-spacing: 0.5px;
-  }
+    .settings-hero-inner {
+      max-width: 860px; margin: 0 auto;
+      position: relative; z-index: 1;
+      display: flex; align-items: center; gap: 24px;
+    }
+    .hero-avatar-wrap {
+      position: relative; flex-shrink: 0;
+    }
+    .hero-avatar {
+      width: 80px; height: 80px; border-radius: 50%;
+      border: 2px solid rgba(24,119,243,0.5);
+      object-fit: cover;
+      background: #1a2236;
+    }
+    .hero-avatar-edit {
+      position: absolute; bottom: 0; right: 0;
+      width: 26px; height: 26px;
+      background: var(--blue); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; border: 2px solid var(--hero-bg);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .hero-avatar-edit:hover { background: var(--blue-dark); transform: scale(1.1); }
+    .hero-avatar-edit i { color: #fff; font-size: 0.6rem; }
 
-  .settings-section label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 500;
-    color: #444;
-  }
+    .hero-user-info {}
+    .hero-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--cyan);
+      margin-bottom: 6px; display: flex; align-items: center; gap: 8px;
+    }
+    .hero-eyebrow::before { content:''; width:20px; height:1px; background:var(--cyan); display:block; }
+    .hero-name {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700; font-size: 2rem;
+      color: #fff; letter-spacing: 0.02em; line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .hero-email {
+      font-size: 0.85rem; color: rgba(255,255,255,0.45);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .hero-meta {
+      display: flex; gap: 16px; margin-top: 10px; flex-wrap: wrap;
+    }
+    .hero-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.55);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 5px 10px; border-radius: 3px;
+    }
+    .hero-chip i { color: var(--cyan); font-size: 0.65rem; }
 
-  .settings-section input,
-  .settings-section select {
-    width: 100%;
-    padding: 10px 14px;
-    margin-bottom: 14px;
-    border: 1.5px solid #bfc9e0;
-    border-radius: 8px;
-    background: rgba(245, 247, 255, 0.7);
-    font-size: 1rem;
-    transition: border 0.2s;
-    outline: none;
-  }
-  .settings-section input:focus,
-  .settings-section select:focus {
-    border: 1.5px solid #3b4cca;
-    background: #fff;
-  }
+    /* ── PAGE LAYOUT ── */
+    .settings-body {
+      max-width: 860px; margin: 0 auto;
+      padding: 40px 24px 80px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
 
-  .settings-section button {
-    padding: 10px 28px;
-    background: linear-gradient(90deg, #3b4cca 60%, #6c63ff 100%);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1rem;
-    box-shadow: 0 2px 8px rgba(60, 60, 120, 0.08);
-    transition: background 0.2s, box-shadow 0.2s;
-    margin-right: 10px;
-  }
-  .settings-section button:hover {
-    background: linear-gradient(90deg, #6c63ff 0%, #3b4cca 100%);
-    box-shadow: 0 4px 16px rgba(60, 60, 120, 0.12);
-  }
+    /* ── SIDEBAR NAV ── */
+    .settings-nav {
+      position: sticky; top: 80px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px;
+      transition: background 0.3s;
+    }
+    .settings-nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; border-radius: 7px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600; font-size: 0.92rem;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--ink2); cursor: pointer;
+      text-decoration: none;
+      transition: background 0.18s, color 0.18s;
+      border: none; background: none; width: 100%; text-align: left;
+    }
+    .settings-nav-item i { color: var(--muted); font-size: 0.85rem; width: 16px; text-align: center; transition: color 0.18s; }
+    .settings-nav-item:hover { background: rgba(24,119,243,0.07); color: var(--blue); }
+    .settings-nav-item:hover i { color: var(--blue); }
+    .settings-nav-item.active { background: rgba(24,119,243,0.1); color: var(--blue); }
+    .settings-nav-item.active i { color: var(--blue); }
+    .settings-nav-sep { height: 1px; background: var(--border); margin: 6px 8px; }
+    .settings-nav-item.danger { color: var(--red); }
+    .settings-nav-item.danger i { color: var(--red); }
+    .settings-nav-item.danger:hover { background: rgba(239,68,68,0.07); }
 
-  /* Danger button */
-  #logoutBtn {
-    background: linear-gradient(90deg, #ff4e50 60%, #f9d423 100%);
-    color: #fff;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    box-shadow: 0 2px 8px rgba(255, 78, 80, 0.08);
-  }
-  #logoutBtn:hover {
-    background: linear-gradient(90deg, #f9d423 0%, #ff4e50 100%);
-    color: #fff;
-  }
+    /* ── PANELS ── */
+    .settings-panels { display: flex; flex-direction: column; gap: 20px; }
 
-  /* Modal Styling */
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 5000;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: auto;
-    background: rgba(44, 62, 80, 0.18);
-    backdrop-filter: blur(2px);
-  }
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      animation: panelIn 0.5s ease both;
+      transition: background 0.3s;
+    }
+    @keyframes panelIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    .panel:nth-child(1){animation-delay:.05s}
+    .panel:nth-child(2){animation-delay:.1s}
+    .panel:nth-child(3){animation-delay:.15s}
+    .panel:nth-child(4){animation-delay:.2s}
+    .panel:nth-child(5){animation-delay:.25s}
+    .panel:nth-child(6){animation-delay:.3s}
 
-  .modal-content {
-    background: rgba(255,255,255,0.97);
-    margin: 12% auto;
-    padding: 36px 28px;
-    border-radius: 18px;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    color: #2d3a8c;
-    box-shadow: 0 8px 32px rgba(60, 60, 120, 0.18);
-    border: 1.5px solid #e5e9f2;
-  }
+    .panel-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+    }
+    .panel-header-icon {
+      width: 34px; height: 34px;
+      background: rgba(24,119,243,0.1);
+      border: 1px solid rgba(24,119,243,0.2);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .panel-header-icon i { color: var(--blue); font-size: 0.85rem; }
+    .panel-header-text {}
+    .panel-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700; font-size: 1.05rem;
+      color: var(--ink); letter-spacing: 0.03em;
+    }
+    .panel-subtitle {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .panel-body { padding: 22px 22px; }
 
-  .modal-content h2 {
-    margin-bottom: 18px;
-    font-size: 1.3rem;
-    color: #3b4cca;
-    font-weight: 700;
-  }
+    /* ── FORM ELEMENTS ── */
+    .field-row {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 10px; align-items: flex-end; margin-bottom: 18px;
+    }
+    .field-row:last-child { margin-bottom: 0; }
+    .field-full { margin-bottom: 18px; }
+    .field-full:last-child { margin-bottom: 0; }
 
-  .modal-content button {
-    margin-top: 18px;
-    padding: 10px 24px;
-    background: linear-gradient(90deg, #3b4cca 60%, #6c63ff 100%);
-    color: white;
-    border: none;
-    border-radius: 7px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1rem;
-    box-shadow: 0 2px 8px rgba(60, 60, 120, 0.08);
-    transition: background 0.2s;
-  }
-  .modal-content button:hover {
-    background: linear-gradient(90deg, #6c63ff 0%, #3b4cca 100%);
-  }
+    .field-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 7px; display: block;
+    }
+    .field-input {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.93rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+    .field-input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(24,119,243,0.1);
+      background: var(--surface);
+    }
+    .field-select {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.93rem;
+      color: var(--ink);
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .field-select:focus { border-color: var(--blue); }
 
-  /* Premium Avatar */
-  .premium-avatar {
-    display: block;
-    margin: 0 auto 18px auto;
-    width: 84px;
-    height: 84px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #6c63ff;
-    box-shadow: 0 2px 12px rgba(60, 60, 120, 0.12);
-    background: #fff;
-  }
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: 'Rajdhani', sans-serif; font-weight: 700;
+      font-size: 0.88rem; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 10px 20px; border-radius: 7px;
+      border: none; cursor: pointer;
+      transition: background 0.18s, transform 0.14s, box-shadow 0.18s;
+      white-space: nowrap; position: relative; overflow: hidden;
+    }
+    .btn::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+      transform: translateX(-100%); transition: transform 0.4s;
+    }
+    .btn:hover::after { transform: translateX(100%); }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(24,119,243,0.3); }
+    .btn-outline {
+      background: transparent; color: var(--blue);
+      border: 1px solid var(--blue);
+    }
+    .btn-outline:hover { background: rgba(24,119,243,0.07); transform: translateY(-1px); }
+    .btn-danger { background: var(--red); color: #fff; }
+    .btn-danger:hover { background: var(--red-dark); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(239,68,68,0.3); }
+    .btn-danger-outline {
+      background: transparent; color: var(--red);
+      border: 1px solid var(--red);
+    }
+    .btn-danger-outline:hover { background: rgba(239,68,68,0.07); }
+    .btn-sm { padding: 8px 16px; font-size: 0.82rem; }
 
-  /* User Card Styles */
-  .user-card {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    background: rgba(245,247,255,0.85);
-    border-radius: 18px;
-    box-shadow: 0 4px 24px rgba(60, 60, 120, 0.10);
-    padding: 24px 24px 18px 24px;
-    margin-bottom: 36px;
-    position: relative;
-    border: 1.5px solid #e5e9f2;
-  }
+    /* ── TOGGLE SWITCH ── */
+    .toggle-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .toggle-row:last-child { border-bottom: none; }
+    .toggle-info strong {
+      display: block; font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: 600; font-size: 0.93rem; color: var(--ink);
+      margin-bottom: 2px;
+    }
+    .toggle-info span {
+      font-size: 0.78rem; color: var(--muted); line-height: 1.4;
+    }
+    .toggle-switch {
+      position: relative; width: 44px; height: 24px; flex-shrink: 0; margin-left: 16px;
+    }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .toggle-track {
+      position: absolute; inset: 0;
+      background: var(--border); border-radius: 999px;
+      cursor: pointer; transition: background 0.22s;
+    }
+    .toggle-track::after {
+      content: ''; position: absolute;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: #fff; top: 3px; left: 3px;
+      transition: transform 0.22s cubic-bezier(.22,1,.36,1);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    }
+    .toggle-switch input:checked + .toggle-track { background: var(--blue); }
+    .toggle-switch input:checked + .toggle-track::after { transform: translateX(20px); }
 
-  .user-card .premium-avatar {
-    width: 96px;
-    height: 96px;
-    margin: 0;
-    border-width: 4px;
-  }
+    /* ── THEME PREVIEW ── */
+    .theme-preview-strip {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px; margin-top: 14px;
+    }
+    .theme-option {
+      border: 2px solid var(--border);
+      border-radius: 8px; padding: 12px 14px;
+      cursor: pointer; transition: border-color 0.2s;
+      position: relative;
+    }
+    .theme-option.selected { border-color: var(--blue); }
+    .theme-option.selected::after {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free'; font-weight: 900;
+      position: absolute; top: 8px; right: 10px;
+      font-size: 0.7rem; color: var(--blue);
+    }
+    .theme-option-preview {
+      height: 40px; border-radius: 4px; margin-bottom: 8px;
+    }
+    .theme-light .theme-option-preview { background: linear-gradient(135deg, #f0f4fb, #ffffff); border: 1px solid #dde3ef; }
+    .theme-dark  .theme-option-preview { background: linear-gradient(135deg, #080e1e, #111827); }
+    .theme-option-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700; font-size: 0.88rem;
+      color: var(--ink); letter-spacing: 0.04em; text-transform: uppercase;
+    }
 
-  .user-details {
-    flex: 1;
-  }
+    /* ── ACTIVITY LOG ── */
+    .activity-list { display: flex; flex-direction: column; gap: 2px; }
+    .activity-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 12px 14px; border-radius: 7px;
+      background: var(--surface2);
+      transition: background 0.18s;
+    }
+    .activity-item:hover { background: rgba(24,119,243,0.06); }
+    .activity-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .activity-dot.success { background: var(--green); }
+    .activity-dot.warning { background: #f59e0b; }
+    .activity-dot.info    { background: var(--blue); }
+    .activity-text { flex: 1; }
+    .activity-text strong {
+      display: block; font-size: 0.88rem;
+      font-weight: 600; color: var(--ink); margin-bottom: 1px;
+    }
+    .activity-text span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem; color: var(--muted); letter-spacing: 0.06em;
+    }
+    .activity-badge {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 3px 8px;
+      border-radius: 3px; background: rgba(24,119,243,0.1);
+      color: var(--blue); flex-shrink: 0;
+    }
 
-  .user-details h2 {
-    margin: 0 0 6px 0;
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: #3b4cca;
-  }
+    /* ── DANGER ZONE ── */
+    .danger-zone {
+      border: 1px solid rgba(239,68,68,0.25) !important;
+    }
+    .danger-zone .panel-header { border-bottom-color: rgba(239,68,68,0.15); }
+    .danger-zone .panel-header-icon {
+      background: rgba(239,68,68,0.1);
+      border-color: rgba(239,68,68,0.2);
+    }
+    .danger-zone .panel-header-icon i { color: var(--red); }
+    .danger-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+      gap: 20px;
+    }
+    .danger-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .danger-item-info strong {
+      display: block; font-weight: 600; font-size: 0.92rem;
+      color: var(--ink); margin-bottom: 3px;
+    }
+    .danger-item-info span { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
 
-  .user-details p {
-    margin: 0 0 10px 0;
-    color: #555;
-    font-size: 1rem;
-  }
+    /* ── TOAST ── */
+    #toast {
+      position: fixed; bottom: 32px; left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      background: var(--ink); color: #fff;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.88rem; font-weight: 500;
+      padding: 12px 24px; border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 9999;
+      display: flex; align-items: center; gap: 10px;
+      border-left: 3px solid var(--blue);
+      white-space: nowrap;
+    }
+    #toast.toast-show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    #toast.toast-success { border-left-color: var(--green); }
+    #toast.toast-error   { border-left-color: var(--red); }
 
-  .avatar-upload-label {
-    cursor: pointer;
-    display: inline-block;
-    margin-top: 8px;
-  }
+    /* ── MODAL ── */
+    .modal {
+      display: none; position: fixed; inset: 0;
+      background: rgba(11,17,32,0.55);
+      backdrop-filter: blur(4px);
+      z-index: 5000;
+      align-items: center; justify-content: center;
+    }
+    .modal.modal-open { display: flex; }
+    .modal-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px 32px;
+      max-width: 420px; width: 90%;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.25);
+      animation: modalIn 0.3s cubic-bezier(.22,1,.36,1);
+    }
+    @keyframes modalIn { from{opacity:0;transform:scale(0.94)translateY(12px)} to{opacity:1;transform:scale(1)translateY(0)} }
+    .modal-icon { font-size: 2.5rem; margin-bottom: 16px; }
+    .modal-title {
+      font-family: 'Rajdhani', sans-serif; font-weight: 700;
+      font-size: 1.4rem; color: var(--ink); margin-bottom: 10px;
+    }
+    .modal-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
+    .modal-actions { display: flex; gap: 10px; justify-content: center; }
 
-  .avatar-upload-btn {
-    display: inline-block;
-    background: linear-gradient(90deg, #3b4cca 60%, #6c63ff 100%);
-    color: #fff;
-    padding: 6px 16px;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: background 0.2s;
-    cursor: pointer;
-  }
-  .avatar-upload-btn:hover {
-    background: linear-gradient(90deg, #6c63ff 0%, #3b4cca 100%);
-  }
-
-  .avatar-remove-btn {
-    display: inline-block;
-    background: linear-gradient(90deg, #ff4e50 60%, #f9d423 100%);
-    color: #fff;
-    padding: 7px 18px;
-    border-radius: 7px;
-    font-size: 1rem;
-    font-weight: 500;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s;
-    margin-top: 8px;
-  }
-  .avatar-remove-btn:hover {
-    background: linear-gradient(90deg, #f9d423 0%, #ff4e50 100%);
-  }
-
-  body.dark-theme {
-    background: linear-gradient(135deg, #23243a 0%, #181820 100%);
-    color: #f1f1f1;
-  }
-  body.dark-theme .content {
-    background: rgba(34, 36, 58, 0.92);
-    color: #f1f1f1;
-    border: 1.5px solid rgba(108, 99, 255, 0.18);
-  }
-  body.dark-theme .settings-section h2 {
-    color: #aab6ff;
-  }
-  body.dark-theme .settings-section input,
-  body.dark-theme .settings-section select {
-    background: rgba(34, 36, 58, 0.7);
-    color: #fff;
-    border: 1.5px solid #6c63ff;
-  }
-  body.dark-theme .settings-section input:focus,
-  body.dark-theme .settings-section select:focus {
-    background: #23243a;
-    border: 1.5px solid #aab6ff;
-  }
-  body.dark-theme .modal-content {
-    background: rgba(34, 36, 58, 0.97);
-    color: #aab6ff;
-    border: 1.5px solid #6c63ff;
-  }
-  body.dark-theme .user-card {
-    background: rgba(34, 36, 58, 0.92);
-    border: 1.5px solid #6c63ff;
-  }
-  body.dark-theme .user-details h2 {
-    color: #aab6ff;
-  }
-  body.dark-theme .user-details p {
-    color: #ccc;
-  }
-
-  /* Toast Notification */
-  .toast {
-    visibility: hidden;
-    min-width: 240px;
-    max-width: 90vw;
-    background: linear-gradient(90deg, #3b4cca 60%, #6c63ff 100%);
-    color: #fff;
-    text-align: center;
-    border-radius: 12px;
-    padding: 18px 32px;
-    position: fixed;
-    left: 50%;
-    bottom: 40px;
-    font-size: 1.08rem;
-    font-weight: 500;
-    z-index: 9999;
-    transform: translateX(-50%);
-    box-shadow: 0 4px 24px rgba(60, 60, 120, 0.18);
-    opacity: 0;
-    transition: opacity 0.4s, visibility 0.4s;
-  }
-  .toast.show {
-    visibility: visible;
-    opacity: 1;
-  }
+    /* ── RESPONSIVE ── */
+    @media(max-width:720px) {
+      .settings-body { grid-template-columns: 1fr; }
+      .settings-nav { position: static; display: flex; flex-wrap: wrap; gap: 4px; padding: 8px; }
+      .settings-nav-sep { display: none; }
+      .settings-hero { padding: 90px 20px 36px; }
+      .field-row { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 
 <body>
   <div id="nav"></div>
-   <!-- Search pop-up -->
-    <div id="searchPopup" class="search-popup">
-      <div class="popup-content">
-        <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
-        <input
-          type="text"
-          id="searchBar"
-          placeholder="Search here..."
-          oninput="showRecommendations()"
-        />
-        <div class="result-box" id="resultBox"></div>
-      </div>
-    </div>
 
-  <div class="content">
-    <!-- User Profile Card at the very top -->
-    <div class="user-card">
-      <img id="profileAvatar" src="images/default-avatar.png" alt="Profile Picture" class="premium-avatar"
-           onerror="this.onerror=null;this.src='images/default-avatar.png';" />
-      <div class="user-details">
-        <h2 id="userCardName">User Name</h2>
-        <p id="userCardEmail">user@email.com</p>
-        <label class="avatar-upload-label">
-          <input type="file" id="avatarUpload" accept="image/*" style="display:none;">
-          <span class="avatar-upload-btn"><i class="fa fa-camera"></i> Change Photo</span>
+  <!-- ── HERO ── -->
+  <div class="settings-hero">
+    <div class="hero-bottom-line"></div>
+    <div class="settings-hero-inner">
+      <div class="hero-avatar-wrap">
+        <img id="profileAvatar" src="images/default-avatar.png" alt="Profile" class="hero-avatar"
+             onerror="this.src='images/default-avatar.png'"/>
+        <label class="hero-avatar-edit" title="Change photo">
+          <input type="file" id="avatarUpload" accept="image/*" style="display:none">
+          <i class="fas fa-camera"></i>
         </label>
-        <button id="removePicBtn" class="avatar-remove-btn" type="button" style="margin-left:10px;">
-          <i class="fa fa-trash"></i> Remove Picture
-        </button>
-        <p id="lastLogin" style="font-size:0.95em;color:#888;margin-top:4px;">Last login: --</p>
+      </div>
+      <div class="hero-user-info">
+        <div class="hero-eyebrow">AlCoders Member</div>
+        <div class="hero-name" id="heroName">Loading...</div>
+        <div class="hero-email" id="heroEmail">—</div>
+        <div class="hero-meta">
+          <div class="hero-chip" id="heroLastLogin"><i class="fas fa-clock"></i> Last login: —</div>
+          <div class="hero-chip"><i class="fas fa-shield-halved"></i> Account Active</div>
+        </div>
       </div>
     </div>
-    <h1>Settings</h1>
+  </div>
 
-    <!-- Profile Name -->
-    <div class="settings-section">
-      <h2>Profile Information</h2>
-      <label for="profileName">Name</label>
-      <input type="text" id="profileName" placeholder="Enter your name">
-      <button id="userNameBtn">Change Name</button>
+  <!-- ── BODY ── -->
+  <div class="settings-body">
 
-      <label for="profileUsername">Username</label>
-      <input type="text" id="profileUsername" placeholder="Enter your username">
-      <button id="userUsernameBtn">Change Username</button>
-    </div>
+    <!-- Sidebar nav -->
+    <nav class="settings-nav" id="settingsNav">
+      <button class="settings-nav-item active" data-target="panel-profile" onclick="scrollToPanel(this,'panel-profile')">
+        <i class="fas fa-user"></i> Profile
+      </button>
+      <button class="settings-nav-item" data-target="panel-theme" onclick="scrollToPanel(this,'panel-theme')">
+        <i class="fas fa-palette"></i> Theme
+      </button>
+      <button class="settings-nav-item" data-target="panel-privacy" onclick="scrollToPanel(this,'panel-privacy')">
+        <i class="fas fa-lock"></i> Privacy
+      </button>
+      <button class="settings-nav-item" data-target="panel-language" onclick="scrollToPanel(this,'panel-language')">
+        <i class="fas fa-globe"></i> Language
+      </button>
+      <button class="settings-nav-item" data-target="panel-activity" onclick="scrollToPanel(this,'panel-activity')">
+        <i class="fas fa-history"></i> Activity
+      </button>
+      <button class="settings-nav-item" data-target="panel-security" onclick="scrollToPanel(this,'panel-security')">
+        <i class="fas fa-key"></i> Security
+      </button>
+      <div class="settings-nav-sep"></div>
+      <button class="settings-nav-item danger" data-target="panel-danger" onclick="scrollToPanel(this,'panel-danger')">
+        <i class="fas fa-triangle-exclamation"></i> Danger
+      </button>
+    </nav>
 
-    <!-- Theme -->
-    <div class="settings-section">
-      <h2>Theme Selection</h2>
-      <label for="themeSelect">Select Theme:</label>
-      <select id="themeSelect">
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-      </select>
-    </div>
+    <!-- Panels -->
+    <div class="settings-panels">
 
-    <!-- Theme Preview -->
-    <div class="settings-section">
-      <h2>Theme Preview</h2>
-      <div id="themePreview" style="padding:20px;border-radius:12px;margin-bottom:10px;">
-        This is a preview of your selected theme.
+      <!-- PROFILE -->
+      <div class="panel" id="panel-profile">
+        <div class="panel-header">
+          <div class="panel-header-icon"><i class="fas fa-user"></i></div>
+          <div class="panel-header-text">
+            <div class="panel-title">Profile Information</div>
+            <div class="panel-subtitle">// Name · Username · Avatar</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="field-row">
+            <div>
+              <label class="field-label">Display Name</label>
+              <input type="text" id="profileName" class="field-input" placeholder="Enter your name">
+            </div>
+            <button class="btn btn-primary btn-sm" id="userNameBtn"><i class="fas fa-check"></i> Save</button>
+          </div>
+          <div class="field-row">
+            <div>
+              <label class="field-label">Username</label>
+              <input type="text" id="profileUsername" class="field-input" placeholder="Enter your username">
+            </div>
+            <button class="btn btn-primary btn-sm" id="userUsernameBtn"><i class="fas fa-check"></i> Save</button>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;">
+            <label style="cursor:pointer;">
+              <input type="file" id="avatarUpload2" accept="image/*" style="display:none">
+              <span class="btn btn-outline btn-sm"><i class="fas fa-camera"></i> Change Photo</span>
+            </label>
+            <button class="btn btn-danger-outline btn-sm" id="removePicBtn"><i class="fas fa-trash"></i> Remove Photo</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- THEME -->
+      <div class="panel" id="panel-theme">
+        <div class="panel-header">
+          <div class="panel-header-icon"><i class="fas fa-palette"></i></div>
+          <div class="panel-header-text">
+            <div class="panel-title">Theme Selection</div>
+            <div class="panel-subtitle">// Appearance · Light · Dark</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <label class="field-label">Select Theme</label>
+          <div class="theme-preview-strip">
+            <div class="theme-option theme-light selected" id="themeOptLight" onclick="selectTheme('light')">
+              <div class="theme-option-preview"></div>
+              <div class="theme-option-label">Light</div>
+            </div>
+            <div class="theme-option theme-dark" id="themeOptDark" onclick="selectTheme('dark')">
+              <div class="theme-option-preview"></div>
+              <div class="theme-option-label">Dark</div>
+            </div>
+          </div>
+          <select id="themeSelect" style="display:none"></select>
+        </div>
+      </div>
+
+      <!-- PRIVACY -->
+      <div class="panel" id="panel-privacy">
+        <div class="panel-header">
+          <div class="panel-header-icon"><i class="fas fa-lock"></i></div>
+          <div class="panel-header-text">
+            <div class="panel-title">Privacy &amp; Data Controls</div>
+            <div class="panel-subtitle">// Visibility · Data · Permissions</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <strong>Show Profile to Other Members</strong>
+              <span>Allow other AlCoders members to view your profile.</span>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="privShowProfile" checked>
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <strong>Show Activity Status</strong>
+              <span>Let others see when you were last active.</span>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="privShowActivity">
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <strong>Allow Usage Analytics</strong>
+              <span>Help us improve AlCoders by sharing anonymous usage data.</span>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="privAnalytics" checked>
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <strong>Email Notifications</strong>
+              <span>Receive updates, course reminders, and announcements.</span>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="privEmailNotif" checked>
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+          <div style="margin-top:16px;">
+            <button class="btn btn-primary btn-sm" id="savePrivacyBtn"><i class="fas fa-save"></i> Save Privacy Settings</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- LANGUAGE -->
+      <div class="panel" id="panel-language">
+        <div class="panel-header">
+          <div class="panel-header-icon"><i class="fas fa-globe"></i></div>
+          <div class="panel-header-text">
+            <div class="panel-title">Language &amp; Region</div>
+            <div class="panel-subtitle">// Locale · Timezone · Format</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="field-full">
+            <label class="field-label">Display Language</label>
+            <select class="field-select" id="langSelect">
+              <option value="en">English</option>
+              <option value="ml">Malayalam</option>
+              <option value="hi">Hindi</option>
+              <option value="ta">Tamil</option>
+              <option value="kn">Kannada</option>
+            </select>
+          </div>
+          <div class="field-full">
+            <label class="field-label">Region / Timezone</label>
+            <select class="field-select" id="regionSelect">
+              <option value="Asia/Kolkata">India (IST — UTC+5:30)</option>
+              <option value="UTC">UTC</option>
+              <option value="America/New_York">United States (EST)</option>
+              <option value="Europe/London">United Kingdom (GMT)</option>
+              <option value="Asia/Dubai">UAE (GST — UTC+4)</option>
+            </select>
+          </div>
+          <div class="field-full">
+            <label class="field-label">Date Format</label>
+            <select class="field-select" id="dateFormatSelect">
+              <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+              <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+              <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-sm" id="saveLangBtn" style="margin-top:6px;"><i class="fas fa-save"></i> Save Preferences</button>
+        </div>
+      </div>
+
+      <!-- ACTIVITY -->
+      <div class="panel" id="panel-activity">
+        <div class="panel-header">
+          <div class="panel-header-icon"><i class="fas fa-history"></i></div>
+          <div class="panel-header-text">
+            <div class="panel-title">Activity &amp; Login History</div>
+            <div class="panel-subtitle">// Recent sessions · Devices</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="activity-list" id="activityList">
+            <div class="activity-item">
+              <div class="activity-dot info"></div>
+              <div class="activity-text">
+                <strong>Loading activity...</strong>
+                <span>Please wait</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECURITY -->
+      <div class="panel" id="panel-security">
+        <div class="panel-header">
+          <div class="panel-header-icon"><i class="fas fa-key"></i></div>
+          <div class="panel-header-text">
+            <div class="panel-title">Security</div>
+            <div class="panel-subtitle">// Password · Session</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="danger-item">
+            <div class="danger-item-info">
+              <strong>Reset Password</strong>
+              <span>Send a password reset link to your registered email address.</span>
+            </div>
+            <button class="btn btn-outline btn-sm" id="resetPasswordBtn"><i class="fas fa-envelope"></i> Send Email</button>
+          </div>
+          <div class="danger-item">
+            <div class="danger-item-info">
+              <strong>Sign Out</strong>
+              <span>End your current session and return to the login page.</span>
+            </div>
+            <button class="btn btn-danger-outline btn-sm" id="logoutBtn"><i class="fas fa-right-from-bracket"></i> Logout</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DANGER ZONE -->
+      <div class="panel danger-zone" id="panel-danger">
+        <div class="panel-header">
+          <div class="panel-header-icon"><i class="fas fa-triangle-exclamation"></i></div>
+          <div class="panel-header-text">
+            <div class="panel-title" style="color:var(--red);">Danger Zone</div>
+            <div class="panel-subtitle">// Irreversible actions</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="danger-item">
+            <div class="danger-item-info">
+              <strong>Clear All Data</strong>
+              <span>Remove all locally stored preferences and cached data from this device.</span>
+            </div>
+            <button class="btn btn-danger-outline btn-sm" id="clearDataBtn"><i class="fas fa-broom"></i> Clear</button>
+          </div>
+          <div class="danger-item">
+            <div class="danger-item-info">
+              <strong>Delete Account</strong>
+              <span>Permanently delete your AlCoders account and all associated data. This cannot be undone.</span>
+            </div>
+            <button class="btn btn-danger btn-sm" id="deleteAccountBtn"><i class="fas fa-skull"></i> Delete Account</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end panels -->
+  </div><!-- end settings-body -->
+
+  <!-- ── MODALS ── -->
+
+  <!-- Login Required -->
+  <div class="modal" id="loginModal">
+    <div class="modal-box">
+      <div class="modal-icon">🔒</div>
+      <div class="modal-title">Login Required</div>
+      <p class="modal-desc">You must be logged in to access Settings. Please sign in to continue.</p>
+      <div class="modal-actions">
+        <button class="btn btn-primary" onclick="window.location.href='loginpage.html'"><i class="fas fa-right-to-bracket"></i> Go to Login</button>
+        <button class="btn btn-outline" onclick="window.location.href='index.html'">Home</button>
       </div>
     </div>
+  </div>
 
-    <!-- Change Password -->
-    <div class="settings-section">
-      <h2>Change Password</h2>
-      <button id="resetPasswordBtn">Send Password Reset Email</button>
-    </div>
-
-    <!-- Logout -->
-    <div class="settings-section">
-      <button id="logoutBtn" style="background-color: #dc3545;">Logout</button>
+  <!-- Logout Confirm -->
+  <div class="modal" id="logoutModal">
+    <div class="modal-box">
+      <div class="modal-icon">👋</div>
+      <div class="modal-title">Logging Out</div>
+      <p class="modal-desc" id="logoutMessage">Goodbye! You have been signed out.</p>
     </div>
   </div>
 
-  <!-- Login Required Modal -->
-  <div id="loginModal" class="modal">
-    <div class="modal-content">
-      <h2>Login Required</h2>
-      <p>You must be logged in to access the settings page.</p>
-      <button onclick="redirectToLogin()">Go to Login Page</button>
-        <button onclick="window.location.href='index.html'">Close</button>
+  <!-- Remove Photo Confirm -->
+  <div class="modal" id="removePicModal">
+    <div class="modal-box">
+      <div class="modal-icon">🗑️</div>
+      <div class="modal-title">Remove Profile Photo</div>
+      <p class="modal-desc">This will remove your current profile photo and replace it with the default. Are you sure?</p>
+      <div class="modal-actions">
+        <button class="btn btn-danger" id="confirmRemovePicBtn"><i class="fas fa-trash"></i> Yes, Remove</button>
+        <button class="btn btn-outline" id="cancelRemovePicBtn">Cancel</button>
+      </div>
     </div>
   </div>
 
-  <!-- Logout Confirmation Modal -->
-  <div id="logoutModal" class="modal">
-    <div class="modal-content">
-      <h2>Logged Out</h2>
-      <p id="logoutMessage">Goodbye, user!</p>
+  <!-- Delete Account Confirm -->
+  <div class="modal" id="deleteModal">
+    <div class="modal-box">
+      <div class="modal-icon">⚠️</div>
+      <div class="modal-title" style="color:var(--red);">Delete Account</div>
+      <p class="modal-desc">This will <strong>permanently delete</strong> your account and all data. This action <strong>cannot be undone</strong>. Type your username to confirm.</p>
+      <input type="text" id="deleteConfirmInput" class="field-input" placeholder="Type your username" style="margin-bottom:16px;">
+      <div class="modal-actions">
+        <button class="btn btn-danger" id="confirmDeleteBtn"><i class="fas fa-skull"></i> Delete Forever</button>
+        <button class="btn btn-outline" onclick="closeModal('deleteModal')">Cancel</button>
+      </div>
     </div>
   </div>
 
-  <!-- Remove Profile Picture Confirmation Modal -->
-  <div id="removePicModal" class="modal">
-    <div class="modal-content">
-      <h2>Remove Profile Picture</h2>
-      <p>Remove your profile picture and use the default?</p>
-      <button id="confirmRemovePicBtn" style="background:linear-gradient(90deg,#ff4e50 60%,#f9d423 100%);margin-right:10px;">Yes, Remove</button>
-      <button id="cancelRemovePicBtn" style="background:linear-gradient(90deg,#6c63ff 60%,#3b4cca 100%);">Cancel</button>
-    </div>
-  </div>
+  <!-- Toast -->
+  <div id="toast"><i class="fas fa-circle-check" id="toastIcon"></i> <span id="toastMsg"></span></div>
 
   <div id="footer"></div>
 
-  <!-- Firebase Modules and Script -->
+  <!-- ── SCRIPTS ── -->
+  <script>
+    /* ── SIDEBAR NAV SCROLL ── */
+    function scrollToPanel(btn, id) {
+      document.querySelectorAll('.settings-nav-item').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    /* ── TOAST ── */
+    function showToast(msg, type = 'success') {
+      const toast = document.getElementById('toast');
+      const icon  = document.getElementById('toastIcon');
+      const text  = document.getElementById('toastMsg');
+      text.textContent = msg;
+      toast.className = 'toast-show toast-' + type;
+      icon.className = type === 'success' ? 'fas fa-circle-check' : type === 'error' ? 'fas fa-circle-xmark' : 'fas fa-circle-info';
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => { toast.className = ''; }, 3000);
+    }
+
+    /* ── MODAL ── */
+    function openModal(id)  { document.getElementById(id).classList.add('modal-open'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('modal-open'); }
+    document.querySelectorAll('.modal').forEach(m => {
+      m.addEventListener('click', e => { if (e.target === m) m.classList.remove('modal-open'); });
+    });
+
+    /* ── THEME PICKER ── */
+    function selectTheme(theme) {
+      document.getElementById('themeOptLight').classList.toggle('selected', theme === 'light');
+      document.getElementById('themeOptDark').classList.toggle('selected',  theme === 'dark');
+      document.body.classList.toggle('dark-theme',  theme === 'dark');
+      document.body.classList.toggle('light-theme', theme === 'light');
+      localStorage.setItem('theme', theme);
+    }
+    // Apply saved theme on load
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    selectTheme(savedTheme);
+  </script>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import {
-      getAuth,
-      onAuthStateChanged,
-      signOut,
-      sendPasswordResetEmail
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import {
-      getFirestore,
-      doc,
-      getDoc,
-      setDoc,
-      updateDoc
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getAuth, onAuthStateChanged, signOut, sendPasswordResetEmail, deleteUser }
+      from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc }
+      from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyBIMtf6DXnAxWKdkoLkfxn7b7zBoAr8Ouk",
@@ -457,230 +889,242 @@
       appId: "1:1092849520429:web:ecf950a9aa868e37760da4"
     };
 
-    const app = initializeApp(firebaseConfig);
+    const app  = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    const db = getFirestore(app);
+    const db   = getFirestore(app);
 
-    const nameInput = document.getElementById("profileName");
-    const usernameInput = document.getElementById("profileUsername");
-    const themeSelect = document.getElementById("themeSelect");
-    const userNameBtn = document.getElementById("userNameBtn");
-    const userUsernameBtn = document.getElementById("userUsernameBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const resetPasswordBtn = document.getElementById("resetPasswordBtn");
-
-    const loginModal = document.getElementById("loginModal");
-    const logoutModal = document.getElementById("logoutModal");
-    const logoutMessage = document.getElementById("logoutMessage");
-
-    // Profile Card Elements    <div id="toast" class="toast"></div>
-    const profileAvatar = document.getElementById("profileAvatar");
-    const avatarUpload = document.getElementById("avatarUpload");
-    const userCardName = document.getElementById("userCardName");
-    const userCardEmail = document.getElementById("userCardEmail");
-    const removePicBtn = document.getElementById("removePicBtn");
-
-    function applyTheme(theme) {
-      document.body.classList.toggle("dark-theme", theme === "dark");
-      document.body.classList.toggle("light-theme", theme === "light");
-    }
-
-    function showLoginModal() {
-      loginModal.style.display = "block";
-    }
-
-    window.redirectToLogin = function () {
-      window.location.href = "loginpage.html";
-    }
+    let userDocRef, currentUsername = '';
 
     onAuthStateChanged(auth, async (user) => {
-      if (!user) {
-        showLoginModal();
+      if (!user) { openModal('loginModal'); return; }
+
+      userDocRef = doc(db, 'users', user.uid);
+
+      /* ── LOAD USER DATA ── */
+      try {
+        const snap = await getDoc(userDocRef);
+        const data = snap.exists() ? snap.data() : {};
+
+        const name  = data.name || user.displayName || 'User';
+        const uname = data.username || '';
+        currentUsername = uname;
+
+        document.getElementById('heroName').textContent    = name;
+        document.getElementById('heroEmail').textContent   = user.email || '—';
+        document.getElementById('profileName').value       = name;
+        document.getElementById('profileUsername').value   = uname;
+
+        if (user.metadata?.lastSignInTime) {
+          document.getElementById('heroLastLogin').innerHTML =
+            '<i class="fas fa-clock"></i> ' + new Date(user.metadata.lastSignInTime).toLocaleString();
+        }
+
+        if (data.profilePic && data.profilePic.length > 30) {
+          document.getElementById('profileAvatar').src = data.profilePic;
+        }
+
+        // Theme
+        if (data.theme) selectTheme(data.theme);
+
+        // Privacy toggles
+        if (data.privacy) {
+          document.getElementById('privShowProfile').checked  = data.privacy.showProfile  ?? true;
+          document.getElementById('privShowActivity').checked = data.privacy.showActivity ?? false;
+          document.getElementById('privAnalytics').checked    = data.privacy.analytics    ?? true;
+          document.getElementById('privEmailNotif').checked   = data.privacy.emailNotif   ?? true;
+        }
+
+        // Language / Region
+        if (data.lang)       document.getElementById('langSelect').value         = data.lang;
+        if (data.region)     document.getElementById('regionSelect').value       = data.region;
+        if (data.dateFormat) document.getElementById('dateFormatSelect').value   = data.dateFormat;
+
+        // Activity log
+        buildActivityLog(user, data);
+
+      } catch (err) {
+        console.error('Error loading user data:', err);
+        showToast('Failed to load profile.', 'error');
+      }
+
+      /* ── AVATAR UPLOAD (both inputs) ── */
+      function handleAvatarUpload(file) {
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+          const b64 = e.target.result;
+          document.getElementById('profileAvatar').src = b64;
+          try {
+            await setDoc(userDocRef, { profilePic: b64 }, { merge: true });
+            showToast('Profile photo updated!');
+          } catch { showToast('Failed to save photo.', 'error'); }
+        };
+        reader.readAsDataURL(file);
+      }
+      document.getElementById('avatarUpload').onchange  = e => handleAvatarUpload(e.target.files[0]);
+      document.getElementById('avatarUpload2').onchange = e => handleAvatarUpload(e.target.files[0]);
+
+      /* ── SAVE NAME ── */
+      document.getElementById('userNameBtn').onclick = async () => {
+        const v = document.getElementById('profileName').value.trim();
+        if (!v) { showToast('Name cannot be empty.', 'error'); return; }
+        try {
+          await setDoc(userDocRef, { name: v }, { merge: true });
+          document.getElementById('heroName').textContent = v;
+          showToast('Name updated!');
+        } catch { showToast('Error updating name.', 'error'); }
+      };
+
+      /* ── SAVE USERNAME ── */
+      document.getElementById('userUsernameBtn').onclick = async () => {
+        const v = document.getElementById('profileUsername').value.trim();
+        if (!v) { showToast('Username cannot be empty.', 'error'); return; }
+        try {
+          await setDoc(userDocRef, { username: v }, { merge: true });
+          localStorage.setItem('username', v);
+          currentUsername = v;
+          showToast('Username updated!');
+        } catch { showToast('Error updating username.', 'error'); }
+      };
+
+      /* ── THEME SAVE ── */
+      document.getElementById('themeOptLight').addEventListener('click', async () => {
+        try { await updateDoc(userDocRef, { theme: 'light' }); } catch {}
+      });
+      document.getElementById('themeOptDark').addEventListener('click', async () => {
+        try { await updateDoc(userDocRef, { theme: 'dark' }); } catch {}
+      });
+
+      /* ── PRIVACY SAVE ── */
+      document.getElementById('savePrivacyBtn').onclick = async () => {
+        try {
+          await setDoc(userDocRef, {
+            privacy: {
+              showProfile:  document.getElementById('privShowProfile').checked,
+              showActivity: document.getElementById('privShowActivity').checked,
+              analytics:    document.getElementById('privAnalytics').checked,
+              emailNotif:   document.getElementById('privEmailNotif').checked,
+            }
+          }, { merge: true });
+          showToast('Privacy settings saved!');
+        } catch { showToast('Error saving privacy.', 'error'); }
+      };
+
+      /* ── LANGUAGE SAVE ── */
+      document.getElementById('saveLangBtn').onclick = async () => {
+        try {
+          await setDoc(userDocRef, {
+            lang:       document.getElementById('langSelect').value,
+            region:     document.getElementById('regionSelect').value,
+            dateFormat: document.getElementById('dateFormatSelect').value,
+          }, { merge: true });
+          showToast('Language preferences saved!');
+        } catch { showToast('Error saving preferences.', 'error'); }
+      };
+
+      /* ── RESET PASSWORD ── */
+      document.getElementById('resetPasswordBtn').onclick = async () => {
+        try {
+          await sendPasswordResetEmail(auth, user.email);
+          showToast('Password reset email sent!');
+        } catch { showToast('Failed to send reset email.', 'error'); }
+      };
+
+      /* ── LOGOUT ── */
+      document.getElementById('logoutBtn').onclick = async () => {
+        try {
+          const snap = await getDoc(userDocRef);
+          const name = snap.exists() ? (snap.data().name || 'User') : 'User';
+          document.getElementById('logoutMessage').textContent = `Goodbye, ${name}! You have been signed out.`;
+          openModal('logoutModal');
+          setTimeout(async () => {
+            await signOut(auth);
+            window.location.href = 'loginpage.html';
+          }, 2000);
+        } catch { showToast('Error signing out.', 'error'); }
+      };
+
+      /* ── REMOVE PHOTO ── */
+      document.getElementById('removePicBtn').onclick = () => openModal('removePicModal');
+      document.getElementById('cancelRemovePicBtn').onclick = () => closeModal('removePicModal');
+      document.getElementById('confirmRemovePicBtn').onclick = async () => {
+        closeModal('removePicModal');
+        document.getElementById('profileAvatar').src = 'images/default-avatar.png';
+        try {
+          await setDoc(userDocRef, { profilePic: '' }, { merge: true });
+          showToast('Profile photo removed.');
+        } catch { showToast('Failed to remove photo.', 'error'); }
+      };
+
+      /* ── CLEAR DATA ── */
+      document.getElementById('clearDataBtn').onclick = () => {
+        localStorage.clear();
+        sessionStorage.clear();
+        showToast('Local data cleared.');
+      };
+
+      /* ── DELETE ACCOUNT ── */
+      document.getElementById('deleteAccountBtn').onclick = () => openModal('deleteModal');
+      document.getElementById('confirmDeleteBtn').onclick = async () => {
+        const input = document.getElementById('deleteConfirmInput').value.trim();
+        if (input !== currentUsername) {
+          showToast('Username does not match.', 'error'); return;
+        }
+        try {
+          await deleteDoc(userDocRef);
+          await deleteUser(user);
+          localStorage.clear();
+          window.location.href = 'index.html';
+        } catch (err) {
+          if (err.code === 'auth/requires-recent-login') {
+            showToast('Please log out and log back in, then try again.', 'error');
+          } else {
+            showToast('Failed to delete account.', 'error');
+          }
+        }
+      };
+    });
+
+    /* ── ACTIVITY LOG ── */
+    function buildActivityLog(user, data) {
+      const list = document.getElementById('activityList');
+      const entries = [];
+
+      if (user.metadata?.lastSignInTime) {
+        entries.push({ dot: 'success', label: 'Signed In', detail: new Date(user.metadata.lastSignInTime).toLocaleString(), badge: 'Current' });
+      }
+      if (user.metadata?.creationTime) {
+        entries.push({ dot: 'info', label: 'Account Created', detail: new Date(user.metadata.creationTime).toLocaleString(), badge: 'Registration' });
+      }
+      if (data.name) {
+        entries.push({ dot: 'info', label: 'Profile Name Set', detail: data.name, badge: 'Profile' });
+      }
+      if (data.theme) {
+        entries.push({ dot: 'info', label: 'Theme Applied', detail: data.theme.charAt(0).toUpperCase() + data.theme.slice(1) + ' mode', badge: 'Settings' });
+      }
+      if (data.username) {
+        entries.push({ dot: 'success', label: 'Username Configured', detail: '@' + data.username, badge: 'Profile' });
+      }
+
+      if (entries.length === 0) {
+        list.innerHTML = '<div class="activity-item"><div class="activity-dot info"></div><div class="activity-text"><strong>No activity yet</strong><span>Activity will appear here as you use AlCoders.</span></div></div>';
         return;
       }
 
-      const uid = user.uid;
-      const userDocRef = doc(db, "users", uid);
-
-      try {
-        const docSnap = await getDoc(userDocRef);
-        if (docSnap.exists()) {
-          const data = docSnap.data();
-          // Set name and email in card
-          userCardName.textContent = data.name || user.displayName || "User";
-          userCardEmail.textContent = user.email || "";
-          nameInput.value = data.name || "";
-          usernameInput.value = data.username || "";
-          if (data.theme) {
-            themeSelect.value = data.theme;
-            applyTheme(data.theme);
-          }
-          // Set avatar if exists
-          if (data.profilePic && data.profilePic.length > 30) {
-            profileAvatar.src = data.profilePic;
-          } else {
-            profileAvatar.src = "images/default-avatar.png";
-          }
-        } else {
-          userCardName.textContent = user.displayName || "User";
-          userCardEmail.textContent = user.email || "";
-          profileAvatar.src = "images/default-avatar.png";
-        }
-      } catch (err) {
-        console.error("Error fetching user data:", err);
-      }
-
-      if (user && user.metadata && user.metadata.lastSignInTime) {
-        document.getElementById("lastLogin").textContent = "Last login: " + new Date(user.metadata.lastSignInTime).toLocaleString();
-      }
-
-      // Avatar upload
-      avatarUpload.onchange = async function() {
-        const file = avatarUpload.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = async function(e) {
-          const base64 = e.target.result;
-          profileAvatar.src = base64;
-          try {
-            await setDoc(userDocRef, { profilePic: base64 }, { merge: true });
-            showToast("Profile picture updated!");
-          } catch (err) {
-            showToast("Failed to save picture.");
-            profileAvatar.src = "images/default-avatar.png";
-          }
-        };
-        reader.readAsDataURL(file);
-      };
-
-      userNameBtn.onclick = async () => {
-        const newName = nameInput.value.trim();
-        if(newName === "") {
-          showToast("Name cannot be empty.");
-          return;
-        }
-        try {
-          await setDoc(userDocRef, { name: newName }, { merge: true });
-          userCardName.textContent = newName;
-          showToast("Name updated successfully!");
-        } catch (error) {
-          console.error("Failed to update name:", error);
-          showToast("Error updating name.");
-        }
-      };
-
-      userUsernameBtn.onclick = async () => {
-        const newUsername = usernameInput.value.trim();
-        if(newUsername === "") {
-          showToast("Username cannot be empty.");
-          return;
-        }
-        try {
-          await setDoc(userDocRef, { username: newUsername }, { merge: true });
-          showToast("Username updated successfully!");
-        } catch (error) {
-          console.error("Failed to update username:", error);
-          showToast("Error updating username.");
-        }
-      };
-
-      themeSelect.onchange = async () => {
-        const selectedTheme = themeSelect.value;
-        applyTheme(selectedTheme);
-        localStorage.setItem("theme", selectedTheme); // Save globally
-        try {
-          await updateDoc(userDocRef, { theme: selectedTheme });
-        } catch (error) {
-          console.error("Error updating theme:", error);
-          showToast("Error updating theme.");
-        }
-      };
-
-      // Logout functionality with popup showing username
-      logoutBtn.onclick = async () => {
-        try {
-          const docSnap = await getDoc(userDocRef);
-          const username = docSnap.exists() ? docSnap.data().name || "User" : "User";
-
-          logoutMessage.textContent = `Goodbye, ${username}! You have been logged out.`;
-          logoutModal.style.display = "block";
-
-          setTimeout(async () => {
-            await signOut(auth);
-            window.location.href = "loginpage.html";
-          }, 2000);
-        } catch (error) {
-          console.error("Error signing out:", error);
-          showToast("Error signing out.");
-        }
-      };
-
-      resetPasswordBtn.onclick = async () => {
-        if (!auth.currentUser) return;
-        try {
-          await sendPasswordResetEmail(auth, auth.currentUser.email);
-          showToast("Password reset email sent!");
-        } catch (err) {
-          showToast("Failed to send reset email.");
-        }
-      };
-
-      // Notifications
-      if (typeof saveNotifBtn !== "undefined" && typeof emailNotif !== "undefined") {
-        saveNotifBtn.onclick = async () => {
-          try {
-            await setDoc(userDocRef, { emailNotif: emailNotif.checked }, { merge: true });
-            showToast("Notification preferences saved!");
-          } catch (err) {
-            showToast("Failed to save preferences.");
-          }
-        };
-      }
-    });
-
-    const removePicModal = document.getElementById("removePicModal");
-    const confirmRemovePicBtn = document.getElementById("confirmRemovePicBtn");
-    const cancelRemovePicBtn = document.getElementById("cancelRemovePicBtn");
-
-    removePicBtn.onclick = function() {
-      removePicModal.style.display = "block";
-    };
-
-    confirmRemovePicBtn.onclick = async function() {
-      removePicModal.style.display = "none";
-      profileAvatar.src = "images/default-avatar.png";
-      try {
-        await setDoc(userDocRef, { profilePic: "" }, { merge: true });
-        showToast("Profile picture removed.");
-      } catch (err) {
-        showToast("Failed to remove picture.");
-      }
-    };
-
-    cancelRemovePicBtn.onclick = function() {
-      removePicModal.style.display = "none";
-    };
-    function showToast(message, duration = 2500) {
-      const toast = document.getElementById("toast");
-      toast.textContent = message;
-      toast.className = "toast show";
-      setTimeout(() => {
-        toast.className = "toast";
-      }, duration);
+      list.innerHTML = entries.map(e => `
+        <div class="activity-item">
+          <div class="activity-dot ${e.dot}"></div>
+          <div class="activity-text">
+            <strong>${e.label}</strong>
+            <span>${e.detail}</span>
+          </div>
+          <div class="activity-badge">${e.badge}</div>
+        </div>
+      `).join('');
     }
-
-    const themePreview = document.getElementById("themePreview");
-    themeSelect.oninput = () => {
-      themePreview.style.background = themeSelect.value === "dark"
-        ? "linear-gradient(135deg, #23243a 0%, #181820 100%)"
-        : "linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%)";
-      themePreview.style.color = themeSelect.value === "dark" ? "#fff" : "#222";
-    };
   </script>
 
-  <!-- Navigation/other scripts -->
-     <script src="loadNav.js"></script>
+  <script src="loadNav.js"></script>
   <script src="navigation.js"></script>
-
 </body>
 </html>
