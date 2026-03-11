@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Module 4 — Light Sensors · AlCoders</title>
+<link rel="stylesheet" href="../css/theme.css">
+<script type="module" src="../theme.js"></script>
+<link rel="shortcut icon" href="../images/alcodersLogo.jpg" type="image/jpg"/>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Syne:wght@600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <a href="index.html"><div>
+      <div class="logo-text">Al<span>Coders</span></div>
+      <div class="logo-sub">Introduction to Sensors</div>
+    </div></a>
+  </div>
+  <a class="sidebar-back" href="index.html">← Back to course</a>
+  <div class="sidebar-module-nav">
+    <a href="module1.html" class="mod-nav-btn">M1</a>
+    <a href="module2.html" class="mod-nav-btn">M2</a>
+    <a href="module3.html" class="mod-nav-btn">M3</a>
+    <a href="module4.html" class="mod-nav-btn current">M4</a>
+    <a href="module5.html" class="mod-nav-btn">M5</a>
+    <a href="module6.html" class="mod-nav-btn">M6</a>
+    <a href="module7.html" class="mod-nav-btn">M7</a>
+    <a href="module8.html" class="mod-nav-btn">M8</a>
+  </div>
+  <div class="sidebar-module-block">
+    <div class="sidebar-module-title"><span class="mod-badge">04</span> Light Sensors</div>
+    <a class="sidebar-lesson" data-lesson="l4-1" href="#"><span class="lesson-dot"></span>LDR — How Light Sensing Works</a>
+    <a class="sidebar-lesson" data-lesson="l4-2" href="#"><span class="lesson-dot"></span>LDR with Arduino</a>
+    <a class="sidebar-lesson" data-lesson="l4-3" href="#"><span class="lesson-dot"></span>Photodiode Sensor</a>
+    <a class="sidebar-lesson" data-lesson="l4-4" href="#"><span class="lesson-dot"></span>IR Sensor — Principle & Types</a>
+    <a class="sidebar-lesson" data-lesson="l4-5" href="#"><span class="lesson-dot"></span>IR Sensor with Arduino</a>
+    <a class="sidebar-lesson proj-link" data-lesson="proj4" href="#"><span class="lesson-dot"></span>Project: Auto Night Lamp</a>
+  </div>
+</aside>
+
+<main class="main" id="mainContent">
+  <div class="topbar">
+    <div class="breadcrumb">AlCoders / <strong>Sensors</strong> / Module 4</div>
+    <div class="topbar-nav">
+      <button class="nav-btn" id="prevBtn" disabled>← Prev</button>
+      <button class="nav-btn primary" id="nextBtn">Next →</button>
+    </div>
+  </div>
+
+  <!-- L4-1 -->
+  <div class="lesson-page" id="l4-1">
+    <div class="lesson-tag">Module 04 · Lesson 1</div>
+    <h1 class="lesson-title">LDR — How Light Sensing Works <span class="badge analog">Analog</span></h1>
+    <p class="lesson-intro">The LDR (Light Dependent Resistor) is one of the most fundamental sensor components. Understanding it teaches analog sensing, voltage dividers, and how resistance converts to voltage.</p>
+
+    <div class="block">
+      <h2>What is an LDR?</h2>
+      <p>An LDR (also called a photoresistor or photocell) is a passive resistor whose resistance changes dramatically depending on light intensity. In <strong>darkness</strong>: very high resistance (1MΩ or more). In <strong>bright light</strong>: low resistance (hundreds of ohms).</p>
+      <p><strong>Why?</strong> LDRs are made from cadmium sulphide (CdS). Photons (light particles) hitting the CdS crystal excite electrons into the conduction band, creating more charge carriers — which lowers resistance. This is the <strong>photoconductive effect</strong>.</p>
+    </div>
+
+    <div class="block">
+      <h2>The Voltage Divider Circuit</h2>
+      <p>Arduino reads voltage, not resistance. So we use a <strong>voltage divider</strong> to convert the LDR's changing resistance into a changing voltage. Connect the LDR and a fixed 10kΩ resistor in series between 5V and GND. Read the voltage at the midpoint.</p>
+      <p>Formula: <strong>Vout = 5V × R_fixed / (R_LDR + R_fixed)</strong></p>
+      <ul>
+        <li>Bright light → R_LDR small → Vout small → low analog reading</li>
+        <li>Darkness → R_LDR large → Vout approaches 5V → high analog reading</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>Wiring LDR with Voltage Divider</h2>
+      <table class="pin-table">
+        <thead><tr><th>Connection</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>LDR pin 1</td><td class="vcc">→ 5V</td></tr>
+          <tr><td>LDR pin 2</td><td class="sig">→ Arduino A0 AND → 10kΩ resistor</td></tr>
+          <tr><td>10kΩ other end</td><td class="gnd">→ GND</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — LDR Reading</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">const int</span> LDR_PIN = <span class="v">A0</span>;
+<span class="kw">const int</span> DARK_THRESHOLD = <span class="v">500</span>;
+
+<span class="kw">void</span> <span class="p">setup</span>() { <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>); }
+
+<span class="kw">void</span> <span class="p">loop</span>() {
+  <span class="kw">int</span> ldrValue = <span class="p">analogRead</span>(LDR_PIN);
+  <span class="kw">int</span> lightPct = <span class="p">map</span>(ldrValue, <span class="v">0</span>, <span class="v">1023</span>, <span class="v">100</span>, <span class="v">0</span>); <span class="cm">// invert</span>
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"LDR: "</span>); <span class="p">Serial</span>.<span class="p">print</span>(ldrValue);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">" | Light: "</span>); <span class="p">Serial</span>.<span class="p">print</span>(lightPct); <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"%"</span>);
+  <span class="p">Serial</span>.<span class="p">println</span>(ldrValue > DARK_THRESHOLD ? <span class="a">" 🌙 DARK"</span> : <span class="a">" ☀ BRIGHT"</span>);
+  <span class="p">delay</span>(<span class="v">500</span>);
+}</div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-head">✅ Calibration</div>
+      Open Serial Monitor. Observe raw values in bright light (usually ~100–300) and in darkness (usually ~700–900). Set your threshold somewhere in between — typically 400–600 for indoor use.
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l4-1')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l4-2')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L4-2 -->
+  <div class="lesson-page" id="l4-2">
+    <div class="lesson-tag">Module 04 · Lesson 2</div>
+    <h1 class="lesson-title">LDR with Arduino — Full Examples</h1>
+    <p class="lesson-intro">Let's build practical circuits with the LDR, including an automatic night light and using LDR modules with digital output.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — Auto Night Light with PWM Dimming</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">const int</span> LDR_PIN   = <span class="v">A0</span>;
+<span class="kw">const int</span> LED_PIN   = <span class="v">9</span>;  <span class="cm">// PWM pin</span>
+<span class="kw">const int</span> THRESHOLD = <span class="v">500</span>;
+
+<span class="kw">void</span> <span class="p">setup</span>() { <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>); <span class="p">pinMode</span>(LED_PIN, <span class="v">OUTPUT</span>); }
+
+<span class="kw">void</span> <span class="p">loop</span>() {
+  <span class="kw">int</span> ldr = <span class="p">analogRead</span>(LDR_PIN);
+  <span class="kw">if</span> (ldr > THRESHOLD) {
+    <span class="kw">int</span> brightness = <span class="p">map</span>(ldr, THRESHOLD, <span class="v">1023</span>, <span class="v">50</span>, <span class="v">255</span>);
+    <span class="p">analogWrite</span>(LED_PIN, brightness);
+    <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"DARK — brightness: "</span>); <span class="p">Serial</span>.<span class="p">println</span>(brightness);
+  } <span class="kw">else</span> {
+    <span class="p">analogWrite</span>(LED_PIN, <span class="v">0</span>);
+    <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"Light OK — LED off"</span>);
+  }
+  <span class="p">delay</span>(<span class="v">200</span>);
+}</div>
+    </div>
+
+    <div class="block">
+      <h2>Using an LDR Module (with DO output)</h2>
+      <p>LDR modules (small PCB with LDR + LM393 comparator) output both AO (analog) and DO (digital threshold signal). Use the onboard potentiometer to set the light threshold.</p>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — LDR Module Digital Output</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">const int</span> LDR_DO = <span class="v">4</span>;
+<span class="kw">const int</span> LDR_AO = <span class="v">A0</span>;
+
+<span class="kw">void</span> <span class="p">setup</span>() { <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>); <span class="p">pinMode</span>(LDR_DO, <span class="v">INPUT</span>); }
+
+<span class="kw">void</span> <span class="p">loop</span>() {
+  <span class="kw">int</span> dState = <span class="p">digitalRead</span>(LDR_DO);
+  <span class="kw">int</span> aVal   = <span class="p">analogRead</span>(LDR_AO);
+  <span class="p">Serial</span>.<span class="p">print</span>(dState == <span class="v">LOW</span> ? <span class="a">"Light"</span> : <span class="a">"Dark"</span>);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">" | Analog: "</span>); <span class="p">Serial</span>.<span class="p">println</span>(aVal);
+  <span class="p">delay</span>(<span class="v">300</span>);
+}</div>
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l4-2')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l4-3')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L4-3 -->
+  <div class="lesson-page" id="l4-3">
+    <div class="lesson-tag">Module 04 · Lesson 3</div>
+    <h1 class="lesson-title">Photodiode Sensor <span class="badge analog">Analog</span></h1>
+    <p class="lesson-intro">Photodiodes are faster, more accurate, and more directional than LDRs. Used in line-following robots, fiber optic communication, and precision light measurement.</p>
+
+    <div class="block">
+      <h2>Photodiode vs LDR</h2>
+      <table class="comp-table">
+        <thead><tr><th>Property</th><th>LDR</th><th>Photodiode</th></tr></thead>
+        <tbody>
+          <tr><td>Response time</td><td class="low">~20–100ms (slow)</td><td class="highlight">~1ns–1µs (very fast)</td></tr>
+          <tr><td>Linearity</td><td class="low">Non-linear</td><td class="highlight">Very linear</td></tr>
+          <tr><td>Directional</td><td class="low">Omnidirectional</td><td class="highlight">Focused cone (~30°)</td></tr>
+          <tr><td>Complexity</td><td class="highlight">Very simple</td><td>Needs amplification</td></tr>
+          <tr><td>Common use</td><td>Light/dark detection</td><td>Line following, remote RX</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="block">
+      <h2>How a Photodiode Works</h2>
+      <p>A photodiode is a p-n junction that generates current when photons strike it. It operates in <strong>reverse-biased mode</strong>. Under normal conditions, almost no current flows. When light hits the junction, photons create electron-hole pairs, allowing a small reverse current proportional to light intensity.</p>
+    </div>
+
+    <div class="block">
+      <h2>TCRT5000 — IR Photodiode Line Sensor</h2>
+      <p>The TCRT5000 contains an IR LED (emitter) and photodiode (receiver) side by side. The IR LED emits light; the photodiode detects how much bounces back from a surface. Used for line-following robots and rotary encoders.</p>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — TCRT5000 Line Sensor</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">const int</span> LINE_DO = <span class="v">5</span>;
+<span class="kw">const int</span> LINE_AO = <span class="v">A1</span>;
+
+<span class="kw">void</span> <span class="p">setup</span>() { <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>); <span class="p">pinMode</span>(LINE_DO, <span class="v">INPUT</span>); }
+
+<span class="kw">void</span> <span class="p">loop</span>() {
+  <span class="kw">int</span> digital = <span class="p">digitalRead</span>(LINE_DO);
+  <span class="kw">int</span> analog  = <span class="p">analogRead</span>(LINE_AO);
+  <span class="p">Serial</span>.<span class="p">print</span>(digital == <span class="v">LOW</span> ? <span class="a">"WHITE (clear)"</span> : <span class="a">"BLACK (line)"</span>);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">" | Analog: "</span>); <span class="p">Serial</span>.<span class="p">println</span>(analog);
+  <span class="p">delay</span>(<span class="v">100</span>);
+}</div>
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l4-3')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l4-4')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L4-4 -->
+  <div class="lesson-page" id="l4-4">
+    <div class="lesson-tag">Module 04 · Lesson 4</div>
+    <h1 class="lesson-title">IR Sensor — Principle & Types <span class="badge digital">Digital</span></h1>
+    <p class="lesson-intro">Infrared sensors are everywhere — TV remotes, burglar alarms, and smartphone proximity sensors all use IR technology. Let's understand how they really work.</p>
+
+    <div class="block">
+      <h2>What is Infrared Light?</h2>
+      <p>Infrared is electromagnetic radiation with wavelengths just beyond visible red light (700nm–1mm). We cannot see it, but it's emitted by everything warm including the human body. IR sensors exploit this in different ways.</p>
+    </div>
+
+    <div class="block">
+      <h2>Types of IR Sensors</h2>
+      <ul>
+        <li><strong>Active IR sensors</strong> — have both an IR emitter (LED) and receiver (photodiode). Emit IR and detect how much bounces back. Used for object detection. Example: FC-51, TCRT5000.</li>
+        <li><strong>Passive IR (PIR) sensors</strong> — detect IR emitted by warm objects (humans, animals). No emitter — receive only. Used for motion detection. Example: HC-SR501.</li>
+        <li><strong>IR receiver modules</strong> — receive modulated IR signals from remote controls. Example: TSOP1738, VS1838B.</li>
+        <li><strong>IR break-beam sensors</strong> — emitter and receiver on opposite sides of a gap. Detects when something breaks the beam.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>FC-51 IR Obstacle Sensor Module</h2>
+      <p>The most common IR sensor module for Arduino beginners. Contains an IR LED (constantly emitting 38kHz modulated IR), an IR receiver, an LM393 comparator, and a potentiometer to adjust detection distance (2–30cm). When an obstacle is in range, DO goes LOW. The onboard indicator LED lights up.</p>
+    </div>
+
+    <div class="block">
+      <h2>Wiring FC-51</h2>
+      <table class="pin-table">
+        <thead><tr><th>FC-51 Pin</th><th>Connect To</th></tr></thead>
+        <tbody>
+          <tr><td class="vcc">VCC</td><td>5V</td></tr>
+          <tr><td class="gnd">GND</td><td>GND</td></tr>
+          <tr><td class="sig">OUT</td><td>Digital Pin 4</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-head">⚠️ IR Interference</div>
+      IR sensors can be fooled by sunlight and incandescent bulbs, which emit strong IR radiation. If your sensor behaves erratically near windows, this is why.
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l4-4')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l4-5')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L4-5 -->
+  <div class="lesson-page" id="l4-5">
+    <div class="lesson-tag">Module 04 · Lesson 5</div>
+    <h1 class="lesson-title">IR Sensor with Arduino — Full Implementation</h1>
+    <p class="lesson-intro">Let's build an obstacle detection system and decode remote control signals — one of the most satisfying beginner projects.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — IR Obstacle Avoidance (FC-51)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">const int</span> IR_PIN  = <span class="v">4</span>;
+<span class="kw">const int</span> BUZZ_PIN = <span class="v">8</span>;
+
+<span class="kw">void</span> <span class="p">setup</span>() {
+  <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>);
+  <span class="p">pinMode</span>(IR_PIN, <span class="v">INPUT</span>);
+  <span class="p">pinMode</span>(BUZZ_PIN, <span class="v">OUTPUT</span>);
+}
+
+<span class="kw">void</span> <span class="p">loop</span>() {
+  <span class="kw">if</span> (<span class="p">digitalRead</span>(IR_PIN) == <span class="v">LOW</span>) { <span class="cm">// LOW = obstacle detected</span>
+    <span class="p">digitalWrite</span>(BUZZ_PIN, <span class="v">HIGH</span>);
+    <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"🚨 OBSTACLE DETECTED!"</span>);
+  } <span class="kw">else</span> {
+    <span class="p">digitalWrite</span>(BUZZ_PIN, <span class="v">LOW</span>);
+    <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"✅ Path clear"</span>);
+  }
+  <span class="p">delay</span>(<span class="v">100</span>);
+}</div>
+    </div>
+
+    <div class="block">
+      <h2>Decoding IR Remote Controls</h2>
+      <p>Using a VS1838B IR receiver module and the <strong>IRremote library</strong>, you can read signals from any TV remote. Every button on a remote sends a unique hex code — you capture it and use it to trigger actions.</p>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — IR Remote Decoder</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="p">#include</span> <span class="a">&lt;IRremote.h&gt;</span>
+
+<span class="kw">const int</span> IR_RECV_PIN = <span class="v">11</span>;
+IRrecv irrecv(IR_RECV_PIN);
+decode_results results;
+
+<span class="kw">void</span> <span class="p">setup</span>() {
+  <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>);
+  irrecv.<span class="p">enableIRIn</span>();
+  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"IR Receiver ready — press a button"</span>);
+}
+
+<span class="kw">void</span> <span class="p">loop</span>() {
+  <span class="kw">if</span> (irrecv.<span class="p">decode</span>(&results)) {
+    <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Code: 0x"</span>);
+    <span class="p">Serial</span>.<span class="p">println</span>(results.value, <span class="v">HEX</span>);
+    <span class="kw">if</span> (results.value == <span class="v">0xFF6897</span>) {  <span class="cm">// replace with your remote's code</span>
+      <span class="p">digitalWrite</span>(<span class="v">13</span>, <span class="v">HIGH</span>);
+    }
+    irrecv.<span class="p">resume</span>();
+  }
+  <span class="p">delay</span>(<span class="v">10</span>);
+}</div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-head">✅ Find Your Remote's Codes</div>
+      Upload the code, open Serial Monitor, and press each button on your remote. Write down the hex code for each button. Then use those codes in if/switch statements to trigger actions.
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l4-5')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('proj4')">Module Project →</button>
+    </div>
+  </div>
+
+  <!-- PROJ4 -->
+  <div class="lesson-page" id="proj4">
+    <div class="lesson-tag">Module 04 · Project</div>
+    <h1 class="lesson-title">Project: Automatic Night Lamp</h1>
+    <p class="lesson-intro">Combine LDR light sensing with IR remote control for a smart lamp with auto and manual modes.</p>
+
+    <div class="project-box">
+      <h3>🔨 Build: Auto Night Lamp with IR Override</h3>
+      <p>LED brightness increases automatically as the room gets darker. Manual override via IR remote lets you control brightness by hand.</p>
+      <ol class="project-steps">
+        <li>Wire LDR (A0), LED (pin 9 PWM), IR receiver (pin 11)</li>
+        <li>In auto mode: LED brightness increases proportionally as room darkens</li>
+        <li>Press remote button "1" to switch to manual mode (fixed brightness)</li>
+        <li>Press "+" and "−" to adjust brightness manually in steps of 25</li>
+        <li>Press "0" to return to auto mode</li>
+        <li>Print current mode and brightness to Serial Monitor each loop</li>
+      </ol>
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'proj4')">Mark as Complete ✓</button>
+    </div>
+    <div class="module-nav-footer">
+      <a href="module3.html" class="mod-prev-btn">← Module 3</a>
+      <a href="module5.html" class="mod-next-btn">Module 5: Motion & Distance →</a>
+    </div>
+  </div>
+
+</main>
+</div>
+<script src="course.js"></script>
+<script>
+let currentIndex = 0;
+const lessonOrder = ['l4-1','l4-2','l4-3','l4-4','l4-5','proj4'];
+</script>
+</body>
+</html>

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arduino Course – AlCoders</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="../css/theme.css">
+<script type="module" src="../theme.js"></script>
+<link rel="shortcut icon" href="../images/alcodersLogo.jpg" type="image/jpg" />
+  <style>
+    body { font-family: var(--sans); }
+
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #2563eb 100%);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 40%, rgba(96,165,250,0.15) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(167,139,250,0.1) 0%, transparent 50%);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 0.4rem 1.1rem;
+      border-radius: 99px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .hero h1 span { color: #60a5fa; }
+    .hero p {
+      font-size: 1.1rem;
+      opacity: 0.85;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+      position: relative;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 2rem;
+      position: relative;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat .num { font-size: 2rem; font-weight: 800; color: #60a5fa; }
+    .hero-stat .lbl { font-size: 0.82rem; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; }
+    .cta-btn {
+      padding: 0.85rem 2rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .cta-btn.primary { background: #3b82f6; color: white; }
+    .cta-btn.primary:hover { background: #2563eb; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59,130,246,0.4); }
+    .cta-btn.secondary { background: rgba(255,255,255,0.12); color: white; border: 1.5px solid rgba(255,255,255,0.25); }
+    .cta-btn.secondary:hover { background: rgba(255,255,255,0.2); }
+
+    /* ── WHAT YOU LEARN ── */
+    .section { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .section-title { font-size: 1.8rem; font-weight: 800; text-align: center; margin-bottom: 0.5rem; }
+    .section-sub { text-align: center; color: var(--text3); margin-bottom: 2.5rem; }
+
+    .learn-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .learn-item {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.25rem;
+      display: flex; align-items: flex-start; gap: 0.75rem;
+    }
+    .learn-item .check { color: var(--green); font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+    .learn-item span { font-size: 0.9rem; font-weight: 500; color: var(--text2); }
+
+    /* ── MODULES GRID ── */
+    .modules-section { background: var(--bg2); padding: 4rem 2rem; }
+    .modules-inner { max-width: 1100px; margin: 0 auto; }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .module-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: block;
+    }
+    .module-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); border-color: var(--accent); }
+
+    .module-card-top {
+      padding: 1.25rem 1.5rem 1rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+    }
+    .mod-emoji {
+      width: 48px; height: 48px;
+      background: var(--accent-light);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .mod-info { flex: 1; }
+    .mod-num { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--accent); margin-bottom: 0.2rem; }
+    .mod-name { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.35rem; }
+    .mod-desc { font-size: 0.82rem; color: var(--text3); line-height: 1.5; }
+
+    .module-card-footer {
+      padding: 0.75rem 1.5rem;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.8rem; color: var(--text3);
+    }
+    .difficulty-badge {
+      font-size: 0.72rem; font-weight: 600; padding: 0.2rem 0.6rem;
+      border-radius: 99px; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .diff-beginner { background: var(--green-light); color: var(--green); }
+    .diff-intermediate { background: var(--orange-light); color: var(--orange); }
+    .diff-advanced { background: #fef2f2; color: #dc2626; }
+
+    /* ── TOOLS NEEDED ── */
+    .tools-section { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem; margin-top: 2rem;
+    }
+    .tool-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      text-align: center;
+      background: white;
+    }
+    .tool-card .tool-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .tool-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .tool-card p { font-size: 0.8rem; color: var(--text3); }
+    .tool-card a { color: var(--accent); font-size: 0.82rem; font-weight: 600; text-decoration: none; }
+    .tool-card a:hover { text-decoration: underline; }
+
+    /* footer */
+    .site-footer {
+      background: #0f172a; color: #94a3b8;
+      text-align: center; padding: 2rem;
+      font-size: 0.85rem;
+    }
+    .site-footer span { color: #60a5fa; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="../index.html"> <span>Al</span>Coders</a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Arduino Course</a>
+    <a href="module1.html">Start Learning →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🤖 Arduino Masterclass</div>
+  <h1>Learn Arduino<br/><span>From Zero to Hero</span></h1>
+  <p>A complete beginner-to-advanced Arduino course — hardware, circuits, sensors, IoT, and real-world projects. Everything you need, all in one place.</p>
+  <div class="hero-cta">
+    <a href="module1.html" class="cta-btn primary">🚀 Start Learning</a>
+    <a href="#modules" class="cta-btn secondary">📋 View Curriculum</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">12</div><div class="lbl">Modules</div></div>
+    <div class="hero-stat"><div class="num">60+</div><div class="lbl">Lessons</div></div>
+    <div class="hero-stat"><div class="num">20+</div><div class="lbl">Projects</div></div>
+    <div class="hero-stat"><div class="num">0</div><div class="lbl">Exp. Needed</div></div>
+  </div>
+</section>
+
+<!-- WHAT YOU'LL LEARN -->
+<div class="section">
+  <h2 class="section-title">What You'll Learn</h2>
+  <p class="section-sub">From first circuit to connected IoT devices — covered completely.</p>
+  <div class="learn-grid">
+    <div class="learn-item"><span class="check">✓</span><span>Set up Arduino IDE & write your first sketch</span></div>
+    <div class="learn-item"><span class="check">✓</span><span>Understand electronics: voltage, current, resistance</span></div>
+    <div class="learn-item"><span class="check">✓</span><span>Use digital & analog pins with real components</span></div>
+    <div class="learn-item"><span class="check">✓</span><span>Control LEDs, motors, buzzers & displays</span></div>
+    <div class="learn-item"><span class="check">✓</span><span>Read temperature, motion, light & ultrasonic sensors</span></div>
+    <div class="learn-item"><span class="check">✓</span><span>Communicate via Serial, I2C & SPI</span></div>
+    <div class="learn-item"><span class="check">✓</span><span>Build IoT projects with WiFi & Bluetooth</span></div>
+    <div class="learn-item"><span class="check">✓</span><span>Use interrupts, timers & power management</span></div>
+    <div class="learn-item"><span class="check">✓</span><span>Interface with LCD, OLED & 7-segment displays</span></div>
+    <div class="learn-item"><span class="check">✓</span><span>Build a complete smart home project</span></div>
+    <div class="learn-item"><span class="check">✓</span><span>Debug circuits and read datasheets</span></div>
+    <div class="learn-item"><span class="check">✓</span><span>Design your own Arduino-powered device</span></div>
+  </div>
+</div>
+
+<!-- MODULES -->
+<div class="modules-section" id="modules">
+  <div class="modules-inner">
+    <h2 class="section-title">Course Curriculum</h2>
+    <p class="section-sub">12 modules, structured from absolute beginner to advanced maker.</p>
+    <div class="modules-grid">
+
+      <a href="module1.html" class="module-card">
+        <div class="module-card-top">
+          <div class="mod-emoji">🔧</div>
+          <div class="mod-info">
+            <div class="mod-num">Module 01</div>
+            <div class="mod-name">Getting Started with Arduino</div>
+            <div class="mod-desc">What is Arduino, installing the IDE, understanding the board, your first sketch.</div>
+          </div>
+        </div>
+        <div class="module-card-footer"><span>5 lessons</span><span class="difficulty-badge diff-beginner">Beginner</span></div>
+      </a>
+
+      <a href="module2.html" class="module-card">
+        <div class="module-card-top">
+          <div class="mod-emoji">⚡</div>
+          <div class="mod-info">
+            <div class="mod-num">Module 02</div>
+            <div class="mod-name">Electronics Fundamentals</div>
+            <div class="mod-desc">Voltage, current, resistance, Ohm's Law, breadboards, resistors & capacitors.</div>
+          </div>
+        </div>
+        <div class="module-card-footer"><span>5 lessons</span><span class="difficulty-badge diff-beginner">Beginner</span></div>
+      </a>
+
+      <a href="module3.html" class="module-card">
+        <div class="module-card-top">
+          <div class="mod-emoji">💡</div>
+          <div class="mod-info">
+            <div class="mod-num">Module 03</div>
+            <div class="mod-name">Digital I/O & LEDs</div>
+            <div class="mod-desc">Digital pins, digitalWrite, digitalRead, buttons, debouncing, LED projects.</div>
+          </div>
+        </div>
+        <div class="module-card-footer"><span>5 lessons</span><span class="difficulty-badge diff-beginner">Beginner</span></div>
+      </a>
+
+      <a href="module4.html" class="module-card">
+        <div class="module-card-top">
+          <div class="mod-emoji">🌡️</div>
+          <div class="mod-info">
+            <div class="mod-num">Module 04</div>
+            <div class="mod-name">Analog I/O & Sensors</div>
+            <div class="mod-desc">analogRead, PWM, potentiometers, temperature sensors, light sensors.</div>
+          </div>
+        </div>
+        <div class="module-card-footer"><span>5 lessons</span><span class="difficulty-badge diff-beginner">Beginner</span></div>
+      </a>
+
+      <a href="module5.html" class="module-card">
+        <div class="module-card-top">
+          <div class="mod-emoji">📺</div>
+          <div class="mod-info">
+            <div class="mod-num">Module 05</div>
+            <div class="mod-name">Displays & Output Devices</div>
+            <div class="mod-desc">LCD 16x2, OLED displays, 7-segment, buzzer, RGB LEDs, servo motors.</div>
+          </div>
+        </div>
+        <div class="module-card-footer"><span>5 lessons</span><span class="difficulty-badge diff-intermediate">Intermediate</span></div>
+      </a>
+
+      <a href="module6.html" class="module-card">
+        <div class="module-card-top">
+          <div class="mod-emoji">🔊</div>
+          <div class="mod-info">
+            <div class="mod-num">Module 06</div>
+            <div class="mod-name">Motors & Actuators</div>
+            <div class="mod-desc">DC motors, stepper motors, servo control, H-bridge, motor driver ICs.</div>
+          </div>
+        </div>
+        <div class="module-card-footer"><span>5 lessons</span><span class="difficulty-badge diff-intermediate">Intermediate</span></div>
+      </a>
+
+      <a href="module7.html" class="module-card">
+        <div class="module-card-top">
+          <div class="mod-emoji">📡</div>
+          <div class="mod-info">
+            <div class="mod-num">Module 07</div>
+            <div class="mod-name">Communication Protocols</div>
+            <div class="mod-desc">Serial UART, I2C, SPI — how they work and how to use them in code.</div>
+          </div>
+        </div>
+        <div class="module-card-footer"><span>5 lessons</span><span class="difficulty-badge diff-intermediate">Intermediate</span></div>
+      </a>
+
+      <a href="module8.html" class="module-card">
+        <div class="module-card-top">
+          <div class="mod-emoji">🌐</div>
+          <div class="mod-info">
+            <div class="mod-num">Module 08</div>
+            <div class="mod-name">IoT & WiFi with ESP8266/ESP32</div>
+            <div class="mod-desc">Connect to WiFi, send data to cloud, build a web server, MQTT basics.</div>
+          </div>
+        </div>
+        <div class="module-card-footer"><span>5 lessons</span><span class="difficulty-badge diff-intermediate">Intermediate</span></div>
+      </a>
+
+      <a href="module9.html" class="module-card">
+        <div class="module-card-top">
+          <div class="mod-emoji">📶</div>
+          <div class="mod-info">
+            <div class="mod-num">Module 09</div>
+            <div class="mod-name">Bluetooth & Wireless</div>
+            <div class="mod-desc">HC-05/06 Bluetooth, BLE with ESP32, phone-controlled Arduino projects.</div>
+          </div>
+        </div>
+        <div class="module-card-footer"><span>5 lessons</span><span class="difficulty-badge diff-intermediate">Intermediate</span></div>
+      </a>
+
+      <a href="module10.html" class="module-card">
+        <div class="module-card-top">
+          <div class="mod-emoji">⏱️</div>
+          <div class="mod-info">
+            <div class="mod-num">Module 10</div>
+            <div class="mod-name">Interrupts, Timers & Power</div>
+            <div class="mod-desc">Hardware interrupts, watchdog timer, sleep modes, low-power design.</div>
+          </div>
+        </div>
+        <div class="module-card-footer"><span>5 lessons</span><span class="difficulty-badge diff-advanced">Advanced</span></div>
+      </a>
+
+      <a href="module11.html" class="module-card">
+        <div class="module-card-top">
+          <div class="mod-emoji">💾</div>
+          <div class="mod-info">
+            <div class="mod-num">Module 11</div>
+            <div class="mod-name">Memory, Libraries & EEPROM</div>
+            <div class="mod-desc">SRAM, Flash, EEPROM, writing custom libraries, using SD cards.</div>
+          </div>
+        </div>
+        <div class="module-card-footer"><span>5 lessons</span><span class="difficulty-badge diff-advanced">Advanced</span></div>
+      </a>
+
+      <a href="module12.html" class="module-card">
+        <div class="module-card-top">
+          <div class="mod-emoji">🏗️</div>
+          <div class="mod-info">
+            <div class="mod-num">Module 12</div>
+            <div class="mod-name">Capstone Projects</div>
+            <div class="mod-desc">Smart weather station, obstacle-avoiding robot, home automation system.</div>
+          </div>
+        </div>
+        <div class="module-card-footer"><span>5 lessons</span><span class="difficulty-badge diff-advanced">Advanced</span></div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<!-- TOOLS NEEDED -->
+<div class="tools-section">
+  <h2 class="section-title">Tools & Hardware You'll Need</h2>
+  <p class="section-sub">Free software + affordable hardware. Let's get you set up!</p>
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="tool-icon">🖥️</div>
+      <h4>Arduino IDE</h4>
+      <p>Free software to write and upload code</p>
+      <a href="https://www.arduino.cc/en/software" target="_blank">Download Free →</a>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🤖</div>
+      <h4>Arduino Uno R3</h4>
+      <p>The best starter board — affordable & universal</p>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🧪</div>
+      <h4>Breadboard + Wires</h4>
+      <p>For prototyping circuits without soldering</p>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🔌</div>
+      <h4>USB Cable</h4>
+      <p>Type A to Type B (comes with most Arduino kits)</p>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">🌡️</div>
+      <h4>Starter Components</h4>
+      <p>LEDs, resistors, sensors, buttons (any starter kit)</p>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">📱</div>
+      <h4>Tinkercad (Optional)</h4>
+      <p>Free online Arduino simulator — no hardware needed to start</p>
+      <a href="https://www.tinkercad.com" target="_blank">Try Free →</a>
+    </div>
+  </div>
+</div>
+<footer>
+  &copy; 2025 AlCoders | Designed for Students by Students 🚀<br>
+  Keep exploring, keep building, and enjoy coding!
+</footer>
+
+
+<script src="script.js"></script>
+</body>
+</html>

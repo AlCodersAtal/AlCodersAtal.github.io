@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 11: Arduino & Sensors — AlCoders Electronics</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo"><div class="logo-icon">⚡</div>Al<span>Coders</span></a>
+  <div class="nav-links">
+    <a href="module10.html">← Module 10</a>
+    <a href="index.html">All Modules</a>
+    <a href="module12.html">Module 12: Final Projects →</a>
+  </div>
+</nav>
+<div class="course-layout">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h3>// Module 11 Progress</h3>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-label">0% complete</div>
+  </div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">1</span>What is Electricity?</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module1.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">2</span>Basic Components</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module2.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">3</span>Ohm's Law & Power</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module3.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">4</span>Series & Parallel</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module4.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">5</span>Semiconductors & Diodes</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module5.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">6</span>Transistors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module6.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">7</span>Breadboarding & Tools</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module7.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">8</span>Capacitors & Inductors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module8.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">9</span>Sensors & Signals</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module9.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">10</span>Intro to Arduino</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module10.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn active"><span class="module-num">11</span>Arduino & Sensors</button><ul class="lesson-list">
+<li class="lesson-item"><a href="#m11_1" data-lid="m11_1">11.1 Buttons & Debouncing</a></li>
+<li class="lesson-item"><a href="#m11_2" data-lid="m11_2">11.2 Analog Sensor Reading</a></li>
+<li class="lesson-item"><a href="#m11_3" data-lid="m11_3">11.3 I2C Communication</a></li>
+<li class="lesson-item"><a href="#m11_4" data-lid="m11_4">11.4 LCD Display</a></li>
+<li class="lesson-item"><a href="#m11_5" data-lid="m11_5">11.5 Servo Motors</a></li>
+</ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">12</span>Final Projects</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module12.html">Go to module →</a></li></ul></div>
+
+</aside>
+<main class="content-area">
+  <div class="lesson-breadcrumb">Electronics Course → <span>Module 11</span> → Arduino & Sensors</div>
+  <section id="m11_1">
+<h1 class="lesson-title">11.1 Buttons & Debouncing</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>Buttons are the simplest input. Connect between digital pin and GND with INPUT_PULLUP — reads LOW when pressed, HIGH when released.</p>
+<div class="info-box"><div class="box-title">📌 Debouncing</div>Mechanical buttons bounce electrically, causing multiple triggers. Fix: after detecting change, ignore input for 50ms. Or use the Bounce2 library.</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m11_2">
+<h1 class="lesson-title">11.2 Analog Sensor Reading</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>Read analog sensors like LDRs and potentiometers with analogRead() and convert to useful values with map().</p>
+<div class="tip-box"><div class="box-title">💡 LDR Circuit</div>LDR + 10kΩ divider → A0. int light = analogRead(A0); // 0 (dark) to 1023 (bright). int pct = map(light, 0, 1023, 0, 100);</div>
+<div class="info-box"><div class="box-title">📌 map() Function</div>map(value, fromLow, fromHigh, toLow, toHigh) — rescales a number. map(analogRead(A0), 0, 1023, 0, 255) maps 0–5V to 0–255 for analogWrite().</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m11_3">
+<h1 class="lesson-title">11.3 I2C Communication</h1>
+<div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p><strong>I2C</strong> connects up to 128 devices with just 2 wires: SDA (A4) and SCL (A5) on Arduino Uno.</p>
+<div class="info-box"><div class="box-title">📌 Using Wire Library</div>#include <Wire.h>. Wire.begin(); Wire.beginTransmission(addr); Wire.write(data); Wire.endTransmission(); Wire.requestFrom(addr, bytes); Wire.read();</div>
+<div class="tip-box"><div class="box-title">💡 Common I2C Addresses</div>OLED 0.96": 0x3C. MPU-6050: 0x68. BMP280: 0x76. DS3231 RTC: 0x68.</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m11_4">
+<h1 class="lesson-title">11.4 LCD Display</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>16×2 I2C LCD reduces wiring to 4 pins (Vcc, GND, SDA, SCL) — much simpler than direct wiring.</p>
+<div class="info-box"><div class="box-title">📌 I2C LCD Code</div>#include &lt;LiquidCrystal_I2C.h&gt;. LiquidCrystal_I2C lcd(0x27, 16, 2); lcd.init(); lcd.backlight(); lcd.setCursor(0,0); lcd.print("Hello World!");</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m11_5">
+<h1 class="lesson-title">11.5 Servo Motors</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>Servo motors move to a precise angle (0–180°) on command — perfect for beginner robotics.</p>
+<div class="info-box"><div class="box-title">📌 Servo Code</div>#include &lt;Servo.h&gt;. Servo myservo; myservo.attach(9); myservo.write(90); // go to 90 degrees</div>
+<div class="tip-box"><div class="box-title">💡 Pot-Controlled Servo</div>int pot = analogRead(A0); int angle = map(pot, 0, 1023, 0, 180); myservo.write(angle); — potentiometer controls servo position in real-time!</div>
+</div>
+
+<div class="lesson-nav">
+  <a href="module10.html" class="btn btn-outline">← Module 10</a>
+  <button class="mark-done-btn">Mark as Complete</button>
+  <a href="module12.html" class="btn btn-primary">Module 12: Final Projects →</a>
+</div>
+</section>
+
+</main>
+</div>
+<script src="course.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  updateProgressBar('m11', 5);
+  initMarkDone('m11_5');
+  refreshSidebarDone();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 2: Electronics Fundamentals – AlCoders Arduino</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="index.html">⚡ <span>Al</span>Coders</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="module1.html">← Module 1</a>
+    <a href="module2.html" class="active">Module 2</a>
+    <a href="module3.html">Module 3 →</a>
+  </div>
+</nav>
+<div class="breadcrumb">
+  <a href="index.html">Arduino Course</a> › Module 2 › Electronics Fundamentals
+</div>
+<div class="page-wrapper">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">Course Progress</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 60 lessons completed</div>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔧</span> Module 1 – Getting Started</div>
+    <a href="module1.html#lesson1" class="lesson-link" data-lesson="m1l1"><span class="lesson-dot"></span>What is Arduino?</a>
+    <a href="module1.html#lesson2" class="lesson-link" data-lesson="m1l2"><span class="lesson-dot"></span>Installing the Arduino IDE</a>
+    <a href="module1.html#lesson3" class="lesson-link" data-lesson="m1l3"><span class="lesson-dot"></span>Exploring the Arduino Board</a>
+    <a href="module1.html#lesson4" class="lesson-link" data-lesson="m1l4"><span class="lesson-dot"></span>Your First Sketch: Blink</a>
+    <a href="module1.html#lesson5" class="lesson-link" data-lesson="m1l5"><span class="lesson-dot"></span>Understanding the Code</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⚡</span> Module 2 – Electronics</div>
+    <a href="#lesson1" class="lesson-link active" data-lesson="m2l1"><span class="lesson-dot"></span>Voltage, Current & Resistance</a>
+    <a href="#lesson2" class="lesson-link" data-lesson="m2l2"><span class="lesson-dot"></span>Ohm's Law</a>
+    <a href="#lesson3" class="lesson-link" data-lesson="m2l3"><span class="lesson-dot"></span>Breadboards & Schematics</a>
+    <a href="#lesson4" class="lesson-link" data-lesson="m2l4"><span class="lesson-dot"></span>Resistors & Capacitors</a>
+    <a href="#lesson5" class="lesson-link" data-lesson="m2l5"><span class="lesson-dot"></span>Power Supply & Safety</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💡</span> Module 3 – Digital I/O</div>
+    <a href="module3.html" class="lesson-link" data-lesson="m3l1"><span class="lesson-dot"></span>Digital Pins Explained</a>
+    <a href="module3.html#lesson2" class="lesson-link" data-lesson="m3l2"><span class="lesson-dot"></span>digitalWrite & digitalRead</a>
+    <a href="module3.html#lesson3" class="lesson-link" data-lesson="m3l3"><span class="lesson-dot"></span>Push Buttons & Input</a>
+    <a href="module3.html#lesson4" class="lesson-link" data-lesson="m3l4"><span class="lesson-dot"></span>Debouncing Buttons</a>
+    <a href="module3.html#lesson5" class="lesson-link" data-lesson="m3l5"><span class="lesson-dot"></span>Traffic Light Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌡️</span> Module 4 – Analog I/O</div>
+    <a href="module4.html" class="lesson-link" data-lesson="m4l1"><span class="lesson-dot"></span>Analog vs Digital</a>
+    <a href="module4.html#lesson2" class="lesson-link" data-lesson="m4l2"><span class="lesson-dot"></span>analogRead & Potentiometer</a>
+    <a href="module4.html#lesson3" class="lesson-link" data-lesson="m4l3"><span class="lesson-dot"></span>PWM & analogWrite</a>
+    <a href="module4.html#lesson4" class="lesson-link" data-lesson="m4l4"><span class="lesson-dot"></span>Temperature Sensor</a>
+    <a href="module4.html#lesson5" class="lesson-link" data-lesson="m4l5"><span class="lesson-dot"></span>Light Sensor (LDR) Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📺</span> Module 5 – Displays</div>
+    <a href="module5.html" class="lesson-link" data-lesson="m5l1"><span class="lesson-dot"></span>LCD 16x2 with I2C</a>
+    <a href="module5.html#lesson2" class="lesson-link" data-lesson="m5l2"><span class="lesson-dot"></span>OLED Display</a>
+    <a href="module5.html#lesson3" class="lesson-link" data-lesson="m5l3"><span class="lesson-dot"></span>7-Segment Display</a>
+    <a href="module5.html#lesson4" class="lesson-link" data-lesson="m5l4"><span class="lesson-dot"></span>Buzzer & Tones</a>
+    <a href="module5.html#lesson5" class="lesson-link" data-lesson="m5l5"><span class="lesson-dot"></span>RGB LED & Color Mixing</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔊</span> Module 6 – Motors</div>
+    <a href="module6.html" class="lesson-link" data-lesson="m6l1"><span class="lesson-dot"></span>Servo Motor Basics</a>
+    <a href="module6.html#lesson2" class="lesson-link" data-lesson="m6l2"><span class="lesson-dot"></span>DC Motors & L298N</a>
+    <a href="module6.html#lesson3" class="lesson-link" data-lesson="m6l3"><span class="lesson-dot"></span>Stepper Motors</a>
+    <a href="module6.html#lesson4" class="lesson-link" data-lesson="m6l4"><span class="lesson-dot"></span>Motor Speed Control</a>
+    <a href="module6.html#lesson5" class="lesson-link" data-lesson="m6l5"><span class="lesson-dot"></span>Mini Robot Car Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📡</span> Module 7 – Protocols</div>
+    <a href="module7.html" class="lesson-link" data-lesson="m7l1"><span class="lesson-dot"></span>Serial Communication</a>
+    <a href="module7.html#lesson2" class="lesson-link" data-lesson="m7l2"><span class="lesson-dot"></span>I2C Protocol</a>
+    <a href="module7.html#lesson3" class="lesson-link" data-lesson="m7l3"><span class="lesson-dot"></span>SPI Protocol</a>
+    <a href="module7.html#lesson4" class="lesson-link" data-lesson="m7l4"><span class="lesson-dot"></span>Connecting Multiple Devices</a>
+    <a href="module7.html#lesson5" class="lesson-link" data-lesson="m7l5"><span class="lesson-dot"></span>Real-time Serial Plotter</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌐</span> Module 8 – WiFi & IoT</div>
+    <a href="module8.html" class="lesson-link" data-lesson="m8l1"><span class="lesson-dot"></span>Intro to ESP8266 & ESP32</a>
+    <a href="module8.html#lesson2" class="lesson-link" data-lesson="m8l2"><span class="lesson-dot"></span>Connecting to WiFi</a>
+    <a href="module8.html#lesson3" class="lesson-link" data-lesson="m8l3"><span class="lesson-dot"></span>Building a Web Server</a>
+    <a href="module8.html#lesson4" class="lesson-link" data-lesson="m8l4"><span class="lesson-dot"></span>Sending Data to Cloud</a>
+    <a href="module8.html#lesson5" class="lesson-link" data-lesson="m8l5"><span class="lesson-dot"></span>MQTT Basics</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📶</span> Module 9 – Bluetooth</div>
+    <a href="module9.html" class="lesson-link" data-lesson="m9l1"><span class="lesson-dot"></span>HC-05 Bluetooth Module</a>
+    <a href="module9.html#lesson2" class="lesson-link" data-lesson="m9l2"><span class="lesson-dot"></span>AT Commands Setup</a>
+    <a href="module9.html#lesson3" class="lesson-link" data-lesson="m9l3"><span class="lesson-dot"></span>Phone-Controlled LED</a>
+    <a href="module9.html#lesson4" class="lesson-link" data-lesson="m9l4"><span class="lesson-dot"></span>BLE with ESP32</a>
+    <a href="module9.html#lesson5" class="lesson-link" data-lesson="m9l5"><span class="lesson-dot"></span>Bluetooth Robot Control</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⏱️</span> Module 10 – Interrupts</div>
+    <a href="module10.html" class="lesson-link" data-lesson="m10l1"><span class="lesson-dot"></span>What are Interrupts?</a>
+    <a href="module10.html#lesson2" class="lesson-link" data-lesson="m10l2"><span class="lesson-dot"></span>attachInterrupt()</a>
+    <a href="module10.html#lesson3" class="lesson-link" data-lesson="m10l3"><span class="lesson-dot"></span>Timer Interrupts</a>
+    <a href="module10.html#lesson4" class="lesson-link" data-lesson="m10l4"><span class="lesson-dot"></span>Watchdog Timer</a>
+    <a href="module10.html#lesson5" class="lesson-link" data-lesson="m10l5"><span class="lesson-dot"></span>Sleep Modes & Low Power</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💾</span> Module 11 – Memory</div>
+    <a href="module11.html" class="lesson-link" data-lesson="m11l1"><span class="lesson-dot"></span>SRAM, Flash & EEPROM</a>
+    <a href="module11.html#lesson2" class="lesson-link" data-lesson="m11l2"><span class="lesson-dot"></span>Reading & Writing EEPROM</a>
+    <a href="module11.html#lesson3" class="lesson-link" data-lesson="m11l3"><span class="lesson-dot"></span>SD Card Module</a>
+    <a href="module11.html#lesson4" class="lesson-link" data-lesson="m11l4"><span class="lesson-dot"></span>Writing Custom Libraries</a>
+    <a href="module11.html#lesson5" class="lesson-link" data-lesson="m11l5"><span class="lesson-dot"></span>Data Logger Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🏗️</span> Module 12 – Capstone</div>
+    <a href="module12.html" class="lesson-link" data-lesson="m12l1"><span class="lesson-dot"></span>Smart Weather Station</a>
+    <a href="module12.html#lesson2" class="lesson-link" data-lesson="m12l2"><span class="lesson-dot"></span>Obstacle-Avoiding Robot</a>
+    <a href="module12.html#lesson3" class="lesson-link" data-lesson="m12l3"><span class="lesson-dot"></span>Home Automation System</a>
+    <a href="module12.html#lesson4" class="lesson-link" data-lesson="m12l4"><span class="lesson-dot"></span>Custom PCB Design Intro</a>
+    <a href="module12.html#lesson5" class="lesson-link" data-lesson="m12l5"><span class="lesson-dot"></span>Next Steps & Resources</a>
+  </div>
+</aside>
+
+<main class="content">
+  <div class="module-hero">
+    <div class="module-badge">⚡ Module 2 of 12</div>
+    <h1>Electronics Fundamentals</h1>
+    <p>Understanding electricity is the foundation of everything. Learn voltage, current, resistance, Ohm's Law, and how to read a breadboard — the essential knowledge before touching any circuit.</p>
+    <div class="module-meta">
+      <div class="meta-item">⏱️ ~90 minutes</div>
+      <div class="meta-item">📗 5 lessons</div>
+      <div class="meta-item">🟢 Beginner</div>
+    </div>
+  </div>
+
+  <!-- LESSON 1 -->
+  <div class="lesson-section" id="lesson1">
+    <h2>⚡ Lesson 1: Voltage, Current & Resistance</h2>
+
+    <p>Electricity sounds complicated, but it follows simple rules that you can understand with everyday analogies. Let's use <strong>water flow</strong> to explain it.</p>
+
+    <h3>The Water Pipe Analogy</h3>
+    <table class="component-table">
+      <thead><tr><th>Electrical Concept</th><th>Symbol</th><th>Unit</th><th>Water Analogy</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Voltage (V)</strong></td><td>V</td><td>Volts (V)</td><td>Water pressure — the "push" that drives electricity</td></tr>
+        <tr><td><strong>Current (I)</strong></td><td>I</td><td>Amperes (A)</td><td>Water flow rate — how much electricity flows per second</td></tr>
+        <tr><td><strong>Resistance (R)</strong></td><td>R</td><td>Ohms (Ω)</td><td>Pipe narrowness — how much it opposes current flow</td></tr>
+        <tr><td><strong>Power (P)</strong></td><td>P</td><td>Watts (W)</td><td>Energy used per second — V × I</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box note">
+      <span class="icon">💧</span>
+      <div class="body">
+        <strong>The Analogy</strong>
+        Imagine water in a pipe. Voltage = the pump pressure pushing water. Current = how fast water flows. Resistance = how narrow or blocked the pipe is. High resistance → low current, just like a narrow pipe slows water flow.
+      </div>
+    </div>
+
+    <h3>In Arduino Terms</h3>
+    <ul>
+      <li>Your Arduino outputs <strong>5V</strong> on its digital pins (or 3.3V on some boards)</li>
+      <li>Components like LEDs need <strong>current limited</strong> — we use resistors to do this</li>
+      <li>An LED typically needs about <strong>20mA</strong> (milliamps = 0.02 Amperes)</li>
+      <li>Too much current = blown LED, or damaged Arduino pin</li>
+    </ul>
+
+    <div class="info-box danger">
+      <span class="icon">⚠️</span>
+      <div class="body">
+        <strong>Arduino Pin Limits</strong>
+        Each Arduino Uno digital pin can source/sink a maximum of <strong>40mA</strong>. The total current from ALL pins combined should not exceed <strong>200mA</strong>. Always use resistors with LEDs!
+      </div>
+    </div>
+  </div>
+
+  <!-- LESSON 2 -->
+  <div class="lesson-section" id="lesson2">
+    <h2>🧮 Lesson 2: Ohm's Law</h2>
+
+    <p>Ohm's Law is the most important formula in electronics. It connects voltage, current, and resistance. Master this and you can design any basic circuit.</p>
+
+    <div class="diagram-box">
+      <svg width="300" height="180" viewBox="0 0 300 180" style="max-width:100%">
+        <rect x="50" y="30" width="200" height="120" rx="12" fill="#1e3a8a"/>
+        <text x="150" y="75" text-anchor="middle" fill="white" font-size="36" font-weight="bold" font-family="serif">V = I × R</text>
+        <text x="150" y="105" text-anchor="middle" fill="#93c5fd" font-size="14" font-family="sans-serif">Voltage = Current × Resistance</text>
+        <text x="100" y="130" text-anchor="middle" fill="#60a5fa" font-size="12" font-family="sans-serif">I = V/R</text>
+        <text x="200" y="130" text-anchor="middle" fill="#60a5fa" font-size="12" font-family="sans-serif">R = V/I</text>
+      </svg>
+      <div class="diagram-label">Ohm's Law — Three Forms</div>
+    </div>
+
+    <h3>Practical Example: LED Resistor Calculator</h3>
+    <p>You want to connect an LED to Arduino's 5V pin. The LED has a forward voltage of 2V and needs 20mA current. What resistor do you need?</p>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots"><span></span><span></span><span></span></div>
+        <span class="code-lang">Formula</span>
+        <button class="copy-btn">Copy</button>
+      </div>
+      <pre><code>Voltage across resistor = Supply voltage - LED forward voltage
+                        = 5V - 2V = 3V
+
+Required current = 20mA = 0.02A
+
+Resistance = V / I
+           = 3V / 0.02A
+           = 150 Ohms
+
+→ Use a 150Ω or 220Ω resistor (nearest standard value)</code></pre>
+    </div>
+
+    <div class="info-box tip">
+      <span class="icon">💡</span>
+      <div class="body">
+        <strong>Rule of Thumb</strong>
+        For most standard 5mm LEDs with a 5V Arduino, a <strong>220Ω resistor</strong> works perfectly. For 3.3V boards, use <strong>100Ω</strong>. When in doubt, a higher resistance is safer than a lower one — your LED will just be slightly dimmer.
+      </div>
+    </div>
+
+    <h3>Common LED Forward Voltages</h3>
+    <table class="component-table">
+      <thead><tr><th>LED Color</th><th>Forward Voltage (Vf)</th><th>Resistor for 5V Arduino</th></tr></thead>
+      <tbody>
+        <tr><td>🔴 Red</td><td>1.8–2.0V</td><td>150–220Ω</td></tr>
+        <tr><td>🟡 Yellow</td><td>2.0–2.2V</td><td>150–220Ω</td></tr>
+        <tr><td>🟢 Green</td><td>2.0–3.0V</td><td>100–220Ω</td></tr>
+        <tr><td>🔵 Blue</td><td>3.0–3.5V</td><td>68–100Ω</td></tr>
+        <tr><td>⚪ White</td><td>3.0–3.5V</td><td>68–100Ω</td></tr>
+      </tbody>
+    </table>
+
+    <div class="quiz-box">
+      <h4>Quick Check</h4>
+      <p>An LED needs 20mA and there's 3V across its resistor. What resistance do you need?</p>
+      <button class="quiz-option" data-correct="false">60Ω</button>
+      <button class="quiz-option" data-correct="true">150Ω</button>
+      <button class="quiz-option" data-correct="false">300Ω</button>
+      <button class="quiz-option" data-correct="false">1kΩ</button>
+      <div class="quiz-result"></div>
+    </div>
+  </div>
+
+  <!-- LESSON 3 -->
+  <div class="lesson-section" id="lesson3">
+    <h2>🧩 Lesson 3: Breadboards & Schematics</h2>
+
+    <h3>What is a Breadboard?</h3>
+    <p>A <strong>breadboard</strong> is a plastic board with a grid of holes connected by metal strips underneath. You can push components and wires into these holes to build circuits <strong>without soldering</strong>. It's the prototyping tool every Arduino maker needs.</p>
+
+    <div class="diagram-box">
+      <svg width="400" height="200" viewBox="0 0 400 200" style="max-width:100%">
+        <!-- Breadboard body -->
+        <rect x="20" y="10" width="360" height="180" rx="8" fill="#e8e0c8" stroke="#ccc" stroke-width="2"/>
+        <!-- Power rails left -->
+        <rect x="30" y="25" width="16" height="155" rx="3" fill="#fee2e2"/>
+        <rect x="50" y="25" width="16" height="155" rx="3" fill="#dbeafe"/>
+        <!-- Power rails right -->
+        <rect x="334" y="25" width="16" height="155" rx="3" fill="#fee2e2"/>
+        <rect x="354" y="25" width="16" height="155" rx="3" fill="#dbeafe"/>
+        <!-- Labels -->
+        <text x="38" y="20" text-anchor="middle" fill="#dc2626" font-size="10" font-weight="bold" font-family="sans-serif">+</text>
+        <text x="58" y="20" text-anchor="middle" fill="#2563eb" font-size="10" font-weight="bold" font-family="sans-serif">−</text>
+        <text x="342" y="20" text-anchor="middle" fill="#dc2626" font-size="10" font-weight="bold" font-family="sans-serif">+</text>
+        <text x="362" y="20" text-anchor="middle" fill="#2563eb" font-size="10" font-weight="bold" font-family="sans-serif">−</text>
+        <!-- Main grid dots -->
+        <g fill="#888">
+        <!-- Row A-J horizontal bands -->
+        <!-- Just showing a grid of dots -->
+        <text x="200" y="95" text-anchor="middle" fill="#555" font-size="12" font-family="sans-serif">Main Grid</text>
+        <text x="200" y="112" text-anchor="middle" fill="#777" font-size="10" font-family="sans-serif">(columns are connected vertically)</text>
+        </g>
+        <!-- Center divider -->
+        <line x1="75" y1="95" x2="330" y2="95" stroke="#aaa" stroke-width="2" stroke-dasharray="4,3"/>
+        <text x="200" y="108" text-anchor="middle" fill="#999" font-size="9" font-family="sans-serif">← gap (no connection across) →</text>
+        <!-- Row arrows showing horizontal connection -->
+        <text x="200" y="75" text-anchor="middle" fill="#555" font-size="9" font-family="sans-serif">↔ holes in same row are connected ↔</text>
+        <text x="200" y="130" text-anchor="middle" fill="#555" font-size="9" font-family="sans-serif">↔ holes in same row are connected ↔</text>
+        <text x="200" y="160" text-anchor="middle" fill="#777" font-size="10" font-family="sans-serif" font-style="italic">Power rails run vertically (top to bottom)</text>
+      </svg>
+      <div class="diagram-label">Breadboard Layout — Understanding the Connections</div>
+    </div>
+
+    <h3>Breadboard Rules</h3>
+    <ul>
+      <li>🔴 <strong>Red rail (+)</strong> — Connect to Arduino 5V or 3.3V</li>
+      <li>🔵 <strong>Blue rail (−)</strong> — Connect to Arduino GND</li>
+      <li>All holes in the <strong>same row</strong> (e.g., row 5, a-e) are connected together</li>
+      <li>The <strong>center gap</strong> divides the board — no connection across it</li>
+      <li>Always match pin lengths to the right holes — short leg (−) to GND, long leg (+) to signal</li>
+    </ul>
+
+    <h3>Reading Schematics</h3>
+    <p>A <strong>schematic</strong> is a diagram that shows how a circuit is connected using standard symbols. Learning to read schematics means you can follow any project in the world.</p>
+
+    <table class="component-table">
+      <thead><tr><th>Symbol Description</th><th>Component</th><th>What It Does</th></tr></thead>
+      <tbody>
+        <tr><td>Zigzag line</td><td>Resistor</td><td>Limits current flow</td></tr>
+        <tr><td>Triangle with line</td><td>LED / Diode</td><td>Allows current in one direction only</td></tr>
+        <tr><td>Two parallel lines (unequal)</td><td>Capacitor</td><td>Stores and releases charge</td></tr>
+        <tr><td>Coiled line</td><td>Inductor</td><td>Stores energy in a magnetic field</td></tr>
+        <tr><td>Lines with dots</td><td>Wire junction</td><td>Wires are connected at the dot</td></tr>
+        <tr><td>Lines crossing (no dot)</td><td>Wires crossing</td><td>Wires pass over each other — NOT connected</td></tr>
+        <tr><td>Rectangle with label</td><td>IC / Chip</td><td>Integrated circuit</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LESSON 4 -->
+  <div class="lesson-section" id="lesson4">
+    <h2>🔩 Lesson 4: Resistors & Capacitors</h2>
+
+    <h3>Resistors</h3>
+    <p>Resistors are the most common component in electronics. They limit current and divide voltages. You can identify their value by their <strong>color bands</strong>.</p>
+
+    <h3>4-Band Resistor Color Code</h3>
+    <table class="component-table">
+      <thead><tr><th>Color</th><th>Digit Value</th><th>Multiplier</th></tr></thead>
+      <tbody>
+        <tr><td>⬛ Black</td><td>0</td><td>×1</td></tr>
+        <tr><td>🟫 Brown</td><td>1</td><td>×10</td></tr>
+        <tr><td>🔴 Red</td><td>2</td><td>×100</td></tr>
+        <tr><td>🟠 Orange</td><td>3</td><td>×1,000</td></tr>
+        <tr><td>🟡 Yellow</td><td>4</td><td>×10,000</td></tr>
+        <tr><td>🟢 Green</td><td>5</td><td>×100,000</td></tr>
+        <tr><td>🔵 Blue</td><td>6</td><td>×1,000,000</td></tr>
+        <tr><td>🟣 Violet</td><td>7</td><td>—</td></tr>
+        <tr><td>⬜ Gray</td><td>8</td><td>—</td></tr>
+        <tr><td>⬜ White</td><td>9</td><td>—</td></tr>
+        <tr><td>🥇 Gold</td><td>—</td><td>×0.1 (±5% tolerance)</td></tr>
+        <tr><td>🩶 Silver</td><td>—</td><td>×0.01 (±10% tolerance)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box tip">
+      <span class="icon">🎨</span>
+      <div class="body">
+        <strong>Memory Trick</strong>
+        "Better Be Right Or Your Great Big Ventures Go Wrong" — Black, Brown, Red, Orange, Yellow, Green, Blue, Violet, Gray, White (0–9). A 220Ω resistor = Red-Red-Brown (2, 2, ×10 = 220Ω).
+      </div>
+    </div>
+
+    <h3>Capacitors</h3>
+    <p>Capacitors <strong>store electrical energy</strong> temporarily and release it. They are used to smooth out power supply noise, filter signals, and in timing circuits.</p>
+
+    <table class="component-table">
+      <thead><tr><th>Type</th><th>Polarized?</th><th>Common Use</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Electrolytic</strong></td><td>✅ Yes (+ and − legs)</td><td>Power filtering, large capacitance (µF range)</td></tr>
+        <tr><td><strong>Ceramic</strong></td><td>❌ No</td><td>Signal decoupling, small capacitance (pF–nF)</td></tr>
+        <tr><td><strong>Tantalum</strong></td><td>✅ Yes</td><td>Stable, compact filtering</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box warning">
+      <span class="icon">⚠️</span>
+      <div class="body">
+        <strong>Electrolytic Capacitors are Polarized!</strong>
+        The long leg is (+) positive, short leg is (−) negative. The body also has a stripe marking the (−) side. Installing them backwards can cause them to explode. Always double-check orientation!
+      </div>
+    </div>
+  </div>
+
+  <!-- LESSON 5 -->
+  <div class="lesson-section" id="lesson5">
+    <h2>🔌 Lesson 5: Power Supply & Safety</h2>
+
+    <h3>Powering Your Arduino</h3>
+    <table class="component-table">
+      <thead><tr><th>Method</th><th>Voltage</th><th>Best For</th></tr></thead>
+      <tbody>
+        <tr><td><strong>USB from Computer</strong></td><td>5V via USB</td><td>Programming, testing, desktop projects</td></tr>
+        <tr><td><strong>USB Power Bank</strong></td><td>5V via USB</td><td>Portable/outdoor projects</td></tr>
+        <tr><td><strong>DC Barrel Jack (Vin)</strong></td><td>7–12V DC</td><td>Standalone, motor-heavy projects</td></tr>
+        <tr><td><strong>9V Battery + Connector</strong></td><td>9V → regulated 5V</td><td>Temporary standalone use</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Golden Safety Rules</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Never exceed 5V on digital/analog pins</strong><p>Applying higher voltage directly to a pin will permanently damage the ATmega chip.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Always use resistors with LEDs</strong><p>LEDs have almost no internal resistance — without a resistor, they draw unlimited current and burn out instantly.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Connect GND first, power last</strong><p>When wiring, always connect the ground wire first. When disconnecting, remove power first.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Unplug before rewiring</strong><p>Always disconnect USB before changing your circuit. A short circuit can destroy your Arduino instantly.</p></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-body"><strong>Check polarity</strong><p>LEDs, electrolytic capacitors, and diodes have polarity. Installing them backwards can cause damage.</p></div></div>
+      <div class="step"><div class="step-num">6</div><div class="step-body"><strong>Avoid mains electricity (220V/110V)</strong><p>Never connect your Arduino directly to wall power. Always use a properly rated adapter or relay module.</p></div></div>
+    </div>
+
+    <div class="info-box project">
+      <span class="icon">🔨</span>
+      <div class="body">
+        <strong>Mini Project: LED Circuit with Resistor</strong>
+        Before moving to Module 3, build this on your breadboard: Connect a 220Ω resistor from Arduino Pin 13 to the (+) leg of an LED. Connect the (−) leg of the LED to GND. Upload the Blink sketch from Module 1. You're now using a real external LED!
+      </div>
+    </div>
+  </div>
+
+  <div class="lesson-footer">
+    <a href="module1.html" class="btn btn-outline">← Module 1</a>
+    <button class="btn btn-complete" data-lesson="m2_complete">○ Mark Module Complete</button>
+    <a href="module3.html" class="btn btn-primary">Module 3: Digital I/O →</a>
+  </div>
+</main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

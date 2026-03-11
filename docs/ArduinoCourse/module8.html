@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 8: WiFi & IoT – AlCoders Arduino</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="index.html">⚡ <span>Al</span>Coders</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="module7.html">← Module 7</a>
+    <a href="module8.html" class="active">Module 8</a>
+    <a href="module9.html">Module 9 →</a>
+  </div>
+</nav>
+<div class="breadcrumb">
+  <a href="index.html">Arduino Course</a> › Module 8 › WiFi &amp; IoT
+</div>
+<div class="page-wrapper">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">Course Progress</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 60 lessons completed</div>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔧</span> Module 1 – Getting Started</div>
+    <a href="module1.html" class="lesson-link" data-lesson="m1l1"><span class="lesson-dot"></span>What is Arduino?</a>
+    <a href="module1.html#lesson2" class="lesson-link" data-lesson="m1l2"><span class="lesson-dot"></span>Installing the IDE</a>
+    <a href="module1.html#lesson3" class="lesson-link" data-lesson="m1l3"><span class="lesson-dot"></span>Exploring the Board</a>
+    <a href="module1.html#lesson4" class="lesson-link" data-lesson="m1l4"><span class="lesson-dot"></span>Your First Sketch: Blink</a>
+    <a href="module1.html#lesson5" class="lesson-link" data-lesson="m1l5"><span class="lesson-dot"></span>Understanding the Code</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⚡</span> Module 2 – Electronics</div>
+    <a href="module2.html" class="lesson-link" data-lesson="m2l1"><span class="lesson-dot"></span>Voltage, Current & Resistance</a>
+    <a href="module2.html#lesson2" class="lesson-link" data-lesson="m2l2"><span class="lesson-dot"></span>Ohm's Law</a>
+    <a href="module2.html#lesson3" class="lesson-link" data-lesson="m2l3"><span class="lesson-dot"></span>Breadboards & Schematics</a>
+    <a href="module2.html#lesson4" class="lesson-link" data-lesson="m2l4"><span class="lesson-dot"></span>Resistors & Capacitors</a>
+    <a href="module2.html#lesson5" class="lesson-link" data-lesson="m2l5"><span class="lesson-dot"></span>Power Supply & Safety</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💡</span> Module 3 – Digital I/O</div>
+    <a href="module3.html" class="lesson-link" data-lesson="m3l1"><span class="lesson-dot"></span>Digital Pins Explained</a>
+    <a href="module3.html#lesson2" class="lesson-link" data-lesson="m3l2"><span class="lesson-dot"></span>digitalWrite & digitalRead</a>
+    <a href="module3.html#lesson3" class="lesson-link" data-lesson="m3l3"><span class="lesson-dot"></span>Push Buttons & Input</a>
+    <a href="module3.html#lesson4" class="lesson-link" data-lesson="m3l4"><span class="lesson-dot"></span>Debouncing Buttons</a>
+    <a href="module3.html#lesson5" class="lesson-link" data-lesson="m3l5"><span class="lesson-dot"></span>Traffic Light Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌡️</span> Module 4 – Analog I/O</div>
+    <a href="module4.html" class="lesson-link" data-lesson="m4l1"><span class="lesson-dot"></span>Analog vs Digital</a>
+    <a href="module4.html#lesson2" class="lesson-link" data-lesson="m4l2"><span class="lesson-dot"></span>analogRead & Potentiometer</a>
+    <a href="module4.html#lesson3" class="lesson-link" data-lesson="m4l3"><span class="lesson-dot"></span>PWM & analogWrite</a>
+    <a href="module4.html#lesson4" class="lesson-link" data-lesson="m4l4"><span class="lesson-dot"></span>Temperature Sensor</a>
+    <a href="module4.html#lesson5" class="lesson-link" data-lesson="m4l5"><span class="lesson-dot"></span>LDR Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📺</span> Module 5 – Displays</div>
+    <a href="module5.html" class="lesson-link" data-lesson="m5l1"><span class="lesson-dot"></span>LCD 16x2 with I2C</a>
+    <a href="module5.html#lesson2" class="lesson-link" data-lesson="m5l2"><span class="lesson-dot"></span>OLED Display</a>
+    <a href="module5.html#lesson3" class="lesson-link" data-lesson="m5l3"><span class="lesson-dot"></span>7-Segment Display</a>
+    <a href="module5.html#lesson4" class="lesson-link" data-lesson="m5l4"><span class="lesson-dot"></span>Buzzer & Tones</a>
+    <a href="module5.html#lesson5" class="lesson-link" data-lesson="m5l5"><span class="lesson-dot"></span>RGB LED</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔊</span> Module 6 – Motors</div>
+    <a href="module6.html" class="lesson-link" data-lesson="m6l1"><span class="lesson-dot"></span>Servo Motor Basics</a>
+    <a href="module6.html#lesson2" class="lesson-link" data-lesson="m6l2"><span class="lesson-dot"></span>DC Motors & L298N</a>
+    <a href="module6.html#lesson3" class="lesson-link" data-lesson="m6l3"><span class="lesson-dot"></span>Stepper Motors</a>
+    <a href="module6.html#lesson4" class="lesson-link" data-lesson="m6l4"><span class="lesson-dot"></span>Speed Control</a>
+    <a href="module6.html#lesson5" class="lesson-link" data-lesson="m6l5"><span class="lesson-dot"></span>Mini Robot Car</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📡</span> Module 7 – Protocols</div>
+    <a href="module7.html" class="lesson-link" data-lesson="m7l1"><span class="lesson-dot"></span>Serial Communication</a>
+    <a href="module7.html#lesson2" class="lesson-link" data-lesson="m7l2"><span class="lesson-dot"></span>I2C Protocol</a>
+    <a href="module7.html#lesson3" class="lesson-link" data-lesson="m7l3"><span class="lesson-dot"></span>SPI Protocol</a>
+    <a href="module7.html#lesson4" class="lesson-link" data-lesson="m7l4"><span class="lesson-dot"></span>Multiple Devices</a>
+    <a href="module7.html#lesson5" class="lesson-link" data-lesson="m7l5"><span class="lesson-dot"></span>Serial Plotter</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌐</span> Module 8 – WiFi & IoT</div>
+    <a href="#lesson1" class="lesson-link active" data-lesson="m8l1"><span class="lesson-dot"></span>Intro to ESP8266 & ESP32</a>
+    <a href="#lesson2" class="lesson-link" data-lesson="m8l2"><span class="lesson-dot"></span>Connecting to WiFi</a>
+    <a href="#lesson3" class="lesson-link" data-lesson="m8l3"><span class="lesson-dot"></span>Building a Web Server</a>
+    <a href="#lesson4" class="lesson-link" data-lesson="m8l4"><span class="lesson-dot"></span>Sending Data to Cloud</a>
+    <a href="#lesson5" class="lesson-link" data-lesson="m8l5"><span class="lesson-dot"></span>MQTT Basics</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📶</span> Module 9 – Bluetooth</div>
+    <a href="module9.html" class="lesson-link" data-lesson="m9l1"><span class="lesson-dot"></span>HC-05 Module</a>
+    <a href="module9.html#lesson2" class="lesson-link" data-lesson="m9l2"><span class="lesson-dot"></span>AT Commands</a>
+    <a href="module9.html#lesson3" class="lesson-link" data-lesson="m9l3"><span class="lesson-dot"></span>Phone-Controlled LED</a>
+    <a href="module9.html#lesson4" class="lesson-link" data-lesson="m9l4"><span class="lesson-dot"></span>BLE with ESP32</a>
+    <a href="module9.html#lesson5" class="lesson-link" data-lesson="m9l5"><span class="lesson-dot"></span>Bluetooth Robot</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⏱️</span> Module 10 – Interrupts</div>
+    <a href="module10.html" class="lesson-link" data-lesson="m10l1"><span class="lesson-dot"></span>What are Interrupts?</a>
+    <a href="module10.html#lesson2" class="lesson-link" data-lesson="m10l2"><span class="lesson-dot"></span>attachInterrupt()</a>
+    <a href="module10.html#lesson3" class="lesson-link" data-lesson="m10l3"><span class="lesson-dot"></span>Timer Interrupts</a>
+    <a href="module10.html#lesson4" class="lesson-link" data-lesson="m10l4"><span class="lesson-dot"></span>Watchdog Timer</a>
+    <a href="module10.html#lesson5" class="lesson-link" data-lesson="m10l5"><span class="lesson-dot"></span>Sleep Modes</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💾</span> Module 11 – Memory</div>
+    <a href="module11.html" class="lesson-link" data-lesson="m11l1"><span class="lesson-dot"></span>SRAM, Flash & EEPROM</a>
+    <a href="module11.html#lesson2" class="lesson-link" data-lesson="m11l2"><span class="lesson-dot"></span>Reading & Writing EEPROM</a>
+    <a href="module11.html#lesson3" class="lesson-link" data-lesson="m11l3"><span class="lesson-dot"></span>SD Card Module</a>
+    <a href="module11.html#lesson4" class="lesson-link" data-lesson="m11l4"><span class="lesson-dot"></span>Custom Libraries</a>
+    <a href="module11.html#lesson5" class="lesson-link" data-lesson="m11l5"><span class="lesson-dot"></span>Data Logger</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🏗️</span> Module 12 – Capstone</div>
+    <a href="module12.html" class="lesson-link" data-lesson="m12l1"><span class="lesson-dot"></span>Smart Weather Station</a>
+    <a href="module12.html#lesson2" class="lesson-link" data-lesson="m12l2"><span class="lesson-dot"></span>Obstacle-Avoiding Robot</a>
+    <a href="module12.html#lesson3" class="lesson-link" data-lesson="m12l3"><span class="lesson-dot"></span>Home Automation</a>
+    <a href="module12.html#lesson4" class="lesson-link" data-lesson="m12l4"><span class="lesson-dot"></span>PCB Design Intro</a>
+    <a href="module12.html#lesson5" class="lesson-link" data-lesson="m12l5"><span class="lesson-dot"></span>Next Steps</a>
+  </div>
+</aside>
+<main class="content">
+  <div class="module-hero">
+    <div class="module-badge">🌐 Module 8 of 12</div>
+    <h1>WiFi &amp; IoT</h1>
+    <p>Connect your Arduino projects to the internet! Learn ESP8266 and ESP32 — powerful WiFi-capable boards programmable with the Arduino IDE. Build web servers, cloud dashboards, and real IoT devices.</p>
+    <div class="module-meta">
+      <div class="meta-item">⏱️ ~3 hours</div>
+      <div class="meta-item">📗 5 lessons</div>
+      <div class="meta-item">🔴 Advanced</div>
+    </div>
+  </div>
+
+  <div class="lesson-section" id="lesson1">
+    <h2>🌐 Lesson 1: Intro to ESP8266 &amp; ESP32</h2>
+    <p>The <strong>ESP8266</strong> and <strong>ESP32</strong> are WiFi-capable microcontrollers from Espressif. They're much more powerful than the Arduino Uno and include built-in WiFi (and Bluetooth on ESP32). You program them using the Arduino IDE — same syntax, but with extra WiFi libraries.</p>
+
+    <h3>Comparison Table</h3>
+    <table class="component-table">
+      <thead><tr><th>Feature</th><th>Arduino Uno</th><th>ESP8266 (NodeMCU)</th><th>ESP32</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Processor</strong></td><td>ATmega328P 16MHz</td><td>Xtensa 80MHz</td><td>Xtensa dual-core 240MHz</td></tr>
+        <tr><td><strong>RAM</strong></td><td>2KB SRAM</td><td>80KB</td><td>520KB</td></tr>
+        <tr><td><strong>Flash</strong></td><td>32KB</td><td>4MB</td><td>4MB+</td></tr>
+        <tr><td><strong>WiFi</strong></td><td>❌ None</td><td>✅ 2.4GHz</td><td>✅ 2.4GHz</td></tr>
+        <tr><td><strong>Bluetooth</strong></td><td>❌ None</td><td>❌ None</td><td>✅ BT + BLE</td></tr>
+        <tr><td><strong>Price (India)</strong></td><td>~₹200–500</td><td>~₹150–300</td><td>~₹300–600</td></tr>
+        <tr><td><strong>Best for</strong></td><td>Learning, hardware basics</td><td>Simple WiFi IoT</td><td>Advanced IoT, BT projects</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Setting Up ESP8266/ESP32 in Arduino IDE</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Open Preferences</strong><p>In Arduino IDE: File → Preferences</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Add Board Manager URL</strong><p>In "Additional Boards Manager URLs", add:<br/>
+      ESP8266: <code>http://arduino.esp8266.com/stable/package_esp8266com_index.json</code><br/>
+      ESP32: <code>https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json</code></p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Install Board</strong><p>Tools → Board → Boards Manager → Search "esp8266" or "esp32" → Install</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Select Your Board</strong><p>Tools → Board → ESP8266 Boards → NodeMCU 1.0 (or for ESP32: ESP32 Dev Module)</p></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-body"><strong>Select Port</strong><p>Tools → Port → Select the COM port that appeared when you plugged in the board. If no port appears, install the CP2102 or CH340 driver.</p></div></div>
+    </div>
+
+    <div class="info-box note">
+      <span class="icon">💡</span>
+      <div class="body"><strong>Which to use?</strong> For this module we'll use the <strong>ESP8266 NodeMCU</strong> for lessons 1–4 (easy to get, cheaper). Lesson 4 (BLE) uses ESP32 specifically. All ESP8266 code also works on ESP32 with only minor changes.</div>
+    </div>
+  </div>
+
+  <div class="lesson-section" id="lesson2">
+    <h2>📶 Lesson 2: Connecting to WiFi</h2>
+    <p>Connecting your ESP8266 to your home WiFi network is the first step to building IoT projects. Once connected, your device can fetch data from the internet, post sensor readings to servers, and receive commands remotely.</p>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ (ESP8266)</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="pp">#include</span> <span class="st">&lt;ESP8266WiFi.h&gt;</span>  <span class="cm">// For ESP32 use: #include &lt;WiFi.h&gt;</span>
+
+<span class="kw">const</span> <span class="tp">char</span>* ssid     = <span class="st">"YOUR_WIFI_NAME"</span>;
+<span class="kw">const</span> <span class="tp">char</span>* password = <span class="st">"YOUR_WIFI_PASSWORD"</span>;
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">Serial.begin</span>(<span class="nm">115200</span>);
+  <span class="fn">Serial.println</span>(<span class="st">"Connecting to WiFi..."</span>);
+
+  <span class="fn">WiFi.begin</span>(ssid, password);
+
+  <span class="kw">while</span> (<span class="fn">WiFi.status</span>() != WL_CONNECTED) {
+    <span class="fn">delay</span>(<span class="nm">500</span>);
+    <span class="fn">Serial.print</span>(<span class="st">"."</span>);
+  }
+
+  <span class="fn">Serial.println</span>(<span class="st">""</span>);
+  <span class="fn">Serial.println</span>(<span class="st">"✅ Connected!"</span>);
+  <span class="fn">Serial.print</span>(<span class="st">"IP Address: "</span>);
+  <span class="fn">Serial.println</span>(<span class="fn">WiFi.localIP</span>());
+  <span class="fn">Serial.print</span>(<span class="st">"Signal strength (RSSI): "</span>);
+  <span class="fn">Serial.print</span>(<span class="fn">WiFi.RSSI</span>());
+  <span class="fn">Serial.println</span>(<span class="st">" dBm"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// Check if still connected</span>
+  <span class="kw">if</span> (<span class="fn">WiFi.status</span>() != WL_CONNECTED) {
+    <span class="fn">Serial.println</span>(<span class="st">"WiFi lost! Reconnecting..."</span>);
+    <span class="fn">WiFi.reconnect</span>();
+  }
+}</code></pre>
+    </div>
+
+    <div class="info-box tip">
+      <span class="icon">✅</span>
+      <div class="body"><strong>Security tip:</strong> Never hard-code WiFi credentials in code you share publicly. For real projects, store credentials in a separate config file or use WiFiManager library to set them up via a captive portal.</div>
+    </div>
+  </div>
+
+  <div class="lesson-section" id="lesson3">
+    <h2>🖥️ Lesson 3: Building a Web Server</h2>
+    <p>Turn your ESP8266 into a tiny web server accessible from any browser on your local network. Control LEDs, read sensor values — all from a webpage!</p>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ (ESP8266)</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="pp">#include</span> <span class="st">&lt;ESP8266WiFi.h&gt;</span>
+<span class="pp">#include</span> <span class="st">&lt;ESP8266WebServer.h&gt;</span>
+
+<span class="kw">const</span> <span class="tp">char</span>* ssid     = <span class="st">"YOUR_WIFI"</span>;
+<span class="kw">const</span> <span class="tp">char</span>* password = <span class="st">"YOUR_PASS"</span>;
+
+<span class="tp">ESP8266WebServer</span> server(<span class="nm">80</span>); <span class="cm">// Port 80 = HTTP</span>
+<span class="pp">#define</span> LED_PIN <span class="nm">2</span>  <span class="cm">// Built-in LED on NodeMCU (active LOW)</span>
+
+<span class="kw">bool</span> ledState = <span class="kw">false</span>;
+
+<span class="cm">// HTML page sent to browser</span>
+<span class="tp">String</span> <span class="fn">buildPage</span>() {
+  <span class="tp">String</span> html = <span class="st">"&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;"</span>;
+  html += <span class="st">"&lt;title&gt;ESP8266 Control&lt;/title&gt;"</span>;
+  html += <span class="st">"&lt;meta name='viewport' content='width=device-width,initial-scale=1'&gt;"</span>;
+  html += <span class="st">"&lt;style&gt;body{font-family:sans-serif;text-align:center;padding:30px}"</span>;
+  html += <span class="st">"button{padding:15px 30px;font-size:18px;border-radius:8px;cursor:pointer;border:none}"</span>;
+  html += <span class="st">".on{background:#16a34a;color:white}.off{background:#dc2626;color:white}&lt;/style&gt;&lt;/head&gt;"</span>;
+  html += <span class="st">"&lt;body&gt;&lt;h1&gt;⚡ AlCoders IoT Control&lt;/h1&gt;"</span>;
+  html += <span class="st">"&lt;p&gt;LED is currently: &lt;strong&gt;"</span> + <span class="tp">String</span>(ledState ? <span class="st">"ON"</span> : <span class="st">"OFF"</span>) + <span class="st">"&lt;/strong&gt;&lt;/p&gt;"</span>;
+  html += <span class="st">"&lt;a href='/on'&gt;&lt;button class='on'&gt;Turn ON&lt;/button&gt;&lt;/a&gt; "</span>;
+  html += <span class="st">"&lt;a href='/off'&gt;&lt;button class='off'&gt;Turn OFF&lt;/button&gt;&lt;/a&gt;"</span>;
+  html += <span class="st">"&lt;p&gt;Uptime: "</span> + <span class="tp">String</span>(<span class="fn">millis</span>()/<span class="nm">1000</span>) + <span class="st">"s&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;"</span>;
+  <span class="kw">return</span> html;
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">Serial.begin</span>(<span class="nm">115200</span>);
+  <span class="fn">pinMode</span>(LED_PIN, OUTPUT);
+  <span class="fn">WiFi.begin</span>(ssid, password);
+  <span class="kw">while</span> (<span class="fn">WiFi.status</span>() != WL_CONNECTED) { <span class="fn">delay</span>(<span class="nm">500</span>); <span class="fn">Serial.print</span>(<span class="st">"."</span>); }
+  <span class="fn">Serial.println</span>(<span class="st">"\nConnected! Visit: http://"</span> + <span class="fn">WiFi.localIP</span>().<span class="fn">toString</span>());
+
+  <span class="fn">server.on</span>(<span class="st">"/"</span>, []() { <span class="fn">server.send</span>(<span class="nm">200</span>, <span class="st">"text/html"</span>, <span class="fn">buildPage</span>()); });
+  <span class="fn">server.on</span>(<span class="st">"/on"</span>, []() {
+    ledState = <span class="kw">true</span>;
+    <span class="fn">digitalWrite</span>(LED_PIN, LOW); <span class="cm">// NodeMCU LED is active LOW</span>
+    <span class="fn">server.sendHeader</span>(<span class="st">"Location"</span>, <span class="st">"/"</span>);
+    <span class="fn">server.send</span>(<span class="nm">302</span>);
+  });
+  <span class="fn">server.on</span>(<span class="st">"/off"</span>, []() {
+    ledState = <span class="kw">false</span>;
+    <span class="fn">digitalWrite</span>(LED_PIN, HIGH);
+    <span class="fn">server.sendHeader</span>(<span class="st">"Location"</span>, <span class="st">"/"</span>);
+    <span class="fn">server.send</span>(<span class="nm">302</span>);
+  });
+  <span class="fn">server.begin</span>();
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="fn">server.handleClient</span>(); <span class="cm">// Check for incoming requests</span>
+}</code></pre>
+    </div>
+
+    <p>Open your browser and type the IP address shown in Serial Monitor (e.g. <strong>192.168.1.42</strong>). You'll see a web page with On/Off buttons that control the LED!</p>
+  </div>
+
+  <div class="lesson-section" id="lesson4">
+    <h2>☁️ Lesson 4: Sending Data to the Cloud (ThingSpeak)</h2>
+    <p><strong>ThingSpeak</strong> is a free IoT cloud platform by MathWorks. You can post sensor data to it and see beautiful live graphs from anywhere in the world.</p>
+
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Create Account</strong><p>Go to <strong>thingspeak.com</strong> → Sign up for free</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Create Channel</strong><p>New Channel → Add field names (e.g. "Temperature", "Humidity") → Save</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Get API Key</strong><p>In your channel: API Keys tab → Copy the "Write API Key"</p></div></div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ (ESP8266)</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="pp">#include</span> <span class="st">&lt;ESP8266WiFi.h&gt;</span>
+<span class="pp">#include</span> <span class="st">&lt;ESP8266HTTPClient.h&gt;</span>
+<span class="pp">#include</span> <span class="st">&lt;DHT.h&gt;</span>  <span class="cm">// Install "DHT sensor library" by Adafruit</span>
+
+<span class="kw">const</span> <span class="tp">char</span>* ssid     = <span class="st">"YOUR_WIFI"</span>;
+<span class="kw">const</span> <span class="tp">char</span>* password = <span class="st">"YOUR_PASS"</span>;
+<span class="tp">String</span> apiKey = <span class="st">"YOUR_THINGSPEAK_WRITE_KEY"</span>;
+<span class="tp">String</span> server  = <span class="st">"http://api.thingspeak.com/update"</span>;
+
+<span class="pp">#define</span> DHT_PIN  <span class="nm">4</span>  <span class="cm">// D2 on NodeMCU</span>
+<span class="pp">#define</span> DHT_TYPE DHT11
+<span class="tp">DHT</span> dht(DHT_PIN, DHT_TYPE);
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">Serial.begin</span>(<span class="nm">115200</span>);
+  <span class="fn">dht.begin</span>();
+  <span class="fn">WiFi.begin</span>(ssid, password);
+  <span class="kw">while</span> (<span class="fn">WiFi.status</span>() != WL_CONNECTED) { <span class="fn">delay</span>(<span class="nm">500</span>); }
+  <span class="fn">Serial.println</span>(<span class="st">"Connected!"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">float</span> temp = <span class="fn">dht.readTemperature</span>();
+  <span class="tp">float</span> hum  = <span class="fn">dht.readHumidity</span>();
+
+  <span class="kw">if</span> (<span class="fn">isnan</span>(temp) || <span class="fn">isnan</span>(hum)) {
+    <span class="fn">Serial.println</span>(<span class="st">"DHT read error"</span>);
+    <span class="kw">return</span>;
+  }
+
+  <span class="tp">String</span> url = server + <span class="st">"?api_key="</span> + apiKey
+             + <span class="st">"&field1="</span> + <span class="tp">String</span>(temp)
+             + <span class="st">"&field2="</span> + <span class="tp">String</span>(hum);
+
+  <span class="tp">WiFiClient</span> client;
+  <span class="tp">HTTPClient</span> http;
+  <span class="fn">http.begin</span>(client, url);
+  <span class="tp">int</span> code = <span class="fn">http.GET</span>();
+  <span class="fn">Serial.print</span>(<span class="st">"Temp:"</span>); <span class="fn">Serial.print</span>(temp);
+  <span class="fn">Serial.print</span>(<span class="st">" Hum:"</span>); <span class="fn">Serial.print</span>(hum);
+  <span class="fn">Serial.print</span>(<span class="st">" → HTTP:"</span>); <span class="fn">Serial.println</span>(code);
+  <span class="fn">http.end</span>();
+
+  <span class="fn">delay</span>(<span class="nm">20000</span>); <span class="cm">// ThingSpeak free tier: max 1 update per 15 seconds</span>
+}</code></pre>
+    </div>
+  </div>
+
+  <div class="lesson-section" id="lesson5">
+    <h2>📨 Lesson 5: MQTT Basics</h2>
+    <p><strong>MQTT (Message Queuing Telemetry Transport)</strong> is the standard protocol for IoT messaging. It uses a publish/subscribe model: devices publish messages to a "topic" and other devices subscribe to receive them. It's lightweight and perfect for Arduino/ESP devices.</p>
+
+    <h3>MQTT Concepts</h3>
+    <table class="component-table">
+      <thead><tr><th>Term</th><th>Meaning</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Broker</strong></td><td>Server that routes messages</td><td>broker.hivemq.com (free public)</td></tr>
+        <tr><td><strong>Client</strong></td><td>Any device connecting to broker</td><td>Your ESP8266</td></tr>
+        <tr><td><strong>Topic</strong></td><td>Channel/address for messages</td><td>home/livingroom/temperature</td></tr>
+        <tr><td><strong>Publish</strong></td><td>Send a message to a topic</td><td>ESP8266 sends "25.3" to temperature topic</td></tr>
+        <tr><td><strong>Subscribe</strong></td><td>Receive messages from a topic</td><td>Phone app gets temperature updates</td></tr>
+        <tr><td><strong>QoS</strong></td><td>Delivery guarantee level (0, 1, 2)</td><td>QoS 0 = fire-and-forget</td></tr>
+      </tbody>
+    </table>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ (ESP8266)</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="cm">// Install "PubSubClient" library by Nick O'Leary</span>
+<span class="pp">#include</span> <span class="st">&lt;ESP8266WiFi.h&gt;</span>
+<span class="pp">#include</span> <span class="st">&lt;PubSubClient.h&gt;</span>
+
+<span class="kw">const</span> <span class="tp">char</span>* ssid      = <span class="st">"YOUR_WIFI"</span>;
+<span class="kw">const</span> <span class="tp">char</span>* password  = <span class="st">"YOUR_PASS"</span>;
+<span class="kw">const</span> <span class="tp">char</span>* mqttServer = <span class="st">"broker.hivemq.com"</span>;
+
+<span class="tp">WiFiClient</span> wifiClient;
+<span class="tp">PubSubClient</span> mqtt(wifiClient);
+
+<span class="cm">// Called when a subscribed message arrives</span>
+<span class="kw">void</span> <span class="fn">onMessage</span>(<span class="tp">char</span>* topic, <span class="tp">byte</span>* payload, <span class="tp">unsigned int</span> length) {
+  <span class="tp">String</span> msg = <span class="st">""</span>;
+  <span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">0</span>; i &lt; length; i++) msg += (<span class="tp">char</span>)payload[i];
+  <span class="fn">Serial.print</span>(<span class="st">"[MQTT] Topic: "</span>); <span class="fn">Serial.print</span>(topic);
+  <span class="fn">Serial.print</span>(<span class="st">" | Message: "</span>); <span class="fn">Serial.println</span>(msg);
+
+  <span class="kw">if</span> (msg == <span class="st">"on"</span>)  <span class="fn">digitalWrite</span>(<span class="nm">LED_BUILTIN</span>, LOW);
+  <span class="kw">if</span> (msg == <span class="st">"off"</span>) <span class="fn">digitalWrite</span>(<span class="nm">LED_BUILTIN</span>, HIGH);
+}
+
+<span class="kw">void</span> <span class="fn">connectMQTT</span>() {
+  <span class="kw">while</span> (!<span class="fn">mqtt.connected</span>()) {
+    <span class="fn">Serial.print</span>(<span class="st">"Connecting MQTT..."</span>);
+    <span class="kw">if</span> (<span class="fn">mqtt.connect</span>(<span class="st">"AlCodersESP8266"</span>)) {
+      <span class="fn">Serial.println</span>(<span class="st">"connected!"</span>);
+      <span class="fn">mqtt.subscribe</span>(<span class="st">"alcoders/led/control"</span>);
+    } <span class="kw">else</span> {
+      <span class="fn">Serial.print</span>(<span class="st">"failed, rc="</span>); <span class="fn">Serial.println</span>(<span class="fn">mqtt.state</span>());
+      <span class="fn">delay</span>(<span class="nm">2000</span>);
+    }
+  }
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">Serial.begin</span>(<span class="nm">115200</span>);
+  <span class="fn">pinMode</span>(LED_BUILTIN, OUTPUT);
+  <span class="fn">WiFi.begin</span>(ssid, password);
+  <span class="kw">while</span> (<span class="fn">WiFi.status</span>() != WL_CONNECTED) { <span class="fn">delay</span>(<span class="nm">500</span>); }
+  <span class="fn">mqtt.setServer</span>(mqttServer, <span class="nm">1883</span>);
+  <span class="fn">mqtt.setCallback</span>(onMessage);
+  <span class="fn">connectMQTT</span>();
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">if</span> (!<span class="fn">mqtt.connected</span>()) <span class="fn">connectMQTT</span>();
+  <span class="fn">mqtt.loop</span>(); <span class="cm">// Process incoming messages</span>
+
+  <span class="cm">// Publish sensor reading every 10 seconds</span>
+  <span class="kw">static</span> <span class="tp">unsigned long</span> last = <span class="nm">0</span>;
+  <span class="kw">if</span> (<span class="fn">millis</span>() - last &gt; <span class="nm">10000</span>) {
+    last = <span class="fn">millis</span>();
+    <span class="tp">String</span> reading = <span class="tp">String</span>(<span class="fn">analogRead</span>(A0));
+    <span class="fn">mqtt.publish</span>(<span class="st">"alcoders/sensor/value"</span>, reading.<span class="fn">c_str</span>());
+  }
+}</code></pre>
+    </div>
+
+    <div class="quiz-box">
+      <h4>Quick Check</h4>
+      <p>In MQTT, what is a "broker"?</p>
+      <button class="quiz-option" data-correct="false">The device that reads sensors</button>
+      <button class="quiz-option" data-correct="true">The server that routes messages between clients</button>
+      <button class="quiz-option" data-correct="false">The WiFi access point</button>
+      <button class="quiz-option" data-correct="false">The topic where data is stored</button>
+      <div class="quiz-result"></div>
+    </div>
+  </div>
+
+  <div class="lesson-footer">
+    <a href="module7.html" class="btn btn-outline">← Module 7</a>
+    <button class="btn btn-complete" data-lesson="m8_complete">○ Mark Module Complete</button>
+    <a href="module9.html" class="btn btn-primary">Module 9: Bluetooth →</a>
+  </div>
+</main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

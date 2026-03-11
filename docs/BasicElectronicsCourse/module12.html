@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 12: Final Projects — AlCoders Electronics</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo"><div class="logo-icon">⚡</div>Al<span>Coders</span></a>
+  <div class="nav-links">
+    <a href="module11.html">← Module 11</a>
+    <a href="index.html">All Modules</a>
+    <a href="index.html">Back to All Modules →</a>
+  </div>
+</nav>
+<div class="course-layout">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h3>// Module 12 Progress</h3>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-label">0% complete</div>
+  </div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">1</span>What is Electricity?</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module1.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">2</span>Basic Components</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module2.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">3</span>Ohm's Law & Power</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module3.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">4</span>Series & Parallel</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module4.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">5</span>Semiconductors & Diodes</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module5.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">6</span>Transistors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module6.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">7</span>Breadboarding & Tools</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module7.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">8</span>Capacitors & Inductors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module8.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">9</span>Sensors & Signals</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module9.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">10</span>Intro to Arduino</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module10.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">11</span>Arduino & Sensors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module11.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn active"><span class="module-num">12</span>Final Projects</button><ul class="lesson-list">
+<li class="lesson-item"><a href="#m12_1" data-lid="m12_1">12.1 Project 1: Smart Night Light</a></li>
+<li class="lesson-item"><a href="#m12_2" data-lid="m12_2">12.2 Project 2: Motion Alarm</a></li>
+<li class="lesson-item"><a href="#m12_3" data-lid="m12_3">12.3 Project 3: Weather Station</a></li>
+<li class="lesson-item"><a href="#m12_4" data-lid="m12_4">12.4 Project 4: Line-Following Robot</a></li>
+<li class="lesson-item"><a href="#m12_5" data-lid="m12_5">12.5 Project 5: IoT Sensor Station</a></li>
+</ul></div>
+
+</aside>
+<main class="content-area">
+  <div class="lesson-breadcrumb">Electronics Course → <span>Module 12</span> → Final Projects</div>
+  <section id="m12_1">
+<h1 class="lesson-title">12.1 Project 1: Smart Night Light</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>Build an auto-dimming LED that brightens in darkness and turns off in daylight.</p>
+<div class="info-box"><div class="box-title">📌 Components</div>Arduino, LDR, 10kΩ, 220Ω, LED (Pin 9 PWM), breadboard.</div>
+<div class="tip-box"><div class="box-title">💡 Core Code</div>int ldr = analogRead(A0); int brightness = map(ldr, 200, 900, 255, 0); brightness = constrain(brightness, 0, 255); analogWrite(9, brightness);</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m12_2">
+<h1 class="lesson-title">12.2 Project 2: Motion Alarm</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>PIR-triggered alarm with armed/disarmed states, buzzer, and LED indicators.</p>
+<div class="info-box"><div class="box-title">📌 Components</div>Arduino, PIR HC-SR501, active buzzer, red LED, green LED, push button, resistors.</div>
+<div class="tip-box"><div class="box-title">💡 PIR Setup</div>Adjust HC-SR501's sensitivity and delay pots. Use repeat-trigger jumper mode for continuous detection while motion persists.</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m12_3">
+<h1 class="lesson-title">12.3 Project 3: Weather Station</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>Display real-time temperature, humidity, and heat index on a 16×2 I2C LCD.</p>
+<div class="info-box"><div class="box-title">📌 Libraries</div>Install via Library Manager: DHT sensor library (Adafruit) and LiquidCrystal_I2C. float t = dht.readTemperature(); float h = dht.readHumidity();</div>
+<div class="tip-box"><div class="box-title">💡 Enhancement</div>Add BMP280 for pressure and altitude. Send data to Serial Plotter to visualise temperature changes over time!</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m12_4">
+<h1 class="lesson-title">12.4 Project 4: Line-Following Robot</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>Two-wheel robot that follows a black line using IR sensors and an L298N motor driver.</p>
+<div class="info-box"><div class="box-title">📌 Logic</div>Left sensor on line → turn right. Right sensor on line → turn left. Both on → go straight. Both off → stop or search.</div>
+<div class="tip-box"><div class="box-title">💡 Tuning Tips</div>IR sensor height: 5–10mm. Line width: 3–4cm. Tune motor speeds with PWM. Debug sensor values first with Serial.println before adding motor code!</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m12_5">
+<h1 class="lesson-title">12.5 Project 5: IoT Sensor Station</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>Use NodeMCU ESP8266 to send DHT22 readings to ThingSpeak cloud for web dashboard visualisation.</p>
+<div class="info-box"><div class="box-title">📌 Setup</div>Install ESP8266 boards in IDE. Connect to WiFi with WiFi.begin(). Get ThingSpeak API key. POST data to ThingSpeak field every 15 seconds.</div>
+<div class="tip-box"><div class="box-title">💡 🎓 Congratulations!</div>You've mastered Basic Electronics — from atoms to IoT! Next steps: PCB design with KiCad, Raspberry Pi, 3D printed enclosures, and advanced sensor projects!</div>
+</div>
+
+<div class="lesson-nav">
+  <a href="module11.html" class="btn btn-outline">← Module 11</a>
+  <button class="mark-done-btn">Mark as Complete</button>
+  <a href="index.html" class="btn btn-primary">Back to All Modules →</a>
+</div>
+</section>
+
+</main>
+</div>
+<script src="course.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  updateProgressBar('m12', 5);
+  initMarkDone('m12_5');
+  refreshSidebarDone();
+});
+</script>
+</body>
+</html>

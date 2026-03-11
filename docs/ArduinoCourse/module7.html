@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 7: Communication Protocols – AlCoders Arduino</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="index.html">⚡ <span>Al</span>Coders</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="module6.html">← Module 6</a>
+    <a href="module7.html" class="active">Module 7</a>
+    <a href="module8.html">Module 8 →</a>
+  </div>
+</nav>
+<div class="breadcrumb">
+  <a href="index.html">Arduino Course</a> › Module 7 › Communication Protocols
+</div>
+<div class="page-wrapper">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">Course Progress</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 60 lessons completed</div>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔧</span> Module 1 – Getting Started</div>
+    <a href="module1.html" class="lesson-link" data-lesson="m1l1"><span class="lesson-dot"></span>What is Arduino?</a>
+    <a href="module1.html#lesson2" class="lesson-link" data-lesson="m1l2"><span class="lesson-dot"></span>Installing the IDE</a>
+    <a href="module1.html#lesson3" class="lesson-link" data-lesson="m1l3"><span class="lesson-dot"></span>Exploring the Board</a>
+    <a href="module1.html#lesson4" class="lesson-link" data-lesson="m1l4"><span class="lesson-dot"></span>Your First Sketch: Blink</a>
+    <a href="module1.html#lesson5" class="lesson-link" data-lesson="m1l5"><span class="lesson-dot"></span>Understanding the Code</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⚡</span> Module 2 – Electronics</div>
+    <a href="module2.html" class="lesson-link" data-lesson="m2l1"><span class="lesson-dot"></span>Voltage, Current & Resistance</a>
+    <a href="module2.html#lesson2" class="lesson-link" data-lesson="m2l2"><span class="lesson-dot"></span>Ohm's Law</a>
+    <a href="module2.html#lesson3" class="lesson-link" data-lesson="m2l3"><span class="lesson-dot"></span>Breadboards & Schematics</a>
+    <a href="module2.html#lesson4" class="lesson-link" data-lesson="m2l4"><span class="lesson-dot"></span>Resistors & Capacitors</a>
+    <a href="module2.html#lesson5" class="lesson-link" data-lesson="m2l5"><span class="lesson-dot"></span>Power Supply & Safety</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💡</span> Module 3 – Digital I/O</div>
+    <a href="module3.html" class="lesson-link" data-lesson="m3l1"><span class="lesson-dot"></span>Digital Pins Explained</a>
+    <a href="module3.html#lesson2" class="lesson-link" data-lesson="m3l2"><span class="lesson-dot"></span>digitalWrite & digitalRead</a>
+    <a href="module3.html#lesson3" class="lesson-link" data-lesson="m3l3"><span class="lesson-dot"></span>Push Buttons & Input</a>
+    <a href="module3.html#lesson4" class="lesson-link" data-lesson="m3l4"><span class="lesson-dot"></span>Debouncing Buttons</a>
+    <a href="module3.html#lesson5" class="lesson-link" data-lesson="m3l5"><span class="lesson-dot"></span>Traffic Light Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌡️</span> Module 4 – Analog I/O</div>
+    <a href="module4.html" class="lesson-link" data-lesson="m4l1"><span class="lesson-dot"></span>Analog vs Digital</a>
+    <a href="module4.html#lesson2" class="lesson-link" data-lesson="m4l2"><span class="lesson-dot"></span>analogRead & Potentiometer</a>
+    <a href="module4.html#lesson3" class="lesson-link" data-lesson="m4l3"><span class="lesson-dot"></span>PWM & analogWrite</a>
+    <a href="module4.html#lesson4" class="lesson-link" data-lesson="m4l4"><span class="lesson-dot"></span>Temperature Sensor</a>
+    <a href="module4.html#lesson5" class="lesson-link" data-lesson="m4l5"><span class="lesson-dot"></span>LDR Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📺</span> Module 5 – Displays</div>
+    <a href="module5.html" class="lesson-link" data-lesson="m5l1"><span class="lesson-dot"></span>LCD 16x2 with I2C</a>
+    <a href="module5.html#lesson2" class="lesson-link" data-lesson="m5l2"><span class="lesson-dot"></span>OLED Display</a>
+    <a href="module5.html#lesson3" class="lesson-link" data-lesson="m5l3"><span class="lesson-dot"></span>7-Segment Display</a>
+    <a href="module5.html#lesson4" class="lesson-link" data-lesson="m5l4"><span class="lesson-dot"></span>Buzzer & Tones</a>
+    <a href="module5.html#lesson5" class="lesson-link" data-lesson="m5l5"><span class="lesson-dot"></span>RGB LED</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔊</span> Module 6 – Motors</div>
+    <a href="module6.html" class="lesson-link" data-lesson="m6l1"><span class="lesson-dot"></span>Servo Motor Basics</a>
+    <a href="module6.html#lesson2" class="lesson-link" data-lesson="m6l2"><span class="lesson-dot"></span>DC Motors & L298N</a>
+    <a href="module6.html#lesson3" class="lesson-link" data-lesson="m6l3"><span class="lesson-dot"></span>Stepper Motors</a>
+    <a href="module6.html#lesson4" class="lesson-link" data-lesson="m6l4"><span class="lesson-dot"></span>Speed Control</a>
+    <a href="module6.html#lesson5" class="lesson-link" data-lesson="m6l5"><span class="lesson-dot"></span>Mini Robot Car</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📡</span> Module 7 – Protocols</div>
+    <a href="#lesson1" class="lesson-link active" data-lesson="m7l1"><span class="lesson-dot"></span>Serial Communication</a>
+    <a href="#lesson2" class="lesson-link" data-lesson="m7l2"><span class="lesson-dot"></span>I2C Protocol</a>
+    <a href="#lesson3" class="lesson-link" data-lesson="m7l3"><span class="lesson-dot"></span>SPI Protocol</a>
+    <a href="#lesson4" class="lesson-link" data-lesson="m7l4"><span class="lesson-dot"></span>Connecting Multiple Devices</a>
+    <a href="#lesson5" class="lesson-link" data-lesson="m7l5"><span class="lesson-dot"></span>Real-time Serial Plotter</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌐</span> Module 8 – WiFi & IoT</div>
+    <a href="module8.html" class="lesson-link" data-lesson="m8l1"><span class="lesson-dot"></span>Intro to ESP8266 & ESP32</a>
+    <a href="module8.html#lesson2" class="lesson-link" data-lesson="m8l2"><span class="lesson-dot"></span>Connecting to WiFi</a>
+    <a href="module8.html#lesson3" class="lesson-link" data-lesson="m8l3"><span class="lesson-dot"></span>Building a Web Server</a>
+    <a href="module8.html#lesson4" class="lesson-link" data-lesson="m8l4"><span class="lesson-dot"></span>Sending Data to Cloud</a>
+    <a href="module8.html#lesson5" class="lesson-link" data-lesson="m8l5"><span class="lesson-dot"></span>MQTT Basics</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📶</span> Module 9 – Bluetooth</div>
+    <a href="module9.html" class="lesson-link" data-lesson="m9l1"><span class="lesson-dot"></span>HC-05 Module</a>
+    <a href="module9.html#lesson2" class="lesson-link" data-lesson="m9l2"><span class="lesson-dot"></span>AT Commands</a>
+    <a href="module9.html#lesson3" class="lesson-link" data-lesson="m9l3"><span class="lesson-dot"></span>Phone-Controlled LED</a>
+    <a href="module9.html#lesson4" class="lesson-link" data-lesson="m9l4"><span class="lesson-dot"></span>BLE with ESP32</a>
+    <a href="module9.html#lesson5" class="lesson-link" data-lesson="m9l5"><span class="lesson-dot"></span>Bluetooth Robot</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⏱️</span> Module 10 – Interrupts</div>
+    <a href="module10.html" class="lesson-link" data-lesson="m10l1"><span class="lesson-dot"></span>What are Interrupts?</a>
+    <a href="module10.html#lesson2" class="lesson-link" data-lesson="m10l2"><span class="lesson-dot"></span>attachInterrupt()</a>
+    <a href="module10.html#lesson3" class="lesson-link" data-lesson="m10l3"><span class="lesson-dot"></span>Timer Interrupts</a>
+    <a href="module10.html#lesson4" class="lesson-link" data-lesson="m10l4"><span class="lesson-dot"></span>Watchdog Timer</a>
+    <a href="module10.html#lesson5" class="lesson-link" data-lesson="m10l5"><span class="lesson-dot"></span>Sleep Modes</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💾</span> Module 11 – Memory</div>
+    <a href="module11.html" class="lesson-link" data-lesson="m11l1"><span class="lesson-dot"></span>SRAM, Flash & EEPROM</a>
+    <a href="module11.html#lesson2" class="lesson-link" data-lesson="m11l2"><span class="lesson-dot"></span>Reading & Writing EEPROM</a>
+    <a href="module11.html#lesson3" class="lesson-link" data-lesson="m11l3"><span class="lesson-dot"></span>SD Card Module</a>
+    <a href="module11.html#lesson4" class="lesson-link" data-lesson="m11l4"><span class="lesson-dot"></span>Writing Custom Libraries</a>
+    <a href="module11.html#lesson5" class="lesson-link" data-lesson="m11l5"><span class="lesson-dot"></span>Data Logger</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🏗️</span> Module 12 – Capstone</div>
+    <a href="module12.html" class="lesson-link" data-lesson="m12l1"><span class="lesson-dot"></span>Smart Weather Station</a>
+    <a href="module12.html#lesson2" class="lesson-link" data-lesson="m12l2"><span class="lesson-dot"></span>Obstacle-Avoiding Robot</a>
+    <a href="module12.html#lesson3" class="lesson-link" data-lesson="m12l3"><span class="lesson-dot"></span>Home Automation</a>
+    <a href="module12.html#lesson4" class="lesson-link" data-lesson="m12l4"><span class="lesson-dot"></span>Custom PCB Design</a>
+    <a href="module12.html#lesson5" class="lesson-link" data-lesson="m12l5"><span class="lesson-dot"></span>Next Steps</a>
+  </div>
+</aside>
+
+<main class="content">
+  <div class="module-hero">
+    <div class="module-badge">📡 Module 7 of 12</div>
+    <h1>Communication Protocols</h1>
+    <p>Learn how Arduino talks to other devices. Master Serial for debugging and PC communication, I2C for connecting multiple sensors on 2 wires, and SPI for high-speed data transfers.</p>
+    <div class="module-meta">
+      <div class="meta-item">⏱️ ~2 hours</div>
+      <div class="meta-item">📗 5 lessons</div>
+      <div class="meta-item">🟡 Intermediate</div>
+    </div>
+  </div>
+
+  <!-- LESSON 1 -->
+  <div class="lesson-section" id="lesson1">
+    <h2>💬 Lesson 1: Serial Communication</h2>
+
+    <p>You've already used <code>Serial.println()</code> to print debug messages. But Serial is far more powerful — it lets Arduino communicate <strong>bidirectionally</strong> with your computer, other Arduinos, Raspberry Pis, and any device with a UART interface.</p>
+
+    <h3>How Serial Works</h3>
+    <p>Serial (UART) sends data one bit at a time. Both sides must agree on a <strong>baud rate</strong> — the speed in bits per second. Common rates: 9600, 115200. Arduino Uno uses pins TX (pin 1) and RX (pin 0) for hardware serial, though these are shared with USB.</p>
+
+    <div class="info-box warning">
+      <span class="icon">⚠️</span>
+      <div class="body"><strong>Important:</strong> Avoid using pins 0 (RX) and 1 (TX) for your own components while uploading sketches — it conflicts with the USB serial connection. Use SoftwareSerial for additional serial ports.</div>
+    </div>
+
+    <h3>Sending Data from Arduino to PC</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">Serial.begin</span>(<span class="nm">9600</span>);   <span class="cm">// Match this baud rate in Serial Monitor</span>
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">int</span> lightLevel = <span class="fn">analogRead</span>(A0);
+  <span class="tp">float</span> voltage = lightLevel * (<span class="nm">5.0</span> / <span class="nm">1023.0</span>);
+
+  <span class="fn">Serial.print</span>(<span class="st">"Light: "</span>);
+  <span class="fn">Serial.print</span>(lightLevel);
+  <span class="fn">Serial.print</span>(<span class="st">" | Voltage: "</span>);
+  <span class="fn">Serial.print</span>(voltage, <span class="nm">2</span>);  <span class="cm">// 2 decimal places</span>
+  <span class="fn">Serial.println</span>(<span class="st">"V"</span>);      <span class="cm">// println adds newline</span>
+
+  <span class="fn">delay</span>(<span class="nm">500</span>);
+}</code></pre>
+    </div>
+
+    <h3>Receiving Commands from PC</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="pp">#define</span> LED_PIN <span class="nm">13</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">Serial.begin</span>(<span class="nm">9600</span>);
+  <span class="fn">pinMode</span>(LED_PIN, OUTPUT);
+  <span class="fn">Serial.println</span>(<span class="st">"Ready. Type 'on' or 'off'"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">if</span> (<span class="fn">Serial.available</span>() &gt; <span class="nm">0</span>) {
+    <span class="tp">String</span> input = <span class="fn">Serial.readStringUntil</span>(<span class="st">'\n'</span>);
+    <span class="fn">input.trim</span>();   <span class="cm">// Remove whitespace/newlines</span>
+    <span class="fn">input.toLowerCase</span>(); <span class="cm">// Case-insensitive</span>
+
+    <span class="kw">if</span> (input == <span class="st">"on"</span>) {
+      <span class="fn">digitalWrite</span>(LED_PIN, HIGH);
+      <span class="fn">Serial.println</span>(<span class="st">"LED turned ON"</span>);
+    } <span class="kw">else</span> <span class="kw">if</span> (input == <span class="st">"off"</span>) {
+      <span class="fn">digitalWrite</span>(LED_PIN, LOW);
+      <span class="fn">Serial.println</span>(<span class="st">"LED turned OFF"</span>);
+    } <span class="kw">else</span> {
+      <span class="fn">Serial.print</span>(<span class="st">"Unknown command: "</span>);
+      <span class="fn">Serial.println</span>(input);
+    }
+  }
+}</code></pre>
+    </div>
+
+    <h3>Two Arduinos Talking via SoftwareSerial</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="pp">#include</span> <span class="st">&lt;SoftwareSerial.h&gt;</span>
+
+<span class="cm">// Create extra serial port on pins 10 (RX) and 11 (TX)</span>
+<span class="tp">SoftwareSerial</span> mySerial(<span class="nm">10</span>, <span class="nm">11</span>);
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">Serial.begin</span>(<span class="nm">9600</span>);     <span class="cm">// For debugging via USB</span>
+  <span class="fn">mySerial.begin</span>(<span class="nm">9600</span>);  <span class="cm">// For talking to second Arduino</span>
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// Forward from USB to second Arduino</span>
+  <span class="kw">if</span> (<span class="fn">Serial.available</span>())    <span class="fn">mySerial.write</span>(<span class="fn">Serial.read</span>());
+  <span class="cm">// Forward from second Arduino to USB</span>
+  <span class="kw">if</span> (<span class="fn">mySerial.available</span>()) <span class="fn">Serial.write</span>(<span class="fn">mySerial.read</span>());
+}</code></pre>
+    </div>
+  </div>
+
+  <!-- LESSON 2 -->
+  <div class="lesson-section" id="lesson2">
+    <h2>🔗 Lesson 2: I2C Protocol</h2>
+
+    <p><strong>I2C (Inter-Integrated Circuit)</strong> lets you connect up to 127 devices using only 2 wires: <strong>SDA</strong> (data) and <strong>SCL</strong> (clock). Each device has a unique address (like 0x27 for LCD, 0x3C for OLED). This is why all our I2C modules connected to A4 and A5.</p>
+
+    <h3>I2C Key Facts</h3>
+    <table class="component-table">
+      <thead><tr><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Wires needed</strong></td><td>2 (SDA + SCL) + power</td></tr>
+        <tr><td><strong>Arduino Uno pins</strong></td><td>SDA = A4, SCL = A5</td></tr>
+        <tr><td><strong>Max devices</strong></td><td>127 (each needs unique address)</td></tr>
+        <tr><td><strong>Speed</strong></td><td>100kHz standard, 400kHz fast</td></tr>
+        <tr><td><strong>Pull-up resistors</strong></td><td>4.7kΩ on SDA and SCL (most modules include these)</td></tr>
+        <tr><td><strong>Best for</strong></td><td>Sensors, displays, EEPROMs — low-speed, short cables</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Common I2C Sensors &amp; Their Addresses</h3>
+    <table class="component-table">
+      <thead><tr><th>Device</th><th>Default Address</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>LCD 16x2 (PCF8574)</td><td>0x27 or 0x3F</td><td>Character display</td></tr>
+        <tr><td>OLED SSD1306</td><td>0x3C or 0x3D</td><td>Pixel display</td></tr>
+        <tr><td>MPU6050</td><td>0x68 or 0x69</td><td>Accelerometer + Gyroscope</td></tr>
+        <tr><td>BMP180/BMP280</td><td>0x76 or 0x77</td><td>Pressure + Temperature</td></tr>
+        <tr><td>DS3231 RTC</td><td>0x57, 0x68</td><td>Real-time Clock</td></tr>
+        <tr><td>ADS1115</td><td>0x48–0x4B</td><td>16-bit ADC</td></tr>
+      </tbody>
+    </table>
+
+    <h3>MPU6050 Accelerometer Example</h3>
+    <p>The MPU6050 is a 6-axis accelerometer/gyroscope combo module. It reads motion on all 3 axes:</p>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="cm">// Install: "MPU6050" by Electronic Cats (Library Manager)</span>
+<span class="pp">#include</span> <span class="st">&lt;Wire.h&gt;</span>
+<span class="pp">#include</span> <span class="st">&lt;MPU6050.h&gt;</span>
+
+<span class="tp">MPU6050</span> mpu;
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">Serial.begin</span>(<span class="nm">9600</span>);
+  <span class="fn">Wire.begin</span>();
+  <span class="fn">mpu.initialize</span>();
+  <span class="fn">Serial.println</span>(<span class="fn">mpu.testConnection</span>() ? <span class="st">"MPU6050 OK"</span> : <span class="st">"Connection failed"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">int16_t</span> ax, ay, az, gx, gy, gz;
+  <span class="fn">mpu.getMotion6</span>(&amp;ax, &amp;ay, &amp;az, &amp;gx, &amp;gy, &amp;gz);
+
+  <span class="fn">Serial.print</span>(<span class="st">"AccX:"</span>); <span class="fn">Serial.print</span>(ax / <span class="nm">16384.0</span>, <span class="nm">2</span>);
+  <span class="fn">Serial.print</span>(<span class="st">" AccY:"</span>); <span class="fn">Serial.print</span>(ay / <span class="nm">16384.0</span>, <span class="nm">2</span>);
+  <span class="fn">Serial.print</span>(<span class="st">" AccZ:"</span>); <span class="fn">Serial.println</span>(az / <span class="nm">16384.0</span>, <span class="nm">2</span>);
+  <span class="fn">delay</span>(<span class="nm">200</span>);
+}</code></pre>
+    </div>
+  </div>
+
+  <!-- LESSON 3 -->
+  <div class="lesson-section" id="lesson3">
+    <h2>⚡ Lesson 3: SPI Protocol</h2>
+
+    <p><strong>SPI (Serial Peripheral Interface)</strong> is faster than I2C and ideal for high-speed devices like SD cards, displays (TFT), and wireless modules. It uses 4 wires and a master-slave architecture.</p>
+
+    <h3>SPI Pins on Arduino Uno</h3>
+    <table class="wiring-table">
+      <thead><tr><th>SPI Signal</th><th>Arduino Uno Pin</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td class="wire-from">MOSI</td><td class="wire-to">Pin 11</td><td>Master Out, Slave In (data to device)</td></tr>
+        <tr><td class="wire-from">MISO</td><td class="wire-to">Pin 12</td><td>Master In, Slave Out (data from device)</td></tr>
+        <tr><td class="wire-from">SCK</td><td class="wire-to">Pin 13</td><td>Clock signal</td></tr>
+        <tr><td class="wire-from">CS/SS</td><td class="wire-to">Pin 10 (any digital)</td><td>Chip Select — activates specific device</td></tr>
+      </tbody>
+    </table>
+
+    <h3>I2C vs SPI Comparison</h3>
+    <table class="component-table">
+      <thead><tr><th>Feature</th><th>I2C</th><th>SPI</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Wires</strong></td><td>2 (SDA, SCL)</td><td>4 (MOSI, MISO, SCK, CS)</td></tr>
+        <tr><td><strong>Speed</strong></td><td>100–400 kHz</td><td>Up to 80 MHz</td></tr>
+        <tr><td><strong>Devices</strong></td><td>127 (by address)</td><td>Many (one CS pin each)</td></tr>
+        <tr><td><strong>Best for</strong></td><td>Sensors, slow peripherals</td><td>SD cards, displays, radio modules</td></tr>
+      </tbody>
+    </table>
+
+    <h3>SPI Example: MAX7219 LED Matrix</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="cm">// Install "LedControl" library by Eberhard Fahle</span>
+<span class="pp">#include</span> <span class="st">&lt;LedControl.h&gt;</span>
+
+<span class="cm">// DIN=11, CLK=13, CS=10, number of matrices=1</span>
+<span class="tp">LedControl</span> lc(<span class="nm">11</span>, <span class="nm">13</span>, <span class="nm">10</span>, <span class="nm">1</span>);
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">lc.shutdown</span>(<span class="nm">0</span>, <span class="kw">false</span>);  <span class="cm">// Wake up MAX7219</span>
+  <span class="fn">lc.setIntensity</span>(<span class="nm">0</span>, <span class="nm">8</span>); <span class="cm">// Brightness 0–15</span>
+  <span class="fn">lc.clearDisplay</span>(<span class="nm">0</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// Set individual LEDs: row, col, state</span>
+  <span class="kw">for</span> (<span class="tp">int</span> r = <span class="nm">0</span>; r &lt; <span class="nm">8</span>; r++) {
+    <span class="kw">for</span> (<span class="tp">int</span> c = <span class="nm">0</span>; c &lt; <span class="nm">8</span>; c++) {
+      <span class="fn">lc.setLed</span>(<span class="nm">0</span>, r, c, <span class="kw">true</span>);
+      <span class="fn">delay</span>(<span class="nm">30</span>);
+    }
+  }
+  <span class="fn">lc.clearDisplay</span>(<span class="nm">0</span>);
+  <span class="fn">delay</span>(<span class="nm">500</span>);
+}</code></pre>
+    </div>
+  </div>
+
+  <!-- LESSON 4 -->
+  <div class="lesson-section" id="lesson4">
+    <h2>🔌 Lesson 4: Connecting Multiple Devices</h2>
+
+    <p>Real projects use multiple devices at once. Here's how to combine I2C devices on the same bus without conflict, and manage addressing properly.</p>
+
+    <h3>Multiple I2C Devices — No Conflict</h3>
+    <p>All I2C devices share the same SDA and SCL wires. They co-exist because each has a unique address. Wire all VCCs to 5V, all GNDs to GND, all SDAs to A4, all SCLs to A5:</p>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="cm">// OLED + LCD + BMP280 all on I2C simultaneously</span>
+<span class="pp">#include</span> <span class="st">&lt;Wire.h&gt;</span>
+<span class="pp">#include</span> <span class="st">&lt;Adafruit_SSD1306.h&gt;</span>
+<span class="pp">#include</span> <span class="st">&lt;LiquidCrystal_I2C.h&gt;</span>
+<span class="pp">#include</span> <span class="st">&lt;Adafruit_BMP280.h&gt;</span>
+
+<span class="tp">Adafruit_SSD1306</span> oled(<span class="nm">128</span>, <span class="nm">64</span>, &amp;Wire, <span class="nm">-1</span>);
+<span class="tp">LiquidCrystal_I2C</span> lcd(<span class="nm">0x27</span>, <span class="nm">16</span>, <span class="nm">2</span>);
+<span class="tp">Adafruit_BMP280</span> bmp;
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">Wire.begin</span>();
+  <span class="fn">oled.begin</span>(SSD1306_SWITCHCAPVCC, <span class="nm">0x3C</span>);
+  <span class="fn">lcd.init</span>(); <span class="fn">lcd.backlight</span>();
+  <span class="fn">bmp.begin</span>(<span class="nm">0x76</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">float</span> temp = <span class="fn">bmp.readTemperature</span>();
+  <span class="tp">float</span> pres = <span class="fn">bmp.readPressure</span>() / <span class="nm">100.0</span>; <span class="cm">// hPa</span>
+
+  <span class="cm">// Show on LCD</span>
+  <span class="fn">lcd.setCursor</span>(<span class="nm">0</span>, <span class="nm">0</span>);
+  <span class="fn">lcd.print</span>(<span class="st">"Temp: "</span>); <span class="fn">lcd.print</span>(temp, <span class="nm">1</span>); <span class="fn">lcd.print</span>(<span class="st">"C"</span>);
+
+  <span class="cm">// Show on OLED</span>
+  <span class="fn">oled.clearDisplay</span>();
+  <span class="fn">oled.setCursor</span>(<span class="nm">0</span>, <span class="nm">0</span>);
+  <span class="fn">oled.print</span>(<span class="st">"Pressure: "</span>); <span class="fn">oled.print</span>(pres);
+  <span class="fn">oled.display</span>();
+  <span class="fn">delay</span>(<span class="nm">1000</span>);
+}</code></pre>
+    </div>
+
+    <div class="info-box tip">
+      <span class="icon">✅</span>
+      <div class="body"><strong>Address Conflict?</strong> If two devices share the same address (some modules let you change it via solder pads), you can use a TCA9548A I2C multiplexer to isolate them on separate channels — up to 8 same-address devices on one bus!</div>
+    </div>
+  </div>
+
+  <!-- LESSON 5 -->
+  <div class="lesson-section" id="lesson5">
+    <h2>📈 Lesson 5: Real-Time Serial Plotter</h2>
+
+    <p>Arduino IDE has a built-in <strong>Serial Plotter</strong> that graphs values in real time. Just go to <strong>Tools → Serial Plotter</strong>. Print comma-separated values and it graphs multiple lines simultaneously.</p>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="cm">// Serial Plotter — graph 3 sensor values live</span>
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">Serial.begin</span>(<span class="nm">9600</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">int</span> sensor1 = <span class="fn">analogRead</span>(A0);
+  <span class="tp">int</span> sensor2 = <span class="fn">analogRead</span>(A1);
+  <span class="tp">int</span> sensor3 = <span class="fn">analogRead</span>(A2);
+
+  <span class="cm">// Print comma-separated — each becomes one plot line</span>
+  <span class="fn">Serial.print</span>(sensor1);
+  <span class="fn">Serial.print</span>(<span class="st">","</span>);
+  <span class="fn">Serial.print</span>(sensor2);
+  <span class="fn">Serial.print</span>(<span class="st">","</span>);
+  <span class="fn">Serial.println</span>(sensor3); <span class="cm">// println ends the row</span>
+  <span class="fn">delay</span>(<span class="nm">50</span>); <span class="cm">// ~20 samples per second</span>
+}</code></pre>
+    </div>
+
+    <div class="info-box note">
+      <span class="icon">💡</span>
+      <div class="body"><strong>Tip:</strong> Add labels like <code>Serial.print("Light:");</code> before the value and the plotter will label the graph line for you (Arduino IDE 2.x only).</div>
+    </div>
+
+    <div class="quiz-box">
+      <h4>Quick Check</h4>
+      <p>How many devices can share an I2C bus?</p>
+      <button class="quiz-option" data-correct="false">Just 1 device</button>
+      <button class="quiz-option" data-correct="false">Up to 8 devices</button>
+      <button class="quiz-option" data-correct="true">Up to 127 devices (each with unique address)</button>
+      <button class="quiz-option" data-correct="false">As many as you want</button>
+      <div class="quiz-result"></div>
+    </div>
+  </div>
+
+  <div class="lesson-footer">
+    <a href="module6.html" class="btn btn-outline">← Module 6</a>
+    <button class="btn btn-complete" data-lesson="m7_complete">○ Mark Module Complete</button>
+    <a href="module8.html" class="btn btn-primary">Module 8: WiFi & IoT →</a>
+  </div>
+</main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

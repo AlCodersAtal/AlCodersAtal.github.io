@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 10: Introduction to Arduino — AlCoders Electronics</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo"><div class="logo-icon">⚡</div>Al<span>Coders</span></a>
+  <div class="nav-links">
+    <a href="module9.html">← Module 9</a>
+    <a href="index.html">All Modules</a>
+    <a href="module11.html">Module 11: Arduino & Sensors →</a>
+  </div>
+</nav>
+<div class="course-layout">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h3>// Module 10 Progress</h3>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-label">0% complete</div>
+  </div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">1</span>What is Electricity?</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module1.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">2</span>Basic Components</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module2.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">3</span>Ohm's Law & Power</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module3.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">4</span>Series & Parallel</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module4.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">5</span>Semiconductors & Diodes</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module5.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">6</span>Transistors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module6.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">7</span>Breadboarding & Tools</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module7.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">8</span>Capacitors & Inductors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module8.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">9</span>Sensors & Signals</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module9.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn active"><span class="module-num">10</span>Intro to Arduino</button><ul class="lesson-list">
+<li class="lesson-item"><a href="#m10_1" data-lid="m10_1">10.1 What is Arduino?</a></li>
+<li class="lesson-item"><a href="#m10_2" data-lid="m10_2">10.2 IDE Setup & Sketch Structure</a></li>
+<li class="lesson-item"><a href="#m10_3" data-lid="m10_3">10.3 Digital I/O & Blink</a></li>
+<li class="lesson-item"><a href="#m10_4" data-lid="m10_4">10.4 Analog I/O & PWM</a></li>
+<li class="lesson-item"><a href="#m10_5" data-lid="m10_5">10.5 Serial Monitor</a></li>
+</ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">11</span>Arduino & Sensors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module11.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">12</span>Final Projects</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module12.html">Go to module →</a></li></ul></div>
+
+</aside>
+<main class="content-area">
+  <div class="lesson-breadcrumb">Electronics Course → <span>Module 10</span> → Introduction to Arduino</div>
+  <section id="m10_1">
+<h1 class="lesson-title">10.1 What is Arduino?</h1>
+<div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p><strong>Arduino</strong> is an open-source microcontroller platform that makes programming hardware accessible to beginners. Created in 2005, it has millions of users worldwide.</p>
+<div class="component-grid"><div class="component-card"><div class="component-icon">🔩</div><h4>Digital Pins 0–13</h4><p>Read/write HIGH/LOW. Pins 3,5,6,9,10,11 support PWM.</p></div><div class="component-card"><div class="component-icon">🔩</div><h4>Analog Pins A0–A5</h4><p>10-bit ADC. 0–5V → 0–1023. Can also be used as digital.</p></div><div class="component-card"><div class="component-icon">🔩</div><h4>Power Pins</h4><p>5V out, 3.3V out, GND, Vin. Max 500mA from 5V when USB powered.</p></div><div class="component-card"><div class="component-icon">🔩</div><h4>ATmega328P</h4><p>8-bit 16MHz CPU. 32KB Flash. 2KB SRAM. The brain of the Arduino.</p></div></div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m10_2">
+<h1 class="lesson-title">10.2 IDE Setup & Sketch Structure</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>The <strong>Arduino IDE</strong> is free at arduino.cc. Install, select board (Arduino Uno) and port, and upload.</p>
+<div class="info-box"><div class="box-title">📌 Every Sketch Has Two Functions</div>setup(): runs once on startup. Use for initialization. loop(): runs forever after setup. Put your main logic here.</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m10_3">
+<h1 class="lesson-title">10.3 Digital I/O & Blink</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>Blink is the Hello World of Arduino — flash the LED on pin 13 (built-in LED on Arduino Uno).</p>
+<div class="tip-box"><div class="box-title">💡 Blink Code</div>void setup() { pinMode(13, OUTPUT); } void loop() { digitalWrite(13, HIGH); delay(1000); digitalWrite(13, LOW); delay(1000); }</div>
+<div class="info-box"><div class="box-title">📌 Key Functions</div>pinMode(pin, mode): INPUT or OUTPUT. digitalWrite(pin, val): HIGH or LOW. digitalRead(pin): returns HIGH or LOW. delay(ms): pause execution.</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m10_4">
+<h1 class="lesson-title">10.4 Analog I/O & PWM</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>Arduino reads 0–5V as 0–1023 via analogRead(). It simulates analog output with PWM (Pulse Width Modulation) via analogWrite().</p>
+<div class="info-box"><div class="box-title">📌 analogRead & analogWrite</div>int val = analogRead(A0); // 0–1023. float v = val * 5.0 / 1023.0; // convert to volts. analogWrite(9, 128); // ~2.5V average on PWM pin.</div>
+<div class="tip-box"><div class="box-title">💡 PWM Explained</div>PWM switches pin HIGH/LOW rapidly. Duty cycle = fraction of time HIGH. 50% duty = ~2.5V average. LED or motor averages this and behaves accordingly.</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m10_5">
+<h1 class="lesson-title">10.5 Serial Monitor</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>The <strong>Serial Monitor</strong> is your window into the Arduino — print debug messages, sensor values, and program state to your computer.</p>
+<div class="info-box"><div class="box-title">📌 Serial Functions</div>Serial.begin(9600) in setup. Serial.println(value) prints with newline. Serial.print() without newline. Open Monitor: magnifying glass icon. Set baud to match Serial.begin().</div>
+<div class="tip-box"><div class="box-title">💡 Debug Strategy</div>Print variable values at key points in your code — this is how every programmer debugs. Add Serial.println(sensor_value) to verify sensors are reading correctly before adding complex logic.</div>
+</div>
+
+<div class="lesson-nav">
+  <a href="module9.html" class="btn btn-outline">← Module 9</a>
+  <button class="mark-done-btn">Mark as Complete</button>
+  <a href="module11.html" class="btn btn-primary">Module 11: Arduino & Sensors →</a>
+</div>
+</section>
+
+</main>
+</div>
+<script src="course.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  updateProgressBar('m10', 5);
+  initMarkDone('m10_5');
+  refreshSidebarDone();
+});
+</script>
+</body>
+</html>

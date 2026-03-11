@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Module 6 — Temperature & Humidity · AlCoders</title>
+<link rel="stylesheet" href="../css/theme.css">
+<script type="module" src="../theme.js"></script>
+<link rel="shortcut icon" href="../images/alcodersLogo.jpg" type="image/jpg"/>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Syne:wght@600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <a href="index.html"><div>
+      <div class="logo-text">Al<span>Coders</span></div>
+      <div class="logo-sub">Introduction to Sensors</div>
+    </div></a>
+  </div>
+  <a class="sidebar-back" href="index.html">← Back to course</a>
+  <div class="sidebar-module-nav">
+    <a href="module1.html" class="mod-nav-btn">M1</a>
+    <a href="module2.html" class="mod-nav-btn">M2</a>
+    <a href="module3.html" class="mod-nav-btn">M3</a>
+    <a href="module4.html" class="mod-nav-btn">M4</a>
+    <a href="module5.html" class="mod-nav-btn">M5</a>
+    <a href="module6.html" class="mod-nav-btn current">M6</a>
+    <a href="module7.html" class="mod-nav-btn">M7</a>
+    <a href="module8.html" class="mod-nav-btn">M8</a>
+  </div>
+  <div class="sidebar-module-block">
+    <div class="sidebar-module-title"><span class="mod-badge">06</span> Temperature & Humidity</div>
+    <a class="sidebar-lesson" data-lesson="l6-1" href="#"><span class="lesson-dot"></span>DHT11 vs DHT22 — Full Comparison</a>
+    <a class="sidebar-lesson" data-lesson="l6-2" href="#"><span class="lesson-dot"></span>How DHT Sensors Work Inside</a>
+    <a class="sidebar-lesson" data-lesson="l6-3" href="#"><span class="lesson-dot"></span>DHT with Arduino — Full Code</a>
+    <a class="sidebar-lesson" data-lesson="l6-4" href="#"><span class="lesson-dot"></span>DS18B20 Waterproof Sensor</a>
+    <a class="sidebar-lesson proj-link" data-lesson="proj6" href="#"><span class="lesson-dot"></span>Project: Mini Weather Station</a>
+  </div>
+</aside>
+
+<main class="main" id="mainContent">
+  <div class="topbar">
+    <div class="breadcrumb">AlCoders / <strong>Sensors</strong> / Module 6</div>
+    <div class="topbar-nav">
+      <button class="nav-btn" id="prevBtn" disabled>← Prev</button>
+      <button class="nav-btn primary" id="nextBtn">Next →</button>
+    </div>
+  </div>
+
+  <!-- L6-1 -->
+  <div class="lesson-page" id="l6-1">
+    <div class="lesson-tag">Module 06 · Lesson 1</div>
+    <h1 class="lesson-title">DHT11 vs DHT22 — Full Comparison</h1>
+    <p class="lesson-intro">The DHT11 and DHT22 are the most popular temperature and humidity sensors for Arduino. They look almost identical but have important differences.</p>
+
+    <table class="comp-table">
+      <thead><tr><th>Specification</th><th>DHT11 (Blue)</th><th>DHT22 / AM2302 (White)</th></tr></thead>
+      <tbody>
+        <tr><td>Temperature range</td><td class="low">0°C to 50°C</td><td class="highlight">-40°C to 80°C</td></tr>
+        <tr><td>Temp accuracy</td><td class="low">±2°C</td><td class="highlight">±0.5°C</td></tr>
+        <tr><td>Temp resolution</td><td class="low">1°C (integer only)</td><td class="highlight">0.1°C (decimal)</td></tr>
+        <tr><td>Humidity range</td><td>20% – 80% RH</td><td class="highlight">0% – 100% RH</td></tr>
+        <tr><td>Humidity accuracy</td><td class="low">±5% RH</td><td class="highlight">±2–5% RH</td></tr>
+        <tr><td>Humidity resolution</td><td class="low">1% RH</td><td class="highlight">0.1% RH</td></tr>
+        <tr><td>Sampling rate</td><td class="highlight">Once per second</td><td class="low">Once per 2 seconds</td></tr>
+        <tr><td>Operating voltage</td><td>3.3V – 5.5V</td><td>3.3V – 5.5V</td></tr>
+        <tr><td>Price</td><td class="highlight">~$1–2</td><td class="low">~$3–5</td></tr>
+      </tbody>
+    </table>
+
+    <div class="block">
+      <h2>Which Should You Use?</h2>
+      <ul>
+        <li>Use <strong>DHT11</strong> for: learning projects, simple on/off decisions, budget builds, room-temperature-only applications</li>
+        <li>Use <strong>DHT22</strong> for: anything requiring accuracy, outdoor use, data logging, greenhouses, incubators</li>
+        <li>The DHT22 is almost always worth the extra ~$2 for any serious project</li>
+      </ul>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-head">📌 DHT22 = AM2302</div>
+      The DHT22 and AM2302 are the same sensor. AM2302 just refers to the version with a built-in pull-up resistor and wiring pigtail. They use identical code.
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l6-1')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l6-2')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L6-2 -->
+  <div class="lesson-page" id="l6-2">
+    <div class="lesson-tag">Module 06 · Lesson 2</div>
+    <h1 class="lesson-title">How DHT Sensors Work Inside</h1>
+    <p class="lesson-intro">Understanding the DHT's internal working explains why you can only read it once every 1–2 seconds and helps you troubleshoot common issues.</p>
+
+    <div class="block">
+      <h2>What's Inside the DHT Sensor</h2>
+      <ul>
+        <li><strong>Capacitive humidity sensor</strong> — a polymer film between two electrodes. As humidity increases, the film absorbs water vapor and its capacitance changes. The internal MCU measures this and converts it to % RH.</li>
+        <li><strong>NTC thermistor</strong> — a resistor whose resistance decreases as temperature increases. The internal MCU reads it and converts to °C.</li>
+        <li><strong>Internal 8-bit MCU</strong> — handles measurement, conversion, calibration, and serial communication. This is why DHT sensors are easy to use — all the hard work happens inside the sensor.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>The Single-Wire Communication Protocol</h2>
+      <ol>
+        <li>Arduino pulls DATA line LOW for at least 18ms — the "wake up" signal</li>
+        <li>Arduino releases DATA line HIGH</li>
+        <li>Sensor responds: LOW 80µs then HIGH 80µs — handshake</li>
+        <li>Sensor sends 40 bits: 16 bits humidity + 16 bits temperature + 8-bit checksum</li>
+        <li>Each bit: ~28µs HIGH = bit 0, ~70µs HIGH = bit 1</li>
+        <li>The library decodes all this and returns a clean float value</li>
+      </ol>
+      <p>This entire process takes time — which is why you must wait 1–2 seconds between readings. Reading too fast returns NaN (Not a Number).</p>
+    </div>
+
+    <div class="block">
+      <h2>Why Readings Sometimes Fail</h2>
+      <ul>
+        <li><strong>Too fast reading</strong> — faster than once per 2 seconds (DHT22) or 1 second (DHT11)</li>
+        <li><strong>Missing pull-up resistor</strong> — the data line needs a 10kΩ pull-up to 5V. Modules usually have it built in; bare sensors don't.</li>
+        <li><strong>Long data wire</strong> — cables over ~20cm cause signal integrity issues</li>
+        <li><strong>Power supply noise</strong> — add a 100nF ceramic capacitor between VCC and GND to stabilize readings</li>
+      </ul>
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l6-2')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l6-3')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L6-3 -->
+  <div class="lesson-page" id="l6-3">
+    <div class="lesson-tag">Module 06 · Lesson 3</div>
+    <h1 class="lesson-title">DHT Sensor with Arduino — Complete Code</h1>
+    <p class="lesson-intro">Let's wire up the DHT sensor and build a complete temperature/humidity monitor with heat index calculation.</p>
+
+    <div class="block">
+      <h2>Wiring DHT11 / DHT22</h2>
+      <table class="pin-table">
+        <thead><tr><th>DHT Pin</th><th>Connect To</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="vcc">Pin 1 (VCC)</td><td>5V</td><td>Left pin when facing sensor</td></tr>
+          <tr><td class="sig">Pin 2 (DATA)</td><td>Digital Pin 2 + 10kΩ to 5V</td><td>Pull-up required for bare sensor</td></tr>
+          <tr><td>Pin 3</td><td>Not connected</td><td></td></tr>
+          <tr><td class="gnd">Pin 4 (GND)</td><td>GND</td><td>Right pin when facing sensor</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Module (3-pin version):</strong> VCC → 5V, DATA → Pin 2, GND → GND. No external pull-up needed.</p>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — DHT with Heat Index</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="p">#include</span> <span class="a">"DHT.h"</span>
+
+<span class="kw">#define</span> DHT_PIN  <span class="v">2</span>
+<span class="kw">#define</span> DHT_TYPE <span class="v">DHT22</span>   <span class="cm">// change to DHT11 for DHT11</span>
+DHT dht(DHT_PIN, DHT_TYPE);
+
+<span class="kw">void</span> <span class="p">setup</span>() {
+  <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>);
+  dht.<span class="p">begin</span>();
+  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"=== DHT Monitor ==="</span>);
+}
+
+<span class="kw">void</span> <span class="p">loop</span>() {
+  <span class="p">delay</span>(<span class="v">2000</span>); <span class="cm">// MUST wait 2s between DHT22 reads</span>
+
+  <span class="kw">float</span> humidity = dht.<span class="p">readHumidity</span>();
+  <span class="kw">float</span> tempC    = dht.<span class="p">readTemperature</span>();
+  <span class="kw">float</span> tempF    = dht.<span class="p">readTemperature</span>(<span class="kw">true</span>);
+
+  <span class="kw">if</span> (<span class="p">isnan</span>(humidity) || <span class="p">isnan</span>(tempC)) {
+    <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"❌ Failed to read from DHT!"</span>);
+    <span class="kw">return</span>;
+  }
+
+  <span class="kw">float</span> heatIndex = dht.<span class="p">computeHeatIndex</span>(tempC, humidity, <span class="kw">false</span>);
+
+  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"----------------------------"</span>);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Humidity:    "</span>); <span class="p">Serial</span>.<span class="p">print</span>(humidity);   <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"%"</span>);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Temperature: "</span>); <span class="p">Serial</span>.<span class="p">print</span>(tempC);     <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"°C"</span>);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"           : "</span>); <span class="p">Serial</span>.<span class="p">print</span>(tempF);     <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"°F"</span>);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Feels like:  "</span>); <span class="p">Serial</span>.<span class="p">print</span>(heatIndex); <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"°C"</span>);
+
+  <span class="kw">if</span> (humidity > <span class="v">70</span>) <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"⚠ High humidity — muggy"</span>);
+  <span class="kw">if</span> (tempC > <span class="v">35</span>)    <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"🔥 High temperature!"</span>);
+  <span class="kw">if</span> (tempC < <span class="v">10</span>)    <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"🥶 Low temperature!"</span>);
+}</div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-head">✅ Heat Index Explained</div>
+      The heat index ("feels like" temperature) combines temperature and humidity to give a human-perceived temperature. At 35°C with 80% humidity, it feels like 42°C. The DHT library's <code>computeHeatIndex()</code> uses the Steadman formula to calculate this.
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l6-3')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l6-4')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L6-4 -->
+  <div class="lesson-page" id="l6-4">
+    <div class="lesson-tag">Module 06 · Lesson 4</div>
+    <h1 class="lesson-title">DS18B20 Waterproof Temperature Sensor <span class="badge i2c">1-Wire</span></h1>
+    <p class="lesson-intro">The DS18B20 can go underwater, into soil, or into liquids. Multiple sensors can share a single data pin using the 1-Wire protocol.</p>
+
+    <div class="block">
+      <h2>What Makes the DS18B20 Special</h2>
+      <ul>
+        <li><strong>Waterproof probe</strong> — sealed stainless steel, safe in water, soil, food, chemicals</li>
+        <li><strong>1-Wire protocol</strong> — only one data wire plus GND. Multiple DS18B20 sensors can share the same data wire — each has a unique 64-bit address</li>
+        <li><strong>12-bit resolution</strong> — 0.0625°C precision</li>
+        <li><strong>Range: -55°C to +125°C</strong> — handles boiling water and deep freezes</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>Wiring DS18B20</h2>
+      <table class="pin-table">
+        <thead><tr><th>Wire Color</th><th>Connect To</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td style="color:#c0392b">Red</td><td class="vcc">5V</td><td>VCC</td></tr>
+          <tr><td>Black</td><td class="gnd">GND</td><td>Ground</td></tr>
+          <tr><td style="color:#f59e0b">Yellow/White</td><td class="sig">Pin 4 + 4.7kΩ pull-up to 5V</td><td>DATA — pull-up REQUIRED</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — DS18B20 Temperature Sensor</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="p">#include</span> <span class="a">&lt;OneWire.h&gt;</span>
+<span class="p">#include</span> <span class="a">&lt;DallasTemperature.h&gt;</span>
+
+OneWire oneWire(<span class="v">4</span>);
+DallasTemperature sensors(&oneWire);
+
+<span class="kw">void</span> <span class="p">setup</span>() {
+  <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>);
+  sensors.<span class="p">begin</span>();
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Found "</span>);
+  <span class="p">Serial</span>.<span class="p">print</span>(sensors.<span class="p">getDeviceCount</span>());
+  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">" DS18B20 sensor(s)"</span>);
+}
+
+<span class="kw">void</span> <span class="p">loop</span>() {
+  sensors.<span class="p">requestTemperatures</span>();
+  <span class="kw">float</span> tempC = sensors.<span class="p">getTempCByIndex</span>(<span class="v">0</span>);
+  <span class="kw">if</span> (tempC == <span class="v">DEVICE_DISCONNECTED_C</span>) {
+    <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"Sensor disconnected!"</span>);
+  } <span class="kw">else</span> {
+    <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Temperature: "</span>);
+    <span class="p">Serial</span>.<span class="p">print</span>(tempC, <span class="v">2</span>);
+    <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"°C"</span>);
+  }
+  <span class="p">delay</span>(<span class="v">1000</span>);
+}</div>
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l6-4')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('proj6')">Module Project →</button>
+    </div>
+  </div>
+
+  <!-- PROJ6 -->
+  <div class="lesson-page" id="proj6">
+    <div class="lesson-tag">Module 06 · Project</div>
+    <h1 class="lesson-title">Project: Mini Weather Station</h1>
+    <p class="lesson-intro">Build a weather station that displays temperature, humidity, heat index, and a comfort level message on an LCD.</p>
+
+    <div class="project-box">
+      <h3>🔨 Build: Mini Weather Station with LCD</h3>
+      <p>Combine DHT22 and a 16x2 I2C LCD display to build a real weather station with comfort level feedback.</p>
+      <ol class="project-steps">
+        <li>Wire DHT22 (pin 2) and a 16x2 LCD display via I2C (VCC, GND, SDA=A4, SCL=A5)</li>
+        <li>Display temperature on LCD row 1: "Temp: 27.3°C"</li>
+        <li>Display humidity on LCD row 2: "Hum: 65% MUGGY"</li>
+        <li>Comfort labels: COLD / COOL / OK / WARM / HOT for temperature; DRY / OK / HUMID for humidity</li>
+        <li>Send full readings including heat index to Serial Monitor every 2 seconds</li>
+        <li>Bonus: add an RGB LED that glows blue when cold, green when comfortable, red when hot</li>
+      </ol>
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'proj6')">Mark as Complete ✓</button>
+    </div>
+    <div class="module-nav-footer">
+      <a href="module5.html" class="mod-prev-btn">← Module 5</a>
+      <a href="module7.html" class="mod-next-btn">Module 7: Soil & Gas →</a>
+    </div>
+  </div>
+
+</main>
+</div>
+<script src="course.js"></script>
+<script>
+let currentIndex = 0;
+const lessonOrder = ['l6-1','l6-2','l6-3','l6-4','proj6'];
+</script>
+</body>
+</html>

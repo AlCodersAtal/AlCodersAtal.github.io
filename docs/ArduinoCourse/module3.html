@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 3: Digital I/O & LEDs – AlCoders Arduino</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="index.html">⚡ <span>Al</span>Coders</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="module2.html">← Module 2: Electronics</a>
+    <a href="module3.html" class="active">Module 3</a>
+    <a href="module4.html">Module 4: Analog I/O →</a>
+  </div>
+</nav>
+<div class="breadcrumb">
+  <a href="index.html">Arduino Course</a> › Module 3 › Digital I/O & LEDs
+</div>
+<div class="page-wrapper">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">Course Progress</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 60 lessons completed</div>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔧</span> Module 1 – Getting Started</div>
+    <a href="module1.html#lesson1" class="lesson-link" data-lesson="m1l1"><span class="lesson-dot"></span>What is Arduino?</a>
+    <a href="module1.html#lesson2" class="lesson-link" data-lesson="m1l2"><span class="lesson-dot"></span>Installing the Arduino IDE</a>
+    <a href="module1.html#lesson3" class="lesson-link" data-lesson="m1l3"><span class="lesson-dot"></span>Exploring the Arduino Board</a>
+    <a href="module1.html#lesson4" class="lesson-link" data-lesson="m1l4"><span class="lesson-dot"></span>Your First Sketch: Blink</a>
+    <a href="module1.html#lesson5" class="lesson-link" data-lesson="m1l5"><span class="lesson-dot"></span>Understanding the Code</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⚡</span> Module 2 – Electronics</div>
+    <a href="module2.html" class="lesson-link" data-lesson="m2l1"><span class="lesson-dot"></span>Voltage, Current & Resistance</a>
+    <a href="module2.html#lesson2" class="lesson-link" data-lesson="m2l2"><span class="lesson-dot"></span>Ohm's Law</a>
+    <a href="module2.html#lesson3" class="lesson-link" data-lesson="m2l3"><span class="lesson-dot"></span>Breadboards & Schematics</a>
+    <a href="module2.html#lesson4" class="lesson-link" data-lesson="m2l4"><span class="lesson-dot"></span>Resistors & Capacitors</a>
+    <a href="module2.html#lesson5" class="lesson-link" data-lesson="m2l5"><span class="lesson-dot"></span>Power Supply & Safety</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💡</span> Module 3 – Digital I/O</div>
+    <a href="module3.html" class="lesson-link" data-lesson="m3l1"><span class="lesson-dot"></span>Digital Pins Explained</a>
+    <a href="module3.html#lesson2" class="lesson-link" data-lesson="m3l2"><span class="lesson-dot"></span>digitalWrite & digitalRead</a>
+    <a href="module3.html#lesson3" class="lesson-link" data-lesson="m3l3"><span class="lesson-dot"></span>Push Buttons & Input</a>
+    <a href="module3.html#lesson4" class="lesson-link" data-lesson="m3l4"><span class="lesson-dot"></span>Debouncing Buttons</a>
+    <a href="module3.html#lesson5" class="lesson-link" data-lesson="m3l5"><span class="lesson-dot"></span>Traffic Light Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌡️</span> Module 4 – Analog I/O</div>
+    <a href="module4.html" class="lesson-link" data-lesson="m4l1"><span class="lesson-dot"></span>Analog vs Digital</a>
+    <a href="module4.html#lesson2" class="lesson-link" data-lesson="m4l2"><span class="lesson-dot"></span>analogRead & Potentiometer</a>
+    <a href="module4.html#lesson3" class="lesson-link" data-lesson="m4l3"><span class="lesson-dot"></span>PWM & analogWrite</a>
+    <a href="module4.html#lesson4" class="lesson-link" data-lesson="m4l4"><span class="lesson-dot"></span>Temperature Sensor</a>
+    <a href="module4.html#lesson5" class="lesson-link" data-lesson="m4l5"><span class="lesson-dot"></span>Light Sensor (LDR) Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📺</span> Module 5 – Displays</div>
+    <a href="module5.html" class="lesson-link" data-lesson="m5l1"><span class="lesson-dot"></span>LCD 16x2 with I2C</a>
+    <a href="module5.html#lesson2" class="lesson-link" data-lesson="m5l2"><span class="lesson-dot"></span>OLED Display</a>
+    <a href="module5.html#lesson3" class="lesson-link" data-lesson="m5l3"><span class="lesson-dot"></span>7-Segment Display</a>
+    <a href="module5.html#lesson4" class="lesson-link" data-lesson="m5l4"><span class="lesson-dot"></span>Buzzer & Tones</a>
+    <a href="module5.html#lesson5" class="lesson-link" data-lesson="m5l5"><span class="lesson-dot"></span>RGB LED & Color Mixing</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔊</span> Module 6 – Motors</div>
+    <a href="module6.html" class="lesson-link" data-lesson="m6l1"><span class="lesson-dot"></span>Servo Motor Basics</a>
+    <a href="module6.html#lesson2" class="lesson-link" data-lesson="m6l2"><span class="lesson-dot"></span>DC Motors & L298N</a>
+    <a href="module6.html#lesson3" class="lesson-link" data-lesson="m6l3"><span class="lesson-dot"></span>Stepper Motors</a>
+    <a href="module6.html#lesson4" class="lesson-link" data-lesson="m6l4"><span class="lesson-dot"></span>Motor Speed Control</a>
+    <a href="module6.html#lesson5" class="lesson-link" data-lesson="m6l5"><span class="lesson-dot"></span>Mini Robot Car Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📡</span> Module 7 – Protocols</div>
+    <a href="module7.html" class="lesson-link" data-lesson="m7l1"><span class="lesson-dot"></span>Serial Communication</a>
+    <a href="module7.html#lesson2" class="lesson-link" data-lesson="m7l2"><span class="lesson-dot"></span>I2C Protocol</a>
+    <a href="module7.html#lesson3" class="lesson-link" data-lesson="m7l3"><span class="lesson-dot"></span>SPI Protocol</a>
+    <a href="module7.html#lesson4" class="lesson-link" data-lesson="m7l4"><span class="lesson-dot"></span>Connecting Multiple Devices</a>
+    <a href="module7.html#lesson5" class="lesson-link" data-lesson="m7l5"><span class="lesson-dot"></span>Real-time Serial Plotter</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌐</span> Module 8 – WiFi & IoT</div>
+    <a href="module8.html" class="lesson-link" data-lesson="m8l1"><span class="lesson-dot"></span>Intro to ESP8266 & ESP32</a>
+    <a href="module8.html#lesson2" class="lesson-link" data-lesson="m8l2"><span class="lesson-dot"></span>Connecting to WiFi</a>
+    <a href="module8.html#lesson3" class="lesson-link" data-lesson="m8l3"><span class="lesson-dot"></span>Building a Web Server</a>
+    <a href="module8.html#lesson4" class="lesson-link" data-lesson="m8l4"><span class="lesson-dot"></span>Sending Data to Cloud</a>
+    <a href="module8.html#lesson5" class="lesson-link" data-lesson="m8l5"><span class="lesson-dot"></span>MQTT Basics</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📶</span> Module 9 – Bluetooth</div>
+    <a href="module9.html" class="lesson-link" data-lesson="m9l1"><span class="lesson-dot"></span>HC-05 Bluetooth Module</a>
+    <a href="module9.html#lesson2" class="lesson-link" data-lesson="m9l2"><span class="lesson-dot"></span>AT Commands Setup</a>
+    <a href="module9.html#lesson3" class="lesson-link" data-lesson="m9l3"><span class="lesson-dot"></span>Phone-Controlled LED</a>
+    <a href="module9.html#lesson4" class="lesson-link" data-lesson="m9l4"><span class="lesson-dot"></span>BLE with ESP32</a>
+    <a href="module9.html#lesson5" class="lesson-link" data-lesson="m9l5"><span class="lesson-dot"></span>Bluetooth Robot Control</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⏱️</span> Module 10 – Interrupts</div>
+    <a href="module10.html" class="lesson-link" data-lesson="m10l1"><span class="lesson-dot"></span>What are Interrupts?</a>
+    <a href="module10.html#lesson2" class="lesson-link" data-lesson="m10l2"><span class="lesson-dot"></span>attachInterrupt()</a>
+    <a href="module10.html#lesson3" class="lesson-link" data-lesson="m10l3"><span class="lesson-dot"></span>Timer Interrupts</a>
+    <a href="module10.html#lesson4" class="lesson-link" data-lesson="m10l4"><span class="lesson-dot"></span>Watchdog Timer</a>
+    <a href="module10.html#lesson5" class="lesson-link" data-lesson="m10l5"><span class="lesson-dot"></span>Sleep Modes & Low Power</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💾</span> Module 11 – Memory</div>
+    <a href="module11.html" class="lesson-link" data-lesson="m11l1"><span class="lesson-dot"></span>SRAM, Flash & EEPROM</a>
+    <a href="module11.html#lesson2" class="lesson-link" data-lesson="m11l2"><span class="lesson-dot"></span>Reading & Writing EEPROM</a>
+    <a href="module11.html#lesson3" class="lesson-link" data-lesson="m11l3"><span class="lesson-dot"></span>SD Card Module</a>
+    <a href="module11.html#lesson4" class="lesson-link" data-lesson="m11l4"><span class="lesson-dot"></span>Writing Custom Libraries</a>
+    <a href="module11.html#lesson5" class="lesson-link" data-lesson="m11l5"><span class="lesson-dot"></span>Data Logger Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🏗️</span> Module 12 – Capstone</div>
+    <a href="module12.html" class="lesson-link" data-lesson="m12l1"><span class="lesson-dot"></span>Smart Weather Station</a>
+    <a href="module12.html#lesson2" class="lesson-link" data-lesson="m12l2"><span class="lesson-dot"></span>Obstacle-Avoiding Robot</a>
+    <a href="module12.html#lesson3" class="lesson-link" data-lesson="m12l3"><span class="lesson-dot"></span>Home Automation System</a>
+    <a href="module12.html#lesson4" class="lesson-link" data-lesson="m12l4"><span class="lesson-dot"></span>Custom PCB Design Intro</a>
+    <a href="module12.html#lesson5" class="lesson-link" data-lesson="m12l5"><span class="lesson-dot"></span>Next Steps & Resources</a>
+  </div>
+</aside>
+<main class="content">
+  <div class="module-hero">
+    <div class="module-badge">💡 Module 3 of 12</div>
+    <h1>Digital I/O & LEDs</h1>
+    <p>Digital pins, buttons, debouncing, and your first real LED project.</p>
+    <div class="module-meta">
+      <div class="meta-item">⏱️ ~2 hours</div>
+      <div class="meta-item">📗 5 lessons</div>
+      <div class="meta-item">🟢 Beginner</div>
+    </div>
+  </div>
+
+  <div class="lesson-section" id="lesson1">
+    <h2>🔌 Lesson 1: Digital Pins Explained</h2>
+    
+<p>Arduino's digital pins are the most fundamental I/O mechanism. Each pin can be in one of two states: <strong>HIGH (5V)</strong> or <strong>LOW (0V)</strong>. There are 14 digital pins (0–13) on the Arduino Uno.</p>
+<h3>Digital vs Analog Thinking</h3>
+<p>Digital is binary — it's either ON or OFF. Light switches, buttons, and relay signals are digital. There's no "in between." This makes digital I/O simple to code but limited in expressiveness compared to analog (which comes in Module 4).</p>
+<h3>Pin Modes</h3>
+<table class="component-table"><thead><tr><th>Mode</th><th>Usage</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>OUTPUT</code></td><td>Driving LEDs, relays, buzzers</td><td>Pin outputs 5V (HIGH) or 0V (LOW)</td></tr>
+<tr><td><code>INPUT</code></td><td>Reading sensors, buttons</td><td>Pin reads external voltage — floating if not connected!</td></tr>
+<tr><td><code>INPUT_PULLUP</code></td><td>Buttons (recommended)</td><td>Internal 20kΩ pull-up resistor activated — pin reads HIGH when open, LOW when button pressed</td></tr>
+</tbody></table>
+<div class="info-box warning"><span class="icon">⚠️</span><div class="body"><strong>Floating Pins</strong>An INPUT pin with nothing connected to it will "float" — it randomly reads HIGH or LOW. Always connect a pull-up or pull-down resistor, or use INPUT_PULLUP mode.</div></div>
+<div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(<span class="nm">13</span>, OUTPUT);       <span class="cm">// pin 13 as output</span>
+  <span class="fn">pinMode</span>(<span class="nm">2</span>, INPUT_PULLUP);   <span class="cm">// pin 2 as input with pull-up</span>
+  <span class="fn">Serial.begin</span>(<span class="nm">9600</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">int</span> state = <span class="fn">digitalRead</span>(<span class="nm">2</span>);  <span class="cm">// Read pin 2</span>
+  <span class="fn">Serial.println</span>(state);         <span class="cm">// Print to Serial Monitor</span>
+  <span class="fn">delay</span>(<span class="nm">100</span>);
+}</code></pre></div>
+  </div>
+
+  <div class="lesson-section" id="lesson2">
+    <h2>⬆️ Lesson 2: digitalWrite & digitalRead</h2>
+    
+<p>The two most essential digital functions — mastering these lets you control outputs and read inputs.</p>
+<h3>digitalWrite — Controlling Outputs</h3>
+<div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div><pre><code><span class="cm">// digitalWrite(pin, value)</span>
+<span class="cm">// value = HIGH or LOW (or 1 or 0)</span>
+
+<span class="fn">digitalWrite</span>(<span class="nm">13</span>, HIGH);   <span class="cm">// Set pin 13 to 5V — LED ON</span>
+<span class="fn">digitalWrite</span>(<span class="nm">13</span>, LOW);    <span class="cm">// Set pin 13 to 0V — LED OFF</span>
+
+<span class="cm">// You can also use 1 and 0:</span>
+<span class="fn">digitalWrite</span>(<span class="nm">13</span>, <span class="nm">1</span>);     <span class="cm">// Same as HIGH</span>
+<span class="fn">digitalWrite</span>(<span class="nm">13</span>, <span class="nm">0</span>);     <span class="cm">// Same as LOW</span></code></pre></div>
+<h3>digitalRead — Reading Inputs</h3>
+<div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div><pre><code><span class="cm">// digitalRead(pin) returns HIGH or LOW</span>
+<span class="tp">int</span> buttonState = <span class="fn">digitalRead</span>(<span class="nm">2</span>);
+
+<span class="kw">if</span> (buttonState == HIGH) {
+  <span class="fn">Serial.println</span>(<span class="st">"Button is NOT pressed"</span>);
+} <span class="kw">else</span> {
+  <span class="fn">Serial.println</span>(<span class="st">"Button IS pressed!"</span>);
+  <span class="fn">digitalWrite</span>(<span class="nm">13</span>, HIGH);  <span class="cm">// Turn on LED</span>
+}</code></pre></div>
+<div class="info-box note"><span class="icon">📝</span><div class="body"><strong>Why is button press LOW?</strong>With INPUT_PULLUP, the pin is pulled to HIGH (5V) by default. When you press the button and connect the pin to GND, it becomes LOW. So pressed = LOW, released = HIGH. This is counterintuitive at first but becomes second nature!</div></div>
+  </div>
+
+  <div class="lesson-section" id="lesson3">
+    <h2>🔘 Lesson 3: Push Buttons & Input</h2>
+    
+<p>Push buttons are momentary switches — they only connect while you hold them. Here's how to wire and read them correctly.</p>
+<h3>Wiring a Button with INPUT_PULLUP</h3>
+<table class="wiring-table"><thead><tr><th>Button Pin</th><th>Arduino Pin</th></tr></thead><tbody>
+<tr><td class="wire-from">Pin 1 (any leg)</td><td class="wire-to">Digital Pin 2</td></tr>
+<tr><td class="wire-from">Pin 2 (other leg)</td><td class="wire-to">GND</td></tr>
+</tbody></table>
+<p>With INPUT_PULLUP — no external resistor needed! The Arduino's internal resistor handles it.</p>
+<div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div><pre><code><span class="pp">#define</span> BUTTON_PIN <span class="nm">2</span>
+<span class="pp">#define</span> LED_PIN    <span class="nm">13</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(LED_PIN, OUTPUT);
+  <span class="fn">pinMode</span>(BUTTON_PIN, INPUT_PULLUP);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// With pullup: button pressed = LOW</span>
+  <span class="kw">if</span> (<span class="fn">digitalRead</span>(BUTTON_PIN) == LOW) {
+    <span class="fn">digitalWrite</span>(LED_PIN, HIGH);  <span class="cm">// LED on while pressing</span>
+  } <span class="kw">else</span> {
+    <span class="fn">digitalWrite</span>(LED_PIN, LOW);   <span class="cm">// LED off when released</span>
+  }
+}</code></pre></div>
+  </div>
+
+  <div class="lesson-section" id="lesson4">
+    <h2>🛡️ Lesson 4: Debouncing Buttons</h2>
+    
+<p>When you press a physical button, the metal contacts don't make a clean single connection. They "bounce" — rapidly connecting and disconnecting dozens of times in a few milliseconds. This causes false multiple presses. <strong>Debouncing</strong> eliminates this.</p>
+<h3>The Problem</h3>
+<p>Without debouncing, pressing a button once might be detected as 5–20 presses. For a counter or toggle, this causes chaos.</p>
+<h3>Software Debounce Solution</h3>
+<div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div><pre><code><span class="pp">#define</span> BUTTON_PIN <span class="nm">2</span>
+<span class="pp">#define</span> LED_PIN    <span class="nm">13</span>
+<span class="pp">#define</span> DEBOUNCE_MS <span class="nm">50</span>  <span class="cm">// 50ms debounce window</span>
+
+<span class="tp">int</span> ledState = LOW;
+<span class="tp">int</span> lastButtonState = HIGH;
+<span class="tp">unsigned long</span> lastDebounceTime = <span class="nm">0</span>;
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(LED_PIN, OUTPUT);
+  <span class="fn">pinMode</span>(BUTTON_PIN, INPUT_PULLUP);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">int</span> reading = <span class="fn">digitalRead</span>(BUTTON_PIN);
+
+  <span class="kw">if</span> (reading != lastButtonState) {
+    lastDebounceTime = <span class="fn">millis</span>();  <span class="cm">// Reset timer on change</span>
+  }
+
+  <span class="kw">if</span> ((<span class="fn">millis</span>() - lastDebounceTime) > DEBOUNCE_MS) {
+    <span class="cm">// State is stable! Act on it.</span>
+    <span class="kw">if</span> (reading == LOW) {  <span class="cm">// Button pressed</span>
+      ledState = !ledState;  <span class="cm">// Toggle LED</span>
+      <span class="fn">digitalWrite</span>(LED_PIN, ledState);
+    }
+  }
+  lastButtonState = reading;
+  <span class="fn">delay</span>(<span class="nm">10</span>);
+}</code></pre></div>
+<div class="info-box tip"><span class="icon">💡</span><div class="body"><strong>Hardware Debounce</strong>You can also add a 100nF capacitor across the button terminals. This smooths the bounce electrically, no code needed. For production designs, hardware debounce is preferred.</div></div>
+  </div>
+
+  <div class="lesson-section" id="lesson5">
+    <h2>🚦 Lesson 5: Project – Traffic Light</h2>
+    
+<div class="project-card"><div class="project-card-header"><h3>🚦 Traffic Light Simulator</h3></div><div class="project-card-body">
+<p>Build a traffic light using 3 LEDs (Red, Yellow, Green) that cycles through the traffic light sequence automatically.</p>
+<div class="project-materials">
+<span class="material-tag">Arduino Uno</span><span class="material-tag">Red LED</span><span class="material-tag">Yellow LED</span>
+<span class="material-tag">Green LED</span><span class="material-tag">3× 220Ω Resistors</span><span class="material-tag">Breadboard</span><span class="material-tag">Wires</span>
+</div>
+<h3>Wiring</h3>
+<table class="wiring-table"><thead><tr><th>Component</th><th>Arduino Pin</th></tr></thead><tbody>
+<tr><td class="wire-from">Red LED (+)</td><td class="wire-to">Pin 9</td></tr>
+<tr><td class="wire-from">Yellow LED (+)</td><td class="wire-to">Pin 10</td></tr>
+<tr><td class="wire-from">Green LED (+)</td><td class="wire-to">Pin 11</td></tr>
+<tr><td class="wire-from">All LEDs (−) via 220Ω</td><td class="wire-to">GND</td></tr>
+</tbody></table>
+</div></div>
+<div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div><pre><code><span class="pp">#define</span> RED    <span class="nm">9</span>
+<span class="pp">#define</span> YELLOW <span class="nm">10</span>
+<span class="pp">#define</span> GREEN  <span class="nm">11</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(RED, OUTPUT);
+  <span class="fn">pinMode</span>(YELLOW, OUTPUT);
+  <span class="fn">pinMode</span>(GREEN, OUTPUT);
+}
+
+<span class="kw">void</span> <span class="fn">setLight</span>(<span class="tp">int</span> red, <span class="tp">int</span> yellow, <span class="tp">int</span> green) {
+  <span class="fn">digitalWrite</span>(RED, red);
+  <span class="fn">digitalWrite</span>(YELLOW, yellow);
+  <span class="fn">digitalWrite</span>(GREEN, green);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="fn">setLight</span>(HIGH, LOW, LOW);  <span class="cm">// Red ON — Stop</span>
+  <span class="fn">delay</span>(<span class="nm">3000</span>);               <span class="cm">// 3 seconds</span>
+
+  <span class="fn">setLight</span>(HIGH, HIGH, LOW); <span class="cm">// Red+Yellow — Get Ready</span>
+  <span class="fn">delay</span>(<span class="nm">1000</span>);               <span class="cm">// 1 second</span>
+
+  <span class="fn">setLight</span>(LOW, LOW, HIGH);  <span class="cm">// Green ON — Go</span>
+  <span class="fn">delay</span>(<span class="nm">3000</span>);               <span class="cm">// 3 seconds</span>
+
+  <span class="fn">setLight</span>(LOW, HIGH, LOW);  <span class="cm">// Yellow — Slow Down</span>
+  <span class="fn">delay</span>(<span class="nm">1000</span>);               <span class="cm">// 1 second</span>
+}</code></pre></div>
+<div class="info-box project"><span class="icon">⭐</span><div class="body"><strong>Challenge!</strong>Add a push button as a pedestrian crossing button. When pressed, the sequence should interrupt and give a "walk" signal. This is a real engineering problem — try it!</div></div>
+  </div>
+
+  <div class="lesson-footer">
+    <a href="module2.html" class="btn btn-outline">← Module 2: Electronics</a>
+    <button class="btn btn-complete" data-lesson="m3_complete">○ Mark Module Complete</button>
+    <a href="module4.html" class="btn btn-primary">Module 4: Analog I/O →</a>
+  </div>
+</main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

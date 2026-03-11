@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 5: Displays & Output Devices – AlCoders Arduino</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="index.html">⚡ <span>Al</span>Coders</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="module4.html">← Module 4</a>
+    <a href="module5.html" class="active">Module 5</a>
+    <a href="module6.html">Module 6 →</a>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">Arduino Course</a> › Module 5 › Displays &amp; Output Devices
+</div>
+
+<div class="page-wrapper">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">Course Progress</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 60 lessons completed</div>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔧</span> Module 1 – Getting Started</div>
+    <a href="module1.html" class="lesson-link" data-lesson="m1l1"><span class="lesson-dot"></span>What is Arduino?</a>
+    <a href="module1.html#lesson2" class="lesson-link" data-lesson="m1l2"><span class="lesson-dot"></span>Installing the IDE</a>
+    <a href="module1.html#lesson3" class="lesson-link" data-lesson="m1l3"><span class="lesson-dot"></span>Exploring the Board</a>
+    <a href="module1.html#lesson4" class="lesson-link" data-lesson="m1l4"><span class="lesson-dot"></span>Your First Sketch: Blink</a>
+    <a href="module1.html#lesson5" class="lesson-link" data-lesson="m1l5"><span class="lesson-dot"></span>Understanding the Code</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⚡</span> Module 2 – Electronics</div>
+    <a href="module2.html" class="lesson-link" data-lesson="m2l1"><span class="lesson-dot"></span>Voltage, Current & Resistance</a>
+    <a href="module2.html#lesson2" class="lesson-link" data-lesson="m2l2"><span class="lesson-dot"></span>Ohm's Law</a>
+    <a href="module2.html#lesson3" class="lesson-link" data-lesson="m2l3"><span class="lesson-dot"></span>Breadboards & Schematics</a>
+    <a href="module2.html#lesson4" class="lesson-link" data-lesson="m2l4"><span class="lesson-dot"></span>Resistors & Capacitors</a>
+    <a href="module2.html#lesson5" class="lesson-link" data-lesson="m2l5"><span class="lesson-dot"></span>Power Supply & Safety</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💡</span> Module 3 – Digital I/O</div>
+    <a href="module3.html" class="lesson-link" data-lesson="m3l1"><span class="lesson-dot"></span>Digital Pins Explained</a>
+    <a href="module3.html#lesson2" class="lesson-link" data-lesson="m3l2"><span class="lesson-dot"></span>digitalWrite & digitalRead</a>
+    <a href="module3.html#lesson3" class="lesson-link" data-lesson="m3l3"><span class="lesson-dot"></span>Push Buttons & Input</a>
+    <a href="module3.html#lesson4" class="lesson-link" data-lesson="m3l4"><span class="lesson-dot"></span>Debouncing Buttons</a>
+    <a href="module3.html#lesson5" class="lesson-link" data-lesson="m3l5"><span class="lesson-dot"></span>Traffic Light Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌡️</span> Module 4 – Analog I/O</div>
+    <a href="module4.html" class="lesson-link" data-lesson="m4l1"><span class="lesson-dot"></span>Analog vs Digital</a>
+    <a href="module4.html#lesson2" class="lesson-link" data-lesson="m4l2"><span class="lesson-dot"></span>analogRead & Potentiometer</a>
+    <a href="module4.html#lesson3" class="lesson-link" data-lesson="m4l3"><span class="lesson-dot"></span>PWM & analogWrite</a>
+    <a href="module4.html#lesson4" class="lesson-link" data-lesson="m4l4"><span class="lesson-dot"></span>Temperature Sensor (LM35)</a>
+    <a href="module4.html#lesson5" class="lesson-link" data-lesson="m4l5"><span class="lesson-dot"></span>Light Sensor (LDR) Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📺</span> Module 5 – Displays</div>
+    <a href="#lesson1" class="lesson-link active" data-lesson="m5l1"><span class="lesson-dot"></span>LCD 16x2 with I2C</a>
+    <a href="#lesson2" class="lesson-link" data-lesson="m5l2"><span class="lesson-dot"></span>OLED Display (SSD1306)</a>
+    <a href="#lesson3" class="lesson-link" data-lesson="m5l3"><span class="lesson-dot"></span>7-Segment Display</a>
+    <a href="#lesson4" class="lesson-link" data-lesson="m5l4"><span class="lesson-dot"></span>Buzzer & Tones</a>
+    <a href="#lesson5" class="lesson-link" data-lesson="m5l5"><span class="lesson-dot"></span>RGB LED & Color Mixing</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔊</span> Module 6 – Motors</div>
+    <a href="module6.html" class="lesson-link" data-lesson="m6l1"><span class="lesson-dot"></span>Servo Motor Basics</a>
+    <a href="module6.html#lesson2" class="lesson-link" data-lesson="m6l2"><span class="lesson-dot"></span>DC Motors & L298N</a>
+    <a href="module6.html#lesson3" class="lesson-link" data-lesson="m6l3"><span class="lesson-dot"></span>Stepper Motors</a>
+    <a href="module6.html#lesson4" class="lesson-link" data-lesson="m6l4"><span class="lesson-dot"></span>Motor Speed Control</a>
+    <a href="module6.html#lesson5" class="lesson-link" data-lesson="m6l5"><span class="lesson-dot"></span>Mini Robot Car Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📡</span> Module 7 – Protocols</div>
+    <a href="module7.html" class="lesson-link" data-lesson="m7l1"><span class="lesson-dot"></span>Serial Communication</a>
+    <a href="module7.html#lesson2" class="lesson-link" data-lesson="m7l2"><span class="lesson-dot"></span>I2C Protocol</a>
+    <a href="module7.html#lesson3" class="lesson-link" data-lesson="m7l3"><span class="lesson-dot"></span>SPI Protocol</a>
+    <a href="module7.html#lesson4" class="lesson-link" data-lesson="m7l4"><span class="lesson-dot"></span>Connecting Multiple Devices</a>
+    <a href="module7.html#lesson5" class="lesson-link" data-lesson="m7l5"><span class="lesson-dot"></span>Real-time Serial Plotter</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌐</span> Module 8 – WiFi & IoT</div>
+    <a href="module8.html" class="lesson-link" data-lesson="m8l1"><span class="lesson-dot"></span>Intro to ESP8266 & ESP32</a>
+    <a href="module8.html#lesson2" class="lesson-link" data-lesson="m8l2"><span class="lesson-dot"></span>Connecting to WiFi</a>
+    <a href="module8.html#lesson3" class="lesson-link" data-lesson="m8l3"><span class="lesson-dot"></span>Building a Web Server</a>
+    <a href="module8.html#lesson4" class="lesson-link" data-lesson="m8l4"><span class="lesson-dot"></span>Sending Data to Cloud</a>
+    <a href="module8.html#lesson5" class="lesson-link" data-lesson="m8l5"><span class="lesson-dot"></span>MQTT Basics</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📶</span> Module 9 – Bluetooth</div>
+    <a href="module9.html" class="lesson-link" data-lesson="m9l1"><span class="lesson-dot"></span>HC-05 Bluetooth Module</a>
+    <a href="module9.html#lesson2" class="lesson-link" data-lesson="m9l2"><span class="lesson-dot"></span>AT Commands Setup</a>
+    <a href="module9.html#lesson3" class="lesson-link" data-lesson="m9l3"><span class="lesson-dot"></span>Phone-Controlled LED</a>
+    <a href="module9.html#lesson4" class="lesson-link" data-lesson="m9l4"><span class="lesson-dot"></span>BLE with ESP32</a>
+    <a href="module9.html#lesson5" class="lesson-link" data-lesson="m9l5"><span class="lesson-dot"></span>Bluetooth Robot Control</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⏱️</span> Module 10 – Interrupts</div>
+    <a href="module10.html" class="lesson-link" data-lesson="m10l1"><span class="lesson-dot"></span>What are Interrupts?</a>
+    <a href="module10.html#lesson2" class="lesson-link" data-lesson="m10l2"><span class="lesson-dot"></span>attachInterrupt()</a>
+    <a href="module10.html#lesson3" class="lesson-link" data-lesson="m10l3"><span class="lesson-dot"></span>Timer Interrupts</a>
+    <a href="module10.html#lesson4" class="lesson-link" data-lesson="m10l4"><span class="lesson-dot"></span>Watchdog Timer</a>
+    <a href="module10.html#lesson5" class="lesson-link" data-lesson="m10l5"><span class="lesson-dot"></span>Sleep Modes & Low Power</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💾</span> Module 11 – Memory & Storage</div>
+    <a href="module11.html" class="lesson-link" data-lesson="m11l1"><span class="lesson-dot"></span>SRAM, Flash & EEPROM</a>
+    <a href="module11.html#lesson2" class="lesson-link" data-lesson="m11l2"><span class="lesson-dot"></span>Reading & Writing EEPROM</a>
+    <a href="module11.html#lesson3" class="lesson-link" data-lesson="m11l3"><span class="lesson-dot"></span>SD Card Module</a>
+    <a href="module11.html#lesson4" class="lesson-link" data-lesson="m11l4"><span class="lesson-dot"></span>Writing Custom Libraries</a>
+    <a href="module11.html#lesson5" class="lesson-link" data-lesson="m11l5"><span class="lesson-dot"></span>Data Logger Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🏗️</span> Module 12 – Capstone Projects</div>
+    <a href="module12.html" class="lesson-link" data-lesson="m12l1"><span class="lesson-dot"></span>Smart Weather Station</a>
+    <a href="module12.html#lesson2" class="lesson-link" data-lesson="m12l2"><span class="lesson-dot"></span>Obstacle-Avoiding Robot</a>
+    <a href="module12.html#lesson3" class="lesson-link" data-lesson="m12l3"><span class="lesson-dot"></span>Home Automation System</a>
+    <a href="module12.html#lesson4" class="lesson-link" data-lesson="m12l4"><span class="lesson-dot"></span>Custom PCB Design Intro</a>
+    <a href="module12.html#lesson5" class="lesson-link" data-lesson="m12l5"><span class="lesson-dot"></span>Next Steps & Resources</a>
+  </div>
+</aside>
+
+<main class="content">
+  <div class="module-hero">
+    <div class="module-badge">📺 Module 5 of 12</div>
+    <h1>Displays &amp; Output Devices</h1>
+    <p>Make your Arduino projects communicate visually and audibly. Learn to drive LCD screens, OLED displays, 7-segment displays, buzzers, and RGB LEDs — the building blocks of interactive devices.</p>
+    <div class="module-meta">
+      <div class="meta-item">⏱️ ~2 hours</div>
+      <div class="meta-item">📗 5 lessons</div>
+      <div class="meta-item">🟡 Intermediate</div>
+    </div>
+  </div>
+
+  <!-- LESSON 1 -->
+  <div class="lesson-section" id="lesson1">
+    <h2>📺 Lesson 1: LCD 16x2 with I2C</h2>
+
+    <p>The <strong>LCD 16x2</strong> (Liquid Crystal Display) is one of the most popular Arduino displays. It shows 2 rows of 16 characters. The <strong>I2C backpack adapter</strong> reduces the wiring from 10+ wires down to just 4, making it much easier to use.</p>
+
+    <div class="info-box note">
+      <span class="icon">💡</span>
+      <div class="body"><strong>Why I2C?</strong> Without an I2C adapter, the LCD needs pins RS, EN, D4–D7 plus power — that's 6 data pins. The I2C module handles all that internally. You only need <strong>SDA (A4)</strong> and <strong>SCL (A5)</strong>.</div>
+    </div>
+
+    <h3>Components Needed</h3>
+    <div class="project-materials">
+      <span class="material-tag">LCD 16x2 Display</span>
+      <span class="material-tag">I2C Backpack (PCF8574)</span>
+      <span class="material-tag">4x Jumper Wires</span>
+      <span class="material-tag">Arduino Uno</span>
+    </div>
+
+    <h3>Wiring (I2C LCD → Arduino Uno)</h3>
+    <table class="wiring-table">
+      <thead><tr><th>LCD I2C Pin</th><th>Arduino Pin</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td class="wire-from">VCC</td><td class="wire-to">5V</td><td>Power</td></tr>
+        <tr><td class="wire-from">GND</td><td class="wire-to">GND</td><td>Ground</td></tr>
+        <tr><td class="wire-from">SDA</td><td class="wire-to">A4</td><td>I2C Data</td></tr>
+        <tr><td class="wire-from">SCL</td><td class="wire-to">A5</td><td>I2C Clock</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Installing the Library</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Open Library Manager</strong><p>In Arduino IDE: Tools → Manage Libraries...</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Search and Install</strong><p>Search for <strong>"LiquidCrystal I2C"</strong> by Frank de Brabander. Click Install.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Find Your I2C Address</strong><p>Most I2C LCDs use address <code>0x27</code> or <code>0x3F</code>. Run the I2C scanner sketch below to confirm.</p></div></div>
+    </div>
+
+    <h3>I2C Scanner — Find Your LCD Address</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="pp">#include</span> <span class="st">&lt;Wire.h&gt;</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">Wire.begin</span>();
+  <span class="fn">Serial.begin</span>(<span class="nm">9600</span>);
+  <span class="fn">Serial.println</span>(<span class="st">"Scanning I2C bus..."</span>);
+
+  <span class="kw">for</span> (<span class="tp">byte</span> addr = <span class="nm">1</span>; addr &lt; <span class="nm">127</span>; addr++) {
+    <span class="fn">Wire.beginTransmission</span>(addr);
+    <span class="tp">byte</span> error = <span class="fn">Wire.endTransmission</span>();
+    <span class="kw">if</span> (error == <span class="nm">0</span>) {
+      <span class="fn">Serial.print</span>(<span class="st">"Device found at 0x"</span>);
+      <span class="fn">Serial.println</span>(addr, HEX);
+    }
+  }
+  <span class="fn">Serial.println</span>(<span class="st">"Scan complete."</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {}</code></pre>
+    </div>
+
+    <h3>Hello World on LCD</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="pp">#include</span> <span class="st">&lt;Wire.h&gt;</span>
+<span class="pp">#include</span> <span class="st">&lt;LiquidCrystal_I2C.h&gt;</span>
+
+<span class="cm">// Create LCD object: address 0x27, 16 columns, 2 rows</span>
+<span class="tp">LiquidCrystal_I2C</span> lcd(<span class="nm">0x27</span>, <span class="nm">16</span>, <span class="nm">2</span>);
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">lcd.init</span>();          <span class="cm">// Initialize the LCD</span>
+  <span class="fn">lcd.backlight</span>();     <span class="cm">// Turn on backlight</span>
+
+  <span class="fn">lcd.setCursor</span>(<span class="nm">0</span>, <span class="nm">0</span>); <span class="cm">// col 0, row 0 (top row)</span>
+  <span class="fn">lcd.print</span>(<span class="st">"Hello, World!"</span>);
+
+  <span class="fn">lcd.setCursor</span>(<span class="nm">0</span>, <span class="nm">1</span>); <span class="cm">// col 0, row 1 (bottom row)</span>
+  <span class="fn">lcd.print</span>(<span class="st">"AlCoders ⚡"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// Nothing needed — LCD holds what you write until you change it</span>
+}</code></pre>
+    </div>
+
+    <h3>Dynamic Counter Project</h3>
+    <p>Display a live counter that increments every second — a pattern you'll use in dozens of real projects:</p>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="pp">#include</span> <span class="st">&lt;Wire.h&gt;</span>
+<span class="pp">#include</span> <span class="st">&lt;LiquidCrystal_I2C.h&gt;</span>
+
+<span class="tp">LiquidCrystal_I2C</span> lcd(<span class="nm">0x27</span>, <span class="nm">16</span>, <span class="nm">2</span>);
+<span class="tp">int</span> counter = <span class="nm">0</span>;
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">lcd.init</span>();
+  <span class="fn">lcd.backlight</span>();
+  <span class="fn">lcd.setCursor</span>(<span class="nm">0</span>, <span class="nm">0</span>);
+  <span class="fn">lcd.print</span>(<span class="st">"Count:"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="fn">lcd.setCursor</span>(<span class="nm">7</span>, <span class="nm">0</span>);  <span class="cm">// Position cursor after "Count: "</span>
+  <span class="fn">lcd.print</span>(<span class="st">"     "</span>);      <span class="cm">// Clear old number (spaces)</span>
+  <span class="fn">lcd.setCursor</span>(<span class="nm">7</span>, <span class="nm">0</span>);
+  <span class="fn">lcd.print</span>(counter);
+
+  <span class="fn">lcd.setCursor</span>(<span class="nm">0</span>, <span class="nm">1</span>);
+  <span class="fn">lcd.print</span>(<span class="st">"Uptime: "</span>);
+  <span class="fn">lcd.print</span>(<span class="fn">millis</span>() / <span class="nm">1000</span>);
+  <span class="fn">lcd.print</span>(<span class="st">"s"</span>);
+
+  counter++;
+  <span class="fn">delay</span>(<span class="nm">1000</span>);
+}</code></pre>
+    </div>
+
+    <div class="info-box tip">
+      <span class="icon">✅</span>
+      <div class="body"><strong>LCD Tips</strong> Always clear the position before writing new values (use spaces). Use <code>lcd.clear()</code> sparingly — it causes a visible flicker. Adjust contrast with the small potentiometer on the I2C backpack if text is invisible.</div>
+    </div>
+
+    <div class="quiz-box">
+      <h4>Quick Check</h4>
+      <p>What does <code>lcd.setCursor(3, 1)</code> mean?</p>
+      <button class="quiz-option" data-correct="false">Row 3, Column 1</button>
+      <button class="quiz-option" data-correct="true">Column 3, Row 1 (second row)</button>
+      <button class="quiz-option" data-correct="false">Third character on first row</button>
+      <button class="quiz-option" data-correct="false">It sets the LCD address</button>
+      <div class="quiz-result"></div>
+    </div>
+  </div>
+
+  <!-- LESSON 2 -->
+  <div class="lesson-section" id="lesson2">
+    <h2>🖥️ Lesson 2: OLED Display (SSD1306)</h2>
+
+    <p>The <strong>0.96" OLED display (SSD1306)</strong> is a compact, high-contrast 128×64 pixel screen that runs on I2C. It's perfect for compact projects because it's tiny, bright, and requires no backlight power.</p>
+
+    <h3>Components Needed</h3>
+    <div class="project-materials">
+      <span class="material-tag">0.96" OLED SSD1306</span>
+      <span class="material-tag">4x Jumper Wires</span>
+      <span class="material-tag">Arduino Uno</span>
+    </div>
+
+    <h3>Wiring (OLED → Arduino)</h3>
+    <table class="wiring-table">
+      <thead><tr><th>OLED Pin</th><th>Arduino Pin</th></tr></thead>
+      <tbody>
+        <tr><td class="wire-from">VCC</td><td class="wire-to">3.3V or 5V</td></tr>
+        <tr><td class="wire-from">GND</td><td class="wire-to">GND</td></tr>
+        <tr><td class="wire-from">SDA</td><td class="wire-to">A4</td></tr>
+        <tr><td class="wire-from">SCL</td><td class="wire-to">A5</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Install Libraries</h3>
+    <p>In Library Manager, install both: <strong>Adafruit SSD1306</strong> and <strong>Adafruit GFX Library</strong>. These two work together.</p>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="pp">#include</span> <span class="st">&lt;Wire.h&gt;</span>
+<span class="pp">#include</span> <span class="st">&lt;Adafruit_GFX.h&gt;</span>
+<span class="pp">#include</span> <span class="st">&lt;Adafruit_SSD1306.h&gt;</span>
+
+<span class="pp">#define</span> SCREEN_WIDTH <span class="nm">128</span>
+<span class="pp">#define</span> SCREEN_HEIGHT <span class="nm">64</span>
+<span class="pp">#define</span> OLED_RESET <span class="nm">-1</span>  <span class="cm">// -1 = share Arduino reset pin</span>
+
+<span class="tp">Adafruit_SSD1306</span> display(SCREEN_WIDTH, SCREEN_HEIGHT, &amp;Wire, OLED_RESET);
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">Serial.begin</span>(<span class="nm">9600</span>);
+
+  <span class="kw">if</span> (!<span class="fn">display.begin</span>(SSD1306_SWITCHCAPVCC, <span class="nm">0x3C</span>)) {
+    <span class="fn">Serial.println</span>(<span class="st">"SSD1306 not found!"</span>);
+    <span class="kw">while</span> (<span class="nm">true</span>); <span class="cm">// Stop here</span>
+  }
+
+  <span class="fn">display.clearDisplay</span>();
+
+  <span class="cm">// Text</span>
+  <span class="fn">display.setTextSize</span>(<span class="nm">2</span>);             <span class="cm">// Scale 1=6x8, 2=12x16</span>
+  <span class="fn">display.setTextColor</span>(SSD1306_WHITE);
+  <span class="fn">display.setCursor</span>(<span class="nm">10</span>, <span class="nm">10</span>);
+  <span class="fn">display.println</span>(<span class="st">"AlCoders"</span>);
+
+  <span class="fn">display.setTextSize</span>(<span class="nm">1</span>);
+  <span class="fn">display.setCursor</span>(<span class="nm">20</span>, <span class="nm">40</span>);
+  <span class="fn">display.println</span>(<span class="st">"Arduino Course"</span>);
+
+  <span class="cm">// Draw a line under title</span>
+  <span class="fn">display.drawLine</span>(<span class="nm">0</span>, <span class="nm">30</span>, <span class="nm">127</span>, <span class="nm">30</span>, SSD1306_WHITE);
+
+  <span class="fn">display.display</span>(); <span class="cm">// IMPORTANT: push buffer to screen</span>
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {}</code></pre>
+    </div>
+
+    <h3>Drawing Shapes</h3>
+    <p>The Adafruit GFX library lets you draw lines, rectangles, circles, and even bitmaps:</p>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="fn">display.clearDisplay</span>();
+
+<span class="cm">// Rectangle: x, y, width, height, color</span>
+<span class="fn">display.drawRect</span>(<span class="nm">10</span>, <span class="nm">10</span>, <span class="nm">50</span>, <span class="nm">30</span>, SSD1306_WHITE);
+
+<span class="cm">// Filled rectangle</span>
+<span class="fn">display.fillRect</span>(<span class="nm">70</span>, <span class="nm">10</span>, <span class="nm">50</span>, <span class="nm">30</span>, SSD1306_WHITE);
+
+<span class="cm">// Circle: x-center, y-center, radius, color</span>
+<span class="fn">display.drawCircle</span>(<span class="nm">64</span>, <span class="nm">48</span>, <span class="nm">12</span>, SSD1306_WHITE);
+
+<span class="cm">// Triangle: x0,y0, x1,y1, x2,y2, color</span>
+<span class="fn">display.drawTriangle</span>(<span class="nm">30</span>, <span class="nm">60</span>, <span class="nm">50</span>, <span class="nm">40</span>, <span class="nm">70</span>, <span class="nm">60</span>, SSD1306_WHITE);
+
+<span class="fn">display.display</span>(); <span class="cm">// Always call this after drawing</span></code></pre>
+    </div>
+
+    <h3>Animated Sensor Dashboard</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">int</span> sensorVal = <span class="fn">analogRead</span>(A0);
+  <span class="tp">float</span> voltage = sensorVal * (<span class="nm">5.0</span> / <span class="nm">1023.0</span>);
+
+  <span class="fn">display.clearDisplay</span>();
+
+  <span class="fn">display.setTextSize</span>(<span class="nm">1</span>);
+  <span class="fn">display.setCursor</span>(<span class="nm">0</span>, <span class="nm">0</span>);
+  <span class="fn">display.print</span>(<span class="st">"Sensor: "</span>);
+  <span class="fn">display.println</span>(sensorVal);
+
+  <span class="fn">display.setCursor</span>(<span class="nm">0</span>, <span class="nm">12</span>);
+  <span class="fn">display.print</span>(<span class="st">"Voltage: "</span>);
+  <span class="fn">display.print</span>(voltage, <span class="nm">2</span>); <span class="cm">// 2 decimal places</span>
+  <span class="fn">display.print</span>(<span class="st">"V"</span>);
+
+  <span class="cm">// Progress bar</span>
+  <span class="tp">int</span> barWidth = <span class="fn">map</span>(sensorVal, <span class="nm">0</span>, <span class="nm">1023</span>, <span class="nm">0</span>, <span class="nm">128</span>);
+  <span class="fn">display.fillRect</span>(<span class="nm">0</span>, <span class="nm">50</span>, barWidth, <span class="nm">10</span>, SSD1306_WHITE);
+  <span class="fn">display.drawRect</span>(<span class="nm">0</span>, <span class="nm">50</span>, <span class="nm">128</span>, <span class="nm">10</span>, SSD1306_WHITE);
+
+  <span class="fn">display.display</span>();
+  <span class="fn">delay</span>(<span class="nm">100</span>);
+}</code></pre>
+    </div>
+
+    <div class="info-box tip">
+      <span class="icon">✅</span>
+      <div class="body"><strong>Key rule:</strong> Always call <code>display.clearDisplay()</code> before drawing new content, then <code>display.display()</code> at the end. The OLED works with a frame buffer — nothing appears until you push it.</div>
+    </div>
+  </div>
+
+  <!-- LESSON 3 -->
+  <div class="lesson-section" id="lesson3">
+    <h2>🔢 Lesson 3: 7-Segment Display</h2>
+
+    <p>A <strong>7-segment display</strong> shows numbers 0–9 (and some letters) using 7 LED segments arranged like a figure-8. It's what you see on digital clocks, microwaves, and scoreboards.</p>
+
+    <p>Each segment is labeled <strong>a through g</strong>. To show a digit, you turn specific segments on/off. Most modules also have a <strong>decimal point (dp)</strong> segment.</p>
+
+    <h3>Common Cathode vs Common Anode</h3>
+    <table class="component-table">
+      <thead><tr><th>Type</th><th>Common Pin</th><th>Turn ON a Segment</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Common Cathode (CC)</strong></td><td>Connect to GND</td><td>Write HIGH to segment pin</td></tr>
+        <tr><td><strong>Common Anode (CA)</strong></td><td>Connect to 5V</td><td>Write LOW to segment pin</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box warning">
+      <span class="icon">⚠️</span>
+      <div class="body"><strong>Always use resistors!</strong> Connect a 220Ω–330Ω resistor in series with each segment pin to protect the LEDs.</div>
+    </div>
+
+    <h3>Code: Count 0–9</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="cm">// 7-Segment Display — Common Cathode</span>
+<span class="cm">// Pins: a=2, b=3, c=4, d=5, e=6, f=7, g=8</span>
+<span class="tp">int</span> segPins[] = {<span class="nm">2</span>, <span class="nm">3</span>, <span class="nm">4</span>, <span class="nm">5</span>, <span class="nm">6</span>, <span class="nm">7</span>, <span class="nm">8</span>};
+
+<span class="cm">// Segment patterns: a, b, c, d, e, f, g</span>
+<span class="cm">// 1 = segment ON, 0 = segment OFF</span>
+<span class="tp">byte</span> digits[<span class="nm">10</span>][<span class="nm">7</span>] = {
+  {<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">0</span>}, <span class="cm">// 0</span>
+  {<span class="nm">0</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">0</span>,<span class="nm">0</span>,<span class="nm">0</span>,<span class="nm">0</span>}, <span class="cm">// 1</span>
+  {<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">0</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">0</span>,<span class="nm">1</span>}, <span class="cm">// 2</span>
+  {<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">0</span>,<span class="nm">0</span>,<span class="nm">1</span>}, <span class="cm">// 3</span>
+  {<span class="nm">0</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">0</span>,<span class="nm">0</span>,<span class="nm">1</span>,<span class="nm">1</span>}, <span class="cm">// 4</span>
+  {<span class="nm">1</span>,<span class="nm">0</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">0</span>,<span class="nm">1</span>,<span class="nm">1</span>}, <span class="cm">// 5</span>
+  {<span class="nm">1</span>,<span class="nm">0</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">1</span>}, <span class="cm">// 6</span>
+  {<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">0</span>,<span class="nm">0</span>,<span class="nm">0</span>,<span class="nm">0</span>}, <span class="cm">// 7</span>
+  {<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">1</span>}, <span class="cm">// 8</span>
+  {<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">1</span>,<span class="nm">0</span>,<span class="nm">1</span>,<span class="nm">1</span>}  <span class="cm">// 9</span>
+};
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">0</span>; i &lt; <span class="nm">7</span>; i++)
+    <span class="fn">pinMode</span>(segPins[i], OUTPUT);
+}
+
+<span class="kw">void</span> <span class="fn">showDigit</span>(<span class="tp">int</span> num) {
+  <span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">0</span>; i &lt; <span class="nm">7</span>; i++)
+    <span class="fn">digitalWrite</span>(segPins[i], digits[num][i]);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">for</span> (<span class="tp">int</span> d = <span class="nm">0</span>; d &lt;= <span class="nm">9</span>; d++) {
+    <span class="fn">showDigit</span>(d);
+    <span class="fn">delay</span>(<span class="nm">800</span>);
+  }
+}</code></pre>
+    </div>
+
+    <div class="info-box note">
+      <span class="icon">💡</span>
+      <div class="body"><strong>Tip:</strong> For multi-digit displays (like 4-digit clock modules), use a TM1637 chip with a dedicated library — it simplifies wiring to just 2 pins. Search "TM1637" in Library Manager.</div>
+    </div>
+  </div>
+
+  <!-- LESSON 4 -->
+  <div class="lesson-section" id="lesson4">
+    <h2>🔔 Lesson 4: Buzzer &amp; Tones</h2>
+
+    <p>A <strong>passive buzzer</strong> can be made to play tones at different frequencies — like a tiny speaker. A <strong>active buzzer</strong> beeps at one fixed frequency when powered. We'll use the passive buzzer for music!</p>
+
+    <h3>Active vs Passive Buzzer</h3>
+    <table class="component-table">
+      <thead><tr><th>Type</th><th>How It Works</th><th>Can Play Music?</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Active Buzzer</strong></td><td>Apply 5V → beeps at fixed frequency</td><td>No — one pitch only</td></tr>
+        <tr><td><strong>Passive Buzzer</strong></td><td>Needs PWM signal to create sound</td><td>Yes — any frequency!</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Wiring (Passive Buzzer)</h3>
+    <table class="wiring-table">
+      <thead><tr><th>Buzzer Pin</th><th>Arduino</th></tr></thead>
+      <tbody>
+        <tr><td class="wire-from">+ (positive)</td><td class="wire-to">Pin 8 (or any digital)</td></tr>
+        <tr><td class="wire-from">- (negative)</td><td class="wire-to">GND</td></tr>
+      </tbody>
+    </table>
+
+    <h3>tone() Function</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="pp">#define</span> BUZZER_PIN <span class="nm">8</span>
+
+<span class="cm">// Musical note frequencies (Hz)</span>
+<span class="pp">#define</span> NOTE_C4  <span class="nm">262</span>
+<span class="pp">#define</span> NOTE_D4  <span class="nm">294</span>
+<span class="pp">#define</span> NOTE_E4  <span class="nm">330</span>
+<span class="pp">#define</span> NOTE_F4  <span class="nm">349</span>
+<span class="pp">#define</span> NOTE_G4  <span class="nm">392</span>
+<span class="pp">#define</span> NOTE_A4  <span class="nm">440</span>
+<span class="pp">#define</span> NOTE_B4  <span class="nm">494</span>
+<span class="pp">#define</span> NOTE_C5  <span class="nm">523</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(BUZZER_PIN, OUTPUT);
+}
+
+<span class="kw">void</span> <span class="fn">playNote</span>(<span class="tp">int</span> frequency, <span class="tp">int</span> duration) {
+  <span class="fn">tone</span>(BUZZER_PIN, frequency, duration);
+  <span class="fn">delay</span>(duration + <span class="nm">50</span>); <span class="cm">// brief gap between notes</span>
+  <span class="fn">noTone</span>(BUZZER_PIN);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// Play C Major scale</span>
+  <span class="fn">playNote</span>(NOTE_C4, <span class="nm">300</span>);
+  <span class="fn">playNote</span>(NOTE_D4, <span class="nm">300</span>);
+  <span class="fn">playNote</span>(NOTE_E4, <span class="nm">300</span>);
+  <span class="fn">playNote</span>(NOTE_F4, <span class="nm">300</span>);
+  <span class="fn">playNote</span>(NOTE_G4, <span class="nm">300</span>);
+  <span class="fn">playNote</span>(NOTE_A4, <span class="nm">300</span>);
+  <span class="fn">playNote</span>(NOTE_B4, <span class="nm">300</span>);
+  <span class="fn">playNote</span>(NOTE_C5, <span class="nm">600</span>);
+  <span class="fn">delay</span>(<span class="nm">2000</span>);
+}</code></pre>
+    </div>
+
+    <h3>Alarm System Project</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="cm">// Motion-triggered alarm with PIR sensor on pin 7</span>
+<span class="pp">#define</span> PIR_PIN    <span class="nm">7</span>
+<span class="pp">#define</span> BUZZER_PIN <span class="nm">8</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(PIR_PIN, INPUT);
+  <span class="fn">pinMode</span>(BUZZER_PIN, OUTPUT);
+  <span class="fn">Serial.begin</span>(<span class="nm">9600</span>);
+  <span class="fn">Serial.println</span>(<span class="st">"Alarm armed. Waiting..."</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">if</span> (<span class="fn">digitalRead</span>(PIR_PIN) == HIGH) {
+    <span class="fn">Serial.println</span>(<span class="st">"MOTION DETECTED!"</span>);
+    <span class="cm">// Wailing siren effect</span>
+    <span class="kw">for</span> (<span class="tp">int</span> freq = <span class="nm">500</span>; freq &lt;= <span class="nm">1500</span>; freq += <span class="nm">10</span>) {
+      <span class="fn">tone</span>(BUZZER_PIN, freq);
+      <span class="fn">delay</span>(<span class="nm">5</span>);
+    }
+    <span class="kw">for</span> (<span class="tp">int</span> freq = <span class="nm">1500</span>; freq &gt;= <span class="nm">500</span>; freq -= <span class="nm">10</span>) {
+      <span class="fn">tone</span>(BUZZER_PIN, freq);
+      <span class="fn">delay</span>(<span class="nm">5</span>);
+    }
+  } <span class="kw">else</span> {
+    <span class="fn">noTone</span>(BUZZER_PIN);
+  }
+}</code></pre>
+    </div>
+  </div>
+
+  <!-- LESSON 5 -->
+  <div class="lesson-section" id="lesson5">
+    <h2>🌈 Lesson 5: RGB LED &amp; Color Mixing</h2>
+
+    <p>An <strong>RGB LED</strong> contains three LEDs in one package: Red, Green, and Blue. By controlling the brightness of each color using PWM, you can mix any color in the spectrum — over 16 million combinations!</p>
+
+    <h3>Common Cathode RGB LED Pinout</h3>
+    <table class="wiring-table">
+      <thead><tr><th>RGB Pin</th><th>Arduino PWM Pin</th><th>Resistor</th></tr></thead>
+      <tbody>
+        <tr><td class="wire-from">R (Red)</td><td class="wire-to">Pin 9~</td><td>220Ω</td></tr>
+        <tr><td class="wire-from">Common (-)</td><td class="wire-to">GND</td><td>—</td></tr>
+        <tr><td class="wire-from">G (Green)</td><td class="wire-to">Pin 10~</td><td>220Ω</td></tr>
+        <tr><td class="wire-from">B (Blue)</td><td class="wire-to">Pin 11~</td><td>220Ω</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Full RGB Color Control</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="pp">#define</span> RED_PIN   <span class="nm">9</span>
+<span class="pp">#define</span> GREEN_PIN <span class="nm">10</span>
+<span class="pp">#define</span> BLUE_PIN  <span class="nm">11</span>
+
+<span class="kw">void</span> <span class="fn">setColor</span>(<span class="tp">int</span> r, <span class="tp">int</span> g, <span class="tp">int</span> b) {
+  <span class="fn">analogWrite</span>(RED_PIN, r);
+  <span class="fn">analogWrite</span>(GREEN_PIN, g);
+  <span class="fn">analogWrite</span>(BLUE_PIN, b);
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(RED_PIN, OUTPUT);
+  <span class="fn">pinMode</span>(GREEN_PIN, OUTPUT);
+  <span class="fn">pinMode</span>(BLUE_PIN, OUTPUT);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="fn">setColor</span>(<span class="nm">255</span>, <span class="nm">0</span>,   <span class="nm">0</span>);   <span class="fn">delay</span>(<span class="nm">500</span>); <span class="cm">// Red</span>
+  <span class="fn">setColor</span>(<span class="nm">0</span>,   <span class="nm">255</span>, <span class="nm">0</span>);   <span class="fn">delay</span>(<span class="nm">500</span>); <span class="cm">// Green</span>
+  <span class="fn">setColor</span>(<span class="nm">0</span>,   <span class="nm">0</span>,   <span class="nm">255</span>); <span class="fn">delay</span>(<span class="nm">500</span>); <span class="cm">// Blue</span>
+  <span class="fn">setColor</span>(<span class="nm">255</span>, <span class="nm">255</span>, <span class="nm">0</span>);   <span class="fn">delay</span>(<span class="nm">500</span>); <span class="cm">// Yellow</span>
+  <span class="fn">setColor</span>(<span class="nm">0</span>,   <span class="nm">255</span>, <span class="nm">255</span>); <span class="fn">delay</span>(<span class="nm">500</span>); <span class="cm">// Cyan</span>
+  <span class="fn">setColor</span>(<span class="nm">255</span>, <span class="nm">0</span>,   <span class="nm">255</span>); <span class="fn">delay</span>(<span class="nm">500</span>); <span class="cm">// Magenta</span>
+  <span class="fn">setColor</span>(<span class="nm">255</span>, <span class="nm">255</span>, <span class="nm">255</span>); <span class="fn">delay</span>(<span class="nm">500</span>); <span class="cm">// White</span>
+}</code></pre>
+    </div>
+
+    <h3>Rainbow Fade Effect</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="cm">// Smooth rainbow cycle through all colors</span>
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// Red → Yellow (increase green)</span>
+  <span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">0</span>; i &lt; <span class="nm">256</span>; i++) { <span class="fn">setColor</span>(<span class="nm">255</span>, i, <span class="nm">0</span>); <span class="fn">delay</span>(<span class="nm">5</span>); }
+  <span class="cm">// Yellow → Green (decrease red)</span>
+  <span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">255</span>; i &gt;= <span class="nm">0</span>; i--) { <span class="fn">setColor</span>(i, <span class="nm">255</span>, <span class="nm">0</span>); <span class="fn">delay</span>(<span class="nm">5</span>); }
+  <span class="cm">// Green → Cyan (increase blue)</span>
+  <span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">0</span>; i &lt; <span class="nm">256</span>; i++) { <span class="fn">setColor</span>(<span class="nm">0</span>, <span class="nm">255</span>, i); <span class="fn">delay</span>(<span class="nm">5</span>); }
+  <span class="cm">// Cyan → Blue (decrease green)</span>
+  <span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">255</span>; i &gt;= <span class="nm">0</span>; i--) { <span class="fn">setColor</span>(<span class="nm">0</span>, i, <span class="nm">255</span>); <span class="fn">delay</span>(<span class="nm">5</span>); }
+  <span class="cm">// Blue → Magenta (increase red)</span>
+  <span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">0</span>; i &lt; <span class="nm">256</span>; i++) { <span class="fn">setColor</span>(i, <span class="nm">0</span>, <span class="nm">255</span>); <span class="fn">delay</span>(<span class="nm">5</span>); }
+  <span class="cm">// Magenta → Red (decrease blue)</span>
+  <span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">255</span>; i &gt;= <span class="nm">0</span>; i--) { <span class="fn">setColor</span>(<span class="nm">255</span>, <span class="nm">0</span>, i); <span class="fn">delay</span>(<span class="nm">5</span>); }
+}</code></pre>
+    </div>
+
+    <div class="quiz-box">
+      <h4>Quick Check</h4>
+      <p>What color does <code>setColor(255, 255, 0)</code> produce?</p>
+      <button class="quiz-option" data-correct="false">White</button>
+      <button class="quiz-option" data-correct="true">Yellow</button>
+      <button class="quiz-option" data-correct="false">Orange</button>
+      <button class="quiz-option" data-correct="false">Cyan</button>
+      <div class="quiz-result"></div>
+    </div>
+  </div>
+
+  <div class="lesson-footer">
+    <a href="module4.html" class="btn btn-outline">← Module 4</a>
+    <button class="btn btn-complete" data-lesson="m5_complete">○ Mark Module Complete</button>
+    <a href="module6.html" class="btn btn-primary">Module 6: Motors →</a>
+  </div>
+</main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

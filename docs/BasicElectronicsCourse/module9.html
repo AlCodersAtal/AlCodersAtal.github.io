@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 9: Sensors & Signals — AlCoders Electronics</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo"><div class="logo-icon">⚡</div>Al<span>Coders</span></a>
+  <div class="nav-links">
+    <a href="module8.html">← Module 8</a>
+    <a href="index.html">All Modules</a>
+    <a href="module10.html">Module 10: Intro to Arduino →</a>
+  </div>
+</nav>
+<div class="course-layout">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h3>// Module 9 Progress</h3>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-label">0% complete</div>
+  </div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">1</span>What is Electricity?</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module1.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">2</span>Basic Components</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module2.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">3</span>Ohm's Law & Power</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module3.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">4</span>Series & Parallel</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module4.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">5</span>Semiconductors & Diodes</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module5.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">6</span>Transistors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module6.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">7</span>Breadboarding & Tools</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module7.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">8</span>Capacitors & Inductors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module8.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn active"><span class="module-num">9</span>Sensors & Signals</button><ul class="lesson-list">
+<li class="lesson-item"><a href="#m9_1" data-lid="m9_1">9.1 Analog vs Digital</a></li>
+<li class="lesson-item"><a href="#m9_2" data-lid="m9_2">9.2 Common Sensors</a></li>
+<li class="lesson-item"><a href="#m9_3" data-lid="m9_3">9.3 Signal Conditioning</a></li>
+<li class="lesson-item"><a href="#m9_4" data-lid="m9_4">9.4 Pull-up & Pull-down Resistors</a></li>
+<li class="lesson-item"><a href="#m9_5" data-lid="m9_5">9.5 Sensor Reading Preview</a></li>
+</ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">10</span>Intro to Arduino</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module10.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">11</span>Arduino & Sensors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module11.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">12</span>Final Projects</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module12.html">Go to module →</a></li></ul></div>
+
+</aside>
+<main class="content-area">
+  <div class="lesson-breadcrumb">Electronics Course → <span>Module 9</span> → Sensors & Signals</div>
+  <section id="m9_1">
+<h1 class="lesson-title">9.1 Analog vs Digital</h1>
+<div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>All signals are either <strong>analog</strong> (continuous, like temperature) or <strong>digital</strong> (two states: HIGH/LOW).</p>
+<div class="info-box"><div class="box-title">📌 ADC — Analog to Digital</div>Arduino has a 10-bit ADC: converts 0–5V to 0–1023. Resolution = 5V/1024 ≈ 4.9mV per step.</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m9_2">
+<h1 class="lesson-title">9.2 Common Sensors</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<div class="component-grid"><div class="component-card"><div class="component-icon">🔩</div><h4>LDR</h4><p>Resistance drops with light. Use in voltage divider for light level detection.</p></div><div class="component-card"><div class="component-icon">🔩</div><h4>NTC Thermistor</h4><p>Resistance drops with heat. Combine with voltage divider for temperature sensing.</p></div><div class="component-card"><div class="component-icon">🔩</div><h4>PIR HC-SR501</h4><p>Detects human motion. Digital output HIGH when motion detected.</p></div><div class="component-card"><div class="component-icon">🔩</div><h4>HC-SR04</h4><p>Ultrasonic distance sensor. 2cm–400cm range. Trigger pulse → measure echo time.</p></div></div>
+<div class="component-grid"><div class="component-card"><div class="component-icon">🔩</div><h4>DHT22</h4><p>Temperature + humidity sensor. Digital one-wire protocol. More accurate than DHT11.</p></div><div class="component-card"><div class="component-icon">🔩</div><h4>MPU-6050</h4><p>6-axis IMU via I2C. Accelerometer + gyroscope for motion/orientation.</p></div><div class="component-card"><div class="component-icon">🔩</div><h4>MQ-2</h4><p>Gas sensor (LPG, smoke). Analog output. Needs warm-up time.</p></div><div class="component-card"><div class="component-icon">🔩</div><h4>TCRT5000</h4><p>IR reflective sensor for line following. Short range (1–10mm).</p></div></div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m9_3">
+<h1 class="lesson-title">9.3 Signal Conditioning</h1>
+<div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>Raw sensor signals often need preparation before a microcontroller can use them.</p>
+<div class="info-box"><div class="box-title">📌 Techniques</div>Amplification (op-amp) · Low-pass filtering (RC) · Level shifting (resistor divider) · Buffering (voltage follower) · ADC conversion.</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m9_4">
+<h1 class="lesson-title">9.4 Pull-up & Pull-down Resistors</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>Digital inputs must never be left floating (unconnected) — they pick up noise and read random values.</p>
+<div class="info-box"><div class="box-title">📌 Solutions</div>Pull-up (10kΩ to Vcc): undriven → reads HIGH. Pull-down (10kΩ to GND): undriven → reads LOW. Arduino has built-in pull-ups activated with INPUT_PULLUP.</div>
+<div class="warning-box"><div class="box-title">⚠️ Voltage Levels</div>Arduino is 5V. Some sensors are 3.3V. Never connect 5V to a 3.3V input directly — use a voltage divider or level shifter.</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m9_5">
+<h1 class="lesson-title">9.5 Sensor Reading Preview</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>Before Arduino code in Module 10, here's the pattern for reading sensors.</p>
+<div class="info-box"><div class="box-title">📌 Voltage Divider Sensor Pattern</div>Sensor as bottom resistor → midpoint to analog pin → analogRead() returns 0–1023 → multiply by 5.0/1023.0 for volts.</div>
+<div class="tip-box"><div class="box-title">💡 Calibration</div>Raw ADC values are meaningless without calibration. Always test at known reference points and apply a conversion formula.</div>
+</div>
+
+<div class="lesson-nav">
+  <a href="module8.html" class="btn btn-outline">← Module 8</a>
+  <button class="mark-done-btn">Mark as Complete</button>
+  <a href="module10.html" class="btn btn-primary">Module 10: Intro to Arduino →</a>
+</div>
+</section>
+
+</main>
+</div>
+<script src="course.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  updateProgressBar('m9', 5);
+  initMarkDone('m9_5');
+  refreshSidebarDone();
+});
+</script>
+</body>
+</html>

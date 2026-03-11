@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 1: Getting Started – AlCoders Arduino</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="index.html">⚡ <span>Al</span>Coders</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="module1.html" class="active">Module 1</a>
+    <a href="module2.html">Module 2 →</a>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">Arduino Course</a> › Module 1 › Getting Started with Arduino
+</div>
+
+<div class="page-wrapper">
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo-block"><a href="index.html"><span class="sidebar-logo-text">⚡ <span>Al</span>Coders</span></a></div>
+  <div class="sidebar-header">
+    <div class="sidebar-title">Course Progress</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 60 lessons completed</div>
+  </div>
+
+  <div class="module-group">
+    <div class="module-label"><span class="mod-icon">🔧</span> Module 1 – Getting Started</div>
+    <a href="#lesson1" class="lesson-link active" data-lesson="m1l1"><span class="lesson-dot"></span>What is Arduino?</a>
+    <a href="#lesson2" class="lesson-link" data-lesson="m1l2"><span class="lesson-dot"></span>Installing the Arduino IDE</a>
+    <a href="#lesson3" class="lesson-link" data-lesson="m1l3"><span class="lesson-dot"></span>Exploring the Arduino Board</a>
+    <a href="#lesson4" class="lesson-link" data-lesson="m1l4"><span class="lesson-dot"></span>Your First Sketch: Blink</a>
+    <a href="#lesson5" class="lesson-link" data-lesson="m1l5"><span class="lesson-dot"></span>Understanding the Code</a>
+  </div>
+  <div class="module-group">
+    <div class="module-label"><span class="mod-icon">⚡</span> Module 2 – Electronics</div>
+    <a href="module2.html" class="lesson-link" data-lesson="m2l1"><span class="lesson-dot"></span>Voltage, Current & Resistance</a>
+    <a href="module2.html#lesson2" class="lesson-link" data-lesson="m2l2"><span class="lesson-dot"></span>Ohm's Law</a>
+    <a href="module2.html#lesson3" class="lesson-link" data-lesson="m2l3"><span class="lesson-dot"></span>Breadboards & Schematics</a>
+    <a href="module2.html#lesson4" class="lesson-link" data-lesson="m2l4"><span class="lesson-dot"></span>Resistors & Capacitors</a>
+    <a href="module2.html#lesson5" class="lesson-link" data-lesson="m2l5"><span class="lesson-dot"></span>Power Supply & Safety</a>
+  </div>
+  <div class="module-group">
+    <div class="module-label"><span class="mod-icon">💡</span> Module 3 – Digital I/O</div>
+    <a href="module3.html" class="lesson-link" data-lesson="m3l1"><span class="lesson-dot"></span>Digital Pins Explained</a>
+    <a href="module3.html#lesson2" class="lesson-link" data-lesson="m3l2"><span class="lesson-dot"></span>digitalWrite & digitalRead</a>
+    <a href="module3.html#lesson3" class="lesson-link" data-lesson="m3l3"><span class="lesson-dot"></span>Push Buttons & Input</a>
+    <a href="module3.html#lesson4" class="lesson-link" data-lesson="m3l4"><span class="lesson-dot"></span>Debouncing Buttons</a>
+    <a href="module3.html#lesson5" class="lesson-link" data-lesson="m3l5"><span class="lesson-dot"></span>Traffic Light Project</a>
+  </div>
+  <div class="module-group">
+    <div class="module-label"><span class="mod-icon">🌡️</span> Module 4 – Analog I/O</div>
+    <a href="module4.html" class="lesson-link" data-lesson="m4l1"><span class="lesson-dot"></span>Analog vs Digital</a>
+    <a href="module4.html#lesson2" class="lesson-link" data-lesson="m4l2"><span class="lesson-dot"></span>analogRead & Potentiometer</a>
+    <a href="module4.html#lesson3" class="lesson-link" data-lesson="m4l3"><span class="lesson-dot"></span>PWM & analogWrite</a>
+    <a href="module4.html#lesson4" class="lesson-link" data-lesson="m4l4"><span class="lesson-dot"></span>Temperature Sensor (LM35/NTC)</a>
+    <a href="module4.html#lesson5" class="lesson-link" data-lesson="m4l5"><span class="lesson-dot"></span>Light Sensor (LDR) Project</a>
+  </div>
+  <div class="module-group">
+    <div class="module-label"><span class="mod-icon">📺</span> Module 5 – Displays</div>
+    <a href="module5.html" class="lesson-link" data-lesson="m5l1"><span class="lesson-dot"></span>LCD 16x2 with I2C</a>
+    <a href="module5.html#lesson2" class="lesson-link" data-lesson="m5l2"><span class="lesson-dot"></span>OLED Display (SSD1306)</a>
+    <a href="module5.html#lesson3" class="lesson-link" data-lesson="m5l3"><span class="lesson-dot"></span>7-Segment Display</a>
+    <a href="module5.html#lesson4" class="lesson-link" data-lesson="m5l4"><span class="lesson-dot"></span>Buzzer & Tones</a>
+    <a href="module5.html#lesson5" class="lesson-link" data-lesson="m5l5"><span class="lesson-dot"></span>RGB LED & Color Mixing</a>
+  </div>
+  <div class="module-group">
+    <div class="module-label"><span class="mod-icon">🔊</span> Module 6 – Motors</div>
+    <a href="module6.html" class="lesson-link" data-lesson="m6l1"><span class="lesson-dot"></span>Servo Motor Basics</a>
+    <a href="module6.html#lesson2" class="lesson-link" data-lesson="m6l2"><span class="lesson-dot"></span>DC Motors & L298N</a>
+    <a href="module6.html#lesson3" class="lesson-link" data-lesson="m6l3"><span class="lesson-dot"></span>Stepper Motors</a>
+    <a href="module6.html#lesson4" class="lesson-link" data-lesson="m6l4"><span class="lesson-dot"></span>Motor Speed Control</a>
+    <a href="module6.html#lesson5" class="lesson-link" data-lesson="m6l5"><span class="lesson-dot"></span>Mini Robot Car Project</a>
+  </div>
+  <div class="module-group">
+    <div class="module-label"><span class="mod-icon">📡</span> Module 7 – Protocols</div>
+    <a href="module7.html" class="lesson-link" data-lesson="m7l1"><span class="lesson-dot"></span>Serial Communication</a>
+    <a href="module7.html#lesson2" class="lesson-link" data-lesson="m7l2"><span class="lesson-dot"></span>I2C Protocol</a>
+    <a href="module7.html#lesson3" class="lesson-link" data-lesson="m7l3"><span class="lesson-dot"></span>SPI Protocol</a>
+    <a href="module7.html#lesson4" class="lesson-link" data-lesson="m7l4"><span class="lesson-dot"></span>Connecting Multiple Devices</a>
+    <a href="module7.html#lesson5" class="lesson-link" data-lesson="m7l5"><span class="lesson-dot"></span>Real-time Serial Plotter</a>
+  </div>
+  <div class="module-group">
+    <div class="module-label"><span class="mod-icon">🌐</span> Module 8 – WiFi & IoT</div>
+    <a href="module8.html" class="lesson-link" data-lesson="m8l1"><span class="lesson-dot"></span>Intro to ESP8266 & ESP32</a>
+    <a href="module8.html#lesson2" class="lesson-link" data-lesson="m8l2"><span class="lesson-dot"></span>Connecting to WiFi</a>
+    <a href="module8.html#lesson3" class="lesson-link" data-lesson="m8l3"><span class="lesson-dot"></span>Building a Web Server</a>
+    <a href="module8.html#lesson4" class="lesson-link" data-lesson="m8l4"><span class="lesson-dot"></span>Sending Data to Cloud (ThingSpeak)</a>
+    <a href="module8.html#lesson5" class="lesson-link" data-lesson="m8l5"><span class="lesson-dot"></span>MQTT Basics</a>
+  </div>
+  <div class="module-group">
+    <div class="module-label"><span class="mod-icon">📶</span> Module 9 – Bluetooth</div>
+    <a href="module9.html" class="lesson-link" data-lesson="m9l1"><span class="lesson-dot"></span>HC-05 Bluetooth Module</a>
+    <a href="module9.html#lesson2" class="lesson-link" data-lesson="m9l2"><span class="lesson-dot"></span>AT Commands Setup</a>
+    <a href="module9.html#lesson3" class="lesson-link" data-lesson="m9l3"><span class="lesson-dot"></span>Phone-Controlled LED</a>
+    <a href="module9.html#lesson4" class="lesson-link" data-lesson="m9l4"><span class="lesson-dot"></span>BLE with ESP32</a>
+    <a href="module9.html#lesson5" class="lesson-link" data-lesson="m9l5"><span class="lesson-dot"></span>Bluetooth Robot Control</a>
+  </div>
+  <div class="module-group">
+    <div class="module-label"><span class="mod-icon">⏱️</span> Module 10 – Interrupts</div>
+    <a href="module10.html" class="lesson-link" data-lesson="m10l1"><span class="lesson-dot"></span>What are Interrupts?</a>
+    <a href="module10.html#lesson2" class="lesson-link" data-lesson="m10l2"><span class="lesson-dot"></span>attachInterrupt()</a>
+    <a href="module10.html#lesson3" class="lesson-link" data-lesson="m10l3"><span class="lesson-dot"></span>Timer Interrupts</a>
+    <a href="module10.html#lesson4" class="lesson-link" data-lesson="m10l4"><span class="lesson-dot"></span>Watchdog Timer</a>
+    <a href="module10.html#lesson5" class="lesson-link" data-lesson="m10l5"><span class="lesson-dot"></span>Sleep Modes & Low Power</a>
+  </div>
+  <div class="module-group">
+    <div class="module-label"><span class="mod-icon">💾</span> Module 11 – Memory</div>
+    <a href="module11.html" class="lesson-link" data-lesson="m11l1"><span class="lesson-dot"></span>SRAM, Flash & EEPROM</a>
+    <a href="module11.html#lesson2" class="lesson-link" data-lesson="m11l2"><span class="lesson-dot"></span>Reading & Writing EEPROM</a>
+    <a href="module11.html#lesson3" class="lesson-link" data-lesson="m11l3"><span class="lesson-dot"></span>SD Card Module</a>
+    <a href="module11.html#lesson4" class="lesson-link" data-lesson="m11l4"><span class="lesson-dot"></span>Writing Custom Libraries</a>
+    <a href="module11.html#lesson5" class="lesson-link" data-lesson="m11l5"><span class="lesson-dot"></span>Data Logger Project</a>
+  </div>
+  <div class="module-group">
+    <div class="module-label"><span class="mod-icon">🏗️</span> Module 12 – Capstone</div>
+    <a href="module12.html" class="lesson-link" data-lesson="m12l1"><span class="lesson-dot"></span>Smart Weather Station</a>
+    <a href="module12.html#lesson2" class="lesson-link" data-lesson="m12l2"><span class="lesson-dot"></span>Obstacle-Avoiding Robot</a>
+    <a href="module12.html#lesson3" class="lesson-link" data-lesson="m12l3"><span class="lesson-dot"></span>Home Automation System</a>
+    <a href="module12.html#lesson4" class="lesson-link" data-lesson="m12l4"><span class="lesson-dot"></span>Custom PCB Design Intro</span></a>
+    <a href="module12.html#lesson5" class="lesson-link" data-lesson="m12l5"><span class="lesson-dot"></span>Next Steps & Resources</a>
+  </div>
+</aside>
+
+<!-- CONTENT -->
+<main class="content">
+
+  <div class="module-hero">
+    <div class="module-badge">🔧 Module 1 of 12</div>
+    <h1>Getting Started with Arduino</h1>
+    <p>Welcome to Arduino! In this module you'll learn exactly what Arduino is, install all the tools you need, understand the board layout, and write your very first program.</p>
+    <div class="module-meta">
+      <div class="meta-item">⏱️ ~90 minutes</div>
+      <div class="meta-item">📗 5 lessons</div>
+      <div class="meta-item">🟢 Beginner</div>
+    </div>
+  </div>
+
+  <!-- LESSON 1 -->
+  <div class="lesson-section" id="lesson1">
+    <h2>🤖 Lesson 1: What is Arduino?</h2>
+
+    <p>Arduino is an <strong>open-source electronics platform</strong> that combines a physical programmable circuit board (the <em>microcontroller</em>) with software (the <em>IDE</em>) that runs on your computer. You write code on your computer, upload it to the Arduino board, and the board runs your program — controlling lights, reading sensors, driving motors, and more.</p>
+
+    <p>Think of it as a tiny, programmable brain that you can connect to the real world.</p>
+
+    <div class="info-box note">
+      <span class="icon">💡</span>
+      <div class="body">
+        <strong>Key Idea</strong>
+        Arduino is NOT just hardware, and NOT just software — it's both together. The board is the body, and your code is the brain.
+      </div>
+    </div>
+
+    <h3>Why Arduino?</h3>
+    <ul>
+      <li>✅ <strong>Beginner friendly</strong> — simplified C++ language, huge community</li>
+      <li>✅ <strong>Affordable</strong> — official boards from ₹500–₹2000, cheap clones even less</li>
+      <li>✅ <strong>Huge ecosystem</strong> — thousands of libraries, shields, and sensor modules</li>
+      <li>✅ <strong>Used professionally</strong> — rapid prototyping in startups, universities, and research labs</li>
+      <li>✅ <strong>Open source</strong> — everything is free to learn, modify, and build upon</li>
+    </ul>
+
+    <h3>Popular Arduino Boards</h3>
+    <table class="component-table">
+      <thead><tr><th>Board</th><th>Processor</th><th>Best For</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Arduino Uno R3</strong></td><td>ATmega328P @ 16MHz</td><td>Beginners — the standard starter board</td></tr>
+        <tr><td><strong>Arduino Nano</strong></td><td>ATmega328P @ 16MHz</td><td>Compact projects, breadboard-friendly</td></tr>
+        <tr><td><strong>Arduino Mega 2560</strong></td><td>ATmega2560 @ 16MHz</td><td>Projects needing many pins/memory</td></tr>
+        <tr><td><strong>Arduino Leonardo</strong></td><td>ATmega32U4</td><td>USB HID — simulate keyboard/mouse</td></tr>
+        <tr><td><strong>ESP8266 / ESP32</strong></td><td>Xtensa 80–240MHz</td><td>WiFi & IoT projects (Module 8)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box tip">
+      <span class="icon">✅</span>
+      <div class="body">
+        <strong>Recommendation</strong>
+        For this course, use the <strong>Arduino Uno R3</strong>. It's the most widely documented board, and every tutorial in this course is built around it. You can use a clone (CH340 chip) to save money — it works identically.
+      </div>
+    </div>
+
+    <h3>What Can You Build?</h3>
+    <p>Arduino is used for an incredible range of real-world projects:</p>
+    <ul>
+      <li>🌡️ Weather stations that post data online</li>
+      <li>🤖 Robots that avoid obstacles or follow lines</li>
+      <li>🏠 Smart home systems (lights, locks, fans)</li>
+      <li>🎮 Custom game controllers</li>
+      <li>💊 Automated medication dispensers</li>
+      <li>🌱 Automated plant watering systems</li>
+      <li>🔒 RFID-based door locks</li>
+    </ul>
+
+    <div class="quiz-box">
+      <h4>Quick Check</h4>
+      <p>What does an Arduino board contain that lets it run your programs?</p>
+      <button class="quiz-option" data-correct="false">A graphics card</button>
+      <button class="quiz-option" data-correct="true">A microcontroller chip</button>
+      <button class="quiz-option" data-correct="false">A Raspberry Pi processor</button>
+      <button class="quiz-option" data-correct="false">A WiFi module</button>
+      <div class="quiz-result"></div>
+    </div>
+  </div>
+
+  <!-- LESSON 2 -->
+  <div class="lesson-section" id="lesson2">
+    <h2>🖥️ Lesson 2: Installing the Arduino IDE</h2>
+
+    <p>The <strong>Arduino IDE</strong> (Integrated Development Environment) is the free software where you write, edit, and upload your code to the Arduino board. Let's install it step by step.</p>
+
+    <h3>Download the IDE</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Go to the official website</strong>
+          <p>Open your browser and visit <strong>arduino.cc/en/software</strong>. Always download from the official site!</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Choose your version</strong>
+          <p>Download <strong>Arduino IDE 2.x</strong> (latest) — it has better autocomplete, debugging tools, and a built-in library manager. Choose your OS: Windows, macOS, or Linux.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Install it</strong>
+          <p><strong>Windows:</strong> Run the .exe installer. Click "Install" for all components including drivers.<br/>
+          <strong>macOS:</strong> Open the .dmg and drag Arduino IDE to Applications.<br/>
+          <strong>Linux:</strong> Extract the .zip and run <code>install.sh</code> as root.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>Install USB Drivers (Windows only)</strong>
+          <p>If you have a <strong>clone Arduino (CH340 chip)</strong>, you need to install the CH340 driver separately. Download from: <strong>wch-ic.com/downloads/CH341SER_ZIP.html</strong>. After installing, restart your computer.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <strong>Launch the IDE</strong>
+          <p>Open Arduino IDE. You'll see the editor window with a toolbar at the top and a console at the bottom.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Connecting Your Arduino</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Plug in via USB</strong>
+          <p>Connect your Arduino Uno to your computer using the USB-A to USB-B cable. The board's power LED (labeled PWR) should light up green.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Select the Board</strong>
+          <p>In the IDE: go to <strong>Tools → Board → Arduino AVR Boards → Arduino Uno</strong></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Select the Port</strong>
+          <p>Go to <strong>Tools → Port</strong>. On Windows it'll be something like <code>COM3</code>. On Mac/Linux it'll be <code>/dev/cu.usbmodem...</code> or <code>/dev/ttyUSB0</code>. Select the one that appeared after you plugged in the Arduino.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box warning">
+      <span class="icon">⚠️</span>
+      <div class="body">
+        <strong>Port Not Showing?</strong>
+        If no port appears: (1) Try a different USB cable — many phone charging cables don't carry data. (2) Install/reinstall CH340 drivers if using a clone. (3) Check Device Manager (Windows) or System Information (Mac) for errors.
+      </div>
+    </div>
+
+    <h3>IDE Overview</h3>
+    <table class="component-table">
+      <thead><tr><th>Element</th><th>What It Does</th></tr></thead>
+      <tbody>
+        <tr><td>✅ <strong>Verify Button</strong></td><td>Checks your code for errors (compiles without uploading)</td></tr>
+        <tr><td>⬆️ <strong>Upload Button</strong></td><td>Compiles and uploads code to your Arduino</td></tr>
+        <tr><td>📄 <strong>Sketch Area</strong></td><td>Where you write your code</td></tr>
+        <tr><td>💬 <strong>Console (bottom)</strong></td><td>Shows upload status, errors, and Serial Monitor output</td></tr>
+        <tr><td>🔍 <strong>Serial Monitor</strong></td><td>View text sent from Arduino (Tools → Serial Monitor)</td></tr>
+        <tr><td>📚 <strong>Library Manager</strong></td><td>Install extra libraries (Tools → Manage Libraries)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LESSON 3 -->
+  <div class="lesson-section" id="lesson3">
+    <h2>🔍 Lesson 3: Exploring the Arduino Uno Board</h2>
+
+    <p>Before writing code, let's understand every part of the Arduino Uno. Knowing your hardware is just as important as knowing the code.</p>
+
+    <div class="diagram-box">
+      <svg width="500" height="300" viewBox="0 0 500 300" style="max-width:100%">
+        <!-- Board outline -->
+        <rect x="20" y="20" width="460" height="260" rx="16" fill="#1a6b1a" stroke="#0d4d0d" stroke-width="3"/>
+        <!-- USB port -->
+        <rect x="20" y="100" width="30" height="50" rx="4" fill="#aaa" stroke="#888" stroke-width="1"/>
+        <text x="35" y="160" text-anchor="middle" fill="white" font-size="8" font-family="sans-serif">USB</text>
+        <!-- Power jack -->
+        <rect x="20" y="180" width="25" height="35" rx="4" fill="#555" stroke="#333" stroke-width="1"/>
+        <text x="32" y="230" text-anchor="middle" fill="white" font-size="8" font-family="sans-serif">PWR</text>
+        <!-- Digital pins (top) -->
+        <text x="250" y="38" text-anchor="middle" fill="white" font-size="11" font-family="sans-serif" font-weight="bold">DIGITAL PINS (0–13)</text>
+        <g fill="#c0c0c0" stroke="#999">
+          <!-- pin dots top -->
+          <circle cx="90" cy="42" r="5"/><text x="90" y="60" text-anchor="middle" fill="white" font-size="9" font-family="monospace">0</text>
+          <circle cx="112" cy="42" r="5"/><text x="112" y="60" text-anchor="middle" fill="white" font-size="9" font-family="monospace">1</text>
+          <circle cx="134" cy="42" r="5"/><text x="134" y="60" text-anchor="middle" fill="white" font-size="9" font-family="monospace">2</text>
+          <circle cx="156" cy="42" r="5"/><text x="156" y="60" text-anchor="middle" fill="white" font-size="9" font-family="monospace">3~</text>
+          <circle cx="178" cy="42" r="5"/><text x="178" y="60" text-anchor="middle" fill="white" font-size="9" font-family="monospace">4</text>
+          <circle cx="200" cy="42" r="5"/><text x="200" y="60" text-anchor="middle" fill="white" font-size="9" font-family="monospace">5~</text>
+          <circle cx="222" cy="42" r="5"/><text x="222" y="60" text-anchor="middle" fill="white" font-size="9" font-family="monospace">6~</text>
+          <circle cx="244" cy="42" r="5"/><text x="244" y="60" text-anchor="middle" fill="white" font-size="9" font-family="monospace">7</text>
+          <circle cx="266" cy="42" r="5"/><text x="266" y="60" text-anchor="middle" fill="white" font-size="9" font-family="monospace">8</text>
+          <circle cx="288" cy="42" r="5"/><text x="288" y="60" text-anchor="middle" fill="white" font-size="9" font-family="monospace">9~</text>
+          <circle cx="310" cy="42" r="5"/><text x="310" y="60" text-anchor="middle" fill="white" font-size="9" font-family="monospace">10~</text>
+          <circle cx="332" cy="42" r="5"/><text x="332" y="60" text-anchor="middle" fill="white" font-size="9" font-family="monospace">11~</text>
+          <circle cx="354" cy="42" r="5"/><text x="354" y="60" text-anchor="middle" fill="white" font-size="9" font-family="monospace">12</text>
+          <circle cx="376" cy="42" r="5"/><text x="376" y="60" text-anchor="middle" fill="white" font-size="9" font-family="monospace">13</text>
+        </g>
+        <!-- Analog pins (bottom) -->
+        <text x="200" y="268" text-anchor="middle" fill="white" font-size="11" font-family="sans-serif" font-weight="bold">ANALOG PINS (A0–A5)</text>
+        <g fill="#86efac" stroke="#4ade80">
+          <circle cx="200" cy="256" r="5"/><text x="200" y="250" text-anchor="middle" fill="white" font-size="9" font-family="monospace">A0</text>
+          <circle cx="222" cy="256" r="5"/><text x="222" y="250" text-anchor="middle" fill="white" font-size="9" font-family="monospace">A1</text>
+          <circle cx="244" cy="256" r="5"/><text x="244" y="250" text-anchor="middle" fill="white" font-size="9" font-family="monospace">A2</text>
+          <circle cx="266" cy="256" r="5"/><text x="266" y="250" text-anchor="middle" fill="white" font-size="9" font-family="monospace">A3</text>
+          <circle cx="288" cy="256" r="5"/><text x="288" y="250" text-anchor="middle" fill="white" font-size="9" font-family="monospace">A4</text>
+          <circle cx="310" cy="256" r="5"/><text x="310" y="250" text-anchor="middle" fill="white" font-size="9" font-family="monospace">A5</text>
+        </g>
+        <!-- Power pins -->
+        <g fill="#fb923c" stroke="#f97316">
+          <circle cx="390" cy="256" r="5"/><text x="390" y="250" text-anchor="middle" fill="white" font-size="9" font-family="monospace">3.3V</text>
+          <circle cx="412" cy="256" r="5"/><text x="412" y="250" text-anchor="middle" fill="white" font-size="9" font-family="monospace">5V</text>
+          <circle cx="434" cy="256" r="5"/><text x="434" y="250" text-anchor="middle" fill="white" font-size="9" font-family="monospace">GND</text>
+          <circle cx="456" cy="256" r="5"/><text x="456" y="250" text-anchor="middle" fill="white" font-size="9" font-family="monospace">Vin</text>
+        </g>
+        <!-- ATmega chip -->
+        <rect x="200" y="110" width="100" height="80" rx="4" fill="#111" stroke="#333"/>
+        <text x="250" y="148" text-anchor="middle" fill="white" font-size="9" font-family="monospace">ATmega328P</text>
+        <text x="250" y="162" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="monospace">MICROCONTROLLER</text>
+        <!-- LED -->
+        <circle cx="420" cy="90" r="6" fill="#fbbf24" stroke="#f59e0b"/>
+        <text x="420" y="110" text-anchor="middle" fill="white" font-size="8" font-family="sans-serif">L LED</text>
+        <!-- Reset btn -->
+        <rect x="150" y="200" width="28" height="20" rx="4" fill="#3b82f6"/>
+        <text x="164" y="215" text-anchor="middle" fill="white" font-size="8" font-family="sans-serif">RST</text>
+      </svg>
+      <div class="diagram-label">Arduino Uno R3 — Board Overview</div>
+    </div>
+
+    <h3>Key Parts Explained</h3>
+    <table class="component-table">
+      <thead><tr><th>Part</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ATmega328P</strong></td><td>The brain — microcontroller that runs your code. 32KB Flash, 2KB SRAM, 1KB EEPROM.</td></tr>
+        <tr><td><strong>Digital Pins 0–13</strong></td><td>Can be INPUT or OUTPUT. Pins 3,5,6,9,10,11 marked with <code>~</code> support PWM (fading).</td></tr>
+        <tr><td><strong>Analog Pins A0–A5</strong></td><td>Read analog voltages (0–5V) as values 0–1023. Can also work as digital pins.</td></tr>
+        <tr><td><strong>5V & 3.3V pins</strong></td><td>Power output pins for your components. Never exceed these voltages!</td></tr>
+        <tr><td><strong>GND pins</strong></td><td>Ground (negative terminal). Every circuit needs a GND connection.</td></tr>
+        <tr><td><strong>Vin</strong></td><td>External power input (7–12V) — bypasses USB power.</td></tr>
+        <tr><td><strong>Reset Button</strong></td><td>Restarts your sketch from the beginning.</td></tr>
+        <tr><td><strong>TX/RX LEDs</strong></td><td>Blink when data is being sent/received via USB — useful for debugging.</td></tr>
+        <tr><td><strong>L LED (Pin 13)</strong></td><td>Built-in LED connected to digital pin 13 — perfect for your first test!</td></tr>
+        <tr><td><strong>ICSP Header</strong></td><td>In-circuit Serial Programming — used for programming without USB.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box danger">
+      <span class="icon">🚨</span>
+      <div class="body">
+        <strong>Important Safety Rules</strong>
+        Never connect more than 5V to digital/analog pins. Never short 5V to GND. Never draw more than 40mA from a single pin (200mA total). Always use resistors with LEDs!
+      </div>
+    </div>
+  </div>
+
+  <!-- LESSON 4 -->
+  <div class="lesson-section" id="lesson4">
+    <h2>💡 Lesson 4: Your First Sketch – Blink!</h2>
+
+    <p>Every programmer's "Hello World" — in Arduino, it's the <strong>Blink</strong> sketch. We'll make the built-in LED on the board blink on and off. No extra hardware needed!</p>
+
+    <h3>The Blink Code</h3>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots"><span></span><span></span><span></span></div>
+        <span class="code-lang">Arduino C++</span>
+        <button class="copy-btn">Copy</button>
+      </div>
+      <pre><code><span class="cm">// Blink — Your First Arduino Sketch!</span>
+<span class="cm">// This blinks the built-in LED on Pin 13</span>
+
+<span class="pp">#define</span> LED_PIN <span class="nm">13</span>   <span class="cm">// The built-in LED is on pin 13</span>
+
+<span class="cm">// setup() runs ONCE when the board powers on</span>
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(LED_PIN, OUTPUT);  <span class="cm">// Set pin 13 as an output</span>
+}
+
+<span class="cm">// loop() runs FOREVER after setup()</span>
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="fn">digitalWrite</span>(LED_PIN, HIGH);  <span class="cm">// Turn LED ON  (5V to pin)</span>
+  <span class="fn">delay</span>(<span class="nm">1000</span>);                  <span class="cm">// Wait 1000ms = 1 second</span>
+  <span class="fn">digitalWrite</span>(LED_PIN, LOW);   <span class="cm">// Turn LED OFF (0V to pin)</span>
+  <span class="fn">delay</span>(<span class="nm">1000</span>);                  <span class="cm">// Wait 1 second</span>
+}</code></pre>
+    </div>
+
+    <h3>How to Upload</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body"><strong>Open a New Sketch</strong><p>In Arduino IDE: File → New Sketch. Delete any default code.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body"><strong>Type or Paste the Code</strong><p>Copy the code above and paste it into the IDE.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body"><strong>Verify First</strong><p>Click the ✅ Verify button (or Ctrl+R). Wait for "Compilation complete" in the console. If there are errors, check for typos.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body"><strong>Upload</strong><p>Click the ⬆️ Upload button (or Ctrl+U). The TX/RX LEDs will blink briefly. Wait for "Upload complete."</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body"><strong>Watch It Blink!</strong><p>The orange LED labeled "L" on your Arduino should now blink: 1 second ON, 1 second OFF. Congratulations — you just programmed your first Arduino! 🎉</p></div>
+      </div>
+    </div>
+
+    <div class="info-box tip">
+      <span class="icon">🎯</span>
+      <div class="body">
+        <strong>Try It!</strong>
+        Change the delay values. Make it blink faster (try <code>delay(200)</code>) or make an SOS pattern (3 short, 3 long, 3 short). Experimenting is the best way to learn!
+      </div>
+    </div>
+  </div>
+
+  <!-- LESSON 5 -->
+  <div class="lesson-section" id="lesson5">
+    <h2>📖 Lesson 5: Understanding the Code Structure</h2>
+
+    <p>Now let's break down what every part of the Arduino code actually means. This structure applies to <strong>every single Arduino sketch</strong> you'll ever write.</p>
+
+    <h3>The Two Required Functions</h3>
+
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots"><span></span><span></span><span></span></div>
+        <span class="code-lang">Structure</span>
+        <button class="copy-btn">Copy</button>
+      </div>
+      <pre><code><span class="cm">// 1. GLOBAL AREA — Variables and constants declared here</span>
+<span class="cm">//    are available everywhere in your code</span>
+<span class="tp">int</span> myVariable = <span class="nm">10</span>;
+
+<span class="cm">// 2. setup() — Runs ONCE when the board starts</span>
+<span class="cm">//    Use it to configure pins, start Serial, initialize sensors</span>
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="cm">// Your initialization code here</span>
+}
+
+<span class="cm">// 3. loop() — Runs FOREVER in a continuous cycle</span>
+<span class="cm">//    This is your main program logic</span>
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// Your main code here — repeats forever</span>
+}</code></pre>
+    </div>
+
+    <h3>Comments</h3>
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots"><span></span><span></span><span></span></div>
+        <span class="code-lang">Arduino C++</span>
+        <button class="copy-btn">Copy</button>
+      </div>
+      <pre><code><span class="cm">// This is a single-line comment — Arduino ignores it</span>
+
+<span class="cm">/*
+  This is a multi-line comment.
+  Use it to explain longer sections of code.
+  Everything between the asterisks is ignored.
+*/</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="cm">// Comments make your code readable — use them always!</span>
+}</code></pre>
+    </div>
+
+    <h3>Variables and Data Types</h3>
+    <table class="component-table">
+      <thead><tr><th>Type</th><th>Size</th><th>Range</th><th>Example Use</th></tr></thead>
+      <tbody>
+        <tr><td><code>int</code></td><td>2 bytes</td><td>-32,768 to 32,767</td><td>Pin numbers, counters</td></tr>
+        <tr><td><code>long</code></td><td>4 bytes</td><td>-2.1B to 2.1B</td><td>Time in milliseconds (millis())</td></tr>
+        <tr><td><code>float</code></td><td>4 bytes</td><td>±3.4×10³⁸</td><td>Temperature, decimal values</td></tr>
+        <tr><td><code>bool</code></td><td>1 byte</td><td>true / false</td><td>Button state, flags</td></tr>
+        <tr><td><code>byte</code></td><td>1 byte</td><td>0 to 255</td><td>PWM values, raw data</td></tr>
+        <tr><td><code>String</code></td><td>variable</td><td>text</td><td>Serial messages (use sparingly)</td></tr>
+        <tr><td><code>char</code></td><td>1 byte</td><td>-128 to 127</td><td>Single characters</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Core Arduino Functions You'll Use Constantly</h3>
+    <div class="code-block">
+      <div class="code-header">
+        <div class="code-dots"><span></span><span></span><span></span></div>
+        <span class="code-lang">Arduino C++</span>
+        <button class="copy-btn">Copy</button>
+      </div>
+      <pre><code><span class="cm">// === PIN CONTROL ===</span>
+<span class="fn">pinMode</span>(pin, MODE);           <span class="cm">// MODE = INPUT, OUTPUT, or INPUT_PULLUP</span>
+<span class="fn">digitalWrite</span>(pin, value);     <span class="cm">// value = HIGH (5V) or LOW (0V)</span>
+<span class="tp">int</span> val = <span class="fn">digitalRead</span>(pin);  <span class="cm">// Returns HIGH or LOW</span>
+<span class="fn">analogWrite</span>(pin, value);      <span class="cm">// PWM: value 0–255 (only ~ pins)</span>
+<span class="tp">int</span> raw = <span class="fn">analogRead</span>(pin);   <span class="cm">// Read analog: 0–1023 (A0–A5)</span>
+
+<span class="cm">// === TIME ===</span>
+<span class="fn">delay</span>(ms);                    <span class="cm">// Pause for milliseconds</span>
+<span class="fn">delayMicroseconds</span>(us);        <span class="cm">// Pause for microseconds</span>
+<span class="tp">unsigned long</span> t = <span class="fn">millis</span>();  <span class="cm">// Time since board started (ms)</span>
+<span class="tp">unsigned long</span> u = <span class="fn">micros</span>();  <span class="cm">// Time since board started (μs)</span>
+
+<span class="cm">// === SERIAL (debugging) ===</span>
+<span class="fn">Serial.begin</span>(<span class="nm">9600</span>);           <span class="cm">// Start serial at 9600 baud</span>
+<span class="fn">Serial.print</span>(<span class="st">"Hello"</span>);        <span class="cm">// Print without newline</span>
+<span class="fn">Serial.println</span>(<span class="st">"World"</span>);      <span class="cm">// Print with newline</span>
+<span class="fn">Serial.println</span>(variable);     <span class="cm">// Print any variable</span>
+
+<span class="cm">// === MATH ===</span>
+<span class="fn">map</span>(val, inMin, inMax, outMin, outMax); <span class="cm">// Scale a value</span>
+<span class="fn">constrain</span>(val, min, max);     <span class="cm">// Keep value within range</span>
+<span class="fn">abs</span>(x);                       <span class="cm">// Absolute value</span>
+<span class="fn">random</span>(min, max);             <span class="cm">// Random number</span></code></pre>
+    </div>
+
+    <div class="info-box note">
+      <span class="icon">📝</span>
+      <div class="body">
+        <strong>Remember</strong>
+        Arduino code is a simplified version of <strong>C++</strong>. You don't need to know C++ deeply, but understanding the basics (variables, if statements, loops, functions) will make you a much better Arduino programmer. These are all taught through the projects in upcoming modules!
+      </div>
+    </div>
+
+    <div class="quiz-box">
+      <h4>Quick Check</h4>
+      <p>Which Arduino function runs repeatedly, forever?</p>
+      <button class="quiz-option" data-correct="false">setup()</button>
+      <button class="quiz-option" data-correct="true">loop()</button>
+      <button class="quiz-option" data-correct="false">main()</button>
+      <button class="quiz-option" data-correct="false">run()</button>
+      <div class="quiz-result"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER NAV -->
+  <div class="lesson-footer">
+    <a href="index.html" class="btn btn-outline">← Back to Course</a>
+    <button class="btn btn-complete" data-lesson="m1_complete">○ Mark Module Complete</button>
+    <a href="module2.html" class="btn btn-primary">Module 2: Electronics →</a>
+  </div>
+
+</main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 4: Analog I/O & Sensors – AlCoders Arduino</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="index.html">⚡ <span>Al</span>Coders</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="module3.html">← Module 3</a>
+    <a href="module4.html" class="active">Module 4</a>
+    <a href="module5.html">Module 5 →</a>
+  </div>
+</nav>
+<div class="breadcrumb"><a href="index.html">Arduino Course</a> › Module 4 › Analog I/O & Sensors</div>
+<div class="page-wrapper">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">Course Progress</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 60 lessons completed</div>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔧</span> Module 1</div><a href="module1.html" class="lesson-link" data-lesson="m1l1"><span class="lesson-dot"></span>What is Arduino?</a><a href="module1.html#lesson2" class="lesson-link" data-lesson="m1l2"><span class="lesson-dot"></span>Installing the IDE</a><a href="module1.html#lesson3" class="lesson-link" data-lesson="m1l3"><span class="lesson-dot"></span>The Arduino Board</a><a href="module1.html#lesson4" class="lesson-link" data-lesson="m1l4"><span class="lesson-dot"></span>First Sketch: Blink</a><a href="module1.html#lesson5" class="lesson-link" data-lesson="m1l5"><span class="lesson-dot"></span>Understanding the Code</a></div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⚡</span> Module 2</div><a href="module2.html" class="lesson-link" data-lesson="m2l1"><span class="lesson-dot"></span>Voltage, Current & Resistance</a><a href="module2.html#lesson2" class="lesson-link" data-lesson="m2l2"><span class="lesson-dot"></span>Ohm's Law</a><a href="module2.html#lesson3" class="lesson-link" data-lesson="m2l3"><span class="lesson-dot"></span>Breadboards & Schematics</a><a href="module2.html#lesson4" class="lesson-link" data-lesson="m2l4"><span class="lesson-dot"></span>Resistors & Capacitors</a><a href="module2.html#lesson5" class="lesson-link" data-lesson="m2l5"><span class="lesson-dot"></span>Power Supply & Safety</a></div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💡</span> Module 3</div><a href="module3.html" class="lesson-link" data-lesson="m3l1"><span class="lesson-dot"></span>Digital Pins Explained</a><a href="module3.html#lesson2" class="lesson-link" data-lesson="m3l2"><span class="lesson-dot"></span>digitalWrite & digitalRead</a><a href="module3.html#lesson3" class="lesson-link" data-lesson="m3l3"><span class="lesson-dot"></span>Push Buttons & Input</a><a href="module3.html#lesson4" class="lesson-link" data-lesson="m3l4"><span class="lesson-dot"></span>Debouncing Buttons</a><a href="module3.html#lesson5" class="lesson-link" data-lesson="m3l5"><span class="lesson-dot"></span>Traffic Light Project</a></div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌡️</span> Module 4 – Analog I/O</div>
+    <a href="#lesson1" class="lesson-link active" data-lesson="m4l1"><span class="lesson-dot"></span>Analog vs Digital</a>
+    <a href="#lesson2" class="lesson-link" data-lesson="m4l2"><span class="lesson-dot"></span>analogRead & Potentiometer</a>
+    <a href="#lesson3" class="lesson-link" data-lesson="m4l3"><span class="lesson-dot"></span>PWM & analogWrite</a>
+    <a href="#lesson4" class="lesson-link" data-lesson="m4l4"><span class="lesson-dot"></span>Temperature Sensor (LM35)</a>
+    <a href="#lesson5" class="lesson-link" data-lesson="m4l5"><span class="lesson-dot"></span>LDR Night Light Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📺</span> Module 5</div><a href="module5.html" class="lesson-link" data-lesson="m5l1"><span class="lesson-dot"></span>LCD 16x2 with I2C</a><a href="module5.html#lesson2" class="lesson-link" data-lesson="m5l2"><span class="lesson-dot"></span>OLED Display</a><a href="module5.html#lesson3" class="lesson-link" data-lesson="m5l3"><span class="lesson-dot"></span>7-Segment Display</a><a href="module5.html#lesson4" class="lesson-link" data-lesson="m5l4"><span class="lesson-dot"></span>Buzzer & Tones</a><a href="module5.html#lesson5" class="lesson-link" data-lesson="m5l5"><span class="lesson-dot"></span>RGB LED & Color Mixing</a></div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔊</span> Module 6</div><a href="module6.html" class="lesson-link" data-lesson="m6l1"><span class="lesson-dot"></span>Servo Motor Basics</a><a href="module6.html#lesson2" class="lesson-link" data-lesson="m6l2"><span class="lesson-dot"></span>DC Motors & L298N</a><a href="module6.html#lesson3" class="lesson-link" data-lesson="m6l3"><span class="lesson-dot"></span>Stepper Motors</a><a href="module6.html#lesson4" class="lesson-link" data-lesson="m6l4"><span class="lesson-dot"></span>Motor Speed Control</a><a href="module6.html#lesson5" class="lesson-link" data-lesson="m6l5"><span class="lesson-dot"></span>Mini Robot Car Project</a></div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📡</span> Module 7</div><a href="module7.html" class="lesson-link" data-lesson="m7l1"><span class="lesson-dot"></span>Serial Communication</a><a href="module7.html#lesson2" class="lesson-link" data-lesson="m7l2"><span class="lesson-dot"></span>I2C Protocol</a><a href="module7.html#lesson3" class="lesson-link" data-lesson="m7l3"><span class="lesson-dot"></span>SPI Protocol</a><a href="module7.html#lesson4" class="lesson-link" data-lesson="m7l4"><span class="lesson-dot"></span>Multiple Devices</a><a href="module7.html#lesson5" class="lesson-link" data-lesson="m7l5"><span class="lesson-dot"></span>Serial Plotter</a></div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌐</span> Module 8</div><a href="module8.html" class="lesson-link" data-lesson="m8l1"><span class="lesson-dot"></span>ESP8266 & ESP32</a><a href="module8.html#lesson2" class="lesson-link" data-lesson="m8l2"><span class="lesson-dot"></span>Connecting to WiFi</a><a href="module8.html#lesson3" class="lesson-link" data-lesson="m8l3"><span class="lesson-dot"></span>Web Server</a><a href="module8.html#lesson4" class="lesson-link" data-lesson="m8l4"><span class="lesson-dot"></span>Cloud Data Upload</a><a href="module8.html#lesson5" class="lesson-link" data-lesson="m8l5"><span class="lesson-dot"></span>MQTT Basics</a></div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📶</span> Module 9</div><a href="module9.html" class="lesson-link" data-lesson="m9l1"><span class="lesson-dot"></span>HC-05 Bluetooth</a><a href="module9.html#lesson2" class="lesson-link" data-lesson="m9l2"><span class="lesson-dot"></span>AT Commands</a><a href="module9.html#lesson3" class="lesson-link" data-lesson="m9l3"><span class="lesson-dot"></span>Phone-Controlled LED</a><a href="module9.html#lesson4" class="lesson-link" data-lesson="m9l4"><span class="lesson-dot"></span>BLE with ESP32</a><a href="module9.html#lesson5" class="lesson-link" data-lesson="m9l5"><span class="lesson-dot"></span>Bluetooth Robot</a></div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⏱️</span> Module 10</div><a href="module10.html" class="lesson-link" data-lesson="m10l1"><span class="lesson-dot"></span>What are Interrupts?</a><a href="module10.html#lesson2" class="lesson-link" data-lesson="m10l2"><span class="lesson-dot"></span>attachInterrupt()</a><a href="module10.html#lesson3" class="lesson-link" data-lesson="m10l3"><span class="lesson-dot"></span>Timer Interrupts</a><a href="module10.html#lesson4" class="lesson-link" data-lesson="m10l4"><span class="lesson-dot"></span>Watchdog Timer</a><a href="module10.html#lesson5" class="lesson-link" data-lesson="m10l5"><span class="lesson-dot"></span>Sleep Modes</a></div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💾</span> Module 11</div><a href="module11.html" class="lesson-link" data-lesson="m11l1"><span class="lesson-dot"></span>SRAM, Flash & EEPROM</a><a href="module11.html#lesson2" class="lesson-link" data-lesson="m11l2"><span class="lesson-dot"></span>EEPROM Read/Write</a><a href="module11.html#lesson3" class="lesson-link" data-lesson="m11l3"><span class="lesson-dot"></span>SD Card Module</a><a href="module11.html#lesson4" class="lesson-link" data-lesson="m11l4"><span class="lesson-dot"></span>Custom Libraries</a><a href="module11.html#lesson5" class="lesson-link" data-lesson="m11l5"><span class="lesson-dot"></span>Data Logger</a></div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🏗️</span> Module 12</div><a href="module12.html" class="lesson-link" data-lesson="m12l1"><span class="lesson-dot"></span>Smart Weather Station</a><a href="module12.html#lesson2" class="lesson-link" data-lesson="m12l2"><span class="lesson-dot"></span>Obstacle-Avoiding Robot</a><a href="module12.html#lesson3" class="lesson-link" data-lesson="m12l3"><span class="lesson-dot"></span>Home Automation</a><a href="module12.html#lesson4" class="lesson-link" data-lesson="m12l4"><span class="lesson-dot"></span>PCB Design Intro</a><a href="module12.html#lesson5" class="lesson-link" data-lesson="m12l5"><span class="lesson-dot"></span>Next Steps</a></div>
+</aside>
+
+<main class="content">
+  <div class="module-hero">
+    <div class="module-badge">🌡️ Module 4 of 12</div>
+    <h1>Analog I/O & Sensors</h1>
+    <p>The real world isn't binary. Learn to read continuously varying signals — temperature, light, and position — using Arduino's analog inputs and PWM outputs.</p>
+    <div class="module-meta">
+      <div class="meta-item">⏱️ ~2 hours</div>
+      <div class="meta-item">📗 5 lessons</div>
+      <div class="meta-item">🟢 Beginner</div>
+    </div>
+  </div>
+
+  <div class="lesson-section" id="lesson1">
+    <h2>📊 Lesson 1: Analog vs Digital</h2>
+    <p><strong>Digital</strong> signals are binary — they're either HIGH (5V) or LOW (0V). But the real world has gradations. Temperature isn't just hot or cold — it's 24.6°C. Light isn't just bright or dark — it varies continuously. That's where <strong>analog</strong> comes in.</p>
+    <table class="component-table"><thead><tr><th>Feature</th><th>Digital</th><th>Analog</th></tr></thead><tbody>
+      <tr><td>Values</td><td>0 or 1 (LOW/HIGH)</td><td>Continuous range</td></tr>
+      <tr><td>Arduino pins</td><td>Pins 0–13</td><td>Pins A0–A5</td></tr>
+      <tr><td>Read function</td><td>digitalRead() → 0 or 1</td><td>analogRead() → 0 to 1023</td></tr>
+      <tr><td>Example</td><td>Button state</td><td>Temperature, light level, rotation</td></tr>
+    </tbody></table>
+    <h3>The ADC (Analog-to-Digital Converter)</h3>
+    <p>The Arduino Uno has a <strong>10-bit ADC</strong>. This means it divides the 0–5V input range into 2¹⁰ = 1024 steps. So analogRead() returns a value from 0 (0V) to 1023 (5V).</p>
+    <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Formula</span><button class="copy-btn">Copy</button></div><pre><code>Voltage = (analogRead value / 1023) × 5V
+
+Example: analogRead() = 512
+Voltage = (512 / 1023) × 5 = 2.50V (approx. half of 5V)</code></pre></div>
+  </div>
+
+  <div class="lesson-section" id="lesson2">
+    <h2>🎛️ Lesson 2: analogRead & Potentiometer</h2>
+    <p>A <strong>potentiometer</strong> (pot) is a variable resistor with a knob. It's the perfect component to learn analogRead — turning the knob changes the voltage output from 0V to 5V.</p>
+    <h3>Wiring</h3>
+    <table class="wiring-table"><thead><tr><th>Potentiometer Pin</th><th>Arduino</th></tr></thead><tbody>
+      <tr><td class="wire-from">Left pin</td><td class="wire-to">GND</td></tr>
+      <tr><td class="wire-from">Middle pin (wiper)</td><td class="wire-to">A0</td></tr>
+      <tr><td class="wire-from">Right pin</td><td class="wire-to">5V</td></tr>
+    </tbody></table>
+    <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">Serial.begin</span>(<span class="nm">9600</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">int</span> raw = <span class="fn">analogRead</span>(A0);         <span class="cm">// 0–1023</span>
+  <span class="tp">float</span> voltage = (raw / <span class="nm">1023.0</span>) * <span class="nm">5.0</span>; <span class="cm">// Convert to volts</span>
+
+  <span class="fn">Serial.print</span>(<span class="st">"Raw: "</span>);
+  <span class="fn">Serial.print</span>(raw);
+  <span class="fn">Serial.print</span>(<span class="st">"  Voltage: "</span>);
+  <span class="fn">Serial.print</span>(voltage);
+  <span class="fn">Serial.println</span>(<span class="st">" V"</span>);
+  <span class="fn">delay</span>(<span class="nm">200</span>);
+}</code></pre></div>
+    <div class="info-box tip"><span class="icon">💡</span><div class="body"><strong>Open Serial Monitor!</strong>After uploading, go to Tools → Serial Monitor (or Ctrl+Shift+M). Set baud rate to 9600. You'll see the values updating as you turn the knob.</div></div>
+    <h3>The map() Function</h3>
+    <p>Often you want to convert the 0–1023 range to something more useful. The <code>map()</code> function does this elegantly.</p>
+    <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div><pre><code><span class="cm">// map(value, fromLow, fromHigh, toLow, toHigh)</span>
+<span class="tp">int</span> raw = <span class="fn">analogRead</span>(A0);          <span class="cm">// 0–1023</span>
+<span class="tp">int</span> percent = <span class="fn">map</span>(raw, <span class="nm">0</span>, <span class="nm">1023</span>, <span class="nm">0</span>, <span class="nm">100</span>); <span class="cm">// 0–100%</span>
+<span class="tp">int</span> angle   = <span class="fn">map</span>(raw, <span class="nm">0</span>, <span class="nm">1023</span>, <span class="nm">0</span>, <span class="nm">180</span>); <span class="cm">// 0°–180° for servo</span>
+<span class="tp">int</span> pwm     = <span class="fn">map</span>(raw, <span class="nm">0</span>, <span class="nm">1023</span>, <span class="nm">0</span>, <span class="nm">255</span>); <span class="cm">// 0–255 for PWM</span></code></pre></div>
+  </div>
+
+  <div class="lesson-section" id="lesson3">
+    <h2>〰️ Lesson 3: PWM & analogWrite</h2>
+    <p>Arduino can't output true analog voltages from digital pins — but it can fake it using <strong>PWM (Pulse Width Modulation)</strong>. PWM rapidly switches a pin between HIGH and LOW so fast that components see it as an in-between voltage.</p>
+    <div class="diagram-box">
+      <svg width="400" height="160" viewBox="0 0 400 160" style="max-width:100%">
+        <!-- 25% duty -->
+        <text x="60" y="18" text-anchor="middle" fill="#334155" font-size="11" font-family="sans-serif" font-weight="bold">25% Duty — Dim</text>
+        <rect x="10" y="25" width="20" height="20" fill="#2563eb"/>
+        <rect x="30" y="45" width="60" height="20" fill="#e2e8f0"/>
+        <rect x="90" y="25" width="20" height="20" fill="#2563eb"/>
+        <rect x="110" y="45" width="5" height="20" fill="#e2e8f0"/>
+        <!-- 50% duty -->
+        <text x="220" y="18" text-anchor="middle" fill="#334155" font-size="11" font-family="sans-serif" font-weight="bold">50% Duty — Medium</text>
+        <rect x="170" y="25" width="40" height="20" fill="#2563eb"/>
+        <rect x="210" y="45" width="40" height="20" fill="#e2e8f0"/>
+        <rect x="250" y="25" width="5" height="20" fill="#2563eb"/>
+        <!-- 75% duty -->
+        <text x="360" y="18" text-anchor="middle" fill="#334155" font-size="11" font-family="sans-serif" font-weight="bold">75% Duty — Bright</text>
+        <rect x="310" y="25" width="60" height="20" fill="#2563eb"/>
+        <rect x="370" y="45" width="20" height="20" fill="#e2e8f0"/>
+        <!-- Labels -->
+        <text x="200" y="90" text-anchor="middle" fill="#64748b" font-size="10" font-family="sans-serif">PWM pins on Uno: 3, 5, 6, 9, 10, 11 (marked with ~)</text>
+        <text x="200" y="110" text-anchor="middle" fill="#64748b" font-size="10" font-family="sans-serif">analogWrite(pin, 0) = always OFF | analogWrite(pin, 255) = always ON</text>
+      </svg>
+      <div class="diagram-label">PWM — Duty Cycle Controls Perceived Brightness / Speed</div>
+    </div>
+    <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div><pre><code><span class="cm">// Fade LED in and out using PWM</span>
+<span class="pp">#define</span> LED_PIN <span class="nm">9</span>   <span class="cm">// Must be a PWM pin (~)</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(LED_PIN, OUTPUT);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// Fade IN</span>
+  <span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">0</span>; i <= <span class="nm">255</span>; i++) {
+    <span class="fn">analogWrite</span>(LED_PIN, i);
+    <span class="fn">delay</span>(<span class="nm">8</span>);
+  }
+  <span class="cm">// Fade OUT</span>
+  <span class="kw">for</span> (<span class="tp">int</span> i = <span class="nm">255</span>; i >= <span class="nm">0</span>; i--) {
+    <span class="fn">analogWrite</span>(LED_PIN, i);
+    <span class="fn">delay</span>(<span class="nm">8</span>);
+  }
+}</code></pre></div>
+    <div class="quiz-box"><h4>Quick Check</h4><p>analogWrite(pin, 127) produces approximately what output?</p>
+      <button class="quiz-option" data-correct="false">Full 5V (HIGH)</button>
+      <button class="quiz-option" data-correct="true">~50% duty cycle (≈2.5V average)</button>
+      <button class="quiz-option" data-correct="false">0V (LOW)</button>
+      <button class="quiz-option" data-correct="false">Random voltage</button>
+      <div class="quiz-result"></div>
+    </div>
+  </div>
+
+  <div class="lesson-section" id="lesson4">
+    <h2>🌡️ Lesson 4: Temperature Sensor (LM35)</h2>
+    <p>The <strong>LM35</strong> is a classic precision temperature sensor. It outputs 10mV per °C, making it incredibly easy to use with analogRead.</p>
+    <h3>LM35 Pinout</h3>
+    <table class="component-table"><thead><tr><th>Pin</th><th>Connection</th></tr></thead><tbody>
+      <tr><td>Pin 1 (left, flat side)</td><td>5V (VCC)</td></tr>
+      <tr><td>Pin 2 (middle)</td><td>A0 (analog output)</td></tr>
+      <tr><td>Pin 3 (right)</td><td>GND</td></tr>
+    </tbody></table>
+    <div class="info-box warning"><span class="icon">⚠️</span><div class="body"><strong>Orientation Matters!</strong>The LM35 has a flat and a curved side. Look at it from the flat side — left is VCC, middle is output, right is GND. Installing backwards will make it get extremely hot instantly!</div></div>
+    <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">Serial.begin</span>(<span class="nm">9600</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">int</span> raw = <span class="fn">analogRead</span>(A0);
+
+  <span class="cm">// LM35: 10mV per °C</span>
+  <span class="cm">// voltage = (raw / 1023.0) * 5000 mV</span>
+  <span class="cm">// temperature = voltage / 10</span>
+  <span class="tp">float</span> voltage = (raw / <span class="nm">1023.0</span>) * <span class="nm">5000.0</span>;  <span class="cm">// in mV</span>
+  <span class="tp">float</span> tempC = voltage / <span class="nm">10.0</span>;             <span class="cm">// in Celsius</span>
+  <span class="tp">float</span> tempF = (tempC * <span class="nm">9.0</span> / <span class="nm">5.0</span>) + <span class="nm">32.0</span>; <span class="cm">// in Fahrenheit</span>
+
+  <span class="fn">Serial.print</span>(<span class="st">"Temp: "</span>);
+  <span class="fn">Serial.print</span>(tempC);
+  <span class="fn">Serial.print</span>(<span class="st">" °C  | "</span>);
+  <span class="fn">Serial.print</span>(tempF);
+  <span class="fn">Serial.println</span>(<span class="st">" °F"</span>);
+  <span class="fn">delay</span>(<span class="nm">1000</span>);
+}</code></pre></div>
+    <div class="info-box note"><span class="icon">📝</span><div class="body"><strong>DHT11/DHT22 Alternative</strong>For projects requiring humidity as well, the DHT11 and DHT22 sensors are popular choices. They use a digital interface and require the <strong>DHT sensor library</strong> (install via Library Manager). They are more accurate than the LM35 but require a library to use.</div></div>
+  </div>
+
+  <div class="lesson-section" id="lesson5">
+    <h2>🌙 Lesson 5: Project – Automatic Night Light (LDR)</h2>
+    <p>An <strong>LDR (Light Dependent Resistor)</strong> changes its resistance based on ambient light — it has high resistance in the dark and low resistance in the light. We'll use this to build an automatic LED night light.</p>
+
+    <div class="project-card"><div class="project-card-header"><h3>🌙 Automatic Night Light</h3></div><div class="project-card-body">
+      <p>The LED automatically turns on when the room gets dark, and off when it's bright.</p>
+      <div class="project-materials">
+        <span class="material-tag">Arduino Uno</span><span class="material-tag">LDR (photoresistor)</span><span class="material-tag">10kΩ Resistor</span><span class="material-tag">LED</span><span class="material-tag">220Ω Resistor</span><span class="material-tag">Breadboard + Wires</span>
+      </div>
+    </div></div>
+
+    <h3>Voltage Divider Circuit for LDR</h3>
+    <p>An LDR alone can't connect directly to Arduino — we need a <strong>voltage divider</strong> with a 10kΩ fixed resistor. Together they form a circuit that outputs varying voltage to A0.</p>
+    <table class="wiring-table"><thead><tr><th>Connection</th><th>Arduino</th></tr></thead><tbody>
+      <tr><td class="wire-from">5V → LDR → junction point</td><td class="wire-to">A0</td></tr>
+      <tr><td class="wire-from">Junction → 10kΩ → GND</td><td class="wire-to">GND</td></tr>
+      <tr><td class="wire-from">LED (via 220Ω)</td><td class="wire-to">Pin 13</td></tr>
+    </tbody></table>
+
+    <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div><pre><code><span class="pp">#define</span> LDR_PIN  A0
+<span class="pp">#define</span> LED_PIN  <span class="nm">13</span>
+<span class="pp">#define</span> THRESHOLD <span class="nm">400</span>  <span class="cm">// Adjust based on your lighting</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(LED_PIN, OUTPUT);
+  <span class="fn">Serial.begin</span>(<span class="nm">9600</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">int</span> lightLevel = <span class="fn">analogRead</span>(LDR_PIN);
+  <span class="fn">Serial.print</span>(<span class="st">"Light level: "</span>);
+  <span class="fn">Serial.println</span>(lightLevel);
+
+  <span class="kw">if</span> (lightLevel < THRESHOLD) {
+    <span class="fn">digitalWrite</span>(LED_PIN, HIGH); <span class="cm">// Dark → LED ON</span>
+    <span class="fn">Serial.println</span>(<span class="st">"DARK — Light ON"</span>);
+  } <span class="kw">else</span> {
+    <span class="fn">digitalWrite</span>(LED_PIN, LOW);  <span class="cm">// Bright → LED OFF</span>
+    <span class="fn">Serial.println</span>(<span class="st">"BRIGHT — Light OFF"</span>);
+  }
+  <span class="fn">delay</span>(<span class="nm">300</span>);
+}</code></pre></div>
+    <div class="info-box tip"><span class="icon">🎯</span><div class="body"><strong>Calibrate the Threshold</strong>Open Serial Monitor and cover the LDR with your hand — note the value. Then expose it to normal light — note that value. Set THRESHOLD to something in between. Every room/LDR combination is different!</div></div>
+  </div>
+
+  <div class="lesson-footer">
+    <a href="module3.html" class="btn btn-outline">← Module 3</a>
+    <button class="btn btn-complete" data-lesson="m4_complete">○ Mark Module Complete</button>
+    <a href="module5.html" class="btn btn-primary">Module 5: Displays →</a>
+  </div>
+</main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

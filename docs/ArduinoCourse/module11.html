@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 11: Memory & Libraries – AlCoders Arduino</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="index.html">⚡ <span>Al</span>Coders</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="module10.html">← Module 10</a>
+    <a href="module11.html" class="active">Module 11</a>
+    <a href="module12.html">Module 12 →</a>
+  </div>
+</nav>
+<div class="breadcrumb">
+  <a href="index.html">Arduino Course</a> › Module 11 › Memory, Libraries &amp; EEPROM
+</div>
+<div class="page-wrapper">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">Course Progress</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 60 lessons completed</div>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔧</span> Module 1 – Getting Started</div>
+    <a href="module1.html" class="lesson-link" data-lesson="m1l1"><span class="lesson-dot"></span>What is Arduino?</a>
+    <a href="module1.html#lesson2" class="lesson-link" data-lesson="m1l2"><span class="lesson-dot"></span>Installing the IDE</a>
+    <a href="module1.html#lesson3" class="lesson-link" data-lesson="m1l3"><span class="lesson-dot"></span>Exploring the Board</a>
+    <a href="module1.html#lesson4" class="lesson-link" data-lesson="m1l4"><span class="lesson-dot"></span>Your First Sketch: Blink</a>
+    <a href="module1.html#lesson5" class="lesson-link" data-lesson="m1l5"><span class="lesson-dot"></span>Understanding the Code</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⚡</span> Module 2 – Electronics</div>
+    <a href="module2.html" class="lesson-link" data-lesson="m2l1"><span class="lesson-dot"></span>Voltage, Current &amp; Resistance</a>
+    <a href="module2.html#lesson2" class="lesson-link" data-lesson="m2l2"><span class="lesson-dot"></span>Ohm's Law</a>
+    <a href="module2.html#lesson3" class="lesson-link" data-lesson="m2l3"><span class="lesson-dot"></span>Breadboards &amp; Schematics</a>
+    <a href="module2.html#lesson4" class="lesson-link" data-lesson="m2l4"><span class="lesson-dot"></span>Resistors &amp; Capacitors</a>
+    <a href="module2.html#lesson5" class="lesson-link" data-lesson="m2l5"><span class="lesson-dot"></span>Power Supply &amp; Safety</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💡</span> Module 3 – Digital I/O</div>
+    <a href="module3.html" class="lesson-link" data-lesson="m3l1"><span class="lesson-dot"></span>Digital Pins Explained</a>
+    <a href="module3.html#lesson2" class="lesson-link" data-lesson="m3l2"><span class="lesson-dot"></span>digitalWrite &amp; digitalRead</a>
+    <a href="module3.html#lesson3" class="lesson-link" data-lesson="m3l3"><span class="lesson-dot"></span>Push Buttons &amp; Input</a>
+    <a href="module3.html#lesson4" class="lesson-link" data-lesson="m3l4"><span class="lesson-dot"></span>Debouncing Buttons</a>
+    <a href="module3.html#lesson5" class="lesson-link" data-lesson="m3l5"><span class="lesson-dot"></span>Traffic Light Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌡️</span> Module 4 – Analog I/O</div>
+    <a href="module4.html" class="lesson-link" data-lesson="m4l1"><span class="lesson-dot"></span>Analog vs Digital</a>
+    <a href="module4.html#lesson2" class="lesson-link" data-lesson="m4l2"><span class="lesson-dot"></span>analogRead &amp; Potentiometer</a>
+    <a href="module4.html#lesson3" class="lesson-link" data-lesson="m4l3"><span class="lesson-dot"></span>PWM &amp; analogWrite</a>
+    <a href="module4.html#lesson4" class="lesson-link" data-lesson="m4l4"><span class="lesson-dot"></span>Temperature Sensor</a>
+    <a href="module4.html#lesson5" class="lesson-link" data-lesson="m4l5"><span class="lesson-dot"></span>Light Sensor Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📺</span> Module 5 – Displays</div>
+    <a href="module5.html" class="lesson-link" data-lesson="m5l1"><span class="lesson-dot"></span>LCD 16x2 with I2C</a>
+    <a href="module5.html#lesson2" class="lesson-link" data-lesson="m5l2"><span class="lesson-dot"></span>OLED Display (SSD1306)</a>
+    <a href="module5.html#lesson3" class="lesson-link" data-lesson="m5l3"><span class="lesson-dot"></span>7-Segment Display</a>
+    <a href="module5.html#lesson4" class="lesson-link" data-lesson="m5l4"><span class="lesson-dot"></span>Buzzer &amp; Tones</a>
+    <a href="module5.html#lesson5" class="lesson-link" data-lesson="m5l5"><span class="lesson-dot"></span>RGB LED &amp; Color Mixing</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔊</span> Module 6 – Motors</div>
+    <a href="module6.html" class="lesson-link" data-lesson="m6l1"><span class="lesson-dot"></span>Servo Motor Basics</a>
+    <a href="module6.html#lesson2" class="lesson-link" data-lesson="m6l2"><span class="lesson-dot"></span>DC Motors &amp; L298N</a>
+    <a href="module6.html#lesson3" class="lesson-link" data-lesson="m6l3"><span class="lesson-dot"></span>Stepper Motors</a>
+    <a href="module6.html#lesson4" class="lesson-link" data-lesson="m6l4"><span class="lesson-dot"></span>Motor Speed Control</a>
+    <a href="module6.html#lesson5" class="lesson-link" data-lesson="m6l5"><span class="lesson-dot"></span>Mini Robot Car Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📡</span> Module 7 – Protocols</div>
+    <a href="module7.html" class="lesson-link" data-lesson="m7l1"><span class="lesson-dot"></span>Serial Communication</a>
+    <a href="module7.html#lesson2" class="lesson-link" data-lesson="m7l2"><span class="lesson-dot"></span>I2C Protocol</a>
+    <a href="module7.html#lesson3" class="lesson-link" data-lesson="m7l3"><span class="lesson-dot"></span>SPI Protocol</a>
+    <a href="module7.html#lesson4" class="lesson-link" data-lesson="m7l4"><span class="lesson-dot"></span>Connecting Multiple Devices</a>
+    <a href="module7.html#lesson5" class="lesson-link" data-lesson="m7l5"><span class="lesson-dot"></span>Real-time Serial Plotter</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌐</span> Module 8 – WiFi &amp; IoT</div>
+    <a href="module8.html" class="lesson-link" data-lesson="m8l1"><span class="lesson-dot"></span>Intro to ESP8266/ESP32</a>
+    <a href="module8.html#lesson2" class="lesson-link" data-lesson="m8l2"><span class="lesson-dot"></span>Connecting to WiFi</a>
+    <a href="module8.html#lesson3" class="lesson-link" data-lesson="m8l3"><span class="lesson-dot"></span>Building a Web Server</a>
+    <a href="module8.html#lesson4" class="lesson-link" data-lesson="m8l4"><span class="lesson-dot"></span>Sending Data to Cloud</a>
+    <a href="module8.html#lesson5" class="lesson-link" data-lesson="m8l5"><span class="lesson-dot"></span>MQTT Basics</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📶</span> Module 9 – Bluetooth</div>
+    <a href="module9.html" class="lesson-link" data-lesson="m9l1"><span class="lesson-dot"></span>HC-05 Bluetooth Module</a>
+    <a href="module9.html#lesson2" class="lesson-link" data-lesson="m9l2"><span class="lesson-dot"></span>AT Commands Setup</a>
+    <a href="module9.html#lesson3" class="lesson-link" data-lesson="m9l3"><span class="lesson-dot"></span>Phone-to-Arduino Control</a>
+    <a href="module9.html#lesson4" class="lesson-link" data-lesson="m9l4"><span class="lesson-dot"></span>BLE with ESP32</a>
+    <a href="module9.html#lesson5" class="lesson-link" data-lesson="m9l5"><span class="lesson-dot"></span>Bluetooth Car Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⏱️</span> Module 10 – Interrupts &amp; Timers</div>
+    <a href="module10.html" class="lesson-link" data-lesson="m10l1"><span class="lesson-dot"></span>What are Interrupts?</a>
+    <a href="module10.html#lesson2" class="lesson-link" data-lesson="m10l2"><span class="lesson-dot"></span>attachInterrupt()</a>
+    <a href="module10.html#lesson3" class="lesson-link" data-lesson="m10l3"><span class="lesson-dot"></span>Hardware Timers</a>
+    <a href="module10.html#lesson4" class="lesson-link" data-lesson="m10l4"><span class="lesson-dot"></span>millis() vs delay()</a>
+    <a href="module10.html#lesson5" class="lesson-link" data-lesson="m10l5"><span class="lesson-dot"></span>Sleep Modes &amp; Power Saving</a>
+  </div>
+  <div class="module-group active-module"><div class="module-label"><span class="mod-icon">💾</span> Module 11 – Memory &amp; Libraries</div>
+    <a href="#lesson1" class="lesson-link active" data-lesson="m11l1"><span class="lesson-dot"></span>Arduino Memory Types</a>
+    <a href="#lesson2" class="lesson-link" data-lesson="m11l2"><span class="lesson-dot"></span>EEPROM Read &amp; Write</a>
+    <a href="#lesson3" class="lesson-link" data-lesson="m11l3"><span class="lesson-dot"></span>SD Card Module</a>
+    <a href="#lesson4" class="lesson-link" data-lesson="m11l4"><span class="lesson-dot"></span>Writing Custom Libraries</a>
+    <a href="#lesson5" class="lesson-link" data-lesson="m11l5"><span class="lesson-dot"></span>Data Logger Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🏗️</span> Module 12 – Capstone Projects</div>
+    <a href="module12.html" class="lesson-link" data-lesson="m12l1"><span class="lesson-dot"></span>Smart Weather Station</a>
+    <a href="module12.html#lesson2" class="lesson-link" data-lesson="m12l2"><span class="lesson-dot"></span>Obstacle-Avoiding Robot</a>
+    <a href="module12.html#lesson3" class="lesson-link" data-lesson="m12l3"><span class="lesson-dot"></span>Home Automation System</a>
+    <a href="module12.html#lesson4" class="lesson-link" data-lesson="m12l4"><span class="lesson-dot"></span>RFID Door Lock</a>
+    <a href="module12.html#lesson5" class="lesson-link" data-lesson="m12l5"><span class="lesson-dot"></span>Build Your Own Project</a>
+  </div>
+</aside>
+
+<main class="main-content">
+  <div class="module-hero">
+    <div class="module-hero-icon">💾</div>
+    <div>
+      <div class="module-hero-num">Module 11 · Advanced</div>
+      <h1 class="module-hero-title">Memory, Libraries &amp; EEPROM</h1>
+      <p class="module-hero-desc">Master Arduino's memory system, persist data with EEPROM, log to SD cards, and write reusable custom libraries.</p>
+    </div>
+  </div>
+
+  <!-- LESSON 1 -->
+  <div class="lesson-card" id="lesson1">
+    <div class="lesson-header">
+      <div class="lesson-icon">🧠</div>
+      <div>
+        <div class="lesson-num">Lesson 1 of 5</div>
+        <h2 class="lesson-title">Arduino Memory Types</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>The Arduino Uno has three distinct types of memory, each serving a different purpose. Understanding them is crucial for writing efficient, bug-free programs — especially when you start running low on space.</p>
+      <table class="component-table"><thead><tr><th>Memory</th><th>Size (Uno)</th><th>Contents</th><th>Persists?</th></tr></thead><tbody>
+        <tr><td><strong>Flash</strong></td><td>32 KB</td><td>Your compiled sketch code</td><td>Yes (until re-flashed)</td></tr>
+        <tr><td><strong>SRAM</strong></td><td>2 KB</td><td>Variables, stack, heap, at runtime</td><td>No (lost on reset)</td></tr>
+        <tr><td><strong>EEPROM</strong></td><td>1 KB</td><td>Small permanent storage</td><td>Yes (100,000 write cycles)</td></tr>
+      </tbody></table>
+      <h3>The SRAM Problem</h3>
+      <p>2 KB sounds tiny — and it is. String constants, arrays, and String objects all eat SRAM. Running out causes random crashes, resets, and very strange behavior. Use the F() macro to move string literals to Flash:</p>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ — Saving SRAM with F() macro</span><button class="copy-btn">Copy</button></div><pre><code><span class="cm">// BAD — strings stored in SRAM (wastes precious 2KB)</span>
+Serial.<span class="fn">println</span>(<span class="st">"Welcome to AlCoders Arduino Course"</span>);
+
+<span class="cm">// GOOD — F() stores strings in Flash instead</span>
+Serial.<span class="fn">println</span>(<span class="fn">F</span>(<span class="st">"Welcome to AlCoders Arduino Course"</span>));
+
+<span class="cm">// Check free SRAM at runtime (useful for debugging)</span>
+<span class="kw">int</span> <span class="fn">freeMemory</span>() {
+  <span class="kw">extern int</span> __heap_start, *__brkval;
+  <span class="tp">int</span> v;
+  <span class="kw">return</span> (<span class="tp">int</span>) &amp;v - (__brkval == <span class="nm">0</span> ? (<span class="tp">int</span>) &amp;__heap_start : (<span class="tp">int</span>) __brkval);
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="nm">9600</span>);
+  Serial.<span class="fn">print</span>(<span class="fn">F</span>(<span class="st">"Free SRAM: "</span>));
+  Serial.<span class="fn">println</span>(<span class="fn">freeMemory</span>());
+}</code></pre></div>
+      <div class="info-box warning"><span class="icon">⚠️</span><div class="body"><strong>Avoid the String class</strong> The Arduino <code>String</code> class causes heap fragmentation and memory leaks over time. Use character arrays (<code>char[]</code>) and <code>strcpy()</code>/<code>sprintf()</code> instead for robust code.</div></div>
+      <div class="quiz-box">
+        <h4>Quick Check</h4>
+        <p>Your sketch has lots of Serial.println("...") calls. Which memory type do these string literals waste if you don't use F()?</p>
+        <button class="quiz-option" data-correct="false">Flash</button>
+        <button class="quiz-option" data-correct="true">SRAM</button>
+        <button class="quiz-option" data-correct="false">EEPROM</button>
+        <button class="quiz-option" data-correct="false">All three equally</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m11l1">○ Mark Complete</button></div>
+  </div>
+
+  <!-- LESSON 2 -->
+  <div class="lesson-card" id="lesson2">
+    <div class="lesson-header">
+      <div class="lesson-icon">💿</div>
+      <div>
+        <div class="lesson-num">Lesson 2 of 5</div>
+        <h2 class="lesson-title">EEPROM Read &amp; Write</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>EEPROM (Electrically Erasable Programmable Read-Only Memory) survives power-off, resets, and even reprogramming. It's perfect for storing settings, calibration values, or user preferences.</p>
+      <div class="info-box warning"><span class="icon">⚠️</span><div class="body"><strong>EEPROM Endurance</strong> Each EEPROM address can only be written ~100,000 times before it wears out. Use <code>EEPROM.update()</code> instead of <code>EEPROM.write()</code> — it only writes if the value has changed, extending EEPROM life dramatically.</div></div>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ — EEPROM: Save &amp; load settings</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">#include</span> <span class="st">&lt;EEPROM.h&gt;</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="nm">9600</span>);
+
+  <span class="cm">// Write a byte (0-255) to address 0</span>
+  EEPROM.<span class="fn">update</span>(<span class="nm">0</span>, <span class="nm">42</span>);   <span class="cm">// Only writes if value changed</span>
+
+  <span class="cm">// Read it back</span>
+  <span class="tp">byte</span> val = EEPROM.<span class="fn">read</span>(<span class="nm">0</span>);
+  Serial.<span class="fn">println</span>(val);  <span class="cm">// 42</span>
+
+  <span class="cm">// Store a float (uses 4 addresses)</span>
+  <span class="tp">float</span> temp = <span class="nm">23.5</span>;
+  EEPROM.<span class="fn">put</span>(<span class="nm">10</span>, temp);   <span class="cm">// address 10-13</span>
+
+  <span class="cm">// Read the float back</span>
+  <span class="tp">float</span> loadedTemp;
+  EEPROM.<span class="fn">get</span>(<span class="nm">10</span>, loadedTemp);
+  Serial.<span class="fn">println</span>(loadedTemp);   <span class="cm">// 23.50</span>
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {}</code></pre></div>
+      <h3>Storing a Struct</h3>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ — Store multiple settings as struct</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">#include</span> <span class="st">&lt;EEPROM.h&gt;</span>
+
+<span class="kw">struct</span> Settings {
+  <span class="tp">byte</span> brightness;    <span class="cm">// 0-255</span>
+  <span class="tp">int</span>  threshold;     <span class="cm">// sensor trigger level</span>
+  <span class="tp">bool</span> alarmEnabled;
+};
+
+Settings cfg = { <span class="nm">128</span>, <span class="nm">500</span>, <span class="kw">true</span> };
+
+<span class="kw">void</span> <span class="fn">saveSettings</span>() { EEPROM.<span class="fn">put</span>(<span class="nm">0</span>, cfg); }
+<span class="kw">void</span> <span class="fn">loadSettings</span>() { EEPROM.<span class="fn">get</span>(<span class="nm">0</span>, cfg); }</code></pre></div>
+      <div class="quiz-box">
+        <h4>Quick Check</h4>
+        <p>Why should you use EEPROM.update() instead of EEPROM.write()?</p>
+        <button class="quiz-option" data-correct="false">update() is faster</button>
+        <button class="quiz-option" data-correct="true">update() only writes if value changed, extending EEPROM lifespan</button>
+        <button class="quiz-option" data-correct="false">write() doesn't work with floats</button>
+        <button class="quiz-option" data-correct="false">update() uses less SRAM</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m11l2">○ Mark Complete</button></div>
+  </div>
+
+  <!-- LESSON 3 -->
+  <div class="lesson-card" id="lesson3">
+    <div class="lesson-header">
+      <div class="lesson-icon">📁</div>
+      <div>
+        <div class="lesson-num">Lesson 3 of 5</div>
+        <h2 class="lesson-title">SD Card Module</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>When you need to store kilobytes or megabytes of data (sensor logs, images, config files), an SD card module is your answer. It communicates via <strong>SPI</strong> and uses the built-in <strong>SD library</strong>.</p>
+      <h3>Wiring (SPI)</h3>
+      <table class="component-table"><thead><tr><th>SD Module Pin</th><th>Arduino Uno Pin</th></tr></thead><tbody>
+        <tr><td>VCC</td><td>5V (some modules need 3.3V — check!)</td></tr>
+        <tr><td>GND</td><td>GND</td></tr>
+        <tr><td>MOSI</td><td>11</td></tr>
+        <tr><td>MISO</td><td>12</td></tr>
+        <tr><td>SCK</td><td>13</td></tr>
+        <tr><td>CS</td><td>10 (or any digital pin)</td></tr>
+      </tbody></table>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ — Write sensor data to SD card</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">#include</span> <span class="st">&lt;SPI.h&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;SD.h&gt;</span>
+
+<span class="kw">const int</span> CS_PIN = <span class="nm">10</span>;
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="nm">9600</span>);
+  <span class="kw">if</span> (!SD.<span class="fn">begin</span>(CS_PIN)) {
+    Serial.<span class="fn">println</span>(<span class="fn">F</span>(<span class="st">"SD card init failed!"</span>));
+    <span class="kw">return</span>;
+  }
+  Serial.<span class="fn">println</span>(<span class="fn">F</span>(<span class="st">"SD card ready."</span>));
+}
+
+<span class="kw">void</span> <span class="fn">logData</span>(<span class="tp">float</span> temp, <span class="tp">int</span> light) {
+  File f = SD.<span class="fn">open</span>(<span class="st">"data.csv"</span>, FILE_WRITE);
+  <span class="kw">if</span> (f) {
+    f.<span class="fn">print</span>(<span class="fn">millis</span>());  f.<span class="fn">print</span>(<span class="st">","</span>);
+    f.<span class="fn">print</span>(temp);     f.<span class="fn">print</span>(<span class="st">","</span>);
+    f.<span class="fn">println</span>(light);
+    f.<span class="fn">close</span>();   <span class="cm">// ALWAYS close! Or data may be lost</span>
+  }
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">float</span> temperature = <span class="fn">analogRead</span>(A0) * <span class="nm">0.488</span>;
+  <span class="tp">int</span>   lightLevel  = <span class="fn">analogRead</span>(A1);
+  <span class="fn">logData</span>(temperature, lightLevel);
+  <span class="fn">delay</span>(<span class="nm">5000</span>);   <span class="cm">// Log every 5 seconds</span>
+}</code></pre></div>
+      <div class="info-box tip"><span class="icon">💡</span><div class="body"><strong>CSV Format</strong> Save data as CSV (comma-separated values) — you can open it directly in Excel or Google Sheets to graph your sensor data. Include headers on first run: "time,temperature,light"</div></div>
+      <div class="quiz-box">
+        <h4>Quick Check</h4>
+        <p>Why must you always call file.close() after writing to an SD card?</p>
+        <button class="quiz-option" data-correct="false">To free the SD CS pin</button>
+        <button class="quiz-option" data-correct="true">Data is buffered in memory and only written to card on close</button>
+        <button class="quiz-option" data-correct="false">To reset the SPI bus</button>
+        <button class="quiz-option" data-correct="false">close() is optional — it doesn't matter</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m11l3">○ Mark Complete</button></div>
+  </div>
+
+  <!-- LESSON 4 -->
+  <div class="lesson-card" id="lesson4">
+    <div class="lesson-header">
+      <div class="lesson-icon">📦</div>
+      <div>
+        <div class="lesson-num">Lesson 4 of 5</div>
+        <h2 class="lesson-title">Writing Custom Libraries</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>A library is just reusable code packaged into a header file (.h) and source file (.cpp). Once you understand how libraries work, you can write your own — making your sketches cleaner and your code portable across projects.</p>
+      <h3>Library Structure</h3>
+      <p>A library lives in <code>Documents/Arduino/libraries/MyLibName/</code> and contains:</p>
+      <table class="component-table"><thead><tr><th>File</th><th>Purpose</th></tr></thead><tbody>
+        <tr><td><code>MyLibName.h</code></td><td>Class declaration — lists all functions and variables</td></tr>
+        <tr><td><code>MyLibName.cpp</code></td><td>Function implementations (the actual code)</td></tr>
+        <tr><td><code>keywords.txt</code></td><td>IDE syntax highlighting definitions</td></tr>
+        <tr><td><code>library.properties</code></td><td>Metadata (name, version, author)</td></tr>
+      </tbody></table>
+      <h3>Example: LED Blinker Library</h3>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Blinker.h — Header file</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">#ifndef</span> BLINKER_H
+<span class="kw">#define</span> BLINKER_H
+
+<span class="kw">#include</span> <span class="st">&lt;Arduino.h&gt;</span>
+
+<span class="kw">class</span> Blinker {
+  <span class="kw">public</span>:
+    <span class="fn">Blinker</span>(<span class="tp">int</span> pin, <span class="tp">long</span> interval);
+    <span class="kw">void</span> <span class="fn">update</span>();     <span class="cm">// Call in loop()</span>
+    <span class="kw">void</span> <span class="fn">setInterval</span>(<span class="tp">long</span> interval);
+  <span class="kw">private</span>:
+    <span class="tp">int</span>  _pin;
+    <span class="tp">long</span> _interval;
+    <span class="tp">bool</span> _state;
+    <span class="kw">unsigned long</span> _lastToggle;
+};
+
+<span class="kw">#endif</span></code></pre></div>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Blinker.cpp — Implementation</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">#include</span> <span class="st">"Blinker.h"</span>
+
+<span class="fn">Blinker::Blinker</span>(<span class="tp">int</span> pin, <span class="tp">long</span> interval) {
+  _pin = pin;
+  _interval = interval;
+  _state = <span class="kw">false</span>;
+  _lastToggle = <span class="nm">0</span>;
+  <span class="fn">pinMode</span>(_pin, OUTPUT);
+}
+
+<span class="kw">void</span> <span class="fn">Blinker::update</span>() {
+  <span class="kw">unsigned long</span> now = <span class="fn">millis</span>();
+  <span class="kw">if</span> (now - _lastToggle &gt;= _interval) {
+    _lastToggle = now;
+    _state = !_state;
+    <span class="fn">digitalWrite</span>(_pin, _state);
+  }
+}
+
+<span class="kw">void</span> <span class="fn">Blinker::setInterval</span>(<span class="tp">long</span> interval) {
+  _interval = interval;
+}</code></pre></div>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Sketch — Using your custom library</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">#include</span> <span class="st">&lt;Blinker.h&gt;</span>
+
+Blinker <span class="fn">led1</span>(<span class="nm">13</span>, <span class="nm">500</span>);   <span class="cm">// pin 13, blink every 500ms</span>
+Blinker <span class="fn">led2</span>(<span class="nm">12</span>, <span class="nm">200</span>);   <span class="cm">// pin 12, blink every 200ms</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  led1.<span class="fn">update</span>();
+  led2.<span class="fn">update</span>();
+  <span class="cm">// Both LEDs blink independently with no delay()</span>
+}</code></pre></div>
+      <div class="quiz-box">
+        <h4>Quick Check</h4>
+        <p>In a custom library, where do you write the actual function code (implementations)?</p>
+        <button class="quiz-option" data-correct="false">In the .h header file</button>
+        <button class="quiz-option" data-correct="true">In the .cpp source file</button>
+        <button class="quiz-option" data-correct="false">In keywords.txt</button>
+        <button class="quiz-option" data-correct="false">In the main sketch file</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m11l4">○ Mark Complete</button></div>
+  </div>
+
+  <!-- LESSON 5 -->
+  <div class="lesson-card" id="lesson5">
+    <div class="lesson-header">
+      <div class="lesson-icon">📊</div>
+      <div>
+        <div class="lesson-num">Lesson 5 of 5 · Project</div>
+        <h2 class="lesson-title">Data Logger Project</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>Build a complete <strong>Environmental Data Logger</strong> that reads temperature + humidity, timestamps each reading using a DS3231 RTC (Real-Time Clock), saves to SD card in CSV format, and stores the last reading to EEPROM for safe recovery.</p>
+      <h3>Hardware Required</h3>
+      <table class="component-table"><thead><tr><th>Component</th><th>Purpose</th></tr></thead><tbody>
+        <tr><td>Arduino Uno</td><td>Main controller</td></tr>
+        <tr><td>DHT22 sensor</td><td>Temperature + Humidity</td></tr>
+        <tr><td>DS3231 RTC module</td><td>Real timestamps (I2C)</td></tr>
+        <tr><td>SD card module</td><td>Log storage (SPI)</td></tr>
+        <tr><td>16x2 LCD (I2C)</td><td>Display current readings</td></tr>
+      </tbody></table>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ — Complete Data Logger</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">#include</span> <span class="st">&lt;DHT.h&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;RTClib.h&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;SD.h&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;SPI.h&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;EEPROM.h&gt;</span>
+
+DHT <span class="fn">dht</span>(<span class="nm">7</span>, DHT22);
+RTC_DS3231 rtc;
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="nm">9600</span>);
+  dht.<span class="fn">begin</span>();
+  rtc.<span class="fn">begin</span>();
+  SD.<span class="fn">begin</span>(<span class="nm">10</span>);
+
+  <span class="cm">// Write CSV header if file doesn't exist</span>
+  <span class="kw">if</span> (!SD.<span class="fn">exists</span>(<span class="st">"log.csv"</span>)) {
+    File f = SD.<span class="fn">open</span>(<span class="st">"log.csv"</span>, FILE_WRITE);
+    f.<span class="fn">println</span>(<span class="st">"datetime,temp_c,humidity_pct"</span>);
+    f.<span class="fn">close</span>();
+  }
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  DateTime now = rtc.<span class="fn">now</span>();
+  <span class="tp">float</span> temp = dht.<span class="fn">readTemperature</span>();
+  <span class="tp">float</span> hum  = dht.<span class="fn">readHumidity</span>();
+
+  <span class="kw">if</span> (!<span class="fn">isnan</span>(temp)) {
+    <span class="cm">// Save to SD card</span>
+    File f = SD.<span class="fn">open</span>(<span class="st">"log.csv"</span>, FILE_WRITE);
+    f.<span class="fn">print</span>(now.<span class="fn">timestamp</span>(DateTime::TIMESTAMP_FULL));
+    f.<span class="fn">print</span>(<span class="st">","</span>); f.<span class="fn">print</span>(temp);
+    f.<span class="fn">print</span>(<span class="st">","</span>); f.<span class="fn">println</span>(hum);
+    f.<span class="fn">close</span>();
+
+    <span class="cm">// Back up last temp to EEPROM (address 0)</span>
+    EEPROM.<span class="fn">put</span>(<span class="nm">0</span>, temp);
+    
+    Serial.<span class="fn">print</span>(temp); Serial.<span class="fn">print</span>(<span class="st">"°C  "</span>);
+    Serial.<span class="fn">print</span>(hum);  Serial.<span class="fn">println</span>(<span class="st">"%"</span>);
+  }
+
+  <span class="fn">delay</span>(<span class="nm">60000</span>);  <span class="cm">// Log every minute</span>
+}</code></pre></div>
+      <div class="info-box success"><span class="icon">🎉</span><div class="body"><strong>Challenge:</strong> Add a button that cycles through the last 10 readings stored in EEPROM and displays them on the LCD — no SD card needed for quick review!</div></div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m11l5">○ Mark Complete</button></div>
+  </div>
+
+  <div class="lesson-footer">
+    <a href="module10.html" class="btn btn-outline">← Module 10</a>
+    <button class="btn btn-complete" data-lesson="m11_complete">○ Mark Module Complete</button>
+    <a href="module12.html" class="btn btn-primary">Module 12: Capstone Projects →</a>
+  </div>
+</main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

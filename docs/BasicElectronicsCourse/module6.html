@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 6: Transistors — AlCoders Electronics</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo"><div class="logo-icon">⚡</div>Al<span>Coders</span></a>
+  <div class="nav-links">
+    <a href="module5.html">← Module 5</a>
+    <a href="index.html">All Modules</a>
+    <a href="module7.html">Module 7: Breadboarding →</a>
+  </div>
+</nav>
+<div class="course-layout">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h3>// Module 6 Progress</h3>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-label">0% complete</div>
+  </div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">1</span>What is Electricity?</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module1.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">2</span>Basic Components</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module2.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">3</span>Ohm's Law & Power</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module3.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">4</span>Series & Parallel</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module4.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">5</span>Semiconductors & Diodes</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module5.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn active"><span class="module-num">6</span>Transistors</button><ul class="lesson-list">
+<li class="lesson-item"><a href="#m6_1" data-lid="m6_1">6.1 What is a Transistor?</a></li>
+<li class="lesson-item"><a href="#m6_2" data-lid="m6_2">6.2 NPN BJT as Switch</a></li>
+<li class="lesson-item"><a href="#m6_3" data-lid="m6_3">6.3 Transistor Switch — Circuit</a></li>
+<li class="lesson-item"><a href="#m6_4" data-lid="m6_4">6.4 MOSFET Basics</a></li>
+<li class="lesson-item"><a href="#m6_5" data-lid="m6_5">6.5 Transistor Amplifier Overview</a></li>
+</ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">7</span>Breadboarding & Tools</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module7.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">8</span>Capacitors & Inductors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module8.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">9</span>Sensors & Signals</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module9.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">10</span>Intro to Arduino</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module10.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">11</span>Arduino & Sensors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module11.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">12</span>Final Projects</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module12.html">Go to module →</a></li></ul></div>
+
+</aside>
+<main class="content-area">
+  <div class="lesson-breadcrumb">Electronics Course → <span>Module 6</span> → Transistors</div>
+  <section id="m6_1">
+<h1 class="lesson-title">6.1 What is a Transistor?</h1>
+<div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>The <strong>transistor</strong> — invented in 1947 — is a semiconductor device used as a switch or amplifier. Every smartphone contains billions.</p>
+<div class="info-box"><div class="box-title">📌 Two Main Types</div>BJT (Bipolar Junction Transistor): current-controlled, 3 terminals: Base, Collector, Emitter. MOSFET: voltage-controlled, 3 terminals: Gate, Drain, Source.</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m6_2">
+<h1 class="lesson-title">6.2 NPN BJT as Switch</h1>
+<div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>An <strong>NPN BJT</strong> (like BC547, 2N2222) is the most common transistor for beginner switching applications.</p>
+<div class="formula-block"><div class="formula-text">Ic = hFE × Ib</div><div class="formula-label">Collector current = current gain × base current. Typical hFE = 100–300</div></div>
+<div class="info-box"><div class="box-title">📌 How to Switch</div>Base LOW → transistor OFF. Base HIGH (via resistor) → transistor saturated (fully ON). Lets 5mA microcontroller signal control 500mA motor.</div>
+<div class="tip-box"><div class="box-title">💡 Base Resistor</div>Always limit base current with resistor. If Vcc=5V, Ib_desired=1mA: R = (5−0.7)/0.001 = 4.3kΩ → use 4.7kΩ.</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m6_3">
+<h1 class="lesson-title">6.3 Transistor Switch — Circuit</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p><strong>Circuit:</strong> Arduino pin → 1kΩ → NPN Base. Motor between 12V and Collector. Emitter to GND. Arduino HIGH → motor runs. LOW → motor stops.</p>
+<div class="warning-box"><div class="box-title">⚠️ Flyback Diode</div>ALWAYS add a flyback diode (1N4007, cathode to Vcc) across motors, relays, and solenoids to absorb voltage spikes when switching off.</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m6_4">
+<h1 class="lesson-title">6.4 MOSFET Basics</h1>
+<div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>MOSFETs (like IRLZ44N) are voltage-controlled and draw almost zero gate current — perfect for microcontrollers.</p>
+<div class="info-box"><div class="box-title">📌 N-Channel MOSFET</div>Gate voltage above threshold (~2–4V for logic-level) turns it ON. Load between Drain and Vcc. Source to GND.</div>
+<div class="tip-box"><div class="box-title">💡 Logic-Level MOSFETs</div>IRLZ44N, 2N7000 fully turn on with 5V gate signal — perfect for Arduino. Standard MOSFETs need 10V.</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m6_5">
+<h1 class="lesson-title">6.5 Transistor Amplifier Overview</h1>
+<div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>A transistor amplifies weak signals: small base current variations → large collector current variations.</p>
+<div class="info-box"><div class="box-title">📌 Common Amplifier Configurations</div>Common Emitter: high voltage gain, inverted signal. Used in audio amps. Emitter Follower: gain ~1, high current drive, impedance matching. Common Base: high frequency.</div>
+<div class="tip-box"><div class="box-title">💡 Module 6 Complete!</div>You understand BJTs and MOSFETs as switches and the basics of amplification. Module 7 is where we build on a real breadboard!</div>
+</div>
+
+<div class="lesson-nav">
+  <a href="module5.html" class="btn btn-outline">← Module 5</a>
+  <button class="mark-done-btn">Mark as Complete</button>
+  <a href="module7.html" class="btn btn-primary">Module 7: Breadboarding →</a>
+</div>
+</section>
+
+</main>
+</div>
+<script src="course.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  updateProgressBar('m6', 5);
+  initMarkDone('m6_5');
+  refreshSidebarDone();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Module 3 — Basic Sensors · AlCoders</title>
+<link rel="stylesheet" href="../css/theme.css">
+<script type="module" src="../theme.js"></script>
+<link rel="shortcut icon" href="../images/alcodersLogo.jpg" type="image/jpg"/>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Syne:wght@600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <a href="index.html"><div>
+      <div class="logo-text">Al<span>Coders</span></div>
+      <div class="logo-sub">Introduction to Sensors</div>
+    </div></a>
+  </div>
+  <a class="sidebar-back" href="index.html">← Back to course</a>
+  <div class="sidebar-module-nav">
+    <a href="module1.html" class="mod-nav-btn">M1</a>
+    <a href="module2.html" class="mod-nav-btn">M2</a>
+    <a href="module3.html" class="mod-nav-btn current">M3</a>
+    <a href="module4.html" class="mod-nav-btn">M4</a>
+    <a href="module5.html" class="mod-nav-btn">M5</a>
+    <a href="module6.html" class="mod-nav-btn">M6</a>
+    <a href="module7.html" class="mod-nav-btn">M7</a>
+    <a href="module8.html" class="mod-nav-btn">M8</a>
+  </div>
+  <div class="sidebar-module-block">
+    <div class="sidebar-module-title"><span class="mod-badge">03</span> Basic & Common Sensors</div>
+    <a class="sidebar-lesson" data-lesson="l3-1" href="#"><span class="lesson-dot"></span>Push Button Sensor</a>
+    <a class="sidebar-lesson" data-lesson="l3-2" href="#"><span class="lesson-dot"></span>Potentiometer</a>
+    <a class="sidebar-lesson" data-lesson="l3-3" href="#"><span class="lesson-dot"></span>Tilt & Vibration Sensor</a>
+    <a class="sidebar-lesson" data-lesson="l3-4" href="#"><span class="lesson-dot"></span>Sound / Microphone Sensor</a>
+    <a class="sidebar-lesson proj-link" data-lesson="proj3" href="#"><span class="lesson-dot"></span>Project: Sensor Dashboard</a>
+  </div>
+</aside>
+
+<main class="main" id="mainContent">
+  <div class="topbar">
+    <div class="breadcrumb">AlCoders / <strong>Sensors</strong> / Module 3</div>
+    <div class="topbar-nav">
+      <button class="nav-btn" id="prevBtn" disabled>← Prev</button>
+      <button class="nav-btn primary" id="nextBtn">Next →</button>
+    </div>
+  </div>
+
+  <!-- L3-1 -->
+  <div class="lesson-page" id="l3-1">
+    <div class="lesson-tag">Module 03 · Lesson 1</div>
+    <h1 class="lesson-title">Push Button Sensor <span class="badge digital">Digital</span></h1>
+    <p class="lesson-intro">The push button is the simplest possible sensor. Learning it correctly teaches you principles that apply to every digital sensor.</p>
+
+    <div class="block">
+      <h2>What is a Push Button?</h2>
+      <p>A push button (momentary tactile switch) creates or breaks an electrical connection when pressed. Most standard push buttons are <strong>normally open (NO)</strong> — the circuit is open (no connection) by default, and closes when pressed.</p>
+      <p>Internally it has two pairs of pins. Pressing the button bridges a metal contact between the two pairs.</p>
+    </div>
+
+    <div class="block">
+      <h2>Wiring with INPUT_PULLUP (Simplest Method)</h2>
+      <table class="pin-table">
+        <thead><tr><th>Button Pin</th><th>Connect To</th></tr></thead>
+        <tbody>
+          <tr><td>One leg</td><td class="sig">Arduino Digital Pin 2</td></tr>
+          <tr><td>Other leg</td><td class="gnd">GND</td></tr>
+        </tbody>
+      </table>
+      <p>No external resistor needed — <code>INPUT_PULLUP</code> activates Arduino's internal 20kΩ pull-up resistor.</p>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — Button with INPUT_PULLUP</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">const int</span> BUTTON_PIN = <span class="v">2</span>;
+<span class="kw">const int</span> LED_PIN    = <span class="v">13</span>;
+
+<span class="kw">void</span> <span class="p">setup</span>() {
+  <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>);
+  <span class="p">pinMode</span>(BUTTON_PIN, <span class="v">INPUT_PULLUP</span>);
+  <span class="p">pinMode</span>(LED_PIN, <span class="v">OUTPUT</span>);
+}
+
+<span class="kw">void</span> <span class="p">loop</span>() {
+  <span class="kw">int</span> btnState = <span class="p">digitalRead</span>(BUTTON_PIN);
+  <span class="kw">if</span> (btnState == <span class="v">LOW</span>) {   <span class="cm">// LOW = pressed with INPUT_PULLUP</span>
+    <span class="p">digitalWrite</span>(LED_PIN, <span class="v">HIGH</span>);
+    <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"Button PRESSED"</span>);
+  } <span class="kw">else</span> {
+    <span class="p">digitalWrite</span>(LED_PIN, <span class="v">LOW</span>);
+  }
+  <span class="p">delay</span>(<span class="v">50</span>);
+}</div>
+    </div>
+
+    <div class="block">
+      <h2>Switch Debouncing</h2>
+      <p>Mechanical buttons "bounce" rapidly for a few milliseconds when pressed, causing multiple false readings. Always debounce in real projects:</p>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — Debounced Button</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">const int</span> BUTTON_PIN = <span class="v">2</span>;
+<span class="kw">unsigned long</span> lastDebounceTime = <span class="v">0</span>;
+<span class="kw">const unsigned long</span> DEBOUNCE_DELAY = <span class="v">50</span>;
+<span class="kw">int</span> lastButtonState = <span class="v">HIGH</span>;
+<span class="kw">int</span> buttonState;
+<span class="kw">int</span> pressCount = <span class="v">0</span>;
+
+<span class="kw">void</span> <span class="p">setup</span>() { <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>); <span class="p">pinMode</span>(BUTTON_PIN, <span class="v">INPUT_PULLUP</span>); }
+
+<span class="kw">void</span> <span class="p">loop</span>() {
+  <span class="kw">int</span> reading = <span class="p">digitalRead</span>(BUTTON_PIN);
+  <span class="kw">if</span> (reading != lastButtonState) lastDebounceTime = <span class="p">millis</span>();
+  <span class="kw">if</span> ((<span class="p">millis</span>() - lastDebounceTime) > DEBOUNCE_DELAY) {
+    <span class="kw">if</span> (reading != buttonState) {
+      buttonState = reading;
+      <span class="kw">if</span> (buttonState == <span class="v">LOW</span>) { pressCount++; <span class="p">Serial</span>.<span class="p">println</span>(pressCount); }
+    }
+  }
+  lastButtonState = reading;
+}</div>
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l3-1')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l3-2')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L3-2 -->
+  <div class="lesson-page" id="l3-2">
+    <div class="lesson-tag">Module 03 · Lesson 2</div>
+    <h1 class="lesson-title">Potentiometer <span class="badge analog">Analog</span></h1>
+    <p class="lesson-intro">The potentiometer is the most important analog sensor for beginners — it perfectly demonstrates how analog signals work and how Arduino reads them.</p>
+
+    <div class="block">
+      <h2>What is a Potentiometer?</h2>
+      <p>A potentiometer (pot) is a variable resistor with a rotary knob. It has three pins: two ends of a resistive track and a wiper that slides along the track. As you turn the knob, the wiper moves and the voltage on the middle pin changes from 0V to 5V — a perfect analog signal.</p>
+    </div>
+
+    <div class="block">
+      <h2>Wiring</h2>
+      <table class="pin-table">
+        <thead><tr><th>Potentiometer Pin</th><th>Connect To</th></tr></thead>
+        <tbody>
+          <tr><td>Left pin</td><td class="vcc">5V</td></tr>
+          <tr><td>Middle pin (wiper)</td><td class="sig">A0</td></tr>
+          <tr><td>Right pin</td><td class="gnd">GND</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — Potentiometer + LED Dimmer</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">const int</span> POT_PIN = <span class="v">A0</span>;
+<span class="kw">const int</span> LED_PIN = <span class="v">9</span>; <span class="cm">// PWM pin</span>
+
+<span class="kw">void</span> <span class="p">setup</span>() { <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>); <span class="p">pinMode</span>(LED_PIN, <span class="v">OUTPUT</span>); }
+
+<span class="kw">void</span> <span class="p">loop</span>() {
+  <span class="kw">int</span> raw = <span class="p">analogRead</span>(POT_PIN);             <span class="cm">// 0–1023</span>
+  <span class="kw">float</span> voltage = (raw / <span class="v">1023.0</span>) * <span class="v">5.0</span>;      <span class="cm">// 0–5V</span>
+  <span class="kw">int</span> brightness = <span class="p">map</span>(raw, <span class="v">0</span>, <span class="v">1023</span>, <span class="v">0</span>, <span class="v">255</span>); <span class="cm">// map to PWM range</span>
+  <span class="p">analogWrite</span>(LED_PIN, brightness);
+
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Raw: "</span>); <span class="p">Serial</span>.<span class="p">print</span>(raw);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">" | Voltage: "</span>); <span class="p">Serial</span>.<span class="p">print</span>(voltage);
+  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"V"</span>);
+  <span class="p">delay</span>(<span class="v">100</span>);
+}</div>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-head">📌 The map() Function</div>
+      <code>map(value, fromLow, fromHigh, toLow, toHigh)</code> linearly re-maps a number from one range to another. Above it converts 0–1023 (ADC range) to 0–255 (PWM range). You'll use this constantly with analog sensors.
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l3-2')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l3-3')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L3-3 -->
+  <div class="lesson-page" id="l3-3">
+    <div class="lesson-tag">Module 03 · Lesson 3</div>
+    <h1 class="lesson-title">Tilt & Vibration Sensors <span class="badge digital">Digital</span></h1>
+    <p class="lesson-intro">Tilt and vibration sensors are simple but useful — perfect for burglar alarms, orientation detection, and shake-activated projects.</p>
+
+    <div class="block">
+      <h2>Tilt Sensor (SW-520D)</h2>
+      <p>A tilt sensor contains a small metal ball inside a cylindrical tube with two electrodes. When upright, the ball bridges the electrodes and closes the circuit (LOW output). When tilted beyond a threshold angle, the ball rolls away and opens the circuit (HIGH output). It's a gravity-activated switch.</p>
+    </div>
+
+    <div class="block">
+      <h2>Vibration Sensor (SW-18010P)</h2>
+      <p>Contains a spring-coiled wire inside a cylinder. When vibrated, the spring makes intermittent contact with the outer wall, producing rapid on/off pulses. Module versions include a comparator chip that outputs a clean digital HIGH when vibration exceeds a threshold — adjustable via an onboard potentiometer.</p>
+    </div>
+
+    <div class="block">
+      <h2>Wiring Tilt/Vibration Module</h2>
+      <table class="pin-table">
+        <thead><tr><th>Module Pin</th><th>Connect To</th></tr></thead>
+        <tbody>
+          <tr><td class="vcc">VCC</td><td>5V</td></tr>
+          <tr><td class="gnd">GND</td><td>GND</td></tr>
+          <tr><td class="sig">DO (Digital Output)</td><td>Digital Pin 3</td></tr>
+          <tr><td>AO (Analog Output)</td><td>A0 (optional)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — Tilt/Vibration Alarm</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">const int</span> SENSOR_PIN = <span class="v">3</span>;
+<span class="kw">const int</span> BUZZER_PIN = <span class="v">8</span>;
+
+<span class="kw">void</span> <span class="p">setup</span>() {
+  <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>);
+  <span class="p">pinMode</span>(SENSOR_PIN, <span class="v">INPUT</span>);
+  <span class="p">pinMode</span>(BUZZER_PIN, <span class="v">OUTPUT</span>);
+}
+
+<span class="kw">void</span> <span class="p">loop</span>() {
+  <span class="kw">if</span> (<span class="p">digitalRead</span>(SENSOR_PIN) == <span class="v">HIGH</span>) {
+    <span class="p">digitalWrite</span>(BUZZER_PIN, <span class="v">HIGH</span>);
+    <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"⚠ Tilt/Vibration Detected!"</span>);
+    <span class="p">delay</span>(<span class="v">500</span>);
+  } <span class="kw">else</span> {
+    <span class="p">digitalWrite</span>(BUZZER_PIN, <span class="v">LOW</span>);
+  }
+  <span class="p">delay</span>(<span class="v">50</span>);
+}</div>
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l3-3')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l3-4')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L3-4 -->
+  <div class="lesson-page" id="l3-4">
+    <div class="lesson-tag">Module 03 · Lesson 4</div>
+    <h1 class="lesson-title">Sound / Microphone Sensor <span class="badge both">Analog + Digital</span></h1>
+    <p class="lesson-intro">The KY-038 sound sensor module can detect claps, voices, and ambient noise — enabling clap-activated switches and sound-responsive projects.</p>
+
+    <div class="block">
+      <h2>How the Sound Sensor Works</h2>
+      <p>The KY-038 module has an electret microphone that converts sound pressure waves into a tiny electrical signal. An onboard LM393 comparator amplifies this and compares it to a threshold set by an onboard potentiometer. If sound exceeds the threshold, the digital output (DO) goes HIGH. The analog output (AO) varies continuously with sound level.</p>
+    </div>
+
+    <div class="block">
+      <h2>Wiring</h2>
+      <table class="pin-table">
+        <thead><tr><th>KY-038 Pin</th><th>Connect To</th></tr></thead>
+        <tbody>
+          <tr><td class="vcc">VCC</td><td>5V</td></tr>
+          <tr><td class="gnd">GND</td><td>GND</td></tr>
+          <tr><td class="sig">DO</td><td>Digital Pin 7</td></tr>
+          <tr><td>AO</td><td>A0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — Clap Switch</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">const int</span> SOUND_DO = <span class="v">7</span>;
+<span class="kw">const int</span> SOUND_AO = <span class="v">A0</span>;
+<span class="kw">const int</span> LED_PIN  = <span class="v">13</span>;
+<span class="kw">bool</span> ledState = <span class="kw">false</span>;
+
+<span class="kw">void</span> <span class="p">setup</span>() {
+  <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>);
+  <span class="p">pinMode</span>(SOUND_DO, <span class="v">INPUT</span>);
+  <span class="p">pinMode</span>(LED_PIN, <span class="v">OUTPUT</span>);
+}
+
+<span class="kw">void</span> <span class="p">loop</span>() {
+  <span class="kw">int</span> soundLevel = <span class="p">analogRead</span>(SOUND_AO);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Sound level: "</span>); <span class="p">Serial</span>.<span class="p">println</span>(soundLevel);
+
+  <span class="kw">if</span> (<span class="p">digitalRead</span>(SOUND_DO) == <span class="v">HIGH</span>) {
+    ledState = !ledState;
+    <span class="p">digitalWrite</span>(LED_PIN, ledState ? <span class="v">HIGH</span> : <span class="v">LOW</span>);
+    <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"👏 Clap detected!"</span>);
+    <span class="p">delay</span>(<span class="v">300</span>); <span class="cm">// prevent double-trigger</span>
+  }
+  <span class="p">delay</span>(<span class="v">10</span>);
+}</div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-head">✅ Calibration Tip</div>
+      Adjust the small blue potentiometer on the KY-038 to set sensitivity. The onboard red LED lights up when sound exceeds the threshold — use it for visual calibration without opening the Serial Monitor.
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l3-4')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('proj3')">Module Project →</button>
+    </div>
+  </div>
+
+  <!-- PROJ3 -->
+  <div class="lesson-page" id="proj3">
+    <div class="lesson-tag">Module 03 · Project</div>
+    <h1 class="lesson-title">Project: Interactive Sensor Dashboard</h1>
+    <p class="lesson-intro">Combine the button, potentiometer, and sound sensor into a live Serial Monitor dashboard.</p>
+
+    <div class="project-box">
+      <h3>🔨 Build: Interactive Sensor Dashboard</h3>
+      <p>Read all three Module 3 sensors simultaneously and display a formatted live dashboard in the Serial Monitor.</p>
+      <ol class="project-steps">
+        <li>Wire: button (pin 2), potentiometer (A0), sound sensor AO (A1), sound DO (pin 7)</li>
+        <li>Every 200ms, read all sensors</li>
+        <li>Print a formatted table: button state, pot percentage (0–100%), sound level (0–1023)</li>
+        <li>When sound raw value exceeds 600, print "🔊 LOUD!" in the output</li>
+        <li>When button is pressed, print "=== BUTTON PRESSED ===" in the output</li>
+      </ol>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — Multi-Sensor Dashboard</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">const int</span> BTN_PIN   = <span class="v">2</span>;
+<span class="kw">const int</span> POT_PIN   = <span class="v">A0</span>;
+<span class="kw">const int</span> SOUND_AO  = <span class="v">A1</span>;
+<span class="kw">const int</span> SOUND_DO  = <span class="v">7</span>;
+
+<span class="kw">void</span> <span class="p">setup</span>() {
+  <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>);
+  <span class="p">pinMode</span>(BTN_PIN,  <span class="v">INPUT_PULLUP</span>);
+  <span class="p">pinMode</span>(SOUND_DO, <span class="v">INPUT</span>);
+  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"=== Sensor Dashboard ==="</span>);
+}
+
+<span class="kw">void</span> <span class="p">loop</span>() {
+  <span class="kw">bool</span> btnPressed  = (<span class="p">digitalRead</span>(BTN_PIN) == <span class="v">LOW</span>);
+  <span class="kw">int</span>  potRaw      = <span class="p">analogRead</span>(POT_PIN);
+  <span class="kw">int</span>  potPct      = <span class="p">map</span>(potRaw, <span class="v">0</span>, <span class="v">1023</span>, <span class="v">0</span>, <span class="v">100</span>);
+  <span class="kw">int</span>  soundLevel  = <span class="p">analogRead</span>(SOUND_AO);
+  <span class="kw">bool</span> soundLoud   = (<span class="p">digitalRead</span>(SOUND_DO) == <span class="v">HIGH</span>);
+
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"BTN: "</span>); <span class="p">Serial</span>.<span class="p">print</span>(btnPressed ? <span class="a">"PRESSED"</span> : <span class="a">"off    "</span>);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">" | POT: "</span>); <span class="p">Serial</span>.<span class="p">print</span>(potPct); <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"%"</span>);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">" | SOUND: "</span>); <span class="p">Serial</span>.<span class="p">print</span>(soundLevel);
+  <span class="kw">if</span> (soundLoud) <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">" 🔊 LOUD!"</span>);
+  <span class="p">Serial</span>.<span class="p">println</span>();
+  <span class="p">delay</span>(<span class="v">200</span>);
+}</div>
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'proj3')">Mark as Complete ✓</button>
+    </div>
+
+    <div class="module-nav-footer">
+      <a href="module2.html" class="mod-prev-btn">← Module 2</a>
+      <a href="module4.html" class="mod-next-btn">Module 4: Light Sensors →</a>
+    </div>
+  </div>
+
+</main>
+</div>
+<script src="course.js"></script>
+<script>
+let currentIndex = 0;
+const lessonOrder = ['l3-1','l3-2','l3-3','l3-4','proj3'];
+</script>
+</body>
+</html>

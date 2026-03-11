@@ -513,3 +513,24 @@ body.dark-theme .highlight {
   color: #aad7ff !important;
   border-left: 5px solid #1877f3 !important;
 }
+
+/* Arduino Course specific dark theme */
+body.dark-theme .module-card,
+body.dark-theme .learn-item,
+body.dark-theme .tool-card {
+  background: #18191c !important;
+  border-color: #23272f !important;
+}
+
+body.dark-theme .modules-section {
+  background: #23242a !important;
+}
+
+body.dark-theme .module-card-footer {
+  background: #23242a !important;
+  border-top-color: #23272f !important;
+}
+
+body.dark-theme .mod-emoji {
+  background: rgba(26,92,255,.2) !important;
+}

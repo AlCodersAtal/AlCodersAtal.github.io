@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 4: Series & Parallel Circuits — AlCoders Electronics</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo"><div class="logo-icon">⚡</div>Al<span>Coders</span></a>
+  <div class="nav-links">
+    <a href="module3.html">← Module 3</a>
+    <a href="index.html">All Modules</a>
+    <a href="module5.html">Module 5: Semiconductors →</a>
+  </div>
+</nav>
+<div class="course-layout">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h3>// Module 4 Progress</h3>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-label">0% complete</div>
+  </div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">1</span>What is Electricity?</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module1.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">2</span>Basic Components</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module2.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">3</span>Ohm's Law & Power</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module3.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn active"><span class="module-num">4</span>Series & Parallel</button><ul class="lesson-list">
+<li class="lesson-item"><a href="#m4_1" data-lid="m4_1">4.1 Series Circuits</a></li>
+<li class="lesson-item"><a href="#m4_2" data-lid="m4_2">4.2 Parallel Circuits</a></li>
+<li class="lesson-item"><a href="#m4_3" data-lid="m4_3">4.3 Kirchhoff's Voltage Law (KVL)</a></li>
+<li class="lesson-item"><a href="#m4_4" data-lid="m4_4">4.4 Kirchhoff's Current Law (KCL)</a></li>
+<li class="lesson-item"><a href="#m4_5" data-lid="m4_5">4.5 Voltage Divider</a></li>
+</ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">5</span>Semiconductors & Diodes</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module5.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">6</span>Transistors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module6.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">7</span>Breadboarding & Tools</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module7.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">8</span>Capacitors & Inductors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module8.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">9</span>Sensors & Signals</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module9.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">10</span>Intro to Arduino</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module10.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">11</span>Arduino & Sensors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module11.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">12</span>Final Projects</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module12.html">Go to module →</a></li></ul></div>
+
+</aside>
+<main class="content-area">
+  <div class="lesson-breadcrumb">Electronics Course → <span>Module 4</span> → Series & Parallel Circuits</div>
+  <section id="m4_1">
+<h1 class="lesson-title">4.1 Series Circuits</h1>
+<div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>In a <strong>series circuit</strong>, components are connected end-to-end in a single path. There is only one path for current to flow.</p>
+<div class="formula-block"><div class="formula-text">R_total = R1 + R2 + R3 + ...</div><div class="formula-label">Total resistance in series adds up</div></div>
+<div class="info-box"><div class="box-title">📌 Key Properties of Series</div>Current is the same through all components. Voltage divides across each component proportionally to its resistance. If one component fails open, the entire circuit stops working.</div>
+<div class="formula-block"><div class="formula-text">V_total = V1 + V2 + V3</div><div class="formula-label">Voltages add up in series (Kirchhoff's Voltage Law)</div></div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m4_2">
+<h1 class="lesson-title">4.2 Parallel Circuits</h1>
+<div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>In a <strong>parallel circuit</strong>, components are connected across the same two nodes, giving current multiple paths to flow.</p>
+<div class="formula-block"><div class="formula-text">1/R_total = 1/R1 + 1/R2 + 1/R3</div><div class="formula-label">Total resistance in parallel is always less than the smallest resistor</div></div>
+<div class="info-box"><div class="box-title">📌 Key Properties of Parallel</div>Voltage is the same across all parallel branches. Current divides between branches. If one branch fails, others continue working.</div>
+<div class="tip-box"><div class="box-title">💡 Shortcut for Two Resistors</div>For just two resistors: R_total = (R1 × R2) / (R1 + R2). Much faster!</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m4_3">
+<h1 class="lesson-title">4.3 Kirchhoff's Voltage Law (KVL)</h1>
+<div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p><strong>KVL</strong>: The sum of all voltage drops around any closed loop = 0. Energy is conserved — whatever voltage a source provides, the components consume exactly that much.</p>
+<div class="formula-block"><div class="formula-text">ΣV = 0 around any loop</div><div class="formula-label">Sum of all voltages in a loop = 0</div></div>
+<div class="info-box"><div class="box-title">📌 How to Apply KVL</div>1. Choose a loop direction. 2. Start at any point. 3. Add voltage rises (+) and drops (−). 4. The total must equal zero.</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m4_4">
+<h1 class="lesson-title">4.4 Kirchhoff's Current Law (KCL)</h1>
+<div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p><strong>KCL</strong>: The total current entering a node equals the total current leaving that node. Charge cannot accumulate at a point.</p>
+<div class="formula-block"><div class="formula-text">ΣI_in = ΣI_out at any node</div><div class="formula-label">Current in = Current out</div></div>
+<div class="info-box"><div class="box-title">📌 Practical Use</div>At any junction, add all currents flowing in and all currents flowing out — they must be equal.</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m4_5">
+<h1 class="lesson-title">4.5 Voltage Divider</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>A <strong>voltage divider</strong> uses two resistors in series to produce a fraction of the input voltage. One of the most used circuits in electronics.</p>
+<div class="formula-block"><div class="formula-text">Vout = Vin × R2 / (R1 + R2)</div><div class="formula-label">Output voltage is proportional to R2's share of total resistance</div></div>
+<div class="tip-box"><div class="box-title">💡 Example</div>5V, R1=R2=10kΩ: Vout = 2.5V. This is exactly how potentiometers and sensor interfaces work!</div>
+</div>
+
+<div class="lesson-nav">
+  <a href="module3.html" class="btn btn-outline">← Module 3</a>
+  <button class="mark-done-btn">Mark as Complete</button>
+  <a href="module5.html" class="btn btn-primary">Module 5: Semiconductors →</a>
+</div>
+</section>
+
+</main>
+</div>
+<script src="course.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  updateProgressBar('m4', 5);
+  initMarkDone('m4_5');
+  refreshSidebarDone();
+});
+</script>
+</body>
+</html>

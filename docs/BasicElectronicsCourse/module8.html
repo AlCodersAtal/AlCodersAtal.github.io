@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 8: Capacitors & Inductors In-Depth — AlCoders Electronics</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo"><div class="logo-icon">⚡</div>Al<span>Coders</span></a>
+  <div class="nav-links">
+    <a href="module7.html">← Module 7</a>
+    <a href="index.html">All Modules</a>
+    <a href="module9.html">Module 9: Sensors →</a>
+  </div>
+</nav>
+<div class="course-layout">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h3>// Module 8 Progress</h3>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-label">0% complete</div>
+  </div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">1</span>What is Electricity?</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module1.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">2</span>Basic Components</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module2.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">3</span>Ohm's Law & Power</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module3.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">4</span>Series & Parallel</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module4.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">5</span>Semiconductors & Diodes</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module5.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">6</span>Transistors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module6.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">7</span>Breadboarding & Tools</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module7.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn active"><span class="module-num">8</span>Capacitors & Inductors</button><ul class="lesson-list">
+<li class="lesson-item"><a href="#m8_1" data-lid="m8_1">8.1 Capacitors in AC</a></li>
+<li class="lesson-item"><a href="#m8_2" data-lid="m8_2">8.2 RC Time Constants</a></li>
+<li class="lesson-item"><a href="#m8_3" data-lid="m8_3">8.3 RC Filters</a></li>
+<li class="lesson-item"><a href="#m8_4" data-lid="m8_4">8.4 Inductors in Circuits</a></li>
+<li class="lesson-item"><a href="#m8_5" data-lid="m8_5">8.5 Decoupling Capacitors</a></li>
+</ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">9</span>Sensors & Signals</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module9.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">10</span>Intro to Arduino</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module10.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">11</span>Arduino & Sensors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module11.html">Go to module →</a></li></ul></div>
+<div class="module-group"><button class="module-title-btn"><span class="module-num">12</span>Final Projects</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module12.html">Go to module →</a></li></ul></div>
+
+</aside>
+<main class="content-area">
+  <div class="lesson-breadcrumb">Electronics Course → <span>Module 8</span> → Capacitors & Inductors In-Depth</div>
+  <section id="m8_1">
+<h1 class="lesson-title">8.1 Capacitors in AC</h1>
+<div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>In AC circuits, capacitors continuously charge/discharge, allowing AC while blocking DC. This frequency-dependent resistance is <strong>capacitive reactance</strong>.</p>
+<div class="formula-block"><div class="formula-text">Xc = 1 / (2π × f × C)</div><div class="formula-label">High freq → low reactance (conducts). Low freq → high reactance (blocks). DC → infinite (fully blocks).</div></div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m8_2">
+<h1 class="lesson-title">8.2 RC Time Constants</h1>
+<div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>An <strong>RC circuit</strong> charges/discharges exponentially. Time constant τ (tau) = R × C describes the speed.</p>
+<div class="formula-block"><div class="formula-text">τ = R × C (seconds)</div><div class="formula-label">After 1τ: 63% charged. After 5τ: 99% (fully charged)</div></div>
+<div class="tip-box"><div class="box-title">💡 Example</div>R=10kΩ, C=100µF: τ = 1 second. Takes ~5 seconds to fully charge. Used in 555 timers, delays, and debouncing.</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m8_3">
+<h1 class="lesson-title">8.3 RC Filters</h1>
+<div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p><strong>Filters</strong> allow certain frequencies through while blocking others.</p>
+<div class="info-box"><div class="box-title">📌 Low-Pass Filter</div>R in series, C to ground. Passes low frequencies, blocks high. Cutoff: f_c = 1/(2πRC). Use to remove noise.</div>
+<div class="info-box"><div class="box-title">📌 High-Pass Filter</div>C in series, R to ground. Passes high frequencies, blocks DC. Use for AC coupling audio signals.</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m8_4">
+<h1 class="lesson-title">8.4 Inductors in Circuits</h1>
+<div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p>Inductors store magnetic energy and oppose current changes. Their reactance increases with frequency.</p>
+<div class="formula-block"><div class="formula-text">XL = 2π × f × L</div><div class="formula-label">Inductive reactance — opposite of capacitive reactance</div></div>
+<div class="info-box"><div class="box-title">📌 Applications</div>DC-DC converters, EMI filters, transformers, LC oscillators for radio tuning.</div>
+</div>
+</section>
+<hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+<section id="m8_5">
+<h1 class="lesson-title">8.5 Decoupling Capacitors</h1>
+<div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+<div class="lesson-body">
+<p><strong>Decoupling capacitors</strong> placed next to IC power pins stabilise supply voltage during switching transients — essential in every PCB design.</p>
+<div class="info-box"><div class="box-title">📌 Why They're Needed</div>ICs switch millions of times per second causing current spikes. A nearby capacitor acts as a local energy reservoir, preventing voltage drops.</div>
+<div class="tip-box"><div class="box-title">💡 Standard Practice</div>100nF ceramic cap per IC between Vcc and GND, as close as physically possible to the power pin. Add 10µF electrolytic for power-hungry ICs.</div>
+</div>
+
+<div class="lesson-nav">
+  <a href="module7.html" class="btn btn-outline">← Module 7</a>
+  <button class="mark-done-btn">Mark as Complete</button>
+  <a href="module9.html" class="btn btn-primary">Module 9: Sensors →</a>
+</div>
+</section>
+
+</main>
+</div>
+<script src="course.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  updateProgressBar('m8', 5);
+  initMarkDone('m8_5');
+  refreshSidebarDone();
+});
+</script>
+</body>
+</html>

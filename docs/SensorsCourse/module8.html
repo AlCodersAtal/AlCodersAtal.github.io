@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Module 8 — Final Project · AlCoders</title>
+<link rel="stylesheet" href="../css/theme.css">
+<script type="module" src="../theme.js"></script>
+<link rel="shortcut icon" href="../images/alcodersLogo.jpg" type="image/jpg"/>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Syne:wght@600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <a href="index.html"><div>
+      <div class="logo-text">Al<span>Coders</span></div>
+      <div class="logo-sub">Introduction to Sensors</div>
+    </div></a>
+  </div>
+  <a class="sidebar-back" href="index.html">← Back to course</a>
+  <div class="sidebar-module-nav">
+    <a href="module1.html" class="mod-nav-btn">M1</a>
+    <a href="module2.html" class="mod-nav-btn">M2</a>
+    <a href="module3.html" class="mod-nav-btn">M3</a>
+    <a href="module4.html" class="mod-nav-btn">M4</a>
+    <a href="module5.html" class="mod-nav-btn">M5</a>
+    <a href="module6.html" class="mod-nav-btn">M6</a>
+    <a href="module7.html" class="mod-nav-btn">M7</a>
+    <a href="module8.html" class="mod-nav-btn current">M8</a>
+  </div>
+  <div class="sidebar-module-block">
+    <div class="sidebar-module-title"><span class="mod-badge">08</span> Final Project</div>
+    <a class="sidebar-lesson" data-lesson="l8-1" href="#"><span class="lesson-dot"></span>Project Overview & Hardware</a>
+    <a class="sidebar-lesson" data-lesson="l8-2" href="#"><span class="lesson-dot"></span>System Architecture & Wiring</a>
+    <a class="sidebar-lesson" data-lesson="l8-3" href="#"><span class="lesson-dot"></span>Writing the Code — Part 1</a>
+    <a class="sidebar-lesson" data-lesson="l8-4" href="#"><span class="lesson-dot"></span>Writing the Code — Part 2</a>
+    <a class="sidebar-lesson" data-lesson="l8-5" href="#"><span class="lesson-dot"></span>Complete Code — Full System</a>
+    <a class="sidebar-lesson" data-lesson="l8-6" href="#"><span class="lesson-dot"></span>Testing & Calibration</a>
+    <a class="sidebar-lesson proj-link" data-lesson="l8-7" href="#"><span class="lesson-dot"></span>🎓 Course Complete!</a>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main" id="mainContent">
+  <div class="topbar">
+    <div class="breadcrumb">AlCoders / <strong>Sensors</strong> / Module 8 — Final Project</div>
+    <div class="topbar-nav">
+      <button class="nav-btn" id="prevBtn" disabled>← Prev</button>
+      <button class="nav-btn primary" id="nextBtn">Next →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ L8-1 ═══════════════════════════ -->
+  <div class="lesson-page" id="l8-1">
+    <div class="lesson-tag">Module 08 · Lesson 1</div>
+    <h1 class="lesson-title">Project Overview & Hardware</h1>
+    <p class="lesson-intro">You've now learned every major sensor category in this course. This final module brings everything together — PIR, ultrasonic, gas, and temperature sensors all working as one unified system.</p>
+
+    <div class="block">
+      <h2>What You're Building</h2>
+      <p>A <strong>Multi-Sensor Smart Security & Safety System</strong> — a real-world project that combines five sensors and multiple outputs into a working alarm system. Here's what it does:</p>
+      <ul>
+        <li><strong>Arm/Disarm toggle</strong> — push button switches between ARMED and DISARMED states. Green LED = disarmed. Red LED = armed.</li>
+        <li><strong>Motion intrusion detection</strong> — when armed, both PIR and HC-SR04 are monitored. Motion detected OR object closer than 40cm triggers the intrusion alarm.</li>
+        <li><strong>Gas / smoke alarm</strong> — MQ-2 is always active, even when disarmed. If gas level exceeds threshold, three rapid beeps sound immediately.</li>
+        <li><strong>Temperature alert</strong> — DHT22 always monitors temperature. If above 40°C (fire indicator), a continuous alarm triggers regardless of arm state.</li>
+        <li><strong>10-second status report</strong> — every 10 seconds, a full system snapshot is printed to the Serial Monitor: arm state, PIR, distance, gas level, temperature, humidity.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>Components Required</h2>
+      <ul>
+        <li>1× Arduino Uno (or Nano / Mega)</li>
+        <li>1× HC-SR501 PIR motion sensor</li>
+        <li>1× HC-SR04 ultrasonic distance sensor</li>
+        <li>1× MQ-2 gas / smoke sensor module</li>
+        <li>1× DHT22 temperature &amp; humidity sensor</li>
+        <li>1× Momentary push button</li>
+        <li>1× Green LED + 220Ω resistor</li>
+        <li>1× Red LED + 220Ω resistor</li>
+        <li>1× Passive buzzer</li>
+        <li>1× Breadboard + assorted jumper wires</li>
+        <li>1× USB cable to connect Arduino to computer</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>Libraries Needed</h2>
+      <ul>
+        <li><strong>DHT sensor library</strong> by Adafruit — for DHT22</li>
+        <li><strong>Adafruit Unified Sensor</strong> — required dependency</li>
+      </ul>
+      <p>Install: <em>Sketch → Include Library → Manage Libraries</em> → search "DHT sensor library" → click <strong>Install All</strong>.</p>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-head">📌 This Project Uses Concepts From Every Module</div>
+      Digital input (Module 3), analog reading (Module 3), PIR and ultrasonic (Module 5), temperature/humidity (Module 6), gas sensing (Module 7), millis() non-blocking timing (Module 5), and INPUT_PULLUP debounce (Module 3). If anything feels unfamiliar, revisit that module first.
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l8-1')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l8-2')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ L8-2 ═══════════════════════════ -->
+  <div class="lesson-page" id="l8-2">
+    <div class="lesson-tag">Module 08 · Lesson 2</div>
+    <h1 class="lesson-title">System Architecture & Wiring</h1>
+    <p class="lesson-intro">Good wiring discipline prevents hours of debugging. Pin every component to the table below before writing a single line of code.</p>
+
+    <div class="block">
+      <h2>Complete Pin Assignment</h2>
+      <table class="pin-table">
+        <thead>
+          <tr><th>Component</th><th>Component Pin</th><th>Arduino Pin</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>PIR HC-SR501</td><td class="vcc">VCC</td><td>5V</td><td>Can use 5–20V</td></tr>
+          <tr><td>PIR HC-SR501</td><td class="gnd">GND</td><td>GND</td><td></td></tr>
+          <tr><td>PIR HC-SR501</td><td class="sig">OUT</td><td>Digital 7</td><td>3.3V output — OK for Uno</td></tr>
+          <tr><td>HC-SR04</td><td class="vcc">VCC</td><td>5V</td><td>Must be 5V</td></tr>
+          <tr><td>HC-SR04</td><td class="gnd">GND</td><td>GND</td><td></td></tr>
+          <tr><td>HC-SR04</td><td class="sig">Trig</td><td>Digital 9</td><td>Send 10µs pulse</td></tr>
+          <tr><td>HC-SR04</td><td class="sig">Echo</td><td>Digital 10</td><td>Measure pulse back</td></tr>
+          <tr><td>MQ-2</td><td class="vcc">VCC</td><td>5V</td><td>Heater draws ~150mA</td></tr>
+          <tr><td>MQ-2</td><td class="gnd">GND</td><td>GND</td><td></td></tr>
+          <tr><td>MQ-2</td><td class="sig">AO</td><td>A0</td><td>Analog gas level</td></tr>
+          <tr><td>DHT22</td><td class="vcc">VCC</td><td>5V</td><td></td></tr>
+          <tr><td>DHT22</td><td class="gnd">GND</td><td>GND</td><td></td></tr>
+          <tr><td>DHT22</td><td class="sig">DATA</td><td>Digital 2</td><td>Module has pull-up built in</td></tr>
+          <tr><td>Push Button</td><td>Leg A</td><td>Digital 4</td><td>Use INPUT_PULLUP</td></tr>
+          <tr><td>Push Button</td><td>Leg B</td><td>GND</td><td></td></tr>
+          <tr><td>Green LED</td><td>Anode (+)</td><td>Digital 6 + 220Ω</td><td>Disarmed indicator</td></tr>
+          <tr><td>Red LED</td><td>Anode (+)</td><td>Digital 5 + 220Ω</td><td>Armed indicator</td></tr>
+          <tr><td>Passive Buzzer</td><td>(+) pin</td><td>Digital 8</td><td></td></tr>
+          <tr><td>All LEDs + Buzzer</td><td>Cathode / (−)</td><td>GND</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="block">
+      <h2>System State Logic Map</h2>
+      <ul>
+        <li><strong>Startup (0–60s)</strong> — all sensors initialize. Serial Monitor shows countdown. Green LED blinks slowly.</li>
+        <li><strong>DISARMED</strong> — green LED solid on. Intrusion detection inactive. Gas + temperature alarms still running.</li>
+        <li><strong>ARMED</strong> — red LED solid on. All alarms active. PIR HIGH or distance &lt; 40cm = intrusion alarm (rapid buzz + red LED flash).</li>
+        <li><strong>Gas alarm (any state)</strong> — three short beeps, "⚠ GAS DETECTED" printed.</li>
+        <li><strong>Temp alarm (any state)</strong> — continuous buzzer, "🔥 HIGH TEMP" printed.</li>
+        <li><strong>Button press</strong> — debounced toggle: ARMED ↔ DISARMED with confirmation beep.</li>
+      </ul>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-head">✅ Wiring Tip — Power Rail</div>
+      On your breadboard, connect the 5V pin to the red (+) power rail and GND to the blue (−) rail. Then all components can share power cleanly without running wires back to Arduino each time.
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-head">⚠️ MQ-2 Current Draw</div>
+      The MQ-2 heater draws around 150–200mA. Do not power it through an Arduino I/O pin — always connect VCC directly to the 5V power pin. Powering via USB is fine for testing; for standalone use, use a 9V adapter through Vin.
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l8-2')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l8-3')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ L8-3 ═══════════════════════════ -->
+  <div class="lesson-page" id="l8-3">
+    <div class="lesson-tag">Module 08 · Lesson 3</div>
+    <h1 class="lesson-title">Writing the Code — Part 1</h1>
+    <p class="lesson-intro">We build the system in layers. Part 1 covers the setup, pin definitions, helper functions, and the arm/disarm toggle.</p>
+
+    <div class="block">
+      <h2>Step 1 — Includes, Pins & Global Variables</h2>
+      <p>All pin numbers and configuration constants go at the top. This makes tuning easy — change a value in one place, it updates everywhere.</p>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — Includes, Pins & Globals</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="p">#include</span> <span class="a">"DHT.h"</span>
+
+<span class="cm">// ── PIN DEFINITIONS ───────────────────────</span>
+<span class="kw">#define</span> PIR_PIN    <span class="v">7</span>
+<span class="kw">#define</span> TRIG_PIN   <span class="v">9</span>
+<span class="kw">#define</span> ECHO_PIN   <span class="v">10</span>
+<span class="kw">#define</span> MQ2_PIN    <span class="v">A0</span>
+<span class="kw">#define</span> DHT_PIN    <span class="v">2</span>
+<span class="kw">#define</span> BTN_PIN    <span class="v">4</span>
+<span class="kw">#define</span> GREEN_LED  <span class="v">6</span>
+<span class="kw">#define</span> RED_LED    <span class="v">5</span>
+<span class="kw">#define</span> BUZZER     <span class="v">8</span>
+
+<span class="cm">// ── THRESHOLDS ─────────────────────────────</span>
+<span class="kw">#define</span> GAS_THRESHOLD   <span class="v">600</span>   <span class="cm">// MQ-2 raw value — tune after preheat</span>
+<span class="kw">#define</span> TEMP_THRESHOLD  <span class="v">40.0</span>  <span class="cm">// °C — triggers temp alarm</span>
+<span class="kw">#define</span> DIST_THRESHOLD  <span class="v">40</span>    <span class="cm">// cm — intruder too close</span>
+
+<span class="cm">// ── SENSOR OBJECT ──────────────────────────</span>
+DHT dht(DHT_PIN, DHT22);
+
+<span class="cm">// ── STATE ──────────────────────────────────</span>
+<span class="kw">bool</span>          systemArmed   = <span class="kw">false</span>;
+<span class="kw">int</span>           lastBtnState  = <span class="v">HIGH</span>;
+<span class="kw">unsigned long</span> lastDebounce  = <span class="v">0</span>;
+<span class="kw">unsigned long</span> lastStatus    = <span class="v">0</span>;
+<span class="kw">unsigned long</span> lastMotionMsg = <span class="v">0</span>;</div>
+    </div>
+
+    <div class="block">
+      <h2>Step 2 — setup()</h2>
+      <p>Configure all pins, start Serial and DHT, then wait for the PIR's 60-second warm-up — blinking the green LED so the user knows the system is alive.</p>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — setup()</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">void</span> <span class="p">setup</span>() {
+  <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>);
+  dht.<span class="p">begin</span>();
+
+  <span class="p">pinMode</span>(PIR_PIN,   <span class="v">INPUT</span>);
+  <span class="p">pinMode</span>(TRIG_PIN,  <span class="v">OUTPUT</span>);
+  <span class="p">pinMode</span>(ECHO_PIN,  <span class="v">INPUT</span>);
+  <span class="p">pinMode</span>(BTN_PIN,   <span class="v">INPUT_PULLUP</span>);
+  <span class="p">pinMode</span>(GREEN_LED, <span class="v">OUTPUT</span>);
+  <span class="p">pinMode</span>(RED_LED,   <span class="v">OUTPUT</span>);
+  <span class="p">pinMode</span>(BUZZER,    <span class="v">OUTPUT</span>);
+
+  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"=== AlCoders Security System ==="</span>);
+  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"PIR warming up — please wait 60s..."</span>);
+
+  <span class="kw">for</span> (<span class="kw">int</span> i = <span class="v">60</span>; i > <span class="v">0</span>; i--) {
+    <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Ready in: "</span>); <span class="p">Serial</span>.<span class="p">print</span>(i); <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"s"</span>);
+    <span class="p">digitalWrite</span>(GREEN_LED, <span class="v">HIGH</span>); <span class="p">delay</span>(<span class="v">500</span>);
+    <span class="p">digitalWrite</span>(GREEN_LED, <span class="v">LOW</span>);  <span class="p">delay</span>(<span class="v">500</span>);
+  }
+
+  <span class="p">digitalWrite</span>(GREEN_LED, <span class="v">HIGH</span>); <span class="cm">// default state: disarmed</span>
+  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"✅ System ready! Press button to ARM."</span>);
+}</div>
+    </div>
+
+    <div class="block">
+      <h2>Step 3 — Arm/Disarm Toggle</h2>
+      <p>The button is read with INPUT_PULLUP (LOW = pressed). We debounce with millis() and toggle state on each press.</p>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — checkButton()</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">void</span> <span class="p">checkButton</span>() {
+  <span class="kw">int</span> reading = <span class="p">digitalRead</span>(BTN_PIN);
+  <span class="kw">if</span> (reading != lastBtnState) lastDebounce = <span class="p">millis</span>();
+
+  <span class="kw">if</span> ((<span class="p">millis</span>() - lastDebounce) > <span class="v">50</span>) {
+    <span class="kw">if</span> (reading == <span class="v">LOW</span> && lastBtnState == <span class="v">HIGH</span>) {
+      systemArmed = !systemArmed;
+      <span class="kw">if</span> (systemArmed) {
+        <span class="p">digitalWrite</span>(GREEN_LED, <span class="v">LOW</span>);
+        <span class="p">digitalWrite</span>(RED_LED,   <span class="v">HIGH</span>);
+        <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"🔴 SYSTEM ARMED"</span>);
+        <span class="p">tone</span>(BUZZER, <span class="v">1000</span>, <span class="v">200</span>); <span class="cm">// short confirm beep</span>
+      } <span class="kw">else</span> {
+        <span class="p">digitalWrite</span>(RED_LED,   <span class="v">LOW</span>);
+        <span class="p">digitalWrite</span>(GREEN_LED, <span class="v">HIGH</span>);
+        <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"🟢 SYSTEM DISARMED"</span>);
+        <span class="p">noTone</span>(BUZZER);
+      }
+    }
+  }
+  lastBtnState = reading;
+}</div>
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l8-3')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l8-4')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ L8-4 ═══════════════════════════ -->
+  <div class="lesson-page" id="l8-4">
+    <div class="lesson-tag">Module 08 · Lesson 4</div>
+    <h1 class="lesson-title">Writing the Code — Part 2</h1>
+    <p class="lesson-intro">Part 2 covers the sensor helper functions, the three alarm routines, and the status reporter — each written as its own clean function.</p>
+
+    <div class="block">
+      <h2>Helper — Read Ultrasonic Distance</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — getDistance()</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">long</span> <span class="p">getDistance</span>() {
+  <span class="p">digitalWrite</span>(TRIG_PIN, <span class="v">LOW</span>);  <span class="p">delayMicroseconds</span>(<span class="v">2</span>);
+  <span class="p">digitalWrite</span>(TRIG_PIN, <span class="v">HIGH</span>); <span class="p">delayMicroseconds</span>(<span class="v">10</span>);
+  <span class="p">digitalWrite</span>(TRIG_PIN, <span class="v">LOW</span>);
+  <span class="kw">long</span> dur = <span class="p">pulseIn</span>(ECHO_PIN, <span class="v">HIGH</span>, <span class="v">30000</span>); <span class="cm">// 30ms timeout</span>
+  <span class="kw">if</span> (dur == <span class="v">0</span>) <span class="kw">return</span> <span class="v">999</span>; <span class="cm">// out of range — treat as safe</span>
+  <span class="kw">return</span> dur / <span class="v">58</span>;
+}</div>
+    </div>
+
+    <div class="block">
+      <h2>Alarm — Intrusion (when armed)</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — intrusionAlarm()</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">void</span> <span class="p">intrusionAlarm</span>(<span class="kw">const char</span>* source) {
+  <span class="kw">if</span> (<span class="p">millis</span>() - lastMotionMsg < <span class="v">3000</span>) <span class="kw">return</span>; <span class="cm">// throttle prints</span>
+  lastMotionMsg = <span class="p">millis</span>();
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"🚨 INTRUDER DETECTED via "</span>); <span class="p">Serial</span>.<span class="p">println</span>(source);
+  <span class="kw">for</span> (<span class="kw">int</span> i = <span class="v">0</span>; i < <span class="v">5</span>; i++) {
+    <span class="p">digitalWrite</span>(RED_LED, <span class="v">LOW</span>);
+    <span class="p">tone</span>(BUZZER, <span class="v">2400</span>, <span class="v">150</span>); <span class="p">delay</span>(<span class="v">200</span>);
+    <span class="p">digitalWrite</span>(RED_LED, <span class="v">HIGH</span>);
+    <span class="p">delay</span>(<span class="v">150</span>);
+  }
+}</div>
+    </div>
+
+    <div class="block">
+      <h2>Alarm — Gas Detection (always active)</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — checkGas()</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">void</span> <span class="p">checkGas</span>() {
+  <span class="kw">int</span> gasLevel = <span class="p">analogRead</span>(MQ2_PIN);
+  <span class="kw">if</span> (gasLevel > GAS_THRESHOLD) {
+    <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"⚠ GAS DETECTED! Level: "</span>); <span class="p">Serial</span>.<span class="p">println</span>(gasLevel);
+    <span class="kw">for</span> (<span class="kw">int</span> i = <span class="v">0</span>; i < <span class="v">3</span>; i++) {
+      <span class="p">tone</span>(BUZZER, <span class="v">1800</span>, <span class="v">200</span>); <span class="p">delay</span>(<span class="v">300</span>);
+    }
+    <span class="p">delay</span>(<span class="v">2000</span>); <span class="cm">// wait before re-checking</span>
+  }
+}</div>
+    </div>
+
+    <div class="block">
+      <h2>Alarm — Temperature Alert (always active)</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — checkTemperature()</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">void</span> <span class="p">checkTemperature</span>() {
+  <span class="kw">float</span> tempC = dht.<span class="p">readTemperature</span>();
+  <span class="kw">if</span> (<span class="p">isnan</span>(tempC)) <span class="kw">return</span>;
+  <span class="kw">if</span> (tempC > TEMP_THRESHOLD) {
+    <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"🔥 HIGH TEMP ALERT: "</span>); <span class="p">Serial</span>.<span class="p">print</span>(tempC); <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"°C"</span>);
+    <span class="p">tone</span>(BUZZER, <span class="v">3000</span>); <span class="cm">// continuous tone until temp drops</span>
+    <span class="p">delay</span>(<span class="v">1000</span>);
+    <span class="p">noTone</span>(BUZZER);
+  }
+}</div>
+    </div>
+
+    <div class="block">
+      <h2>Status Reporter — Every 10 Seconds</h2>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — printStatus()</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">void</span> <span class="p">printStatus</span>() {
+  <span class="kw">if</span> (<span class="p">millis</span>() - lastStatus < <span class="v">10000</span>) <span class="kw">return</span>;
+  lastStatus = <span class="p">millis</span>();
+
+  <span class="kw">float</span> tempC    = dht.<span class="p">readTemperature</span>();
+  <span class="kw">float</span> humidity = dht.<span class="p">readHumidity</span>();
+  <span class="kw">long</span>  dist     = <span class="p">getDistance</span>();
+  <span class="kw">int</span>   gas      = <span class="p">analogRead</span>(MQ2_PIN);
+  <span class="kw">bool</span>  pir      = (<span class="p">digitalRead</span>(PIR_PIN) == <span class="v">HIGH</span>);
+
+  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"──────────── STATUS ────────────"</span>);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"System  : "</span>); <span class="p">Serial</span>.<span class="p">println</span>(systemArmed ? <span class="a">"ARMED 🔴"</span> : <span class="a">"DISARMED 🟢"</span>);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"PIR     : "</span>); <span class="p">Serial</span>.<span class="p">println</span>(pir ? <span class="a">"Motion"</span> : <span class="a">"Clear"</span>);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Distance: "</span>); <span class="p">Serial</span>.<span class="p">print</span>(dist);  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">" cm"</span>);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Gas MQ-2: "</span>); <span class="p">Serial</span>.<span class="p">println</span>(gas);
+  <span class="kw">if</span> (!<span class="p">isnan</span>(tempC)) {
+    <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Temp    : "</span>); <span class="p">Serial</span>.<span class="p">print</span>(tempC);    <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"°C"</span>);
+    <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Humidity: "</span>); <span class="p">Serial</span>.<span class="p">print</span>(humidity); <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"%"</span>);
+  }
+  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"────────────────────────────────"</span>);
+}</div>
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l8-4')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l8-5')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ L8-5 ═══════════════════════════ -->
+  <div class="lesson-page" id="l8-5">
+    <div class="lesson-tag">Module 08 · Lesson 5</div>
+    <h1 class="lesson-title">Complete Code — Full System</h1>
+    <p class="lesson-intro">Here is every function assembled into a single, ready-to-upload sketch. Copy it, upload, open the Serial Monitor at 9600 baud, and wait 60 seconds.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — Multi-Sensor Security System (Complete)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="p">#include</span> <span class="a">"DHT.h"</span>
+
+<span class="cm">// ── PINS ──────────────────────────────────────</span>
+<span class="kw">#define</span> PIR_PIN    <span class="v">7</span>
+<span class="kw">#define</span> TRIG_PIN   <span class="v">9</span>
+<span class="kw">#define</span> ECHO_PIN   <span class="v">10</span>
+<span class="kw">#define</span> MQ2_PIN    <span class="v">A0</span>
+<span class="kw">#define</span> DHT_PIN    <span class="v">2</span>
+<span class="kw">#define</span> BTN_PIN    <span class="v">4</span>
+<span class="kw">#define</span> GREEN_LED  <span class="v">6</span>
+<span class="kw">#define</span> RED_LED    <span class="v">5</span>
+<span class="kw">#define</span> BUZZER     <span class="v">8</span>
+
+<span class="cm">// ── THRESHOLDS — tune these after calibration ─</span>
+<span class="kw">#define</span> GAS_THRESHOLD   <span class="v">600</span>
+<span class="kw">#define</span> TEMP_THRESHOLD  <span class="v">40.0</span>
+<span class="kw">#define</span> DIST_THRESHOLD  <span class="v">40</span>
+
+DHT dht(DHT_PIN, DHT22);
+
+<span class="kw">bool</span>          systemArmed   = <span class="kw">false</span>;
+<span class="kw">int</span>           lastBtnState  = <span class="v">HIGH</span>;
+<span class="kw">unsigned long</span> lastDebounce  = <span class="v">0</span>;
+<span class="kw">unsigned long</span> lastStatus    = <span class="v">0</span>;
+<span class="kw">unsigned long</span> lastMotionMsg = <span class="v">0</span>;
+
+<span class="cm">// ─────────────────────────────────────────────</span>
+<span class="kw">long</span> <span class="p">getDistance</span>() {
+  <span class="p">digitalWrite</span>(TRIG_PIN, <span class="v">LOW</span>);  <span class="p">delayMicroseconds</span>(<span class="v">2</span>);
+  <span class="p">digitalWrite</span>(TRIG_PIN, <span class="v">HIGH</span>); <span class="p">delayMicroseconds</span>(<span class="v">10</span>);
+  <span class="p">digitalWrite</span>(TRIG_PIN, <span class="v">LOW</span>);
+  <span class="kw">long</span> dur = <span class="p">pulseIn</span>(ECHO_PIN, <span class="v">HIGH</span>, <span class="v">30000</span>);
+  <span class="kw">return</span> (dur == <span class="v">0</span>) ? <span class="v">999</span> : dur / <span class="v">58</span>;
+}
+
+<span class="kw">void</span> <span class="p">checkButton</span>() {
+  <span class="kw">int</span> reading = <span class="p">digitalRead</span>(BTN_PIN);
+  <span class="kw">if</span> (reading != lastBtnState) lastDebounce = <span class="p">millis</span>();
+  <span class="kw">if</span> ((<span class="p">millis</span>() - lastDebounce) > <span class="v">50</span> && reading == <span class="v">LOW</span> && lastBtnState == <span class="v">HIGH</span>) {
+    systemArmed = !systemArmed;
+    <span class="kw">if</span> (systemArmed) {
+      <span class="p">digitalWrite</span>(GREEN_LED, <span class="v">LOW</span>); <span class="p">digitalWrite</span>(RED_LED, <span class="v">HIGH</span>);
+      <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"🔴 SYSTEM ARMED"</span>);
+      <span class="p">tone</span>(BUZZER, <span class="v">1000</span>, <span class="v">200</span>);
+    } <span class="kw">else</span> {
+      <span class="p">digitalWrite</span>(RED_LED, <span class="v">LOW</span>); <span class="p">digitalWrite</span>(GREEN_LED, <span class="v">HIGH</span>);
+      <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"🟢 SYSTEM DISARMED"</span>);
+      <span class="p">noTone</span>(BUZZER);
+    }
+  }
+  lastBtnState = reading;
+}
+
+<span class="kw">void</span> <span class="p">intrusionAlarm</span>(<span class="kw">const char</span>* source) {
+  <span class="kw">if</span> (<span class="p">millis</span>() - lastMotionMsg < <span class="v">3000</span>) <span class="kw">return</span>;
+  lastMotionMsg = <span class="p">millis</span>();
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"🚨 INTRUDER via "</span>); <span class="p">Serial</span>.<span class="p">println</span>(source);
+  <span class="kw">for</span> (<span class="kw">int</span> i = <span class="v">0</span>; i < <span class="v">5</span>; i++) {
+    <span class="p">digitalWrite</span>(RED_LED, <span class="v">LOW</span>);
+    <span class="p">tone</span>(BUZZER, <span class="v">2400</span>, <span class="v">150</span>); <span class="p">delay</span>(<span class="v">200</span>);
+    <span class="p">digitalWrite</span>(RED_LED, <span class="v">HIGH</span>); <span class="p">delay</span>(<span class="v">150</span>);
+  }
+}
+
+<span class="kw">void</span> <span class="p">checkGas</span>() {
+  <span class="kw">int</span> gas = <span class="p">analogRead</span>(MQ2_PIN);
+  <span class="kw">if</span> (gas > GAS_THRESHOLD) {
+    <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"⚠ GAS DETECTED! Level: "</span>); <span class="p">Serial</span>.<span class="p">println</span>(gas);
+    <span class="kw">for</span> (<span class="kw">int</span> i = <span class="v">0</span>; i < <span class="v">3</span>; i++) { <span class="p">tone</span>(BUZZER, <span class="v">1800</span>, <span class="v">200</span>); <span class="p">delay</span>(<span class="v">300</span>); }
+    <span class="p">delay</span>(<span class="v">2000</span>);
+  }
+}
+
+<span class="kw">void</span> <span class="p">checkTemperature</span>() {
+  <span class="kw">float</span> t = dht.<span class="p">readTemperature</span>();
+  <span class="kw">if</span> (<span class="p">isnan</span>(t)) <span class="kw">return</span>;
+  <span class="kw">if</span> (t > TEMP_THRESHOLD) {
+    <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"🔥 HIGH TEMP: "</span>); <span class="p">Serial</span>.<span class="p">print</span>(t); <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"°C"</span>);
+    <span class="p">tone</span>(BUZZER, <span class="v">3000</span>); <span class="p">delay</span>(<span class="v">1000</span>); <span class="p">noTone</span>(BUZZER);
+  }
+}
+
+<span class="kw">void</span> <span class="p">printStatus</span>() {
+  <span class="kw">if</span> (<span class="p">millis</span>() - lastStatus < <span class="v">10000</span>) <span class="kw">return</span>;
+  lastStatus = <span class="p">millis</span>();
+  <span class="kw">float</span> t = dht.<span class="p">readTemperature</span>(), h = dht.<span class="p">readHumidity</span>();
+  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"──────── STATUS ────────"</span>);
+  <span class="p">Serial</span>.<span class="p">println</span>(systemArmed ? <span class="a">"ARMED 🔴"</span> : <span class="a">"DISARMED 🟢"</span>);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"PIR: "</span>);      <span class="p">Serial</span>.<span class="p">println</span>(<span class="p">digitalRead</span>(PIR_PIN) == <span class="v">HIGH</span> ? <span class="a">"Motion"</span> : <span class="a">"Clear"</span>);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Dist: "</span>);     <span class="p">Serial</span>.<span class="p">print</span>(<span class="p">getDistance</span>()); <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">" cm"</span>);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Gas:  "</span>);     <span class="p">Serial</span>.<span class="p">println</span>(<span class="p">analogRead</span>(MQ2_PIN));
+  <span class="kw">if</span> (!<span class="p">isnan</span>(t)) {
+    <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Temp: "</span>); <span class="p">Serial</span>.<span class="p">print</span>(t); <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"°C"</span>);
+    <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Hum:  "</span>); <span class="p">Serial</span>.<span class="p">print</span>(h); <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"%"</span>);
+  }
+  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"────────────────────────"</span>);
+}
+
+<span class="cm">// ─────────────────────────────────────────────</span>
+<span class="kw">void</span> <span class="p">setup</span>() {
+  <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>);
+  dht.<span class="p">begin</span>();
+  <span class="p">pinMode</span>(PIR_PIN,   <span class="v">INPUT</span>);
+  <span class="p">pinMode</span>(TRIG_PIN,  <span class="v">OUTPUT</span>);
+  <span class="p">pinMode</span>(ECHO_PIN,  <span class="v">INPUT</span>);
+  <span class="p">pinMode</span>(BTN_PIN,   <span class="v">INPUT_PULLUP</span>);
+  <span class="p">pinMode</span>(GREEN_LED, <span class="v">OUTPUT</span>);
+  <span class="p">pinMode</span>(RED_LED,   <span class="v">OUTPUT</span>);
+  <span class="p">pinMode</span>(BUZZER,    <span class="v">OUTPUT</span>);
+
+  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"=== AlCoders Security System ==="</span>);
+  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"PIR warming up — 60s..."</span>);
+  <span class="kw">for</span> (<span class="kw">int</span> i = <span class="v">60</span>; i > <span class="v">0</span>; i--) {
+    <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Ready in: "</span>); <span class="p">Serial</span>.<span class="p">print</span>(i); <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"s"</span>);
+    <span class="p">digitalWrite</span>(GREEN_LED, <span class="v">HIGH</span>); <span class="p">delay</span>(<span class="v">500</span>);
+    <span class="p">digitalWrite</span>(GREEN_LED, <span class="v">LOW</span>);  <span class="p">delay</span>(<span class="v">500</span>);
+  }
+  <span class="p">digitalWrite</span>(GREEN_LED, <span class="v">HIGH</span>);
+  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"✅ Ready — press button to ARM"</span>);
+}
+
+<span class="kw">void</span> <span class="p">loop</span>() {
+  <span class="p">checkButton</span>();
+
+  <span class="cm">// Always-active safety checks</span>
+  <span class="p">checkGas</span>();
+  <span class="p">checkTemperature</span>();
+
+  <span class="cm">// Intrusion checks — only when armed</span>
+  <span class="kw">if</span> (systemArmed) {
+    <span class="kw">if</span> (<span class="p">digitalRead</span>(PIR_PIN) == <span class="v">HIGH</span>) <span class="p">intrusionAlarm</span>(<span class="a">"PIR"</span>);
+    <span class="kw">if</span> (<span class="p">getDistance</span>() < DIST_THRESHOLD)  <span class="p">intrusionAlarm</span>(<span class="a">"Ultrasonic"</span>);
+  }
+
+  <span class="p">printStatus</span>(); <span class="cm">// every 10s</span>
+  <span class="p">delay</span>(<span class="v">100</span>);   <span class="cm">// main loop pace</span>
+}</div>
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l8-5')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l8-6')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ L8-6 ═══════════════════════════ -->
+  <div class="lesson-page" id="l8-6">
+    <div class="lesson-tag">Module 08 · Lesson 6</div>
+    <h1 class="lesson-title">Testing & Calibration</h1>
+    <p class="lesson-intro">A project isn't done when the code compiles — it's done when it behaves reliably. Follow this step-by-step testing procedure.</p>
+
+    <div class="block">
+      <h2>Step-by-Step Test Procedure</h2>
+      <ol>
+        <li><strong>Upload the sketch.</strong> Open Serial Monitor at 9600 baud. You should see the 60-second countdown with green LED blinking.</li>
+        <li><strong>After warmup</strong> — Serial prints "Ready". Green LED stays solid. System is DISARMED.</li>
+        <li><strong>Test button toggle</strong> — press the button. Serial should print "SYSTEM ARMED" and the red LED turns on. Press again: "SYSTEM DISARMED", green LED returns.</li>
+        <li><strong>Test PIR (armed)</strong> — arm the system. Walk in front of the PIR sensor. Alarm should sound and "INTRUDER via PIR" should print.</li>
+        <li><strong>Test ultrasonic (armed)</strong> — arm the system. Hold your hand 20cm in front of the HC-SR04. Alarm sounds and "INTRUDER via Ultrasonic" prints.</li>
+        <li><strong>Test gas alarm (any state)</strong> — disarm the system first. Bring a lit match near the MQ-2 briefly (careful!). "GAS DETECTED" should print with three beeps.</li>
+        <li><strong>Test status report</strong> — wait 10 seconds and verify the status block prints with sensible values.</li>
+        <li><strong>Test disarmed safety</strong> — with the system DISARMED, trigger the gas sensor. Alarm should still sound — gas alarm is always active.</li>
+      </ol>
+    </div>
+
+    <div class="block">
+      <h2>Calibrating Your Thresholds</h2>
+      <ul>
+        <li><strong>GAS_THRESHOLD</strong> — Open Serial Monitor. Read the "Gas" line in the status report in clean air. Your threshold should be about 100–150 points above the clean-air reading.</li>
+        <li><strong>DIST_THRESHOLD</strong> — adjust based on the size of the area you want to protect. 40cm is good for a desk or doorway sensor.</li>
+        <li><strong>TEMP_THRESHOLD</strong> — 40°C is suitable for indoor rooms. Lower to 35°C for sensitive areas.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>Common Problems & Fixes</h2>
+      <ul>
+        <li><strong>PIR triggers constantly</strong> — it hasn't warmed up yet, or is positioned near a heat vent / window. Reposition and wait the full 60 seconds.</li>
+        <li><strong>DHT returns NaN</strong> — wait 2 seconds between reads (already handled), check data pin wiring, ensure module has pull-up resistor.</li>
+        <li><strong>MQ-2 always shows high values</strong> — it needs a 20-minute preheat at first use. Readings will settle. Recalibrate threshold after preheat.</li>
+        <li><strong>Button not toggling</strong> — check that one leg goes to pin 4 and the other to GND, and that INPUT_PULLUP is set.</li>
+        <li><strong>HC-SR04 always reads 999cm</strong> — check 5V connection and that Trig/Echo are not swapped.</li>
+      </ul>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-head">✅ Extensions to Try</div>
+      Once your base project works, try adding: an LCD display showing arm state and live readings, an RGB LED that colour-codes the alarm type, a buzzer tone() melody for the arm/disarm sound, or logging readings to SD card with a timestamp.
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l8-6')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l8-7')">Course Certificate →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ L8-7 COMPLETION ═══════════════════════════ -->
+  <div class="lesson-page" id="l8-7">
+    <div class="lesson-tag">Module 08 · Course Complete 🎓</div>
+    <h1 class="lesson-title">Congratulations — You Did It!</h1>
+    <p class="lesson-intro">You've completed the AlCoders Introduction to Sensors course. You've gone from "what is a sensor?" to building a fully functional multi-sensor security system from scratch.</p>
+
+    <div class="block">
+      <h2>What You've Mastered</h2>
+      <ul>
+        <li>The physics and working principles of over <strong>10 sensor types</strong></li>
+        <li>Every major Arduino board — <strong>Uno, Nano, and Mega</strong> — and when to use each</li>
+        <li>Analog and digital signal reading, voltage dividers, and the map() function</li>
+        <li>Passive IR motion detection, ultrasonic distance measurement</li>
+        <li>Light sensing with LDR, photodiodes, and IR</li>
+        <li>Temperature and humidity with DHT11, DHT22, and DS18B20</li>
+        <li>Soil moisture sensing for smart irrigation</li>
+        <li>Gas detection with the MQ sensor family</li>
+        <li>Non-blocking code with <strong>millis()</strong> — the professional way to handle timing</li>
+        <li>Building a real, working <strong>multi-sensor system</strong> with state machines and multiple alarms</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>What to Build Next</h2>
+      <ul>
+        <li><strong>Add WiFi</strong> — connect the system to the internet with an ESP8266 or ESP32. Send WhatsApp / email / Telegram alerts when motion is detected.</li>
+        <li><strong>Add a display</strong> — show live sensor readings on a 16×2 LCD or OLED screen.</li>
+        <li><strong>Add data logging</strong> — record temperature and humidity to a microSD card every minute. Plot the data on your computer.</li>
+        <li><strong>Build a weather station</strong> — combine DHT22, BMP280 (pressure), BH1750 (light), and rain sensor to build a full meteorological station.</li>
+        <li><strong>Build a robot</strong> — use ultrasonic sensors for obstacle avoidance and IR line sensors for line-following on a motorized chassis.</li>
+      </ul>
+    </div>
+
+    <div style="background:linear-gradient(135deg,rgba(26,92,255,.07),rgba(255,92,43,.05));border:1px solid rgba(26,92,255,.2);border-radius:var(--radius);padding:36px 40px;text-align:center;margin-top:32px;">
+      <div style="font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">AlCoders · ATL Viswadeepthi</div>
+      <div style="font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;color:var(--text);letter-spacing:-1px;margin-bottom:8px;">Certificate of Completion</div>
+      <div style="font-family:'Lora',serif;font-style:italic;color:var(--muted);font-size:1rem;margin-bottom:24px;">Introduction to Sensors — 8 Modules · 35 Lessons</div>
+      <div style="font-family:'Syne',sans-serif;font-size:.85rem;color:var(--body);max-width:480px;margin:0 auto;">You demonstrated curiosity, persistence, and technical skill. The ability to bridge the physical world with code is one of the most powerful skills in modern technology.</div>
+      <div style="margin-top:28px;font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:2px;color:var(--muted2);text-transform:uppercase;">Keep building. Keep learning. 🚀</div>
+    </div>
+
+    <div class="module-nav-footer" style="margin-top:48px;">
+      <a href="module7.html" class="mod-prev-btn">← Module 7</a>
+      <a href="index.html" class="mod-next-btn">Back to Course Home →</a>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<script src="course.js"></script>
+<script>
+let currentIndex = 0;
+const lessonOrder = ['l8-1','l8-2','l8-3','l8-4','l8-5','l8-6','l8-7'];
+</script>
+</body>
+</html>

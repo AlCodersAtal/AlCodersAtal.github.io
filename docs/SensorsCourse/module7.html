@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Module 7 — Soil & Gas Sensors · AlCoders</title>
+<link rel="stylesheet" href="../css/theme.css">
+<script type="module" src="../theme.js"></script>
+<link rel="shortcut icon" href="../images/alcodersLogo.jpg" type="image/jpg"/>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Syne:wght@600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <a href="index.html"><div>
+      <div class="logo-text">Al<span>Coders</span></div>
+      <div class="logo-sub">Introduction to Sensors</div>
+    </div></a>
+  </div>
+  <a class="sidebar-back" href="index.html">← Back to course</a>
+  <div class="sidebar-module-nav">
+    <a href="module1.html" class="mod-nav-btn">M1</a>
+    <a href="module2.html" class="mod-nav-btn">M2</a>
+    <a href="module3.html" class="mod-nav-btn">M3</a>
+    <a href="module4.html" class="mod-nav-btn">M4</a>
+    <a href="module5.html" class="mod-nav-btn">M5</a>
+    <a href="module6.html" class="mod-nav-btn">M6</a>
+    <a href="module7.html" class="mod-nav-btn current">M7</a>
+    <a href="module8.html" class="mod-nav-btn">M8</a>
+  </div>
+  <div class="sidebar-module-block">
+    <div class="sidebar-module-title"><span class="mod-badge">07</span> Soil Moisture & Gas Sensors</div>
+    <a class="sidebar-lesson" data-lesson="l7-1" href="#"><span class="lesson-dot"></span>Soil Moisture — Principle & Types</a>
+    <a class="sidebar-lesson" data-lesson="l7-2" href="#"><span class="lesson-dot"></span>Soil Moisture with Arduino</a>
+    <a class="sidebar-lesson" data-lesson="l7-3" href="#"><span class="lesson-dot"></span>Gas Sensors — MQ Series</a>
+    <a class="sidebar-lesson" data-lesson="l7-4" href="#"><span class="lesson-dot"></span>MQ Sensors with Arduino</a>
+    <a class="sidebar-lesson proj-link" data-lesson="proj7" href="#"><span class="lesson-dot"></span>Project: Smart Plant Monitor</a>
+  </div>
+</aside>
+
+<main class="main" id="mainContent">
+  <div class="topbar">
+    <div class="breadcrumb">AlCoders / <strong>Sensors</strong> / Module 7</div>
+    <div class="topbar-nav">
+      <button class="nav-btn" id="prevBtn" disabled>← Prev</button>
+      <button class="nav-btn primary" id="nextBtn">Next →</button>
+    </div>
+  </div>
+
+  <!-- L7-1 -->
+  <div class="lesson-page" id="l7-1">
+    <div class="lesson-tag">Module 07 · Lesson 1</div>
+    <h1 class="lesson-title">Soil Moisture — Principle & Types <span class="badge both">Analog + Digital</span></h1>
+    <p class="lesson-intro">Soil moisture sensors are the foundation of smart irrigation systems. Understanding both types helps you choose the right one for your project's lifespan requirements.</p>
+
+    <div class="block">
+      <h2>Why Measure Soil Moisture?</h2>
+      <p>Plants need a specific range of soil moisture — too dry and they wilt, too wet and roots rot. Traditional schedules waste water by ignoring actual soil conditions. A soil moisture sensor lets your Arduino water plants <em>only when needed</em>, saving water and keeping plants healthier.</p>
+    </div>
+
+    <div class="block">
+      <h2>Type 1: Resistive Soil Moisture Sensor (YL-69 / FC-28)</h2>
+      <p>The most common cheap sensor (the two-probe "fork" type). Works by passing a small current between two exposed metal probes and measuring resistance. Dry soil has very high resistance. Wet soil conducts electricity well and has low resistance.</p>
+      <ul>
+        <li><strong>Pros:</strong> Very cheap (~$1), simple, no calibration needed for basic use</li>
+        <li><strong>Cons:</strong> Exposed metal probes corrode (rust) over time due to electrolysis. Accuracy degrades after months of continuous use in soil. Not recommended for permanent installations.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>Type 2: Capacitive Soil Moisture Sensor</h2>
+      <p>A better design with no exposed probes. Measures the dielectric permittivity of the soil — water has a much higher dielectric constant than dry soil (~80 vs ~4). The sensor's PCB traces form a capacitor; as soil moisture changes, the capacitance changes and the onboard circuit converts this to a voltage.</p>
+      <ul>
+        <li><strong>Pros:</strong> No corrosion (fully coated PCB), much longer lifespan, stable readings</li>
+        <li><strong>Cons:</strong> Slightly more expensive (~$3–5). Needs calibration for accurate % readings.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>Wiring Resistive Module (YL-69)</h2>
+      <table class="pin-table">
+        <thead><tr><th>Module Pin</th><th>Connect To</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="vcc">VCC</td><td>Digital Pin 6 (acts as power)</td><td>Saves sensor from corrosion</td></tr>
+          <tr><td class="gnd">GND</td><td>GND</td><td></td></tr>
+          <tr><td class="sig">AO</td><td>A0</td><td>0 = wet, 1023 = dry</td></tr>
+          <tr><td class="sig">DO</td><td>Digital Pin 7</td><td>HIGH = dry, LOW = wet</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-head">⚠️ Don't Power Resistive Sensors Continuously</div>
+      Continuously passing current through the probes accelerates corrosion. Best practice: power the sensor from a digital output pin, pull it HIGH just before reading, then LOW immediately after. This significantly extends sensor life.
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l7-1')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l7-2')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L7-2 -->
+  <div class="lesson-page" id="l7-2">
+    <div class="lesson-tag">Module 07 · Lesson 2</div>
+    <h1 class="lesson-title">Soil Moisture Sensor with Arduino</h1>
+    <p class="lesson-intro">Let's build a complete smart plant watering system that monitors soil moisture and automatically controls a water pump.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — Smart Plant Watering System</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">const int</span> SENSOR_AO  = <span class="v">A0</span>;
+<span class="kw">const int</span> SENSOR_VCC = <span class="v">6</span>;   <span class="cm">// power sensor only when reading</span>
+<span class="kw">const int</span> PUMP_PIN   = <span class="v">8</span>;
+<span class="kw">const int</span> DRY_THRESH = <span class="v">700</span>; <span class="cm">// above = dry — tune to your soil</span>
+<span class="kw">const int</span> WET_THRESH = <span class="v">300</span>; <span class="cm">// below = wet enough</span>
+
+<span class="kw">int</span> <span class="p">readSoilMoisture</span>() {
+  <span class="p">digitalWrite</span>(SENSOR_VCC, <span class="v">HIGH</span>); <span class="p">delay</span>(<span class="v">100</span>);
+  <span class="kw">int</span> val = <span class="p">analogRead</span>(SENSOR_AO);
+  <span class="p">digitalWrite</span>(SENSOR_VCC, <span class="v">LOW</span>);
+  <span class="kw">return</span> val;
+}
+
+<span class="kw">void</span> <span class="p">setup</span>() {
+  <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>);
+  <span class="p">pinMode</span>(SENSOR_VCC, <span class="v">OUTPUT</span>);
+  <span class="p">pinMode</span>(PUMP_PIN, <span class="v">OUTPUT</span>);
+  <span class="p">digitalWrite</span>(PUMP_PIN, <span class="v">LOW</span>);
+}
+
+<span class="kw">void</span> <span class="p">loop</span>() {
+  <span class="kw">int</span> moisture = <span class="p">readSoilMoisture</span>();
+  <span class="kw">int</span> percent  = <span class="p">map</span>(moisture, <span class="v">1023</span>, <span class="v">0</span>, <span class="v">0</span>, <span class="v">100</span>); <span class="cm">// invert</span>
+
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Soil: "</span>); <span class="p">Serial</span>.<span class="p">print</span>(percent); <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"%"</span>);
+
+  <span class="kw">if</span> (moisture > DRY_THRESH) {
+    <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">" — DRY 💧 Pumping water..."</span>);
+    <span class="p">digitalWrite</span>(PUMP_PIN, <span class="v">HIGH</span>); <span class="p">delay</span>(<span class="v">3000</span>);
+    <span class="p">digitalWrite</span>(PUMP_PIN, <span class="v">LOW</span>);
+    <span class="p">delay</span>(<span class="v">30000</span>); <span class="cm">// wait for water to absorb</span>
+  } <span class="kw">else if</span> (moisture < WET_THRESH) {
+    <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">" — WET ✅ No watering needed"</span>);
+    <span class="p">digitalWrite</span>(PUMP_PIN, <span class="v">LOW</span>);
+  } <span class="kw">else</span> {
+    <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">" — OK 🌱 Moisture is fine"</span>);
+    <span class="p">digitalWrite</span>(PUMP_PIN, <span class="v">LOW</span>);
+  }
+  <span class="p">delay</span>(<span class="v">10000</span>);
+}</div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-head">✅ Calibrating Your Thresholds</div>
+      1. Insert sensor into completely dry soil — note the raw value (typically 700–900).<br>
+      2. Water the soil thoroughly — note the wet value (typically 200–400).<br>
+      3. Set DRY_THRESH slightly below your dry reading, WET_THRESH slightly above your wet reading.
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l7-2')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l7-3')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L7-3 -->
+  <div class="lesson-page" id="l7-3">
+    <div class="lesson-tag">Module 07 · Lesson 3</div>
+    <h1 class="lesson-title">Gas Sensors — MQ Series <span class="badge both">Analog + Digital</span></h1>
+    <p class="lesson-intro">The MQ series are the most popular gas sensors for Arduino — same housing, same interface, but each model detects a different gas or gas mixture.</p>
+
+    <div class="block">
+      <h2>How MQ Sensors Work — Metal Oxide Semiconductor</h2>
+      <p>MQ sensors use a <strong>tin dioxide (SnO₂) layer</strong> on a ceramic substrate, heated by a nichrome wire coil to ~200–300°C (this is why MQ sensors get warm during operation):</p>
+      <ol>
+        <li>The heater raises the SnO₂ element to operating temperature</li>
+        <li>Oxygen from air adsorbs onto the SnO₂ surface, trapping electrons and <em>increasing resistance</em></li>
+        <li>When target gas molecules contact the surface, they react with the adsorbed oxygen, releasing electrons and <em>decreasing resistance</em></li>
+        <li>This resistance drop is converted to a voltage change by a load resistor, which Arduino reads via the analog output</li>
+      </ol>
+    </div>
+
+    <div class="block">
+      <h2>MQ Sensor Family — Which Detects What</h2>
+      <table class="comp-table">
+        <thead><tr><th>Model</th><th>Primary Gas</th><th>Also Detects</th><th>Common Use</th></tr></thead>
+        <tbody>
+          <tr><td>MQ-2</td><td>LPG, Propane</td><td>Hydrogen, smoke, methane, CO</td><td>General gas/smoke alarm</td></tr>
+          <tr><td>MQ-3</td><td>Alcohol/Ethanol</td><td>Benzene, hexane</td><td>Breathalyzer</td></tr>
+          <tr><td>MQ-4</td><td>Methane (natural gas)</td><td>LPG, propane</td><td>Gas leak detector</td></tr>
+          <tr><td>MQ-5</td><td>LPG, Natural Gas</td><td>Coal gas, hydrogen</td><td>Gas stove leak sensor</td></tr>
+          <tr><td>MQ-7</td><td>Carbon Monoxide (CO)</td><td>H₂</td><td>CO poisoning alarm</td></tr>
+          <tr><td>MQ-9</td><td>CO + Flammable Gas</td><td>LPG, methane</td><td>Multi-gas safety alarm</td></tr>
+          <tr><td>MQ-135</td><td>Air quality (IAQ)</td><td>NH₃, benzene, CO₂, alcohol</td><td>Indoor air quality monitor</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="block">
+      <h2>MQ Module Wiring (All Models Same)</h2>
+      <table class="pin-table">
+        <thead><tr><th>Module Pin</th><th>Connect To</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="vcc">VCC</td><td>5V</td><td>Powers heater too — draws 150–200mA!</td></tr>
+          <tr><td class="gnd">GND</td><td>GND</td><td></td></tr>
+          <tr><td class="sig">AO</td><td>A0</td><td>Higher value = more gas detected</td></tr>
+          <tr><td class="sig">DO</td><td>Digital Pin 7</td><td>HIGH when gas exceeds threshold</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-head">⚠️ 20-Minute Preheat Required</div>
+      MQ sensors need the heater to warm the metal oxide before readings are accurate. Preheat for <strong>at least 20 minutes</strong> at first use, and 2–3 minutes on subsequent power-ons. First readings after power-on will always be high/unstable — this is normal.
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l7-3')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l7-4')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L7-4 -->
+  <div class="lesson-page" id="l7-4">
+    <div class="lesson-tag">Module 07 · Lesson 4</div>
+    <h1 class="lesson-title">MQ Sensors with Arduino — Full Code</h1>
+    <p class="lesson-intro">Let's wire up the MQ-2 and build a complete three-level gas safety alarm with LED indicators.</p>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++ — MQ-2 Gas & Smoke Alarm</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">const int</span> MQ2_AO     = <span class="v">A0</span>;
+<span class="kw">const int</span> MQ2_DO     = <span class="v">7</span>;
+<span class="kw">const int</span> GREEN_LED  = <span class="v">3</span>;
+<span class="kw">const int</span> YELLOW_LED = <span class="v">5</span>;
+<span class="kw">const int</span> RED_LED    = <span class="v">6</span>;
+<span class="kw">const int</span> BUZZER     = <span class="v">8</span>;
+<span class="kw">const int</span> WARN_LEVEL  = <span class="v">400</span>;
+<span class="kw">const int</span> ALARM_LEVEL = <span class="v">700</span>;
+
+<span class="kw">void</span> <span class="p">setup</span>() {
+  <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>);
+  <span class="p">pinMode</span>(MQ2_DO, <span class="v">INPUT</span>);
+  <span class="p">pinMode</span>(GREEN_LED, <span class="v">OUTPUT</span>); <span class="p">pinMode</span>(YELLOW_LED, <span class="v">OUTPUT</span>);
+  <span class="p">pinMode</span>(RED_LED, <span class="v">OUTPUT</span>);   <span class="p">pinMode</span>(BUZZER, <span class="v">OUTPUT</span>);
+  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"MQ-2 Preheating (60s)..."</span>);
+  <span class="p">delay</span>(<span class="v">60000</span>);
+  <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"✅ Ready"</span>);
+}
+
+<span class="kw">void</span> <span class="p">loop</span>() {
+  <span class="kw">int</span> gasLevel = <span class="p">analogRead</span>(MQ2_AO);
+  <span class="p">Serial</span>.<span class="p">print</span>(<span class="a">"Gas: "</span>); <span class="p">Serial</span>.<span class="p">print</span>(gasLevel);
+
+  <span class="cm">// Clear all indicators</span>
+  <span class="p">digitalWrite</span>(GREEN_LED, <span class="v">LOW</span>); <span class="p">digitalWrite</span>(YELLOW_LED, <span class="v">LOW</span>);
+  <span class="p">digitalWrite</span>(RED_LED, <span class="v">LOW</span>);   <span class="p">digitalWrite</span>(BUZZER, <span class="v">LOW</span>);
+
+  <span class="kw">if</span> (gasLevel >= ALARM_LEVEL) {
+    <span class="p">digitalWrite</span>(RED_LED, <span class="v">HIGH</span>); <span class="p">digitalWrite</span>(BUZZER, <span class="v">HIGH</span>);
+    <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">" ❌ DANGER!"</span>);
+  } <span class="kw">else if</span> (gasLevel >= WARN_LEVEL) {
+    <span class="p">digitalWrite</span>(YELLOW_LED, <span class="v">HIGH</span>);
+    <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">" ⚠ WARNING"</span>);
+  } <span class="kw">else</span> {
+    <span class="p">digitalWrite</span>(GREEN_LED, <span class="v">HIGH</span>);
+    <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">" ✅ CLEAN"</span>);
+  }
+  <span class="p">delay</span>(<span class="v">500</span>);
+}</div>
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l7-4')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('proj7')">Module Project →</button>
+    </div>
+  </div>
+
+  <!-- PROJ7 -->
+  <div class="lesson-page" id="proj7">
+    <div class="lesson-tag">Module 07 · Project</div>
+    <h1 class="lesson-title">Project: Smart Plant Monitor</h1>
+    <p class="lesson-intro">Combine soil moisture, temperature, humidity, and air quality sensors into a complete plant health reporting system.</p>
+
+    <div class="project-box">
+      <h3>🔨 Build: Smart Plant Health Monitor</h3>
+      <p>Read soil moisture, DHT22, and MQ-135 together to give a complete plant environment health report.</p>
+      <ol class="project-steps">
+        <li>Wire: DHT22 (pin 2), soil moisture sensor (A0, VCC on pin 6), MQ-135 AO (A1), buzzer (pin 8)</li>
+        <li>Every 5 seconds, read all three sensors</li>
+        <li>Score each: temperature OK/HIGH/LOW, humidity OK/DRY/HUMID, soil OK/DRY/WATERLOGGED, air OK/POOR</li>
+        <li>Print a "Plant Health Report" to Serial Monitor with all scores</li>
+        <li>Calculate overall health: GREAT (all OK) / OKAY (1 issue) / NEEDS ATTENTION (2+ issues)</li>
+        <li>Trigger buzzer with 1 beep for OKAY, 3 beeps for NEEDS ATTENTION</li>
+      </ol>
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'proj7')">Mark as Complete ✓</button>
+    </div>
+    <div class="module-nav-footer">
+      <a href="module6.html" class="mod-prev-btn">← Module 6</a>
+      <a href="module8.html" class="mod-next-btn">Module 8: Final Project →</a>
+    </div>
+  </div>
+
+</main>
+</div>
+<script src="course.js"></script>
+<script>
+let currentIndex = 0;
+const lessonOrder = ['l7-1','l7-2','l7-3','l7-4','proj7'];
+</script>
+</body>
+</html>

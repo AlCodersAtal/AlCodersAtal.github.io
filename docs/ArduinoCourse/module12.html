@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 12: Capstone Projects – AlCoders Arduino</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="index.html">⚡ <span>Al</span>Coders</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="module11.html">← Module 11</a>
+    <a href="module12.html" class="active">Module 12 🏁</a>
+  </div>
+</nav>
+<div class="breadcrumb">
+  <a href="index.html">Arduino Course</a> › Module 12 › Capstone Projects
+</div>
+<div class="page-wrapper">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">Course Progress</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 60 lessons completed</div>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔧</span> Module 1 – Getting Started</div>
+    <a href="module1.html" class="lesson-link" data-lesson="m1l1"><span class="lesson-dot"></span>What is Arduino?</a>
+    <a href="module1.html#lesson2" class="lesson-link" data-lesson="m1l2"><span class="lesson-dot"></span>Installing the IDE</a>
+    <a href="module1.html#lesson3" class="lesson-link" data-lesson="m1l3"><span class="lesson-dot"></span>Exploring the Board</a>
+    <a href="module1.html#lesson4" class="lesson-link" data-lesson="m1l4"><span class="lesson-dot"></span>Your First Sketch: Blink</a>
+    <a href="module1.html#lesson5" class="lesson-link" data-lesson="m1l5"><span class="lesson-dot"></span>Understanding the Code</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⚡</span> Module 2 – Electronics</div>
+    <a href="module2.html" class="lesson-link" data-lesson="m2l1"><span class="lesson-dot"></span>Voltage, Current &amp; Resistance</a>
+    <a href="module2.html#lesson2" class="lesson-link" data-lesson="m2l2"><span class="lesson-dot"></span>Ohm's Law</a>
+    <a href="module2.html#lesson3" class="lesson-link" data-lesson="m2l3"><span class="lesson-dot"></span>Breadboards &amp; Schematics</a>
+    <a href="module2.html#lesson4" class="lesson-link" data-lesson="m2l4"><span class="lesson-dot"></span>Resistors &amp; Capacitors</a>
+    <a href="module2.html#lesson5" class="lesson-link" data-lesson="m2l5"><span class="lesson-dot"></span>Power Supply &amp; Safety</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💡</span> Module 3 – Digital I/O</div>
+    <a href="module3.html" class="lesson-link" data-lesson="m3l1"><span class="lesson-dot"></span>Digital Pins Explained</a>
+    <a href="module3.html#lesson2" class="lesson-link" data-lesson="m3l2"><span class="lesson-dot"></span>digitalWrite &amp; digitalRead</a>
+    <a href="module3.html#lesson3" class="lesson-link" data-lesson="m3l3"><span class="lesson-dot"></span>Push Buttons &amp; Input</a>
+    <a href="module3.html#lesson4" class="lesson-link" data-lesson="m3l4"><span class="lesson-dot"></span>Debouncing Buttons</a>
+    <a href="module3.html#lesson5" class="lesson-link" data-lesson="m3l5"><span class="lesson-dot"></span>Traffic Light Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌡️</span> Module 4 – Analog I/O</div>
+    <a href="module4.html" class="lesson-link" data-lesson="m4l1"><span class="lesson-dot"></span>Analog vs Digital</a>
+    <a href="module4.html#lesson2" class="lesson-link" data-lesson="m4l2"><span class="lesson-dot"></span>analogRead &amp; Potentiometer</a>
+    <a href="module4.html#lesson3" class="lesson-link" data-lesson="m4l3"><span class="lesson-dot"></span>PWM &amp; analogWrite</a>
+    <a href="module4.html#lesson4" class="lesson-link" data-lesson="m4l4"><span class="lesson-dot"></span>Temperature Sensor</a>
+    <a href="module4.html#lesson5" class="lesson-link" data-lesson="m4l5"><span class="lesson-dot"></span>Light Sensor Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📺</span> Module 5 – Displays</div>
+    <a href="module5.html" class="lesson-link" data-lesson="m5l1"><span class="lesson-dot"></span>LCD 16x2 with I2C</a>
+    <a href="module5.html#lesson2" class="lesson-link" data-lesson="m5l2"><span class="lesson-dot"></span>OLED Display (SSD1306)</a>
+    <a href="module5.html#lesson3" class="lesson-link" data-lesson="m5l3"><span class="lesson-dot"></span>7-Segment Display</a>
+    <a href="module5.html#lesson4" class="lesson-link" data-lesson="m5l4"><span class="lesson-dot"></span>Buzzer &amp; Tones</a>
+    <a href="module5.html#lesson5" class="lesson-link" data-lesson="m5l5"><span class="lesson-dot"></span>RGB LED &amp; Color Mixing</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔊</span> Module 6 – Motors</div>
+    <a href="module6.html" class="lesson-link" data-lesson="m6l1"><span class="lesson-dot"></span>Servo Motor Basics</a>
+    <a href="module6.html#lesson2" class="lesson-link" data-lesson="m6l2"><span class="lesson-dot"></span>DC Motors &amp; L298N</a>
+    <a href="module6.html#lesson3" class="lesson-link" data-lesson="m6l3"><span class="lesson-dot"></span>Stepper Motors</a>
+    <a href="module6.html#lesson4" class="lesson-link" data-lesson="m6l4"><span class="lesson-dot"></span>Motor Speed Control</a>
+    <a href="module6.html#lesson5" class="lesson-link" data-lesson="m6l5"><span class="lesson-dot"></span>Mini Robot Car Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📡</span> Module 7 – Protocols</div>
+    <a href="module7.html" class="lesson-link" data-lesson="m7l1"><span class="lesson-dot"></span>Serial Communication</a>
+    <a href="module7.html#lesson2" class="lesson-link" data-lesson="m7l2"><span class="lesson-dot"></span>I2C Protocol</a>
+    <a href="module7.html#lesson3" class="lesson-link" data-lesson="m7l3"><span class="lesson-dot"></span>SPI Protocol</a>
+    <a href="module7.html#lesson4" class="lesson-link" data-lesson="m7l4"><span class="lesson-dot"></span>Connecting Multiple Devices</a>
+    <a href="module7.html#lesson5" class="lesson-link" data-lesson="m7l5"><span class="lesson-dot"></span>Real-time Serial Plotter</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌐</span> Module 8 – WiFi &amp; IoT</div>
+    <a href="module8.html" class="lesson-link" data-lesson="m8l1"><span class="lesson-dot"></span>Intro to ESP8266/ESP32</a>
+    <a href="module8.html#lesson2" class="lesson-link" data-lesson="m8l2"><span class="lesson-dot"></span>Connecting to WiFi</a>
+    <a href="module8.html#lesson3" class="lesson-link" data-lesson="m8l3"><span class="lesson-dot"></span>Building a Web Server</a>
+    <a href="module8.html#lesson4" class="lesson-link" data-lesson="m8l4"><span class="lesson-dot"></span>Sending Data to Cloud</a>
+    <a href="module8.html#lesson5" class="lesson-link" data-lesson="m8l5"><span class="lesson-dot"></span>MQTT Basics</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📶</span> Module 9 – Bluetooth</div>
+    <a href="module9.html" class="lesson-link" data-lesson="m9l1"><span class="lesson-dot"></span>HC-05 Bluetooth Module</a>
+    <a href="module9.html#lesson2" class="lesson-link" data-lesson="m9l2"><span class="lesson-dot"></span>AT Commands Setup</a>
+    <a href="module9.html#lesson3" class="lesson-link" data-lesson="m9l3"><span class="lesson-dot"></span>Phone-to-Arduino Control</a>
+    <a href="module9.html#lesson4" class="lesson-link" data-lesson="m9l4"><span class="lesson-dot"></span>BLE with ESP32</a>
+    <a href="module9.html#lesson5" class="lesson-link" data-lesson="m9l5"><span class="lesson-dot"></span>Bluetooth Car Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⏱️</span> Module 10 – Interrupts &amp; Timers</div>
+    <a href="module10.html" class="lesson-link" data-lesson="m10l1"><span class="lesson-dot"></span>What are Interrupts?</a>
+    <a href="module10.html#lesson2" class="lesson-link" data-lesson="m10l2"><span class="lesson-dot"></span>attachInterrupt()</a>
+    <a href="module10.html#lesson3" class="lesson-link" data-lesson="m10l3"><span class="lesson-dot"></span>Hardware Timers</a>
+    <a href="module10.html#lesson4" class="lesson-link" data-lesson="m10l4"><span class="lesson-dot"></span>millis() vs delay()</a>
+    <a href="module10.html#lesson5" class="lesson-link" data-lesson="m10l5"><span class="lesson-dot"></span>Sleep Modes &amp; Power Saving</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💾</span> Module 11 – Memory &amp; Libraries</div>
+    <a href="module11.html" class="lesson-link" data-lesson="m11l1"><span class="lesson-dot"></span>Arduino Memory Types</a>
+    <a href="module11.html#lesson2" class="lesson-link" data-lesson="m11l2"><span class="lesson-dot"></span>EEPROM Read &amp; Write</a>
+    <a href="module11.html#lesson3" class="lesson-link" data-lesson="m11l3"><span class="lesson-dot"></span>SD Card Module</a>
+    <a href="module11.html#lesson4" class="lesson-link" data-lesson="m11l4"><span class="lesson-dot"></span>Writing Custom Libraries</a>
+    <a href="module11.html#lesson5" class="lesson-link" data-lesson="m11l5"><span class="lesson-dot"></span>Data Logger Project</a>
+  </div>
+  <div class="module-group active-module"><div class="module-label"><span class="mod-icon">🏗️</span> Module 12 – Capstone Projects</div>
+    <a href="#lesson1" class="lesson-link active" data-lesson="m12l1"><span class="lesson-dot"></span>Smart Weather Station</a>
+    <a href="#lesson2" class="lesson-link" data-lesson="m12l2"><span class="lesson-dot"></span>Obstacle-Avoiding Robot</a>
+    <a href="#lesson3" class="lesson-link" data-lesson="m12l3"><span class="lesson-dot"></span>Home Automation System</a>
+    <a href="#lesson4" class="lesson-link" data-lesson="m12l4"><span class="lesson-dot"></span>RFID Door Lock</a>
+    <a href="#lesson5" class="lesson-link" data-lesson="m12l5"><span class="lesson-dot"></span>Build Your Own Project</a>
+  </div>
+</aside>
+
+<main class="main-content">
+  <div class="module-hero" style="background: linear-gradient(135deg,#0f172a,#1e3a8a);">
+    <div class="module-hero-icon">🏗️</div>
+    <div>
+      <div class="module-hero-num">Module 12 · Advanced · Final Module</div>
+      <h1 class="module-hero-title">Capstone Projects</h1>
+      <p class="module-hero-desc">Apply everything you've learned to build 4 complete, real-world Arduino projects from scratch. These combine hardware, code, sensors, and communication — the full stack.</p>
+    </div>
+  </div>
+
+  <!-- LESSON 1 -->
+  <div class="lesson-card" id="lesson1">
+    <div class="lesson-header">
+      <div class="lesson-icon">🌦️</div>
+      <div>
+        <div class="lesson-num">Project 1 of 5</div>
+        <h2 class="lesson-title">Smart Weather Station</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>Build a weather station that reads temperature, humidity, atmospheric pressure and UV index, displays them on an OLED, logs to SD card, and uploads to the cloud via WiFi (ESP8266).</p>
+      <h3>Hardware List</h3>
+      <table class="component-table"><thead><tr><th>Component</th><th>Measures</th><th>Protocol</th></tr></thead><tbody>
+        <tr><td>DHT22</td><td>Temperature + Humidity</td><td>1-Wire</td></tr>
+        <tr><td>BMP280</td><td>Pressure + Altitude</td><td>I2C</td></tr>
+        <tr><td>GUVA-S12SD</td><td>UV Index</td><td>Analog</td></tr>
+        <tr><td>SSD1306 OLED</td><td>Display</td><td>I2C</td></tr>
+        <tr><td>ESP8266 (NodeMCU)</td><td>WiFi</td><td>UART/AT</td></tr>
+        <tr><td>SD Module</td><td>Local logging</td><td>SPI</td></tr>
+      </tbody></table>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ — Weather Station Core</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">#include</span> <span class="st">&lt;DHT.h&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;Adafruit_BMP280.h&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;Adafruit_SSD1306.h&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;SD.h&gt;</span>
+
+DHT <span class="fn">dht</span>(<span class="nm">7</span>, DHT22);
+Adafruit_BMP280 bmp;
+Adafruit_SSD1306 <span class="fn">display</span>(<span class="nm">128</span>, <span class="nm">64</span>, &amp;Wire, -<span class="nm">1</span>);
+
+<span class="kw">struct</span> WeatherData {
+  <span class="tp">float</span> temp, hum, pressure, altitude;
+  <span class="tp">int</span>   uvRaw;
+};
+
+WeatherData <span class="fn">readAll</span>() {
+  <span class="kw">return</span> {
+    dht.<span class="fn">readTemperature</span>(),
+    dht.<span class="fn">readHumidity</span>(),
+    bmp.<span class="fn">readPressure</span>() / <span class="nm">100.0</span>,   <span class="cm">// Pa → hPa</span>
+    bmp.<span class="fn">readAltitude</span>(<span class="nm">1013.25</span>),
+    <span class="fn">analogRead</span>(A0)                  <span class="cm">// UV raw</span>
+  };
+}
+
+<span class="kw">void</span> <span class="fn">displayData</span>(WeatherData &amp;w) {
+  display.<span class="fn">clearDisplay</span>();
+  display.<span class="fn">setCursor</span>(<span class="nm">0</span>,<span class="nm">0</span>);
+  display.<span class="fn">print</span>(<span class="st">"Temp: "</span>); display.<span class="fn">print</span>(w.temp); display.<span class="fn">println</span>(<span class="st">"C"</span>);
+  display.<span class="fn">print</span>(<span class="st">"Hum:  "</span>); display.<span class="fn">print</span>(w.hum);  display.<span class="fn">println</span>(<span class="st">"%"</span>);
+  display.<span class="fn">print</span>(<span class="st">"Pres: "</span>); display.<span class="fn">print</span>(w.pressure); display.<span class="fn">println</span>(<span class="st">"hPa"</span>);
+  display.<span class="fn">print</span>(<span class="st">"Alt:  "</span>); display.<span class="fn">print</span>(w.altitude); display.<span class="fn">println</span>(<span class="st">"m"</span>);
+  display.<span class="fn">display</span>();
+}
+
+<span class="kw">void</span> <span class="fn">logToSD</span>(WeatherData &amp;w) {
+  File f = SD.<span class="fn">open</span>(<span class="st">"weather.csv"</span>, FILE_WRITE);
+  f.<span class="fn">print</span>(<span class="fn">millis</span>()); f.<span class="fn">print</span>(<span class="st">","</span>);
+  f.<span class="fn">print</span>(w.temp);  f.<span class="fn">print</span>(<span class="st">","</span>);
+  f.<span class="fn">print</span>(w.hum);   f.<span class="fn">print</span>(<span class="st">","</span>);
+  f.<span class="fn">println</span>(w.pressure);
+  f.<span class="fn">close</span>();
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  dht.<span class="fn">begin</span>(); bmp.<span class="fn">begin</span>();
+  display.<span class="fn">begin</span>(SSD1306_SWITCHCAPVCC, <span class="nm">0x3C</span>);
+  SD.<span class="fn">begin</span>(<span class="nm">10</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  WeatherData w = <span class="fn">readAll</span>();
+  <span class="fn">displayData</span>(w);
+  <span class="fn">logToSD</span>(w);
+  <span class="fn">delay</span>(<span class="nm">30000</span>);   <span class="cm">// Every 30 seconds</span>
+}</code></pre></div>
+      <div class="info-box success"><span class="icon">🎉</span><div class="body"><strong>Extension:</strong> Add the ESP8266 to post data to ThingSpeak every 15 minutes. You'll have a live graph on the internet showing your room's climate over time!</div></div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m12l1">○ Mark Complete</button></div>
+  </div>
+
+  <!-- LESSON 2 -->
+  <div class="lesson-card" id="lesson2">
+    <div class="lesson-header">
+      <div class="lesson-icon">🤖</div>
+      <div>
+        <div class="lesson-num">Project 2 of 5</div>
+        <h2 class="lesson-title">Obstacle-Avoiding Robot</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>Build a fully autonomous robot that drives forward, detects obstacles with an ultrasonic sensor, and steers around them — no remote control needed.</p>
+      <h3>Hardware List</h3>
+      <table class="component-table"><thead><tr><th>Component</th><th>Role</th></tr></thead><tbody>
+        <tr><td>Arduino Uno</td><td>Brain</td></tr>
+        <tr><td>HC-SR04 ultrasonic sensor</td><td>Distance measurement</td></tr>
+        <tr><td>SG90 Servo</td><td>Rotate sensor to look left/right</td></tr>
+        <tr><td>L298N motor driver</td><td>Drive 2 DC motors</td></tr>
+        <tr><td>Robot chassis + DC motors</td><td>Movement</td></tr>
+        <tr><td>7.4V Li-ion battery</td><td>Power</td></tr>
+      </tbody></table>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ — Obstacle Avoiding Robot</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">#include</span> <span class="st">&lt;Servo.h&gt;</span>
+
+<span class="cm">// Ultrasonic</span>
+<span class="kw">const int</span> TRIG=<span class="nm">8</span>, ECHO=<span class="nm">9</span>;
+<span class="cm">// Motors</span>
+<span class="kw">const int</span> IN1=<span class="nm">2</span>,IN2=<span class="nm">3</span>,IN3=<span class="nm">4</span>,IN4=<span class="nm">5</span>,ENA=<span class="nm">6</span>,ENB=<span class="nm">7</span>;
+<span class="kw">const int</span> SAFE_DIST = <span class="nm">20</span>;   <span class="cm">// cm — stop if closer</span>
+
+Servo sensorServo;
+
+<span class="tp">long</span> <span class="fn">getDistance</span>() {
+  <span class="fn">digitalWrite</span>(TRIG, LOW); <span class="fn">delayMicroseconds</span>(<span class="nm">2</span>);
+  <span class="fn">digitalWrite</span>(TRIG, HIGH); <span class="fn">delayMicroseconds</span>(<span class="nm">10</span>);
+  <span class="fn">digitalWrite</span>(TRIG, LOW);
+  <span class="kw">return</span> <span class="fn">pulseIn</span>(ECHO, HIGH) / <span class="nm">58</span>;  <span class="cm">// µs → cm</span>
+}
+
+<span class="kw">void</span> <span class="fn">forward</span>()  { <span class="fn">digitalWrite</span>(IN1,H); <span class="fn">digitalWrite</span>(IN2,L); <span class="fn">digitalWrite</span>(IN3,H); <span class="fn">digitalWrite</span>(IN4,L); }
+<span class="kw">void</span> <span class="fn">stopAll</span>()  { <span class="fn">digitalWrite</span>(IN1,L); <span class="fn">digitalWrite</span>(IN2,L); <span class="fn">digitalWrite</span>(IN3,L); <span class="fn">digitalWrite</span>(IN4,L); }
+<span class="kw">void</span> <span class="fn">turnLeft</span>() { <span class="fn">digitalWrite</span>(IN1,L); <span class="fn">digitalWrite</span>(IN2,H); <span class="fn">digitalWrite</span>(IN3,H); <span class="fn">digitalWrite</span>(IN4,L); }
+<span class="kw">void</span> <span class="fn">turnRight</span>(){ <span class="fn">digitalWrite</span>(IN1,H); <span class="fn">digitalWrite</span>(IN2,L); <span class="fn">digitalWrite</span>(IN3,L); <span class="fn">digitalWrite</span>(IN4,H); }
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(TRIG,OUTPUT); <span class="fn">pinMode</span>(ECHO,INPUT);
+  <span class="kw">int</span> pins[]={IN1,IN2,IN3,IN4,ENA,ENB};
+  <span class="kw">for</span>(<span class="kw">auto</span> p:pins) <span class="fn">pinMode</span>(p,OUTPUT);
+  <span class="fn">analogWrite</span>(ENA,<span class="nm">180</span>); <span class="fn">analogWrite</span>(ENB,<span class="nm">180</span>);
+  sensorServo.<span class="fn">attach</span>(<span class="nm">11</span>);
+  sensorServo.<span class="fn">write</span>(<span class="nm">90</span>); <span class="cm">// Face forward</span>
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">long</span> dist = <span class="fn">getDistance</span>();
+
+  <span class="kw">if</span> (dist > SAFE_DIST) {
+    <span class="fn">forward</span>();
+  } <span class="kw">else</span> {
+    <span class="fn">stopAll</span>();
+    <span class="fn">delay</span>(<span class="nm">300</span>);
+
+    <span class="cm">// Look left and right</span>
+    sensorServo.<span class="fn">write</span>(<span class="nm">0</span>); <span class="fn">delay</span>(<span class="nm">400</span>);
+    <span class="tp">long</span> distLeft = <span class="fn">getDistance</span>();
+    sensorServo.<span class="fn">write</span>(<span class="nm">180</span>); <span class="fn">delay</span>(<span class="nm">400</span>);
+    <span class="tp">long</span> distRight = <span class="fn">getDistance</span>();
+    sensorServo.<span class="fn">write</span>(<span class="nm">90</span>);
+
+    <span class="kw">if</span> (distLeft > distRight) {
+      <span class="fn">turnLeft</span>(); <span class="fn">delay</span>(<span class="nm">500</span>);
+    } <span class="kw">else</span> {
+      <span class="fn">turnRight</span>(); <span class="fn">delay</span>(<span class="nm">500</span>);
+    }
+  }
+}</code></pre></div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m12l2">○ Mark Complete</button></div>
+  </div>
+
+  <!-- LESSON 3 -->
+  <div class="lesson-card" id="lesson3">
+    <div class="lesson-header">
+      <div class="lesson-icon">🏠</div>
+      <div>
+        <div class="lesson-num">Project 3 of 5</div>
+        <h2 class="lesson-title">Home Automation System</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>Control lights, fans, and appliances from anywhere using a web interface hosted directly on an <strong>ESP32</strong>. No internet required — connects to your home WiFi and creates a local dashboard accessible from any phone or browser.</p>
+      <h3>Features</h3>
+      <table class="component-table"><thead><tr><th>Feature</th><th>Component</th></tr></thead><tbody>
+        <tr><td>4-relay appliance control</td><td>4-channel relay module</td></tr>
+        <tr><td>Temperature display</td><td>DHT22</td></tr>
+        <tr><td>Motion detection alert</td><td>PIR sensor</td></tr>
+        <tr><td>Web dashboard</td><td>ESP32 web server</td></tr>
+        <tr><td>Schedule automation</td><td>millis() timer logic</td></tr>
+      </tbody></table>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">ESP32 Arduino — Home Automation Web Server</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">#include</span> <span class="st">&lt;WiFi.h&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;WebServer.h&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;DHT.h&gt;</span>
+
+<span class="kw">const char</span>* ssid     = <span class="st">"YourWiFi"</span>;
+<span class="kw">const char</span>* password = <span class="st">"YourPassword"</span>;
+
+WebServer <span class="fn">server</span>(<span class="nm">80</span>);
+DHT <span class="fn">dht</span>(<span class="nm">4</span>, DHT22);
+
+<span class="kw">const int</span> relays[] = {<span class="nm">16</span>,<span class="nm">17</span>,<span class="nm">18</span>,<span class="nm">19</span>};
+<span class="tp">bool</span> relayState[<span class="nm">4</span>] = {<span class="kw">false</span>,<span class="kw">false</span>,<span class="kw">false</span>,<span class="kw">false</span>};
+
+<span class="kw">void</span> <span class="fn">handleRoot</span>() {
+  <span class="tp">float</span> t = dht.<span class="fn">readTemperature</span>();
+  <span class="tp">float</span> h = dht.<span class="fn">readHumidity</span>();
+  <span class="tp">String</span> html = <span class="st">"&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta name='viewport' content='width=device-width,initial-scale=1'&gt;&lt;title&gt;AlCoders Home&lt;/title&gt;&lt;/head&gt;&lt;body style='font-family:sans-serif;padding:20px'&gt;"</span>;
+  html += <span class="st">"&lt;h1&gt;🏠 Home Control&lt;/h1&gt;"</span>;
+  html += <span class="st">"&lt;p&gt;Temp: &lt;b&gt;"</span> + <span class="tp">String</span>(t) + <span class="st">"°C&lt;/b&gt; | Humidity: &lt;b&gt;"</span> + <span class="tp">String</span>(h) + <span class="st">"%&lt;/b&gt;&lt;/p&gt;"</span>;
+  <span class="kw">for</span>(<span class="kw">int</span> i=<span class="nm">0</span>; i&lt;<span class="nm">4</span>; i++) {
+    html += <span class="st">"&lt;p&gt;Relay "</span> + <span class="tp">String</span>(i+<span class="nm">1</span>) + <span class="st">": &lt;a href='/toggle?id="</span> + <span class="tp">String</span>(i) + <span class="st">"'&gt;&lt;button&gt;"</span>;
+    html += relayState[i] ? <span class="st">"ON ✅"</span> : <span class="st">"OFF ❌"</span>;
+    html += <span class="st">"&lt;/button&gt;&lt;/a&gt;&lt;/p&gt;"</span>;
+  }
+  html += <span class="st">"&lt;/body&gt;&lt;/html&gt;"</span>;
+  server.<span class="fn">send</span>(<span class="nm">200</span>, <span class="st">"text/html"</span>, html);
+}
+
+<span class="kw">void</span> <span class="fn">handleToggle</span>() {
+  <span class="tp">int</span> id = server.<span class="fn">arg</span>(<span class="st">"id"</span>).<span class="fn">toInt</span>();
+  <span class="kw">if</span>(id &gt;= <span class="nm">0</span> &amp;&amp; id &lt; <span class="nm">4</span>) {
+    relayState[id] = !relayState[id];
+    <span class="fn">digitalWrite</span>(relays[id], relayState[id] ? LOW : HIGH);  <span class="cm">// Relay = active LOW</span>
+  }
+  server.<span class="fn">sendHeader</span>(<span class="st">"Location"</span>, <span class="st">"/"</span>);
+  server.<span class="fn">send</span>(<span class="nm">303</span>);
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="kw">for</span>(<span class="kw">int</span> i=<span class="nm">0</span>; i&lt;<span class="nm">4</span>; i++) { <span class="fn">pinMode</span>(relays[i], OUTPUT); <span class="fn">digitalWrite</span>(relays[i], HIGH); }
+  dht.<span class="fn">begin</span>();
+  WiFi.<span class="fn">begin</span>(ssid, password);
+  <span class="kw">while</span>(WiFi.<span class="fn">status</span>() != WL_CONNECTED) <span class="fn">delay</span>(<span class="nm">500</span>);
+  server.<span class="fn">on</span>(<span class="st">"/"</span>, handleRoot);
+  server.<span class="fn">on</span>(<span class="st">"/toggle"</span>, handleToggle);
+  server.<span class="fn">begin</span>();
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() { server.<span class="fn">handleClient</span>(); }</code></pre></div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m12l3">○ Mark Complete</button></div>
+  </div>
+
+  <!-- LESSON 4 -->
+  <div class="lesson-card" id="lesson4">
+    <div class="lesson-header">
+      <div class="lesson-icon">🔐</div>
+      <div>
+        <div class="lesson-num">Project 4 of 5</div>
+        <h2 class="lesson-title">RFID Door Lock</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>Build a keycard-based door lock using an <strong>MFRC522 RFID reader</strong>. Tap your card → door opens. Wrong card → alarm sounds. Authorized UIDs stored in EEPROM so they persist after power-off.</p>
+      <h3>Hardware List</h3>
+      <table class="component-table"><thead><tr><th>Component</th><th>Role</th></tr></thead><tbody>
+        <tr><td>MFRC522 RFID reader</td><td>Read card/tag UID</td></tr>
+        <tr><td>SG90 Servo</td><td>Lock/unlock mechanism</td></tr>
+        <tr><td>Green + Red LED</td><td>Access granted/denied</td></tr>
+        <tr><td>Buzzer</td><td>Alert tones</td></tr>
+        <tr><td>Push button</td><td>Add new authorized card</td></tr>
+      </tbody></table>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ — RFID Door Lock</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">#include</span> <span class="st">&lt;SPI.h&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;MFRC522.h&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;Servo.h&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;EEPROM.h&gt;</span>
+
+<span class="kw">#define</span> SS_PIN   <span class="nm">10</span>
+<span class="kw">#define</span> RST_PIN  <span class="nm">9</span>
+<span class="kw">#define</span> LED_GREEN <span class="nm">6</span>
+<span class="kw">#define</span> LED_RED   <span class="nm">7</span>
+<span class="kw">#define</span> BUZZER    <span class="nm">5</span>
+<span class="kw">#define</span> ENROLL_BTN <span class="nm">4</span>
+
+MFRC522 <span class="fn">rfid</span>(SS_PIN, RST_PIN);
+Servo lockServo;
+
+<span class="cm">// Store up to 5 authorized UIDs in EEPROM (4 bytes each)</span>
+<span class="kw">const int</span> MAX_CARDS = <span class="nm">5</span>;
+<span class="tp">byte</span> storedUIDs[MAX_CARDS][<span class="nm">4</span>];
+<span class="kw">int</span> cardCount = <span class="nm">0</span>;
+
+<span class="kw">bool</span> <span class="fn">isAuthorized</span>(<span class="tp">byte</span>* uid) {
+  <span class="kw">for</span>(<span class="kw">int</span> i=<span class="nm">0</span>; i&lt;cardCount; i++) {
+    <span class="kw">if</span>(<span class="fn">memcmp</span>(storedUIDs[i], uid, <span class="nm">4</span>) == <span class="nm">0</span>) <span class="kw">return</span> <span class="kw">true</span>;
+  }
+  <span class="kw">return</span> <span class="kw">false</span>;
+}
+
+<span class="kw">void</span> <span class="fn">grantAccess</span>() {
+  lockServo.<span class="fn">write</span>(<span class="nm">90</span>);   <span class="cm">// Unlock</span>
+  <span class="fn">digitalWrite</span>(LED_GREEN, HIGH);
+  <span class="fn">tone</span>(BUZZER, <span class="nm">1000</span>, <span class="nm">200</span>);
+  <span class="fn">delay</span>(<span class="nm">3000</span>);
+  lockServo.<span class="fn">write</span>(<span class="nm">0</span>);    <span class="cm">// Lock</span>
+  <span class="fn">digitalWrite</span>(LED_GREEN, LOW);
+}
+
+<span class="kw">void</span> <span class="fn">denyAccess</span>() {
+  <span class="fn">digitalWrite</span>(LED_RED, HIGH);
+  <span class="fn">tone</span>(BUZZER, <span class="nm">300</span>, <span class="nm">1000</span>);
+  <span class="fn">delay</span>(<span class="nm">1000</span>);
+  <span class="fn">digitalWrite</span>(LED_RED, LOW);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">if</span>(!rfid.<span class="fn">PICC_IsNewCardPresent</span>() || !rfid.<span class="fn">PICC_ReadCardSerial</span>()) <span class="kw">return</span>;
+
+  <span class="tp">byte</span>* uid = rfid.uid.uidByte;
+
+  <span class="kw">if</span>(<span class="fn">digitalRead</span>(ENROLL_BTN) == LOW &amp;&amp; cardCount &lt; MAX_CARDS) {
+    <span class="cm">// Enroll mode — save new card</span>
+    <span class="fn">memcpy</span>(storedUIDs[cardCount], uid, <span class="nm">4</span>);
+    EEPROM.<span class="fn">put</span>(cardCount * <span class="nm">4</span>, storedUIDs[cardCount]);
+    cardCount++;
+    <span class="fn">tone</span>(BUZZER, <span class="nm">2000</span>, <span class="nm">500</span>);
+  } <span class="kw">else</span> {
+    <span class="fn">isAuthorized</span>(uid) ? <span class="fn">grantAccess</span>() : <span class="fn">denyAccess</span>();
+  }
+  rfid.<span class="fn">PICC_HaltA</span>();
+}</code></pre></div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m12l4">○ Mark Complete</button></div>
+  </div>
+
+  <!-- LESSON 5 -->
+  <div class="lesson-card" id="lesson5">
+    <div class="lesson-header">
+      <div class="lesson-icon">🎓</div>
+      <div>
+        <div class="lesson-num">Lesson 5 of 5 · Course Finale</div>
+        <h2 class="lesson-title">Build Your Own Project</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>🎉 <strong>Congratulations!</strong> You've completed the AlCoders Arduino Masterclass — from blinking your first LED to building IoT systems, robots, and smart devices. Now it's time to apply everything to a project of your own choosing.</p>
+      <h3>Project Framework — Use This Every Time</h3>
+      <table class="component-table"><thead><tr><th>Step</th><th>What to Do</th></tr></thead><tbody>
+        <tr><td>1. Define</td><td>What does your project do? What inputs and outputs does it need?</td></tr>
+        <tr><td>2. Component List</td><td>List every sensor, actuator, display, and communication module</td></tr>
+        <tr><td>3. Circuit Design</td><td>Draw a schematic or Tinkercad diagram before wiring</td></tr>
+        <tr><td>4. Code Structure</td><td>Plan setup(), loop(), and helper functions before writing</td></tr>
+        <tr><td>5. Build &amp; Test</td><td>Build and test one component at a time — don't wire everything at once</td></tr>
+        <tr><td>6. Integrate</td><td>Combine components, test interactions</td></tr>
+        <tr><td>7. Refine</td><td>Add error handling, debouncing, power saving, and edge cases</td></tr>
+      </tbody></table>
+      <h3>Project Ideas to Inspire You</h3>
+      <div class="info-box tip"><span class="icon">💡</span><div class="body">
+        <strong>Beginner Projects</strong>
+        <ul style="margin-top:0.5rem;margin-left:1.2rem;line-height:2">
+          <li>Digital thermometer with LCD display and min/max memory</li>
+          <li>Plant watering alert (soil moisture sensor + buzzer)</li>
+          <li>Password-protected LED matrix with keypad</li>
+        </ul>
+      </div></div>
+      <div class="info-box tip"><span class="icon">🚀</span><div class="body">
+        <strong>Intermediate Projects</strong>
+        <ul style="margin-top:0.5rem;margin-left:1.2rem;line-height:2">
+          <li>Automatic plant irrigation system with OLED status display</li>
+          <li>Gesture-controlled lamp using APDS-9960</li>
+          <li>SMS alert system using SIM800L module</li>
+        </ul>
+      </div></div>
+      <div class="info-box warning"><span class="icon">🔥</span><div class="body">
+        <strong>Advanced Projects</strong>
+        <ul style="margin-top:0.5rem;margin-left:1.2rem;line-height:2">
+          <li>Voice-controlled home automation using ESP32 + Google Assistant</li>
+          <li>GPS tracker with live Google Maps location (SIM800L + GPS module)</li>
+          <li>Self-balancing robot using MPU-6050 gyroscope + PID control</li>
+          <li>Biometric attendance system (fingerprint sensor + SD card)</li>
+        </ul>
+      </div></div>
+      <h3>Where to Go Next</h3>
+      <table class="component-table"><thead><tr><th>Resource</th><th>What You'll Find</th></tr></thead><tbody>
+        <tr><td><strong>arduino.cc/reference</strong></td><td>Official language reference — bookmark this</td></tr>
+        <tr><td><strong>tinkercad.com</strong></td><td>Free online circuit simulator — prototype without hardware</td></tr>
+        <tr><td><strong>hackster.io</strong></td><td>Thousands of community Arduino projects with code</td></tr>
+        <tr><td><strong>instructables.com</strong></td><td>Step-by-step project builds with photos</td></tr>
+        <tr><td><strong>forum.arduino.cc</strong></td><td>Community help — never be stuck for long</td></tr>
+        <tr><td><strong>platformio.org</strong></td><td>Professional Arduino IDE with VS Code integration</td></tr>
+      </tbody></table>
+      <div class="info-box success"><span class="icon">🏆</span><div class="body"><strong>You Did It!</strong> You started at zero and now understand hardware fundamentals, C++ for microcontrollers, sensors, actuators, displays, communication protocols, IoT, Bluetooth, interrupts, memory, and built multiple complete projects. That's the full stack of embedded development — you are officially an Arduino maker. Keep building!</div></div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m12l5">○ Mark Complete</button></div>
+  </div>
+
+  <div class="lesson-footer">
+    <a href="module11.html" class="btn btn-outline">← Module 11</a>
+    <button class="btn btn-complete" data-lesson="m12_complete">○ Mark Course Complete 🎓</button>
+    <a href="index.html" class="btn btn-primary">🏠 Back to Course Home</a>
+  </div>
+</main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

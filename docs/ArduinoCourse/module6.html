@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 6: Motors & Movement – AlCoders Arduino</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-logo" href="index.html">⚡ <span>Al</span>Coders</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="module5.html">← Module 5</a>
+    <a href="module6.html" class="active">Module 6</a>
+    <a href="module7.html">Module 7 →</a>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">Arduino Course</a> › Module 6 › Motors &amp; Movement
+</div>
+
+<div class="page-wrapper">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">Course Progress</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 60 lessons completed</div>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔧</span> Module 1 – Getting Started</div>
+    <a href="module1.html" class="lesson-link" data-lesson="m1l1"><span class="lesson-dot"></span>What is Arduino?</a>
+    <a href="module1.html#lesson2" class="lesson-link" data-lesson="m1l2"><span class="lesson-dot"></span>Installing the IDE</a>
+    <a href="module1.html#lesson3" class="lesson-link" data-lesson="m1l3"><span class="lesson-dot"></span>Exploring the Board</a>
+    <a href="module1.html#lesson4" class="lesson-link" data-lesson="m1l4"><span class="lesson-dot"></span>Your First Sketch: Blink</a>
+    <a href="module1.html#lesson5" class="lesson-link" data-lesson="m1l5"><span class="lesson-dot"></span>Understanding the Code</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⚡</span> Module 2 – Electronics</div>
+    <a href="module2.html" class="lesson-link" data-lesson="m2l1"><span class="lesson-dot"></span>Voltage, Current & Resistance</a>
+    <a href="module2.html#lesson2" class="lesson-link" data-lesson="m2l2"><span class="lesson-dot"></span>Ohm's Law</a>
+    <a href="module2.html#lesson3" class="lesson-link" data-lesson="m2l3"><span class="lesson-dot"></span>Breadboards & Schematics</a>
+    <a href="module2.html#lesson4" class="lesson-link" data-lesson="m2l4"><span class="lesson-dot"></span>Resistors & Capacitors</a>
+    <a href="module2.html#lesson5" class="lesson-link" data-lesson="m2l5"><span class="lesson-dot"></span>Power Supply & Safety</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💡</span> Module 3 – Digital I/O</div>
+    <a href="module3.html" class="lesson-link" data-lesson="m3l1"><span class="lesson-dot"></span>Digital Pins Explained</a>
+    <a href="module3.html#lesson2" class="lesson-link" data-lesson="m3l2"><span class="lesson-dot"></span>digitalWrite & digitalRead</a>
+    <a href="module3.html#lesson3" class="lesson-link" data-lesson="m3l3"><span class="lesson-dot"></span>Push Buttons & Input</a>
+    <a href="module3.html#lesson4" class="lesson-link" data-lesson="m3l4"><span class="lesson-dot"></span>Debouncing Buttons</a>
+    <a href="module3.html#lesson5" class="lesson-link" data-lesson="m3l5"><span class="lesson-dot"></span>Traffic Light Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌡️</span> Module 4 – Analog I/O</div>
+    <a href="module4.html" class="lesson-link" data-lesson="m4l1"><span class="lesson-dot"></span>Analog vs Digital</a>
+    <a href="module4.html#lesson2" class="lesson-link" data-lesson="m4l2"><span class="lesson-dot"></span>analogRead & Potentiometer</a>
+    <a href="module4.html#lesson3" class="lesson-link" data-lesson="m4l3"><span class="lesson-dot"></span>PWM & analogWrite</a>
+    <a href="module4.html#lesson4" class="lesson-link" data-lesson="m4l4"><span class="lesson-dot"></span>Temperature Sensor (LM35)</a>
+    <a href="module4.html#lesson5" class="lesson-link" data-lesson="m4l5"><span class="lesson-dot"></span>Light Sensor (LDR) Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📺</span> Module 5 – Displays</div>
+    <a href="module5.html" class="lesson-link" data-lesson="m5l1"><span class="lesson-dot"></span>LCD 16x2 with I2C</a>
+    <a href="module5.html#lesson2" class="lesson-link" data-lesson="m5l2"><span class="lesson-dot"></span>OLED Display (SSD1306)</a>
+    <a href="module5.html#lesson3" class="lesson-link" data-lesson="m5l3"><span class="lesson-dot"></span>7-Segment Display</a>
+    <a href="module5.html#lesson4" class="lesson-link" data-lesson="m5l4"><span class="lesson-dot"></span>Buzzer & Tones</a>
+    <a href="module5.html#lesson5" class="lesson-link" data-lesson="m5l5"><span class="lesson-dot"></span>RGB LED & Color Mixing</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔊</span> Module 6 – Motors</div>
+    <a href="#lesson1" class="lesson-link active" data-lesson="m6l1"><span class="lesson-dot"></span>Servo Motor Basics</a>
+    <a href="#lesson2" class="lesson-link" data-lesson="m6l2"><span class="lesson-dot"></span>DC Motors & L298N</a>
+    <a href="#lesson3" class="lesson-link" data-lesson="m6l3"><span class="lesson-dot"></span>Stepper Motors</a>
+    <a href="#lesson4" class="lesson-link" data-lesson="m6l4"><span class="lesson-dot"></span>Motor Speed Control</a>
+    <a href="#lesson5" class="lesson-link" data-lesson="m6l5"><span class="lesson-dot"></span>Mini Robot Car Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📡</span> Module 7 – Protocols</div>
+    <a href="module7.html" class="lesson-link" data-lesson="m7l1"><span class="lesson-dot"></span>Serial Communication</a>
+    <a href="module7.html#lesson2" class="lesson-link" data-lesson="m7l2"><span class="lesson-dot"></span>I2C Protocol</a>
+    <a href="module7.html#lesson3" class="lesson-link" data-lesson="m7l3"><span class="lesson-dot"></span>SPI Protocol</a>
+    <a href="module7.html#lesson4" class="lesson-link" data-lesson="m7l4"><span class="lesson-dot"></span>Connecting Multiple Devices</a>
+    <a href="module7.html#lesson5" class="lesson-link" data-lesson="m7l5"><span class="lesson-dot"></span>Real-time Serial Plotter</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌐</span> Module 8 – WiFi & IoT</div>
+    <a href="module8.html" class="lesson-link" data-lesson="m8l1"><span class="lesson-dot"></span>Intro to ESP8266 & ESP32</a>
+    <a href="module8.html#lesson2" class="lesson-link" data-lesson="m8l2"><span class="lesson-dot"></span>Connecting to WiFi</a>
+    <a href="module8.html#lesson3" class="lesson-link" data-lesson="m8l3"><span class="lesson-dot"></span>Building a Web Server</a>
+    <a href="module8.html#lesson4" class="lesson-link" data-lesson="m8l4"><span class="lesson-dot"></span>Sending Data to Cloud</a>
+    <a href="module8.html#lesson5" class="lesson-link" data-lesson="m8l5"><span class="lesson-dot"></span>MQTT Basics</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📶</span> Module 9 – Bluetooth</div>
+    <a href="module9.html" class="lesson-link" data-lesson="m9l1"><span class="lesson-dot"></span>HC-05 Bluetooth Module</a>
+    <a href="module9.html#lesson2" class="lesson-link" data-lesson="m9l2"><span class="lesson-dot"></span>AT Commands Setup</a>
+    <a href="module9.html#lesson3" class="lesson-link" data-lesson="m9l3"><span class="lesson-dot"></span>Phone-Controlled LED</a>
+    <a href="module9.html#lesson4" class="lesson-link" data-lesson="m9l4"><span class="lesson-dot"></span>BLE with ESP32</a>
+    <a href="module9.html#lesson5" class="lesson-link" data-lesson="m9l5"><span class="lesson-dot"></span>Bluetooth Robot Control</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⏱️</span> Module 10 – Interrupts</div>
+    <a href="module10.html" class="lesson-link" data-lesson="m10l1"><span class="lesson-dot"></span>What are Interrupts?</a>
+    <a href="module10.html#lesson2" class="lesson-link" data-lesson="m10l2"><span class="lesson-dot"></span>attachInterrupt()</a>
+    <a href="module10.html#lesson3" class="lesson-link" data-lesson="m10l3"><span class="lesson-dot"></span>Timer Interrupts</a>
+    <a href="module10.html#lesson4" class="lesson-link" data-lesson="m10l4"><span class="lesson-dot"></span>Watchdog Timer</a>
+    <a href="module10.html#lesson5" class="lesson-link" data-lesson="m10l5"><span class="lesson-dot"></span>Sleep Modes & Low Power</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💾</span> Module 11 – Memory & Storage</div>
+    <a href="module11.html" class="lesson-link" data-lesson="m11l1"><span class="lesson-dot"></span>SRAM, Flash & EEPROM</a>
+    <a href="module11.html#lesson2" class="lesson-link" data-lesson="m11l2"><span class="lesson-dot"></span>Reading & Writing EEPROM</a>
+    <a href="module11.html#lesson3" class="lesson-link" data-lesson="m11l3"><span class="lesson-dot"></span>SD Card Module</a>
+    <a href="module11.html#lesson4" class="lesson-link" data-lesson="m11l4"><span class="lesson-dot"></span>Writing Custom Libraries</a>
+    <a href="module11.html#lesson5" class="lesson-link" data-lesson="m11l5"><span class="lesson-dot"></span>Data Logger Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🏗️</span> Module 12 – Capstone Projects</div>
+    <a href="module12.html" class="lesson-link" data-lesson="m12l1"><span class="lesson-dot"></span>Smart Weather Station</a>
+    <a href="module12.html#lesson2" class="lesson-link" data-lesson="m12l2"><span class="lesson-dot"></span>Obstacle-Avoiding Robot</a>
+    <a href="module12.html#lesson3" class="lesson-link" data-lesson="m12l3"><span class="lesson-dot"></span>Home Automation System</a>
+    <a href="module12.html#lesson4" class="lesson-link" data-lesson="m12l4"><span class="lesson-dot"></span>Custom PCB Design Intro</a>
+    <a href="module12.html#lesson5" class="lesson-link" data-lesson="m12l5"><span class="lesson-dot"></span>Next Steps & Resources</a>
+  </div>
+</aside>
+
+<main class="content">
+  <div class="module-hero">
+    <div class="module-badge">🔊 Module 6 of 12</div>
+    <h1>Motors &amp; Movement</h1>
+    <p>Make things move! This module covers servo motors for precise positioning, DC motors for wheels and fans, and stepper motors for exact rotation. By the end you'll build a working mini robot car.</p>
+    <div class="module-meta">
+      <div class="meta-item">⏱️ ~2.5 hours</div>
+      <div class="meta-item">📗 5 lessons</div>
+      <div class="meta-item">🟡 Intermediate</div>
+    </div>
+  </div>
+
+  <!-- LESSON 1 -->
+  <div class="lesson-section" id="lesson1">
+    <h2>⚙️ Lesson 1: Servo Motor Basics</h2>
+
+    <p>A <strong>servo motor</strong> is a special motor that rotates to a specific angle on command. It has built-in position control — you tell it "go to 90 degrees" and it goes there precisely. This makes servos perfect for robot arms, steering, camera mounts, and doors.</p>
+
+    <h3>Inside a Servo</h3>
+    <p>A servo contains a small DC motor, a gearbox (for torque), a potentiometer (to sense position), and a control circuit. The 3-wire interface (power, ground, signal) makes it easy to connect.</p>
+
+    <table class="wiring-table">
+      <thead><tr><th>Servo Wire</th><th>Color</th><th>Arduino Connection</th></tr></thead>
+      <tbody>
+        <tr><td class="wire-from">Signal</td><td>Orange or Yellow</td><td class="wire-to">Pin 9</td></tr>
+        <tr><td class="wire-from">Power (VCC)</td><td>Red</td><td class="wire-to">5V</td></tr>
+        <tr><td class="wire-from">Ground (GND)</td><td>Brown or Black</td><td class="wire-to">GND</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box warning">
+      <span class="icon">⚠️</span>
+      <div class="body"><strong>Power Warning:</strong> For a single small SG90 servo, powering from Arduino's 5V pin is fine. For larger servos or multiple servos, use an external power supply (like a 6V battery pack) — they draw too much current and will reset your Arduino.</div>
+    </div>
+
+    <h3>Basic Servo Control</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="pp">#include</span> <span class="st">&lt;Servo.h&gt;</span>  <span class="cm">// Built-in library — no installation needed</span>
+
+<span class="tp">Servo</span> myServo;
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">myServo.attach</span>(<span class="nm">9</span>);  <span class="cm">// Connect servo to pin 9</span>
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// Sweep from 0 to 180 degrees</span>
+  <span class="kw">for</span> (<span class="tp">int</span> angle = <span class="nm">0</span>; angle &lt;= <span class="nm">180</span>; angle++) {
+    <span class="fn">myServo.write</span>(angle);
+    <span class="fn">delay</span>(<span class="nm">10</span>);
+  }
+  <span class="cm">// Sweep back from 180 to 0</span>
+  <span class="kw">for</span> (<span class="tp">int</span> angle = <span class="nm">180</span>; angle &gt;= <span class="nm">0</span>; angle--) {
+    <span class="fn">myServo.write</span>(angle);
+    <span class="fn">delay</span>(<span class="nm">10</span>);
+  }
+}</code></pre>
+    </div>
+
+    <h3>Potentiometer-Controlled Servo</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="pp">#include</span> <span class="st">&lt;Servo.h&gt;</span>
+
+<span class="tp">Servo</span> myServo;
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">myServo.attach</span>(<span class="nm">9</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">int</span> potVal = <span class="fn">analogRead</span>(A0);    <span class="cm">// 0 to 1023</span>
+  <span class="tp">int</span> angle  = <span class="fn">map</span>(potVal, <span class="nm">0</span>, <span class="nm">1023</span>, <span class="nm">0</span>, <span class="nm">180</span>); <span class="cm">// Scale to 0–180°</span>
+  <span class="fn">myServo.write</span>(angle);
+  <span class="fn">delay</span>(<span class="nm">15</span>);  <span class="cm">// Give servo time to reach position</span>
+}</code></pre>
+    </div>
+  </div>
+
+  <!-- LESSON 2 -->
+  <div class="lesson-section" id="lesson2">
+    <h2>🔋 Lesson 2: DC Motors &amp; L298N Driver</h2>
+
+    <p>A <strong>DC motor</strong> spins continuously in one direction (or the other). Unlike servos, they have no built-in position sensing. You control their <strong>direction</strong> and <strong>speed</strong>. DC motors are used in wheels, fans, pumps, and conveyor belts.</p>
+
+    <p><strong>Never connect a DC motor directly to an Arduino pin!</strong> Motors draw far more current than the Arduino can supply (200mA max per pin). You need a <strong>motor driver IC</strong> like the <strong>L298N</strong>.</p>
+
+    <h3>L298N Motor Driver Pinout</h3>
+    <table class="wiring-table">
+      <thead><tr><th>L298N Pin</th><th>Connect To</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td class="wire-from">ENA</td><td class="wire-to">Pin 9 (PWM)</td><td>Motor A speed (0-255)</td></tr>
+        <tr><td class="wire-from">IN1</td><td class="wire-to">Pin 2</td><td>Motor A direction</td></tr>
+        <tr><td class="wire-from">IN2</td><td class="wire-to">Pin 3</td><td>Motor A direction</td></tr>
+        <tr><td class="wire-from">IN3</td><td class="wire-to">Pin 4</td><td>Motor B direction</td></tr>
+        <tr><td class="wire-from">IN4</td><td class="wire-to">Pin 5</td><td>Motor B direction</td></tr>
+        <tr><td class="wire-from">ENB</td><td class="wire-to">Pin 10 (PWM)</td><td>Motor B speed (0-255)</td></tr>
+        <tr><td class="wire-from">12V</td><td class="wire-to">External battery+</td><td>Motor power (6–12V)</td></tr>
+        <tr><td class="wire-from">GND</td><td class="wire-to">Battery- + Arduino GND</td><td>Common ground</td></tr>
+        <tr><td class="wire-from">5V out</td><td class="wire-to">Arduino 5V (optional)</td><td>Powers Arduino from battery</td></tr>
+      </tbody>
+    </table>
+
+    <h3>DC Motor Control Code</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="cm">// L298N Motor Driver — Single Motor</span>
+<span class="pp">#define</span> ENA <span class="nm">9</span>   <span class="cm">// Speed (PWM)</span>
+<span class="pp">#define</span> IN1 <span class="nm">2</span>
+<span class="pp">#define</span> IN2 <span class="nm">3</span>
+
+<span class="kw">void</span> <span class="fn">motorForward</span>(<span class="tp">int</span> speed) {
+  <span class="fn">digitalWrite</span>(IN1, HIGH);
+  <span class="fn">digitalWrite</span>(IN2, LOW);
+  <span class="fn">analogWrite</span>(ENA, speed);  <span class="cm">// 0 = stop, 255 = full speed</span>
+}
+
+<span class="kw">void</span> <span class="fn">motorBackward</span>(<span class="tp">int</span> speed) {
+  <span class="fn">digitalWrite</span>(IN1, LOW);
+  <span class="fn">digitalWrite</span>(IN2, HIGH);
+  <span class="fn">analogWrite</span>(ENA, speed);
+}
+
+<span class="kw">void</span> <span class="fn">motorStop</span>() {
+  <span class="fn">digitalWrite</span>(IN1, LOW);
+  <span class="fn">digitalWrite</span>(IN2, LOW);
+  <span class="fn">analogWrite</span>(ENA, <span class="nm">0</span>);
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(ENA, OUTPUT);
+  <span class="fn">pinMode</span>(IN1, OUTPUT);
+  <span class="fn">pinMode</span>(IN2, OUTPUT);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="fn">motorForward</span>(<span class="nm">200</span>);  <span class="fn">delay</span>(<span class="nm">2000</span>);  <span class="cm">// Forward 2 seconds</span>
+  <span class="fn">motorStop</span>();        <span class="fn">delay</span>(<span class="nm">500</span>);   <span class="cm">// Stop 0.5s</span>
+  <span class="fn">motorBackward</span>(<span class="nm">150</span>); <span class="fn">delay</span>(<span class="nm">2000</span>);  <span class="cm">// Backward 2 seconds</span>
+  <span class="fn">motorStop</span>();        <span class="fn">delay</span>(<span class="nm">500</span>);
+}</code></pre>
+    </div>
+  </div>
+
+  <!-- LESSON 3 -->
+  <div class="lesson-section" id="lesson3">
+    <h2>🎯 Lesson 3: Stepper Motors</h2>
+
+    <p>A <strong>stepper motor</strong> moves in precise, discrete steps — each step is an exact angle (often 1.8° per step, giving 200 steps per revolution). This makes stepper motors ideal for 3D printers, CNC machines, and camera sliders where exact positioning is critical.</p>
+
+    <h3>Types of Stepper Motors</h3>
+    <table class="component-table">
+      <thead><tr><th>Type</th><th>Example</th><th>Steps/Rev</th><th>Use Case</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Unipolar</strong></td><td>28BYJ-48 + ULN2003</td><td>2048 (half-step)</td><td>Beginner projects, small loads</td></tr>
+        <tr><td><strong>Bipolar</strong></td><td>NEMA17 + A4988</td><td>200 (1.8°/step)</td><td>3D printers, CNC</td></tr>
+      </tbody>
+    </table>
+
+    <h3>28BYJ-48 Stepper with ULN2003 Driver</h3>
+    <table class="wiring-table">
+      <thead><tr><th>ULN2003 Pin</th><th>Arduino Pin</th></tr></thead>
+      <tbody>
+        <tr><td class="wire-from">IN1</td><td class="wire-to">Pin 8</td></tr>
+        <tr><td class="wire-from">IN2</td><td class="wire-to">Pin 9</td></tr>
+        <tr><td class="wire-from">IN3</td><td class="wire-to">Pin 10</td></tr>
+        <tr><td class="wire-from">IN4</td><td class="wire-to">Pin 11</td></tr>
+        <tr><td class="wire-from">VCC</td><td class="wire-to">5V</td></tr>
+        <tr><td class="wire-from">GND</td><td class="wire-to">GND</td></tr>
+      </tbody>
+    </table>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="pp">#include</span> <span class="st">&lt;Stepper.h&gt;</span>
+
+<span class="cm">// 28BYJ-48 has 2048 steps per revolution (half-step mode)</span>
+<span class="pp">#define</span> STEPS_PER_REV <span class="nm">2048</span>
+
+<span class="cm">// Create Stepper object: steps, IN1, IN3, IN2, IN4</span>
+<span class="tp">Stepper</span> myStepper(STEPS_PER_REV, <span class="nm">8</span>, <span class="nm">10</span>, <span class="nm">9</span>, <span class="nm">11</span>);
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">myStepper.setSpeed</span>(<span class="nm">10</span>); <span class="cm">// RPM (10 is good for 28BYJ-48)</span>
+  <span class="fn">Serial.begin</span>(<span class="nm">9600</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="fn">Serial.println</span>(<span class="st">"Clockwise one revolution"</span>);
+  <span class="fn">myStepper.step</span>(STEPS_PER_REV);  <span class="cm">// Positive = clockwise</span>
+  <span class="fn">delay</span>(<span class="nm">1000</span>);
+
+  <span class="fn">Serial.println</span>(<span class="st">"Counter-clockwise one revolution"</span>);
+  <span class="fn">myStepper.step</span>(-STEPS_PER_REV); <span class="cm">// Negative = counter-clockwise</span>
+  <span class="fn">delay</span>(<span class="nm">1000</span>);
+}</code></pre>
+    </div>
+  </div>
+
+  <!-- LESSON 4 -->
+  <div class="lesson-section" id="lesson4">
+    <h2>🎛️ Lesson 4: Motor Speed Control</h2>
+
+    <p>Controlling motor speed precisely is key for smooth robot movement, conveyor belts, and fans. We use <strong>PWM (analogWrite)</strong> for DC motors and the <strong>enable pin (EN)</strong> on the L298N to vary speed from 0 to 255.</p>
+
+    <h3>Speed Ramping — Smooth Acceleration</h3>
+    <p>Jumping instantly to full speed strains motors and mechanical parts. Ramping smoothly is better:</p>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="cm">// Smooth acceleration and deceleration</span>
+<span class="kw">void</span> <span class="fn">rampUp</span>() {
+  <span class="kw">for</span> (<span class="tp">int</span> speed = <span class="nm">0</span>; speed &lt;= <span class="nm">255</span>; speed += <span class="nm">5</span>) {
+    <span class="fn">motorForward</span>(speed);
+    <span class="fn">delay</span>(<span class="nm">20</span>);
+  }
+}
+
+<span class="kw">void</span> <span class="fn">rampDown</span>() {
+  <span class="kw">for</span> (<span class="tp">int</span> speed = <span class="nm">255</span>; speed &gt;= <span class="nm">0</span>; speed -= <span class="nm">5</span>) {
+    <span class="fn">motorForward</span>(speed);
+    <span class="fn">delay</span>(<span class="nm">20</span>);
+  }
+}</code></pre>
+    </div>
+
+    <h3>Potentiometer Speed Control</h3>
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="tp">int</span> potVal = <span class="fn">analogRead</span>(A0);               <span class="cm">// 0–1023</span>
+  <span class="tp">int</span> speed   = <span class="fn">map</span>(potVal, <span class="nm">0</span>, <span class="nm">1023</span>, <span class="nm">0</span>, <span class="nm">255</span>); <span class="cm">// Scale</span>
+  <span class="tp">int</span> minSpeed = <span class="nm">80</span>;                          <span class="cm">// Min speed to overcome friction</span>
+
+  <span class="kw">if</span> (speed &lt; minSpeed) {
+    <span class="fn">motorStop</span>();
+  } <span class="kw">else</span> {
+    <span class="fn">motorForward</span>(speed);
+  }
+  <span class="fn">delay</span>(<span class="nm">10</span>);
+}</code></pre>
+    </div>
+  </div>
+
+  <!-- LESSON 5 -->
+  <div class="lesson-section" id="lesson5">
+    <h2>🤖 Lesson 5: Mini Robot Car Project</h2>
+
+    <div class="project-card">
+      <div class="project-card-header"><h3>🚗 Build: Two-Wheel Drive Robot Car</h3></div>
+      <div class="project-card-body">
+        <p>Build a 2-wheel drive robot car controlled over Serial. This project combines everything from Modules 3–6.</p>
+        <div class="project-materials">
+          <span class="material-tag">2x DC Motors</span>
+          <span class="material-tag">L298N Driver</span>
+          <span class="material-tag">Robot Car Chassis Kit</span>
+          <span class="material-tag">Arduino Uno</span>
+          <span class="material-tag">7.4V LiPo or 4x AA Battery</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div>
+      <pre><code><span class="cm">// Robot Car — Serial Controlled</span>
+<span class="cm">// Send W/A/S/D from Serial Monitor to drive</span>
+
+<span class="cm">// Motor A (Left)</span>
+<span class="pp">#define</span> ENA <span class="nm">9</span>
+<span class="pp">#define</span> IN1 <span class="nm">2</span>
+<span class="pp">#define</span> IN2 <span class="nm">3</span>
+<span class="cm">// Motor B (Right)</span>
+<span class="pp">#define</span> ENB <span class="nm">10</span>
+<span class="pp">#define</span> IN3 <span class="nm">4</span>
+<span class="pp">#define</span> IN4 <span class="nm">5</span>
+
+<span class="pp">#define</span> SPEED <span class="nm">200</span>
+
+<span class="kw">void</span> <span class="fn">forward</span>() {
+  <span class="fn">digitalWrite</span>(IN1,HIGH); <span class="fn">digitalWrite</span>(IN2,LOW); <span class="fn">analogWrite</span>(ENA,SPEED);
+  <span class="fn">digitalWrite</span>(IN3,HIGH); <span class="fn">digitalWrite</span>(IN4,LOW); <span class="fn">analogWrite</span>(ENB,SPEED);
+}
+<span class="kw">void</span> <span class="fn">backward</span>() {
+  <span class="fn">digitalWrite</span>(IN1,LOW); <span class="fn">digitalWrite</span>(IN2,HIGH); <span class="fn">analogWrite</span>(ENA,SPEED);
+  <span class="fn">digitalWrite</span>(IN3,LOW); <span class="fn">digitalWrite</span>(IN4,HIGH); <span class="fn">analogWrite</span>(ENB,SPEED);
+}
+<span class="kw">void</span> <span class="fn">turnLeft</span>() {   <span class="cm">// Right wheel forward, left wheel stopped</span>
+  <span class="fn">digitalWrite</span>(IN1,LOW); <span class="fn">analogWrite</span>(ENA,<span class="nm">0</span>);
+  <span class="fn">digitalWrite</span>(IN3,HIGH); <span class="fn">digitalWrite</span>(IN4,LOW); <span class="fn">analogWrite</span>(ENB,SPEED);
+}
+<span class="kw">void</span> <span class="fn">turnRight</span>() {  <span class="cm">// Left wheel forward, right wheel stopped</span>
+  <span class="fn">digitalWrite</span>(IN1,HIGH); <span class="fn">digitalWrite</span>(IN2,LOW); <span class="fn">analogWrite</span>(ENA,SPEED);
+  <span class="fn">digitalWrite</span>(IN3,LOW); <span class="fn">analogWrite</span>(ENB,<span class="nm">0</span>);
+}
+<span class="kw">void</span> <span class="fn">stopCar</span>() {
+  <span class="fn">analogWrite</span>(ENA,<span class="nm">0</span>); <span class="fn">analogWrite</span>(ENB,<span class="nm">0</span>);
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="kw">int</span> pins[] = {ENA,IN1,IN2,ENB,IN3,IN4};
+  <span class="kw">for</span>(<span class="tp">int</span> i=<span class="nm">0</span>;i&lt;<span class="nm">6</span>;i++) <span class="fn">pinMode</span>(pins[i],OUTPUT);
+  <span class="fn">Serial.begin</span>(<span class="nm">9600</span>);
+  <span class="fn">Serial.println</span>(<span class="st">"W=Forward S=Back A=Left D=Right X=Stop"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">if</span> (<span class="fn">Serial.available</span>()) {
+    <span class="tp">char</span> cmd = <span class="fn">Serial.read</span>();
+    <span class="kw">switch</span> (cmd) {
+      <span class="kw">case</span> <span class="st">'W'</span>: <span class="kw">case</span> <span class="st">'w'</span>: <span class="fn">forward</span>();   <span class="kw">break</span>;
+      <span class="kw">case</span> <span class="st">'S'</span>: <span class="kw">case</span> <span class="st">'s'</span>: <span class="fn">backward</span>();  <span class="kw">break</span>;
+      <span class="kw">case</span> <span class="st">'A'</span>: <span class="kw">case</span> <span class="st">'a'</span>: <span class="fn">turnLeft</span>();  <span class="kw">break</span>;
+      <span class="kw">case</span> <span class="st">'D'</span>: <span class="kw">case</span> <span class="st">'d'</span>: <span class="fn">turnRight</span>(); <span class="kw">break</span>;
+      <span class="kw">default</span>:               <span class="fn">stopCar</span>();   <span class="kw">break</span>;
+    }
+  }
+}</code></pre>
+    </div>
+
+    <div class="quiz-box">
+      <h4>Quick Check</h4>
+      <p>Why can't you connect a DC motor directly to an Arduino digital pin?</p>
+      <button class="quiz-option" data-correct="false">The voltage is wrong</button>
+      <button class="quiz-option" data-correct="true">Motors draw more current than the pin can supply</button>
+      <button class="quiz-option" data-correct="false">DC motors need AC current</button>
+      <button class="quiz-option" data-correct="false">Arduino pins only output digital signals</button>
+      <div class="quiz-result"></div>
+    </div>
+  </div>
+
+  <div class="lesson-footer">
+    <a href="module5.html" class="btn btn-outline">← Module 5</a>
+    <button class="btn btn-complete" data-lesson="m6_complete">○ Mark Module Complete</button>
+    <a href="module7.html" class="btn btn-primary">Module 7: Protocols →</a>
+  </div>
+</main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

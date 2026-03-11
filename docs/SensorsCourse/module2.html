@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Module 2 — Arduino Boards · AlCoders</title>
+<link rel="stylesheet" href="../css/theme.css">
+<script type="module" src="../theme.js"></script>
+<link rel="shortcut icon" href="../images/alcodersLogo.jpg" type="image/jpg"/>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Syne:wght@600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <a href="index.html"><div>
+      <div class="logo-text">Al<span>Coders</span></div>
+      <div class="logo-sub">Introduction to Sensors</div>
+    </div></a>
+  </div>
+  <a class="sidebar-back" href="index.html">← Back to course</a>
+  <div class="sidebar-module-nav">
+    <a href="module1.html" class="mod-nav-btn">M1</a>
+    <a href="module2.html" class="mod-nav-btn current">M2</a>
+    <a href="module3.html" class="mod-nav-btn">M3</a>
+    <a href="module4.html" class="mod-nav-btn">M4</a>
+    <a href="module5.html" class="mod-nav-btn">M5</a>
+    <a href="module6.html" class="mod-nav-btn">M6</a>
+    <a href="module7.html" class="mod-nav-btn">M7</a>
+    <a href="module8.html" class="mod-nav-btn">M8</a>
+  </div>
+  <div class="sidebar-module-block">
+    <div class="sidebar-module-title"><span class="mod-badge">02</span> Arduino Boards Deep Dive</div>
+    <a class="sidebar-lesson" data-lesson="l2-1" href="#"><span class="lesson-dot"></span>What is Arduino?</a>
+    <a class="sidebar-lesson" data-lesson="l2-2" href="#"><span class="lesson-dot"></span>Arduino Uno — Full Guide</a>
+    <a class="sidebar-lesson" data-lesson="l2-3" href="#"><span class="lesson-dot"></span>Arduino Nano — Full Guide</a>
+    <a class="sidebar-lesson" data-lesson="l2-4" href="#"><span class="lesson-dot"></span>Arduino Mega — Full Guide</a>
+    <a class="sidebar-lesson" data-lesson="l2-5" href="#"><span class="lesson-dot"></span>Uno vs Nano vs Mega</a>
+    <a class="sidebar-lesson" data-lesson="l2-6" href="#"><span class="lesson-dot"></span>Arduino IDE Setup</a>
+    <a class="sidebar-lesson" data-lesson="l2-7" href="#"><span class="lesson-dot"></span>Pins, Voltage & Power</a>
+  </div>
+</aside>
+
+<main class="main" id="mainContent">
+  <div class="topbar">
+    <div class="breadcrumb">AlCoders / <strong>Sensors</strong> / Module 2</div>
+    <div class="topbar-nav">
+      <button class="nav-btn" id="prevBtn" disabled>← Prev</button>
+      <button class="nav-btn primary" id="nextBtn">Next →</button>
+    </div>
+  </div>
+
+  <!-- L2-1 -->
+  <div class="lesson-page" id="l2-1">
+    <div class="lesson-tag">Module 02 · Lesson 1</div>
+    <h1 class="lesson-title">What is Arduino?</h1>
+    <p class="lesson-intro">Before connecting any sensor, you need to understand the platform you're building on. Arduino is much more than just a board — it's an entire ecosystem.</p>
+
+    <div class="block">
+      <h2>The Big Picture</h2>
+      <p><strong>Arduino</strong> is an open-source electronics platform combining a <strong>hardware board</strong> (microcontroller) and a <strong>software environment</strong> (IDE). Created in 2005 in Italy, it was designed to make electronics accessible to artists, designers, and beginners — not just engineers.</p>
+      <p>Instead of programming chips in assembly, Arduino gives you simplified C++ where you can blink LEDs, read sensors, and control motors with just a few lines of code.</p>
+    </div>
+
+    <div class="block">
+      <h2>Key Components of Every Arduino Board</h2>
+      <ul>
+        <li><strong>Microcontroller (MCU)</strong> — the brain. Runs your code. Contains CPU, RAM, Flash memory, and peripherals all in one chip.</li>
+        <li><strong>Digital I/O pins</strong> — read or output HIGH/LOW. Connect LEDs, buttons, sensors, motors.</li>
+        <li><strong>Analog input pins</strong> — read analog voltages (0–5V) and convert to 0–1023 using built-in ADC.</li>
+        <li><strong>PWM pins</strong> — special pins that simulate analog output (dimming LEDs, servo motors).</li>
+        <li><strong>Power pins</strong> — 5V, 3.3V, GND to power your sensors.</li>
+        <li><strong>USB interface</strong> — connects to your computer for programming and serial communication.</li>
+        <li><strong>Crystal oscillator</strong> — sets the clock speed (16 MHz on Uno).</li>
+        <li><strong>Reset button</strong> — restarts the currently running program.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>How Your Code Runs</h2>
+      <ul>
+        <li><strong>setup()</strong> — runs once when the board powers on. Configure pins, start Serial, initialize sensors.</li>
+        <li><strong>loop()</strong> — runs continuously after setup(), forever. This is where you read sensors and react to them.</li>
+      </ul>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">void</span> <span class="p">setup</span>() {
+  <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>);       <span class="cm">// Start serial at 9600 baud</span>
+  <span class="p">pinMode</span>(<span class="v">13</span>, <span class="v">OUTPUT</span>);    <span class="cm">// Set pin 13 as output</span>
+}
+
+<span class="kw">void</span> <span class="p">loop</span>() {
+  <span class="p">digitalWrite</span>(<span class="v">13</span>, <span class="v">HIGH</span>); <span class="cm">// LED on</span>
+  <span class="p">delay</span>(<span class="v">1000</span>);
+  <span class="p">digitalWrite</span>(<span class="v">13</span>, <span class="v">LOW</span>);  <span class="cm">// LED off</span>
+  <span class="p">delay</span>(<span class="v">1000</span>);
+}</div>
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l2-1')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l2-2')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L2-2 -->
+  <div class="lesson-page" id="l2-2">
+    <div class="lesson-tag">Module 02 · Lesson 2</div>
+    <h1 class="lesson-title">Arduino Uno — Full Guide</h1>
+    <p class="lesson-intro">The Arduino Uno is the most popular board in the world for learning electronics. It's the standard reference board — when someone says "Arduino," they almost always mean the Uno.</p>
+
+    <div class="block">
+      <h2>Technical Specifications</h2>
+      <table class="pin-table">
+        <thead><tr><th>Specification</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Microcontroller</td><td>ATmega328P</td></tr>
+          <tr><td>Operating Voltage</td><td>5V</td></tr>
+          <tr><td>Input Voltage (recommended)</td><td>7–12V</td></tr>
+          <tr><td>Digital I/O Pins</td><td>14 (6 with PWM)</td></tr>
+          <tr><td>Analog Input Pins</td><td>6 (A0–A5)</td></tr>
+          <tr><td>Flash Memory</td><td>32 KB</td></tr>
+          <tr><td>SRAM</td><td>2 KB</td></tr>
+          <tr><td>EEPROM</td><td>1 KB</td></tr>
+          <tr><td>Clock Speed</td><td>16 MHz</td></tr>
+          <tr><td>Board Dimensions</td><td>68.6mm × 53.4mm</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="block">
+      <h2>Pin Layout Explained</h2>
+      <ul>
+        <li><strong>Digital pins 0–13</strong> — general purpose. Pins 0 (RX) and 1 (TX) are for serial. Pin 13 has a built-in LED.</li>
+        <li><strong>PWM pins (~3, ~5, ~6, ~9, ~10, ~11)</strong> — use <code>analogWrite(pin, 0-255)</code> for LED dimming and motor speed.</li>
+        <li><strong>Analog pins A0–A5</strong> — read 0–5V. Also usable as digital pins 14–19.</li>
+        <li><strong>Power pins</strong> — 3.3V (50mA max), 5V, two GND, Vin (input voltage).</li>
+        <li><strong>I2C pins</strong> — A4 = SDA, A5 = SCL.</li>
+        <li><strong>SPI pins</strong> — 10 (SS), 11 (MOSI), 12 (MISO), 13 (SCK).</li>
+      </ul>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-head">⚠️ Important Limits</div>
+      Never draw more than <strong>40mA from a single pin</strong> or more than <strong>200mA total</strong> from all I/O pins combined. Power hungry components directly from the 5V power pin, not from I/O pins.
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l2-2')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l2-3')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L2-3 -->
+  <div class="lesson-page" id="l2-3">
+    <div class="lesson-tag">Module 02 · Lesson 3</div>
+    <h1 class="lesson-title">Arduino Nano — Full Guide</h1>
+    <p class="lesson-intro">The Nano is essentially a miniaturized Uno. Same brain, much smaller body — perfect when space is tight or you're embedding a controller inside a finished project.</p>
+
+    <div class="block">
+      <h2>Technical Specifications</h2>
+      <table class="pin-table">
+        <thead><tr><th>Specification</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Microcontroller</td><td>ATmega328P (same as Uno)</td></tr>
+          <tr><td>Operating Voltage</td><td>5V</td></tr>
+          <tr><td>Analog Input Pins</td><td>8 (A0–A7) — 2 more than Uno!</td></tr>
+          <tr><td>Flash Memory</td><td>32 KB</td></tr>
+          <tr><td>SRAM</td><td>2 KB</td></tr>
+          <tr><td>Clock Speed</td><td>16 MHz</td></tr>
+          <tr><td>Board Dimensions</td><td>45mm × 18mm — much smaller!</td></tr>
+          <tr><td>Breadboard friendly</td><td>Yes — fits directly on a breadboard</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="block">
+      <h2>What's Different from the Uno?</h2>
+      <ul>
+        <li><strong>Size</strong> — dramatically smaller (45×18mm vs 68×53mm). Perfect for wearables and embedded projects.</li>
+        <li><strong>Breadboard-friendly</strong> — its DIP-style layout slots directly into a standard breadboard. The Uno does NOT fit on a breadboard.</li>
+        <li><strong>2 extra analog pins</strong> — A6 and A7 (analog input only — cannot be used as digital I/O).</li>
+        <li><strong>No barrel jack</strong> — powered via USB or the Vin pin.</li>
+        <li><strong>Same capabilities otherwise</strong> — same MCU, clock speed, memory, and logic.</li>
+      </ul>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-head">📌 CH340 Driver Note</div>
+      Many Nano clones use the CH340G USB chip. Your computer may not recognize it automatically. If your Nano isn't detected, download and install the <strong>CH340 driver</strong> for your OS. Also set: Tools → Processor → ATmega328P (Old Bootloader).
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l2-3')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l2-4')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L2-4 -->
+  <div class="lesson-page" id="l2-4">
+    <div class="lesson-tag">Module 02 · Lesson 4</div>
+    <h1 class="lesson-title">Arduino Mega — Full Guide</h1>
+    <p class="lesson-intro">The Mega is the powerhouse of the Arduino family. When your project outgrows the Uno — needing more pins, more memory, or more serial ports — the Mega is the answer.</p>
+
+    <div class="block">
+      <h2>Technical Specifications</h2>
+      <table class="pin-table">
+        <thead><tr><th>Specification</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Microcontroller</td><td>ATmega2560</td></tr>
+          <tr><td>Digital I/O Pins</td><td><strong>54</strong> (15 with PWM)</td></tr>
+          <tr><td>Analog Input Pins</td><td><strong>16</strong> (A0–A15)</td></tr>
+          <tr><td>Flash Memory</td><td><strong>256 KB</strong> (8× the Uno!)</td></tr>
+          <tr><td>SRAM</td><td><strong>8 KB</strong></td></tr>
+          <tr><td>Hardware Serial ports</td><td><strong>4</strong> (Serial, Serial1, Serial2, Serial3)</td></tr>
+          <tr><td>I2C</td><td>Pins 20 (SDA), 21 (SCL)</td></tr>
+          <tr><td>Board Dimensions</td><td>101.5mm × 53.4mm</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="block">
+      <h2>The 4 Hardware Serial Ports — The Mega's Killer Feature</h2>
+      <p>On the Uno, there's only one UART, usually reserved for debugging. The Mega gives you four independent UART ports running simultaneously:</p>
+      <ul>
+        <li><strong>Serial</strong> — pins 0/1 — USB/debugging</li>
+        <li><strong>Serial1</strong> — pins 19/18 — e.g., GPS module</li>
+        <li><strong>Serial2</strong> — pins 17/16 — e.g., Bluetooth module</li>
+        <li><strong>Serial3</strong> — pins 15/14 — e.g., fingerprint sensor</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h2>When to Choose the Mega</h2>
+      <ul>
+        <li>Building complex multi-sensor systems (5+ sensors)</li>
+        <li>Using large libraries that consume lots of Flash memory</li>
+        <li>Projects needing many PWM outputs (robots with multiple servos)</li>
+        <li>Connecting multiple serial devices simultaneously</li>
+        <li>3D printers, CNC machines (RAMPS shield is designed for the Mega)</li>
+      </ul>
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l2-4')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l2-5')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L2-5 -->
+  <div class="lesson-page" id="l2-5">
+    <div class="lesson-tag">Module 02 · Lesson 5</div>
+    <h1 class="lesson-title">Uno vs Nano vs Mega — Full Comparison</h1>
+    <p class="lesson-intro">Now that you know each board in detail, let's put them side by side so you can clearly see the differences and choose the right one for any project.</p>
+
+    <table class="comp-table">
+      <thead><tr><th>Feature</th><th>Arduino Uno</th><th>Arduino Nano</th><th>Arduino Mega</th></tr></thead>
+      <tbody>
+        <tr><td>MCU Chip</td><td>ATmega328P</td><td>ATmega328P</td><td class="highlight">ATmega2560</td></tr>
+        <tr><td>Flash Memory</td><td>32 KB</td><td>32 KB</td><td class="highlight">256 KB (8×)</td></tr>
+        <tr><td>SRAM</td><td>2 KB</td><td>2 KB</td><td class="highlight">8 KB (4×)</td></tr>
+        <tr><td>Digital I/O pins</td><td>14</td><td>14</td><td class="highlight">54</td></tr>
+        <tr><td>Analog input pins</td><td>6</td><td>8</td><td class="highlight">16</td></tr>
+        <tr><td>PWM pins</td><td>6</td><td>6</td><td class="highlight">15</td></tr>
+        <tr><td>Hardware Serial</td><td>1</td><td>1</td><td class="highlight">4</td></tr>
+        <tr><td>Size</td><td>68×53mm</td><td class="highlight">45×18mm</td><td class="low">101×53mm</td></tr>
+        <tr><td>Breadboard fit</td><td class="low">No</td><td class="highlight">Yes</td><td class="low">No</td></tr>
+        <tr><td>Barrel jack</td><td class="highlight">Yes</td><td class="low">No</td><td class="highlight">Yes</td></tr>
+        <tr><td>Price (approx)</td><td>~$3–5</td><td class="highlight">~$2–4</td><td class="low">~$8–12</td></tr>
+      </tbody>
+    </table>
+
+    <div class="block">
+      <h2>Decision Guide</h2>
+      <ol>
+        <li>Learning electronics or first sensor project? → <strong>Arduino Uno</strong></li>
+        <li>Making a compact wearable or embedded product? → <strong>Arduino Nano</strong></li>
+        <li>Building a robot or system with 5+ sensors/modules? → <strong>Arduino Mega</strong></li>
+        <li>Getting "low memory" warnings in the IDE? → <strong>Upgrade to Mega</strong></li>
+        <li>Need GPS + Bluetooth + another serial device at once? → <strong>Arduino Mega</strong></li>
+      </ol>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-head">✅ Course Note</div>
+      All code examples in this course are written for the <strong>Arduino Uno</strong>. They work identically on the Nano. For the Mega, I2C uses pins 20/21 instead of A4/A5.
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l2-5')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l2-6')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L2-6 -->
+  <div class="lesson-page" id="l2-6">
+    <div class="lesson-tag">Module 02 · Lesson 6</div>
+    <h1 class="lesson-title">Arduino IDE Setup</h1>
+    <p class="lesson-intro">The Arduino IDE is where you write, compile, and upload your code. Setting it up correctly is the first hands-on step in your sensor journey.</p>
+
+    <div class="block">
+      <h2>Installing the Arduino IDE</h2>
+      <ol>
+        <li>Go to <strong>arduino.cc/en/software</strong> and download Arduino IDE 2.x</li>
+        <li>Run the installer for your OS (Windows, macOS, Linux)</li>
+        <li>Accept all driver installations when prompted</li>
+        <li>Open Arduino IDE after installation</li>
+      </ol>
+    </div>
+
+    <div class="block">
+      <h2>Configuring for Your Board</h2>
+      <ol>
+        <li>Connect your Arduino to the computer via USB</li>
+        <li>Go to <strong>Tools → Board → Arduino AVR Boards</strong></li>
+        <li>Select your board: Uno, Nano, or Mega</li>
+        <li>Go to <strong>Tools → Port</strong> and select your COM port</li>
+        <li>For Nano clones with CH340: Tools → Processor → ATmega328P (Old Bootloader)</li>
+      </ol>
+    </div>
+
+    <div class="block">
+      <h2>Installing Sensor Libraries</h2>
+      <ol>
+        <li>Go to <strong>Sketch → Include Library → Manage Libraries</strong></li>
+        <li>Search for the library (e.g., "DHT sensor library")</li>
+        <li>Click Install — always click <strong>Install All</strong> for dependencies</li>
+      </ol>
+      <p><strong>Essential libraries for this course:</strong></p>
+      <ul>
+        <li><strong>DHT sensor library</strong> by Adafruit — for DHT11 and DHT22</li>
+        <li><strong>Adafruit Unified Sensor</strong> — required by Adafruit libraries</li>
+        <li><strong>NewPing</strong> — for HC-SR04 ultrasonic sensor</li>
+        <li><strong>OneWire + DallasTemperature</strong> — for DS18B20</li>
+        <li><strong>IRremote</strong> — for IR receiver modules</li>
+      </ul>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-head">✅ The Serial Monitor</div>
+      Open with <strong>Tools → Serial Monitor</strong> or Ctrl+Shift+M. Set baud rate to match your <code>Serial.begin()</code> call (usually 9600). Everything you <code>Serial.print()</code> appears here in real time — your best sensor debugging tool.
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l2-6')">Mark as Complete ✓</button>
+      <button class="next-btn" onclick="goLesson('l2-7')">Next Lesson →</button>
+    </div>
+  </div>
+
+  <!-- L2-7 -->
+  <div class="lesson-page" id="l2-7">
+    <div class="lesson-tag">Module 02 · Lesson 7</div>
+    <h1 class="lesson-title">Pins, Voltage & Power</h1>
+    <p class="lesson-intro">Understanding how to safely power sensors and wire them correctly is critical. This lesson prevents you from burning out your components.</p>
+
+    <div class="block">
+      <h2>The Power Pins</h2>
+      <table class="pin-table">
+        <thead><tr><th>Pin</th><th>Voltage</th><th>Max Current</th><th>Use For</th></tr></thead>
+        <tbody>
+          <tr><td class="vcc">5V</td><td>5V regulated</td><td>~500mA (USB)</td><td>Most 5V sensors</td></tr>
+          <tr><td>3.3V</td><td>3.3V regulated</td><td>~50mA (Uno)</td><td>3.3V sensors</td></tr>
+          <tr><td class="gnd">GND</td><td>0V reference</td><td>—</td><td>Ground for all components</td></tr>
+          <tr><td>Vin</td><td>Input (7–12V)</td><td>—</td><td>External power input</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="block">
+      <h2>The Golden Rule of Wiring Sensors</h2>
+      <p>Every sensor needs three connections at minimum:</p>
+      <ol>
+        <li><strong>Power (VCC)</strong> — connect to 5V (or 3.3V if required)</li>
+        <li><strong>Ground (GND)</strong> — connect to GND. Never skip this.</li>
+        <li><strong>Data/Signal</strong> — connect to the appropriate Arduino pin</li>
+      </ol>
+    </div>
+
+    <div class="block">
+      <h2>Pull-up & Pull-down Resistors</h2>
+      <ul>
+        <li><strong>Pull-up resistor</strong> (10kΩ to 5V) — holds the pin HIGH by default. Activate with <code>pinMode(pin, INPUT_PULLUP)</code>.</li>
+        <li><strong>Pull-down resistor</strong> (10kΩ to GND) — holds the pin LOW by default.</li>
+      </ul>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="cm">// Using internal pull-up resistor</span>
+<span class="kw">void</span> <span class="p">setup</span>() {
+  <span class="p">Serial</span>.<span class="p">begin</span>(<span class="v">9600</span>);
+  <span class="p">pinMode</span>(<span class="v">2</span>, <span class="v">INPUT_PULLUP</span>); <span class="cm">// Pin held HIGH; LOW when button pressed</span>
+}
+<span class="kw">void</span> <span class="p">loop</span>() {
+  <span class="kw">if</span> (<span class="p">digitalRead</span>(<span class="v">2</span>) == <span class="v">LOW</span>) <span class="p">Serial</span>.<span class="p">println</span>(<span class="a">"Button pressed!"</span>);
+  <span class="p">delay</span>(<span class="v">50</span>);
+}</div>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-head">⚠️ Safety Rules</div>
+      1. Never connect 5V directly to an Arduino output pin — use a resistor for LEDs.<br>
+      2. Never exceed 40mA on a single I/O pin.<br>
+      3. Always double-check VCC/GND before powering on — reversed polarity destroys sensors.
+    </div>
+
+    <div class="lesson-footer">
+      <button class="complete-btn" onclick="markDone(this,'l2-7')">Mark as Complete ✓</button>
+    </div>
+
+    <div class="module-nav-footer">
+      <a href="module1.html" class="mod-prev-btn">← Module 1</a>
+      <a href="module3.html" class="mod-next-btn">Module 3: Basic Sensors →</a>
+    </div>
+  </div>
+
+</main>
+</div>
+<script src="course.js"></script>
+<script>
+let currentIndex = 0;
+const lessonOrder = ['l2-1','l2-2','l2-3','l2-4','l2-5','l2-6','l2-7'];
+</script>
+</body>
+</html>

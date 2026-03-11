@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 9: Bluetooth & Wireless – AlCoders Arduino</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="index.html">⚡ <span>Al</span>Coders</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="module8.html">← Module 8</a>
+    <a href="module9.html" class="active">Module 9</a>
+    <a href="module10.html">Module 10 →</a>
+  </div>
+</nav>
+<div class="breadcrumb">
+  <a href="index.html">Arduino Course</a> › Module 9 › Bluetooth &amp; Wireless
+</div>
+<div class="page-wrapper">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">Course Progress</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 60 lessons completed</div>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔧</span> Module 1 – Getting Started</div>
+    <a href="module1.html" class="lesson-link" data-lesson="m1l1"><span class="lesson-dot"></span>What is Arduino?</a>
+    <a href="module1.html#lesson2" class="lesson-link" data-lesson="m1l2"><span class="lesson-dot"></span>Installing the IDE</a>
+    <a href="module1.html#lesson3" class="lesson-link" data-lesson="m1l3"><span class="lesson-dot"></span>Exploring the Board</a>
+    <a href="module1.html#lesson4" class="lesson-link" data-lesson="m1l4"><span class="lesson-dot"></span>Your First Sketch: Blink</a>
+    <a href="module1.html#lesson5" class="lesson-link" data-lesson="m1l5"><span class="lesson-dot"></span>Understanding the Code</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⚡</span> Module 2 – Electronics</div>
+    <a href="module2.html" class="lesson-link" data-lesson="m2l1"><span class="lesson-dot"></span>Voltage, Current &amp; Resistance</a>
+    <a href="module2.html#lesson2" class="lesson-link" data-lesson="m2l2"><span class="lesson-dot"></span>Ohm's Law</a>
+    <a href="module2.html#lesson3" class="lesson-link" data-lesson="m2l3"><span class="lesson-dot"></span>Breadboards &amp; Schematics</a>
+    <a href="module2.html#lesson4" class="lesson-link" data-lesson="m2l4"><span class="lesson-dot"></span>Resistors &amp; Capacitors</a>
+    <a href="module2.html#lesson5" class="lesson-link" data-lesson="m2l5"><span class="lesson-dot"></span>Power Supply &amp; Safety</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💡</span> Module 3 – Digital I/O</div>
+    <a href="module3.html" class="lesson-link" data-lesson="m3l1"><span class="lesson-dot"></span>Digital Pins Explained</a>
+    <a href="module3.html#lesson2" class="lesson-link" data-lesson="m3l2"><span class="lesson-dot"></span>digitalWrite &amp; digitalRead</a>
+    <a href="module3.html#lesson3" class="lesson-link" data-lesson="m3l3"><span class="lesson-dot"></span>Push Buttons &amp; Input</a>
+    <a href="module3.html#lesson4" class="lesson-link" data-lesson="m3l4"><span class="lesson-dot"></span>Debouncing Buttons</a>
+    <a href="module3.html#lesson5" class="lesson-link" data-lesson="m3l5"><span class="lesson-dot"></span>Traffic Light Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌡️</span> Module 4 – Analog I/O</div>
+    <a href="module4.html" class="lesson-link" data-lesson="m4l1"><span class="lesson-dot"></span>Analog vs Digital</a>
+    <a href="module4.html#lesson2" class="lesson-link" data-lesson="m4l2"><span class="lesson-dot"></span>analogRead &amp; Potentiometer</a>
+    <a href="module4.html#lesson3" class="lesson-link" data-lesson="m4l3"><span class="lesson-dot"></span>PWM &amp; analogWrite</a>
+    <a href="module4.html#lesson4" class="lesson-link" data-lesson="m4l4"><span class="lesson-dot"></span>Temperature Sensor</a>
+    <a href="module4.html#lesson5" class="lesson-link" data-lesson="m4l5"><span class="lesson-dot"></span>Light Sensor Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📺</span> Module 5 – Displays</div>
+    <a href="module5.html" class="lesson-link" data-lesson="m5l1"><span class="lesson-dot"></span>LCD 16x2 with I2C</a>
+    <a href="module5.html#lesson2" class="lesson-link" data-lesson="m5l2"><span class="lesson-dot"></span>OLED Display (SSD1306)</a>
+    <a href="module5.html#lesson3" class="lesson-link" data-lesson="m5l3"><span class="lesson-dot"></span>7-Segment Display</a>
+    <a href="module5.html#lesson4" class="lesson-link" data-lesson="m5l4"><span class="lesson-dot"></span>Buzzer &amp; Tones</a>
+    <a href="module5.html#lesson5" class="lesson-link" data-lesson="m5l5"><span class="lesson-dot"></span>RGB LED &amp; Color Mixing</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔊</span> Module 6 – Motors</div>
+    <a href="module6.html" class="lesson-link" data-lesson="m6l1"><span class="lesson-dot"></span>Servo Motor Basics</a>
+    <a href="module6.html#lesson2" class="lesson-link" data-lesson="m6l2"><span class="lesson-dot"></span>DC Motors &amp; L298N</a>
+    <a href="module6.html#lesson3" class="lesson-link" data-lesson="m6l3"><span class="lesson-dot"></span>Stepper Motors</a>
+    <a href="module6.html#lesson4" class="lesson-link" data-lesson="m6l4"><span class="lesson-dot"></span>Motor Speed Control</a>
+    <a href="module6.html#lesson5" class="lesson-link" data-lesson="m6l5"><span class="lesson-dot"></span>Mini Robot Car Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📡</span> Module 7 – Protocols</div>
+    <a href="module7.html" class="lesson-link" data-lesson="m7l1"><span class="lesson-dot"></span>Serial Communication</a>
+    <a href="module7.html#lesson2" class="lesson-link" data-lesson="m7l2"><span class="lesson-dot"></span>I2C Protocol</a>
+    <a href="module7.html#lesson3" class="lesson-link" data-lesson="m7l3"><span class="lesson-dot"></span>SPI Protocol</a>
+    <a href="module7.html#lesson4" class="lesson-link" data-lesson="m7l4"><span class="lesson-dot"></span>Connecting Multiple Devices</a>
+    <a href="module7.html#lesson5" class="lesson-link" data-lesson="m7l5"><span class="lesson-dot"></span>Real-time Serial Plotter</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌐</span> Module 8 – WiFi &amp; IoT</div>
+    <a href="module8.html" class="lesson-link" data-lesson="m8l1"><span class="lesson-dot"></span>Intro to ESP8266/ESP32</a>
+    <a href="module8.html#lesson2" class="lesson-link" data-lesson="m8l2"><span class="lesson-dot"></span>Connecting to WiFi</a>
+    <a href="module8.html#lesson3" class="lesson-link" data-lesson="m8l3"><span class="lesson-dot"></span>Building a Web Server</a>
+    <a href="module8.html#lesson4" class="lesson-link" data-lesson="m8l4"><span class="lesson-dot"></span>Sending Data to Cloud</a>
+    <a href="module8.html#lesson5" class="lesson-link" data-lesson="m8l5"><span class="lesson-dot"></span>MQTT Basics</a>
+  </div>
+  <div class="module-group active-module"><div class="module-label"><span class="mod-icon">📶</span> Module 9 – Bluetooth</div>
+    <a href="#lesson1" class="lesson-link active" data-lesson="m9l1"><span class="lesson-dot"></span>HC-05 Bluetooth Module</a>
+    <a href="#lesson2" class="lesson-link" data-lesson="m9l2"><span class="lesson-dot"></span>AT Commands Setup</a>
+    <a href="#lesson3" class="lesson-link" data-lesson="m9l3"><span class="lesson-dot"></span>Phone-to-Arduino Control</a>
+    <a href="#lesson4" class="lesson-link" data-lesson="m9l4"><span class="lesson-dot"></span>BLE with ESP32</a>
+    <a href="#lesson5" class="lesson-link" data-lesson="m9l5"><span class="lesson-dot"></span>Bluetooth Car Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⏱️</span> Module 10 – Interrupts &amp; Timers</div>
+    <a href="module10.html" class="lesson-link" data-lesson="m10l1"><span class="lesson-dot"></span>What are Interrupts?</a>
+    <a href="module10.html#lesson2" class="lesson-link" data-lesson="m10l2"><span class="lesson-dot"></span>attachInterrupt()</a>
+    <a href="module10.html#lesson3" class="lesson-link" data-lesson="m10l3"><span class="lesson-dot"></span>Hardware Timers</a>
+    <a href="module10.html#lesson4" class="lesson-link" data-lesson="m10l4"><span class="lesson-dot"></span>millis() vs delay()</a>
+    <a href="module10.html#lesson5" class="lesson-link" data-lesson="m10l5"><span class="lesson-dot"></span>Sleep Modes &amp; Power Saving</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💾</span> Module 11 – Memory &amp; Libraries</div>
+    <a href="module11.html" class="lesson-link" data-lesson="m11l1"><span class="lesson-dot"></span>Arduino Memory Types</a>
+    <a href="module11.html#lesson2" class="lesson-link" data-lesson="m11l2"><span class="lesson-dot"></span>EEPROM Read &amp; Write</a>
+    <a href="module11.html#lesson3" class="lesson-link" data-lesson="m11l3"><span class="lesson-dot"></span>SD Card Module</a>
+    <a href="module11.html#lesson4" class="lesson-link" data-lesson="m11l4"><span class="lesson-dot"></span>Writing Custom Libraries</a>
+    <a href="module11.html#lesson5" class="lesson-link" data-lesson="m11l5"><span class="lesson-dot"></span>Data Logger Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🏗️</span> Module 12 – Capstone Projects</div>
+    <a href="module12.html" class="lesson-link" data-lesson="m12l1"><span class="lesson-dot"></span>Smart Weather Station</a>
+    <a href="module12.html#lesson2" class="lesson-link" data-lesson="m12l2"><span class="lesson-dot"></span>Obstacle-Avoiding Robot</a>
+    <a href="module12.html#lesson3" class="lesson-link" data-lesson="m12l3"><span class="lesson-dot"></span>Home Automation System</a>
+    <a href="module12.html#lesson4" class="lesson-link" data-lesson="m12l4"><span class="lesson-dot"></span>RFID Door Lock</a>
+    <a href="module12.html#lesson5" class="lesson-link" data-lesson="m12l5"><span class="lesson-dot"></span>Build Your Own Project</a>
+  </div>
+</aside>
+
+<main class="main-content">
+  <div class="module-hero">
+    <div class="module-hero-icon">📶</div>
+    <div>
+      <div class="module-hero-num">Module 09 · Intermediate</div>
+      <h1 class="module-hero-title">Bluetooth &amp; Wireless</h1>
+      <p class="module-hero-desc">Control Arduino wirelessly from your phone using HC-05, HC-06, and ESP32 BLE. Build real remote-control projects.</p>
+    </div>
+  </div>
+
+  <!-- LESSON 1 -->
+  <div class="lesson-card" id="lesson1">
+    <div class="lesson-header">
+      <div class="lesson-icon">📶</div>
+      <div>
+        <div class="lesson-num">Lesson 1 of 5</div>
+        <h2 class="lesson-title">HC-05 Bluetooth Module</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>The <strong>HC-05</strong> is the most popular Bluetooth module for Arduino — affordable, easy to use, and works with Android phones out of the box. It operates on Classic Bluetooth 2.0 and creates a simple serial (UART) wireless link.</p>
+      <h3>HC-05 vs HC-06</h3>
+      <table class="component-table"><thead><tr><th>Feature</th><th>HC-05</th><th>HC-06</th></tr></thead><tbody>
+        <tr><td>Mode</td><td>Master &amp; Slave</td><td>Slave only</td></tr>
+        <tr><td>AT Commands</td><td>Full support</td><td>Limited</td></tr>
+        <tr><td>Price</td><td>Slightly higher</td><td>Cheaper</td></tr>
+        <tr><td>Best For</td><td>Complex projects</td><td>Simple phone control</td></tr>
+      </tbody></table>
+      <h3>Pinout &amp; Wiring</h3>
+      <div class="info-box tip"><span class="icon">💡</span><div class="body"><strong>Voltage Divider on RX!</strong> HC-05 RX pin operates at 3.3V but Arduino TX outputs 5V. Use a voltage divider (1kΩ + 2kΩ) to step it down, or you may damage the module over time.</div></div>
+      <table class="component-table"><thead><tr><th>HC-05 Pin</th><th>Arduino Pin</th><th>Note</th></tr></thead><tbody>
+        <tr><td>VCC</td><td>5V</td><td>Power</td></tr>
+        <tr><td>GND</td><td>GND</td><td>Ground</td></tr>
+        <tr><td>TX</td><td>Pin 10 (RX)</td><td>Direct connection OK</td></tr>
+        <tr><td>RX</td><td>Pin 11 (TX)</td><td>Voltage divider needed!</td></tr>
+        <tr><td>EN/KEY</td><td>Pin 9 (optional)</td><td>For AT command mode</td></tr>
+      </tbody></table>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">#include</span> <span class="st">&lt;SoftwareSerial.h&gt;</span>
+
+<span class="cm">// RX=10 (receives from HC-05 TX), TX=11 (sends to HC-05 RX)</span>
+SoftwareSerial <span class="fn">btSerial</span>(<span class="nm">10</span>, <span class="nm">11</span>);
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="nm">9600</span>);      <span class="cm">// USB serial for debugging</span>
+  btSerial.<span class="fn">begin</span>(<span class="nm">9600</span>);   <span class="cm">// HC-05 default baud rate</span>
+  Serial.<span class="fn">println</span>(<span class="st">"Bluetooth ready!"</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// Forward data from Bluetooth to Serial Monitor</span>
+  <span class="kw">if</span> (btSerial.<span class="fn">available</span>()) {
+    Serial.<span class="fn">write</span>(btSerial.<span class="fn">read</span>());
+  }
+  <span class="cm">// Forward data from Serial Monitor to Bluetooth</span>
+  <span class="kw">if</span> (Serial.<span class="fn">available</span>()) {
+    btSerial.<span class="fn">write</span>(Serial.<span class="fn">read</span>());
+  }
+}</code></pre></div>
+      <div class="quiz-box">
+        <h4>Quick Check</h4>
+        <p>Why do we need a voltage divider on the HC-05 RX pin?</p>
+        <button class="quiz-option" data-correct="false">To increase the signal strength</button>
+        <button class="quiz-option" data-correct="true">HC-05 RX operates at 3.3V but Arduino TX sends 5V</button>
+        <button class="quiz-option" data-correct="false">To reduce Bluetooth interference</button>
+        <button class="quiz-option" data-correct="false">To slow down the baud rate</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m9l1">○ Mark Complete</button></div>
+  </div>
+
+  <!-- LESSON 2 -->
+  <div class="lesson-card" id="lesson2">
+    <div class="lesson-header">
+      <div class="lesson-icon">⚙️</div>
+      <div>
+        <div class="lesson-num">Lesson 2 of 5</div>
+        <h2 class="lesson-title">AT Commands Setup</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>AT commands let you configure the HC-05 — change its name, baud rate, pairing PIN, and operating mode. This is done in a special <strong>AT Command Mode</strong> which you enter by holding the EN/KEY pin HIGH before powering on.</p>
+      <h3>Entering AT Command Mode</h3>
+      <ol style="margin-left:1.5rem;margin-top:0.75rem;line-height:2">
+        <li>Connect the EN/KEY pin to 3.3V (or use the button on the module)</li>
+        <li>Power on the Arduino</li>
+        <li>The LED on HC-05 blinks slowly (every 2 seconds) — you're in AT mode</li>
+        <li>Set your Serial Monitor baud to 38400, line ending to "Both NL &amp; CR"</li>
+      </ol>
+      <div class="info-box warning"><span class="icon">⚠️</span><div class="body"><strong>AT Mode Baud Rate</strong> In AT mode, HC-05 communicates at 38400 baud — NOT 9600. Your normal sketch uses 9600. These are different!</div></div>
+      <h3>Essential AT Commands</h3>
+      <table class="component-table"><thead><tr><th>Command</th><th>Response</th><th>Purpose</th></tr></thead><tbody>
+        <tr><td><code>AT</code></td><td>OK</td><td>Test connection</td></tr>
+        <tr><td><code>AT+NAME?</code></td><td>+NAME:HC-05</td><td>Get device name</td></tr>
+        <tr><td><code>AT+NAME=MyBot</code></td><td>OK</td><td>Set device name</td></tr>
+        <tr><td><code>AT+PSWD?</code></td><td>+PSWD:1234</td><td>Get pairing PIN</td></tr>
+        <tr><td><code>AT+PSWD=0000</code></td><td>OK</td><td>Set new PIN</td></tr>
+        <tr><td><code>AT+UART?</code></td><td>+UART:9600,0,0</td><td>Get baud rate</td></tr>
+        <tr><td><code>AT+UART=115200,0,0</code></td><td>OK</td><td>Set baud to 115200</td></tr>
+        <tr><td><code>AT+ROLE?</code></td><td>+ROLE:0</td><td>0=Slave, 1=Master</td></tr>
+        <tr><td><code>AT+RESET</code></td><td>OK</td><td>Reboot module</td></tr>
+      </tbody></table>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ — AT Mode Sketch</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">#include</span> <span class="st">&lt;SoftwareSerial.h&gt;</span>
+SoftwareSerial <span class="fn">btSerial</span>(<span class="nm">10</span>, <span class="nm">11</span>);
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="nm">38400</span>);    <span class="cm">// AT mode baud rate</span>
+  btSerial.<span class="fn">begin</span>(<span class="nm">38400</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">if</span> (btSerial.<span class="fn">available</span>())
+    Serial.<span class="fn">write</span>(btSerial.<span class="fn">read</span>());
+  <span class="kw">if</span> (Serial.<span class="fn">available</span>())
+    btSerial.<span class="fn">write</span>(Serial.<span class="fn">read</span>());
+}
+<span class="cm">// Upload this, enter AT mode, open Serial Monitor at 38400</span>
+<span class="cm">// Type: AT  → should respond: OK</span></code></pre></div>
+      <div class="quiz-box">
+        <h4>Quick Check</h4>
+        <p>What baud rate does the HC-05 use in AT Command Mode?</p>
+        <button class="quiz-option" data-correct="false">9600</button>
+        <button class="quiz-option" data-correct="false">115200</button>
+        <button class="quiz-option" data-correct="true">38400</button>
+        <button class="quiz-option" data-correct="false">4800</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m9l2">○ Mark Complete</button></div>
+  </div>
+
+  <!-- LESSON 3 -->
+  <div class="lesson-card" id="lesson3">
+    <div class="lesson-header">
+      <div class="lesson-icon">📱</div>
+      <div>
+        <div class="lesson-num">Lesson 3 of 5</div>
+        <h2 class="lesson-title">Phone-to-Arduino Control</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>The most popular use of HC-05: control your Arduino from your Android phone! Use a free app like <strong>Bluetooth Terminal HC-05</strong> or <strong>Arduino Bluetooth Controller</strong> from the Play Store.</p>
+      <h3>How It Works</h3>
+      <p>Your phone sends single characters (like '1', '0', 'F', 'B') over Bluetooth. Arduino receives them on its SoftwareSerial port and reacts accordingly. This is exactly how remote-controlled robots and smart LED controllers work.</p>
+      <div class="info-box tip"><span class="icon">💡</span><div class="body"><strong>Simple Protocol</strong> Use single characters as commands — they're fast, easy to parse, and don't get corrupted. Avoid sending full words like "forward" — use 'F' instead.</div></div>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ — Bluetooth LED Control</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">#include</span> <span class="st">&lt;SoftwareSerial.h&gt;</span>
+SoftwareSerial <span class="fn">btSerial</span>(<span class="nm">10</span>, <span class="nm">11</span>);
+
+<span class="kw">const int</span> LED_RED   = <span class="nm">5</span>;
+<span class="kw">const int</span> LED_GREEN = <span class="nm">6</span>;
+<span class="kw">const int</span> LED_BLUE  = <span class="nm">7</span>;
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  btSerial.<span class="fn">begin</span>(<span class="nm">9600</span>);
+  <span class="fn">pinMode</span>(LED_RED,   OUTPUT);
+  <span class="fn">pinMode</span>(LED_GREEN, OUTPUT);
+  <span class="fn">pinMode</span>(LED_BLUE,  OUTPUT);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">if</span> (btSerial.<span class="fn">available</span>()) {
+    <span class="tp">char</span> cmd = btSerial.<span class="fn">read</span>();
+
+    <span class="kw">switch</span>(cmd) {
+      <span class="kw">case</span> <span class="st">'R'</span>: <span class="fn">digitalWrite</span>(LED_RED,   HIGH); <span class="kw">break</span>;
+      <span class="kw">case</span> <span class="st">'G'</span>: <span class="fn">digitalWrite</span>(LED_GREEN, HIGH); <span class="kw">break</span>;
+      <span class="kw">case</span> <span class="st">'B'</span>: <span class="fn">digitalWrite</span>(LED_BLUE,  HIGH); <span class="kw">break</span>;
+      <span class="kw">case</span> <span class="st">'X'</span>: <span class="cm">// Turn all off</span>
+        <span class="fn">digitalWrite</span>(LED_RED,   LOW);
+        <span class="fn">digitalWrite</span>(LED_GREEN, LOW);
+        <span class="fn">digitalWrite</span>(LED_BLUE,  LOW);
+        <span class="kw">break</span>;
+    }
+    btSerial.<span class="fn">print</span>(<span class="st">"CMD:"</span>);
+    btSerial.<span class="fn">println</span>(cmd);   <span class="cm">// Echo back to phone</span>
+  }
+}</code></pre></div>
+      <h3>Pairing Your Phone</h3>
+      <ol style="margin-left:1.5rem;line-height:2;margin-top:0.75rem">
+        <li>Power up your Arduino + HC-05 (LED blinks fast in normal mode)</li>
+        <li>On Android: Settings → Bluetooth → Scan for devices</li>
+        <li>Tap "HC-05" (or whatever name you set)</li>
+        <li>Enter PIN: <strong>1234</strong> (default) or 0000</li>
+        <li>Open your Bluetooth terminal app, select HC-05, connect</li>
+        <li>Send characters like 'R', 'G', 'B', 'X'</li>
+      </ol>
+      <div class="quiz-box">
+        <h4>Quick Check</h4>
+        <p>What is the default pairing PIN for HC-05?</p>
+        <button class="quiz-option" data-correct="false">0000</button>
+        <button class="quiz-option" data-correct="true">1234</button>
+        <button class="quiz-option" data-correct="false">9999</button>
+        <button class="quiz-option" data-correct="false">No PIN needed</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m9l3">○ Mark Complete</button></div>
+  </div>
+
+  <!-- LESSON 4 -->
+  <div class="lesson-card" id="lesson4">
+    <div class="lesson-header">
+      <div class="lesson-icon">🔵</div>
+      <div>
+        <div class="lesson-num">Lesson 4 of 5</div>
+        <h2 class="lesson-title">BLE with ESP32</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p><strong>Bluetooth Low Energy (BLE)</strong> is the modern standard — it uses far less power, works with iPhones (Classic Bluetooth doesn't!), and enables more sophisticated communication. The ESP32 has built-in BLE, making it perfect for BLE projects.</p>
+      <h3>Classic Bluetooth vs BLE</h3>
+      <table class="component-table"><thead><tr><th>Feature</th><th>Classic Bluetooth</th><th>BLE</th></tr></thead><tbody>
+        <tr><td>Power</td><td>Higher (~30mA)</td><td>Very low (~1-15mA)</td></tr>
+        <tr><td>iOS Support</td><td>❌ No</td><td>✅ Yes</td></tr>
+        <tr><td>Android Support</td><td>✅ Yes</td><td>✅ Yes</td></tr>
+        <tr><td>Data Rate</td><td>Up to 3 Mbps</td><td>Up to 2 Mbps</td></tr>
+        <tr><td>Use Case</td><td>Audio, continuous stream</td><td>Sensors, IoT, beacons</td></tr>
+      </tbody></table>
+      <h3>BLE Concepts: GATT, Services &amp; Characteristics</h3>
+      <p>BLE uses a system called <strong>GATT</strong> (Generic Attribute Profile). Think of it like a website: a <em>Service</em> is a web page, and <em>Characteristics</em> are the individual fields on that page (text boxes you can read or write).</p>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">ESP32 Arduino — BLE Server (simple LED control)</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">#include</span> <span class="st">&lt;BLEDevice.h&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;BLEServer.h&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;BLEUtils.h&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;BLE2902.h&gt;</span>
+
+<span class="kw">#define</span> SERVICE_UUID        <span class="st">"4fafc201-1fb5-459e-8fcc-c5c9c331914b"</span>
+<span class="kw">#define</span> CHARACTERISTIC_UUID <span class="st">"beb5483e-36e1-4688-b7f5-ea07361b26a8"</span>
+<span class="kw">#define</span> LED_PIN <span class="nm">2</span>
+
+<span class="kw">class</span> LEDCallbacks : <span class="kw">public</span> BLECharacteristicCallbacks {
+  <span class="kw">void</span> <span class="fn">onWrite</span>(BLECharacteristic *pC) {
+    <span class="tp">String</span> val = pC-&gt;<span class="fn">getValue</span>().<span class="fn">c_str</span>();
+    <span class="kw">if</span> (val == <span class="st">"ON"</span>)  <span class="fn">digitalWrite</span>(LED_PIN, HIGH);
+    <span class="kw">if</span> (val == <span class="st">"OFF"</span>) <span class="fn">digitalWrite</span>(LED_PIN, LOW);
+  }
+};
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(LED_PIN, OUTPUT);
+  BLEDevice::<span class="fn">init</span>(<span class="st">"AlCoders-ESP32"</span>);
+  BLEServer *pServer = BLEDevice::<span class="fn">createServer</span>();
+  BLEService *pService = pServer-&gt;<span class="fn">createService</span>(SERVICE_UUID);
+  BLECharacteristic *pChar = pService-&gt;<span class="fn">createCharacteristic</span>(
+    CHARACTERISTIC_UUID,
+    BLECharacteristic::PROPERTY_WRITE
+  );
+  pChar-&gt;<span class="fn">setCallbacks</span>(<span class="kw">new</span> <span class="fn">LEDCallbacks</span>());
+  pService-&gt;<span class="fn">start</span>();
+  pServer-&gt;<span class="fn">getAdvertising</span>()-&gt;<span class="fn">start</span>();
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() { <span class="cm">/* BLE handled in background */</span> }</code></pre></div>
+      <div class="info-box tip"><span class="icon">💡</span><div class="body"><strong>Testing BLE</strong> Use the free app <strong>nRF Connect</strong> (iOS &amp; Android) to scan for BLE devices, connect, and write to characteristics — perfect for testing without building a custom app.</div></div>
+      <div class="quiz-box">
+        <h4>Quick Check</h4>
+        <p>Which of these supports BLE but NOT Classic Bluetooth for iPhone?</p>
+        <button class="quiz-option" data-correct="false">HC-05</button>
+        <button class="quiz-option" data-correct="false">HC-06</button>
+        <button class="quiz-option" data-correct="true">ESP32</button>
+        <button class="quiz-option" data-correct="false">Arduino Uno</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m9l4">○ Mark Complete</button></div>
+  </div>
+
+  <!-- LESSON 5 -->
+  <div class="lesson-card" id="lesson5">
+    <div class="lesson-header">
+      <div class="lesson-icon">🚗</div>
+      <div>
+        <div class="lesson-num">Lesson 5 of 5 · Project</div>
+        <h2 class="lesson-title">Bluetooth Car Project</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>Let's build a <strong>phone-controlled robot car</strong> using HC-05 + L298N motor driver. You'll send direction commands ('F', 'B', 'L', 'R', 'S') from your phone and the car will move accordingly.</p>
+      <h3>Hardware Required</h3>
+      <table class="component-table"><thead><tr><th>Component</th><th>Qty</th></tr></thead><tbody>
+        <tr><td>Arduino Uno</td><td>1</td></tr>
+        <tr><td>HC-05 Bluetooth module</td><td>1</td></tr>
+        <tr><td>L298N Motor Driver</td><td>1</td></tr>
+        <tr><td>DC Motor (3-6V)</td><td>2</td></tr>
+        <tr><td>Robot chassis kit</td><td>1</td></tr>
+        <tr><td>9V battery or Li-ion pack</td><td>1</td></tr>
+        <tr><td>Jumper wires</td><td>Several</td></tr>
+      </tbody></table>
+      <h3>Motor Driver Pin Mapping</h3>
+      <table class="component-table"><thead><tr><th>L298N Pin</th><th>Arduino Pin</th><th>Function</th></tr></thead><tbody>
+        <tr><td>IN1</td><td>2</td><td>Motor A direction 1</td></tr>
+        <tr><td>IN2</td><td>3</td><td>Motor A direction 2</td></tr>
+        <tr><td>IN3</td><td>4</td><td>Motor B direction 1</td></tr>
+        <tr><td>IN4</td><td>5</td><td>Motor B direction 2</td></tr>
+        <tr><td>ENA</td><td>6 (PWM)</td><td>Motor A speed</td></tr>
+        <tr><td>ENB</td><td>7 (PWM)</td><td>Motor B speed</td></tr>
+      </tbody></table>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ — Bluetooth Car</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">#include</span> <span class="st">&lt;SoftwareSerial.h&gt;</span>
+SoftwareSerial <span class="fn">btSerial</span>(<span class="nm">10</span>, <span class="nm">11</span>);
+
+<span class="cm">// Motor pins</span>
+<span class="kw">const int</span> IN1=<span class="nm">2</span>, IN2=<span class="nm">3</span>, IN3=<span class="nm">4</span>, IN4=<span class="nm">5</span>, ENA=<span class="nm">6</span>, ENB=<span class="nm">7</span>;
+<span class="kw">int</span> spd = <span class="nm">180</span>;  <span class="cm">// 0-255</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  btSerial.<span class="fn">begin</span>(<span class="nm">9600</span>);
+  <span class="kw">int</span> pins[] = {IN1,IN2,IN3,IN4,ENA,ENB};
+  <span class="kw">for</span>(<span class="kw">int</span> p : pins) <span class="fn">pinMode</span>(p, OUTPUT);
+  <span class="fn">analogWrite</span>(ENA, spd);
+  <span class="fn">analogWrite</span>(ENB, spd);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">if</span> (btSerial.<span class="fn">available</span>()) {
+    <span class="tp">char</span> c = btSerial.<span class="fn">read</span>();
+    <span class="kw">switch</span>(c) {
+      <span class="kw">case</span> <span class="st">'F'</span>: <span class="fn">forward</span>();  <span class="kw">break</span>;
+      <span class="kw">case</span> <span class="st">'B'</span>: <span class="fn">backward</span>(); <span class="kw">break</span>;
+      <span class="kw">case</span> <span class="st">'L'</span>: <span class="fn">turnLeft</span>(); <span class="kw">break</span>;
+      <span class="kw">case</span> <span class="st">'R'</span>: <span class="fn">turnRight</span>(); <span class="kw">break</span>;
+      <span class="kw">case</span> <span class="st">'S'</span>: <span class="fn">stopCar</span>();  <span class="kw">break</span>;
+    }
+  }
+}
+
+<span class="kw">void</span> <span class="fn">forward</span>()  { <span class="fn">digitalWrite</span>(IN1,HIGH); <span class="fn">digitalWrite</span>(IN2,LOW); <span class="fn">digitalWrite</span>(IN3,HIGH); <span class="fn">digitalWrite</span>(IN4,LOW); }
+<span class="kw">void</span> <span class="fn">backward</span>() { <span class="fn">digitalWrite</span>(IN1,LOW);  <span class="fn">digitalWrite</span>(IN2,HIGH); <span class="fn">digitalWrite</span>(IN3,LOW);  <span class="fn">digitalWrite</span>(IN4,HIGH); }
+<span class="kw">void</span> <span class="fn">turnLeft</span>() { <span class="fn">digitalWrite</span>(IN1,LOW);  <span class="fn">digitalWrite</span>(IN2,HIGH); <span class="fn">digitalWrite</span>(IN3,HIGH); <span class="fn">digitalWrite</span>(IN4,LOW); }
+<span class="kw">void</span> <span class="fn">turnRight</span>(){ <span class="fn">digitalWrite</span>(IN1,HIGH); <span class="fn">digitalWrite</span>(IN2,LOW);  <span class="fn">digitalWrite</span>(IN3,LOW);  <span class="fn">digitalWrite</span>(IN4,HIGH); }
+<span class="kw">void</span> <span class="fn">stopCar</span>()  { <span class="fn">digitalWrite</span>(IN1,LOW);  <span class="fn">digitalWrite</span>(IN2,LOW);  <span class="fn">digitalWrite</span>(IN3,LOW);  <span class="fn">digitalWrite</span>(IN4,LOW); }</code></pre></div>
+      <div class="info-box success"><span class="icon">🎉</span><div class="body"><strong>Challenge:</strong> Add speed control! Send '1' through '9' from phone to set speed (e.g., '5' = 50% = analogWrite of 127). Map the digit to a 0-255 range!</div></div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m9l5">○ Mark Complete</button></div>
+  </div>
+
+  <div class="lesson-footer">
+    <a href="module8.html" class="btn btn-outline">← Module 8</a>
+    <button class="btn btn-complete" data-lesson="m9_complete">○ Mark Module Complete</button>
+    <a href="module10.html" class="btn btn-primary">Module 10: Interrupts &amp; Timers →</a>
+  </div>
+</main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

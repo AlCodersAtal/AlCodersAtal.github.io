@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 3: Ohm's Law & Power — AlCoders Electronics</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo"><div class="logo-icon">⚡</div><span class="logo-text">Al<span>Coders</span></span></a>
+  <div class="nav-links">
+    <a href="module2.html">← Module 2</a><a href="index.html">All Modules</a><a href="module4.html">Module 4 →</a>
+  </div>
+</nav>
+<div class="course-layout">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h3>// Module 3 Progress</h3>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-label">0% complete</div>
+  </div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">1</span>What is Electricity?</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module1.html">Go to module →</a></li></ul></div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">2</span>Basic Components</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module2.html">Go to module →</a></li></ul></div>
+  <div class="module-group">
+    <button class="module-title-btn active"><span class="module-num">3</span>Ohm's Law & Power</button>
+    <ul class="lesson-list">
+      <li class="lesson-item"><a href="#l1" data-lid="m3_1" class="active">3.1 Ohm's Law</a></li>
+      <li class="lesson-item"><a href="#l2" data-lid="m3_2">3.2 The Ohm's Law Triangle</a></li>
+      <li class="lesson-item"><a href="#l3" data-lid="m3_3">3.3 Electric Power</a></li>
+      <li class="lesson-item"><a href="#l4" data-lid="m3_4">3.4 Power Calculations</a></li>
+      <li class="lesson-item"><a href="#l5" data-lid="m3_5">3.5 Practical Examples</a></li>
+    </ul>
+  </div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">4</span>Series & Parallel</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module4.html">Go to module →</a></li></ul></div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">5</span>Semiconductors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module5.html">Go to module →</a></li></ul></div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">6</span>Transistors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module6.html">Go to module →</a></li></ul></div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">7</span>Breadboarding</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module7.html">Go to module →</a></li></ul></div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">8</span>Cap & Inductors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module8.html">Go to module →</a></li></ul></div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">9</span>Sensors & Signals</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module9.html">Go to module →</a></li></ul></div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">10</span>Intro to Arduino</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module10.html">Go to module →</a></li></ul></div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">11</span>Arduino & Sensors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module11.html">Go to module →</a></li></ul></div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">12</span>Final Projects</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module12.html">Go to module →</a></li></ul></div>
+</aside>
+
+<main class="content-area">
+  <div class="lesson-breadcrumb">Electronics Course → <span>Module 3</span> → Ohm's Law & Power</div>
+
+  <section id="l1">
+    <h1 class="lesson-title">3.1 Ohm's Law</h1>
+    <div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+    <div class="lesson-body">
+      <p>Discovered by Georg Ohm in 1827, <strong>Ohm's Law</strong> is the single most important equation in all of electronics. It defines the relationship between voltage, current, and resistance.</p>
+
+      <div class="formula-block">
+        <div class="formula-text">V = I × R</div>
+        <div class="formula-label">Voltage (V) = Current (A) × Resistance (Ω)</div>
+      </div>
+
+      <p>This can be rearranged to solve for any of the three quantities:</p>
+      <ul>
+        <li>To find Voltage: <strong>V = I × R</strong></li>
+        <li>To find Current: <strong>I = V / R</strong></li>
+        <li>To find Resistance: <strong>R = V / I</strong></li>
+      </ul>
+
+      <div class="info-box">
+        <div class="box-title">📌 What Ohm's Law means</div>
+        If you double the voltage in a circuit but keep resistance the same, the current doubles. If you double the resistance but keep voltage the same, the current is halved. Voltage, current, and resistance are always mathematically linked.
+      </div>
+    </div>
+  </section>
+
+  <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+
+  <section id="l2">
+    <h1 class="lesson-title">3.2 The Ohm's Law Triangle</h1>
+    <div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+    <div class="lesson-body">
+      <p>A simple visual trick to remember and rearrange Ohm's Law is the <strong>VIR Triangle</strong>. Cover the value you want to find, and the remaining two symbols show you the formula:</p>
+
+      <div class="circuit-diagram">
+        <svg width="200" height="180" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg">
+          <!-- Triangle -->
+          <polygon points="100,20 20,160 180,160" fill="rgba(24,119,243,0.08)" stroke="#1a5cff" stroke-width="2"/>
+          <!-- Dividing line -->
+          <line x1="20" y1="100" x2="180" y2="100" stroke="#1a5cff" stroke-width="1.5" stroke-dasharray="5,3"/>
+          <!-- Labels -->
+          <text x="100" y="75" text-anchor="middle" fill="#1a5cff" font-family="IBM Plex Mono" font-size="24" font-weight="bold">V</text>
+          <text x="62" y="140" text-anchor="middle" fill="#ffa657" font-family="IBM Plex Mono" font-size="22" font-weight="bold">I</text>
+          <text x="138" y="140" text-anchor="middle" fill="#ff7b72" font-family="IBM Plex Mono" font-size="22" font-weight="bold">R</text>
+          <!-- Instructions -->
+          <text x="100" y="170" text-anchor="middle" fill="#b5b3ac" font-family="IBM Plex Sans" font-size="9">Cover what you want to find</text>
+        </svg>
+      </div>
+
+      <h2>Worked Examples</h2>
+      <div class="info-box">
+        <div class="box-title">Example 1: Find Current</div>
+        A 9V battery connected to a 470Ω resistor. What current flows?<br>
+        <strong>I = V / R = 9 / 470 = 0.0191 A ≈ 19.1 mA</strong>
+      </div>
+      <div class="info-box">
+        <div class="box-title">Example 2: Find Resistance</div>
+        You want 10mA of current from a 5V supply. What resistor do you need?<br>
+        <strong>R = V / I = 5 / 0.01 = 500Ω</strong> → use 470Ω (nearest standard value)
+      </div>
+      <div class="info-box">
+        <div class="box-title">Example 3: Find Voltage</div>
+        2mA flows through a 2.2kΩ resistor. What voltage drop is across it?<br>
+        <strong>V = I × R = 0.002 × 2200 = 4.4V</strong>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <h3>// Quick Check</h3>
+      <div class="quiz-q">A circuit has 12V and a resistance of 1000Ω. What is the current?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" data-correct="false">120 mA</div>
+        <div class="quiz-opt" data-correct="true">12 mA</div>
+        <div class="quiz-opt" data-correct="false">1.2 mA</div>
+        <div class="quiz-opt" data-correct="false">0.12 mA</div>
+      </div>
+      <div class="quiz-feedback" data-ok="I = V/R = 12/1000 = 0.012A = 12mA. Correct!" data-bad="I = V/R = 12/1000 = 0.012A = 12mA. Remember to convert to mA by multiplying by 1000."></div>
+    </div>
+  </section>
+
+  <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+
+  <section id="l3">
+    <h1 class="lesson-title">3.3 Electric Power</h1>
+    <div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+    <div class="lesson-body">
+      <p><strong>Power</strong> is the rate at which energy is consumed or produced in a circuit. A component consuming high power will get hot. This is why resistors have power ratings — exceed them and they burn out.</p>
+
+      <div class="formula-block">
+        <div class="formula-text">P = V × I</div>
+        <div class="formula-label">P = Power (Watts, W) · V = Voltage (V) · I = Current (A)</div>
+      </div>
+
+      <p>Using Ohm's Law, we can derive two more power formulas:</p>
+      <div class="formula-block">
+        <div class="formula-text">P = I² × R &nbsp;&nbsp; P = V² / R</div>
+        <div class="formula-label">All three are equivalent — use whichever quantities you know</div>
+      </div>
+
+      <h2>Power Ratings</h2>
+      <p>Every component has a <strong>maximum power rating</strong>. Resistors commonly come in ¼W, ½W, 1W, 2W, 5W ratings. If a resistor dissipates more power than its rating, it will overheat and fail. Always design with some safety margin — use a resistor with at least 2× the calculated power.</p>
+    </div>
+  </section>
+
+  <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+
+  <section id="l4">
+    <h1 class="lesson-title">3.4 Power Calculations</h1>
+    <div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+    <div class="lesson-body">
+      <p>Let's practice calculating power in real circuit situations.</p>
+
+      <div class="info-box">
+        <div class="box-title">Example: Resistor Power Rating</div>
+        A 100Ω resistor with 12V across it:<br>
+        P = V²/R = 144/100 = <strong>1.44W</strong><br>
+        → You need at least a <strong>2W rated resistor</strong> (with safety margin).
+      </div>
+
+      <div class="info-box">
+        <div class="box-title">Example: LED Power</div>
+        An LED draws 20mA at 2V forward voltage:<br>
+        P = V × I = 2 × 0.02 = <strong>0.04W = 40mW</strong><br>
+        → The LED consumes only 40 milliwatts. Very efficient!
+      </div>
+
+      <h2>Energy</h2>
+      <p>Power × Time = Energy. Energy is measured in Joules (J) or Watt-hours (Wh).</p>
+      <div class="formula-block">
+        <div class="formula-text">E = P × t</div>
+        <div class="formula-label">E = Energy (J or Wh) · P = Power (W) · t = time (s or h)</div>
+      </div>
+    </div>
+  </section>
+
+  <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+
+  <section id="l5">
+    <h1 class="lesson-title">3.5 Practical Examples</h1>
+    <div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+    <div class="lesson-body">
+      <h2>Designing an LED Circuit</h2>
+      <p>Let's use everything from this module to design a complete LED circuit from scratch.</p>
+      <p><strong>Given:</strong> 5V supply (Arduino pin), red LED (Vf = 2V, If = 20mA)</p>
+      <ol>
+        <li>Voltage across resistor: Vr = 5 − 2 = <strong>3V</strong></li>
+        <li>Required resistance: R = Vr / I = 3 / 0.02 = <strong>150Ω</strong></li>
+        <li>Power in resistor: P = I² × R = (0.02)² × 150 = <strong>0.06W = 60mW</strong></li>
+        <li>A standard ¼W (250mW) resistor is plenty — use a <strong>150Ω ¼W resistor</strong>.</li>
+      </ol>
+
+      <div class="circuit-diagram">
+        <svg width="380" height="100" viewBox="0 0 380 100" xmlns="http://www.w3.org/2000/svg">
+          <!-- 5V -->
+          <text x="10" y="45" fill="#1a5cff" font-family="IBM Plex Mono" font-size="11" font-weight="bold">5V</text>
+          <line x1="30" y1="40" x2="70" y2="40" stroke="#1a5cff" stroke-width="2"/>
+          <!-- Resistor -->
+          <rect x="70" y="28" width="55" height="24" fill="none" stroke="#ffa657" stroke-width="2" rx="3"/>
+          <text x="97" y="44" text-anchor="middle" fill="#ffa657" font-family="IBM Plex Mono" font-size="10">150Ω</text>
+          <line x1="125" y1="40" x2="165" y2="40" stroke="#1a5cff" stroke-width="2"/>
+          <!-- LED -->
+          <polygon points="165,26 165,54 198,40" fill="#16a34a" stroke="#16a34a" stroke-width="1" opacity="0.8"/>
+          <line x1="198" y1="26" x2="198" y2="54" stroke="#1a5cff" stroke-width="2.5"/>
+          <line x1="198" y1="40" x2="240" y2="40" stroke="#1a5cff" stroke-width="2"/>
+          <text x="181" y="68" text-anchor="middle" fill="#16a34a" font-family="IBM Plex Mono" font-size="9">LED</text>
+          <!-- Ground line -->
+          <line x1="240" y1="40" x2="280" y2="40" stroke="#1a5cff" stroke-width="2"/>
+          <line x1="280" y1="40" x2="280" y2="80" stroke="#1a5cff" stroke-width="2"/>
+          <line x1="10" y1="80" x2="280" y2="80" stroke="#1a5cff" stroke-width="2"/>
+          <line x1="10" y1="40" x2="10" y2="80" stroke="#1a5cff" stroke-width="2"/>
+          <!-- GND symbol -->
+          <line x1="320" y1="78" x2="360" y2="78" stroke="#7a8ba0" stroke-width="2"/>
+          <line x1="327" y1="83" x2="353" y2="83" stroke="#7a8ba0" stroke-width="1.5"/>
+          <line x1="334" y1="88" x2="346" y2="88" stroke="#7a8ba0" stroke-width="1"/>
+          <text x="340" y="72" text-anchor="middle" fill="#8a8880" font-family="IBM Plex Mono" font-size="9">GND</text>
+        </svg>
+      </div>
+
+      <div class="tip-box">
+        <div class="box-title">✅ Module 3 Complete!</div>
+        You now know Ohm's Law, can calculate current, voltage, and resistance, and can determine power and select resistor ratings. These skills are used in every single circuit you'll ever design!
+      </div>
+    </div>
+
+    <div class="lesson-nav">
+      <a href="module2.html" class="btn btn-outline">← Module 2</a>
+      <button class="mark-done-btn">Mark as Complete</button>
+      <a href="module4.html" class="btn btn-primary">Module 4: Series & Parallel →</a>
+    </div>
+  </section>
+</main>
+</div>
+<script src="course.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  updateProgressBar('m3', 5);
+  initMarkDone('m3_5');
+  refreshSidebarDone();
+});
+</script>
+</body>
+</html>

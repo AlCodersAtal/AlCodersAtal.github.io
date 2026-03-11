@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introduction to Sensors — AlCoders</title>
+<link rel="stylesheet" href="../css/theme.css">
+<script type="module" src="../theme.js"></script>
+<link rel="shortcut icon" href="../images/alcodersLogo.jpg" type="image/jpg" />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<style>
+body { display:block; }
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;z-index:9999;}
+
+/* TOP NAV */
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 5%;background:rgba(247,246,242,.9);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.35rem;color:var(--accent);letter-spacing:-.5px;text-decoration:none;}
+.nav-logo span{color:var(--text);}
+.top-nav ul{list-style:none;display:flex;gap:28px;}
+.top-nav ul a{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--muted);text-decoration:none;text-transform:uppercase;letter-spacing:1px;transition:color .2s;}
+.top-nav ul a:hover{color:var(--accent);}
+.nav-start{font-family:'DM Mono',monospace;font-size:.75rem;background:var(--accent);color:#fff;padding:8px 18px;border-radius:8px;text-decoration:none;transition:transform .2s;}
+.nav-start:hover{transform:translateY(-1px);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 5% 80px;background:var(--white);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(26,92,255,.06) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 80% 80%,rgba(255,92,43,.04) 0%,transparent 60%);pointer-events:none;}
+.hero-badge{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent);border:1px solid rgba(26,92,255,.25);background:rgba(26,92,255,.06);padding:6px 16px;border-radius:100px;margin-bottom:28px;display:inline-block;animation:fadeUp .6s ease both;}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.8rem,7vw,5.8rem);font-weight:800;line-height:1.05;letter-spacing:-2px;max-width:880px;color:var(--text);animation:fadeUp .6s .1s ease both;}
+.hero h1 em{font-style:italic;font-family:'Lora',serif;color:var(--accent);}
+.hero .hero-sub{margin-top:22px;max-width:540px;color:var(--muted);font-size:1.05rem;animation:fadeUp .6s .2s ease both;}
+.hero-btns{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center;animation:fadeUp .6s .3s ease both;}
+.btn-primary{background:var(--accent);color:#fff;padding:13px 30px;border-radius:10px;text-decoration:none;font-family:'Syne',sans-serif;font-weight:700;font-size:.93rem;transition:transform .2s,box-shadow .2s;box-shadow:0 0 28px rgba(26,92,255,.18);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 44px rgba(26,92,255,.28);}
+.btn-secondary{border:1px solid var(--border);color:var(--body);padding:13px 30px;border-radius:10px;text-decoration:none;font-family:'Syne',sans-serif;font-weight:600;font-size:.93rem;transition:border-color .2s,background .2s;background:var(--white);}
+.btn-secondary:hover{border-color:var(--accent);background:rgba(26,92,255,.04);}
+.hero-stats{margin-top:56px;display:flex;gap:44px;flex-wrap:wrap;justify-content:center;animation:fadeUp .6s .4s ease both;}
+.stat{text-align:center;}
+.stat strong{display:block;font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--accent);}
+.stat span{font-size:.78rem;color:var(--muted);font-family:'DM Mono',monospace;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* SECTIONS */
+.lsec{padding:90px 5%;max-width:1180px;margin:0 auto;}
+.section-label{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(1.7rem,3.5vw,2.6rem);font-weight:800;letter-spacing:-1px;line-height:1.1;margin-bottom:18px;color:var(--text);}
+.section-sub{color:var(--muted);max-width:530px;font-size:.97rem;}
+
+/* LEARN GRID */
+.learn-grid{margin-top:52px;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;}
+.learn-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:26px;transition:border-color .2s,transform .2s,box-shadow .2s;}
+.learn-card:hover{border-color:rgba(26,92,255,.3);transform:translateY(-3px);box-shadow:var(--shadow);}
+.learn-icon{font-size:1.7rem;margin-bottom:14px;}
+.learn-card h3{font-family:'Syne',sans-serif;font-weight:700;font-size:.97rem;margin-bottom:8px;color:var(--text);}
+.learn-card p{color:var(--muted);font-size:.86rem;}
+
+/* MODULES GRID */
+.modules-grid{margin-top:52px;display:flex;flex-direction:column;gap:10px;}
+.module{border:1px solid var(--border);border-radius:var(--radius);background:var(--white);overflow:hidden;transition:border-color .2s,box-shadow .2s;}
+.module:hover{border-color:rgba(26,92,255,.25);box-shadow:var(--shadow);}
+.module-header{display:flex;align-items:center;justify-content:space-between;padding:20px 26px;cursor:pointer;user-select:none;text-decoration:none;color:inherit;}
+.module-left{display:flex;align-items:center;gap:16px;}
+.module-num{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--accent);background:rgba(26,92,255,.08);border:1px solid rgba(26,92,255,.18);padding:4px 10px;border-radius:6px;white-space:nowrap;}
+.module-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1.02rem;color:var(--text);}
+.module-right{display:flex;align-items:center;gap:14px;}
+.module-meta{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);}
+.module-arrow{font-size:.9rem;color:var(--muted);transition:transform .2s;}
+.module:hover .module-arrow{transform:translateX(4px);color:var(--accent);}
+.open-link{font-family:'DM Mono',monospace;font-size:.7rem;background:var(--accent);color:#fff;padding:6px 14px;border-radius:7px;text-decoration:none;transition:background .2s;white-space:nowrap;}
+.open-link:hover{background:#0047e0;}
+
+/* PROJECTS */
+.projects-grid{margin-top:52px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;}
+.project-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color .2s,transform .2s,box-shadow .2s;}
+.project-card:hover{border-color:rgba(26,92,255,.3);transform:translateY(-3px);box-shadow:var(--shadow);}
+.project-thumb{height:140px;display:flex;align-items:center;justify-content:center;font-size:2.8rem;}
+.p1{background:linear-gradient(135deg,#e8f0ff,#dce8ff);}
+.p2{background:linear-gradient(135deg,#fff0eb,#ffe0d4);}
+.p3{background:linear-gradient(135deg,#e8f5e9,#d4edda);}
+.p4{background:linear-gradient(135deg,#f3f0ff,#e8e0ff);}
+.p5{background:linear-gradient(135deg,#fffbe8,#fff3cc);}
+.project-info{padding:20px;}
+.project-tag{font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:1px;text-transform:uppercase;color:var(--accent2);margin-bottom:7px;}
+.project-info h3{font-family:'Syne',sans-serif;font-weight:700;font-size:.97rem;margin-bottom:7px;color:var(--text);}
+.project-info p{color:var(--muted);font-size:.84rem;}
+.skill-tags{margin-top:12px;display:flex;gap:5px;flex-wrap:wrap;}
+.skill-tag{font-family:'DM Mono',monospace;font-size:.66rem;background:var(--surface);border:1px solid var(--border);padding:2px 9px;border-radius:100px;color:var(--muted);}
+
+/* ROADMAP */
+.roadmap{margin-top:52px;position:relative;}
+.roadmap::before{content:'';position:absolute;left:22px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),var(--accent2),transparent);}
+.roadmap-item{display:flex;gap:26px;align-items:flex-start;margin-bottom:32px;padding-left:8px;}
+.roadmap-dot{width:30px;height:30px;border-radius:50%;border:2px solid var(--accent);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-family:'DM Mono',monospace;color:var(--accent);flex-shrink:0;position:relative;z-index:1;}
+.roadmap-week{font-family:'DM Mono',monospace;font-size:.66rem;color:var(--accent2);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;}
+.roadmap-content h3{font-family:'Syne',sans-serif;font-weight:700;font-size:.97rem;margin-bottom:5px;color:var(--text);}
+.roadmap-content p{color:var(--muted);font-size:.86rem;}
+
+/* FAQ */
+.faq-list{margin-top:52px;display:flex;flex-direction:column;gap:10px;}
+.faq-item{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.faq-q{padding:18px 22px;font-family:'Syne',sans-serif;font-weight:700;font-size:.92rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;color:var(--text);}
+.faq-q:hover{color:var(--accent);}
+.arrow{transition:transform .3s;color:var(--muted);}
+.faq-item.open .arrow{transform:rotate(180deg);color:var(--accent);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.faq-item.open .faq-a{max-height:400px;}
+.faq-a-inner{padding:0 22px 18px;border-top:1px solid var(--border);padding-top:14px;color:var(--muted);font-size:.88rem;}
+
+/* CTA */
+.cta-banner{margin:40px 5% 90px;max-width:1180px;margin-left:auto;margin-right:auto;background:linear-gradient(135deg,rgba(26,92,255,.07),rgba(255,92,43,.04));border:1px solid rgba(26,92,255,.18);border-radius:20px;padding:56px;text-align:center;}
+.cta-banner h2{font-family:'Syne',sans-serif;font-size:clamp(1.7rem,3.5vw,2.6rem);font-weight:800;letter-spacing:-1px;margin-bottom:14px;color:var(--text);}
+.cta-banner p{color:var(--muted);margin-bottom:30px;font-size:.97rem;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:32px 5%;display:flex;align-items:center;justify-content:space-between;font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);background:var(--white);flex-wrap:wrap;gap:10px;}
+
+/* SENSOR TYPE BADGE */
+.sensor-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:.6rem;padding:2px 8px;border-radius:4px;letter-spacing:1px;text-transform:uppercase;margin-left:8px;vertical-align:middle;}
+.badge-analog{background:rgba(245,158,11,.12);color:#b7700a;border:1px solid rgba(245,158,11,.3);}
+.badge-digital{background:rgba(26,92,255,.1);color:var(--accent);border:1px solid rgba(26,92,255,.2);}
+.badge-protocol{background:rgba(125,60,152,.1);color:#7d3c98;border:1px solid rgba(125,60,152,.2);}
+
+@media(max-width:768px){.top-nav ul{display:none;}.module-meta{display:none;}.cta-banner{padding:36px 22px;}}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<div id="nav"></div>
+<div id="searchPopup" class="search-popup">
+  <div class="popup-content">
+    <span class="close-btn" onclick="hideSearchPopup()">&times;</span>
+    <input type="text" id="searchBar" placeholder="Search here..." oninput="showRecommendations()" />
+    <div class="result-box" id="resultBox"></div>
+  </div>
+</div>
+
+<br><br><br>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="../index.html" class="nav-logo">Al<span>Coders</span></a>
+  <ul>
+    <li><a href="#learn">Learn</a></li>
+    <li><a href="#curriculum">Curriculum</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="module1.html" class="nav-start">Start Course →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-badge">🔬 Free · Hands-On · Arduino + Electronics</span>
+  <h1>Learn how machines<br>sense the <em>real world</em></h1>
+  <p class="hero-sub">A complete, project-driven AlCoders course on sensors — from the physics of how they work to connecting them with Arduino Uno, Nano, and Mega.</p>
+  <div class="hero-btns">
+    <a href="module1.html" class="btn-primary">Start the Course →</a>
+    <a href="#curriculum" class="btn-secondary">View Curriculum</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><strong>8</strong><span>Modules</span></div>
+    <div class="stat"><strong>35+</strong><span>Lessons</span></div>
+    <div class="stat"><strong>10+</strong><span>Sensor Types</span></div>
+    <div class="stat"><strong>6</strong><span>Projects</span></div>
+  </div>
+</div>
+
+<!-- WHAT YOU'LL LEARN -->
+<section class="lsec" id="learn">
+  <div class="section-label">// What you'll learn</div>
+  <h2 class="section-title">Everything you need to work with sensors</h2>
+  <p class="section-sub">From the physics inside a sensor to writing real Arduino code that reads, processes, and reacts to the physical world.</p>
+  <div class="learn-grid">
+    <div class="learn-card">
+      <div class="learn-icon">⚡</div>
+      <h3>Sensor Fundamentals</h3>
+      <p>Understand how sensors work physically — transducers, signal conditioning, analog vs digital output.</p>
+    </div>
+    <div class="learn-card">
+      <div class="learn-icon">🤖</div>
+      <h3>Arduino Boards In-Depth</h3>
+      <p>Full deep dives on Uno, Nano, and Mega — specs, pins, differences, and which to choose for any project.</p>
+    </div>
+    <div class="learn-card">
+      <div class="learn-icon">🌡️</div>
+      <h3>Temperature & Humidity</h3>
+      <p>DHT11, DHT22, and DS18B20 — learn the internals, wire them up, and calculate heat index.</p>
+    </div>
+    <div class="learn-card">
+      <div class="learn-icon">📡</div>
+      <h3>Distance & Motion</h3>
+      <p>Ultrasonic HC-SR04 with the full timing math, and PIR motion sensors with the Fresnel lens physics explained.</p>
+    </div>
+    <div class="learn-card">
+      <div class="learn-icon">💡</div>
+      <h3>Light & IR Sensors</h3>
+      <p>LDR voltage divider circuits, photodiodes, IR obstacle sensors, and decoding TV remote controls.</p>
+    </div>
+    <div class="learn-card">
+      <div class="learn-icon">🌱</div>
+      <h3>Environmental Sensors</h3>
+      <p>Soil moisture (resistive vs capacitive), the full MQ gas sensor family, and real-world safety systems.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section class="lsec" id="curriculum" style="padding-top:60px;">
+  <div class="section-label">// Course curriculum</div>
+  <h2 class="section-title">8 modules · 35+ lessons</h2>
+  <p class="section-sub">Each module builds on the last. Every lesson includes wiring diagrams, working Arduino code, and callouts for common mistakes.</p>
+  <div class="modules-grid">
+
+    <div class="module">
+      <a href="module1.html" class="module-header">
+        <div class="module-left">
+          <span class="module-num">Module 01</span>
+          <span class="module-title">Foundations of Sensors</span>
+        </div>
+        <div class="module-right">
+          <span class="module-meta">5 lessons</span>
+          <a href="module1.html" class="open-link">Open →</a>
+        </div>
+      </a>
+    </div>
+
+    <div class="module">
+      <a href="module2.html" class="module-header">
+        <div class="module-left">
+          <span class="module-num">Module 02</span>
+          <span class="module-title">Arduino Boards Deep Dive</span>
+        </div>
+        <div class="module-right">
+          <span class="module-meta">7 lessons</span>
+          <a href="module2.html" class="open-link">Open →</a>
+        </div>
+      </a>
+    </div>
+
+    <div class="module">
+      <a href="module3.html" class="module-header">
+        <div class="module-left">
+          <span class="module-num">Module 03</span>
+          <span class="module-title">Basic & Common Sensors</span>
+        </div>
+        <div class="module-right">
+          <span class="module-meta">4 lessons + project</span>
+          <a href="module3.html" class="open-link">Open →</a>
+        </div>
+      </a>
+    </div>
+
+    <div class="module">
+      <a href="module4.html" class="module-header">
+        <div class="module-left">
+          <span class="module-num">Module 04</span>
+          <span class="module-title">Light Sensors — LDR, Photodiode & IR</span>
+        </div>
+        <div class="module-right">
+          <span class="module-meta">5 lessons + project</span>
+          <a href="module4.html" class="open-link">Open →</a>
+        </div>
+      </a>
+    </div>
+
+    <div class="module">
+      <a href="module5.html" class="module-header">
+        <div class="module-left">
+          <span class="module-num">Module 05</span>
+          <span class="module-title">Motion & Distance — PIR & HC-SR04</span>
+        </div>
+        <div class="module-right">
+          <span class="module-meta">4 lessons + project</span>
+          <a href="module5.html" class="open-link">Open →</a>
+        </div>
+      </a>
+    </div>
+
+    <div class="module">
+      <a href="module6.html" class="module-header">
+        <div class="module-left">
+          <span class="module-num">Module 06</span>
+          <span class="module-title">Temperature & Humidity — DHT11/22 & DS18B20</span>
+        </div>
+        <div class="module-right">
+          <span class="module-meta">4 lessons + project</span>
+          <a href="module6.html" class="open-link">Open →</a>
+        </div>
+      </a>
+    </div>
+
+    <div class="module">
+      <a href="module7.html" class="module-header">
+        <div class="module-left">
+          <span class="module-num">Module 07</span>
+          <span class="module-title">Soil Moisture & Gas — MQ Series</span>
+        </div>
+        <div class="module-right">
+          <span class="module-meta">4 lessons + project</span>
+          <a href="module7.html" class="open-link">Open →</a>
+        </div>
+      </a>
+    </div>
+
+    <div class="module">
+      <a href="module8.html" class="module-header">
+        <div class="module-left">
+          <span class="module-num">Module 08</span>
+          <span class="module-title">Final Project: Multi-Sensor Security System</span>
+        </div>
+        <div class="module-right">
+          <span class="module-meta">Final project</span>
+          <a href="module8.html" class="open-link">Open →</a>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="lsec" id="projects">
+  <div class="section-label">// Course projects</div>
+  <h2 class="section-title">Build 6 real sensor projects</h2>
+  <p class="section-sub">Every module ends with a hands-on project you wire and code from scratch using real components.</p>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-thumb p1">📊</div>
+      <div class="project-info">
+        <div class="project-tag">Module 3</div>
+        <h3>Interactive Sensor Dashboard</h3>
+        <p>Read button, potentiometer, and sound sensor simultaneously and display a live formatted dashboard in the Serial Monitor.</p>
+        <div class="skill-tags"><span class="skill-tag">Button</span><span class="skill-tag">Potentiometer</span><span class="skill-tag">Sound Sensor</span></div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-thumb p2">🌙</div>
+      <div class="project-info">
+        <div class="project-tag">Module 4</div>
+        <h3>Auto Night Lamp</h3>
+        <p>LED brightness increases automatically as the room gets darker. Manual override with IR remote control — press buttons to dim or brighten.</p>
+        <div class="skill-tags"><span class="skill-tag">LDR</span><span class="skill-tag">IR Remote</span><span class="skill-tag">PWM</span></div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-thumb p3">🚗</div>
+      <div class="project-info">
+        <div class="project-tag">Module 5</div>
+        <h3>Obstacle Detector</h3>
+        <p>Parking-sensor style system — buzzer beeps faster as an object gets closer. Three LEDs show green/yellow/red proximity zones.</p>
+        <div class="skill-tags"><span class="skill-tag">HC-SR04</span><span class="skill-tag">PIR</span><span class="skill-tag">Buzzer</span></div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-thumb p4">🌤️</div>
+      <div class="project-info">
+        <div class="project-tag">Module 6</div>
+        <h3>Mini Weather Station</h3>
+        <p>Displays live temperature, humidity, heat index, and comfort level on an LCD display. Alerts when too hot or too humid.</p>
+        <div class="skill-tags"><span class="skill-tag">DHT22</span><span class="skill-tag">LCD I2C</span><span class="skill-tag">Heat Index</span></div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-thumb p5">🌿</div>
+      <div class="project-info">
+        <div class="project-tag">Module 7</div>
+        <h3>Smart Plant Monitor</h3>
+        <p>Reads soil moisture, temperature, humidity, and air quality. Scores each and gives a plant health rating. Triggers alerts for critical conditions.</p>
+        <div class="skill-tags"><span class="skill-tag">Soil Sensor</span><span class="skill-tag">DHT22</span><span class="skill-tag">MQ-135</span></div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-thumb p1">🔒</div>
+      <div class="project-info">
+        <div class="project-tag">Module 8 · Final</div>
+        <h3>Multi-Sensor Security System</h3>
+        <p>Full armed/disarmed security system combining PIR, ultrasonic, gas sensor, and DHT22. Button toggles armed state, with always-on gas and temperature alerts.</p>
+        <div class="skill-tags"><span class="skill-tag">PIR</span><span class="skill-tag">HC-SR04</span><span class="skill-tag">MQ-2</span><span class="skill-tag">DHT22</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="lsec" id="roadmap">
+  <div class="section-label">// Your learning path</div>
+  <h2 class="section-title">From theory to real systems</h2>
+  <p class="section-sub">A suggested 4-week pace — move faster or slower, you're in full control.</p>
+  <div class="roadmap">
+    <div class="roadmap-item">
+      <div class="roadmap-dot">1</div>
+      <div class="roadmap-content">
+        <div class="roadmap-week">Week 1</div>
+        <h3>Sensor Theory & Arduino Boards</h3>
+        <p>Learn how sensors work, analog vs digital signals, key parameters, and get deep knowledge of the Uno, Nano, and Mega. Modules 1–2.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot">2</div>
+      <div class="roadmap-content">
+        <div class="roadmap-week">Week 2</div>
+        <h3>Basic Sensors & Light Detection</h3>
+        <p>Wire up buttons, potentiometers, sound sensors, LDRs, photodiodes, and IR sensors. Build your first projects. Modules 3–4.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot">3</div>
+      <div class="roadmap-content">
+        <div class="roadmap-week">Week 3</div>
+        <h3>Motion, Distance & Climate</h3>
+        <p>PIR motion detection, ultrasonic ranging, DHT temperature/humidity sensors, and the DS18B20 waterproof probe. Modules 5–6.</p>
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot">4</div>
+      <div class="roadmap-content">
+        <div class="roadmap-week">Week 4</div>
+        <h3>Environmental Sensors & Final Project</h3>
+        <p>Soil moisture, the full MQ gas sensor family, and building the complete multi-sensor security & safety system. Modules 7–8.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="lsec" id="faq">
+  <div class="section-label">// FAQ</div>
+  <h2 class="section-title">Common questions</h2>
+  <div class="faq-list">
+
+    <div class="faq-item open">
+      <div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+        Do I need electronics experience to start? <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">No prior electronics experience is needed. The course starts from absolute fundamentals — what a sensor is, what a signal is — and builds up step by step. If you've done any basic coding before, that's a bonus, but even that isn't required.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+        What hardware do I need to buy? <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">You'll need an Arduino Uno (or Nano), a breadboard, jumper wires, and the specific sensors for each module (DHT22, HC-SR04, PIR, LDR, MQ-2, soil moisture sensor). All are available cheaply on Amazon or AliExpress. A starter kit (~$15–25) usually includes most of what you need.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+        Which Arduino board should I start with? <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">Start with the Arduino Uno. It's the most beginner-friendly, most documented, and all course code is written for it. Module 2 covers all three boards (Uno, Nano, Mega) in detail and helps you decide which is right for your own projects.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+        Do I need to know programming? <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">Basic familiarity with variables and if/else statements helps, but isn't required. All Arduino code is explained line by line with inline comments. The course focuses on the sensor concepts — the code is a tool to prove the concepts work, not the main subject.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+        Can I follow this course without buying hardware? <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">Yes! You can read through all the theory, understand wiring diagrams, and study the code without physical components. For simulation, tools like Tinkercad Circuits let you simulate Arduino + many sensors for free in a browser — no hardware needed at all.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.closest('.faq-item').classList.toggle('open')">
+        Is this course free? <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">
+        <div class="faq-a-inner">100% free. All AlCoders lessons, projects, and code examples are completely free. Just start!</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-banner">
+  <h2>Ready to build your first sensor project?</h2>
+  <p>Start with the fundamentals and finish with a real working security system you built yourself.</p>
+  <a href="module1.html" class="btn-primary">Start Module 1 — It's Free →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>&copy; 2025 AlCoders | Designed for Students by Students 🚀</span>
+  <span>Keep exploring, keep building, and enjoy coding!</span>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  const t = document.documentElement.scrollTop;
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progressBar').style.width = (t / h * 100) + '%';
+});
+</script>
+</body>
+</html>

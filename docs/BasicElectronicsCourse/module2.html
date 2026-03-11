@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 2: Basic Components — AlCoders Electronics</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo"><div class="logo-icon">⚡</div><span class="logo-text">Al<span>Coders</span></span></a>
+  <div class="nav-links">
+    <a href="module1.html">← Module 1</a>
+    <a href="index.html">All Modules</a>
+    <a href="module3.html">Module 3 →</a>
+  </div>
+</nav>
+
+<div class="course-layout">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h3>// Module 2 Progress</h3>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-label">0% complete</div>
+  </div>
+  <div class="module-group">
+    <button class="module-title-btn"><span class="module-num">1</span>What is Electricity?</button>
+    <ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module1.html">Go to module →</a></li></ul>
+  </div>
+  <div class="module-group">
+    <button class="module-title-btn active"><span class="module-num">2</span>Basic Components</button>
+    <ul class="lesson-list">
+      <li class="lesson-item"><a href="#l1" data-lid="m2_1" class="active">2.1 Resistors</a></li>
+      <li class="lesson-item"><a href="#l2" data-lid="m2_2">2.2 Capacitors</a></li>
+      <li class="lesson-item"><a href="#l3" data-lid="m2_3">2.3 Inductors</a></li>
+      <li class="lesson-item"><a href="#l4" data-lid="m2_4">2.4 Diodes & LEDs</a></li>
+      <li class="lesson-item"><a href="#l5" data-lid="m2_5">2.5 Switches & Batteries</a></li>
+      <li class="lesson-item"><a href="#l6" data-lid="m2_6">2.6 Reading Component Values</a></li>
+    </ul>
+  </div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">3</span>Ohm's Law & Power</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module3.html">Go to module →</a></li></ul></div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">4</span>Series & Parallel</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module4.html">Go to module →</a></li></ul></div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">5</span>Semiconductors & Diodes</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module5.html">Go to module →</a></li></ul></div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">6</span>Transistors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module6.html">Go to module →</a></li></ul></div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">7</span>Breadboarding & Tools</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module7.html">Go to module →</a></li></ul></div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">8</span>Capacitors & Inductors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module8.html">Go to module →</a></li></ul></div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">9</span>Sensors & Signals</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module9.html">Go to module →</a></li></ul></div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">10</span>Intro to Arduino</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module10.html">Go to module →</a></li></ul></div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">11</span>Arduino & Sensors</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module11.html">Go to module →</a></li></ul></div>
+  <div class="module-group"><button class="module-title-btn"><span class="module-num">12</span>Final Projects</button><ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module12.html">Go to module →</a></li></ul></div>
+</aside>
+
+<main class="content-area">
+  <div class="lesson-breadcrumb">Electronics Course → <span>Module 2</span> → Basic Components</div>
+
+  <!-- 2.1 RESISTORS -->
+  <section id="l1">
+    <h1 class="lesson-title">2.1 Resistors</h1>
+    <div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+    <div class="lesson-body">
+      <p>A <strong>resistor</strong> is the most common electronic component. Its job is to resist current flow, dropping voltage and limiting the current in a circuit. Resistors protect sensitive components from getting too much current.</p>
+
+      <h2>The Resistor Symbol</h2>
+      <div class="circuit-diagram">
+        <svg width="300" height="80" viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="40" x2="80" y2="40" stroke="#1a5cff" stroke-width="2"/>
+          <rect x="80" y="28" width="60" height="24" fill="none" stroke="#1a5cff" stroke-width="2" rx="3"/>
+          <line x1="140" y1="40" x2="200" y2="40" stroke="#1a5cff" stroke-width="2"/>
+          <text x="110" y="44" text-anchor="middle" fill="#181714" font-family="IBM Plex Mono" font-size="11" font-weight="bold">R</text>
+          <text x="110" y="70" text-anchor="middle" fill="#8a8880" font-family="IBM Plex Mono" font-size="9">IEC Symbol</text>
+          <!-- ANSI zig-zag -->
+          <line x1="220" y1="40" x2="240" y2="40" stroke="#1a5cff" stroke-width="2"/>
+          <polyline points="240,40 246,26 252,54 258,26 264,54 270,26 276,40" fill="none" stroke="#1a5cff" stroke-width="2"/>
+          <line x1="276" y1="40" x2="296" y2="40" stroke="#1a5cff" stroke-width="2"/>
+          <text x="258" y="70" text-anchor="middle" fill="#8a8880" font-family="IBM Plex Mono" font-size="9">ANSI Symbol</text>
+        </svg>
+      </div>
+
+      <h2>The Resistor Colour Code</h2>
+      <p>Most resistors have <strong>coloured bands</strong> that tell you their resistance value. There are 4-band and 5-band resistors. Here's how to read a 4-band resistor:</p>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin:1rem 0;overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:0.8rem;">
+          <tr style="border-bottom:1px solid var(--border);">
+            <th style="padding:6px;text-align:left;color:var(--muted);">Colour</th>
+            <th style="padding:6px;text-align:center;color:var(--muted);">Band 1 (1st digit)</th>
+            <th style="padding:6px;text-align:center;color:var(--muted);">Band 2 (2nd digit)</th>
+            <th style="padding:6px;text-align:center;color:var(--muted);">Band 3 (Multiplier)</th>
+            <th style="padding:6px;text-align:center;color:var(--muted);">Band 4 (Tolerance)</th>
+          </tr>
+          <tr><td style="padding:5px;"><span style="display:inline-block;width:14px;height:14px;background:#1a1a1a;border:1px solid #444;border-radius:2px;vertical-align:middle;"></span> Black</td><td style="text-align:center;padding:5px;">0</td><td style="text-align:center;padding:5px;">0</td><td style="text-align:center;padding:5px;">×1</td><td style="text-align:center;padding:5px;">—</td></tr>
+          <tr><td style="padding:5px;"><span style="display:inline-block;width:14px;height:14px;background:#8B4513;border-radius:2px;vertical-align:middle;"></span> Brown</td><td style="text-align:center;padding:5px;">1</td><td style="text-align:center;padding:5px;">1</td><td style="text-align:center;padding:5px;">×10</td><td style="text-align:center;padding:5px;">±1%</td></tr>
+          <tr><td style="padding:5px;"><span style="display:inline-block;width:14px;height:14px;background:#e03030;border-radius:2px;vertical-align:middle;"></span> Red</td><td style="text-align:center;padding:5px;">2</td><td style="text-align:center;padding:5px;">2</td><td style="text-align:center;padding:5px;">×100</td><td style="text-align:center;padding:5px;">±2%</td></tr>
+          <tr><td style="padding:5px;"><span style="display:inline-block;width:14px;height:14px;background:#ff7f00;border-radius:2px;vertical-align:middle;"></span> Orange</td><td style="text-align:center;padding:5px;">3</td><td style="text-align:center;padding:5px;">3</td><td style="text-align:center;padding:5px;">×1K</td><td style="text-align:center;padding:5px;">—</td></tr>
+          <tr><td style="padding:5px;"><span style="display:inline-block;width:14px;height:14px;background:#ffdf00;border-radius:2px;vertical-align:middle;"></span> Yellow</td><td style="text-align:center;padding:5px;">4</td><td style="text-align:center;padding:5px;">4</td><td style="text-align:center;padding:5px;">×10K</td><td style="text-align:center;padding:5px;">—</td></tr>
+          <tr><td style="padding:5px;"><span style="display:inline-block;width:14px;height:14px;background:#2ca02c;border-radius:2px;vertical-align:middle;"></span> Green</td><td style="text-align:center;padding:5px;">5</td><td style="text-align:center;padding:5px;">5</td><td style="text-align:center;padding:5px;">×100K</td><td style="text-align:center;padding:5px;">±0.5%</td></tr>
+          <tr><td style="padding:5px;"><span style="display:inline-block;width:14px;height:14px;background:#1877f3;border-radius:2px;vertical-align:middle;"></span> Blue</td><td style="text-align:center;padding:5px;">6</td><td style="text-align:center;padding:5px;">6</td><td style="text-align:center;padding:5px;">×1M</td><td style="text-align:center;padding:5px;">±0.25%</td></tr>
+          <tr><td style="padding:5px;"><span style="display:inline-block;width:14px;height:14px;background:#9467bd;border-radius:2px;vertical-align:middle;"></span> Violet</td><td style="text-align:center;padding:5px;">7</td><td style="text-align:center;padding:5px;">7</td><td style="text-align:center;padding:5px;">×10M</td><td style="text-align:center;padding:5px;">±0.1%</td></tr>
+          <tr><td style="padding:5px;"><span style="display:inline-block;width:14px;height:14px;background:#888;border-radius:2px;vertical-align:middle;"></span> Gray</td><td style="text-align:center;padding:5px;">8</td><td style="text-align:center;padding:5px;">8</td><td style="text-align:center;padding:5px;">—</td><td style="text-align:center;padding:5px;">±0.05%</td></tr>
+          <tr><td style="padding:5px;"><span style="display:inline-block;width:14px;height:14px;background:#eee;border:1px solid #aaa;border-radius:2px;vertical-align:middle;"></span> White</td><td style="text-align:center;padding:5px;">9</td><td style="text-align:center;padding:5px;">9</td><td style="text-align:center;padding:5px;">—</td><td style="text-align:center;padding:5px;">—</td></tr>
+          <tr><td style="padding:5px;"><span style="display:inline-block;width:14px;height:14px;background:linear-gradient(135deg,#ffd700,#c8a600);border-radius:2px;vertical-align:middle;"></span> Gold</td><td style="text-align:center;padding:5px;">—</td><td style="text-align:center;padding:5px;">—</td><td style="text-align:center;padding:5px;">×0.1</td><td style="text-align:center;padding:5px;">±5%</td></tr>
+          <tr><td style="padding:5px;"><span style="display:inline-block;width:14px;height:14px;background:linear-gradient(135deg,#aaa,#888);border-radius:2px;vertical-align:middle;"></span> Silver</td><td style="text-align:center;padding:5px;">—</td><td style="text-align:center;padding:5px;">—</td><td style="text-align:center;padding:5px;">×0.01</td><td style="text-align:center;padding:5px;">±10%</td></tr>
+        </table>
+      </div>
+
+      <div class="tip-box">
+        <div class="box-title">📖 Memory Trick</div>
+        <strong>B</strong>ad <strong>B</strong>eer <strong>R</strong>ots <strong>O</strong>ur <strong>Y</strong>oung <strong>G</strong>uts <strong>B</strong>ut <strong>V</strong>odka <strong>G</strong>oes <strong>W</strong>ell — Black, Brown, Red, Orange, Yellow, Green, Blue, Violet, Gray, White
+      </div>
+    </div>
+  </section>
+
+  <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+
+  <!-- 2.2 CAPACITORS -->
+  <section id="l2">
+    <h1 class="lesson-title">2.2 Capacitors</h1>
+    <div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+    <div class="lesson-body">
+      <p>A <strong>capacitor</strong> stores electrical energy in an electric field, like a tiny rechargeable battery. Unlike batteries, capacitors charge and discharge almost instantly. They're used for filtering, timing, and smoothing power supplies.</p>
+
+      <div class="formula-block">
+        <div class="formula-text">C = Q / V</div>
+        <div class="formula-label">C = Capacitance (Farads, F) · Q = Charge stored (C) · V = Voltage across it</div>
+      </div>
+
+      <h2>Types of Capacitors</h2>
+      <div class="component-grid">
+        <div class="component-card">
+          <div class="component-icon">🔵</div>
+          <h4>Ceramic Capacitor</h4>
+          <p>Small, cheap, non-polarised. Used for bypassing and decoupling. Values from pF to ~10µF.</p>
+        </div>
+        <div class="component-card">
+          <div class="component-icon">🟤</div>
+          <h4>Electrolytic Capacitor</h4>
+          <p>Large capacitance (µF to mF). <strong>Polarised</strong> — has a positive and negative leg. Used in power supplies.</p>
+        </div>
+        <div class="component-card">
+          <div class="component-icon">🟡</div>
+          <h4>Film Capacitor</h4>
+          <p>Precise, stable, non-polarised. Good for audio and timing circuits. More expensive.</p>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <div class="box-title">⚠️ Polarity Warning</div>
+        Electrolytic capacitors have a <strong>+</strong> and <strong>−</strong> side. Connect them backwards and they can explode! The negative leg is usually shorter and marked with a stripe.
+      </div>
+
+      <p>Capacitance is measured in <strong>Farads (F)</strong>, but one Farad is enormous. In practice you'll encounter:</p>
+      <ul>
+        <li><strong>µF</strong> (microfarad) = 10⁻⁶ F — common in power supplies</li>
+        <li><strong>nF</strong> (nanofarad) = 10⁻⁹ F — common in signal circuits</li>
+        <li><strong>pF</strong> (picofarad) = 10⁻¹² F — common in RF circuits</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+
+  <!-- 2.3 INDUCTORS -->
+  <section id="l3">
+    <h1 class="lesson-title">2.3 Inductors</h1>
+    <div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+    <div class="lesson-body">
+      <p>An <strong>inductor</strong> is simply a coil of wire. It stores energy in a <strong>magnetic field</strong> when current flows through it. It opposes changes in current — when current tries to increase, the inductor resists; when current tries to decrease, it tries to keep it flowing.</p>
+
+      <div class="formula-block">
+        <div class="formula-text">V = L × (dI/dt)</div>
+        <div class="formula-label">V = induced voltage · L = inductance (Henries, H) · dI/dt = rate of current change</div>
+      </div>
+
+      <p>Inductors are measured in <strong>Henries (H)</strong>, but most practical inductors are in millihenries (mH) or microhenries (µH). They are used in:</p>
+      <ul>
+        <li>Filters (in combination with capacitors — LC filters)</li>
+        <li>Transformers (two inductors sharing a magnetic core)</li>
+        <li>DC-DC converters (power supplies for circuits)</li>
+        <li>Radio circuits (tuning)</li>
+      </ul>
+
+      <div class="info-box">
+        <div class="box-title">📌 For Beginners</div>
+        You won't use inductors much in beginner projects. But understanding them is key for power supplies and filters. For now, just remember: capacitors resist voltage changes; inductors resist current changes.
+      </div>
+    </div>
+  </section>
+
+  <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+
+  <!-- 2.4 DIODES & LEDS -->
+  <section id="l4">
+    <h1 class="lesson-title">2.4 Diodes & LEDs</h1>
+    <div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+    <div class="lesson-body">
+      <p>A <strong>diode</strong> is a one-way valve for electricity. Current can only flow through it in one direction — from anode (+) to cathode (−). If you try to push current the other way, the diode blocks it. This property is called <strong>rectification</strong>.</p>
+
+      <div class="circuit-diagram">
+        <svg width="280" height="80" viewBox="0 0 280 80" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="40" x2="80" y2="40" stroke="#1a5cff" stroke-width="2"/>
+          <polygon points="80,25 80,55 115,40" fill="#1a5cff" stroke="#1a5cff" stroke-width="1.5"/>
+          <line x1="115" y1="25" x2="115" y2="55" stroke="#1a5cff" stroke-width="2.5"/>
+          <line x1="115" y1="40" x2="175" y2="40" stroke="#1a5cff" stroke-width="2"/>
+          <text x="80" y="72" text-anchor="middle" fill="#8a8880" font-family="IBM Plex Mono" font-size="9">Anode (+)</text>
+          <text x="115" y="72" text-anchor="middle" fill="#8a8880" font-family="IBM Plex Mono" font-size="9">Cathode (−)</text>
+          <text x="97" y="20" text-anchor="middle" fill="#1a5cff" font-family="IBM Plex Sans" font-size="10">current →</text>
+          <!-- LED with light rays -->
+          <line x1="200" y1="40" x2="220" y2="40" stroke="#1a5cff" stroke-width="2"/>
+          <polygon points="220,25 220,55 255,40" fill="#16a34a" stroke="#16a34a" stroke-width="1.5" opacity="0.8"/>
+          <line x1="255" y1="25" x2="255" y2="55" stroke="#1a5cff" stroke-width="2.5"/>
+          <line x1="255" y1="40" x2="275" y2="40" stroke="#1a5cff" stroke-width="2"/>
+          <line x1="262" y1="24" x2="270" y2="12" stroke="#ffd700" stroke-width="1.5"/>
+          <line x1="268" y1="28" x2="278" y2="18" stroke="#ffd700" stroke-width="1.5"/>
+          <text x="238" y="72" text-anchor="middle" fill="#16a34a" font-family="IBM Plex Mono" font-size="9">LED</text>
+        </svg>
+      </div>
+
+      <p>An <strong>LED (Light-Emitting Diode)</strong> is a special diode that produces light when current flows through it. LEDs are incredibly efficient and are used everywhere — from indicator lights to displays to room lighting. LEDs need a <strong>current-limiting resistor</strong> in series, or they will burn out instantly.</p>
+
+      <h2>Calculating LED Resistor</h2>
+      <div class="formula-block">
+        <div class="formula-text">R = (Vs − Vf) / If</div>
+        <div class="formula-label">Vs = supply voltage · Vf = LED forward voltage (~2V red, ~3.3V blue) · If = forward current (~20mA)</div>
+      </div>
+
+      <div class="tip-box">
+        <div class="box-title">💡 Example</div>
+        5V supply, red LED (Vf = 2V), 20mA current:<br>
+        R = (5 − 2) / 0.02 = 3 / 0.02 = <strong>150Ω</strong>. Use the nearest standard value: 150Ω or 220Ω.
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <h3>// Quick Check</h3>
+      <div class="quiz-q">Why do LEDs need a resistor in series?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" data-correct="false">To make them brighter</div>
+        <div class="quiz-opt" data-correct="true">To limit the current and prevent burning out the LED</div>
+        <div class="quiz-opt" data-correct="false">To change the LED colour</div>
+        <div class="quiz-opt" data-correct="false">To store energy for the LED</div>
+      </div>
+      <div class="quiz-feedback" data-ok="LEDs have very low resistance themselves, so without a resistor, too much current flows and they burn out." data-bad="Without a current-limiting resistor, the LED draws too much current and is destroyed."></div>
+    </div>
+  </section>
+
+  <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+
+  <!-- 2.5 SWITCHES & BATTERIES -->
+  <section id="l5">
+    <h1 class="lesson-title">2.5 Switches & Batteries</h1>
+    <div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+    <div class="lesson-body">
+      <p><strong>Switches</strong> control whether a circuit is open (no current) or closed (current flows). Every button you press, every toggle you flip, is a switch. Types include:</p>
+      <ul>
+        <li><strong>SPST</strong> (Single Pole Single Throw) — simplest on/off switch</li>
+        <li><strong>SPDT</strong> (Single Pole Double Throw) — selects between two paths</li>
+        <li><strong>Push button</strong> (momentary) — only closed while pressed. Most common in projects.</li>
+        <li><strong>Toggle switch</strong> — stays in position (latching)</li>
+      </ul>
+
+      <h2>Batteries</h2>
+      <p>Batteries convert chemical energy to electrical energy. Key specifications:</p>
+      <ul>
+        <li><strong>Voltage (V):</strong> Determined by the chemistry. AA = 1.5V, Li-ion = 3.7V, 9V block = 9V.</li>
+        <li><strong>Capacity (mAh):</strong> How much charge it holds. A 2000mAh battery can supply 2000mA for 1 hour, or 200mA for 10 hours.</li>
+        <li><strong>Chemistry:</strong> Alkaline (disposable), NiMH (rechargeable), Li-ion (high density), LiPo (flexible shape).</li>
+      </ul>
+
+      <div class="formula-block">
+        <div class="formula-text">Battery Life = Capacity (mAh) / Current Draw (mA)</div>
+        <div class="formula-label">Example: 1000mAh ÷ 50mA = 20 hours of operation</div>
+      </div>
+    </div>
+  </section>
+
+  <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+
+  <!-- 2.6 READING VALUES -->
+  <section id="l6">
+    <h1 class="lesson-title">2.6 Reading Component Values</h1>
+    <div class="lesson-meta"><span class="tag tag-practical">Practical</span><span class="tag tag-beginner">Beginner</span></div>
+    <div class="lesson-body">
+      <p>Real-world components have their values printed or coded on them. Being able to read these is an essential skill for any electronics builder.</p>
+
+      <h2>Unit Prefixes Cheat Sheet</h2>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin:1rem 0;">
+        <table style="width:100%;border-collapse:collapse;font-family:var(--font-mono);font-size:0.82rem;">
+          <tr style="border-bottom:1px solid var(--border);color:var(--muted);"><th style="padding:5px;text-align:left">Prefix</th><th style="padding:5px;text-align:left">Symbol</th><th style="padding:5px;text-align:left">Multiplier</th><th style="padding:5px;text-align:left">Example</th></tr>
+          <tr><td style="padding:5px;">Mega</td><td style="padding:5px;color:var(--accent)">M</td><td style="padding:5px;">× 1,000,000</td><td style="padding:5px;color:var(--muted)">1MΩ = 1,000,000Ω</td></tr>
+          <tr><td style="padding:5px;">Kilo</td><td style="padding:5px;color:var(--accent)">k</td><td style="padding:5px;">× 1,000</td><td style="padding:5px;color:var(--muted)">4.7kΩ = 4,700Ω</td></tr>
+          <tr><td style="padding:5px;">milli</td><td style="padding:5px;color:var(--accent)">m</td><td style="padding:5px;">× 0.001</td><td style="padding:5px;color:var(--muted)">20mA = 0.02A</td></tr>
+          <tr><td style="padding:5px;">micro</td><td style="padding:5px;color:var(--accent)">µ</td><td style="padding:5px;">× 0.000001</td><td style="padding:5px;color:var(--muted)">100µF capacitor</td></tr>
+          <tr><td style="padding:5px;">nano</td><td style="padding:5px;color:var(--accent)">n</td><td style="padding:5px;">× 10⁻⁹</td><td style="padding:5px;color:var(--muted)">47nF capacitor</td></tr>
+          <tr><td style="padding:5px;">pico</td><td style="padding:5px;color:var(--accent)">p</td><td style="padding:5px;">× 10⁻¹²</td><td style="padding:5px;color:var(--muted)">22pF capacitor</td></tr>
+        </table>
+      </div>
+
+      <div class="tip-box">
+        <div class="box-title">✅ Module 2 Complete!</div>
+        You now know the six most fundamental components: resistors, capacitors, inductors, diodes, LEDs, switches and batteries. In Module 3, we put them to use with Ohm's Law!
+      </div>
+    </div>
+
+    <div class="lesson-nav">
+      <a href="module1.html" class="btn btn-outline">← Module 1</a>
+      <button class="mark-done-btn">Mark as Complete</button>
+      <a href="module3.html" class="btn btn-primary">Module 3: Ohm's Law →</a>
+    </div>
+  </section>
+</main>
+</div>
+
+<script src="course.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  updateProgressBar('m2', 6);
+  initMarkDone('m2_6');
+  refreshSidebarDone();
+});
+</script>
+</body>
+</html>

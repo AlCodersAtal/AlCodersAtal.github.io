@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module 10: Interrupts & Timers – AlCoders Arduino</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<nav class="nav">
+  <a class="nav-logo" href="index.html">⚡ <span>Al</span>Coders</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="module9.html">← Module 9</a>
+    <a href="module10.html" class="active">Module 10</a>
+    <a href="module11.html">Module 11 →</a>
+  </div>
+</nav>
+<div class="breadcrumb">
+  <a href="index.html">Arduino Course</a> › Module 10 › Interrupts, Timers &amp; Power
+</div>
+<div class="page-wrapper">
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">Course Progress</div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-text">0 / 60 lessons completed</div>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔧</span> Module 1 – Getting Started</div>
+    <a href="module1.html" class="lesson-link" data-lesson="m1l1"><span class="lesson-dot"></span>What is Arduino?</a>
+    <a href="module1.html#lesson2" class="lesson-link" data-lesson="m1l2"><span class="lesson-dot"></span>Installing the IDE</a>
+    <a href="module1.html#lesson3" class="lesson-link" data-lesson="m1l3"><span class="lesson-dot"></span>Exploring the Board</a>
+    <a href="module1.html#lesson4" class="lesson-link" data-lesson="m1l4"><span class="lesson-dot"></span>Your First Sketch: Blink</a>
+    <a href="module1.html#lesson5" class="lesson-link" data-lesson="m1l5"><span class="lesson-dot"></span>Understanding the Code</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">⚡</span> Module 2 – Electronics</div>
+    <a href="module2.html" class="lesson-link" data-lesson="m2l1"><span class="lesson-dot"></span>Voltage, Current &amp; Resistance</a>
+    <a href="module2.html#lesson2" class="lesson-link" data-lesson="m2l2"><span class="lesson-dot"></span>Ohm's Law</a>
+    <a href="module2.html#lesson3" class="lesson-link" data-lesson="m2l3"><span class="lesson-dot"></span>Breadboards &amp; Schematics</a>
+    <a href="module2.html#lesson4" class="lesson-link" data-lesson="m2l4"><span class="lesson-dot"></span>Resistors &amp; Capacitors</a>
+    <a href="module2.html#lesson5" class="lesson-link" data-lesson="m2l5"><span class="lesson-dot"></span>Power Supply &amp; Safety</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💡</span> Module 3 – Digital I/O</div>
+    <a href="module3.html" class="lesson-link" data-lesson="m3l1"><span class="lesson-dot"></span>Digital Pins Explained</a>
+    <a href="module3.html#lesson2" class="lesson-link" data-lesson="m3l2"><span class="lesson-dot"></span>digitalWrite &amp; digitalRead</a>
+    <a href="module3.html#lesson3" class="lesson-link" data-lesson="m3l3"><span class="lesson-dot"></span>Push Buttons &amp; Input</a>
+    <a href="module3.html#lesson4" class="lesson-link" data-lesson="m3l4"><span class="lesson-dot"></span>Debouncing Buttons</a>
+    <a href="module3.html#lesson5" class="lesson-link" data-lesson="m3l5"><span class="lesson-dot"></span>Traffic Light Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌡️</span> Module 4 – Analog I/O</div>
+    <a href="module4.html" class="lesson-link" data-lesson="m4l1"><span class="lesson-dot"></span>Analog vs Digital</a>
+    <a href="module4.html#lesson2" class="lesson-link" data-lesson="m4l2"><span class="lesson-dot"></span>analogRead &amp; Potentiometer</a>
+    <a href="module4.html#lesson3" class="lesson-link" data-lesson="m4l3"><span class="lesson-dot"></span>PWM &amp; analogWrite</a>
+    <a href="module4.html#lesson4" class="lesson-link" data-lesson="m4l4"><span class="lesson-dot"></span>Temperature Sensor</a>
+    <a href="module4.html#lesson5" class="lesson-link" data-lesson="m4l5"><span class="lesson-dot"></span>Light Sensor Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📺</span> Module 5 – Displays</div>
+    <a href="module5.html" class="lesson-link" data-lesson="m5l1"><span class="lesson-dot"></span>LCD 16x2 with I2C</a>
+    <a href="module5.html#lesson2" class="lesson-link" data-lesson="m5l2"><span class="lesson-dot"></span>OLED Display (SSD1306)</a>
+    <a href="module5.html#lesson3" class="lesson-link" data-lesson="m5l3"><span class="lesson-dot"></span>7-Segment Display</a>
+    <a href="module5.html#lesson4" class="lesson-link" data-lesson="m5l4"><span class="lesson-dot"></span>Buzzer &amp; Tones</a>
+    <a href="module5.html#lesson5" class="lesson-link" data-lesson="m5l5"><span class="lesson-dot"></span>RGB LED &amp; Color Mixing</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🔊</span> Module 6 – Motors</div>
+    <a href="module6.html" class="lesson-link" data-lesson="m6l1"><span class="lesson-dot"></span>Servo Motor Basics</a>
+    <a href="module6.html#lesson2" class="lesson-link" data-lesson="m6l2"><span class="lesson-dot"></span>DC Motors &amp; L298N</a>
+    <a href="module6.html#lesson3" class="lesson-link" data-lesson="m6l3"><span class="lesson-dot"></span>Stepper Motors</a>
+    <a href="module6.html#lesson4" class="lesson-link" data-lesson="m6l4"><span class="lesson-dot"></span>Motor Speed Control</a>
+    <a href="module6.html#lesson5" class="lesson-link" data-lesson="m6l5"><span class="lesson-dot"></span>Mini Robot Car Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📡</span> Module 7 – Protocols</div>
+    <a href="module7.html" class="lesson-link" data-lesson="m7l1"><span class="lesson-dot"></span>Serial Communication</a>
+    <a href="module7.html#lesson2" class="lesson-link" data-lesson="m7l2"><span class="lesson-dot"></span>I2C Protocol</a>
+    <a href="module7.html#lesson3" class="lesson-link" data-lesson="m7l3"><span class="lesson-dot"></span>SPI Protocol</a>
+    <a href="module7.html#lesson4" class="lesson-link" data-lesson="m7l4"><span class="lesson-dot"></span>Connecting Multiple Devices</a>
+    <a href="module7.html#lesson5" class="lesson-link" data-lesson="m7l5"><span class="lesson-dot"></span>Real-time Serial Plotter</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🌐</span> Module 8 – WiFi &amp; IoT</div>
+    <a href="module8.html" class="lesson-link" data-lesson="m8l1"><span class="lesson-dot"></span>Intro to ESP8266/ESP32</a>
+    <a href="module8.html#lesson2" class="lesson-link" data-lesson="m8l2"><span class="lesson-dot"></span>Connecting to WiFi</a>
+    <a href="module8.html#lesson3" class="lesson-link" data-lesson="m8l3"><span class="lesson-dot"></span>Building a Web Server</a>
+    <a href="module8.html#lesson4" class="lesson-link" data-lesson="m8l4"><span class="lesson-dot"></span>Sending Data to Cloud</a>
+    <a href="module8.html#lesson5" class="lesson-link" data-lesson="m8l5"><span class="lesson-dot"></span>MQTT Basics</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">📶</span> Module 9 – Bluetooth</div>
+    <a href="module9.html" class="lesson-link" data-lesson="m9l1"><span class="lesson-dot"></span>HC-05 Bluetooth Module</a>
+    <a href="module9.html#lesson2" class="lesson-link" data-lesson="m9l2"><span class="lesson-dot"></span>AT Commands Setup</a>
+    <a href="module9.html#lesson3" class="lesson-link" data-lesson="m9l3"><span class="lesson-dot"></span>Phone-to-Arduino Control</a>
+    <a href="module9.html#lesson4" class="lesson-link" data-lesson="m9l4"><span class="lesson-dot"></span>BLE with ESP32</a>
+    <a href="module9.html#lesson5" class="lesson-link" data-lesson="m9l5"><span class="lesson-dot"></span>Bluetooth Car Project</a>
+  </div>
+  <div class="module-group active-module"><div class="module-label"><span class="mod-icon">⏱️</span> Module 10 – Interrupts &amp; Timers</div>
+    <a href="#lesson1" class="lesson-link active" data-lesson="m10l1"><span class="lesson-dot"></span>What are Interrupts?</a>
+    <a href="#lesson2" class="lesson-link" data-lesson="m10l2"><span class="lesson-dot"></span>attachInterrupt()</a>
+    <a href="#lesson3" class="lesson-link" data-lesson="m10l3"><span class="lesson-dot"></span>Hardware Timers</a>
+    <a href="#lesson4" class="lesson-link" data-lesson="m10l4"><span class="lesson-dot"></span>millis() vs delay()</a>
+    <a href="#lesson5" class="lesson-link" data-lesson="m10l5"><span class="lesson-dot"></span>Sleep Modes &amp; Power Saving</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">💾</span> Module 11 – Memory &amp; Libraries</div>
+    <a href="module11.html" class="lesson-link" data-lesson="m11l1"><span class="lesson-dot"></span>Arduino Memory Types</a>
+    <a href="module11.html#lesson2" class="lesson-link" data-lesson="m11l2"><span class="lesson-dot"></span>EEPROM Read &amp; Write</a>
+    <a href="module11.html#lesson3" class="lesson-link" data-lesson="m11l3"><span class="lesson-dot"></span>SD Card Module</a>
+    <a href="module11.html#lesson4" class="lesson-link" data-lesson="m11l4"><span class="lesson-dot"></span>Writing Custom Libraries</a>
+    <a href="module11.html#lesson5" class="lesson-link" data-lesson="m11l5"><span class="lesson-dot"></span>Data Logger Project</a>
+  </div>
+  <div class="module-group"><div class="module-label"><span class="mod-icon">🏗️</span> Module 12 – Capstone Projects</div>
+    <a href="module12.html" class="lesson-link" data-lesson="m12l1"><span class="lesson-dot"></span>Smart Weather Station</a>
+    <a href="module12.html#lesson2" class="lesson-link" data-lesson="m12l2"><span class="lesson-dot"></span>Obstacle-Avoiding Robot</a>
+    <a href="module12.html#lesson3" class="lesson-link" data-lesson="m12l3"><span class="lesson-dot"></span>Home Automation System</a>
+    <a href="module12.html#lesson4" class="lesson-link" data-lesson="m12l4"><span class="lesson-dot"></span>RFID Door Lock</a>
+    <a href="module12.html#lesson5" class="lesson-link" data-lesson="m12l5"><span class="lesson-dot"></span>Build Your Own Project</a>
+  </div>
+</aside>
+
+<main class="main-content">
+  <div class="module-hero">
+    <div class="module-hero-icon">⏱️</div>
+    <div>
+      <div class="module-hero-num">Module 10 · Advanced</div>
+      <h1 class="module-hero-title">Interrupts, Timers &amp; Power</h1>
+      <p class="module-hero-desc">Learn to respond to events instantly, use hardware timers for precise timing, and put your Arduino to sleep to save power.</p>
+    </div>
+  </div>
+
+  <!-- LESSON 1 -->
+  <div class="lesson-card" id="lesson1">
+    <div class="lesson-header">
+      <div class="lesson-icon">⚡</div>
+      <div>
+        <div class="lesson-num">Lesson 1 of 5</div>
+        <h2 class="lesson-title">What are Interrupts?</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>Normally Arduino runs code line by line in a loop. <strong>Interrupts</strong> break this pattern — they immediately pause whatever the processor is doing and run a special function called an <strong>ISR</strong> (Interrupt Service Routine) the instant an event occurs.</p>
+      <h3>Why Use Interrupts?</h3>
+      <p>Imagine you need to count button presses while also running other code. If you check the button inside <code>loop()</code>, you might miss fast presses. An interrupt fires the moment the button is pressed — no polling needed, no misses.</p>
+      <table class="component-table"><thead><tr><th>Method</th><th>Polling (loop)</th><th>Interrupt</th></tr></thead><tbody>
+        <tr><td>Response time</td><td>Depends on loop speed</td><td>Instant (microseconds)</td></tr>
+        <tr><td>CPU usage</td><td>Wastes cycles checking</td><td>Efficient — only runs on event</td></tr>
+        <tr><td>Best for</td><td>Slow, non-critical events</td><td>Fast, critical events</td></tr>
+        <tr><td>Example</td><td>Read temperature every second</td><td>Count encoder pulses</td></tr>
+      </tbody></table>
+      <h3>Interrupt Sources on Arduino Uno</h3>
+      <table class="component-table"><thead><tr><th>Interrupt #</th><th>Pin</th><th>Trigger</th></tr></thead><tbody>
+        <tr><td>INT0</td><td>Pin 2</td><td>RISING, FALLING, CHANGE, LOW</td></tr>
+        <tr><td>INT1</td><td>Pin 3</td><td>RISING, FALLING, CHANGE, LOW</td></tr>
+      </tbody></table>
+      <div class="info-box tip"><span class="icon">💡</span><div class="body"><strong>Arduino Mega</strong> has 6 external interrupt pins (2, 3, 18, 19, 20, 21). Arduino Leonardo uses different pin numbers — always check your board's documentation.</div></div>
+      <div class="quiz-box">
+        <h4>Quick Check</h4>
+        <p>What does ISR stand for?</p>
+        <button class="quiz-option" data-correct="false">Input Signal Register</button>
+        <button class="quiz-option" data-correct="true">Interrupt Service Routine</button>
+        <button class="quiz-option" data-correct="false">Internal System Reset</button>
+        <button class="quiz-option" data-correct="false">Integrated Serial Response</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m10l1">○ Mark Complete</button></div>
+  </div>
+
+  <!-- LESSON 2 -->
+  <div class="lesson-card" id="lesson2">
+    <div class="lesson-header">
+      <div class="lesson-icon">🔔</div>
+      <div>
+        <div class="lesson-num">Lesson 2 of 5</div>
+        <h2 class="lesson-title">attachInterrupt()</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>The <code>attachInterrupt()</code> function registers an ISR to run when a specific event occurs on an interrupt pin. The ISR must be fast — no <code>delay()</code>, no Serial prints, no heavy computation.</p>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ — Button Counter with Interrupt</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">volatile int</span> count = <span class="nm">0</span>;  <span class="cm">// volatile! ISR modifies this</span>
+<span class="kw">volatile bool</span> pressed = <span class="kw">false</span>;
+
+<span class="kw">void</span> <span class="fn">buttonISR</span>() {
+  count++;          <span class="cm">// Increment counter</span>
+  pressed = <span class="kw">true</span>;  <span class="cm">// Set flag for main loop</span>
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="nm">9600</span>);
+  <span class="fn">pinMode</span>(<span class="nm">2</span>, INPUT_PULLUP);
+
+  <span class="cm">// attachInterrupt(digitalPinToInterrupt(pin), ISR, mode)</span>
+  <span class="fn">attachInterrupt</span>(<span class="fn">digitalPinToInterrupt</span>(<span class="nm">2</span>), buttonISR, FALLING);
+  <span class="cm">// FALLING = trigger when pin goes HIGH→LOW (button press)</span>
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">if</span> (pressed) {
+    pressed = <span class="kw">false</span>;            <span class="cm">// Clear flag</span>
+    Serial.<span class="fn">print</span>(<span class="st">"Count: "</span>);
+    Serial.<span class="fn">println</span>(count);
+  }
+  <span class="cm">// Other code runs here without missing button presses</span>
+  <span class="fn">delay</span>(<span class="nm">100</span>);
+}</code></pre></div>
+      <h3>Interrupt Modes</h3>
+      <table class="component-table"><thead><tr><th>Mode</th><th>Triggers When</th></tr></thead><tbody>
+        <tr><td><code>RISING</code></td><td>Pin changes from LOW → HIGH</td></tr>
+        <tr><td><code>FALLING</code></td><td>Pin changes from HIGH → LOW</td></tr>
+        <tr><td><code>CHANGE</code></td><td>Pin changes in either direction</td></tr>
+        <tr><td><code>LOW</code></td><td>Pin is LOW (continuous, use carefully)</td></tr>
+      </tbody></table>
+      <div class="info-box warning"><span class="icon">⚠️</span><div class="body"><strong>ISR Rules — Critical!</strong>
+        <ul style="margin-top:0.5rem;margin-left:1.2rem;line-height:1.8">
+          <li>Always declare shared variables as <code>volatile</code></li>
+          <li>Never use <code>delay()</code> inside an ISR</li>
+          <li>Never use <code>Serial.print()</code> inside an ISR</li>
+          <li>Keep ISRs as short as possible — set a flag, do work in loop()</li>
+          <li>millis() won't increment inside an ISR</li>
+        </ul>
+      </div></div>
+      <div class="quiz-box">
+        <h4>Quick Check</h4>
+        <p>Why must shared variables between ISR and main loop be declared as <code>volatile</code>?</p>
+        <button class="quiz-option" data-correct="false">To make them faster to access</button>
+        <button class="quiz-option" data-correct="true">To prevent the compiler from caching them in a register — ensures fresh memory reads</button>
+        <button class="quiz-option" data-correct="false">To make them accessible globally</button>
+        <button class="quiz-option" data-correct="false">To allow the ISR to modify them</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m10l2">○ Mark Complete</button></div>
+  </div>
+
+  <!-- LESSON 3 -->
+  <div class="lesson-card" id="lesson3">
+    <div class="lesson-header">
+      <div class="lesson-icon">⏰</div>
+      <div>
+        <div class="lesson-num">Lesson 3 of 5</div>
+        <h2 class="lesson-title">Hardware Timers</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>The Arduino Uno's ATmega328P has <strong>3 hardware timers</strong> (Timer0, Timer1, Timer2). These are independent counters that count clock cycles — they keep time accurately even while your code is doing something else.</p>
+      <h3>The Three Timers</h3>
+      <table class="component-table"><thead><tr><th>Timer</th><th>Bits</th><th>Used By</th><th>Period</th></tr></thead><tbody>
+        <tr><td>Timer0</td><td>8-bit</td><td>delay(), millis(), micros()</td><td>~1ms</td></tr>
+        <tr><td>Timer1</td><td>16-bit</td><td>Servo library, tone()</td><td>Up to 4s</td></tr>
+        <tr><td>Timer2</td><td>8-bit</td><td>tone() on some boards</td><td>~16ms</td></tr>
+      </tbody></table>
+      <div class="info-box warning"><span class="icon">⚠️</span><div class="body"><strong>Timer Conflicts</strong> The Servo library uses Timer1. If you use Servo and try to generate tones on pins 9/10 (which also use Timer1), there will be conflicts. Plan your pin and library usage carefully.</div></div>
+      <h3>Using the TimerOne Library</h3>
+      <p>For precise, repeating timer interrupts, use the <strong>TimerOne</strong> library (install via Library Manager). This fires an ISR at a fixed interval — perfect for PID control, sensor polling, or anything needing exact timing.</p>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ — TimerOne: Blink LED every 500ms precisely</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">#include</span> <span class="st">&lt;TimerOne.h&gt;</span>
+
+<span class="kw">volatile bool</span> ledState = <span class="kw">false</span>;
+
+<span class="kw">void</span> <span class="fn">timerISR</span>() {
+  ledState = !ledState;
+  <span class="fn">digitalWrite</span>(<span class="nm">13</span>, ledState);
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(<span class="nm">13</span>, OUTPUT);
+  Timer1.<span class="fn">initialize</span>(<span class="nm">500000</span>);   <span class="cm">// 500,000 microseconds = 500ms</span>
+  Timer1.<span class="fn">attachInterrupt</span>(timerISR);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// Main loop free to do other tasks</span>
+  <span class="cm">// LED blinks precisely every 500ms regardless</span>
+}</code></pre></div>
+      <div class="quiz-box">
+        <h4>Quick Check</h4>
+        <p>Which Arduino Uno timer is used by millis() and delay()?</p>
+        <button class="quiz-option" data-correct="true">Timer0</button>
+        <button class="quiz-option" data-correct="false">Timer1</button>
+        <button class="quiz-option" data-correct="false">Timer2</button>
+        <button class="quiz-option" data-correct="false">Timer3</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m10l3">○ Mark Complete</button></div>
+  </div>
+
+  <!-- LESSON 4 -->
+  <div class="lesson-card" id="lesson4">
+    <div class="lesson-header">
+      <div class="lesson-icon">🔄</div>
+      <div>
+        <div class="lesson-num">Lesson 4 of 5</div>
+        <h2 class="lesson-title">millis() vs delay() — Non-Blocking Code</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>This is one of the most important concepts in embedded programming. <code>delay()</code> <strong>freezes everything</strong> — no sensor reads, no button checks, nothing. <code>millis()</code> lets you time events without blocking anything.</p>
+      <h3>The Problem with delay()</h3>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ — WRONG: delay() blocks everything</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="cm">// Blink LED every second</span>
+  <span class="fn">digitalWrite</span>(<span class="nm">13</span>, HIGH);
+  <span class="fn">delay</span>(<span class="nm">1000</span>);  <span class="cm">// Arduino FROZEN for 1 second!</span>
+  <span class="fn">digitalWrite</span>(<span class="nm">13</span>, LOW);
+  <span class="fn">delay</span>(<span class="nm">1000</span>);  <span class="cm">// FROZEN again!</span>
+  <span class="cm">// During these 2 seconds, you can't read sensors,</span>
+  <span class="cm">// check buttons, update display, or do ANYTHING ELSE</span>
+}</code></pre></div>
+      <h3>The millis() Solution</h3>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ — RIGHT: millis() non-blocking pattern</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">unsigned long</span> prevLED = <span class="nm">0</span>;
+<span class="kw">unsigned long</span> prevSensor = <span class="nm">0</span>;
+<span class="kw">bool</span> ledState = <span class="kw">false</span>;
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">unsigned long</span> now = <span class="fn">millis</span>();
+
+  <span class="cm">// Blink LED every 1000ms</span>
+  <span class="kw">if</span> (now - prevLED &gt;= <span class="nm">1000</span>) {
+    prevLED = now;
+    ledState = !ledState;
+    <span class="fn">digitalWrite</span>(<span class="nm">13</span>, ledState);
+  }
+
+  <span class="cm">// Read sensor every 200ms</span>
+  <span class="kw">if</span> (now - prevSensor &gt;= <span class="nm">200</span>) {
+    prevSensor = now;
+    <span class="tp">int</span> val = <span class="fn">analogRead</span>(A0);
+    Serial.<span class="fn">println</span>(val);
+  }
+
+  <span class="cm">// Both tasks run SIMULTANEOUSLY — no blocking!</span>
+  <span class="cm">// Check buttons, update display, etc. here too</span>
+}</code></pre></div>
+      <div class="info-box tip"><span class="icon">💡</span><div class="body"><strong>millis() Overflow</strong> millis() rolls over to 0 after ~49 days. The pattern <code>now - prevTime >= interval</code> handles this correctly because unsigned subtraction wraps around properly. Never use <code>millis() >= prevTime + interval</code> — that breaks at overflow!</div></div>
+      <div class="quiz-box">
+        <h4>Quick Check</h4>
+        <p>You need to blink 3 LEDs at different speeds and also read a button. Which approach should you use?</p>
+        <button class="quiz-option" data-correct="false">Three separate delay() calls</button>
+        <button class="quiz-option" data-correct="true">millis() with separate timers for each LED and button</button>
+        <button class="quiz-option" data-correct="false">Three separate Arduinos</button>
+        <button class="quiz-option" data-correct="false">interrupts only</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m10l4">○ Mark Complete</button></div>
+  </div>
+
+  <!-- LESSON 5 -->
+  <div class="lesson-card" id="lesson5">
+    <div class="lesson-header">
+      <div class="lesson-icon">😴</div>
+      <div>
+        <div class="lesson-num">Lesson 5 of 5</div>
+        <h2 class="lesson-title">Sleep Modes &amp; Power Saving</h2>
+      </div>
+    </div>
+    <div class="lesson-body">
+      <p>Battery-powered Arduino projects live or die on power consumption. The ATmega328P normally draws ~15-20mA, but using sleep modes you can drop this to <strong>under 1µA</strong> — extending battery life from days to years.</p>
+      <h3>Arduino Sleep Modes</h3>
+      <table class="component-table"><thead><tr><th>Mode</th><th>Current Draw</th><th>Wake Sources</th><th>Use Case</th></tr></thead><tbody>
+        <tr><td>Idle</td><td>~6mA</td><td>Any interrupt</td><td>Light sleep, timers still run</td></tr>
+        <tr><td>ADC Noise Reduction</td><td>~1.1mA</td><td>ADC complete, INT0</td><td>Precise ADC reads</td></tr>
+        <tr><td>Power-save</td><td>~1.1mA</td><td>Timer2, TWI, INT</td><td>Timer2 still runs</td></tr>
+        <tr><td><strong>Power-down</strong></td><td><strong>~0.1µA</strong></td><td>External interrupt, WDT</td><td>Deepest sleep, lowest power</td></tr>
+        <tr><td>Standby</td><td>~0.8µA</td><td>INT, crystal oscillator stays on</td><td>Fast wake needed</td></tr>
+      </tbody></table>
+      <div class="code-block"><div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Arduino C++ — Deep Sleep, wake on button press</span><button class="copy-btn">Copy</button></div><pre><code><span class="kw">#include</span> <span class="st">&lt;avr/sleep.h&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;avr/power.h&gt;</span>
+
+<span class="kw">void</span> <span class="fn">wakeISR</span>() {
+  <span class="cm">// Woke up! Just return, setup will continue</span>
+}
+
+<span class="kw">void</span> <span class="fn">goToSleep</span>() {
+  <span class="fn">sleep_enable</span>();
+  <span class="fn">attachInterrupt</span>(<span class="fn">digitalPinToInterrupt</span>(<span class="nm">2</span>), wakeISR, LOW);
+  <span class="fn">set_sleep_mode</span>(SLEEP_MODE_PWR_DOWN);   <span class="cm">// Deepest sleep</span>
+  <span class="fn">sleep_cpu</span>();                           <span class="cm">// ZZZzzz...</span>
+  <span class="cm">// --- CODE RESUMES HERE AFTER WAKE ---</span>
+  <span class="fn">sleep_disable</span>();
+  <span class="fn">detachInterrupt</span>(<span class="fn">digitalPinToInterrupt</span>(<span class="nm">2</span>));
+}
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  Serial.<span class="fn">begin</span>(<span class="nm">9600</span>);
+  <span class="fn">pinMode</span>(<span class="nm">2</span>, INPUT_PULLUP);
+  <span class="fn">pinMode</span>(<span class="nm">13</span>, OUTPUT);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  Serial.<span class="fn">println</span>(<span class="st">"Awake! Doing work..."</span>);
+  <span class="fn">digitalWrite</span>(<span class="nm">13</span>, HIGH);
+  <span class="fn">delay</span>(<span class="nm">1000</span>);
+  <span class="fn">digitalWrite</span>(<span class="nm">13</span>, LOW);
+
+  Serial.<span class="fn">println</span>(<span class="st">"Going to sleep. Press button to wake."</span>);
+  Serial.<span class="fn">flush</span>();   <span class="cm">// Finish sending before sleep!</span>
+  <span class="fn">goToSleep</span>();      <span class="cm">// Sleep until button press</span>
+}</code></pre></div>
+      <div class="info-box tip"><span class="icon">💡</span><div class="body"><strong>More Power Savings</strong> Disable unused peripherals using the power reduction register: <code>power_adc_disable()</code>, <code>power_spi_disable()</code>, <code>power_twi_disable()</code>. Together these can reduce active current from ~15mA to under 5mA even when awake.</div></div>
+      <div class="quiz-box">
+        <h4>Quick Check</h4>
+        <p>Which sleep mode draws the absolute minimum current on Arduino Uno?</p>
+        <button class="quiz-option" data-correct="false">Idle</button>
+        <button class="quiz-option" data-correct="false">Standby</button>
+        <button class="quiz-option" data-correct="true">Power-down (~0.1µA)</button>
+        <button class="quiz-option" data-correct="false">ADC Noise Reduction</button>
+        <div class="quiz-result"></div>
+      </div>
+    </div>
+    <div class="lesson-complete-bar"><button class="btn btn-complete" data-lesson="m10l5">○ Mark Complete</button></div>
+  </div>
+
+  <div class="lesson-footer">
+    <a href="module9.html" class="btn btn-outline">← Module 9</a>
+    <button class="btn btn-complete" data-lesson="m10_complete">○ Mark Module Complete</button>
+    <a href="module11.html" class="btn btn-primary">Module 11: Memory &amp; Libraries →</a>
+  </div>
+</main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

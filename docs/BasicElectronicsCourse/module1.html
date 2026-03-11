@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 1: What is Electricity? — AlCoders Electronics</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo"><div class="logo-icon">⚡</div><span class="logo-text">Al<span>Coders</span></span></a>
+  <div class="nav-links">
+    <a href="index.html">← All Modules</a>
+    <a href="module2.html">Next Module →</a>
+  </div>
+</nav>
+
+<div class="course-layout">
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h3>// Module Progress</h3>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:0%"></div></div>
+    <div class="progress-label">0% complete</div>
+  </div>
+
+  <div class="module-group">
+    <button class="module-title-btn active"><span class="module-num">1</span>What is Electricity?</button>
+    <ul class="lesson-list">
+      <li class="lesson-item"><a href="#l1" data-lid="m1_1" class="active">1.1 Atoms & Electrons</a></li>
+      <li class="lesson-item"><a href="#l2" data-lid="m1_2">1.2 Electric Charge</a></li>
+      <li class="lesson-item"><a href="#l3" data-lid="m1_3">1.3 Voltage & EMF</a></li>
+      <li class="lesson-item"><a href="#l4" data-lid="m1_4">1.4 Current & Amperes</a></li>
+      <li class="lesson-item"><a href="#l5" data-lid="m1_5">1.5 Resistance & Conductors</a></li>
+    </ul>
+  </div>
+
+  <div class="module-group">
+    <button class="module-title-btn"><span class="module-num">2</span>Basic Components</button>
+    <ul class="lesson-list" style="display:none">
+      <li class="lesson-item"><a href="module2.html">2.1 Resistors</a></li>
+    </ul>
+  </div>
+  <div class="module-group">
+    <button class="module-title-btn"><span class="module-num">3</span>Ohm's Law & Power</button>
+    <ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module3.html">Go to module →</a></li></ul>
+  </div>
+  <div class="module-group">
+    <button class="module-title-btn"><span class="module-num">4</span>Series & Parallel</button>
+    <ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module4.html">Go to module →</a></li></ul>
+  </div>
+  <div class="module-group">
+    <button class="module-title-btn"><span class="module-num">5</span>Semiconductors & Diodes</button>
+    <ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module5.html">Go to module →</a></li></ul>
+  </div>
+  <div class="module-group">
+    <button class="module-title-btn"><span class="module-num">6</span>Transistors</button>
+    <ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module6.html">Go to module →</a></li></ul>
+  </div>
+  <div class="module-group">
+    <button class="module-title-btn"><span class="module-num">7</span>Breadboarding & Tools</button>
+    <ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module7.html">Go to module →</a></li></ul>
+  </div>
+  <div class="module-group">
+    <button class="module-title-btn"><span class="module-num">8</span>Capacitors & Inductors</button>
+    <ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module8.html">Go to module →</a></li></ul>
+  </div>
+  <div class="module-group">
+    <button class="module-title-btn"><span class="module-num">9</span>Sensors & Signals</button>
+    <ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module9.html">Go to module →</a></li></ul>
+  </div>
+  <div class="module-group">
+    <button class="module-title-btn"><span class="module-num">10</span>Intro to Arduino</button>
+    <ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module10.html">Go to module →</a></li></ul>
+  </div>
+  <div class="module-group">
+    <button class="module-title-btn"><span class="module-num">11</span>Arduino & Sensors</button>
+    <ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module11.html">Go to module →</a></li></ul>
+  </div>
+  <div class="module-group">
+    <button class="module-title-btn"><span class="module-num">12</span>Final Projects</button>
+    <ul class="lesson-list" style="display:none"><li class="lesson-item"><a href="module12.html">Go to module →</a></li></ul>
+  </div>
+</aside>
+
+<!-- CONTENT -->
+<main class="content-area">
+  <div class="lesson-breadcrumb">Electronics Course → <span>Module 1</span> → Lesson 1.1</div>
+
+  <!-- LESSON 1.1 -->
+  <section id="l1">
+    <h1 class="lesson-title">1.1 Atoms & Electrons</h1>
+    <div class="lesson-meta">
+      <span class="tag tag-theory">Theory</span>
+      <span class="tag tag-beginner">Beginner</span>
+    </div>
+
+    <div class="lesson-body">
+      <p>Everything around you — your phone, the lights in your room, even your body — relies on a single invisible particle: the <strong>electron</strong>. Understanding electronics starts here, at the atomic level.</p>
+
+      <h2>The Atom</h2>
+      <p>All matter is made of <strong>atoms</strong>. An atom has a central <strong>nucleus</strong> containing positively charged protons and neutral neutrons. Orbiting the nucleus are negatively charged <strong>electrons</strong>.</p>
+
+      <div class="circuit-diagram">
+        <svg width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+          <!-- Nucleus -->
+          <circle cx="110" cy="110" r="22" fill="rgba(26,92,255,0.15)" stroke="#1a5cff" stroke-width="2"/>
+          <text x="110" y="106" text-anchor="middle" fill="#181714" font-family="IBM Plex Mono" font-size="9">p+ n</text>
+          <text x="110" y="118" text-anchor="middle" fill="#8a8880" font-family="IBM Plex Mono" font-size="8">nucleus</text>
+          <!-- Orbit 1 -->
+          <ellipse cx="110" cy="110" rx="55" ry="30" fill="none" stroke="#e0ddd4" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <!-- Orbit 2 -->
+          <ellipse cx="110" cy="110" rx="90" ry="50" fill="none" stroke="#e0ddd4" stroke-width="1.5" stroke-dasharray="4,3" transform="rotate(30 110 110)"/>
+          <!-- Electrons -->
+          <circle cx="165" cy="110" r="7" fill="#1a5cff" opacity="0.9"/>
+          <text x="165" y="114" text-anchor="middle" fill="#181714" font-family="IBM Plex Mono" font-size="8" font-weight="bold">e-</text>
+          <circle cx="55" cy="110" r="7" fill="#1a5cff" opacity="0.9"/>
+          <text x="55" y="114" text-anchor="middle" fill="#181714" font-family="IBM Plex Mono" font-size="8" font-weight="bold">e-</text>
+          <circle cx="110" cy="57" r="7" fill="#1a5cff" opacity="0.9"/>
+          <text x="110" y="61" text-anchor="middle" fill="#181714" font-family="IBM Plex Mono" font-size="8" font-weight="bold">e-</text>
+        </svg>
+        <p style="color:var(--muted2);font-size:0.8rem;font-family:var(--font-mono);margin-top:0.5rem;">Simplified atom model — nucleus with orbiting electrons (e-)</p>
+      </div>
+
+      <h2>Valence Electrons</h2>
+      <p>The outermost electrons of an atom are called <strong>valence electrons</strong>. These are the electrons that can be knocked free and made to flow. Materials with loosely held valence electrons (like copper) are called <strong>conductors</strong> — electricity flows easily through them. Materials where electrons are tightly bound (like rubber) are called <strong>insulators</strong>.</p>
+
+      <div class="component-grid">
+        <div class="component-card">
+          <div class="component-icon">🔵</div>
+          <h4>Conductors</h4>
+          <p>1–3 valence electrons. Copper, Silver, Gold, Aluminium. Electrons flow freely.</p>
+        </div>
+        <div class="component-card">
+          <div class="component-icon">⚫</div>
+          <h4>Insulators</h4>
+          <p>5–8 valence electrons. Rubber, Plastic, Glass, Wood. Electrons don't flow.</p>
+        </div>
+        <div class="component-card">
+          <div class="component-icon">🟣</div>
+          <h4>Semiconductors</h4>
+          <p>4 valence electrons. Silicon, Germanium. Can be made to conduct or insulate.</p>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <div class="box-title">💡 Fun Fact</div>
+        A single copper penny contains roughly 28,000,000,000,000,000,000,000,000 free electrons — that's 28 septillion electrons available to carry current!
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <h3>// Quick Check</h3>
+      <div class="quiz-q">Which part of an atom carries a negative charge?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" data-correct="false">Proton</div>
+        <div class="quiz-opt" data-correct="true">Electron</div>
+        <div class="quiz-opt" data-correct="false">Neutron</div>
+        <div class="quiz-opt" data-correct="false">Nucleus</div>
+      </div>
+      <div class="quiz-feedback" data-ok="Electrons orbit the nucleus and carry negative charge." data-bad="Protons are positive, neutrons have no charge. Electrons are negative."></div>
+    </div>
+  </section>
+
+  <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+
+  <!-- LESSON 1.2 -->
+  <section id="l2">
+    <h1 class="lesson-title">1.2 Electric Charge</h1>
+    <div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+    <div class="lesson-body">
+      <p><strong>Electric charge</strong> is a fundamental property of matter. There are two types: <strong>positive (+)</strong> and <strong>negative (−)</strong>. Like charges repel each other; opposite charges attract. This attraction and repulsion is the force that drives all of electronics.</p>
+
+      <h2>Unit of Charge: The Coulomb</h2>
+      <p>Charge is measured in <strong>Coulombs (C)</strong>. One coulomb is the charge of approximately 6.24 × 10¹⁸ electrons. That's a huge number of electrons! In practice, we work with much smaller amounts of charge in everyday circuits.</p>
+
+      <div class="formula-block">
+        <div class="formula-text">Q = n × e</div>
+        <div class="formula-label">Q = total charge (C) · n = number of electrons · e = 1.6 × 10⁻¹⁹ C</div>
+      </div>
+
+      <h2>Static vs. Current Electricity</h2>
+      <p><strong>Static electricity</strong> is charge that has built up and is not moving — like when you shuffle across carpet and then touch a doorknob. <strong>Current electricity</strong> is charge in motion — electrons continuously flowing through a conductor. Electronics deals almost entirely with current electricity.</p>
+
+      <div class="info-box">
+        <div class="box-title">📌 Remember</div>
+        By convention, we say current flows from <strong>positive to negative</strong> (conventional current). But physically, electrons actually move from negative to positive. This historical convention can be confusing — just know both conventions exist!
+      </div>
+    </div>
+  </section>
+
+  <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+
+  <!-- LESSON 1.3 -->
+  <section id="l3">
+    <h1 class="lesson-title">1.3 Voltage & EMF</h1>
+    <div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+    <div class="lesson-body">
+      <p><strong>Voltage</strong> is the electrical pressure that pushes electrons through a circuit. Think of it like water pressure in a pipe — the higher the pressure, the harder the water is pushed. Voltage is the "push" that makes electrons move.</p>
+
+      <h2>The Water Analogy</h2>
+      <div class="component-grid">
+        <div class="component-card">
+          <div class="component-icon">💧</div>
+          <h4>Water Pressure = Voltage</h4>
+          <p>Higher voltage = more electrical pressure. Measured in Volts (V).</p>
+        </div>
+        <div class="component-card">
+          <div class="component-icon">🌊</div>
+          <h4>Water Flow = Current</h4>
+          <p>How much charge flows per second. Measured in Amperes (A).</p>
+        </div>
+        <div class="component-card">
+          <div class="component-icon">🪨</div>
+          <h4>Pipe Friction = Resistance</h4>
+          <p>Opposition to current flow. Measured in Ohms (Ω).</p>
+        </div>
+      </div>
+
+      <h2>EMF — Electromotive Force</h2>
+      <p><strong>EMF (Electromotive Force)</strong> is the voltage produced by a source — like a battery or generator. A 9V battery provides 9 volts of EMF. It's the energy per unit charge that the source provides. EMF and voltage are often used interchangeably for beginners, but technically EMF is the source voltage and terminal voltage can differ due to internal resistance.</p>
+
+      <div class="formula-block">
+        <div class="formula-text">V = W / Q</div>
+        <div class="formula-label">V = Voltage (Volts) · W = Work done (Joules) · Q = Charge (Coulombs)</div>
+      </div>
+
+      <div class="tip-box">
+        <div class="box-title">⚡ Common Voltages</div>
+        AA Battery: 1.5V · Phone charger: 5V · Arduino: 5V · Car battery: 12V · Mains (India): 230V AC
+      </div>
+    </div>
+  </section>
+
+  <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+
+  <!-- LESSON 1.4 -->
+  <section id="l4">
+    <h1 class="lesson-title">1.4 Current & Amperes</h1>
+    <div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+    <div class="lesson-body">
+      <p><strong>Electric current</strong> is the rate at which electric charge flows past a point in a circuit. When electrons move through a wire, that movement is current. The more electrons that pass per second, the higher the current.</p>
+
+      <div class="formula-block">
+        <div class="formula-text">I = Q / t</div>
+        <div class="formula-label">I = Current (Amperes, A) · Q = Charge (Coulombs) · t = Time (seconds)</div>
+      </div>
+
+      <h2>DC vs. AC Current</h2>
+      <p><strong>Direct Current (DC)</strong>: Electrons flow in one consistent direction. Batteries produce DC. Arduino runs on DC. Most electronic components use DC.</p>
+      <p><strong>Alternating Current (AC)</strong>: Electrons constantly reverse direction, typically 50 times per second (50 Hz in India). Mains power from the wall is AC. AC is used for long-distance power transmission because it's more efficient.</p>
+
+      <div class="circuit-diagram">
+        <svg width="400" height="100" viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg">
+          <!-- DC -->
+          <text x="10" y="20" fill="#8a8880" font-family="IBM Plex Mono" font-size="10">DC</text>
+          <line x1="10" y1="50" x2="190" y2="50" stroke="#1a5cff" stroke-width="2"/>
+          <text x="190" y="54" fill="#8a8880" font-family="IBM Plex Mono" font-size="9">→ constant</text>
+          <!-- AC -->
+          <text x="10" y="80" fill="#8a8880" font-family="IBM Plex Mono" font-size="10">AC</text>
+          <path d="M 10 90 Q 30 65 50 90 Q 70 115 90 90 Q 110 65 130 90 Q 150 115 170 90" fill="none" stroke="#1a5cff" stroke-width="2"/>
+          <text x="180" y="94" fill="#8a8880" font-family="IBM Plex Mono" font-size="9">~ alternating</text>
+        </svg>
+      </div>
+
+      <div class="warning-box">
+        <div class="box-title">⚠️ Safety</div>
+        Even small currents can be dangerous. Just 10 milliamperes (0.01A) through your heart can cause cardiac arrest. <strong>Never work with mains AC electricity</strong> without proper training. Always use batteries or low-voltage DC for your experiments.
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <h3>// Quick Check</h3>
+      <div class="quiz-q">Which type of current does a battery produce?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" data-correct="false">AC (Alternating Current)</div>
+        <div class="quiz-opt" data-correct="true">DC (Direct Current)</div>
+        <div class="quiz-opt" data-correct="false">Both AC and DC</div>
+      </div>
+      <div class="quiz-feedback" data-ok="Batteries produce DC — electrons flow in one direction only." data-bad="Batteries produce DC. AC comes from generators and the power grid."></div>
+    </div>
+  </section>
+
+  <hr style="border:none;border-top:1px solid var(--border);margin:3rem 0;">
+
+  <!-- LESSON 1.5 -->
+  <section id="l5">
+    <h1 class="lesson-title">1.5 Resistance & Conductors</h1>
+    <div class="lesson-meta"><span class="tag tag-theory">Theory</span><span class="tag tag-beginner">Beginner</span></div>
+    <div class="lesson-body">
+      <p><strong>Resistance</strong> is the opposition a material offers to the flow of electric current. Even good conductors like copper have some resistance. The more resistance in a circuit, the harder it is for current to flow.</p>
+
+      <div class="formula-block">
+        <div class="formula-text">R = ρL / A</div>
+        <div class="formula-label">R = Resistance (Ω) · ρ = resistivity · L = length · A = cross-sectional area</div>
+      </div>
+
+      <h2>Factors Affecting Resistance</h2>
+      <ul>
+        <li><strong>Material:</strong> Copper has low resistivity; nichrome wire has high resistivity.</li>
+        <li><strong>Length:</strong> Longer wire = more resistance (more obstacles for electrons).</li>
+        <li><strong>Cross-section:</strong> Thicker wire = less resistance (more paths for electrons).</li>
+        <li><strong>Temperature:</strong> Most conductors increase in resistance as they heat up.</li>
+      </ul>
+
+      <h2>The Three Quantities Together</h2>
+      <p>Voltage (V), Current (I), and Resistance (R) are the three fundamental quantities in electronics. They are related by <strong>Ohm's Law</strong>, which we'll explore in depth in Module 3. For now, just remember:</p>
+      <ul>
+        <li>Voltage pushes electrons (measured in <strong>Volts, V</strong>)</li>
+        <li>Current is the flow of electrons (measured in <strong>Amperes, A</strong>)</li>
+        <li>Resistance opposes the flow (measured in <strong>Ohms, Ω</strong>)</li>
+      </ul>
+
+      <div class="tip-box">
+        <div class="box-title">✅ Module 1 Complete!</div>
+        You now understand the atomic basis of electricity, the three fundamental quantities (V, I, R), and the difference between DC and AC. In the next module, we'll meet the components that use these quantities.
+      </div>
+    </div>
+
+    <!-- LESSON NAV -->
+    <div class="lesson-nav">
+      <div></div>
+      <button class="mark-done-btn" id="markDone">Mark as Complete</button>
+      <a href="module2.html" class="btn btn-primary">Module 2: Components →</a>
+    </div>
+  </section>
+
+</main>
+</div>
+
+<script src="course.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  updateProgressBar('m1', 5);
+  initMarkDone('m1_5');
+  refreshSidebarDone();
+});
+</script>
+</body>
+</html>
