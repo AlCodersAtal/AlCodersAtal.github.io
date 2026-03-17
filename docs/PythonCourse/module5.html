@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 5: Functions | Python Course | AlCoders ATL</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">Al<span>Coders</span> ATL</a>
+  <ul><li><a href="index.html#curriculum">All Modules</a></li></ul>
+  <a href="module6.html" class="nav-start">Next Module →</a>
+</nav>
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="progress-bar"></div>
+    <div class="topbar">
+      <div class="breadcrumb">Module 5 → <span>Functions</span></div>
+      <div class="nav-btns">
+        <button class="nav-btn" id="prevBtn" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn" id="nextBtn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 5-1 -->
+    <div class="lesson-page" id="lesson-5-1">
+      <div class="lesson-tag">Module 5 · Lesson 1</div>
+      <h1 class="lesson-title">Defining Functions</h1>
+      <p class="lesson-intro">Functions are named, reusable blocks of code. Write once, call anywhere — they keep your programs organised and maintainable.</p>
+      <div class="block">
+        <h2>Why Functions?</h2>
+        <ul>
+          <li><strong>DRY</strong> — Don't Repeat Yourself. Write logic once, reuse everywhere.</li>
+          <li><strong>Readable</strong> — <code>calculate_tax()</code> is clearer than 5 raw lines of math.</li>
+          <li><strong>Testable</strong> — Small functions are easy to test in isolation.</li>
+          <li><strong>Maintainable</strong> — Fix a bug in one place, not twenty.</li>
+        </ul>
+        <h2>def — Defining a Function</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># Define the function</span>
+<span class="kw">def</span> <span class="fn">greet</span><span class="t">():</span>
+<span class="t">    </span><span class="s">"""Prints a greeting message."""</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">"Hello, World!"</span><span class="t">)</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">"Welcome to Python."</span><span class="t">)</span>
+
+<span class="cm"># Call (run) the function</span>
+<span class="fn">greet</span><span class="t">()</span>   <span class="cm"># Hello, World! / Welcome to Python.</span>
+<span class="fn">greet</span><span class="t">()</span>   <span class="cm"># Call it again — code runs again</span></div>
+        </div>
+        <div class="callout info">
+          <div><div class="callout-head">ℹ️ Docstrings</div><p>The triple-quoted string right after <code>def</code> is a <strong>docstring</strong>. It documents what the function does. Access it with <code>help(greet)</code>. Always write docstrings for your functions!</p></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="5-1" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 5-2 -->
+    <div class="lesson-page" id="lesson-5-2">
+      <div class="lesson-tag">Module 5 · Lesson 2</div>
+      <h1 class="lesson-title">Parameters &amp; Arguments</h1>
+      <p class="lesson-intro">Parameters make functions flexible — pass in different data each time you call them.</p>
+      <div class="block">
+        <h2>Parameters vs Arguments</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># 'name' and 'age' are PARAMETERS (in the definition)</span>
+<span class="kw">def</span> <span class="fn">greet_person</span><span class="t">(</span><span class="v">name</span><span class="t">, </span><span class="v">age</span><span class="t">):</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">f"Hello </span><span class="p">{name}</span><span class="s">! You are </span><span class="p">{age}</span><span class="s"> years old."</span><span class="t">)</span>
+
+<span class="cm"># "Alice" and 25 are ARGUMENTS (passed at call time)</span>
+<span class="fn">greet_person</span><span class="t">(</span><span class="s">"Alice"</span><span class="t">, </span><span class="n">25</span><span class="t">)</span>
+<span class="fn">greet_person</span><span class="t">(</span><span class="s">"Bob"</span><span class="t">, </span><span class="n">30</span><span class="t">)</span></div>
+        </div>
+        <h2>Positional vs Keyword Arguments</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">def</span> <span class="fn">describe</span><span class="t">(</span><span class="v">animal</span><span class="t">, </span><span class="v">colour</span><span class="t">, </span><span class="v">size</span><span class="t">):</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">f"A </span><span class="p">{colour}</span><span class="s"> </span><span class="p">{size}</span><span class="s"> </span><span class="p">{animal}</span><span class="s">"</span><span class="t">)</span>
+
+<span class="cm"># Positional — order matters</span>
+<span class="fn">describe</span><span class="t">(</span><span class="s">"cat"</span><span class="t">, </span><span class="s">"black"</span><span class="t">, </span><span class="s">"small"</span><span class="t">)</span>
+
+<span class="cm"># Keyword — order doesn't matter</span>
+<span class="fn">describe</span><span class="t">(</span><span class="v">size</span><span class="t">=</span><span class="s">"large"</span><span class="t">, </span><span class="v">animal</span><span class="t">=</span><span class="s">"dog"</span><span class="t">, </span><span class="v">colour</span><span class="t">=</span><span class="s">"brown"</span><span class="t">)</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="5-2" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 5-3 -->
+    <div class="lesson-page" id="lesson-5-3">
+      <div class="lesson-tag">Module 5 · Lesson 3</div>
+      <h1 class="lesson-title">Return Values</h1>
+      <p class="lesson-intro">The return statement sends a computed value back to whoever called the function.</p>
+      <div class="block">
+        <h2>Returning a Value</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">def</span> <span class="fn">add</span><span class="t">(</span><span class="v">a</span><span class="t">, </span><span class="v">b</span><span class="t">):</span>
+<span class="t">    </span><span class="kw">return</span> <span class="v">a</span> <span class="t">+ </span><span class="v">b</span>
+
+<span class="v">result</span> <span class="t">= </span><span class="fn">add</span><span class="t">(</span><span class="n">3</span><span class="t">, </span><span class="n">4</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">result</span><span class="t">)</span>              <span class="cm"># 7</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">add</span><span class="t">(</span><span class="n">1</span><span class="t">, </span><span class="n">2</span><span class="t">) + </span><span class="fn">add</span><span class="t">(</span><span class="n">3</span><span class="t">, </span><span class="n">4</span><span class="t">))</span>  <span class="cm"># 10 — compose results</span></div>
+        </div>
+        <h2>Returning Multiple Values</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">def</span> <span class="fn">min_max</span><span class="t">(</span><span class="v">numbers</span><span class="t">):</span>
+<span class="t">    </span><span class="kw">return</span> <span class="fn">min</span><span class="t">(</span><span class="v">numbers</span><span class="t">), </span><span class="fn">max</span><span class="t">(</span><span class="v">numbers</span><span class="t">)</span>  <span class="cm"># returns a tuple</span>
+
+<span class="v">low</span><span class="t">, </span><span class="v">high</span> <span class="t">= </span><span class="fn">min_max</span><span class="t">([</span><span class="n">3</span><span class="t">, </span><span class="n">1</span><span class="t">, </span><span class="n">7</span><span class="t">, </span><span class="n">9</span><span class="t">, </span><span class="n">4</span><span class="t">])</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">f"Min: </span><span class="p">{low}</span><span class="s">, Max: </span><span class="p">{high}</span><span class="s">"</span><span class="t">)</span>  <span class="cm"># Min: 1, Max: 9</span></div>
+        </div>
+        <h2>Early Return</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">def</span> <span class="fn">divide</span><span class="t">(</span><span class="v">a</span><span class="t">, </span><span class="v">b</span><span class="t">):</span>
+<span class="t">    </span><span class="kw">if</span> <span class="v">b</span> <span class="t">== </span><span class="n">0</span><span class="t">:</span>
+<span class="t">        </span><span class="kw">return</span> <span class="kw">None</span>   <span class="cm"># exit early</span>
+<span class="t">    </span><span class="kw">return</span> <span class="v">a</span> <span class="t">/ </span><span class="v">b</span>
+
+<span class="fn">print</span><span class="t">(</span><span class="fn">divide</span><span class="t">(</span><span class="n">10</span><span class="t">, </span><span class="n">2</span><span class="t">))</span>  <span class="cm"># 5.0</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">divide</span><span class="t">(</span><span class="n">10</span><span class="t">, </span><span class="n">0</span><span class="t">))</span>  <span class="cm"># None</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="5-3" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 5-4 -->
+    <div class="lesson-page" id="lesson-5-4">
+      <div class="lesson-tag">Module 5 · Lesson 4</div>
+      <h1 class="lesson-title">Default &amp; Keyword Arguments</h1>
+      <p class="lesson-intro">Default values make parameters optional, so callers only need to provide values when they want something different from the default.</p>
+      <div class="block">
+        <h2>Default Parameter Values</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">def</span> <span class="fn">greet</span><span class="t">(</span><span class="v">name</span><span class="t">, </span><span class="v">greeting</span><span class="t">=</span><span class="s">"Hello"</span><span class="t">):</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">f"</span><span class="p">{greeting}</span><span class="s">, </span><span class="p">{name}</span><span class="s">!"</span><span class="t">)</span>
+
+<span class="fn">greet</span><span class="t">(</span><span class="s">"Alice"</span><span class="t">)</span>              <span class="cm"># Hello, Alice!</span>
+<span class="fn">greet</span><span class="t">(</span><span class="s">"Bob"</span><span class="t">, </span><span class="s">"Namaste"</span><span class="t">)</span>    <span class="cm"># Namaste, Bob!</span></div>
+        </div>
+        <div class="callout warn">
+          <div><div class="callout-head">⚠️ Never use mutable defaults (list, dict)</div><p>Use <code>None</code> as the default and create the mutable object inside the function. Mutable defaults are shared across all calls and cause subtle bugs.</p></div>
+        </div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># WRONG</span>
+<span class="kw">def</span> <span class="fn">append_wrong</span><span class="t">(</span><span class="v">item</span><span class="t">, </span><span class="v">lst</span><span class="t">=[]):</span>
+<span class="t">    </span><span class="v">lst</span><span class="t">.</span><span class="fn">append</span><span class="t">(</span><span class="v">item</span><span class="t">)</span>
+<span class="t">    </span><span class="kw">return</span> <span class="v">lst</span>
+
+<span class="cm"># CORRECT</span>
+<span class="kw">def</span> <span class="fn">append_right</span><span class="t">(</span><span class="v">item</span><span class="t">, </span><span class="v">lst</span><span class="t">=</span><span class="kw">None</span><span class="t">):</span>
+<span class="t">    </span><span class="kw">if</span> <span class="v">lst</span> <span class="kw">is</span> <span class="kw">None</span><span class="t">:</span>
+<span class="t">        </span><span class="v">lst</span> <span class="t">= []</span>
+<span class="t">    </span><span class="v">lst</span><span class="t">.</span><span class="fn">append</span><span class="t">(</span><span class="v">item</span><span class="t">)</span>
+<span class="t">    </span><span class="kw">return</span> <span class="v">lst</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="5-4" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 5-5 -->
+    <div class="lesson-page" id="lesson-5-5">
+      <div class="lesson-tag">Module 5 · Lesson 5</div>
+      <h1 class="lesson-title">*args &amp; **kwargs</h1>
+      <p class="lesson-intro">When you don't know how many arguments will be passed, *args and **kwargs let your function accept any number.</p>
+      <div class="block">
+        <h2>*args — Collect Extra Positional Args into a Tuple</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">def</span> <span class="fn">add_all</span><span class="t">(*</span><span class="v">args</span><span class="t">):</span>
+<span class="t">    </span><span class="kw">return</span> <span class="fn">sum</span><span class="t">(</span><span class="v">args</span><span class="t">)</span>
+
+<span class="fn">print</span><span class="t">(</span><span class="fn">add_all</span><span class="t">(</span><span class="n">1</span><span class="t">, </span><span class="n">2</span><span class="t">))</span>            <span class="cm"># 3</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">add_all</span><span class="t">(</span><span class="n">1</span><span class="t">, </span><span class="n">2</span><span class="t">, </span><span class="n">3</span><span class="t">, </span><span class="n">4</span><span class="t">, </span><span class="n">5</span><span class="t">))</span>  <span class="cm"># 15</span></div>
+        </div>
+        <h2>**kwargs — Collect Extra Keyword Args into a Dict</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">def</span> <span class="fn">print_info</span><span class="t">(**</span><span class="v">kwargs</span><span class="t">):</span>
+<span class="t">    </span><span class="kw">for</span> <span class="v">key</span><span class="t">, </span><span class="v">val</span> <span class="kw">in</span> <span class="v">kwargs</span><span class="t">.</span><span class="fn">items</span><span class="t">():</span>
+<span class="t">        </span><span class="fn">print</span><span class="t">(</span><span class="s">f"  </span><span class="p">{key}</span><span class="s">: </span><span class="p">{val}</span><span class="s">"</span><span class="t">)</span>
+
+<span class="fn">print_info</span><span class="t">(</span><span class="v">name</span><span class="t">=</span><span class="s">"Alice"</span><span class="t">, </span><span class="v">age</span><span class="t">=</span><span class="n">25</span><span class="t">, </span><span class="v">city</span><span class="t">=</span><span class="s">"Kochi"</span><span class="t">)</span>
+<span class="cm"># name: Alice
+# age: 25
+# city: Kochi</span></div>
+        </div>
+        <h2>Combining All Three</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">def</span> <span class="fn">mega_func</span><span class="t">(</span><span class="v">pos1</span><span class="t">, *</span><span class="v">args</span><span class="t">, **</span><span class="v">kwargs</span><span class="t">):</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">f"pos1: </span><span class="p">{pos1}</span><span class="s">"</span><span class="t">)</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">f"args: </span><span class="p">{args}</span><span class="s">"</span><span class="t">)</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">f"kwargs: </span><span class="p">{kwargs}</span><span class="s">"</span><span class="t">)</span>
+
+<span class="fn">mega_func</span><span class="t">(</span><span class="n">1</span><span class="t">, </span><span class="n">2</span><span class="t">, </span><span class="n">3</span><span class="t">, </span><span class="v">x</span><span class="t">=</span><span class="n">10</span><span class="t">, </span><span class="v">y</span><span class="t">=</span><span class="n">20</span><span class="t">)</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="5-5" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 5-6 -->
+    <div class="lesson-page" id="lesson-5-6">
+      <div class="lesson-tag">Module 5 · Lesson 6</div>
+      <h1 class="lesson-title">Lambda Functions</h1>
+      <p class="lesson-intro">Lambda functions are tiny anonymous functions defined in one line. Perfect as arguments to map(), filter(), sorted().</p>
+      <div class="block">
+        <h2>Lambda Syntax</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># Regular function</span>
+<span class="kw">def</span> <span class="fn">square</span><span class="t">(</span><span class="v">x</span><span class="t">):</span>
+<span class="t">    </span><span class="kw">return</span> <span class="v">x</span> <span class="t">** </span><span class="n">2</span>
+
+<span class="cm"># Equivalent lambda — lambda params: expression</span>
+<span class="v">square</span> <span class="t">= </span><span class="kw">lambda</span> <span class="v">x</span><span class="t">: </span><span class="v">x</span> <span class="t">** </span><span class="n">2</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">square</span><span class="t">(</span><span class="n">5</span><span class="t">))</span>  <span class="cm"># 25</span>
+
+<span class="cm"># Used inline with sorted()</span>
+<span class="v">people</span> <span class="t">= [(</span><span class="s">"Alice"</span><span class="t">, </span><span class="n">25</span><span class="t">), (</span><span class="s">"Bob"</span><span class="t">, </span><span class="n">18</span><span class="t">), (</span><span class="s">"Charlie"</span><span class="t">, </span><span class="n">30</span><span class="t">)]</span>
+<span class="v">sorted_people</span> <span class="t">= </span><span class="fn">sorted</span><span class="t">(</span><span class="v">people</span><span class="t">, </span><span class="v">key</span><span class="t">=</span><span class="kw">lambda</span> <span class="v">p</span><span class="t">: </span><span class="v">p</span><span class="t">[</span><span class="n">1</span><span class="t">])</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">sorted_people</span><span class="t">)</span>  <span class="cm"># sorted by age</span>
+
+<span class="cm"># map() — apply to each element</span>
+<span class="v">nums</span> <span class="t">= [</span><span class="n">1</span><span class="t">, </span><span class="n">2</span><span class="t">, </span><span class="n">3</span><span class="t">, </span><span class="n">4</span><span class="t">, </span><span class="n">5</span><span class="t">]</span>
+<span class="v">squares</span> <span class="t">= </span><span class="fn">list</span><span class="t">(</span><span class="fn">map</span><span class="t">(</span><span class="kw">lambda</span> <span class="v">x</span><span class="t">: </span><span class="v">x</span><span class="t">**</span><span class="n">2</span><span class="t">, </span><span class="v">nums</span><span class="t">))</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">squares</span><span class="t">)</span>  <span class="cm"># [1, 4, 9, 16, 25]</span>
+
+<span class="cm"># filter() — keep items where function returns True</span>
+<span class="v">evens</span> <span class="t">= </span><span class="fn">list</span><span class="t">(</span><span class="fn">filter</span><span class="t">(</span><span class="kw">lambda</span> <span class="v">x</span><span class="t">: </span><span class="v">x</span> <span class="t">% </span><span class="n">2</span> <span class="t">== </span><span class="n">0</span><span class="t">, </span><span class="v">nums</span><span class="t">))</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">evens</span><span class="t">)</span>  <span class="cm"># [2, 4]</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="5-6" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 5-7 -->
+    <div class="lesson-page" id="lesson-5-7">
+      <div class="lesson-tag">Module 5 · Lesson 7</div>
+      <h1 class="lesson-title">Scope &amp; Closures</h1>
+      <p class="lesson-intro">Scope determines where a variable can be seen. Closures are functions that remember the variables from their enclosing environment.</p>
+      <div class="block">
+        <h2>Local vs Global Scope</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">x</span> <span class="t">= </span><span class="n">10</span>   <span class="cm"># GLOBAL variable</span>
+
+<span class="kw">def</span> <span class="fn">my_func</span><span class="t">():</span>
+<span class="t">    </span><span class="v">y</span> <span class="t">= </span><span class="n">20</span>   <span class="cm"># LOCAL variable — only exists inside this function</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="v">x</span><span class="t">)</span>  <span class="cm"># Can read global x</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="v">y</span><span class="t">)</span>  <span class="cm"># Local y</span>
+
+<span class="fn">my_func</span><span class="t">()</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">x</span><span class="t">)</span>   <span class="cm"># 10 — global still accessible</span>
+<span class="cm"># print(y)  # NameError — y doesn't exist here</span></div>
+        </div>
+        <h2>global keyword</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">count</span> <span class="t">= </span><span class="n">0</span>
+
+<span class="kw">def</span> <span class="fn">increment</span><span class="t">():</span>
+<span class="t">    </span><span class="kw">global</span> <span class="v">count</span>   <span class="cm"># Tell Python we mean the global count</span>
+<span class="t">    </span><span class="v">count</span> <span class="t">+= </span><span class="n">1</span>
+
+<span class="fn">increment</span><span class="t">()</span>
+<span class="fn">increment</span><span class="t">()</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">count</span><span class="t">)</span>  <span class="cm"># 2</span></div>
+        </div>
+        <h2>Closures</h2>
+        <p>A closure is a function that captures variables from its outer scope, even after the outer function has returned.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">def</span> <span class="fn">make_multiplier</span><span class="t">(</span><span class="v">factor</span><span class="t">):</span>
+<span class="t">    </span><span class="kw">def</span> <span class="fn">multiply</span><span class="t">(</span><span class="v">number</span><span class="t">):</span>
+<span class="t">        </span><span class="kw">return</span> <span class="v">number</span> <span class="t">* </span><span class="v">factor</span>  <span class="cm"># 'factor' from outer scope</span>
+<span class="t">    </span><span class="kw">return</span> <span class="v">multiply</span>
+
+<span class="v">double</span> <span class="t">= </span><span class="fn">make_multiplier</span><span class="t">(</span><span class="n">2</span><span class="t">)</span>
+<span class="v">triple</span> <span class="t">= </span><span class="fn">make_multiplier</span><span class="t">(</span><span class="n">3</span><span class="t">)</span>
+
+<span class="fn">print</span><span class="t">(</span><span class="fn">double</span><span class="t">(</span><span class="n">5</span><span class="t">))</span>   <span class="cm"># 10</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">triple</span><span class="t">(</span><span class="n">5</span><span class="t">))</span>   <span class="cm"># 15</span></div>
+        </div>
+      </div>
+      <div class="callout tip">
+        <div><div class="callout-head">🎉 Module 5 Complete!</div><p>Functions are the most important tool in Python programming. You can now write clean, reusable, well-organised code. Module 6 covers Data Structures — lists, dicts, sets, and more.</p></div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="5-7" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Module 6 →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>

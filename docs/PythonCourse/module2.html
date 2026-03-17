@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 2: Variables & Data Types | Python Course | AlCoders ATL</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">Al<span>Coders</span> ATL</a>
+  <ul><li><a href="index.html#curriculum">All Modules</a></li></ul>
+  <a href="module3.html" class="nav-start">Next Module →</a>
+</nav>
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="progress-bar"></div>
+    <div class="topbar">
+      <div class="breadcrumb">Module 2 → <span>Variables &amp; Data Types</span></div>
+      <div class="nav-btns">
+        <button class="nav-btn" id="prevBtn" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn" id="nextBtn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- LESSON 2-1 -->
+    <div class="lesson-page" id="lesson-2-1">
+      <div class="lesson-tag">Module 2 · Lesson 1</div>
+      <h1 class="lesson-title">Variables &amp; Assignment</h1>
+      <p class="lesson-intro">Variables are containers that store data in your program. Every piece of information in Python — a name, a score, a temperature — lives in a variable.</p>
+
+      <div class="block">
+        <h2>What is a Variable?</h2>
+        <p>Think of a variable as a <strong>labelled box</strong>. You put a value inside the box, and you can access or change that value later using the label.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">name</span> <span class="t">= </span><span class="s">"Alice"</span>       <span class="cm"># Variable 'name' holds the string "Alice"</span>
+<span class="v">age</span> <span class="t">= </span><span class="n">16</span>             <span class="cm"># Variable 'age' holds the integer 16</span>
+<span class="v">height</span> <span class="t">= </span><span class="n">5.7</span>          <span class="cm"># Variable 'height' holds a decimal number</span>
+<span class="v">is_student</span> <span class="t">= </span><span class="kw">True</span>    <span class="cm"># Variable holds a boolean</span>
+
+<span class="fn">print</span><span class="t">(</span><span class="v">name</span><span class="t">)</span>   <span class="cm"># Alice</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">age</span><span class="t">)</span>    <span class="cm"># 16</span></div>
+        </div>
+        <p>The <code>=</code> sign is called the <strong>assignment operator</strong>. It assigns the value on the right to the variable on the left. It does NOT mean "equal to" (that's <code>==</code>).</p>
+      </div>
+
+      <div class="block">
+        <h2>Variable Naming Rules</h2>
+        <table>
+          <thead><tr><th>Rule</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>Start with a letter or underscore</td><td>✅ <code>name</code>, <code>_age</code></td></tr>
+            <tr><td>Can contain letters, numbers, underscores</td><td>✅ <code>score1</code>, <code>my_value</code></td></tr>
+            <tr><td>Cannot start with a number</td><td>❌ <code>1score</code></td></tr>
+            <tr><td>No spaces allowed</td><td>❌ <code>my score</code></td></tr>
+            <tr><td>Case sensitive</td><td><code>Name</code> ≠ <code>name</code></td></tr>
+            <tr><td>No Python keywords</td><td>❌ <code>if</code>, <code>for</code>, <code>print</code></td></tr>
+          </tbody>
+        </table>
+        <h3>Naming Convention: snake_case</h3>
+        <p>Python convention (PEP 8) is to use <strong>snake_case</strong> — all lowercase, words separated by underscores:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># Good variable names</span>
+<span class="v">student_name</span> <span class="t">= </span><span class="s">"Bob"</span>
+<span class="v">total_score</span> <span class="t">= </span><span class="n">95</span>
+<span class="v">is_passing</span> <span class="t">= </span><span class="kw">True</span>
+<span class="v">max_attempts</span> <span class="t">= </span><span class="n">3</span>
+
+<span class="cm"># Bad variable names (avoid)</span>
+<span class="v">x</span> <span class="t">= </span><span class="s">"Bob"</span>        <span class="cm"># Too vague</span>
+<span class="v">StudentName</span> <span class="t">= </span><span class="s">"Bob"</span>   <span class="cm"># CamelCase (used for classes, not variables)</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Multiple Assignment</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># Assign same value to multiple variables</span>
+<span class="v">x</span> <span class="t">= </span><span class="v">y</span> <span class="t">= </span><span class="v">z</span> <span class="t">= </span><span class="n">0</span>
+
+<span class="cm"># Assign multiple variables in one line</span>
+<span class="v">a</span><span class="t">, </span><span class="v">b</span><span class="t">, </span><span class="v">c</span> <span class="t">= </span><span class="n">1</span><span class="t">, </span><span class="n">2</span><span class="t">, </span><span class="n">3</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">a</span><span class="t">, </span><span class="v">b</span><span class="t">, </span><span class="v">c</span><span class="t">)</span>   <span class="cm"># 1 2 3</span>
+
+<span class="cm"># Swap two variables elegantly</span>
+<span class="v">x</span><span class="t">, </span><span class="v">y</span> <span class="t">= </span><span class="n">10</span><span class="t">, </span><span class="n">20</span>
+<span class="v">x</span><span class="t">, </span><span class="v">y</span> <span class="t">= </span><span class="v">y</span><span class="t">, </span><span class="v">x</span>    <span class="cm"># Now x=20, y=10</span></div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="2-1" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- LESSON 2-2 -->
+    <div class="lesson-page" id="lesson-2-2">
+      <div class="lesson-tag">Module 2 · Lesson 2</div>
+      <h1 class="lesson-title">Numbers: int &amp; float</h1>
+      <p class="lesson-intro">Python has two main numeric types: integers (whole numbers) and floats (decimals). Understanding them is fundamental to all calculations.</p>
+
+      <div class="block">
+        <h2>Integers (int)</h2>
+        <p>Integers are whole numbers — positive, negative, or zero. No decimal point.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">age</span> <span class="t">= </span><span class="n">25</span>
+<span class="v">temperature</span> <span class="t">= -</span><span class="n">10</span>
+<span class="v">population</span> <span class="t">= </span><span class="n">1_000_000</span>   <span class="cm"># Underscores allowed for readability</span>
+<span class="v">zero</span> <span class="t">= </span><span class="n">0</span>
+
+<span class="fn">print</span><span class="t">(</span><span class="fn">type</span><span class="t">(</span><span class="v">age</span><span class="t">))</span>   <span class="cm"># &lt;class 'int'&gt;</span></div>
+        </div>
+        <p>Python integers have <strong>unlimited precision</strong> — they can be as large as your computer's memory allows.</p>
+      </div>
+
+      <div class="block">
+        <h2>Floats (float)</h2>
+        <p>Floats are numbers with a decimal point. They're used for fractional values.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">pi</span> <span class="t">= </span><span class="n">3.14159</span>
+<span class="v">price</span> <span class="t">= </span><span class="n">19.99</span>
+<span class="v">gravity</span> <span class="t">= </span><span class="n">9.81</span>
+<span class="v">very_small</span> <span class="t">= </span><span class="n">1.5e-4</span>    <span class="cm"># Scientific notation: 0.00015</span>
+<span class="v">very_large</span> <span class="t">= </span><span class="n">2.5e8</span>     <span class="cm"># 250,000,000</span>
+
+<span class="fn">print</span><span class="t">(</span><span class="fn">type</span><span class="t">(</span><span class="v">pi</span><span class="t">))</span>   <span class="cm"># &lt;class 'float'&gt;</span></div>
+        </div>
+        <div class="callout warn">
+          <div><div class="callout-head">⚠️ Float Precision Issues</div><p>Floats can have tiny rounding errors due to how computers store binary numbers. For example, <code>0.1 + 0.2</code> gives <code>0.30000000000000004</code>. For financial calculations, use the <code>decimal</code> module instead.</p></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Arithmetic with Numbers</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="fn">print</span><span class="t">(</span><span class="n">10</span> <span class="t">+ </span><span class="n">3</span><span class="t">)</span>    <span class="cm"># 13  — addition</span>
+<span class="fn">print</span><span class="t">(</span><span class="n">10</span> <span class="t">- </span><span class="n">3</span><span class="t">)</span>    <span class="cm"># 7   — subtraction</span>
+<span class="fn">print</span><span class="t">(</span><span class="n">10</span> <span class="t">* </span><span class="n">3</span><span class="t">)</span>    <span class="cm"># 30  — multiplication</span>
+<span class="fn">print</span><span class="t">(</span><span class="n">10</span> <span class="t">/ </span><span class="n">3</span><span class="t">)</span>    <span class="cm"># 3.3333... — division (always float)</span>
+<span class="fn">print</span><span class="t">(</span><span class="n">10</span> <span class="t">// </span><span class="n">3</span><span class="t">)</span>   <span class="cm"># 3   — floor division (integer result)</span>
+<span class="fn">print</span><span class="t">(</span><span class="n">10</span> <span class="t">% </span><span class="n">3</span><span class="t">)</span>    <span class="cm"># 1   — modulo (remainder)</span>
+<span class="fn">print</span><span class="t">(</span><span class="n">10</span> <span class="t">** </span><span class="n">3</span><span class="t">)</span>   <span class="cm"># 1000 — exponentiation (10 to the power of 3)</span></div>
+        </div>
+        <h3>Useful Math Functions</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="fn">print</span><span class="t">(</span><span class="fn">abs</span><span class="t">(-</span><span class="n">15</span><span class="t">))</span>       <span class="cm"># 15    — absolute value</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">round</span><span class="t">(</span><span class="n">3.7</span><span class="t">))</span>     <span class="cm"># 4     — round to nearest integer</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">round</span><span class="t">(</span><span class="n">3.14159</span><span class="t">, </span><span class="n">2</span><span class="t">))</span>  <span class="cm"># 3.14 — round to 2 decimal places</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">max</span><span class="t">(</span><span class="n">3</span><span class="t">, </span><span class="n">7</span><span class="t">, </span><span class="n">1</span><span class="t">))</span>    <span class="cm"># 7     — largest value</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">min</span><span class="t">(</span><span class="n">3</span><span class="t">, </span><span class="n">7</span><span class="t">, </span><span class="n">1</span><span class="t">))</span>    <span class="cm"># 1     — smallest value</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">pow</span><span class="t">(</span><span class="n">2</span><span class="t">, </span><span class="n">8</span><span class="t">))</span>       <span class="cm"># 256   — same as 2**8</span>
+
+<span class="kw">import</span> <span class="v">math</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">math</span><span class="t">.</span><span class="fn">sqrt</span><span class="t">(</span><span class="n">16</span><span class="t">))</span>   <span class="cm"># 4.0   — square root</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">math</span><span class="t">.</span><span class="fn">floor</span><span class="t">(</span><span class="n">3.9</span><span class="t">))</span> <span class="cm"># 3     — round down</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">math</span><span class="t">.</span><span class="fn">ceil</span><span class="t">(</span><span class="n">3.1</span><span class="t">))</span>  <span class="cm"># 4     — round up</span></div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="2-2" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- LESSON 2-3 -->
+    <div class="lesson-page" id="lesson-2-3">
+      <div class="lesson-tag">Module 2 · Lesson 3</div>
+      <h1 class="lesson-title">Strings</h1>
+      <p class="lesson-intro">Strings are sequences of characters — text. They're one of the most-used data types in Python. Let's learn how to create and work with them.</p>
+
+      <div class="block">
+        <h2>Creating Strings</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">name</span> <span class="t">= </span><span class="s">"Alice"</span>           <span class="cm"># Double quotes</span>
+<span class="v">city</span> <span class="t">= </span><span class="s">'Mumbai'</span>          <span class="cm"># Single quotes — both work</span>
+<span class="v">quote</span> <span class="t">= </span><span class="s">"It's a great day"</span> <span class="cm"># Single quote inside double quotes</span>
+<span class="v">bio</span> <span class="t">= </span><span class="s">"""This is a
+multiline string
+spanning three lines."""</span>   <span class="cm"># Triple quotes for multiline</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>String Indexing &amp; Length</h2>
+        <p>Every character in a string has an index (position), starting from 0.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">word</span> <span class="t">= </span><span class="s">"Python"</span>
+<span class="cm">#        P  y  t  h  o  n
+#        0  1  2  3  4  5   (positive index)
+#       -6 -5 -4 -3 -2 -1   (negative index)</span>
+
+<span class="fn">print</span><span class="t">(</span><span class="v">word</span><span class="t">[</span><span class="n">0</span><span class="t">])</span>    <span class="cm"># P</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">word</span><span class="t">[</span><span class="n">2</span><span class="t">])</span>    <span class="cm"># t</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">word</span><span class="t">[-</span><span class="n">1</span><span class="t">])</span>   <span class="cm"># n  (last character)</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">len</span><span class="t">(</span><span class="v">word</span><span class="t">))</span>  <span class="cm"># 6  (number of characters)</span></div>
+        </div>
+        <h3>Slicing</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">text</span> <span class="t">= </span><span class="s">"Hello, World!"</span>
+
+<span class="fn">print</span><span class="t">(</span><span class="v">text</span><span class="t">[</span><span class="n">0</span><span class="t">:</span><span class="n">5</span><span class="t">])</span>    <span class="cm"># Hello   (index 0 up to but not including 5)</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">text</span><span class="t">[</span><span class="n">7</span><span class="t">:])</span>     <span class="cm"># World!  (from index 7 to end)</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">text</span><span class="t">[:</span><span class="n">5</span><span class="t">])</span>     <span class="cm"># Hello   (from start to index 5)</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">text</span><span class="t">[::-</span><span class="n">1</span><span class="t">])</span>  <span class="cm"># !dlroW ,olleH  (reversed!)</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>String Concatenation &amp; Repetition</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">first</span> <span class="t">= </span><span class="s">"Hello"</span>
+<span class="v">second</span> <span class="t">= </span><span class="s">"World"</span>
+
+<span class="fn">print</span><span class="t">(</span><span class="v">first</span> <span class="t">+ </span><span class="s">" "</span> <span class="t">+ </span><span class="v">second</span><span class="t">)</span>  <span class="cm"># Hello World</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"Ha"</span> <span class="t">* </span><span class="n">3</span><span class="t">)</span>               <span class="cm"># HaHaHa</span>
+
+<span class="cm"># Augmented assignment</span>
+<span class="v">message</span> <span class="t">= </span><span class="s">"Hello"</span>
+<span class="v">message</span> <span class="t">+= </span><span class="s">" World"</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">message</span><span class="t">)</span>               <span class="cm"># Hello World</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Escape Characters</h2>
+        <table>
+          <thead><tr><th>Escape</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><code>\n</code></td><td>Newline</td></tr>
+            <tr><td><code>\t</code></td><td>Tab</td></tr>
+            <tr><td><code>\\</code></td><td>Backslash</td></tr>
+            <tr><td><code>\'</code></td><td>Single quote</td></tr>
+            <tr><td><code>\"</code></td><td>Double quote</td></tr>
+          </tbody>
+        </table>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="fn">print</span><span class="t">(</span><span class="s">"Line 1\nLine 2"</span><span class="t">)</span>    <span class="cm"># Prints on two lines</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"Name:\tAlice"</span><span class="t">)</span>      <span class="cm"># Tab space between Name: and Alice</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"She said \"Hello\""</span><span class="t">)</span> <span class="cm"># She said "Hello"</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">r"C:\Users\name"</span><span class="t">)</span>    <span class="cm"># Raw string — backslash not treated as escape</span></div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="2-3" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- LESSON 2-4 -->
+    <div class="lesson-page" id="lesson-2-4">
+      <div class="lesson-tag">Module 2 · Lesson 4</div>
+      <h1 class="lesson-title">Booleans &amp; None</h1>
+      <p class="lesson-intro">Booleans represent truth values — True or False. They're the foundation of all decision-making in programs. None represents the absence of a value.</p>
+
+      <div class="block">
+        <h2>Boolean Values</h2>
+        <p>Python has exactly two boolean values: <code>True</code> and <code>False</code> (capital T and F — they're case-sensitive).</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">is_raining</span> <span class="t">= </span><span class="kw">True</span>
+<span class="v">is_sunny</span> <span class="t">= </span><span class="kw">False</span>
+<span class="v">passed_exam</span> <span class="t">= </span><span class="kw">True</span>
+
+<span class="fn">print</span><span class="t">(</span><span class="fn">type</span><span class="t">(</span><span class="kw">True</span><span class="t">))</span>   <span class="cm"># &lt;class 'bool'&gt;</span>
+
+<span class="cm"># Comparisons produce booleans</span>
+<span class="fn">print</span><span class="t">(</span><span class="n">5</span> <span class="t">&gt; </span><span class="n">3</span><span class="t">)</span>    <span class="cm"># True</span>
+<span class="fn">print</span><span class="t">(</span><span class="n">5</span> <span class="t">== </span><span class="n">5</span><span class="t">)</span>   <span class="cm"># True</span>
+<span class="fn">print</span><span class="t">(</span><span class="n">5</span> <span class="t">!= </span><span class="n">3</span><span class="t">)</span>   <span class="cm"># True</span>
+<span class="fn">print</span><span class="t">(</span><span class="n">5</span> <span class="t">&lt; </span><span class="n">3</span><span class="t">)</span>    <span class="cm"># False</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Truthy and Falsy Values</h2>
+        <p>In Python, <em>any value</em> can be evaluated as a boolean. Some values are "falsy" (behave like False), everything else is "truthy".</p>
+        <div class="callout info">
+          <div><div class="callout-head">Falsy Values in Python</div><p><code>False</code>, <code>0</code>, <code>0.0</code>, <code>""</code> (empty string), <code>[]</code> (empty list), <code>{}</code> (empty dict), <code>()</code> (empty tuple), <code>None</code></p></div>
+        </div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="fn">print</span><span class="t">(</span><span class="fn">bool</span><span class="t">(</span><span class="n">1</span><span class="t">))</span>      <span class="cm"># True</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">bool</span><span class="t">(</span><span class="n">0</span><span class="t">))</span>      <span class="cm"># False</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">bool</span><span class="t">(</span><span class="s">""</span><span class="t">))</span>     <span class="cm"># False  (empty string)</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">bool</span><span class="t">(</span><span class="s">"hi"</span><span class="t">))</span>   <span class="cm"># True   (non-empty string)</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">bool</span><span class="t">([])</span><span class="t">)</span>     <span class="cm"># False  (empty list)</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>None — The Absence of Value</h2>
+        <p><code>None</code> is Python's way of saying "nothing" or "no value". It's similar to <code>null</code> in other languages.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">result</span> <span class="t">= </span><span class="kw">None</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">result</span><span class="t">)</span>           <span class="cm"># None</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">type</span><span class="t">(</span><span class="v">result</span><span class="t">))</span>    <span class="cm"># &lt;class 'NoneType'&gt;</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">result</span> <span class="kw">is</span> <span class="kw">None</span><span class="t">)</span>  <span class="cm"># True  — use 'is' not '==' for None</span>
+
+<span class="cm"># Functions that don't return anything return None implicitly</span>
+<span class="kw">def</span> <span class="fn">greet</span><span class="t">():</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">"Hello"</span><span class="t">)</span>
+
+<span class="v">x</span> <span class="t">= </span><span class="fn">greet</span><span class="t">()</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">x</span><span class="t">)</span>   <span class="cm"># None</span></div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="2-4" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- LESSON 2-5 -->
+    <div class="lesson-page" id="lesson-2-5">
+      <div class="lesson-tag">Module 2 · Lesson 5</div>
+      <h1 class="lesson-title">Type Conversion</h1>
+      <p class="lesson-intro">Python lets you convert values from one data type to another. This is essential when working with user input (always a string) or mixing different numeric types.</p>
+
+      <div class="block">
+        <h2>type() — Checking the Type</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="fn">print</span><span class="t">(</span><span class="fn">type</span><span class="t">(</span><span class="n">42</span><span class="t">))</span>        <span class="cm"># &lt;class 'int'&gt;</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">type</span><span class="t">(</span><span class="n">3.14</span><span class="t">))</span>      <span class="cm"># &lt;class 'float'&gt;</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">type</span><span class="t">(</span><span class="s">"hello"</span><span class="t">))</span>   <span class="cm"># &lt;class 'str'&gt;</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">type</span><span class="t">(</span><span class="kw">True</span><span class="t">))</span>      <span class="cm"># &lt;class 'bool'&gt;</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">type</span><span class="t">(</span><span class="kw">None</span><span class="t">))</span>      <span class="cm"># &lt;class 'NoneType'&gt;</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Explicit Type Conversion</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># int() — convert to integer</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">int</span><span class="t">(</span><span class="s">"42"</span><span class="t">))</span>      <span class="cm"># 42</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">int</span><span class="t">(</span><span class="n">3.9</span><span class="t">))</span>       <span class="cm"># 3  (truncates, doesn't round!)</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">int</span><span class="t">(</span><span class="kw">True</span><span class="t">))</span>      <span class="cm"># 1</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">int</span><span class="t">(</span><span class="kw">False</span><span class="t">))</span>     <span class="cm"># 0</span>
+
+<span class="cm"># float() — convert to float</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">float</span><span class="t">(</span><span class="s">"3.14"</span><span class="t">))</span>  <span class="cm"># 3.14</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">float</span><span class="t">(</span><span class="n">7</span><span class="t">))</span>       <span class="cm"># 7.0</span>
+
+<span class="cm"># str() — convert to string</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">str</span><span class="t">(</span><span class="n">100</span><span class="t">))</span>       <span class="cm"># "100"</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">str</span><span class="t">(</span><span class="n">3.14</span><span class="t">))</span>     <span class="cm"># "3.14"</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">str</span><span class="t">(</span><span class="kw">True</span><span class="t">))</span>     <span class="cm"># "True"</span>
+
+<span class="cm"># bool() — convert to boolean</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">bool</span><span class="t">(</span><span class="n">0</span><span class="t">))</span>        <span class="cm"># False</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">bool</span><span class="t">(</span><span class="s">"hello"</span><span class="t">))</span> <span class="cm"># True</span></div>
+        </div>
+        <div class="callout danger">
+          <div><div class="callout-head">❌ Watch Out for ValueError</div><p>You can't convert just any string to int or float. <code>int("hello")</code> raises a <code>ValueError</code>. Only strings that contain valid numbers can be converted.</p></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Implicit Conversion</h2>
+        <p>Python automatically converts types in some situations:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">result</span> <span class="t">= </span><span class="n">5</span> <span class="t">+ </span><span class="n">2.5</span>   <span class="cm"># int + float = float (7.5)</span>
+<span class="v">result</span> <span class="t">= </span><span class="n">10</span> <span class="t">/ </span><span class="n">4</span>     <span class="cm"># Division always returns float (2.5)</span>
+<span class="v">result</span> <span class="t">= </span><span class="kw">True</span> <span class="t">+ </span><span class="n">1</span>   <span class="cm"># True treated as 1, result = 2</span></div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="2-5" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- LESSON 2-6 -->
+    <div class="lesson-page" id="lesson-2-6">
+      <div class="lesson-tag">Module 2 · Lesson 6</div>
+      <h1 class="lesson-title">Input from the User</h1>
+      <p class="lesson-intro">Programs become interactive when they can receive input from the user. Python's input() function makes this easy.</p>
+
+      <div class="block">
+        <h2>The input() Function</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">name</span> <span class="t">= </span><span class="fn">input</span><span class="t">(</span><span class="s">"Enter your name: "</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"Hello, "</span> <span class="t">+ </span><span class="v">name</span> <span class="t">+ </span><span class="s">"!"</span><span class="t">)</span></div>
+        </div>
+        <div class="callout warn">
+          <div><div class="callout-head">⚠️ input() always returns a string</div><p>Even if the user types a number, <code>input()</code> returns it as a string. You must convert it to int or float if you want to do math with it.</p></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Getting Numeric Input</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">age_str</span> <span class="t">= </span><span class="fn">input</span><span class="t">(</span><span class="s">"Enter your age: "</span><span class="t">)</span>
+<span class="v">age</span> <span class="t">= </span><span class="fn">int</span><span class="t">(</span><span class="v">age_str</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"In 10 years you will be"</span><span class="t">, </span><span class="v">age</span> <span class="t">+ </span><span class="n">10</span><span class="t">)</span>
+
+<span class="cm"># Shorter version — convert on same line</span>
+<span class="v">height</span> <span class="t">= </span><span class="fn">float</span><span class="t">(</span><span class="fn">input</span><span class="t">(</span><span class="s">"Enter your height in metres: "</span><span class="t">))</span></div>
+        </div>
+        <h3>Practice: Simple Calculator</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">num1</span> <span class="t">= </span><span class="fn">float</span><span class="t">(</span><span class="fn">input</span><span class="t">(</span><span class="s">"Enter first number: "</span><span class="t">))</span>
+<span class="v">num2</span> <span class="t">= </span><span class="fn">float</span><span class="t">(</span><span class="fn">input</span><span class="t">(</span><span class="s">"Enter second number: "</span><span class="t">))</span>
+
+<span class="fn">print</span><span class="t">(</span><span class="s">"Sum:"</span><span class="t">, </span><span class="v">num1</span> <span class="t">+ </span><span class="v">num2</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"Difference:"</span><span class="t">, </span><span class="v">num1</span> <span class="t">- </span><span class="v">num2</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"Product:"</span><span class="t">, </span><span class="v">num1</span> <span class="t">* </span><span class="v">num2</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"Quotient:"</span><span class="t">, </span><span class="v">num1</span> <span class="t">/ </span><span class="v">num2</span><span class="t">)</span></div>
+        </div>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">What type does input() always return?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">int</div>
+          <div class="quiz-opt" data-correct>str (string)</div>
+          <div class="quiz-opt">float</div>
+          <div class="quiz-opt">It depends on what the user types</div>
+        </div>
+        <div class="quiz-feedback" data-ok>✅ Correct! input() always returns a string, even if the user types a number.</div>
+        <div class="quiz-feedback" data-bad>❌ input() ALWAYS returns a string. You must convert it with int() or float() if needed.</div>
+      </div>
+
+      <div class="callout tip">
+        <div><div class="callout-head">🎉 Module 2 Complete!</div><p>You now understand variables, all the core data types (int, float, str, bool, None), type conversion, and user input. These are the fundamental building blocks of Python. Module 3 covers operators and expressions.</p></div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="2-6" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Module 3 →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>

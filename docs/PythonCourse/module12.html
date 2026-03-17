@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 12: Capstone Projects | Python Course | AlCoders ATL</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">Al<span>Coders</span> ATL</a>
+  <ul><li><a href="index.html#curriculum">All Modules</a></li></ul>
+  <a href="index.html" class="nav-start">🏠 Home</a>
+</nav>
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="progress-bar"></div>
+    <div class="topbar">
+      <div class="breadcrumb">Module 12 → <span>Capstone Projects</span></div>
+      <div class="nav-btns">
+        <button class="nav-btn" id="prevBtn" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn" id="nextBtn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 12-1 CLI To-Do -->
+    <div class="lesson-page" id="lesson-12-1">
+      <div class="lesson-tag">Module 12 · Project 1</div>
+      <h1 class="lesson-title">Project 1: CLI To-Do App</h1>
+      <p class="lesson-intro">Build a command-line to-do list manager that saves tasks to a JSON file. Covers file I/O, JSON, OOP, and user input handling.</p>
+      <div class="block">
+        <h2>Features</h2>
+        <ul>
+          <li>Add, list, complete, and delete tasks</li>
+          <li>Persist tasks to <code>todos.json</code> between runs</li>
+          <li>Colour-coded output for pending vs done</li>
+          <li>Command-line arguments with <code>argparse</code></li>
+        </ul>
+        <div class="project-box">
+          <div class="project-steps">
+            <h3>Build Steps</h3>
+            <ol>
+              <li>Define a <code>Task</code> dataclass with <code>id</code>, <code>title</code>, <code>done</code>, <code>created_at</code></li>
+              <li>Define a <code>TodoApp</code> class with <code>load()</code>, <code>save()</code>, <code>add()</code>, <code>list()</code>, <code>complete()</code>, <code>delete()</code></li>
+              <li>Implement JSON persistence using <code>json.dump</code> / <code>json.load</code></li>
+              <li>Build a CLI with <code>argparse</code> subcommands: <code>add</code>, <code>list</code>, <code>done</code>, <code>delete</code></li>
+              <li>Add colour output using ANSI escape codes or <code>colorama</code></li>
+            </ol>
+          </div>
+        </div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">todo.py — Core structure</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">from</span> <span class="v">dataclasses</span> <span class="kw">import</span> <span class="v">dataclass</span><span class="t">, </span><span class="v">field</span><span class="t">, </span><span class="v">asdict</span>
+<span class="kw">from</span> <span class="v">datetime</span> <span class="kw">import</span> <span class="v">datetime</span>
+<span class="kw">import</span> <span class="v">json</span><span class="t">, </span><span class="v">argparse</span>
+<span class="kw">from</span> <span class="v">pathlib</span> <span class="kw">import</span> <span class="v">Path</span>
+
+<span class="t">@</span><span class="v">dataclass</span>
+<span class="kw">class</span> <span class="fn">Task</span><span class="t">:</span>
+<span class="t">    </span><span class="v">id</span><span class="t">: </span><span class="v">int</span>
+<span class="t">    </span><span class="v">title</span><span class="t">: </span><span class="v">str</span>
+<span class="t">    </span><span class="v">done</span><span class="t">: </span><span class="v">bool</span> <span class="t">= </span><span class="kw">False</span>
+<span class="t">    </span><span class="v">created_at</span><span class="t">: </span><span class="v">str</span> <span class="t">= </span><span class="fn">field</span><span class="t">(</span><span class="v">default_factory</span><span class="t">=</span><span class="kw">lambda</span><span class="t">: </span><span class="v">datetime</span><span class="t">.</span><span class="fn">now</span><span class="t">().</span><span class="fn">isoformat</span><span class="t">())</span>
+
+<span class="kw">class</span> <span class="fn">TodoApp</span><span class="t">:</span>
+<span class="t">    </span><span class="v">FILE</span> <span class="t">= </span><span class="fn">Path</span><span class="t">(</span><span class="s">"todos.json"</span><span class="t">)</span>
+
+<span class="t">    </span><span class="kw">def</span> <span class="fn">__init__</span><span class="t">(</span><span class="v">self</span><span class="t">):</span>
+<span class="t">        </span><span class="v">self</span><span class="t">.</span><span class="v">tasks</span><span class="t">: </span><span class="v">list</span><span class="t">[</span><span class="v">Task</span><span class="t">] = </span><span class="v">self</span><span class="t">.</span><span class="fn">load</span><span class="t">()</span>
+
+<span class="t">    </span><span class="kw">def</span> <span class="fn">load</span><span class="t">(</span><span class="v">self</span><span class="t">) -&gt; </span><span class="v">list</span><span class="t">[</span><span class="v">Task</span><span class="t">]:</span>
+<span class="t">        </span><span class="kw">if</span> <span class="kw">not</span> <span class="v">self</span><span class="t">.</span><span class="v">FILE</span><span class="t">.</span><span class="fn">exists</span><span class="t">():</span>
+<span class="t">            </span><span class="kw">return</span> <span class="t">[]</span>
+<span class="t">        </span><span class="v">data</span> <span class="t">= </span><span class="v">json</span><span class="t">.</span><span class="fn">loads</span><span class="t">(</span><span class="v">self</span><span class="t">.</span><span class="v">FILE</span><span class="t">.</span><span class="fn">read_text</span><span class="t">())</span>
+<span class="t">        </span><span class="kw">return</span> <span class="t">[</span><span class="fn">Task</span><span class="t">(**</span><span class="v">t</span><span class="t">) </span><span class="kw">for</span> <span class="v">t</span> <span class="kw">in</span> <span class="v">data</span><span class="t">]</span>
+
+<span class="t">    </span><span class="kw">def</span> <span class="fn">save</span><span class="t">(</span><span class="v">self</span><span class="t">):</span>
+<span class="t">        </span><span class="v">self</span><span class="t">.</span><span class="v">FILE</span><span class="t">.</span><span class="fn">write_text</span><span class="t">(</span><span class="v">json</span><span class="t">.</span><span class="fn">dumps</span><span class="t">([</span><span class="fn">asdict</span><span class="t">(</span><span class="v">t</span><span class="t">) </span><span class="kw">for</span> <span class="v">t</span> <span class="kw">in</span> <span class="v">self</span><span class="t">.</span><span class="v">tasks</span><span class="t">], </span><span class="v">indent</span><span class="t">=</span><span class="n">2</span><span class="t">))</span>
+
+<span class="t">    </span><span class="kw">def</span> <span class="fn">add</span><span class="t">(</span><span class="v">self</span><span class="t">, </span><span class="v">title</span><span class="t">: </span><span class="v">str</span><span class="t">):</span>
+<span class="t">        </span><span class="v">new_id</span> <span class="t">= </span><span class="fn">max</span><span class="t">((</span><span class="v">t</span><span class="t">.</span><span class="v">id</span> <span class="kw">for</span> <span class="v">t</span> <span class="kw">in</span> <span class="v">self</span><span class="t">.</span><span class="v">tasks</span><span class="t">), </span><span class="v">default</span><span class="t">=</span><span class="n">0</span><span class="t">) + </span><span class="n">1</span>
+<span class="t">        </span><span class="v">self</span><span class="t">.</span><span class="v">tasks</span><span class="t">.</span><span class="fn">append</span><span class="t">(</span><span class="fn">Task</span><span class="t">(</span><span class="v">id</span><span class="t">=</span><span class="v">new_id</span><span class="t">, </span><span class="v">title</span><span class="t">=</span><span class="v">title</span><span class="t">))</span>
+<span class="t">        </span><span class="v">self</span><span class="t">.</span><span class="fn">save</span><span class="t">()</span>
+<span class="t">        </span><span class="fn">print</span><span class="t">(</span><span class="s">f"✓ Added: [{new_id}] {title}"</span><span class="t">)</span>
+
+<span class="kw">if</span> <span class="v">__name__</span> <span class="t">== </span><span class="s">"__main__"</span><span class="t">:</span>
+<span class="t">    </span><span class="v">parser</span> <span class="t">= </span><span class="v">argparse</span><span class="t">.</span><span class="fn">ArgumentParser</span><span class="t">(</span><span class="v">description</span><span class="t">=</span><span class="s">"CLI To-Do App"</span><span class="t">)</span>
+<span class="t">    </span><span class="v">subs</span> <span class="t">= </span><span class="v">parser</span><span class="t">.</span><span class="fn">add_subparsers</span><span class="t">(</span><span class="v">dest</span><span class="t">=</span><span class="s">"command"</span><span class="t">)</span>
+<span class="t">    </span><span class="v">add_p</span> <span class="t">= </span><span class="v">subs</span><span class="t">.</span><span class="fn">add_parser</span><span class="t">(</span><span class="s">"add"</span><span class="t">)</span>
+<span class="t">    </span><span class="v">add_p</span><span class="t">.</span><span class="fn">add_argument</span><span class="t">(</span><span class="s">"title"</span><span class="t">)</span>
+<span class="t">    </span><span class="v">subs</span><span class="t">.</span><span class="fn">add_parser</span><span class="t">(</span><span class="s">"list"</span><span class="t">)</span>
+<span class="t">    </span><span class="cm"># ... more subcommands</span>
+<span class="t">    </span><span class="v">args</span> <span class="t">= </span><span class="v">parser</span><span class="t">.</span><span class="fn">parse_args</span><span class="t">()</span>
+<span class="t">    </span><span class="v">app</span> <span class="t">= </span><span class="fn">TodoApp</span><span class="t">()</span>
+<span class="t">    </span><span class="kw">if</span> <span class="v">args</span><span class="t">.</span><span class="v">command</span> <span class="t">== </span><span class="s">"add"</span><span class="t">:</span>
+<span class="t">        </span><span class="v">app</span><span class="t">.</span><span class="fn">add</span><span class="t">(</span><span class="v">args</span><span class="t">.</span><span class="v">title</span><span class="t">)</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="12-1" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 12-2 File Organiser -->
+    <div class="lesson-page" id="lesson-12-2">
+      <div class="lesson-tag">Module 12 · Project 2</div>
+      <h1 class="lesson-title">Project 2: File Organiser</h1>
+      <p class="lesson-intro">Build a script that scans a directory and automatically sorts files into subfolders by type — images, documents, videos, code, etc.</p>
+      <div class="block">
+        <h2>Features</h2>
+        <ul>
+          <li>Detect file types by extension</li>
+          <li>Move files into categorised subfolders</li>
+          <li>Generate a summary report of what was moved</li>
+          <li>Dry-run mode to preview without moving files</li>
+          <li>Undo option using a log file</li>
+        </ul>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">organiser.py</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">from</span> <span class="v">pathlib</span> <span class="kw">import</span> <span class="v">Path</span>
+<span class="kw">import</span> <span class="v">shutil</span><span class="t">, </span><span class="v">json</span>
+<span class="kw">from</span> <span class="v">collections</span> <span class="kw">import</span> <span class="v">defaultdict</span>
+
+<span class="v">CATEGORIES</span> <span class="t">= {</span>
+<span class="t">    </span><span class="s">"Images"</span><span class="t">:    [</span><span class="s">".jpg"</span><span class="t">, </span><span class="s">".jpeg"</span><span class="t">, </span><span class="s">".png"</span><span class="t">, </span><span class="s">".gif"</span><span class="t">, </span><span class="s">".svg"</span><span class="t">],</span>
+<span class="t">    </span><span class="s">"Documents"</span><span class="t">: [</span><span class="s">".pdf"</span><span class="t">, </span><span class="s">".docx"</span><span class="t">, </span><span class="s">".txt"</span><span class="t">, </span><span class="s">".xlsx"</span><span class="t">],</span>
+<span class="t">    </span><span class="s">"Videos"</span><span class="t">:    [</span><span class="s">".mp4"</span><span class="t">, </span><span class="s">".mkv"</span><span class="t">, </span><span class="s">".mov"</span><span class="t">],</span>
+<span class="t">    </span><span class="s">"Audio"</span><span class="t">:     [</span><span class="s">".mp3"</span><span class="t">, </span><span class="s">".wav"</span><span class="t">, </span><span class="s">".flac"</span><span class="t">],</span>
+<span class="t">    </span><span class="s">"Code"</span><span class="t">:      [</span><span class="s">".py"</span><span class="t">, </span><span class="s">".js"</span><span class="t">, </span><span class="s">".html"</span><span class="t">, </span><span class="s">".css"</span><span class="t">],</span>
+<span class="t">}</span>
+
+<span class="kw">def</span> <span class="fn">get_category</span><span class="t">(</span><span class="v">ext</span><span class="t">: </span><span class="v">str</span><span class="t">) -&gt; </span><span class="v">str</span><span class="t">:</span>
+<span class="t">    </span><span class="kw">for</span> <span class="v">cat</span><span class="t">, </span><span class="v">exts</span> <span class="kw">in</span> <span class="v">CATEGORIES</span><span class="t">.</span><span class="fn">items</span><span class="t">():</span>
+<span class="t">        </span><span class="kw">if</span> <span class="v">ext</span><span class="t">.</span><span class="fn">lower</span><span class="t">() </span><span class="kw">in</span> <span class="v">exts</span><span class="t">:</span>
+<span class="t">            </span><span class="kw">return</span> <span class="v">cat</span>
+<span class="t">    </span><span class="kw">return</span> <span class="s">"Other"</span>
+
+<span class="kw">def</span> <span class="fn">organise</span><span class="t">(</span><span class="v">folder</span><span class="t">: </span><span class="v">str</span><span class="t">, </span><span class="v">dry_run</span><span class="t">: </span><span class="v">bool</span> <span class="t">= </span><span class="kw">False</span><span class="t">):</span>
+<span class="t">    </span><span class="v">src</span> <span class="t">= </span><span class="fn">Path</span><span class="t">(</span><span class="v">folder</span><span class="t">)</span>
+<span class="t">    </span><span class="v">log</span> <span class="t">= []</span>
+<span class="t">    </span><span class="v">summary</span> <span class="t">= </span><span class="fn">defaultdict</span><span class="t">(</span><span class="v">int</span><span class="t">)</span>
+
+<span class="t">    </span><span class="kw">for</span> <span class="v">file</span> <span class="kw">in</span> <span class="v">src</span><span class="t">.</span><span class="fn">iterdir</span><span class="t">():</span>
+<span class="t">        </span><span class="kw">if</span> <span class="kw">not</span> <span class="v">file</span><span class="t">.</span><span class="fn">is_file</span><span class="t">():</span>
+<span class="t">            </span><span class="kw">continue</span>
+<span class="t">        </span><span class="v">cat</span> <span class="t">= </span><span class="fn">get_category</span><span class="t">(</span><span class="v">file</span><span class="t">.</span><span class="v">suffix</span><span class="t">)</span>
+<span class="t">        </span><span class="v">dest_dir</span> <span class="t">= </span><span class="v">src</span> <span class="t">/ </span><span class="v">cat</span>
+<span class="t">        </span><span class="v">dest</span> <span class="t">= </span><span class="v">dest_dir</span> <span class="t">/ </span><span class="v">file</span><span class="t">.</span><span class="v">name</span>
+<span class="t">        </span><span class="fn">print</span><span class="t">(</span><span class="s">f"{'[DRY]' if dry_run else 'MOVE'}: {file.name} → {cat}/"</span><span class="t">)</span>
+<span class="t">        </span><span class="kw">if</span> <span class="kw">not</span> <span class="v">dry_run</span><span class="t">:</span>
+<span class="t">            </span><span class="v">dest_dir</span><span class="t">.</span><span class="fn">mkdir</span><span class="t">(</span><span class="v">exist_ok</span><span class="t">=</span><span class="kw">True</span><span class="t">)</span>
+<span class="t">            </span><span class="v">shutil</span><span class="t">.</span><span class="fn">move</span><span class="t">(</span><span class="v">str</span><span class="t">(</span><span class="v">file</span><span class="t">), </span><span class="v">str</span><span class="t">(</span><span class="v">dest</span><span class="t">))</span>
+<span class="t">            </span><span class="v">log</span><span class="t">.</span><span class="fn">append</span><span class="t">({</span><span class="s">"from"</span><span class="t">: </span><span class="fn">str</span><span class="t">(</span><span class="v">file</span><span class="t">), </span><span class="s">"to"</span><span class="t">: </span><span class="fn">str</span><span class="t">(</span><span class="v">dest</span><span class="t">)})</span>
+<span class="t">        </span><span class="v">summary</span><span class="t">[</span><span class="v">cat</span><span class="t">] += </span><span class="n">1</span>
+
+<span class="t">    </span><span class="kw">if</span> <span class="kw">not</span> <span class="v">dry_run</span><span class="t">:</span>
+<span class="t">        </span><span class="fn">Path</span><span class="t">(</span><span class="s">"organiser_log.json"</span><span class="t">).</span><span class="fn">write_text</span><span class="t">(</span><span class="v">json</span><span class="t">.</span><span class="fn">dumps</span><span class="t">(</span><span class="v">log</span><span class="t">, </span><span class="v">indent</span><span class="t">=</span><span class="n">2</span><span class="t">))</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">"\nSummary:"</span><span class="t">, </span><span class="fn">dict</span><span class="t">(</span><span class="v">summary</span><span class="t">))</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="12-2" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 12-3 Web Scraper -->
+    <div class="lesson-page" id="lesson-12-3">
+      <div class="lesson-tag">Module 12 · Project 3</div>
+      <h1 class="lesson-title">Project 3: Web Scraper</h1>
+      <p class="lesson-intro">Build a web scraper that fetches data from a website, parses HTML, and exports the results to CSV or JSON.</p>
+      <div class="block">
+        <h2>Setup</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Terminal</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">pip install requests beautifulsoup4</span></div>
+        </div>
+        <h2>The Scraper</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">scraper.py</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">import</span> <span class="v">requests</span>
+<span class="kw">from</span> <span class="v">bs4</span> <span class="kw">import</span> <span class="v">BeautifulSoup</span>
+<span class="kw">import</span> <span class="v">csv</span><span class="t">, </span><span class="v">json</span><span class="t">, </span><span class="v">time</span>
+
+<span class="kw">def</span> <span class="fn">scrape_quotes</span><span class="t">(</span><span class="v">pages</span><span class="t">: </span><span class="v">int</span> <span class="t">= </span><span class="n">3</span><span class="t">) -&gt; </span><span class="v">list</span><span class="t">[</span><span class="v">dict</span><span class="t">]:</span>
+<span class="t">    </span><span class="s">"""Scrape quotes from quotes.toscrape.com (a practice site)."""</span>
+<span class="t">    </span><span class="v">base</span> <span class="t">= </span><span class="s">"http://quotes.toscrape.com/page/{}/"</span>
+<span class="t">    </span><span class="v">results</span> <span class="t">= []</span>
+
+<span class="t">    </span><span class="kw">for</span> <span class="v">page</span> <span class="kw">in</span> <span class="fn">range</span><span class="t">(</span><span class="n">1</span><span class="t">, </span><span class="v">pages</span> <span class="t">+ </span><span class="n">1</span><span class="t">):</span>
+<span class="t">        </span><span class="fn">print</span><span class="t">(</span><span class="s">f"Scraping page </span><span class="p">{page}</span><span class="s">..."</span><span class="t">)</span>
+<span class="t">        </span><span class="v">resp</span> <span class="t">= </span><span class="v">requests</span><span class="t">.</span><span class="fn">get</span><span class="t">(</span><span class="fn">base</span><span class="t">.</span><span class="fn">format</span><span class="t">(</span><span class="v">page</span><span class="t">))</span>
+<span class="t">        </span><span class="v">soup</span> <span class="t">= </span><span class="fn">BeautifulSoup</span><span class="t">(</span><span class="v">resp</span><span class="t">.</span><span class="v">text</span><span class="t">, </span><span class="s">"html.parser"</span><span class="t">)</span>
+
+<span class="t">        </span><span class="kw">for</span> <span class="v">quote</span> <span class="kw">in</span> <span class="v">soup</span><span class="t">.</span><span class="fn">select</span><span class="t">(</span><span class="s">".quote"</span><span class="t">):</span>
+<span class="t">            </span><span class="v">results</span><span class="t">.</span><span class="fn">append</span><span class="t">({</span>
+<span class="t">                </span><span class="s">"text"</span><span class="t">:   </span><span class="v">quote</span><span class="t">.</span><span class="fn">select_one</span><span class="t">(</span><span class="s">".text"</span><span class="t">).</span><span class="v">text</span><span class="t">.</span><span class="fn">strip</span><span class="t">(</span><span class="s">"\u201c\u201d"</span><span class="t">),</span>
+<span class="t">                </span><span class="s">"author"</span><span class="t">: </span><span class="v">quote</span><span class="t">.</span><span class="fn">select_one</span><span class="t">(</span><span class="s">".author"</span><span class="t">).</span><span class="v">text</span><span class="t">,</span>
+<span class="t">                </span><span class="s">"tags"</span><span class="t">:   [</span><span class="v">t</span><span class="t">.</span><span class="v">text</span> <span class="kw">for</span> <span class="v">t</span> <span class="kw">in</span> <span class="v">quote</span><span class="t">.</span><span class="fn">select</span><span class="t">(</span><span class="s">".tag"</span><span class="t">)],</span>
+<span class="t">            })</span>
+<span class="t">        </span><span class="v">time</span><span class="t">.</span><span class="fn">sleep</span><span class="t">(</span><span class="n">0.5</span><span class="t">)</span>   <span class="cm"># be polite to the server</span>
+
+<span class="t">    </span><span class="kw">return</span> <span class="v">results</span>
+
+<span class="kw">def</span> <span class="fn">save_csv</span><span class="t">(</span><span class="v">data</span><span class="t">, </span><span class="v">filename</span><span class="t">=</span><span class="s">"quotes.csv"</span><span class="t">):</span>
+<span class="t">    </span><span class="kw">with</span> <span class="fn">open</span><span class="t">(</span><span class="v">filename</span><span class="t">, </span><span class="s">"w"</span><span class="t">, </span><span class="v">newline</span><span class="t">=</span><span class="s">""</span><span class="t">) </span><span class="kw">as</span> <span class="v">f</span><span class="t">:</span>
+<span class="t">        </span><span class="v">w</span> <span class="t">= </span><span class="v">csv</span><span class="t">.</span><span class="fn">DictWriter</span><span class="t">(</span><span class="v">f</span><span class="t">, </span><span class="v">fieldnames</span><span class="t">=[</span><span class="s">"text"</span><span class="t">, </span><span class="s">"author"</span><span class="t">, </span><span class="s">"tags"</span><span class="t">])</span>
+<span class="t">        </span><span class="v">w</span><span class="t">.</span><span class="fn">writeheader</span><span class="t">()</span>
+<span class="t">        </span><span class="v">w</span><span class="t">.</span><span class="fn">writerows</span><span class="t">(</span><span class="v">data</span><span class="t">)</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">f"Saved {len(data)} quotes to {filename}"</span><span class="t">)</span>
+
+<span class="kw">if</span> <span class="v">__name__</span> <span class="t">== </span><span class="s">"__main__"</span><span class="t">:</span>
+<span class="t">    </span><span class="v">quotes</span> <span class="t">= </span><span class="fn">scrape_quotes</span><span class="t">(</span><span class="v">pages</span><span class="t">=</span><span class="n">3</span><span class="t">)</span>
+<span class="t">    </span><span class="fn">save_csv</span><span class="t">(</span><span class="v">quotes</span><span class="t">)</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="12-3" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 12-4 REST API Client -->
+    <div class="lesson-page" id="lesson-12-4">
+      <div class="lesson-tag">Module 12 · Project 4</div>
+      <h1 class="lesson-title">Project 4: REST API Client</h1>
+      <p class="lesson-intro">Build a polished command-line weather app using a live REST API. Covers HTTP requests, JSON parsing, error handling, and beautiful terminal output.</p>
+      <div class="block">
+        <h2>Setup</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Terminal</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">pip install requests</span>
+<span class="cm"># Get a free API key from: https://openweathermap.org/api</span></div>
+        </div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">weather.py</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">import</span> <span class="v">requests</span><span class="t">, </span><span class="v">os</span><span class="t">, </span><span class="v">sys</span>
+<span class="kw">from</span> <span class="v">datetime</span> <span class="kw">import</span> <span class="v">datetime</span>
+
+<span class="v">API_KEY</span> <span class="t">= </span><span class="v">os</span><span class="t">.</span><span class="fn">getenv</span><span class="t">(</span><span class="s">"WEATHER_API_KEY"</span><span class="t">)</span>
+<span class="v">BASE</span> <span class="t">= </span><span class="s">"https://api.openweathermap.org/data/2.5/weather"</span>
+
+<span class="kw">def</span> <span class="fn">get_weather</span><span class="t">(</span><span class="v">city</span><span class="t">: </span><span class="v">str</span><span class="t">) -&gt; </span><span class="v">dict</span><span class="t">:</span>
+<span class="t">    </span><span class="v">params</span> <span class="t">= {</span><span class="s">"q"</span><span class="t">: </span><span class="v">city</span><span class="t">, </span><span class="s">"appid"</span><span class="t">: </span><span class="v">API_KEY</span><span class="t">, </span><span class="s">"units"</span><span class="t">: </span><span class="s">"metric"</span><span class="t">}</span>
+<span class="t">    </span><span class="v">resp</span> <span class="t">= </span><span class="v">requests</span><span class="t">.</span><span class="fn">get</span><span class="t">(</span><span class="v">BASE</span><span class="t">, </span><span class="v">params</span><span class="t">=</span><span class="v">params</span><span class="t">, </span><span class="v">timeout</span><span class="t">=</span><span class="n">10</span><span class="t">)</span>
+<span class="t">    </span><span class="v">resp</span><span class="t">.</span><span class="fn">raise_for_status</span><span class="t">()</span>
+<span class="t">    </span><span class="kw">return</span> <span class="v">resp</span><span class="t">.</span><span class="fn">json</span><span class="t">()</span>
+
+<span class="kw">def</span> <span class="fn">display</span><span class="t">(</span><span class="v">data</span><span class="t">: </span><span class="v">dict</span><span class="t">):</span>
+<span class="t">    </span><span class="v">city</span> <span class="t">= </span><span class="v">data</span><span class="t">[</span><span class="s">"name"</span><span class="t">]</span>
+<span class="t">    </span><span class="v">country</span> <span class="t">= </span><span class="v">data</span><span class="t">[</span><span class="s">"sys"</span><span class="t">][</span><span class="s">"country"</span><span class="t">]</span>
+<span class="t">    </span><span class="v">temp</span> <span class="t">= </span><span class="v">data</span><span class="t">[</span><span class="s">"main"</span><span class="t">][</span><span class="s">"temp"</span><span class="t">]</span>
+<span class="t">    </span><span class="v">feels</span> <span class="t">= </span><span class="v">data</span><span class="t">[</span><span class="s">"main"</span><span class="t">][</span><span class="s">"feels_like"</span><span class="t">]</span>
+<span class="t">    </span><span class="v">desc</span> <span class="t">= </span><span class="v">data</span><span class="t">[</span><span class="s">"weather"</span><span class="t">][</span><span class="n">0</span><span class="t">][</span><span class="s">"description"</span><span class="t">].</span><span class="fn">capitalize</span><span class="t">()</span>
+<span class="t">    </span><span class="v">humidity</span> <span class="t">= </span><span class="v">data</span><span class="t">[</span><span class="s">"main"</span><span class="t">][</span><span class="s">"humidity"</span><span class="t">]</span>
+<span class="t">    </span><span class="v">wind</span> <span class="t">= </span><span class="v">data</span><span class="t">[</span><span class="s">"wind"</span><span class="t">][</span><span class="s">"speed"</span><span class="t">]</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">f"""
+┌─────────────────────────────┐
+│ 🌍 {city}, {country:<span class="t">20</span>}│
+│ 🌡️  {temp:.1f}°C (feels {feels:.1f}°C)
+│ 💧 Humidity: {humidity}%
+│ 🌬️  Wind: {wind} m/s
+│ ☁️  {desc}
+└─────────────────────────────┘"""</span><span class="t">)</span>
+
+<span class="kw">if</span> <span class="v">__name__</span> <span class="t">== </span><span class="s">"__main__"</span><span class="t">:</span>
+<span class="t">    </span><span class="v">city</span> <span class="t">= </span><span class="s">" "</span><span class="t">.</span><span class="fn">join</span><span class="t">(</span><span class="v">sys</span><span class="t">.</span><span class="v">argv</span><span class="t">[</span><span class="n">1</span><span class="t">:]) </span><span class="kw">or</span> <span class="fn">input</span><span class="t">(</span><span class="s">"Enter city: "</span><span class="t">)</span>
+<span class="t">    </span><span class="kw">try</span><span class="t">:</span>
+<span class="t">        </span><span class="v">data</span> <span class="t">= </span><span class="fn">get_weather</span><span class="t">(</span><span class="v">city</span><span class="t">)</span>
+<span class="t">        </span><span class="fn">display</span><span class="t">(</span><span class="v">data</span><span class="t">)</span>
+<span class="t">    </span><span class="kw">except</span> <span class="v">requests</span><span class="t">.</span><span class="v">HTTPError</span> <span class="kw">as</span> <span class="v">e</span><span class="t">:</span>
+<span class="t">        </span><span class="fn">print</span><span class="t">(</span><span class="s">f"Error: City not found or API issue: </span><span class="p">{e}</span><span class="s">"</span><span class="t">)</span>
+<span class="t">    </span><span class="kw">except</span> <span class="v">requests</span><span class="t">.</span><span class="v">ConnectionError</span><span class="t">:</span>
+<span class="t">        </span><span class="fn">print</span><span class="t">(</span><span class="s">"No internet connection."</span><span class="t">)</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="12-4" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 12-5 What's Next -->
+    <div class="lesson-page" id="lesson-12-5">
+      <div class="lesson-tag">Module 12 · Lesson 5</div>
+      <h1 class="lesson-title">What's Next?</h1>
+      <p class="lesson-intro">You've completed the entire Python course — from Hello World to decorators, async, OOP, and real-world projects. Here's where to go from here.</p>
+      <div class="block">
+        <h2>🎉 Congratulations!</h2>
+        <div class="callout tip">
+          <div><div class="callout-head">You now know</div><p>Variables, data types, control flow, functions, data structures, OOP, file I/O, exceptions, modules, generators, decorators, async, type hints, and testing. That's a complete Python developer foundation.</p></div>
+        </div>
+        <h2>Choose Your Path</h2>
+        <div class="component-grid">
+          <div class="component-card"><div class="c-name">🌐 Web Dev</div><p>Learn <strong>Flask</strong> or <strong>FastAPI</strong> to build APIs and web apps. Then explore <strong>Django</strong> for full-stack development.</p></div>
+          <div class="component-card"><div class="c-name">📊 Data Science</div><p>Master <strong>NumPy</strong>, <strong>Pandas</strong>, and <strong>Matplotlib</strong>. Then move to <strong>scikit-learn</strong> for machine learning.</p></div>
+          <div class="component-card"><div class="c-name">🤖 AI / ML</div><p>Explore <strong>TensorFlow</strong> or <strong>PyTorch</strong>. Build neural networks, image classifiers, and NLP models.</p></div>
+          <div class="component-card"><div class="c-name">🔧 Automation</div><p>Use <strong>selenium</strong> and <strong>pyautogui</strong> to automate repetitive tasks. Build bots, scrapers, and schedulers.</p></div>
+          <div class="component-card"><div class="c-name">🎮 Game Dev</div><p>Build 2D games with <strong>pygame</strong>. Great for practising OOP and game loop logic.</p></div>
+          <div class="component-card"><div class="c-name">🐧 DevOps / CLI</div><p>Build command-line tools, system scripts, and CI/CD pipelines using Python and the <strong>Click</strong> library.</p></div>
+        </div>
+        <h2>Practice Resources</h2>
+        <ul>
+          <li><strong>LeetCode / HackerRank</strong> — algorithmic problem solving</li>
+          <li><strong>Project Euler</strong> — math and programming challenges</li>
+          <li><strong>GitHub</strong> — contribute to open source Python projects</li>
+          <li><strong>Real Python</strong> (realpython.com) — in-depth tutorials</li>
+          <li><strong>Python Docs</strong> (docs.python.org) — the official reference</li>
+        </ul>
+        <h2>The Most Important Tip</h2>
+        <div class="callout info">
+          <div><div class="callout-head">💡 Build things</div><p>The fastest way to become a confident Python developer is to build projects that solve real problems you actually have. Every project will teach you ten new things that no tutorial can. Start small, break things, fix them, and keep going. You've got this! 🚀</p></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="12-5" onclick="markDone(this)">Mark Complete ✓</button>
+        <a href="index.html" class="next-btn" style="text-decoration:none">🏠 Back to Course Home</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>

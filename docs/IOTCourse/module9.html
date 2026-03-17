@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Module 9: Beginner IoT Projects — AlCoders IoT Course</title>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="breadcrumb"><span id="breadcrumb-text">Module 9</span></div>
+      <div class="topbar-nav">
+        <button class="nav-btn" onclick="prevLesson()">&#8592; Prev</button>
+        <button class="nav-btn" onclick="nextLesson()">Next &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 9-1 -->
+    <div class="lesson-page active" id="lesson-9-1">
+      <span class="lesson-tag">Module 9 · Lesson 1</span>
+      <h1 class="lesson-title">Project: Cloud Temperature Monitor</h1>
+      <p class="lesson-intro">Your first complete IoT project: a DHT11 sensor on an ESP32 that logs temperature and humidity to ThingSpeak every 30 seconds and displays a live chart in your browser.</p>
+
+      <div class="block">
+        <h3>What You'll Build</h3>
+        <ul>
+          <li>ESP32 reads temperature & humidity from DHT11 every 30 seconds</li>
+          <li>Data is sent to ThingSpeak via HTTP GET</li>
+          <li>ThingSpeak dashboard shows live updating line charts</li>
+          <li>Bonus: configure a ThingSpeak alert if temperature exceeds 35°C</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Components Needed</h3>
+        <div class="component-grid">
+          <div class="component-card"><strong>ESP32</strong><br/>Main microcontroller with Wi-Fi</div>
+          <div class="component-card"><strong>DHT11 Sensor</strong><br/>Temperature + humidity</div>
+          <div class="component-card"><strong>10kΩ Resistor</strong><br/>Pull-up on DHT11 data pin</div>
+          <div class="component-card"><strong>Breadboard + Wires</strong><br/>For the circuit</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Complete Project Code</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">#include </span><span class="v">&lt;WiFi.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;HTTPClient.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;DHT.h&gt;</span>
+
+<span class="kw">const char</span>* ssid     = <span class="a">"YourWiFi"</span>;
+<span class="kw">const char</span>* password = <span class="a">"YourPass"</span>;
+<span class="kw">const char</span>* apiKey   = <span class="a">"YOUR_THINGSPEAK_WRITE_KEY"</span>;
+
+<span class="kw">#define</span> <span class="v">DHTPIN</span>  <span class="p">4</span>
+<span class="kw">#define</span> <span class="v">DHTTYPE</span> <span class="p">DHT11</span>
+<span class="t">DHT</span> dht(<span class="v">DHTPIN</span>, <span class="v">DHTTYPE</span>);
+
+<span class="kw">unsigned long</span> lastSend = <span class="p">0</span>;
+<span class="kw">const long</span>    interval  = <span class="p">30000</span>; <span class="cm">// 30 seconds</span>
+
+<span class="kw">void</span> <span class="t">setup</span>() {
+  Serial.begin(<span class="p">115200</span>);
+  dht.begin();
+
+  WiFi.begin(ssid, password);
+  Serial.print(<span class="a">"Connecting"</span>);
+  <span class="kw">while</span> (WiFi.status() != <span class="v">WL_CONNECTED</span>) {
+    delay(<span class="p">500</span>); Serial.print(<span class="a">"."</span>);
+  }
+  Serial.println(<span class="a">"\nConnected! IP: "</span> + WiFi.localIP().toString());
+}
+
+<span class="kw">void</span> sendToThingSpeak(<span class="kw">float</span> temp, <span class="kw">float</span> hum) {
+  <span class="t">HTTPClient</span> http;
+  <span class="t">String</span> url = <span class="t">String</span>(<span class="a">"https://api.thingspeak.com/update?api_key="</span>)
+               + apiKey + <span class="a">"&field1="</span> + temp + <span class="a">"&field2="</span> + hum;
+  http.begin(url);
+  <span class="kw">int</span> code = http.GET();
+  Serial.println(<span class="a">"Response: "</span> + <span class="t">String</span>(code));
+  http.end();
+}
+
+<span class="kw">void</span> <span class="t">loop</span>() {
+  <span class="kw">unsigned long</span> now = millis();
+  <span class="kw">if</span> (now - lastSend >= interval) {
+    lastSend = now;
+    <span class="kw">float</span> t = dht.readTemperature();
+    <span class="kw">float</span> h = dht.readHumidity();
+    <span class="kw">if</span> (!isnan(t) && !isnan(h)) {
+      Serial.printf(<span class="a">"T=%.1f°C H=%.1f%%\n"</span>, t, h);
+      sendToThingSpeak(t, h);
+    } <span class="kw">else</span> {
+      Serial.println(<span class="a">"DHT read failed"</span>);
+    }
+  }
+}</div>
+        </div>
+      </div>
+
+      <div class="project-box">
+        <h3>Build Steps</h3>
+        <div class="project-steps">
+          <ol>
+            <li>Wire DHT11 to ESP32 (VCC→3.3V, GND→GND, DATA→GPIO4 with 10kΩ pull-up to 3.3V)</li>
+            <li>Create a ThingSpeak account and new Channel with two fields: Temperature and Humidity</li>
+            <li>Copy your Write API Key from the API Keys tab</li>
+            <li>Paste your Wi-Fi credentials and API key into the code</li>
+            <li>Install the <em>DHT sensor library</em> by Adafruit in Library Manager</li>
+            <li>Upload the code and open Serial Monitor at 115200 baud</li>
+            <li>Open your ThingSpeak channel — watch the charts fill in!</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 9-2 -->
+    <div class="lesson-page" id="lesson-9-2">
+      <span class="lesson-tag">Module 9 · Lesson 2</span>
+      <h1 class="lesson-title">Project: Smart RGB LED Controller</h1>
+      <p class="lesson-intro">Control an RGB LED from anywhere in the world using Adafruit IO. A colour picker on the dashboard sends RGB values to your ESP32, which sets the LED colour in real time.</p>
+
+      <div class="block">
+        <h3>Components Needed</h3>
+        <div class="component-grid">
+          <div class="component-card"><strong>ESP32</strong><br/>Wi-Fi microcontroller</div>
+          <div class="component-card"><strong>Common Cathode RGB LED</strong><br/>3 colours in one package</div>
+          <div class="component-card"><strong>3× 220Ω Resistors</strong><br/>Current limiting for each LED pin</div>
+          <div class="component-card"><strong>Breadboard + Wires</strong><br/>For the circuit</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>RGB LED Wiring</h3>
+        <table class="wiring">
+          <thead><tr><th>RGB LED Pin</th><th>ESP32 Pin</th><th>Note</th></tr></thead>
+          <tbody>
+            <tr><td>R (Red)</td><td>GPIO 25</td><td>Via 220Ω resistor</td></tr>
+            <tr><td>G (Green)</td><td>GPIO 26</td><td>Via 220Ω resistor</td></tr>
+            <tr><td>B (Blue)</td><td>GPIO 27</td><td>Via 220Ω resistor</td></tr>
+            <tr><td>Common (–)</td><td>GND</td><td>Longest pin</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="block">
+        <h3>Complete Project Code</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">#include </span><span class="v">&lt;WiFi.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;Adafruit_MQTT.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;Adafruit_MQTT_Client.h&gt;</span>
+
+<span class="kw">#define</span> <span class="v">AIO_USERNAME</span> <span class="a">"your_username"</span>
+<span class="kw">#define</span> <span class="v">AIO_KEY</span>      <span class="a">"your_aio_key"</span>
+
+<span class="kw">#define</span> <span class="v">PIN_R</span> <span class="p">25</span>
+<span class="kw">#define</span> <span class="v">PIN_G</span> <span class="p">26</span>
+<span class="kw">#define</span> <span class="v">PIN_B</span> <span class="p">27</span>
+
+<span class="t">WiFiClient</span> client;
+<span class="t">Adafruit_MQTT_Client</span> mqtt(&client, <span class="a">"io.adafruit.com"</span>, <span class="p">1883</span>, <span class="v">AIO_USERNAME</span>, <span class="v">AIO_KEY</span>);
+<span class="t">Adafruit_MQTT_Subscribe</span> colorFeed(&mqtt, <span class="v">AIO_USERNAME</span> <span class="a">"/feeds/color"</span>);
+
+<span class="kw">void</span> setColor(<span class="kw">int</span> r, <span class="kw">int</span> g, <span class="kw">int</span> b) {
+  analogWrite(<span class="v">PIN_R</span>, r);
+  analogWrite(<span class="v">PIN_G</span>, g);
+  analogWrite(<span class="v">PIN_B</span>, b);
+}
+
+<span class="kw">void</span> <span class="t">setup</span>() {
+  Serial.begin(<span class="p">115200</span>);
+  pinMode(<span class="v">PIN_R</span>, <span class="v">OUTPUT</span>);
+  pinMode(<span class="v">PIN_G</span>, <span class="v">OUTPUT</span>);
+  pinMode(<span class="v">PIN_B</span>, <span class="v">OUTPUT</span>);
+
+  WiFi.begin(<span class="a">"SSID"</span>, <span class="a">"PASS"</span>);
+  <span class="kw">while</span> (WiFi.status() != <span class="v">WL_CONNECTED</span>) delay(<span class="p">500</span>);
+
+  mqtt.subscribe(&colorFeed);
+  mqtt.connect();
+}
+
+<span class="kw">void</span> <span class="t">loop</span>() {
+  mqtt.processPackets(<span class="p">1000</span>);
+  <span class="kw">if</span> (!mqtt.connected()) mqtt.connect();
+
+  <span class="t">Adafruit_MQTT_Subscribe</span>* sub = mqtt.readSubscription(<span class="p">100</span>);
+  <span class="kw">if</span> (sub == &colorFeed) {
+    <span class="t">String</span> hex = (<span class="kw">char</span>*)colorFeed.lastread;
+    <span class="cm">// Parse #RRGGBB hex colour from Adafruit IO colour picker</span>
+    <span class="kw">long</span> colour = strtol(hex.substring(<span class="p">1</span>).c_str(), <span class="kw">nullptr</span>, <span class="p">16</span>);
+    <span class="kw">int</span> r = (colour >> <span class="p">16</span>) & <span class="p">0xFF</span>;
+    <span class="kw">int</span> g = (colour >>  <span class="p">8</span>) & <span class="p">0xFF</span>;
+    <span class="kw">int</span> b =  colour         & <span class="p">0xFF</span>;
+    setColor(r, g, b);
+    Serial.printf(<span class="a">"Colour set: R=%d G=%d B=%d\n"</span>, r, g, b);
+  }
+}</div>
+        </div>
+      </div>
+
+      <div class="project-box">
+        <h3>Build Steps</h3>
+        <div class="project-steps">
+          <ol>
+            <li>Wire RGB LED to ESP32 as per the wiring table above</li>
+            <li>Create an Adafruit IO feed named <strong>color</strong></li>
+            <li>Add a <strong>Color Picker</strong> widget to your dashboard, linked to the color feed</li>
+            <li>Paste your AIO username and key into the code</li>
+            <li>Install <em>Adafruit MQTT Library</em> from Library Manager</li>
+            <li>Upload and open Serial Monitor — you should see "Connected"</li>
+            <li>Click a colour in your Adafruit IO dashboard — LED changes instantly!</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 9-3 -->
+    <div class="lesson-page" id="lesson-9-3">
+      <span class="lesson-tag">Module 9 · Lesson 3</span>
+      <h1 class="lesson-title">Project: Motion-Triggered Security Alert</h1>
+      <p class="lesson-intro">A PIR motion sensor watches a room. When motion is detected, the ESP32 sends an IFTTT webhook that logs the event to Google Sheets and sends a Telegram message.</p>
+
+      <div class="block">
+        <h3>System Overview</h3>
+        <ul>
+          <li>PIR sensor triggers on movement → ESP32 detects HIGH signal</li>
+          <li>ESP32 calls IFTTT Webhooks URL with motion timestamp</li>
+          <li>IFTTT logs a row to Google Sheets (time, location, event)</li>
+          <li>IFTTT sends Telegram message: "Motion detected at Front Door — 14:32"</li>
+          <li>30-second cooldown prevents repeated alerts</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Wiring: PIR to ESP32</h3>
+        <table class="wiring">
+          <thead><tr><th>PIR Pin</th><th>ESP32 Pin</th></tr></thead>
+          <tbody>
+            <tr><td>VCC</td><td>5V (Vin)</td></tr>
+            <tr><td>OUT</td><td>GPIO 14</td></tr>
+            <tr><td>GND</td><td>GND</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="block">
+        <h3>Complete Project Code</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">#include </span><span class="v">&lt;WiFi.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;HTTPClient.h&gt;</span>
+
+<span class="kw">const char</span>* ssid      = <span class="a">"YourWiFi"</span>;
+<span class="kw">const char</span>* password  = <span class="a">"YourPass"</span>;
+<span class="kw">const char</span>* iftttKey  = <span class="a">"YOUR_IFTTT_KEY"</span>;
+<span class="kw">const char</span>* location  = <span class="a">"Front Door"</span>;
+
+<span class="kw">#define</span> <span class="v">PIR_PIN</span>   <span class="p">14</span>
+<span class="kw">#define</span> <span class="v">COOLDOWN</span>  <span class="p">30000UL</span>
+
+<span class="kw">unsigned long</span> lastAlert = <span class="p">0</span>;
+
+<span class="kw">void</span> <span class="t">setup</span>() {
+  Serial.begin(<span class="p">115200</span>);
+  pinMode(<span class="v">PIR_PIN</span>, <span class="v">INPUT</span>);
+  WiFi.begin(ssid, password);
+  <span class="kw">while</span> (WiFi.status() != <span class="v">WL_CONNECTED</span>) delay(<span class="p">500</span>);
+  Serial.println(<span class="a">"Ready. Monitoring for motion..."</span>);
+}
+
+<span class="kw">void</span> sendAlert() {
+  <span class="t">HTTPClient</span> http;
+  <span class="t">String</span> url = <span class="t">String</span>(<span class="a">"https://maker.ifttt.com/trigger/motion_detected/with/key/"</span>) + iftttKey;
+  http.begin(url);
+  http.addHeader(<span class="a">"Content-Type"</span>, <span class="a">"application/json"</span>);
+
+  <span class="t">String</span> body = <span class="t">String</span>(<span class="a">'{"value1":"'</span>) + location +
+                <span class="a">'","value2":"'</span> + millis()/1000 + <span class="a">'"}'</span>;
+  <span class="kw">int</span> code = http.POST(body);
+  Serial.println(<span class="a">"IFTTT response: "</span> + <span class="t">String</span>(code));
+  http.end();
+}
+
+<span class="kw">void</span> <span class="t">loop</span>() {
+  <span class="kw">if</span> (digitalRead(<span class="v">PIR_PIN</span>) == <span class="v">HIGH</span>) {
+    <span class="kw">unsigned long</span> now = millis();
+    <span class="kw">if</span> (now - lastAlert > <span class="v">COOLDOWN</span>) {
+      lastAlert = now;
+      Serial.println(<span class="a">"Motion detected! Sending alert..."</span>);
+      sendAlert();
+    }
+  }
+  delay(<span class="p">100</span>);
+}</div>
+        </div>
+      </div>
+
+      <div class="project-box">
+        <h3>Build Steps</h3>
+        <div class="project-steps">
+          <ol>
+            <li>Wire PIR to ESP32 as per wiring table. Power PIR from 5V/Vin, not 3.3V.</li>
+            <li>Create IFTTT account. Go to Create → If Webhooks → Then Google Sheets</li>
+            <li>Create a second Applet: If Webhooks → Then Telegram (install Telegram bot first)</li>
+            <li>Find your IFTTT Webhooks key at <code>ifttt.com/maker_webhooks/settings</code></li>
+            <li>Paste Wi-Fi + IFTTT key into code. Set your location name.</li>
+            <li>Upload and wave your hand in front of the PIR</li>
+            <li>Check Google Sheets and Telegram — you should see the alert!</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 9-4 -->
+    <div class="lesson-page" id="lesson-9-4">
+      <span class="lesson-tag">Module 9 · Lesson 4</span>
+      <h1 class="lesson-title">Project: Smart Plant Monitor</h1>
+      <p class="lesson-intro">Never let your plant die again! This system monitors soil moisture and temperature, sends readings to Adafruit IO, and alerts you when the soil gets too dry.</p>
+
+      <div class="block">
+        <h3>Components Needed</h3>
+        <div class="component-grid">
+          <div class="component-card"><strong>ESP32</strong><br/>Wi-Fi microcontroller</div>
+          <div class="component-card"><strong>Capacitive Soil Moisture Sensor</strong><br/>More durable than resistive type. Analog output.</div>
+          <div class="component-card"><strong>DHT11 Sensor</strong><br/>Ambient temperature & humidity</div>
+          <div class="component-card"><strong>Small Potted Plant 🌱</strong><br/>The project's beneficiary</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Wiring</h3>
+        <table class="wiring">
+          <thead><tr><th>Component</th><th>Pin</th><th>ESP32</th></tr></thead>
+          <tbody>
+            <tr><td>Soil sensor</td><td>VCC</td><td>3.3V</td></tr>
+            <tr><td>Soil sensor</td><td>GND</td><td>GND</td></tr>
+            <tr><td>Soil sensor</td><td>AOUT</td><td>GPIO 34 (ADC)</td></tr>
+            <tr><td>DHT11</td><td>VCC</td><td>3.3V</td></tr>
+            <tr><td>DHT11</td><td>GND</td><td>GND</td></tr>
+            <tr><td>DHT11</td><td>DATA</td><td>GPIO 4</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="block">
+        <h3>Complete Project Code</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">#include </span><span class="v">&lt;WiFi.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;Adafruit_MQTT.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;Adafruit_MQTT_Client.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;DHT.h&gt;</span>
+
+<span class="kw">#define</span> <span class="v">SOIL_PIN</span>  <span class="p">34</span>
+<span class="kw">#define</span> <span class="v">DHT_PIN</span>   <span class="p">4</span>
+<span class="kw">#define</span> <span class="v">DRY_VAL</span>   <span class="p">2800</span>  <span class="cm">// calibrate: raw ADC value when dry</span>
+<span class="kw">#define</span> <span class="v">WET_VAL</span>   <span class="p">1200</span>  <span class="cm">// calibrate: raw ADC value in water</span>
+
+<span class="t">DHT</span> dht(<span class="v">DHT_PIN</span>, <span class="v">DHT11</span>);
+<span class="t">WiFiClient</span> wc;
+<span class="t">Adafruit_MQTT_Client</span> mqtt(&wc, <span class="a">"io.adafruit.com"</span>, <span class="p">1883</span>, <span class="a">"USER"</span>, <span class="a">"KEY"</span>);
+<span class="t">Adafruit_MQTT_Publish</span> soilFeed(&mqtt, <span class="a">"USER/feeds/soil"</span>);
+<span class="t">Adafruit_MQTT_Publish</span> tempFeed(&mqtt, <span class="a">"USER/feeds/temperature"</span>);
+
+<span class="kw">int</span> soilPercent() {
+  <span class="kw">int</span> raw = analogRead(<span class="v">SOIL_PIN</span>);
+  <span class="kw">return</span> constrain(map(raw, <span class="v">DRY_VAL</span>, <span class="v">WET_VAL</span>, <span class="p">0</span>, <span class="p">100</span>), <span class="p">0</span>, <span class="p">100</span>);
+}
+
+<span class="kw">void</span> <span class="t">setup</span>() {
+  Serial.begin(<span class="p">115200</span>);
+  dht.begin();
+  WiFi.begin(<span class="a">"SSID"</span>, <span class="a">"PASS"</span>);
+  <span class="kw">while</span> (WiFi.status() != <span class="v">WL_CONNECTED</span>) delay(<span class="p">500</span>);
+  mqtt.connect();
+}
+
+<span class="kw">void</span> <span class="t">loop</span>() {
+  <span class="kw">if</span> (!mqtt.connected()) mqtt.connect();
+
+  <span class="kw">int</span>   soil = soilPercent();
+  <span class="kw">float</span> temp = dht.readTemperature();
+
+  soilFeed.publish(soil);
+  tempFeed.publish(temp);
+  Serial.printf(<span class="a">"Soil: %d%% | Temp: %.1f°C\n"</span>, soil, temp);
+
+  delay(<span class="p">60000</span>); <span class="cm">// send every minute</span>
+}</div>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-head">Calibrating the Soil Sensor</div>
+        Read the ADC value with the sensor in dry air and note it as <code>DRY_VAL</code>. Then submerge the sensor tip in water and note the value as <code>WET_VAL</code>. These numbers vary between sensors — always calibrate yours.
+      </div>
+
+      <div class="project-box">
+        <h3>Build Steps</h3>
+        <div class="project-steps">
+          <ol>
+            <li>Wire soil sensor and DHT11 to ESP32 as per the table above</li>
+            <li>Calibrate: upload a simple analogRead sketch, note dry vs wet values</li>
+            <li>Create Adafruit IO feeds: <strong>soil</strong> and <strong>temperature</strong></li>
+            <li>Build a dashboard with two gauges and a line chart</li>
+            <li>Set an Adafruit IO Trigger: if soil &lt; 20, send email "Water your plant!"</li>
+            <li>Upload final code, place sensor in plant soil</li>
+            <li>Watch moisture drop over days as the plant drinks!</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 9-5 -->
+    <div class="lesson-page" id="lesson-9-5">
+      <span class="lesson-tag">Module 9 · Lesson 5</span>
+      <h1 class="lesson-title">Project: Personal Weather Station</h1>
+      <p class="lesson-intro">Build a hyperlocal weather station that measures temperature, humidity, and air pressure, displays live readings on an OLED screen, and publishes history to ThingSpeak.</p>
+
+      <div class="block">
+        <h3>Components Needed</h3>
+        <div class="component-grid">
+          <div class="component-card"><strong>ESP32</strong><br/>Wi-Fi microcontroller</div>
+          <div class="component-card"><strong>BME280 Sensor</strong><br/>Temp + Humidity + Pressure (I²C)</div>
+          <div class="component-card"><strong>SSD1306 OLED (128×64)</strong><br/>Local display (I²C)</div>
+          <div class="component-card"><strong>Breadboard + Wires</strong><br/>Assembly</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Wiring (Both Devices on I²C Bus)</h3>
+        <table class="wiring">
+          <thead><tr><th>Device</th><th>Pin</th><th>ESP32</th></tr></thead>
+          <tbody>
+            <tr><td>BME280 + OLED</td><td>VCC</td><td>3.3V</td></tr>
+            <tr><td>BME280 + OLED</td><td>GND</td><td>GND</td></tr>
+            <tr><td>BME280 + OLED</td><td>SDA</td><td>GPIO 21</td></tr>
+            <tr><td>BME280 + OLED</td><td>SCL</td><td>GPIO 22</td></tr>
+          </tbody>
+        </table>
+        <p>Both devices share the same I²C bus. BME280 address is usually 0x76 or 0x77; SSD1306 is 0x3C.</p>
+      </div>
+
+      <div class="block">
+        <h3>Complete Project Code</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">#include </span><span class="v">&lt;Wire.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;Adafruit_BME280.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;Adafruit_SSD1306.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;WiFi.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;HTTPClient.h&gt;</span>
+
+<span class="t">Adafruit_BME280</span> bme;
+<span class="t">Adafruit_SSD1306</span> display(<span class="p">128</span>, <span class="p">64</span>, &Wire, <span class="p">-1</span>);
+
+<span class="kw">const char</span>* apiKey = <span class="a">"YOUR_THINGSPEAK_KEY"</span>;
+
+<span class="kw">void</span> <span class="t">setup</span>() {
+  Serial.begin(<span class="p">115200</span>);
+  bme.begin(<span class="p">0x76</span>);
+  display.begin(<span class="v">SSD1306_SWITCHCAPVCC</span>, <span class="p">0x3C</span>);
+  display.clearDisplay();
+
+  WiFi.begin(<span class="a">"SSID"</span>, <span class="a">"PASS"</span>);
+  <span class="kw">while</span> (WiFi.status() != <span class="v">WL_CONNECTED</span>) delay(<span class="p">500</span>);
+}
+
+<span class="kw">void</span> updateOLED(<span class="kw">float</span> t, <span class="kw">float</span> h, <span class="kw">float</span> p) {
+  display.clearDisplay();
+  display.setTextSize(<span class="p">1</span>); display.setTextColor(<span class="v">WHITE</span>);
+  display.setCursor(<span class="p">0</span>, <span class="p">0</span>);  display.print(<span class="a">"Temp:  "</span>); display.print(t); display.println(<span class="a">" C"</span>);
+  display.setCursor(<span class="p">0</span>, <span class="p">16</span>); display.print(<span class="a">"Humid: "</span>); display.print(h); display.println(<span class="a">" %"</span>);
+  display.setCursor(<span class="p">0</span>, <span class="p">32</span>); display.print(<span class="a">"Press: "</span>); display.print(p/<span class="p">100</span>); display.println(<span class="a">" hPa"</span>);
+  display.display();
+}
+
+<span class="kw">void</span> <span class="t">loop</span>() {
+  <span class="kw">float</span> t = bme.readTemperature();
+  <span class="kw">float</span> h = bme.readHumidity();
+  <span class="kw">float</span> p = bme.readPressure();
+
+  updateOLED(t, h, p);
+
+  <span class="t">HTTPClient</span> http;
+  <span class="t">String</span> url = <span class="t">String</span>(<span class="a">"https://api.thingspeak.com/update?api_key="</span>)
+               + apiKey + <span class="a">"&field1="</span> + t + <span class="a">"&field2="</span> + h + <span class="a">"&field3="</span> + (p/<span class="p">100</span>);
+  http.begin(url);
+  http.GET();
+  http.end();
+
+  delay(<span class="p">30000</span>);
+}</div>
+        </div>
+      </div>
+
+      <div class="project-box">
+        <h3>Build Steps</h3>
+        <div class="project-steps">
+          <ol>
+            <li>Wire BME280 and SSD1306 to I²C bus (GPIO 21/22, shared)</li>
+            <li>Install libraries: <em>Adafruit BME280</em>, <em>Adafruit SSD1306</em>, <em>Adafruit GFX</em></li>
+            <li>Create ThingSpeak channel with 3 fields: Temperature, Humidity, Pressure</li>
+            <li>Paste Wi-Fi + API key into code</li>
+            <li>Upload — the OLED should show readings within 5 seconds</li>
+            <li>Visit ThingSpeak channel — all three charts will start filling in!</li>
+            <li>Challenge: add a fourth field for a light sensor (LDR on GPIO 35)</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+  </div><!-- .main -->
+</div><!-- .layout -->
+<script src="course.js"></script>
+</body>
+</html>

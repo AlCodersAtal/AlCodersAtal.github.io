@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 4: Control Flow | Python Course | AlCoders ATL</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">Al<span>Coders</span> ATL</a>
+  <ul><li><a href="index.html#curriculum">All Modules</a></li></ul>
+  <a href="module5.html" class="nav-start">Next Module →</a>
+</nav>
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="progress-bar"></div>
+    <div class="topbar">
+      <div class="breadcrumb">Module 4 → <span>Control Flow</span></div>
+      <div class="nav-btns">
+        <button class="nav-btn" id="prevBtn" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn" id="nextBtn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 4-1 -->
+    <div class="lesson-page" id="lesson-4-1">
+      <div class="lesson-tag">Module 4 · Lesson 1</div>
+      <h1 class="lesson-title">if / elif / else</h1>
+      <p class="lesson-intro">Conditions let your program make decisions — run different code depending on whether something is true or false. This is the heart of every program's logic.</p>
+      <div class="block">
+        <h2>The if Statement</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># Basic if</span>
+<span class="v">temperature</span> <span class="t">= </span><span class="n">35</span>
+<span class="kw">if</span> <span class="v">temperature</span> <span class="t">&gt; </span><span class="n">30</span><span class="t">:</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">"It's hot outside!"</span><span class="t">)</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">"Drink water."</span><span class="t">)</span>
+<span class="cm"># Both indented lines run if condition is True</span></div>
+        </div>
+        <h2>if / else</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">score</span> <span class="t">= </span><span class="n">75</span>
+<span class="kw">if</span> <span class="v">score</span> <span class="t">&gt;= </span><span class="n">50</span><span class="t">:</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">"You passed!"</span><span class="t">)</span>
+<span class="kw">else</span><span class="t">:</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">"You failed."</span><span class="t">)</span></div>
+        </div>
+        <h2>if / elif / else — Multiple Conditions</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">score</span> <span class="t">= </span><span class="n">85</span>
+<span class="kw">if</span> <span class="v">score</span> <span class="t">&gt;= </span><span class="n">90</span><span class="t">:</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">"Grade: A"</span><span class="t">)</span>
+<span class="kw">elif</span> <span class="v">score</span> <span class="t">&gt;= </span><span class="n">80</span><span class="t">:</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">"Grade: B"</span><span class="t">)</span>
+<span class="kw">elif</span> <span class="v">score</span> <span class="t">&gt;= </span><span class="n">70</span><span class="t">:</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">"Grade: C"</span><span class="t">)</span>
+<span class="kw">elif</span> <span class="v">score</span> <span class="t">&gt;= </span><span class="n">60</span><span class="t">:</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">"Grade: D"</span><span class="t">)</span>
+<span class="kw">else</span><span class="t">:</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">"Grade: F"</span><span class="t">)</span>
+<span class="cm"># Output: Grade: B</span></div>
+        </div>
+        <h2>Ternary / Conditional Expression</h2>
+        <p>A compact one-line if-else:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">age</span> <span class="t">= </span><span class="n">20</span>
+<span class="v">status</span> <span class="t">= </span><span class="s">"adult"</span> <span class="kw">if</span> <span class="v">age</span> <span class="t">&gt;= </span><span class="n">18</span> <span class="kw">else</span> <span class="s">"minor"</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">status</span><span class="t">)</span>   <span class="cm"># adult</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="4-1" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 4-2 -->
+    <div class="lesson-page" id="lesson-4-2">
+      <div class="lesson-tag">Module 4 · Lesson 2</div>
+      <h1 class="lesson-title">Nested Conditions</h1>
+      <p class="lesson-intro">Conditions can be placed inside other conditions, creating layers of decision-making. Use this carefully — deep nesting makes code hard to read.</p>
+      <div class="block">
+        <h2>Nested if Statements</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">age</span> <span class="t">= </span><span class="n">22</span>
+<span class="v">has_ticket</span> <span class="t">= </span><span class="kw">True</span>
+
+<span class="kw">if</span> <span class="v">age</span> <span class="t">&gt;= </span><span class="n">18</span><span class="t">:</span>
+<span class="t">    </span><span class="kw">if</span> <span class="v">has_ticket</span><span class="t">:</span>
+<span class="t">        </span><span class="fn">print</span><span class="t">(</span><span class="s">"Welcome! Enjoy the show."</span><span class="t">)</span>
+<span class="t">    </span><span class="kw">else</span><span class="t">:</span>
+<span class="t">        </span><span class="fn">print</span><span class="t">(</span><span class="s">"You need a ticket."</span><span class="t">)</span>
+<span class="kw">else</span><span class="t">:</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">"Sorry, adults only."</span><span class="t">)</span></div>
+        </div>
+        <div class="callout tip">
+          <div><div class="callout-head">💡 Prefer 'and' over deep nesting</div><p>The same logic can often be written more clearly using <code>and</code>: <code>if age >= 18 and has_ticket:</code>. Only nest when the conditions are truly separate decisions.</p></div>
+        </div>
+      </div>
+      <div class="block">
+        <h2>match / case (Python 3.10+)</h2>
+        <p>Python 3.10 introduced <code>match</code> statements — similar to switch in other languages:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python 3.10+</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">command</span> <span class="t">= </span><span class="s">"quit"</span>
+
+<span class="kw">match</span> <span class="v">command</span><span class="t">:</span>
+<span class="t">    </span><span class="kw">case</span> <span class="s">"start"</span><span class="t">:</span>
+<span class="t">        </span><span class="fn">print</span><span class="t">(</span><span class="s">"Starting..."</span><span class="t">)</span>
+<span class="t">    </span><span class="kw">case</span> <span class="s">"stop"</span> <span class="t">| </span><span class="s">"quit"</span><span class="t">:</span>     <span class="cm"># multiple options with |</span>
+<span class="t">        </span><span class="fn">print</span><span class="t">(</span><span class="s">"Stopping..."</span><span class="t">)</span>
+<span class="t">    </span><span class="kw">case</span> <span class="t">_:</span>                    <span class="cm"># default (like else)</span>
+<span class="t">        </span><span class="fn">print</span><span class="t">(</span><span class="s">"Unknown command"</span><span class="t">)</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="4-2" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 4-3 -->
+    <div class="lesson-page" id="lesson-4-3">
+      <div class="lesson-tag">Module 4 · Lesson 3</div>
+      <h1 class="lesson-title">for Loops</h1>
+      <p class="lesson-intro">Loops let you repeat code. The for loop iterates over a sequence — a list, string, range, or any iterable — and runs the body once for each item.</p>
+      <div class="block">
+        <h2>Iterating over a List</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">fruits</span> <span class="t">= [</span><span class="s">"apple"</span><span class="t">, </span><span class="s">"banana"</span><span class="t">, </span><span class="s">"cherry"</span><span class="t">]</span>
+<span class="kw">for</span> <span class="v">fruit</span> <span class="kw">in</span> <span class="v">fruits</span><span class="t">:</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="v">fruit</span><span class="t">)</span>
+<span class="cm"># apple
+# banana
+# cherry</span></div>
+        </div>
+        <h2>range() — Counting Loops</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># range(stop) — 0 to stop-1</span>
+<span class="kw">for</span> <span class="v">i</span> <span class="kw">in</span> <span class="fn">range</span><span class="t">(</span><span class="n">5</span><span class="t">):</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="v">i</span><span class="t">)</span>   <span class="cm"># 0, 1, 2, 3, 4</span>
+
+<span class="cm"># range(start, stop)</span>
+<span class="kw">for</span> <span class="v">i</span> <span class="kw">in</span> <span class="fn">range</span><span class="t">(</span><span class="n">1</span><span class="t">, </span><span class="n">6</span><span class="t">):</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="v">i</span><span class="t">)</span>   <span class="cm"># 1, 2, 3, 4, 5</span>
+
+<span class="cm"># range(start, stop, step)</span>
+<span class="kw">for</span> <span class="v">i</span> <span class="kw">in</span> <span class="fn">range</span><span class="t">(</span><span class="n">0</span><span class="t">, </span><span class="n">20</span><span class="t">, </span><span class="n">5</span><span class="t">):</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="v">i</span><span class="t">)</span>   <span class="cm"># 0, 5, 10, 15</span>
+
+<span class="cm"># Count backwards</span>
+<span class="kw">for</span> <span class="v">i</span> <span class="kw">in</span> <span class="fn">range</span><span class="t">(</span><span class="n">10</span><span class="t">, </span><span class="n">0</span><span class="t">, -</span><span class="n">1</span><span class="t">):</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="v">i</span><span class="t">)</span>   <span class="cm"># 10, 9, 8... 1</span></div>
+        </div>
+        <h2>Iterating with enumerate()</h2>
+        <p>Get both the index and value at the same time:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">names</span> <span class="t">= [</span><span class="s">"Alice"</span><span class="t">, </span><span class="s">"Bob"</span><span class="t">, </span><span class="s">"Charlie"</span><span class="t">]</span>
+<span class="kw">for</span> <span class="v">i</span><span class="t">, </span><span class="v">name</span> <span class="kw">in</span> <span class="fn">enumerate</span><span class="t">(</span><span class="v">names</span><span class="t">):</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">f"</span><span class="p">{i}</span><span class="s">: </span><span class="p">{name}</span><span class="s">"</span><span class="t">)</span>
+<span class="cm"># 0: Alice
+# 1: Bob
+# 2: Charlie</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="4-3" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 4-4 -->
+    <div class="lesson-page" id="lesson-4-4">
+      <div class="lesson-tag">Module 4 · Lesson 4</div>
+      <h1 class="lesson-title">while Loops</h1>
+      <p class="lesson-intro">The while loop keeps running as long as a condition is True. Use it when you don't know in advance how many times to repeat.</p>
+      <div class="block">
+        <h2>Basic while Loop</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">count</span> <span class="t">= </span><span class="n">0</span>
+<span class="kw">while</span> <span class="v">count</span> <span class="t">&lt; </span><span class="n">5</span><span class="t">:</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">f"Count: </span><span class="p">{count}</span><span class="s">"</span><span class="t">)</span>
+<span class="t">    </span><span class="v">count</span> <span class="t">+= </span><span class="n">1</span>   <span class="cm"># IMPORTANT: always update the condition variable!</span>
+<span class="cm"># Count: 0, 1, 2, 3, 4</span></div>
+        </div>
+        <div class="callout danger">
+          <div><div class="callout-head">❌ Infinite Loops</div><p>If you forget to update the condition variable, the loop runs forever. Always make sure your while condition will eventually become False. Press Ctrl+C to stop an infinite loop in terminal.</p></div>
+        </div>
+        <h2>while with User Input</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">password</span> <span class="t">= </span><span class="s">""</span>
+<span class="kw">while</span> <span class="v">password</span> <span class="t">!= </span><span class="s">"secret123"</span><span class="t">:</span>
+<span class="t">    </span><span class="v">password</span> <span class="t">= </span><span class="fn">input</span><span class="t">(</span><span class="s">"Enter password: "</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"Access granted!"</span><span class="t">)</span></div>
+        </div>
+        <h2>while / else</h2>
+        <p>Python's while loop can have an <code>else</code> clause that runs when the condition becomes False (but NOT if the loop was exited with <code>break</code>):</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">n</span> <span class="t">= </span><span class="n">3</span>
+<span class="kw">while</span> <span class="v">n</span> <span class="t">&gt; </span><span class="n">0</span><span class="t">:</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="v">n</span><span class="t">)</span>
+<span class="t">    </span><span class="v">n</span> <span class="t">-= </span><span class="n">1</span>
+<span class="kw">else</span><span class="t">:</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">"Loop finished!"</span><span class="t">)</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="4-4" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 4-5 -->
+    <div class="lesson-page" id="lesson-4-5">
+      <div class="lesson-tag">Module 4 · Lesson 5</div>
+      <h1 class="lesson-title">break, continue, pass</h1>
+      <p class="lesson-intro">These three keywords give you fine-grained control over loop execution — skipping iterations, stopping early, or doing nothing.</p>
+      <div class="block">
+        <h2>break — Exit the Loop Early</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># Find first even number</span>
+<span class="v">numbers</span> <span class="t">= [</span><span class="n">1</span><span class="t">, </span><span class="n">3</span><span class="t">, </span><span class="n">7</span><span class="t">, </span><span class="n">4</span><span class="t">, </span><span class="n">9</span><span class="t">]</span>
+<span class="kw">for</span> <span class="v">num</span> <span class="kw">in</span> <span class="v">numbers</span><span class="t">:</span>
+<span class="t">    </span><span class="kw">if</span> <span class="v">num</span> <span class="t">% </span><span class="n">2</span> <span class="t">== </span><span class="n">0</span><span class="t">:</span>
+<span class="t">        </span><span class="fn">print</span><span class="t">(</span><span class="s">f"Found even: </span><span class="p">{num}</span><span class="s">"</span><span class="t">)</span>
+<span class="t">        </span><span class="kw">break</span>    <span class="cm"># Stop immediately</span>
+<span class="cm"># Found even: 4</span></div>
+        </div>
+        <h2>continue — Skip to Next Iteration</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># Print only odd numbers</span>
+<span class="kw">for</span> <span class="v">i</span> <span class="kw">in</span> <span class="fn">range</span><span class="t">(</span><span class="n">1</span><span class="t">, </span><span class="n">11</span><span class="t">):</span>
+<span class="t">    </span><span class="kw">if</span> <span class="v">i</span> <span class="t">% </span><span class="n">2</span> <span class="t">== </span><span class="n">0</span><span class="t">:</span>
+<span class="t">        </span><span class="kw">continue</span>   <span class="cm"># Skip even numbers, go to next i</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="v">i</span><span class="t">)</span>
+<span class="cm"># 1, 3, 5, 7, 9</span></div>
+        </div>
+        <h2>pass — Do Nothing (Placeholder)</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># pass is useful when you need a block but haven't written code yet</span>
+<span class="kw">for</span> <span class="v">i</span> <span class="kw">in</span> <span class="fn">range</span><span class="t">(</span><span class="n">5</span><span class="t">):</span>
+<span class="t">    </span><span class="kw">pass</span>   <span class="cm"># TODO: implement later</span>
+
+<span class="kw">if</span> <span class="kw">True</span><span class="t">:</span>
+<span class="t">    </span><span class="kw">pass</span>   <span class="cm"># Empty if block — valid Python</span>
+
+<span class="kw">class</span> <span class="fn">MyClass</span><span class="t">:</span>
+<span class="t">    </span><span class="kw">pass</span>   <span class="cm"># Empty class skeleton</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="4-5" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 4-6 -->
+    <div class="lesson-page" id="lesson-4-6">
+      <div class="lesson-tag">Module 4 · Lesson 6</div>
+      <h1 class="lesson-title">Loop Patterns &amp; Practice</h1>
+      <p class="lesson-intro">Loops have many common patterns. Learning to recognise them makes you a much faster programmer.</p>
+      <div class="block">
+        <h2>Common Patterns</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># 1. Accumulator — sum up values</span>
+<span class="v">total</span> <span class="t">= </span><span class="n">0</span>
+<span class="kw">for</span> <span class="v">n</span> <span class="kw">in</span> <span class="t">[</span><span class="n">10</span><span class="t">, </span><span class="n">20</span><span class="t">, </span><span class="n">30</span><span class="t">, </span><span class="n">40</span><span class="t">]:</span>
+<span class="t">    </span><span class="v">total</span> <span class="t">+= </span><span class="v">n</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">total</span><span class="t">)</span>   <span class="cm"># 100</span>
+
+<span class="cm"># 2. Counter — count matching items</span>
+<span class="v">words</span> <span class="t">= [</span><span class="s">"cat"</span><span class="t">, </span><span class="s">"dog"</span><span class="t">, </span><span class="s">"cat"</span><span class="t">, </span><span class="s">"fish"</span><span class="t">, </span><span class="s">"cat"</span><span class="t">]</span>
+<span class="v">count</span> <span class="t">= </span><span class="n">0</span>
+<span class="kw">for</span> <span class="v">w</span> <span class="kw">in</span> <span class="v">words</span><span class="t">:</span>
+<span class="t">    </span><span class="kw">if</span> <span class="v">w</span> <span class="t">== </span><span class="s">"cat"</span><span class="t">:</span>
+<span class="t">        </span><span class="v">count</span> <span class="t">+= </span><span class="n">1</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">count</span><span class="t">)</span>   <span class="cm"># 3</span>
+
+<span class="cm"># 3. Find maximum</span>
+<span class="v">scores</span> <span class="t">= [</span><span class="n">42</span><span class="t">, </span><span class="n">87</span><span class="t">, </span><span class="n">65</span><span class="t">, </span><span class="n">91</span><span class="t">, </span><span class="n">34</span><span class="t">]</span>
+<span class="v">best</span> <span class="t">= </span><span class="v">scores</span><span class="t">[</span><span class="n">0</span><span class="t">]</span>
+<span class="kw">for</span> <span class="v">s</span> <span class="kw">in</span> <span class="v">scores</span><span class="t">:</span>
+<span class="t">    </span><span class="kw">if</span> <span class="v">s</span> <span class="t">&gt; </span><span class="v">best</span><span class="t">:</span>
+<span class="t">        </span><span class="v">best</span> <span class="t">= </span><span class="v">s</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">best</span><span class="t">)</span>    <span class="cm"># 91</span>
+
+<span class="cm"># 4. Build a list with a loop</span>
+<span class="v">squares</span> <span class="t">= []</span>
+<span class="kw">for</span> <span class="v">i</span> <span class="kw">in</span> <span class="fn">range</span><span class="t">(</span><span class="n">1</span><span class="t">, </span><span class="n">6</span><span class="t">):</span>
+<span class="t">    </span><span class="v">squares</span><span class="t">.</span><span class="fn">append</span><span class="t">(</span><span class="v">i</span> <span class="t">** </span><span class="n">2</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">squares</span><span class="t">)</span>   <span class="cm"># [1, 4, 9, 16, 25]</span>
+
+<span class="cm"># 5. Multiplication table</span>
+<span class="kw">for</span> <span class="v">i</span> <span class="kw">in</span> <span class="fn">range</span><span class="t">(</span><span class="n">1</span><span class="t">, </span><span class="n">11</span><span class="t">):</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">f"5 × </span><span class="p">{i}</span><span class="s"> = </span><span class="p">{5 * i}</span><span class="s">"</span><span class="t">)</span></div>
+        </div>
+      </div>
+      <div class="block">
+        <h2>Nested Loops</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># Star pattern using nested loops</span>
+<span class="kw">for</span> <span class="v">row</span> <span class="kw">in</span> <span class="fn">range</span><span class="t">(</span><span class="n">1</span><span class="t">, </span><span class="n">6</span><span class="t">):</span>
+<span class="t">    </span><span class="kw">for</span> <span class="v">col</span> <span class="kw">in</span> <span class="fn">range</span><span class="t">(</span><span class="v">row</span><span class="t">):</span>
+<span class="t">        </span><span class="fn">print</span><span class="t">(</span><span class="s">"*"</span><span class="t">, end=</span><span class="s">""</span><span class="t">)</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">()</span>   <span class="cm"># newline after each row</span>
+<span class="cm"># *
+# **
+# ***
+# ****
+# *****</span></div>
+        </div>
+      </div>
+      <div class="callout tip">
+        <div><div class="callout-head">🎉 Module 4 Complete!</div><p>You can now control the flow of any Python program. Conditions and loops are the most powerful tools in programming. Module 5 teaches functions — making your code reusable and organised.</p></div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="4-6" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Module 5 →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>

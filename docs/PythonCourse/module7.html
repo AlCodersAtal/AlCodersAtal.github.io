@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 7: Strings In-Depth | Python Course | AlCoders ATL</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">Al<span>Coders</span> ATL</a>
+  <ul><li><a href="index.html#curriculum">All Modules</a></li></ul>
+  <a href="module8.html" class="nav-start">Next Module →</a>
+</nav>
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="progress-bar"></div>
+    <div class="topbar">
+      <div class="breadcrumb">Module 7 → <span>Strings In-Depth</span></div>
+      <div class="nav-btns">
+        <button class="nav-btn" id="prevBtn" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn" id="nextBtn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 7-1 -->
+    <div class="lesson-page" id="lesson-7-1">
+      <div class="lesson-tag">Module 7 · Lesson 1</div>
+      <h1 class="lesson-title">String Methods</h1>
+      <p class="lesson-intro">Strings have a rich set of built-in methods for transforming, searching, splitting, and validating text.</p>
+      <div class="block">
+        <h2>Case &amp; Whitespace</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">s</span> <span class="t">= </span><span class="s">"  Hello, World!  "</span>
+
+<span class="fn">print</span><span class="t">(</span><span class="v">s</span><span class="t">.</span><span class="fn">upper</span><span class="t">())</span>        <span class="cm"># "  HELLO, WORLD!  "</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">s</span><span class="t">.</span><span class="fn">lower</span><span class="t">())</span>        <span class="cm"># "  hello, world!  "</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">s</span><span class="t">.</span><span class="fn">title</span><span class="t">())</span>        <span class="cm"># "  Hello, World!  "</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">s</span><span class="t">.</span><span class="fn">strip</span><span class="t">())</span>        <span class="cm"># "Hello, World!"  — remove leading/trailing spaces</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">s</span><span class="t">.</span><span class="fn">lstrip</span><span class="t">())</span>       <span class="cm"># remove left spaces only</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">s</span><span class="t">.</span><span class="fn">rstrip</span><span class="t">())</span>       <span class="cm"># remove right spaces only</span></div>
+        </div>
+        <h2>Searching &amp; Replacing</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">text</span> <span class="t">= </span><span class="s">"The quick brown fox jumps over the lazy dog"</span>
+
+<span class="fn">print</span><span class="t">(</span><span class="v">text</span><span class="t">.</span><span class="fn">find</span><span class="t">(</span><span class="s">"fox"</span><span class="t">))</span>         <span class="cm"># 16 — index of first match, -1 if not found</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">text</span><span class="t">.</span><span class="fn">index</span><span class="t">(</span><span class="s">"fox"</span><span class="t">))</span>        <span class="cm"># 16 — like find() but raises ValueError if not found</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">text</span><span class="t">.</span><span class="fn">count</span><span class="t">(</span><span class="s">"the"</span><span class="t">))</span>        <span class="cm"># 1 (case-sensitive)</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">text</span><span class="t">.</span><span class="fn">replace</span><span class="t">(</span><span class="s">"fox"</span><span class="t">, </span><span class="s">"cat"</span><span class="t">))</span> <span class="cm"># "...brown cat jumps..."</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">text</span><span class="t">.</span><span class="fn">startswith</span><span class="t">(</span><span class="s">"The"</span><span class="t">))</span>   <span class="cm"># True</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">text</span><span class="t">.</span><span class="fn">endswith</span><span class="t">(</span><span class="s">"dog"</span><span class="t">))</span>     <span class="cm"># True</span></div>
+        </div>
+        <h2>Splitting &amp; Joining</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># split() — string to list</span>
+<span class="v">csv_line</span> <span class="t">= </span><span class="s">"Alice,25,Kochi,Engineer"</span>
+<span class="v">parts</span> <span class="t">= </span><span class="v">csv_line</span><span class="t">.</span><span class="fn">split</span><span class="t">(</span><span class="s">","</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">parts</span><span class="t">)</span>  <span class="cm"># ['Alice', '25', 'Kochi', 'Engineer']</span>
+
+<span class="v">sentence</span> <span class="t">= </span><span class="s">"hello world python"</span>
+<span class="v">words</span> <span class="t">= </span><span class="v">sentence</span><span class="t">.</span><span class="fn">split</span><span class="t">()</span>  <span class="cm"># split on whitespace</span>
+
+<span class="cm"># join() — list to string</span>
+<span class="v">items</span> <span class="t">= [</span><span class="s">"one"</span><span class="t">, </span><span class="s">"two"</span><span class="t">, </span><span class="s">"three"</span><span class="t">]</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">", "</span><span class="t">.</span><span class="fn">join</span><span class="t">(</span><span class="v">items</span><span class="t">))</span>  <span class="cm"># "one, two, three"</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">" | "</span><span class="t">.</span><span class="fn">join</span><span class="t">(</span><span class="v">items</span><span class="t">))</span> <span class="cm"># "one | two | three"</span></div>
+        </div>
+        <h2>Validation Methods</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="fn">print</span><span class="t">(</span><span class="s">"abc123"</span><span class="t">.</span><span class="fn">isalnum</span><span class="t">())</span>   <span class="cm"># True  — letters and digits only</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"hello"</span><span class="t">.</span><span class="fn">isalpha</span><span class="t">())</span>     <span class="cm"># True  — letters only</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"12345"</span><span class="t">.</span><span class="fn">isdigit</span><span class="t">())</span>     <span class="cm"># True  — digits only</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"hello"</span><span class="t">.</span><span class="fn">islower</span><span class="t">())</span>     <span class="cm"># True</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"HELLO"</span><span class="t">.</span><span class="fn">isupper</span><span class="t">())</span>     <span class="cm"># True</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"   "</span><span class="t">.</span><span class="fn">isspace</span><span class="t">())</span>       <span class="cm"># True  — whitespace only</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="7-1" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 7-2 -->
+    <div class="lesson-page" id="lesson-7-2">
+      <div class="lesson-tag">Module 7 · Lesson 2</div>
+      <h1 class="lesson-title">String Formatting (f-strings)</h1>
+      <p class="lesson-intro">f-strings (Python 3.6+) are the modern, powerful way to embed values and expressions inside strings.</p>
+      <div class="block">
+        <h2>f-string Basics</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">name</span> <span class="t">= </span><span class="s">"Alice"</span>
+<span class="v">age</span> <span class="t">= </span><span class="n">25</span>
+<span class="v">score</span> <span class="t">= </span><span class="n">95.6789</span>
+
+<span class="cm"># Basic embedding</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">f"Name: </span><span class="p">{name}</span><span class="s">, Age: </span><span class="p">{age}</span><span class="s">"</span><span class="t">)</span>
+
+<span class="cm"># Expressions inside {}</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">f"Next year: </span><span class="p">{age + 1}</span><span class="s">"</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">f"Name upper: </span><span class="p">{name.upper()}</span><span class="s">"</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">f"Even? </span><span class="p">{age % 2 == 0}</span><span class="s">"</span><span class="t">)</span>
+
+<span class="cm"># Format specifiers</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">f"Score: </span><span class="p">{score:.2f}</span><span class="s">"</span><span class="t">)</span>       <span class="cm"># 95.68  — 2 decimal places</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">f"Score: </span><span class="p">{score:10.2f}</span><span class="s">"</span><span class="t">)</span>     <span class="cm"># "     95.68" — 10 wide, right-aligned</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">f"Percent: </span><span class="p">{0.856:.1%}</span><span class="s">"</span><span class="t">)</span>     <span class="cm"># 85.6%</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">f"Comma: </span><span class="p">{1000000:,}</span><span class="s">"</span><span class="t">)</span>       <span class="cm"># 1,000,000</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">f"Hex: </span><span class="p">{255:x}</span><span class="s">"</span><span class="t">)</span>             <span class="cm"># ff</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">f"Binary: </span><span class="p">{10:b}</span><span class="s">"</span><span class="t">)</span>           <span class="cm"># 1010</span>
+
+<span class="cm"># Debug mode (Python 3.8+)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">f"</span><span class="p">{name=}</span><span class="s">"</span><span class="t">)</span>  <span class="cm"># name='Alice' — shows name and value</span></div>
+        </div>
+        <h2>Alignment &amp; Padding</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">items</span> <span class="t">= [(</span><span class="s">"Apple"</span><span class="t">, </span><span class="n">1.5</span><span class="t">), (</span><span class="s">"Banana"</span><span class="t">, </span><span class="n">0.75</span><span class="t">), (</span><span class="s">"Cherry"</span><span class="t">, </span><span class="n">3.0</span><span class="t">)]</span>
+<span class="kw">for</span> <span class="v">name</span><span class="t">, </span><span class="v">price</span> <span class="kw">in</span> <span class="v">items</span><span class="t">:</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">f"</span><span class="p">{name:<span class="t">10</span>}</span><span class="s"> £</span><span class="p">{price:>6.2f}</span><span class="s">"</span><span class="t">)</span>
+<span class="cm"># Apple      £  1.50
+# Banana     £  0.75
+# Cherry     £  3.00</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="7-2" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 7-3 -->
+    <div class="lesson-page" id="lesson-7-3">
+      <div class="lesson-tag">Module 7 · Lesson 3</div>
+      <h1 class="lesson-title">Regular Expressions</h1>
+      <p class="lesson-intro">Regular expressions (regex) are a mini-language for searching and matching patterns in text. They're incredibly powerful for data extraction and validation.</p>
+      <div class="block">
+        <h2>The re Module</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">import</span> <span class="v">re</span>
+
+<span class="v">text</span> <span class="t">= </span><span class="s">"My phone is 9876543210 and email is alice@example.com"</span>
+
+<span class="cm"># re.search() — find first match anywhere in string</span>
+<span class="v">m</span> <span class="t">= </span><span class="v">re</span><span class="t">.</span><span class="fn">search</span><span class="t">(</span><span class="s">r"\d{10}"</span><span class="t">, </span><span class="v">text</span><span class="t">)</span>
+<span class="kw">if</span> <span class="v">m</span><span class="t">:</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="v">m</span><span class="t">.</span><span class="fn">group</span><span class="t">())</span>   <span class="cm"># 9876543210</span>
+
+<span class="cm"># re.findall() — find all matches</span>
+<span class="v">emails</span> <span class="t">= </span><span class="v">re</span><span class="t">.</span><span class="fn">findall</span><span class="t">(</span><span class="s">r"[\w.+-]+@[\w-]+\.\w+"</span><span class="t">, </span><span class="v">text</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">emails</span><span class="t">)</span>   <span class="cm"># ['alice@example.com']</span>
+
+<span class="cm"># re.sub() — replace pattern</span>
+<span class="v">clean</span> <span class="t">= </span><span class="v">re</span><span class="t">.</span><span class="fn">sub</span><span class="t">(</span><span class="s">r"\d+"</span><span class="t">, </span><span class="s">"[NUM]"</span><span class="t">, </span><span class="v">text</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">clean</span><span class="t">)</span>    <span class="cm"># "My phone is [NUM] and email is..."</span>
+
+<span class="cm"># re.match() — match at start of string only</span>
+<span class="v">m</span> <span class="t">= </span><span class="v">re</span><span class="t">.</span><span class="fn">match</span><span class="t">(</span><span class="s">r"My"</span><span class="t">, </span><span class="v">text</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">bool</span><span class="t">(</span><span class="v">m</span><span class="t">))</span>   <span class="cm"># True</span></div>
+        </div>
+        <h2>Common Regex Patterns</h2>
+        <table>
+          <thead><tr><th>Pattern</th><th>Matches</th></tr></thead>
+          <tbody>
+            <tr><td><code>\d</code></td><td>Any digit 0-9</td></tr>
+            <tr><td><code>\w</code></td><td>Word char (letter, digit, _)</td></tr>
+            <tr><td><code>\s</code></td><td>Whitespace (space, tab, newline)</td></tr>
+            <tr><td><code>.</code></td><td>Any character except newline</td></tr>
+            <tr><td><code>^</code></td><td>Start of string</td></tr>
+            <tr><td><code>$</code></td><td>End of string</td></tr>
+            <tr><td><code>+</code></td><td>1 or more</td></tr>
+            <tr><td><code>*</code></td><td>0 or more</td></tr>
+            <tr><td><code>?</code></td><td>0 or 1 (optional)</td></tr>
+            <tr><td><code>{n}</code></td><td>Exactly n times</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="7-3" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 7-4 -->
+    <div class="lesson-page" id="lesson-7-4">
+      <div class="lesson-tag">Module 7 · Lesson 4</div>
+      <h1 class="lesson-title">String Projects</h1>
+      <p class="lesson-intro">Put your string skills to work with these practical mini-projects.</p>
+      <div class="block">
+        <h2>Project 1: Word Counter</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">def</span> <span class="fn">word_count</span><span class="t">(</span><span class="v">text</span><span class="t">):</span>
+<span class="t">    </span><span class="s">"""Count frequency of each word in text."""</span>
+<span class="t">    </span><span class="v">words</span> <span class="t">= </span><span class="v">text</span><span class="t">.</span><span class="fn">lower</span><span class="t">().</span><span class="fn">split</span><span class="t">()</span>
+<span class="t">    </span><span class="v">counts</span> <span class="t">= {}</span>
+<span class="t">    </span><span class="kw">for</span> <span class="v">word</span> <span class="kw">in</span> <span class="v">words</span><span class="t">:</span>
+<span class="t">        </span><span class="v">word</span> <span class="t">= </span><span class="v">word</span><span class="t">.</span><span class="fn">strip</span><span class="t">(</span><span class="s">".,!?;:"</span><span class="t">)</span>  <span class="cm"># remove punctuation</span>
+<span class="t">        </span><span class="v">counts</span><span class="t">[</span><span class="v">word</span><span class="t">] = </span><span class="v">counts</span><span class="t">.</span><span class="fn">get</span><span class="t">(</span><span class="v">word</span><span class="t">, </span><span class="n">0</span><span class="t">) + </span><span class="n">1</span>
+<span class="t">    </span><span class="kw">return</span> <span class="v">counts</span>
+
+<span class="v">text</span> <span class="t">= </span><span class="s">"the cat sat on the mat. the cat is fat."</span>
+<span class="v">result</span> <span class="t">= </span><span class="fn">word_count</span><span class="t">(</span><span class="v">text</span><span class="t">)</span>
+<span class="kw">for</span> <span class="v">word</span><span class="t">, </span><span class="v">count</span> <span class="kw">in</span> <span class="fn">sorted</span><span class="t">(</span><span class="v">result</span><span class="t">.</span><span class="fn">items</span><span class="t">(), </span><span class="v">key</span><span class="t">=</span><span class="kw">lambda</span> <span class="v">x</span><span class="t">: -</span><span class="v">x</span><span class="t">[</span><span class="n">1</span><span class="t">]):</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">f"</span><span class="p">{word:<span class="t">10</span>}</span><span class="s"> </span><span class="p">{count}</span><span class="s">"</span><span class="t">)</span></div>
+        </div>
+        <h2>Project 2: Palindrome Checker</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">def</span> <span class="fn">is_palindrome</span><span class="t">(</span><span class="v">text</span><span class="t">):</span>
+<span class="t">    </span><span class="s">"""Check if text is a palindrome (ignoring case/spaces)."""</span>
+<span class="t">    </span><span class="kw">import</span> <span class="v">re</span>
+<span class="t">    </span><span class="v">clean</span> <span class="t">= </span><span class="v">re</span><span class="t">.</span><span class="fn">sub</span><span class="t">(</span><span class="s">r"[^a-z0-9]"</span><span class="t">, </span><span class="s">""</span><span class="t">, </span><span class="v">text</span><span class="t">.</span><span class="fn">lower</span><span class="t">())</span>
+<span class="t">    </span><span class="kw">return</span> <span class="v">clean</span> <span class="t">== </span><span class="v">clean</span><span class="t">[::-</span><span class="n">1</span><span class="t">]</span>
+
+<span class="fn">print</span><span class="t">(</span><span class="fn">is_palindrome</span><span class="t">(</span><span class="s">"racecar"</span><span class="t">))</span>          <span class="cm"># True</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">is_palindrome</span><span class="t">(</span><span class="s">"A man a plan a canal Panama"</span><span class="t">))</span>  <span class="cm"># True</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">is_palindrome</span><span class="t">(</span><span class="s">"hello"</span><span class="t">))</span>             <span class="cm"># False</span></div>
+        </div>
+      </div>
+      <div class="callout tip">
+        <div><div class="callout-head">🎉 Module 7 Complete!</div><p>String mastery is a superpower in Python. Module 8 covers files and exception handling — reading/writing data and dealing with errors gracefully.</p></div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="7-4" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Module 8 →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>

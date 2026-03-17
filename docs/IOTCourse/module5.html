@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 5: IoT Programming — AlCoders ATL</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<div id="mod-progress"></div>
+<nav class="top-nav">
+  <a class="logo" href="index.html">AlCoders ATL</a>
+  <ul><li><a href="module4.html">← Module 4</a></li><li><a href="index.html#curriculum">All Modules</a></li><li><a href="module6.html">Module 6 →</a></li></ul>
+  <a class="nav-start" href="index.html">Course Home</a>
+</nav>
+<div class="layout">
+<aside class="sidebar"></aside>
+<div class="main">
+<div class="topbar">
+  <div class="breadcrumb">Module 5 › <span>IoT Programming</span></div>
+  <div class="nav-btns"><button class="nav-btn" onclick="prevLesson()">← Prev</button><button class="nav-btn primary" onclick="nextLesson()">Next →</button></div>
+</div>
+
+<div class="lesson-page active" id="lesson-5-1">
+  <div class="lesson-tag">Module 5 · Lesson 1</div>
+  <h1 class="lesson-title">Arduino IDE Setup for IoT</h1>
+  <p class="lesson-intro">The Arduino IDE is where you write, compile, and upload code to your board. Setting it up correctly for IoT development — especially for ESP32 — is the first step.</p>
+  <div class="block"><h3>Installing Arduino IDE</h3>
+  <ol><li>Download Arduino IDE 2.x from <strong>arduino.cc/en/software</strong></li><li>Install for your OS (Windows / macOS / Linux)</li><li>Open IDE → File → Preferences</li><li>In "Additional Board Manager URLs" add:<br><code style="background:#f0f0f0;padding:.2em .5em;border-radius:4px;font-family:'DM Mono',monospace;font-size:.88rem">https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json</code></li><li>Tools → Board → Board Manager → search "esp32" → Install "esp32 by Espressif"</li><li>Tools → Board → ESP32 Arduino → ESP32 Dev Module</li></ol>
+  </div>
+  <div class="block"><h3>Key Arduino IDE Features for IoT</h3>
+  <ul><li><strong>Serial Monitor (Ctrl+Shift+M):</strong> See your device's debug output. Set baud rate to match Serial.begin() value.</li><li><strong>Library Manager (Ctrl+Shift+I):</strong> Install sensor and protocol libraries with one click.</li><li><strong>Board Manager:</strong> Add support for non-Arduino boards like ESP32.</li><li><strong>Boards & Port selector:</strong> Pick the right board and COM port before uploading.</li></ul>
+  <div class="callout tip"><div class="callout-head">🔌 Upload Tip</div>When uploading to ESP32, hold the BOOT button on the board while clicking Upload. Release when "Connecting..." appears. Some boards (like ESP32 DevKit v1) do this automatically.</div>
+  </div>
+  <div class="block"><h3>Essential IoT Libraries to Install</h3>
+  <table><tr><th>Library</th><th>Purpose</th><th>Author</th></tr>
+  <tr><td>DHT sensor library</td><td>DHT11/22 temperature sensors</td><td>Adafruit</td></tr>
+  <tr><td>PubSubClient</td><td>MQTT protocol</td><td>Nick O'Leary</td></tr>
+  <tr><td>ArduinoJson</td><td>Parse and create JSON</td><td>Benoit Blanchon</td></tr>
+  <tr><td>Adafruit BMP085</td><td>BMP180 pressure sensor</td><td>Adafruit</td></tr>
+  <tr><td>Servo</td><td>Servo motor control</td><td>Built-in</td></tr></table>
+  </div>
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">Mark Complete</button><button class="next-btn" onclick="nextLesson()">Next Lesson →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-5-2">
+  <div class="lesson-tag">Module 5 · Lesson 2</div>
+  <h1 class="lesson-title">Reading Sensor Data in Code</h1>
+  <p class="lesson-intro">Reading multiple sensors, combining their data into a JSON object, and printing it ready for transmission — this is the core loop of every IoT device.</p>
+  <div class="block"><h3>The IoT Device Main Loop</h3>
+  <p>Every IoT device code follows this pattern:</p>
+  <div class="code-block"><div class="code-header"><span class="code-lang">Arduino C (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+  <div class="code-body"><span class="kw">#include</span> <span class="p">&lt;DHT.h&gt;</span>
+<span class="kw">#include</span> <span class="p">&lt;ArduinoJson.h&gt;</span>
+
+<span class="a">DHT</span> <span class="v">dht</span>(<span class="v">4</span>, <span class="p">DHT11</span>);
+<span class="kw">int</span> <span class="v">lightPin</span> = <span class="v">34</span>;  <span class="cm">// ADC pin</span>
+
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="a">Serial.begin</span>(<span class="v">115200</span>);
+  <span class="v">dht</span>.<span class="a">begin</span>();
+}
+
+<span class="kw">String</span> <span class="a">readSensors</span>() {
+  <span class="kw">float</span> <span class="v">temp</span>  = <span class="v">dht</span>.<span class="a">readTemperature</span>();
+  <span class="kw">float</span> <span class="v">hum</span>   = <span class="v">dht</span>.<span class="a">readHumidity</span>();
+  <span class="kw">int</span>   <span class="v">light</span> = <span class="a">analogRead</span>(<span class="v">lightPin</span>);
+
+  <span class="cm">// Create JSON document</span>
+  <span class="a">StaticJsonDocument</span>&lt;<span class="v">200</span>&gt; <span class="v">doc</span>;
+  <span class="v">doc</span>[<span class="p">"temperature"</span>] = <span class="v">temp</span>;
+  <span class="v">doc</span>[<span class="p">"humidity"</span>]    = <span class="v">hum</span>;
+  <span class="v">doc</span>[<span class="p">"light"</span>]       = <span class="v">light</span>;
+  <span class="v">doc</span>[<span class="p">"device"</span>]      = <span class="p">"AlCoders-Node-1"</span>;
+
+  <span class="kw">String</span> <span class="v">output</span>;
+  <span class="a">serializeJson</span>(<span class="v">doc</span>, <span class="v">output</span>);
+  <span class="kw">return</span> <span class="v">output</span>;
+}
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="kw">String</span> <span class="v">json</span> = <span class="a">readSensors</span>();
+  <span class="a">Serial.println</span>(<span class="v">json</span>);
+  <span class="cm">// Next: send json over MQTT or HTTP</span>
+  <span class="a">delay</span>(<span class="v">10000</span>);
+}</div></div>
+  <p>Output: <code style="font-family:'DM Mono',monospace;background:#f0f0f0;padding:.2em .4em;border-radius:4px">{"temperature":28.5,"humidity":65,"light":2045,"device":"AlCoders-Node-1"}</code></p>
+  </div>
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">Mark Complete</button><button class="next-btn" onclick="nextLesson()">Next Lesson →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-5-3">
+  <div class="lesson-tag">Module 5 · Lesson 3</div>
+  <h1 class="lesson-title">Sending Data to the Cloud</h1>
+  <p class="lesson-intro">This is the most important skill in IoT programming — taking sensor readings and reliably pushing them to a cloud service.</p>
+  <div class="block"><h3>Complete ESP32 → Cloud Flow</h3>
+  <div class="code-block"><div class="code-header"><span class="code-lang">Arduino C (ESP32) — Full Example</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+  <div class="code-body"><span class="kw">#include</span> <span class="p">&lt;WiFi.h&gt;</span>
+<span class="kw">#include</span> <span class="p">&lt;PubSubClient.h&gt;</span>
+<span class="kw">#include</span> <span class="p">&lt;ArduinoJson.h&gt;</span>
+<span class="kw">#include</span> <span class="p">&lt;DHT.h&gt;</span>
+
+<span class="cm">// ── Config ──────────────────────────────</span>
+<span class="kw">const char</span>* <span class="v">WIFI_SSID</span>    = <span class="p">"YourWiFi"</span>;
+<span class="kw">const char</span>* <span class="v">WIFI_PASS</span>    = <span class="p">"YourPassword"</span>;
+<span class="kw">const char</span>* <span class="v">MQTT_BROKER</span> = <span class="p">"broker.hivemq.com"</span>;
+<span class="kw">const char</span>* <span class="v">TOPIC</span>       = <span class="p">"alcoders/lab/sensors"</span>;
+
+<span class="a">DHT</span>          <span class="v">dht</span>(<span class="v">4</span>, <span class="p">DHT11</span>);
+<span class="a">WiFiClient</span>   <span class="v">wifiClient</span>;
+<span class="a">PubSubClient</span> <span class="v">mqtt</span>(<span class="v">wifiClient</span>);
+
+<span class="kw">void</span> <span class="a">connectWiFi</span>() {
+  <span class="a">WiFi.begin</span>(<span class="v">WIFI_SSID</span>, <span class="v">WIFI_PASS</span>);
+  <span class="kw">while</span> (<span class="a">WiFi.status</span>() != <span class="p">WL_CONNECTED</span>) {
+    <span class="a">delay</span>(<span class="v">500</span>); <span class="a">Serial.print</span>(<span class="p">"."</span>);
+  }
+  <span class="a">Serial.println</span>(<span class="p">" WiFi OK"</span>);
+}
+
+<span class="kw">void</span> <span class="a">connectMQTT</span>() {
+  <span class="v">mqtt</span>.<span class="a">setServer</span>(<span class="v">MQTT_BROKER</span>, <span class="v">1883</span>);
+  <span class="kw">while</span> (!<span class="v">mqtt</span>.<span class="a">connected</span>()) {
+    <span class="v">mqtt</span>.<span class="a">connect</span>(<span class="p">"AlCodersNode"</span>);
+    <span class="a">delay</span>(<span class="v">1000</span>);
+  }
+  <span class="a">Serial.println</span>(<span class="p">"MQTT OK"</span>);
+}
+
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="a">Serial.begin</span>(<span class="v">115200</span>);
+  <span class="v">dht</span>.<span class="a">begin</span>();
+  <span class="a">connectWiFi</span>();
+  <span class="a">connectMQTT</span>();
+}
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="kw">if</span> (!<span class="v">mqtt</span>.<span class="a">connected</span>()) <span class="a">connectMQTT</span>();
+  <span class="v">mqtt</span>.<span class="a">loop</span>();
+
+  <span class="a">StaticJsonDocument</span>&lt;<span class="v">200</span>&gt; <span class="v">doc</span>;
+  <span class="v">doc</span>[<span class="p">"temp"</span>]     = <span class="v">dht</span>.<span class="a">readTemperature</span>();
+  <span class="v">doc</span>[<span class="p">"humidity"</span>] = <span class="v">dht</span>.<span class="a">readHumidity</span>();
+
+  <span class="kw">char</span> <span class="v">buf</span>[<span class="v">200</span>];
+  <span class="a">serializeJson</span>(<span class="v">doc</span>, <span class="v">buf</span>);
+  <span class="v">mqtt</span>.<span class="a">publish</span>(<span class="v">TOPIC</span>, <span class="v">buf</span>);
+  <span class="a">Serial.println</span>(<span class="p">"Published: "</span> + <span class="kw">String</span>(<span class="v">buf</span>));
+
+  <span class="a">delay</span>(<span class="v">10000</span>);
+}</div></div>
+  </div>
+  <div class="block"><h3>Error Handling Best Practices</h3>
+  <ul><li>Always check Wi-Fi is connected before sending data</li><li>Always check sensor readings for NaN before publishing</li><li>Implement reconnect logic for both Wi-Fi and MQTT</li><li>Use watchdog timer to reset device if stuck</li></ul>
+  </div>
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">Mark Complete</button><button class="next-btn" onclick="nextLesson()">Next Lesson →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-5-4">
+  <div class="lesson-tag">Module 5 · Lesson 4</div>
+  <h1 class="lesson-title">Receiving Commands from Cloud</h1>
+  <p class="lesson-intro">IoT is two-way. Not only does your device send data up to the cloud — it also receives commands back, allowing remote control of actuators.</p>
+  <div class="block"><h3>MQTT Subscribe — Receiving Commands</h3>
+  <div class="code-block"><div class="code-header"><span class="code-lang">Arduino C (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+  <div class="code-body"><span class="kw">#include</span> <span class="p">&lt;WiFi.h&gt;</span>
+<span class="kw">#include</span> <span class="p">&lt;PubSubClient.h&gt;</span>
+
+<span class="kw">int</span> <span class="v">relayPin</span> = <span class="v">26</span>;
+
+<span class="cm">// Called when a message arrives on subscribed topic</span>
+<span class="kw">void</span> <span class="a">onMessage</span>(<span class="kw">char</span>* <span class="v">topic</span>, <span class="kw">byte</span>* <span class="v">payload</span>, <span class="kw">unsigned int</span> <span class="v">length</span>) {
+  <span class="kw">String</span> <span class="v">msg</span> = <span class="p">""</span>;
+  <span class="kw">for</span> (<span class="kw">int</span> <span class="v">i</span> = <span class="v">0</span>; <span class="v">i</span> < <span class="v">length</span>; <span class="v">i</span>++) <span class="v">msg</span> += (<span class="kw">char</span>)<span class="v">payload</span>[<span class="v">i</span>];
+  
+  <span class="a">Serial.print</span>(<span class="p">"Command received: "</span>); <span class="a">Serial.println</span>(<span class="v">msg</span>);
+  
+  <span class="kw">if</span> (<span class="v">msg</span> == <span class="p">"ON"</span>) {
+    <span class="a">digitalWrite</span>(<span class="v">relayPin</span>, <span class="p">LOW</span>);   <span class="cm">// Activate relay</span>
+    <span class="a">Serial.println</span>(<span class="p">"Relay ON"</span>);
+  } <span class="kw">else if</span> (<span class="v">msg</span> == <span class="p">"OFF"</span>) {
+    <span class="a">digitalWrite</span>(<span class="v">relayPin</span>, <span class="p">HIGH</span>);  <span class="cm">// Deactivate relay</span>
+    <span class="a">Serial.println</span>(<span class="p">"Relay OFF"</span>);
+  }
+}
+
+<span class="a">WiFiClient</span>   <span class="v">wClient</span>;
+<span class="a">PubSubClient</span> <span class="v">mqtt</span>(<span class="v">wClient</span>);
+
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="a">Serial.begin</span>(<span class="v">115200</span>);
+  <span class="a">pinMode</span>(<span class="v">relayPin</span>, <span class="p">OUTPUT</span>);
+  <span class="cm">// ... WiFi connect ...</span>
+  <span class="v">mqtt</span>.<span class="a">setServer</span>(<span class="p">"broker.hivemq.com"</span>, <span class="v">1883</span>);
+  <span class="v">mqtt</span>.<span class="a">setCallback</span>(<span class="v">onMessage</span>);
+  <span class="v">mqtt</span>.<span class="a">connect</span>(<span class="p">"AlCodersRelay"</span>);
+  <span class="v">mqtt</span>.<span class="a">subscribe</span>(<span class="p">"alcoders/lab/relay/control"</span>);
+  <span class="a">Serial.println</span>(<span class="p">"Subscribed to relay topic"</span>);
+}
+
+<span class="kw">void</span> <span class="a">loop</span>() { <span class="v">mqtt</span>.<span class="a">loop</span>(); }</div></div>
+  <p>Now publish <code style="font-family:'DM Mono',monospace;background:#f0f0f0;padding:.1em .4em;border-radius:4px">ON</code> or <code style="font-family:'DM Mono',monospace;background:#f0f0f0;padding:.1em .4em;border-radius:4px">OFF</code> to the topic from any MQTT client (MQTT Explorer, Blynk, Node-RED) to control the relay remotely.</p>
+  </div>
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">Mark Complete</button><button class="next-btn" onclick="nextLesson()">Next Lesson →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-5-5">
+  <div class="lesson-tag">Module 5 · Lesson 5</div>
+  <h1 class="lesson-title">MicroPython on ESP32</h1>
+  <p class="lesson-intro">MicroPython is a lean Python 3 implementation that runs on microcontrollers. For Python fans, it's an alternative to Arduino C for ESP32 IoT projects.</p>
+  <div class="block"><h3>Installing MicroPython on ESP32</h3>
+  <ol><li>Download MicroPython firmware from <strong>micropython.org/download/esp32</strong></li><li>Install esptool: <code style="font-family:'DM Mono',monospace;background:#f0f0f0;padding:.1em .4em;border-radius:4px">pip install esptool</code></li><li>Flash firmware: <code style="font-family:'DM Mono',monospace;background:#f0f0f0;padding:.1em .4em;border-radius:4px">esptool.py --chip esp32 erase_flash</code> then <code style="font-family:'DM Mono',monospace;background:#f0f0f0;padding:.1em .4em;border-radius:4px">esptool.py write_flash -z 0x1000 esp32-firmware.bin</code></li><li>Use Thonny IDE or WebREPL to write and run Python scripts</li></ol>
+  </div>
+  <div class="block"><h3>MicroPython Wi-Fi + MQTT</h3>
+  <div class="code-block"><div class="code-header"><span class="code-lang">MicroPython</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+  <div class="code-body"><span class="kw">import</span> <span class="a">network</span>
+<span class="kw">import</span> <span class="a">time</span>
+<span class="kw">from</span> <span class="a">umqtt.simple</span> <span class="kw">import</span> <span class="v">MQTTClient</span>
+<span class="kw">import</span> <span class="a">dht</span>
+<span class="kw">from</span> <span class="a">machine</span> <span class="kw">import</span> <span class="v">Pin</span>
+
+<span class="cm"># Connect to Wi-Fi</span>
+<span class="v">sta</span> = network.<span class="a">WLAN</span>(network.<span class="p">STA_IF</span>)
+<span class="v">sta</span>.<span class="a">active</span>(<span class="p">True</span>)
+<span class="v">sta</span>.<span class="a">connect</span>(<span class="p">"YourWiFi"</span>, <span class="p">"YourPassword"</span>)
+<span class="kw">while not</span> <span class="v">sta</span>.<span class="a">isconnected</span>(): <span class="a">time.sleep</span>(<span class="v">0.5</span>)
+<span class="a">print</span>(<span class="p">"Connected:", sta.ifconfig()</span>)
+
+<span class="cm"># MQTT setup</span>
+<span class="v">client</span> = <span class="a">MQTTClient</span>(<span class="p">"esp32-py"</span>, <span class="p">"broker.hivemq.com"</span>)
+<span class="v">client</span>.<span class="a">connect</span>()
+
+<span class="cm"># DHT sensor on pin 4</span>
+<span class="v">sensor</span> = dht.<span class="a">DHT11</span>(<span class="a">Pin</span>(<span class="v">4</span>))
+
+<span class="kw">while True</span>:
+    <span class="v">sensor</span>.<span class="a">measure</span>()
+    <span class="v">temp</span> = <span class="v">sensor</span>.<span class="a">temperature</span>()
+    <span class="v">hum</span>  = <span class="v">sensor</span>.<span class="a">humidity</span>()
+    
+    <span class="v">msg</span> = <span class="p">f'{{"temp":{temp},"humidity":{hum}}}'</span>
+    <span class="v">client</span>.<span class="a">publish</span>(<span class="p">b"alcoders/lab/sensors"</span>, <span class="v">msg</span>.<span class="a">encode</span>())
+    <span class="a">print</span>(<span class="p">"Published:", msg</span>)
+    <span class="a">time.sleep</span>(<span class="v">10</span>)</div></div>
+  </div>
+  <div class="block"><h3>Arduino C vs MicroPython — Which to Use?</h3>
+  <table><tr><th>Feature</th><th>Arduino C</th><th>MicroPython</th></tr>
+  <tr><td>Speed</td><td>Faster (compiled)</td><td>Slower (interpreted)</td></tr>
+  <tr><td>Learning curve</td><td>Harder for Python users</td><td>Easy if you know Python</td></tr>
+  <tr><td>Library ecosystem</td><td>Massive</td><td>Smaller but growing</td></tr>
+  <tr><td>Debugging</td><td>Serial monitor</td><td>Interactive REPL (live)</td></tr>
+  <tr><td>Real-time tasks</td><td>Better</td><td>Adequate for most IoT</td></tr></table>
+  </div>
+  <div class="quiz-box">
+    <div class="quiz-q">What does ArduinoJson help you do in IoT code?</div>
+    <div class="quiz-opts">
+      <div class="quiz-opt">Connect to Wi-Fi</div>
+      <div class="quiz-opt" data-correct>Create and parse JSON data for cloud communication</div>
+      <div class="quiz-opt">Read DHT sensor values</div>
+      <div class="quiz-opt">Control servo motors</div>
+    </div>
+    <div class="quiz-feedback" data-ok>✅ Correct! ArduinoJson builds and parses JSON — the standard data format for cloud APIs and MQTT payloads.</div>
+    <div class="quiz-feedback" data-bad>❌ Not quite. ArduinoJson creates and parses JSON data — the format used to send structured sensor readings to the cloud.</div>
+  </div>
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">Mark Complete</button><button class="next-btn" onclick="nextLesson()">Next Lesson →</button></div>
+</div>
+
+</div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>

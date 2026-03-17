@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 1: Getting Started | Python Course | AlCoders ATL</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">Al<span>Coders</span> ATL</a>
+  <ul>
+    <li><a href="index.html#curriculum">All Modules</a></li>
+  </ul>
+  <a href="module2.html" class="nav-start">Next Module →</a>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar"></aside>
+
+  <div class="main">
+    <div class="progress-bar"></div>
+
+    <div class="topbar">
+      <div class="breadcrumb">Module 1 → <span>Getting Started</span></div>
+      <div class="nav-btns">
+        <button class="nav-btn" id="prevBtn" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn" id="nextBtn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         LESSON 1-1: What is Python?
+    ══════════════════════════════════ -->
+    <div class="lesson-page" id="lesson-1-1">
+      <div class="lesson-tag">Module 1 · Lesson 1</div>
+      <h1 class="lesson-title">What is Python?</h1>
+      <p class="lesson-intro">Before writing a single line of code, let's understand what Python actually is, where it came from, and why it's one of the most loved programming languages in the world.</p>
+
+      <div class="block">
+        <h2>A Brief History</h2>
+        <p>Python was created by <strong>Guido van Rossum</strong> and first released in <strong>1991</strong>. The name comes from the British comedy show <em>Monty Python's Flying Circus</em> — not the snake. Guido wanted a language that was fun to use, and the name reflected that spirit.</p>
+        <p>Today Python is maintained by the <strong>Python Software Foundation</strong> and is on version 3.x. It's completely free and open-source.</p>
+      </div>
+
+      <div class="block">
+        <h2>What Makes Python Special?</h2>
+        <p>Python is a <strong>high-level, interpreted, general-purpose programming language</strong>. Let's break that down:</p>
+        <ul>
+          <li><strong>High-level</strong> — You write code that reads almost like plain English. Python handles low-level details (like memory management) for you.</li>
+          <li><strong>Interpreted</strong> — Python runs your code line-by-line at runtime. You don't need to compile your code first (unlike C or Java).</li>
+          <li><strong>General-purpose</strong> — Python can be used for almost anything: web apps, data science, automation, AI, games, scripts, and more.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h2>Why Learn Python?</h2>
+        <div class="component-grid">
+          <div class="component-card"><div class="c-name">🔰 Easy to Learn</div><p>Python syntax is clean and readable. Beginners can write useful programs within hours.</p></div>
+          <div class="component-card"><div class="c-name">🌍 Hugely Popular</div><p>Consistently ranked #1 or #2 in global programming language surveys (TIOBE, Stack Overflow).</p></div>
+          <div class="component-card"><div class="c-name">💼 High Demand</div><p>Python developers are among the most sought-after in the job market worldwide.</p></div>
+          <div class="component-card"><div class="c-name">🧰 Massive Ecosystem</div><p>Hundreds of thousands of libraries on PyPI for every purpose imaginable.</p></div>
+          <div class="component-card"><div class="c-name">🤖 AI & Data Science</div><p>NumPy, Pandas, TensorFlow, PyTorch — the AI world runs on Python.</p></div>
+          <div class="component-card"><div class="c-name">🔄 Cross-platform</div><p>Write once, run on Windows, macOS, and Linux with no changes.</p></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>What Can You Build?</h2>
+        <ul>
+          <li>🌐 <strong>Web Applications</strong> — Django, Flask, FastAPI</li>
+          <li>📊 <strong>Data Analysis & Visualisation</strong> — Pandas, Matplotlib, Seaborn</li>
+          <li>🤖 <strong>Machine Learning & AI</strong> — TensorFlow, PyTorch, scikit-learn</li>
+          <li>🕷️ <strong>Web Scraping</strong> — BeautifulSoup, Scrapy</li>
+          <li>⚙️ <strong>Automation & Scripting</strong> — automate repetitive tasks</li>
+          <li>🎮 <strong>Games</strong> — Pygame</li>
+          <li>📡 <strong>IoT & Microcontrollers</strong> — MicroPython on Raspberry Pi, ESP32</li>
+          <li>🔒 <strong>Cybersecurity</strong> — scripting tools, penetration testing</li>
+        </ul>
+      </div>
+
+      <div class="callout info">
+        <div><div class="callout-head">ℹ️ Python vs Other Languages</div><p>Python is slower than compiled languages like C++ or Java when it comes to raw execution speed. But for most real-world applications — especially in data science, scripting, and web development — Python's speed is more than enough, and development time is far faster.</p></div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="1-1" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         LESSON 1-2: Installing Python & VS Code
+    ══════════════════════════════════ -->
+    <div class="lesson-page" id="lesson-1-2">
+      <div class="lesson-tag">Module 1 · Lesson 2</div>
+      <h1 class="lesson-title">Installing Python &amp; VS Code</h1>
+      <p class="lesson-intro">Before we can write Python, we need two things: the Python interpreter and a good code editor. Let's set everything up from scratch.</p>
+
+      <div class="block">
+        <h2>Step 1: Install Python</h2>
+        <p>Go to <strong>python.org/downloads</strong> and download the latest Python 3.x release for your operating system.</p>
+        <div class="callout warn">
+          <div><div class="callout-head">⚠️ Windows Users — Important!</div><p>During installation, check the box that says <strong>"Add Python to PATH"</strong> before clicking Install Now. This is essential — without it, your terminal won't find Python.</p></div>
+        </div>
+        <h3>Verify the Installation</h3>
+        <p>Open a terminal (Command Prompt on Windows, Terminal on macOS/Linux) and type:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Terminal</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">python --version</span>
+<span class="cm"># Should output something like: Python 3.12.0</span>
+
+<span class="t">python3 --version</span>
+<span class="cm"># On macOS/Linux, you may need to use python3</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Step 2: Install VS Code</h2>
+        <p><strong>Visual Studio Code</strong> (VS Code) is a free, powerful code editor made by Microsoft. It's the most popular editor for Python development.</p>
+        <p>Download it from <strong>code.visualstudio.com</strong> and install it like any normal application.</p>
+        <h3>Essential VS Code Extension</h3>
+        <p>After opening VS Code, click the <strong>Extensions icon</strong> on the left sidebar (or press <code>Ctrl+Shift+X</code>). Search for and install:</p>
+        <ul>
+          <li><strong>Python</strong> by Microsoft — enables syntax highlighting, IntelliSense, debugging, and more</li>
+          <li><strong>Pylance</strong> — enhanced language support (usually installed with Python extension)</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h2>Step 3: Configure VS Code for Python</h2>
+        <ol>
+          <li>Open VS Code and press <strong>Ctrl+Shift+P</strong> (or Cmd+Shift+P on Mac)</li>
+          <li>Type <strong>"Python: Select Interpreter"</strong> and press Enter</li>
+          <li>Choose the Python version you just installed</li>
+        </ol>
+        <h3>The Integrated Terminal</h3>
+        <p>VS Code has a built-in terminal. Open it with <strong>Ctrl+`</strong> (backtick). This is where you'll run your Python files.</p>
+      </div>
+
+      <div class="block">
+        <h2>Alternative: Python Online (No Install)</h2>
+        <p>If you can't install Python right now, you can use these online platforms to follow along:</p>
+        <ul>
+          <li><strong>replit.com</strong> — full IDE in the browser</li>
+          <li><strong>python.org/shell</strong> — interactive Python shell</li>
+          <li><strong>Google Colab</strong> — Python notebooks (great for data science later)</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h2>Key VS Code Shortcuts</h2>
+        <table>
+          <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><code>F5</code></td><td>Run Python file (with debugger)</td></tr>
+            <tr><td><code>Ctrl + F5</code></td><td>Run without debugging</td></tr>
+            <tr><td><code>Ctrl + `</code></td><td>Open/close terminal</td></tr>
+            <tr><td><code>Ctrl + /</code></td><td>Toggle comment on selected lines</td></tr>
+            <tr><td><code>Ctrl + S</code></td><td>Save file</td></tr>
+            <tr><td><code>Ctrl + Shift + P</code></td><td>Open Command Palette</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="1-2" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         LESSON 1-3: Your First Program
+    ══════════════════════════════════ -->
+    <div class="lesson-page" id="lesson-1-3">
+      <div class="lesson-tag">Module 1 · Lesson 3</div>
+      <h1 class="lesson-title">Your First Program</h1>
+      <p class="lesson-intro">Every programmer's journey starts with "Hello, World!" — a simple program that displays text on the screen. Let's write yours.</p>
+
+      <div class="block">
+        <h2>Creating a Python File</h2>
+        <ol>
+          <li>Open VS Code and create a new folder called <code>python-course</code></li>
+          <li>Create a new file inside it called <code>hello.py</code> (the .py extension tells the computer it's Python)</li>
+          <li>Type the following code:</li>
+        </ol>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="fn">print</span><span class="t">(</span><span class="s">"Hello, World!"</span><span class="t">)</span></div>
+        </div>
+        <p>Run it in the terminal:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Terminal</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">python hello.py</span>
+<span class="cm"># Output:</span>
+<span class="s">Hello, World!</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Understanding print()</h2>
+        <p><code>print()</code> is a <strong>built-in function</strong> in Python. It displays whatever you put inside the parentheses on the screen. The text inside quotes is called a <strong>string</strong>.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="fn">print</span><span class="t">(</span><span class="s">"Hello, World!"</span><span class="t">)</span>          <span class="cm"># Prints text</span>
+<span class="fn">print</span><span class="t">(</span><span class="n">42</span><span class="t">)</span>                    <span class="cm"># Prints a number</span>
+<span class="fn">print</span><span class="t">(</span><span class="n">3.14</span><span class="t">)</span>                  <span class="cm"># Prints a decimal</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"My name is"</span><span class="t">, </span><span class="s">"Alex"</span><span class="t">)</span>  <span class="cm"># Prints two values separated by space</span>
+<span class="fn">print</span><span class="t">()</span>                      <span class="cm"># Prints a blank line</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Comments in Python</h2>
+        <p>Comments are notes for humans — Python ignores them completely. Use the <code>#</code> symbol to start a comment.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># This is a comment — Python ignores this line</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"This line runs"</span><span class="t">)</span>  <span class="cm"># Inline comment at end of code</span>
+
+<span class="cm"># Always comment your code!
+# It helps others (and future you) understand what the code does.</span></div>
+        </div>
+        <p>For multi-line comments, you can use triple quotes (though technically these are strings):</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="s">"""
+This is a multi-line comment / docstring.
+It can span multiple lines.
+Often used to document functions and classes.
+"""</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>The Interactive Python Shell (REPL)</h2>
+        <p>Type <code>python</code> in your terminal to open the <strong>interactive shell</strong> (REPL = Read-Eval-Print Loop). You can type Python code and see results immediately — great for testing ideas.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python REPL</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">$ python</span>
+<span class="s">Python 3.12.0 ...</span>
+<span class="t">&gt;&gt;&gt; </span><span class="fn">print</span><span class="t">(</span><span class="s">"hello"</span><span class="t">)</span>
+<span class="s">hello</span>
+<span class="t">&gt;&gt;&gt; </span><span class="n">2</span> <span class="t">+ </span><span class="n">3</span>
+<span class="n">5</span>
+<span class="t">&gt;&gt;&gt; </span><span class="kw">exit</span><span class="t">()</span>    <span class="cm"># Type this to quit</span></div>
+        </div>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">Which function do you use to display output in Python?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">show()</div>
+          <div class="quiz-opt">display()</div>
+          <div class="quiz-opt" data-correct>print()</div>
+          <div class="quiz-opt">output()</div>
+        </div>
+        <div class="quiz-feedback" data-ok>✅ Correct! print() is the built-in function for displaying output.</div>
+        <div class="quiz-feedback" data-bad>❌ Not quite. In Python, print() is the correct function for displaying output.</div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="1-3" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         LESSON 1-4: How Python Works
+    ══════════════════════════════════ -->
+    <div class="lesson-page" id="lesson-1-4">
+      <div class="lesson-tag">Module 1 · Lesson 4</div>
+      <h1 class="lesson-title">How Python Works</h1>
+      <p class="lesson-intro">Understanding what happens under the hood when you run a Python program will make you a better programmer and help you debug errors more effectively.</p>
+
+      <div class="block">
+        <h2>Source Code → Bytecode → Execution</h2>
+        <p>When you run a Python file, here's exactly what happens:</p>
+        <ol>
+          <li><strong>You write source code</strong> in a <code>.py</code> file (human-readable text)</li>
+          <li><strong>The Python interpreter reads your file</strong> and checks for syntax errors</li>
+          <li><strong>Python compiles to bytecode</strong> — a lower-level, platform-independent format stored in <code>.pyc</code> files inside a <code>__pycache__</code> folder</li>
+          <li><strong>The Python Virtual Machine (PVM)</strong> executes the bytecode line by line</li>
+        </ol>
+        <div class="callout info">
+          <div><div class="callout-head">ℹ️ Interpreted vs Compiled</div><p>Python is called "interpreted" because each line is processed at runtime rather than pre-compiled into machine code. This makes Python slower in raw speed but much faster in development. Languages like C or Rust compile ahead of time to machine code.</p></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Indentation — Python's Special Rule</h2>
+        <p>Python uses <strong>indentation (spaces/tabs) to define code blocks</strong>. This is unlike most languages that use curly braces <code>{}</code>. This makes Python code look clean, but you must be consistent.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># CORRECT: 4 spaces for indentation (standard)</span>
+<span class="kw">if</span> <span class="n">True</span><span class="t">:</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">"This is indented correctly"</span><span class="t">)</span>
+
+<span class="cm"># WRONG: mixing spaces and tabs, or wrong number of spaces</span>
+<span class="kw">if</span> <span class="n">True</span><span class="t">:</span>
+<span class="t">  </span><span class="fn">print</span><span class="t">(</span><span class="s">"2 spaces"</span><span class="t">)</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">"4 spaces"</span><span class="t">)</span>  <span class="cm"># IndentationError!</span></div>
+        </div>
+        <div class="callout tip">
+          <div><div class="callout-head">💡 Best Practice</div><p>Always use <strong>4 spaces</strong> per indentation level. VS Code does this automatically when you press Tab. Never mix tabs and spaces.</p></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Python Syntax Rules</h2>
+        <ul>
+          <li>Python is <strong>case-sensitive</strong>: <code>print</code> ≠ <code>Print</code> ≠ <code>PRINT</code></li>
+          <li>Statements end at the end of a line — no semicolons needed (though they work)</li>
+          <li>Long lines can be broken with a backslash <code>\</code> or by wrapping in parentheses</li>
+          <li>Python executes from <strong>top to bottom</strong>, line by line</li>
+        </ul>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># No semicolons needed</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"Line 1"</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"Line 2"</span><span class="t">)</span>
+
+<span class="cm"># Long line continuation with backslash</span>
+<span class="v">result</span> <span class="t">= </span><span class="n">1</span> <span class="t">+ </span><span class="n">2</span> <span class="t">+ </span><span class="n">3</span> <span class="t">+ </span><span class="n">4</span> <span class="t">\</span>
+         <span class="t">+ </span><span class="n">5</span> <span class="t">+ </span><span class="n">6</span>
+
+<span class="cm"># Or wrap in parentheses (preferred)</span>
+<span class="v">result</span> <span class="t">= (</span><span class="n">1</span> <span class="t">+ </span><span class="n">2</span> <span class="t">+ </span><span class="n">3</span>
+          <span class="t">+ </span><span class="n">4</span> <span class="t">+ </span><span class="n">5</span> <span class="t">+ </span><span class="n">6</span><span class="t">)</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Reading Error Messages</h2>
+        <p>When Python encounters an error, it shows a <strong>traceback</strong>. Don't panic — learn to read it:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Error Example</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="a">Traceback (most recent call last):</span>
+<span class="t">  File </span><span class="s">"hello.py"</span><span class="t">, line </span><span class="n">3</span><span class="t">, in &lt;module&gt;</span>
+<span class="t">    </span><span class="fn">prin</span><span class="t">(</span><span class="s">"hello"</span><span class="t">)</span>
+<span class="kw">NameError</span><span class="t">: name </span><span class="s">'prin'</span><span class="t"> is not defined</span></div>
+        </div>
+        <p>Reading this: <em>On line 3, you called <code>prin</code> which doesn't exist — you probably meant <code>print</code>.</em></p>
+        <p>Common error types you'll see:</p>
+        <ul>
+          <li><strong>SyntaxError</strong> — invalid Python syntax (typo, missing colon, etc.)</li>
+          <li><strong>NameError</strong> — using a variable or function that doesn't exist</li>
+          <li><strong>TypeError</strong> — wrong data type for an operation</li>
+          <li><strong>IndentationError</strong> — wrong indentation</li>
+          <li><strong>ValueError</strong> — right type, wrong value</li>
+        </ul>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="1-4" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════
+         LESSON 1-5: Quiz & Practice
+    ══════════════════════════════════ -->
+    <div class="lesson-page" id="lesson-1-5">
+      <div class="lesson-tag">Module 1 · Lesson 5</div>
+      <h1 class="lesson-title">Module 1 Quiz &amp; Practice</h1>
+      <p class="lesson-intro">Test your understanding of Module 1 and try some hands-on exercises to cement your learning.</p>
+
+      <div class="block">
+        <h2>Module Quiz</h2>
+
+        <div class="quiz-box">
+          <div class="quiz-q">Who created Python?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt">Linus Torvalds</div>
+            <div class="quiz-opt" data-correct>Guido van Rossum</div>
+            <div class="quiz-opt">Brendan Eich</div>
+            <div class="quiz-opt">Dennis Ritchie</div>
+          </div>
+          <div class="quiz-feedback" data-ok>✅ Correct! Guido van Rossum created Python in 1991.</div>
+          <div class="quiz-feedback" data-bad>❌ Python was created by Guido van Rossum in 1991.</div>
+        </div>
+
+        <div class="quiz-box">
+          <div class="quiz-q">What does the # symbol do in Python?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt">It's a hashtag for social media</div>
+            <div class="quiz-opt" data-correct>It starts a comment — Python ignores that line</div>
+            <div class="quiz-opt">It multiplies numbers</div>
+            <div class="quiz-opt">It ends a statement</div>
+          </div>
+          <div class="quiz-feedback" data-ok>✅ Correct! Everything after # on a line is a comment.</div>
+          <div class="quiz-feedback" data-bad>❌ In Python, # starts a comment. Python ignores everything after # on that line.</div>
+        </div>
+
+        <div class="quiz-box">
+          <div class="quiz-q">What is the standard indentation in Python?</div>
+          <div class="quiz-opts">
+            <div class="quiz-opt">2 spaces</div>
+            <div class="quiz-opt">1 tab character</div>
+            <div class="quiz-opt" data-correct>4 spaces</div>
+            <div class="quiz-opt">No indentation needed</div>
+          </div>
+          <div class="quiz-feedback" data-ok>✅ Correct! The Python style guide (PEP 8) recommends 4 spaces.</div>
+          <div class="quiz-feedback" data-bad>❌ The standard is 4 spaces per indentation level, as recommended by PEP 8.</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2>Practice Exercises</h2>
+        <p>Try these in your <code>hello.py</code> file or the Python REPL:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Exercise 1</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># Print your name, your age, and your favourite subject on separate lines</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"Your Name"</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"Your Age"</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"Favourite Subject"</span><span class="t">)</span></div>
+        </div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Exercise 2</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># Print a simple pattern using print()
+# Expected output:
+# *
+# **
+# ***
+# ****
+# *****</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"*"</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"**"</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"***"</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"****"</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"*****"</span><span class="t">)</span></div>
+        </div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Exercise 3</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># What will this print? Predict before running!</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"Python"</span><span class="t">, </span><span class="s">"is"</span><span class="t">, </span><span class="s">"awesome"</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"Python"</span> <span class="t">+ </span><span class="s">"is"</span> <span class="t">+ </span><span class="s">"awesome"</span><span class="t">)</span>
+<span class="cm"># Notice the difference? Comma adds space, + does not!</span></div>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div><div class="callout-head">🎉 Module 1 Complete!</div><p>You now know what Python is, have it installed, have written your first program, and understand how Python executes code. In Module 2, we'll dive into <strong>variables and data types</strong> — the building blocks of every program.</p></div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="1-5" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Module 2 →</button>
+      </div>
+    </div>
+
+  </div><!-- .main -->
+</div><!-- .layout -->
+
+<script src="course.js"></script>
+</body>
+</html>

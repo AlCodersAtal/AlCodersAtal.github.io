@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AlCoders — Module 8: Robot Logic</title><link rel="stylesheet" href="course.css"></head>
+<body><div class="progress-bar"></div><div class="layout"><aside class="sidebar"></aside><main class="main">
+<div class="topbar"><div class="breadcrumb">Module 08 › <strong>Decision Making in Code</strong></div><div class="topbar-nav"><button class="nav-btn" onclick="prevLesson()">← Prev</button><button class="nav-btn primary" onclick="nextLesson()">Next →</button></div></div>
+
+<div class="lesson-page" id="lesson-8-1">
+<div class="lesson-tag">Module 08 · Lesson 1</div><h1 class="lesson-title">Decision Making in Code</h1>
+<p class="lesson-intro">A robot's "intelligence" is just well-structured decisions. Map behaviour to code before writing a single line.</p>
+<div class="block">
+<h2>Draw a Decision Tree First</h2>
+<div class="code-block"><div class="code-header"><span class="code-lang">Decision Tree (Plain English)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="code-body"><span class="cm">Is distance &lt; 15cm?
+  YES → Stop → Reverse 500ms → Scan left &amp; right
+         Is left distance > right distance?
+           YES → Spin Left  450ms → Drive Forward
+           NO  → Spin Right 450ms → Drive Forward
+  NO  → Drive Forward at full speed</span></div></div>
+<p>This tree translates almost directly into the state machine code you'll write in the final project.</p>
+<h2>Non-Blocking Timing with millis()</h2>
+<p><code>delay()</code> freezes the entire Arduino — your sensor goes unread. Use <code>millis()</code> instead:</p>
+<div class="code-block"><div class="code-header"><span class="code-lang">Arduino C++</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="code-body"><span class="kw">unsigned long</span> timer = <span class="v">0</span>;
+<span class="kw">bool</span> turning = <span class="kw">false</span>;
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="kw">if</span> (turning) {
+    <span class="kw">if</span> (<span class="a">millis</span>() - timer &gt;= <span class="v">450</span>) { turning=<span class="kw">false</span>; <span class="a">stopMotors</span>(); }
+  } <span class="kw">else</span> {
+    <span class="kw">if</span> (<span class="a">getDistance</span>() &lt; <span class="v">15</span>) {
+      <span class="a">spinRight</span>(<span class="v">180</span>); timer=<span class="a">millis</span>(); turning=<span class="kw">true</span>;
+    } <span class="kw">else</span> { <span class="a">driveForward</span>(<span class="v">200</span>); }
+  }
+}</div></div>
+</div>
+<div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('8-2')">Next: State Machines →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-8-2">
+<div class="lesson-tag">Module 08 · Lesson 2</div><h1 class="lesson-title">State Machines</h1>
+<p class="lesson-intro">A state machine organises behaviour into clear "states" — making complex programs easy to read and debug.</p>
+<div class="block">
+<p>At any time the robot is in exactly <strong>one state</strong>. Events (sensor readings, timers) cause transitions to other states.</p>
+<div class="code-block"><div class="code-header"><span class="code-lang">Arduino C++ — State Machine Pattern</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="code-body"><span class="p">#define</span> ST_FORWARD <span class="v">0</span>
+<span class="p">#define</span> ST_REVERSE <span class="v">1</span>
+<span class="p">#define</span> ST_TURN    <span class="v">2</span>
+
+<span class="kw">int</span>           state = ST_FORWARD;
+<span class="kw">unsigned long</span> timer = <span class="v">0</span>;
+<span class="kw">int</span>           dir   = <span class="v">1</span>;   <span class="cm">// 1=right, -1=left</span>
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="kw">switch</span>(state) {
+    <span class="kw">case</span> ST_FORWARD:
+      <span class="a">driveForward</span>(<span class="v">200</span>);
+      <span class="kw">if</span> (<span class="a">getDistance</span>() &lt; <span class="v">15</span>) { <span class="a">stopMotors</span>(); state=ST_REVERSE; timer=<span class="a">millis</span>(); }
+      <span class="kw">break</span>;
+    <span class="kw">case</span> ST_REVERSE:
+      <span class="a">driveBackward</span>(<span class="v">150</span>);
+      <span class="kw">if</span> (<span class="a">millis</span>()-timer &gt; <span class="v">500</span>) { <span class="a">stopMotors</span>(); dir=<span class="a">scanBestDir</span>(); state=ST_TURN; timer=<span class="a">millis</span>(); }
+      <span class="kw">break</span>;
+    <span class="kw">case</span> ST_TURN:
+      dir==<span class="v">1</span> ? <span class="a">spinRight</span>(<span class="v">180</span>) : <span class="a">spinLeft</span>(<span class="v">180</span>);
+      <span class="kw">if</span> (<span class="a">millis</span>()-timer &gt; <span class="v">450</span>) { <span class="a">stopMotors</span>(); state=ST_FORWARD; }
+      <span class="kw">break</span>;
+  }
+}</div></div>
+</div>
+<div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('8-3')">Next: Debugging Techniques →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-8-3">
+<div class="lesson-tag">Module 08 · Lesson 3</div><h1 class="lesson-title">Debugging Techniques</h1>
+<p class="lesson-intro">Every robot builder spends time debugging. These techniques save hours of frustration.</p>
+<div class="block">
+<h2>Tool #1: Serial Monitor</h2>
+<div class="code-block"><div class="code-header"><span class="code-lang">Arduino C++</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="code-body"><span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="kw">float</span> d = <span class="a">getDistance</span>();
+  Serial.<span class="a">print</span>(<span class="t">"State: "</span>); Serial.<span class="a">print</span>(state);
+  Serial.<span class="a">print</span>(<span class="t">"  Distance: "</span>); Serial.<span class="a">println</span>(d);
+  <span class="cm">// Now you can see EXACTLY what the robot sees</span>
+}</div></div>
+<h2>Common Problems &amp; Fixes</h2>
+<table><thead><tr><th>Symptom</th><th>Likely Cause</th><th>Fix</th></tr></thead><tbody>
+<tr><td>Robot doesn't move</td><td>L298N not powered / wrong wiring</td><td>Check battery, common GND, IN pins</td></tr>
+<tr><td>Spins in circles</td><td>One motor wired backwards</td><td>Swap OUT1/OUT2 for that motor</td></tr>
+<tr><td>Sensor reads 0 always</td><td>TRIG/ECHO swapped or no timeout</td><td>Check wiring, add 30000µs timeout</td></tr>
+<tr><td>Arduino resets randomly</td><td>Power brownout from motors</td><td>Add 100µF cap across motor power lines</td></tr>
+<tr><td>Servo jitters</td><td>Noise on 5V rail</td><td>Add 10µF cap between servo VCC and GND</td></tr>
+</tbody></table>
+<div class="callout tip"><div class="callout-head">💡 Debug One Subsystem at a Time</div>Test sensor alone first (print readings). Then test motors alone. Then combine. Never debug everything at once.</div>
+<div class="quiz-box"><h4>Quick Check</h4>
+<p class="quiz-q">Your robot spins in circles instead of going straight. Most likely cause?</p>
+<div class="quiz-opt" data-correct="false">Sensor threshold is too low</div>
+<div class="quiz-opt" data-correct="true">One motor's wires are connected in reverse</div>
+<div class="quiz-opt" data-correct="false">Serial Monitor is open</div>
+<div class="quiz-feedback" data-ok="✓ Correct! Swap OUT1 and OUT2 for the reversed motor." data-bad="✗ If both motors spin but robot circles, one motor spins the wrong direction. Swap its output wires."></div>
+</div>
+</div>
+<div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><a href="module9.html" class="next-btn">Module 9: Final Project →</a></div>
+</div>
+
+</main></div><script src="course.js"></script></body></html>

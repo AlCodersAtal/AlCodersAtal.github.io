@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Module 7: Data, Dashboards & Automation — AlCoders IoT Course</title>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="breadcrumb"><span id="breadcrumb-text">Module 7</span></div>
+      <div class="topbar-nav">
+        <button class="nav-btn" onclick="prevLesson()">&#8592; Prev</button>
+        <button class="nav-btn" onclick="nextLesson()">Next &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 7-1 -->
+    <div class="lesson-page active" id="lesson-7-1">
+      <span class="lesson-tag">Module 7 · Lesson 1</span>
+      <h1 class="lesson-title">Storing IoT Data</h1>
+      <p class="lesson-intro">Sensor readings are only useful if you can store and retrieve them. Different storage technologies suit different IoT use-cases — from a simple CSV on an SD card to a managed cloud time-series database.</p>
+
+      <div class="block">
+        <h3>Storage Options</h3>
+        <div class="component-grid">
+          <div class="component-card"><strong>SD Card (local)</strong><br/>Cheapest. No internet needed. Good for data logging in remote locations. Limited by card size.</div>
+          <div class="component-card"><strong>SPIFFS / LittleFS</strong><br/>ESP32's built-in flash filesystem. Store config files or small logs. Data lost if firmware erased.</div>
+          <div class="component-card"><strong>Firebase Realtime DB</strong><br/>JSON tree synced in real time. Easy to query from web apps. Free tier: 1 GB storage, 10 GB/month transfer.</div>
+          <div class="component-card"><strong>InfluxDB</strong><br/>Purpose-built time-series database. Extremely fast for sensor data. Can run locally or on cloud.</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Logging to SD Card from ESP32</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">#include </span><span class="v">&lt;SD.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;SPI.h&gt;</span>
+
+<span class="kw">#define</span> <span class="v">SD_CS</span> <span class="p">5</span> <span class="cm">// chip select pin</span>
+
+<span class="kw">void</span> <span class="t">setup</span>() {
+  Serial.begin(<span class="p">115200</span>);
+  SD.begin(<span class="v">SD_CS</span>);
+}
+
+<span class="kw">void</span> logData(<span class="kw">float</span> temp, <span class="kw">float</span> humidity) {
+  <span class="t">File</span> f = SD.open(<span class="a">"/log.csv"</span>, <span class="v">FILE_APPEND</span>);
+  <span class="kw">if</span> (f) {
+    f.print(millis());
+    f.print(<span class="a">","</span>);
+    f.print(temp);
+    f.print(<span class="a">","</span>);
+    f.println(humidity);
+    f.close();
+  }
+}
+
+<span class="kw">void</span> <span class="t">loop</span>() {
+  logData(<span class="p">28.4</span>, <span class="p">65.2</span>); <span class="cm">// replace with real sensor reads</span>
+  delay(<span class="p">60000</span>); <span class="cm">// log every 1 minute</span>
+}</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>SD Card Wiring (SPI)</h3>
+        <table class="wiring">
+          <thead><tr><th>SD Module Pin</th><th>ESP32 Pin</th></tr></thead>
+          <tbody>
+            <tr><td>VCC</td><td>3.3V</td></tr>
+            <tr><td>GND</td><td>GND</td></tr>
+            <tr><td>MISO</td><td>GPIO 19</td></tr>
+            <tr><td>MOSI</td><td>GPIO 23</td></tr>
+            <tr><td>SCK</td><td>GPIO 18</td></tr>
+            <tr><td>CS</td><td>GPIO 5</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-head">CSV Format is Universal</div>
+        Logging as comma-separated values means you can open your log file in Excel, Google Sheets, or Python pandas — no special software needed.
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">Which storage option is best for logging sensor data in a remote location with no internet?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt" data-correct>SD Card (local storage)</div>
+          <div class="quiz-opt">Firebase Realtime DB</div>
+          <div class="quiz-opt">AWS DynamoDB</div>
+          <div class="quiz-opt">ThingSpeak</div>
+        </div>
+        <div class="quiz-feedback" data-ok="Correct! SD cards need no connectivity — perfect for field deployments." data-bad="Think about which option doesn't require internet access."></div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 7-2 -->
+    <div class="lesson-page" id="lesson-7-2">
+      <span class="lesson-tag">Module 7 · Lesson 2</span>
+      <h1 class="lesson-title">Building IoT Dashboards</h1>
+      <p class="lesson-intro">A dashboard turns raw numbers into insight. Whether you use a cloud platform's built-in tools or build your own with Node-RED or Grafana, the goal is the same: understand your data at a glance.</p>
+
+      <div class="block">
+        <h3>Dashboard Tools Comparison</h3>
+        <table>
+          <thead><tr><th>Tool</th><th>Best For</th><th>Skill Level</th></tr></thead>
+          <tbody>
+            <tr><td>ThingSpeak Charts</td><td>Quick sensor plots</td><td>Beginner</td></tr>
+            <tr><td>Adafruit IO</td><td>Interactive widgets</td><td>Beginner</td></tr>
+            <tr><td>Blynk</td><td>Mobile app dashboards</td><td>Beginner</td></tr>
+            <tr><td>Node-RED Dashboard</td><td>Flexible local dashboards</td><td>Intermediate</td></tr>
+            <tr><td>Grafana</td><td>Professional analytics</td><td>Advanced</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="block">
+        <h3>Node-RED: Visual IoT Programming</h3>
+        <p>Node-RED is a browser-based flow programming tool. You connect nodes (MQTT in → function → chart) visually instead of writing code. It runs on Raspberry Pi or any computer.</p>
+        <ul>
+          <li>Drag an <strong>MQTT in</strong> node and configure your broker</li>
+          <li>Add a <strong>JSON</strong> node to parse incoming payloads</li>
+          <li>Connect to a <strong>chart</strong> node from the Dashboard palette</li>
+          <li>Click <strong>Deploy</strong> — your dashboard is live at <code>localhost:1880/ui</code></li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Building a Simple Web Dashboard (HTML + JS)</h3>
+        <p>You can also build a live dashboard yourself using the Fetch API to pull data from ThingSpeak:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">JavaScript</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">const</span> channelId = <span class="a">"YOUR_CHANNEL_ID"</span>;
+<span class="kw">const</span> apiKey    = <span class="a">"YOUR_READ_KEY"</span>;
+
+<span class="kw">async function</span> <span class="t">fetchLatest</span>() {
+  <span class="kw">const</span> res  = <span class="kw">await</span> fetch(
+    <span class="a">`https://api.thingspeak.com/channels/${channelId}/feeds/last.json?api_key=${apiKey}`</span>
+  );
+  <span class="kw">const</span> data = <span class="kw">await</span> res.json();
+  document.getElementById(<span class="a">'temp'</span>).textContent = data.field1 + <span class="a">' °C'</span>;
+  document.getElementById(<span class="a">'hum'</span>).textContent  = data.field2 + <span class="a">' %'</span>;
+}
+
+fetchLatest();
+setInterval(fetchLatest, <span class="p">15000</span>); <span class="cm">// refresh every 15 s</span></div>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <div class="callout-head">Chart.js for Beautiful Graphs</div>
+        Pair the Fetch API with Chart.js (<code>chartjs.org</code>) to build professional line charts in your browser — 20 lines of JavaScript and you have a live-updating graph.
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">Node-RED uses which programming style?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">Object-oriented class hierarchies</div>
+          <div class="quiz-opt">Functional reactive programming</div>
+          <div class="quiz-opt" data-correct>Visual flow-based programming with connected nodes</div>
+          <div class="quiz-opt">Assembly-level hardware programming</div>
+        </div>
+        <div class="quiz-feedback" data-ok="Correct! Node-RED is a visual flow editor — you wire nodes together instead of writing code." data-bad="Think about what makes Node-RED different from traditional coding."></div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 7-3 -->
+    <div class="lesson-page" id="lesson-7-3">
+      <span class="lesson-tag">Module 7 · Lesson 3</span>
+      <h1 class="lesson-title">Alerts & Notifications</h1>
+      <p class="lesson-intro">An IoT system isn't very useful if you have to watch a dashboard 24/7. Alerts let the system notify you the moment something goes wrong — temperature spikes, soil dries out, motion detected.</p>
+
+      <div class="block">
+        <h3>Alert Delivery Methods</h3>
+        <div class="component-grid">
+          <div class="component-card"><strong>Email</strong><br/>Free, reliable, works via Gmail SMTP or services like SendGrid. Best for non-urgent alerts.</div>
+          <div class="component-card"><strong>SMS / WhatsApp</strong><br/>Immediate attention. Use Twilio (SMS) or Twilio WhatsApp API. Costs per message.</div>
+          <div class="component-card"><strong>Push Notification</strong><br/>App alerts. Blynk and Adafruit IO have built-in push. Free and fast.</div>
+          <div class="component-card"><strong>Buzzer / LED</strong><br/>On-device alert — no internet needed. Great for local warnings.</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Threshold Alerts on Adafruit IO</h3>
+        <ol>
+          <li>Open your feed → click <strong>Feed Info</strong></li>
+          <li>Go to <strong>Triggers</strong> → New Trigger</li>
+          <li>Set condition: <em>temperature &gt; 35</em></li>
+          <li>Action: <strong>Send Email</strong> to your address</li>
+          <li>Save — Adafruit IO will email you whenever the condition is met</li>
+        </ol>
+      </div>
+
+      <div class="block">
+        <h3>Sending Email from ESP32 via Gmail SMTP</h3>
+        <p>Use the <strong>ESP Mail Client</strong> library (by Mobizt) to send email directly from your microcontroller:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">#include </span><span class="v">&lt;ESP_Mail_Client.h&gt;</span>
+
+<span class="t">SMTPSession</span> smtp;
+
+<span class="kw">void</span> sendAlert(<span class="kw">float</span> temp) {
+  <span class="t">ESP_Mail_Session</span> session;
+  session.server.host_name = <span class="a">"smtp.gmail.com"</span>;
+  session.server.port = <span class="p">465</span>;
+  session.login.email    = <span class="a">"youremail@gmail.com"</span>;
+  session.login.password = <span class="a">"your_app_password"</span>; <span class="cm">// use App Password, not main pass</span>
+
+  <span class="t">SMTP_Message</span> msg;
+  msg.sender.name  = <span class="a">"IoT Alert"</span>;
+  msg.sender.email = <span class="a">"youremail@gmail.com"</span>;
+  msg.subject      = <span class="a">"High Temperature Warning!"</span>;
+  msg.addRecipient(<span class="a">"Me"</span>, <span class="a">"youremail@gmail.com"</span>);
+  msg.text.content = (<span class="t">String</span>(<span class="a">"Temp is "</span>) + temp + <span class="a">" C — check your device!"</span>).c_str();
+
+  smtp.connect(&session);
+  MailClient.sendMail(&smtp, &msg);
+}</div>
+        </div>
+      </div>
+
+      <div class="callout warn">
+        <div class="callout-head">Use Gmail App Passwords</div>
+        Never use your main Gmail password in code. Enable 2FA on your Google account, then generate an <strong>App Password</strong> under Security settings. This is a 16-character code that only works for your app.
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">Why should you NOT use your main Gmail password in ESP32 code?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">The ESP32 doesn't support SSL</div>
+          <div class="quiz-opt" data-correct>The code could be read by others, exposing your account credentials</div>
+          <div class="quiz-opt">Gmail blocks SMTP from microcontrollers</div>
+          <div class="quiz-opt">Main passwords are too long for Arduino strings</div>
+        </div>
+        <div class="quiz-feedback" data-ok="Correct! Code is often shared or uploaded to GitHub — an App Password limits the damage if it leaks." data-bad="Think about who else might see your source code."></div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 7-4 -->
+    <div class="lesson-page" id="lesson-7-4">
+      <span class="lesson-tag">Module 7 · Lesson 4</span>
+      <h1 class="lesson-title">Automation with IFTTT</h1>
+      <p class="lesson-intro">IFTTT (If This Then That) connects hundreds of services together with simple "Applets". IoT devices can trigger Google Sheets updates, Telegram messages, smart lights, and much more — no server required.</p>
+
+      <div class="block">
+        <h3>How IFTTT Works</h3>
+        <p>Every IFTTT Applet has two parts:</p>
+        <ul>
+          <li><strong>Trigger (IF THIS)</strong> — an event that starts the chain. For IoT: a Webhooks HTTP request from your device.</li>
+          <li><strong>Action (THEN THAT)</strong> — what happens next. Options include: append row to Google Sheet, send Telegram message, turn on Philips Hue lights, post to Twitter, etc.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>IFTTT Webhooks from ESP32</h3>
+        <p>The <strong>Webhooks</strong> service gives you a URL endpoint. When your ESP32 sends an HTTP request to it, IFTTT fires the connected action.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">#include </span><span class="v">&lt;WiFi.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;HTTPClient.h&gt;</span>
+
+<span class="kw">const char</span>* iftttKey   = <span class="a">"YOUR_IFTTT_KEY"</span>;
+<span class="kw">const char</span>* eventName  = <span class="a">"motion_detected"</span>;
+
+<span class="kw">void</span> triggerIFTTT(<span class="t">String</span> value1) {
+  <span class="t">HTTPClient</span> http;
+  <span class="t">String</span> url = <span class="t">String</span>(<span class="a">"https://maker.ifttt.com/trigger/"</span>)
+               + eventName + <span class="a">"/with/key/"</span> + iftttKey;
+
+  http.begin(url);
+  http.addHeader(<span class="a">"Content-Type"</span>, <span class="a">"application/json"</span>);
+  <span class="t">String</span> payload = <span class="t">String</span>(<span class="a">'{"value1":"'</span>) + value1 + <span class="a">'"}'</span>;
+  http.POST(payload);
+  http.end();
+}
+
+<span class="kw">void</span> <span class="t">loop</span>() {
+  <span class="kw">int</span> pir = digitalRead(<span class="p">14</span>);
+  <span class="kw">if</span> (pir == <span class="v">HIGH</span>) {
+    triggerIFTTT(<span class="a">"Motion at front door"</span>);
+    delay(<span class="p">30000</span>); <span class="cm">// cool-down: 30s before next trigger</span>
+  }
+}</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Useful IFTTT Applets for IoT</h3>
+        <table>
+          <thead><tr><th>Trigger (Webhooks)</th><th>Action</th><th>Use Case</th></tr></thead>
+          <tbody>
+            <tr><td>temp_high</td><td>Send Telegram message</td><td>Heat alert for a greenhouse</td></tr>
+            <tr><td>motion_detected</td><td>Add row to Google Sheet</td><td>Log visitor times</td></tr>
+            <tr><td>soil_dry</td><td>Send email</td><td>Plant watering reminder</td></tr>
+            <tr><td>button_pressed</td><td>Turn on smart light</td><td>Desk lamp automation</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-head">Three Value Fields</div>
+        Webhooks supports sending <code>value1</code>, <code>value2</code>, and <code>value3</code> in the JSON payload. Use these to pass temperature, humidity, and a timestamp in a single trigger.
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">In IFTTT, what service does your ESP32 call to start an automation?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">MQTT Broker</div>
+          <div class="quiz-opt" data-correct>Webhooks</div>
+          <div class="quiz-opt">Google Actions</div>
+          <div class="quiz-opt">Twilio</div>
+        </div>
+        <div class="quiz-feedback" data-ok="Correct! The Webhooks service provides HTTP endpoints that any internet-connected device can call to trigger an Applet." data-bad="IFTTT has a special service for HTTP requests from devices — re-read the lesson."></div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 7-5 -->
+    <div class="lesson-page" id="lesson-7-5">
+      <span class="lesson-tag">Module 7 · Lesson 5</span>
+      <h1 class="lesson-title">Edge Computing in IoT</h1>
+      <p class="lesson-intro">Edge computing moves processing closer to the device — on the microcontroller itself or a nearby gateway — instead of sending all data to the cloud. This reduces latency, saves bandwidth, and enables offline operation.</p>
+
+      <div class="block">
+        <h3>Cloud vs Edge</h3>
+        <table>
+          <thead><tr><th></th><th>Cloud Processing</th><th>Edge Processing</th></tr></thead>
+          <tbody>
+            <tr><td>Latency</td><td>100–500ms (network round trip)</td><td>&lt;1ms (local)</td></tr>
+            <tr><td>Bandwidth</td><td>All raw data sent</td><td>Only results/events sent</td></tr>
+            <tr><td>Offline?</td><td>No</td><td>Yes</td></tr>
+            <tr><td>Processing power</td><td>Unlimited</td><td>Limited by hardware</td></tr>
+            <tr><td>Cost</td><td>Data transfer fees</td><td>Higher hardware cost</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="block">
+        <h3>On-Device Edge Processing</h3>
+        <p>Instead of sending every sensor reading, only send an alert when something unusual happens. This is edge computing at its simplest:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">float</span> readings[<span class="p">10</span>];
+<span class="kw">int</span>   idx = <span class="p">0</span>;
+
+<span class="kw">void</span> collectAndProcess() {
+  readings[idx++] = readTemperature();
+
+  <span class="kw">if</span> (idx == <span class="p">10</span>) {
+    <span class="cm">// Compute average at the edge</span>
+    <span class="kw">float</span> avg = <span class="p">0</span>;
+    <span class="kw">for</span> (<span class="kw">int</span> i = <span class="p">0</span>; i &lt; <span class="p">10</span>; i++) avg += readings[i];
+    avg /= <span class="p">10</span>;
+    idx = <span class="p">0</span>;
+
+    <span class="cm">// Only send average, not all 10 raw readings</span>
+    sendToCloud(avg);
+
+    <span class="cm">// Trigger alert locally — no cloud needed</span>
+    <span class="kw">if</span> (avg &gt; <span class="p">38.0</span>) triggerLocalBuzzer();
+  }
+}</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>TinyML: Machine Learning at the Edge</h3>
+        <p>Libraries like <strong>TensorFlow Lite for Microcontrollers</strong> let you run trained ML models on an ESP32 or Arduino Nano 33 BLE Sense. Real-world uses:</p>
+        <ul>
+          <li><strong>Wake word detection</strong> — "Hey device!" processed locally, no audio sent to cloud</li>
+          <li><strong>Gesture recognition</strong> — IMU data classified on-chip</li>
+          <li><strong>Anomaly detection</strong> — motor vibration patterns analysed locally</li>
+          <li><strong>Image classification</strong> — ESP32-CAM identifies objects without uploading photos</li>
+        </ul>
+      </div>
+
+      <div class="callout info">
+        <div class="callout-head">Edge + Cloud Together</div>
+        Best IoT systems use both: edge for fast local decisions and offline operation, cloud for long-term storage, trend analysis, and remote management. Think of edge as the first filter that only sends meaningful data upward.
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">What is the main advantage of processing data at the edge rather than sending it all to the cloud?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">Cloud storage is too expensive</div>
+          <div class="quiz-opt" data-correct>Lower latency, less bandwidth, and offline operation capability</div>
+          <div class="quiz-opt">Edge devices have more processing power</div>
+          <div class="quiz-opt">Cloud platforms don't support IoT data</div>
+        </div>
+        <div class="quiz-feedback" data-ok="Correct! Edge processing is faster (no network round trip), uses less bandwidth, and works without internet." data-bad="Review the Cloud vs Edge comparison table in this lesson."></div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+  </div><!-- .main -->
+</div><!-- .layout -->
+<script src="course.js"></script>
+</body>
+</html>

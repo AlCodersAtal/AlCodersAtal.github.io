@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 2: IoT Hardware — AlCoders ATL</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<div id="mod-progress"></div>
+<nav class="top-nav">
+  <a class="logo" href="index.html">AlCoders ATL</a>
+  <ul>
+    <li><a href="module1.html">← Module 1</a></li>
+    <li><a href="index.html#curriculum">All Modules</a></li>
+    <li><a href="module3.html">Module 3 →</a></li>
+  </ul>
+  <a class="nav-start" href="index.html">Course Home</a>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="breadcrumb">Module 2 › <span>IoT Hardware Essentials</span></div>
+      <div class="nav-btns">
+        <button class="nav-btn" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn primary" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 2-1 -->
+    <div class="lesson-page active" id="lesson-2-1">
+      <div class="lesson-tag">Module 2 · Lesson 1</div>
+      <h1 class="lesson-title">Microcontrollers vs Microprocessors</h1>
+      <p class="lesson-intro">Before picking a board, understand the fundamental difference between a microcontroller (MCU) and a microprocessor (MPU). This shapes everything in IoT hardware design.</p>
+
+      <div class="block">
+        <h3>Microcontroller (MCU)</h3>
+        <p>A microcontroller is a complete computer on a single chip. It contains:</p>
+        <ul>
+          <li><strong>CPU</strong> – executes your code</li>
+          <li><strong>RAM</strong> – temporary storage (a few KB to a few MB)</li>
+          <li><strong>Flash memory</strong> – stores your program permanently</li>
+          <li><strong>I/O pins</strong> – connect to sensors, LEDs, motors</li>
+          <li><strong>Peripherals</strong> – built-in UART, SPI, I2C, ADC, PWM</li>
+        </ul>
+        <p>MCUs are designed to run <strong>one specific program</strong> reliably, with no operating system (or a tiny RTOS). They start instantly and run for years on batteries.</p>
+        <div class="callout tip"><div class="callout-head">Examples</div>ATmega328P (Arduino Uno), ESP8266, ESP32, STM32, ATtiny</div>
+      </div>
+
+      <div class="block">
+        <h3>Microprocessor (MPU)</h3>
+        <p>A microprocessor is just the CPU — it needs external RAM, storage, and peripherals. It runs a full operating system (Linux, Windows) and can do many things at once. Much more powerful, but also uses much more power and costs more.</p>
+        <div class="callout tip"><div class="callout-head">Examples</div>Raspberry Pi (BCM2711), Nvidia Jetson, BeagleBone Black</div>
+      </div>
+
+      <div class="block">
+        <h3>Comparison Table</h3>
+        <table>
+          <tr><th>Feature</th><th>Microcontroller</th><th>Microprocessor</th></tr>
+          <tr><td>Operating System</td><td>None / RTOS</td><td>Linux / Windows</td></tr>
+          <tr><td>Power usage</td><td>Very low (mA)</td><td>High (hundreds of mA)</td></tr>
+          <tr><td>Boot time</td><td>Milliseconds</td><td>20–60 seconds</td></tr>
+          <tr><td>Cost</td><td>₹50 – ₹500</td><td>₹1,500 – ₹6,000+</td></tr>
+          <tr><td>Complexity</td><td>Simple</td><td>Complex</td></tr>
+          <tr><td>Best for</td><td>Sensing, control, battery devices</td><td>AI, video, complex apps</td></tr>
+        </table>
+        <div class="callout info"><div class="callout-head">🎯 IoT Choice</div>Most IoT edge devices use microcontrollers because of low power, low cost, and simplicity. Microprocessors are used when you need heavy processing (AI, video analysis).</div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 2-2 -->
+    <div class="lesson-page" id="lesson-2-2">
+      <div class="lesson-tag">Module 2 · Lesson 2</div>
+      <h1 class="lesson-title">Arduino for IoT</h1>
+      <p class="lesson-intro">Arduino is the most beginner-friendly microcontroller platform in the world. It's an excellent starting point for IoT — even if most production IoT uses ESP32 or other Wi-Fi boards.</p>
+
+      <div class="block">
+        <h3>What is Arduino?</h3>
+        <p>Arduino is an <strong>open-source electronics platform</strong> combining a microcontroller board and a software IDE. The Arduino Uno uses the ATmega328P chip running at 16 MHz with 32 KB of flash and 2 KB of RAM.</p>
+        <p>Arduino's real power is its ecosystem: thousands of libraries, tutorials, and community projects. The Arduino IDE lets you write and upload code with one click.</p>
+      </div>
+
+      <div class="block">
+        <h3>Arduino Uno Pinout</h3>
+        <table>
+          <tr><th>Pin Type</th><th>Pins</th><th>Use</th></tr>
+          <tr><td>Digital I/O</td><td>D0–D13</td><td>Read/write HIGH or LOW (0V / 5V)</td></tr>
+          <tr><td>Analog Input</td><td>A0–A5</td><td>Read analog values 0–1023 (10-bit ADC)</td></tr>
+          <tr><td>PWM Output</td><td>D3,5,6,9,10,11</td><td>Simulate analog out (motor speed, LED dim)</td></tr>
+          <tr><td>I2C</td><td>A4 (SDA), A5 (SCL)</td><td>Communicate with I2C sensors</td></tr>
+          <tr><td>SPI</td><td>D10–D13</td><td>High-speed communication</td></tr>
+          <tr><td>Serial (UART)</td><td>D0 (RX), D1 (TX)</td><td>Serial communication, debug</td></tr>
+          <tr><td>Power</td><td>5V, 3.3V, GND, Vin</td><td>Power supply pins</td></tr>
+        </table>
+      </div>
+
+      <div class="block">
+        <h3>Your First Arduino Sketch</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino C</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm">// Blink an LED – the "Hello World" of Arduino</span>
+
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="cm">// Pin 13 has a built-in LED on Arduino Uno</span>
+  <span class="a">pinMode</span>(<span class="v">13</span>, <span class="p">OUTPUT</span>);
+}
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="a">digitalWrite</span>(<span class="v">13</span>, <span class="p">HIGH</span>);  <span class="cm">// LED on</span>
+  <span class="a">delay</span>(<span class="v">1000</span>);              <span class="cm">// wait 1 second</span>
+  <span class="a">digitalWrite</span>(<span class="v">13</span>, <span class="p">LOW</span>);   <span class="cm">// LED off</span>
+  <span class="a">delay</span>(<span class="v">1000</span>);              <span class="cm">// wait 1 second</span>
+}</div>
+        </div>
+        <p>Every Arduino sketch has two functions: <code>setup()</code> runs once at startup, <code>loop()</code> runs forever in a continuous loop.</p>
+      </div>
+
+      <div class="block">
+        <h3>Arduino for IoT — The Limitation</h3>
+        <p>Arduino Uno has <strong>no built-in Wi-Fi or Bluetooth</strong>. To add internet connectivity you need an extra shield (like ESP8266 module). This is why most IoT projects quickly move to the ESP8266 or ESP32, which have Wi-Fi built in.</p>
+        <div class="callout warn"><div class="callout-head">⚠️ Learn Arduino First</div>Even if you'll use ESP32 in production, learn Arduino first — the programming concepts, wiring skills, and debugging habits transfer directly.</div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 2-3 -->
+    <div class="lesson-page" id="lesson-2-3">
+      <div class="lesson-tag">Module 2 · Lesson 3</div>
+      <h1 class="lesson-title">ESP8266 & ESP32 — The Wi-Fi Boards</h1>
+      <p class="lesson-intro">The ESP8266 and ESP32 by Espressif are the go-to chips for IoT. They combine a capable processor with built-in Wi-Fi (and Bluetooth on ESP32) at an incredibly low price.</p>
+
+      <div class="block">
+        <h3>ESP8266 — The Wi-Fi Pioneer</h3>
+        <p>Released in 2014, the ESP8266 changed IoT forever. For under ₹100, you get:</p>
+        <ul>
+          <li>32-bit Tensilica L106 CPU @ 80/160 MHz</li>
+          <li>Built-in Wi-Fi 802.11 b/g/n</li>
+          <li>80 KB RAM, 4 MB flash (on NodeMCU boards)</li>
+          <li>GPIO, UART, SPI, I2C, ADC (1 channel)</li>
+          <li>Programmable with Arduino IDE</li>
+        </ul>
+        <p>Most popular form: <strong>NodeMCU v1/v2</strong> — a breakout board with USB and all pins exposed.</p>
+      </div>
+
+      <div class="block">
+        <h3>ESP32 — The IoT Powerhouse</h3>
+        <p>The ESP32 is the upgrade. For ₹250–₹400 you get significantly more capability:</p>
+        <ul>
+          <li>Dual-core 240 MHz Xtensa LX6 CPU</li>
+          <li>Wi-Fi 802.11 b/g/n <strong>AND</strong> Bluetooth 4.2 / BLE</li>
+          <li>520 KB RAM, 4 MB flash (typical)</li>
+          <li>34 GPIO pins, 18-channel ADC, 2× DAC</li>
+          <li>Built-in Hall sensor, temperature sensor</li>
+          <li>Supports deep sleep: draw as little as 10 µA</li>
+          <li>Hardware encryption/decryption acceleration</li>
+        </ul>
+        <div class="callout tip"><div class="callout-head">💡 Use ESP32</div>For any new IoT project, default to ESP32. It's powerful enough for everything in this course, and only costs a little more than ESP8266.</div>
+      </div>
+
+      <div class="block">
+        <h3>First ESP32 Wi-Fi Sketch</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino C (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">#include</span> <span class="p">&lt;WiFi.h&gt;</span>
+
+<span class="kw">const char</span>* <span class="v">ssid</span>     = <span class="p">"YourWiFiName"</span>;
+<span class="kw">const char</span>* <span class="v">password</span> = <span class="p">"YourPassword"</span>;
+
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="a">Serial.begin</span>(<span class="v">115200</span>);
+  <span class="a">WiFi.begin</span>(<span class="v">ssid</span>, <span class="v">password</span>);
+
+  <span class="a">Serial.print</span>(<span class="p">"Connecting to WiFi"</span>);
+  <span class="kw">while</span> (<span class="a">WiFi.status</span>() != <span class="p">WL_CONNECTED</span>) {
+    <span class="a">delay</span>(<span class="v">500</span>);
+    <span class="a">Serial.print</span>(<span class="p">"."</span>);
+  }
+
+  <span class="a">Serial.println</span>(<span class="p">"\nConnected!"</span>);
+  <span class="a">Serial.print</span>(<span class="p">"IP Address: "</span>);
+  <span class="a">Serial.println</span>(<span class="a">WiFi.localIP</span>());
+}
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="cm">// Your IoT logic goes here</span>
+}</div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 2-4 -->
+    <div class="lesson-page" id="lesson-2-4">
+      <div class="lesson-tag">Module 2 · Lesson 4</div>
+      <h1 class="lesson-title">Raspberry Pi in IoT</h1>
+      <p class="lesson-intro">Raspberry Pi is a credit-card-sized single-board computer that runs Linux. It's the powerhouse option for IoT projects that need AI, video, or a web server.</p>
+
+      <div class="block">
+        <h3>What is Raspberry Pi?</h3>
+        <p>Raspberry Pi runs a full Linux operating system. Unlike Arduino or ESP32, it can run Python, Node.js, databases, web servers — anything a regular computer can do. It's perfect when your IoT project needs heavy lifting.</p>
+        <ul>
+          <li>Raspberry Pi 4: Quad-core ARM Cortex-A72 @ 1.8 GHz, 1–8 GB RAM</li>
+          <li>Wi-Fi, Bluetooth, Gigabit Ethernet, USB 3.0</li>
+          <li>HDMI output — connect a monitor directly</li>
+          <li>40-pin GPIO header — connect sensors just like Arduino</li>
+          <li>Runs Raspberry Pi OS (Linux) or Ubuntu</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Reading a Sensor with Python on Pi</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python 3</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">import</span> <span class="a">RPi.GPIO</span> <span class="kw">as</span> GPIO
+<span class="kw">import</span> <span class="a">Adafruit_DHT</span>
+<span class="kw">import</span> <span class="a">time</span>
+
+<span class="v">SENSOR</span> = Adafruit_DHT.<span class="p">DHT11</span>
+<span class="v">PIN</span>    = <span class="v">4</span>  <span class="cm"># GPIO pin number</span>
+
+<span class="kw">while</span> <span class="p">True</span>:
+    <span class="v">humidity</span>, <span class="v">temperature</span> = Adafruit_DHT.<span class="a">read_retry</span>(<span class="v">SENSOR</span>, <span class="v">PIN</span>)
+    <span class="kw">if</span> <span class="v">humidity</span> <span class="kw">is not</span> <span class="p">None</span>:
+        <span class="a">print</span>(<span class="p">f"Temp: {temperature}°C  Humidity: {humidity}%"</span>)
+    <span class="kw">else</span>:
+        <span class="a">print</span>(<span class="p">"Sensor read failed"</span>)
+    <span class="a">time.sleep</span>(<span class="v">2</span>)</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>When to Use Raspberry Pi in IoT</h3>
+        <table>
+          <tr><th>Use Raspberry Pi when...</th><th>Use ESP32 when...</th></tr>
+          <tr><td>You need Linux / Python</td><td>Battery-powered device needed</td></tr>
+          <tr><td>Running AI / ML models</td><td>Simple sensing and connectivity</td></tr>
+          <tr><td>Hosting a local web server</td><td>Cost is critical (₹300 vs ₹3,500)</td></tr>
+          <tr><td>Processing camera video</td><td>Needs to boot instantly</td></tr>
+          <tr><td>Acting as a central hub</td><td>Many units deployed at scale</td></tr>
+        </table>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 2-5 -->
+    <div class="lesson-page" id="lesson-2-5">
+      <div class="lesson-tag">Module 2 · Lesson 5</div>
+      <h1 class="lesson-title">Choosing the Right Board</h1>
+      <p class="lesson-intro">With so many options, how do you pick the right board? This lesson gives you a decision framework for every IoT project.</p>
+
+      <div class="block">
+        <h3>The Decision Framework</h3>
+        <p>Ask these questions in order:</p>
+        <ol>
+          <li><strong>Is it battery-powered?</strong> → Yes: MCU (ESP32 with deep sleep). No: Pi is fine.</li>
+          <li><strong>Does it need Wi-Fi?</strong> → Yes: ESP8266/ESP32. No: Arduino Uno is enough.</li>
+          <li><strong>Does it need Bluetooth too?</strong> → Yes: ESP32.</li>
+          <li><strong>Does it need Linux / Python?</strong> → Yes: Raspberry Pi.</li>
+          <li><strong>Does it need video/AI?</strong> → Yes: Raspberry Pi 4 or Jetson.</li>
+          <li><strong>Ultra-low cost (&lt; ₹50/unit)?</strong> → Yes: ATtiny or bare ESP8266 chip.</li>
+        </ol>
+      </div>
+
+      <div class="block">
+        <h3>Quick Reference Card</h3>
+        <div class="component-grid">
+          <div class="component-card"><div class="cc-icon">🟦</div><h4>Arduino Uno</h4><p>Learning basics, no Wi-Fi needed, simple control</p></div>
+          <div class="component-card"><div class="cc-icon">🟩</div><h4>NodeMCU (ESP8266)</h4><p>Simple Wi-Fi IoT, tight budget, single core enough</p></div>
+          <div class="component-card"><div class="cc-icon">🟥</div><h4>ESP32</h4><p>Wi-Fi + BT, battery-powered, dual-core — best all-rounder</p></div>
+          <div class="component-card"><div class="cc-icon">🍓</div><h4>Raspberry Pi</h4><p>Linux needed, heavy processing, acts as hub/server</p></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>For This Course</h3>
+        <p>All projects in this course are designed for <strong>ESP32</strong> as the primary board. If you only have an Arduino + ESP8266, most connectivity projects will still work with minor adjustments. A few cloud and Python projects are written for Raspberry Pi but are optional.</p>
+        <div class="callout tip"><div class="callout-head">🛒 Shopping List</div>To complete this full course: ESP32 DevKit v1 (×1), DHT11 sensor, PIR sensor, soil moisture sensor, BMP180 pressure sensor, 5 LEDs, 2 relays, 1 buzzer, jumper wires, breadboard. Total cost: ~₹800–₹1,200.</div>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">You're building a battery-powered soil sensor that sends data via Wi-Fi every hour. Which board is best?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">Arduino Uno</div>
+          <div class="quiz-opt">Raspberry Pi 4</div>
+          <div class="quiz-opt" data-correct>ESP32 with deep sleep</div>
+          <div class="quiz-opt">NodeMCU ESP8266</div>
+        </div>
+        <div class="quiz-feedback" data-ok>✅ Correct! ESP32 deep sleep draws only ~10 µA, making it perfect for battery-powered devices that wake periodically.</div>
+        <div class="quiz-feedback" data-bad>❌ Not ideal. ESP32 with deep sleep is the right choice — it can run on a battery for months by sleeping between readings.</div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>

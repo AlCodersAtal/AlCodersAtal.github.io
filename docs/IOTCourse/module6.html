@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Module 6: Cloud & IoT Platforms — AlCoders IoT Course</title>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="breadcrumb"><span id="breadcrumb-text">Module 6</span></div>
+      <div class="topbar-nav">
+        <button class="nav-btn" onclick="prevLesson()">&#8592; Prev</button>
+        <button class="nav-btn" onclick="nextLesson()">Next &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 6-1 -->
+    <div class="lesson-page active" id="lesson-6-1">
+      <span class="lesson-tag">Module 6 · Lesson 1</span>
+      <h1 class="lesson-title">Introduction to IoT Cloud Platforms</h1>
+      <p class="lesson-intro">IoT devices generate enormous amounts of data. Cloud platforms give us somewhere to send, store, visualise, and act on that data — without running our own servers.</p>
+
+      <div class="block">
+        <h3>Why Cloud for IoT?</h3>
+        <p>A microcontroller like the ESP32 has kilobytes of RAM. It can't store weeks of sensor readings or serve a web dashboard to hundreds of users. Cloud platforms solve this by providing:</p>
+        <ul>
+          <li><strong>Storage</strong> — time-series databases built for sensor data</li>
+          <li><strong>APIs</strong> — simple HTTP or MQTT endpoints your device can push data to</li>
+          <li><strong>Dashboards</strong> — ready-made charts and gauges, no frontend coding</li>
+          <li><strong>Automation</strong> — trigger emails, SMS, or device commands when thresholds are crossed</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Types of IoT Platforms</h3>
+        <div class="component-grid">
+          <div class="component-card"><strong>Device Management</strong><br/>Register, update, and monitor fleets of devices (AWS IoT Core, Azure IoT Hub)</div>
+          <div class="component-card"><strong>Data Platforms</strong><br/>Ingest and visualise time-series data (ThingSpeak, InfluxDB + Grafana)</div>
+          <div class="component-card"><strong>Maker Platforms</strong><br/>Quick prototyping with dashboards and automations (Adafruit IO, Blynk)</div>
+          <div class="component-card"><strong>Edge Platforms</strong><br/>Run logic close to the device, sync to cloud (AWS Greengrass, Azure IoT Edge)</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Choosing a Platform</h3>
+        <table>
+          <thead><tr><th>Consideration</th><th>Beginner / Maker</th><th>Production</th></tr></thead>
+          <tbody>
+            <tr><td>Cost</td><td>Free tiers (ThingSpeak, Adafruit IO)</td><td>Pay-per-use (AWS, GCP)</td></tr>
+            <tr><td>Setup time</td><td>Minutes</td><td>Hours to days</td></tr>
+            <tr><td>Scalability</td><td>Low (hundreds of devices)</td><td>Millions of devices</td></tr>
+            <tr><td>Features</td><td>Basic charts, IFTTT</td><td>ML, OTA updates, rules engine</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-head">Start with Maker Platforms</div>
+        For school projects, ThingSpeak and Adafruit IO are perfect — free, well-documented, and require no credit card.
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">Which type of IoT platform is best suited for quickly prototyping a classroom weather station?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt" data-correct>Maker platform like Adafruit IO</div>
+          <div class="quiz-opt">Enterprise device management platform</div>
+          <div class="quiz-opt">Edge computing platform</div>
+          <div class="quiz-opt">Industrial SCADA system</div>
+        </div>
+        <div class="quiz-feedback" data-ok="Correct! Maker platforms offer free tiers and one-click dashboards — ideal for prototyping." data-bad="Think about ease of setup and cost for a school project."></div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 6-2 -->
+    <div class="lesson-page" id="lesson-6-2">
+      <span class="lesson-tag">Module 6 · Lesson 2</span>
+      <h1 class="lesson-title">ThingSpeak — Visualising Sensor Data</h1>
+      <p class="lesson-intro">ThingSpeak is a free IoT analytics platform by MathWorks. Your ESP32 sends data via HTTP, and ThingSpeak plots it automatically. No server setup required.</p>
+
+      <div class="block">
+        <h3>Key Concepts</h3>
+        <ul>
+          <li><strong>Channel</strong> — a collection of up to 8 data fields (e.g., temperature, humidity)</li>
+          <li><strong>Write API Key</strong> — secret key your device uses to push data</li>
+          <li><strong>Read API Key</strong> — key for fetching data (or make the channel public)</li>
+          <li><strong>Update interval</strong> — free accounts: minimum 15 seconds between updates</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Sending Data from ESP32</h3>
+        <p>A simple HTTP GET request is all you need. Replace <code>YOUR_API_KEY</code> with your channel's Write API Key.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">#include </span><span class="v">&lt;WiFi.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;HTTPClient.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;DHT.h&gt;</span>
+
+<span class="kw">const char</span>* <span class="v">ssid</span>     = <span class="a">"YourWiFi"</span>;
+<span class="kw">const char</span>* <span class="v">password</span> = <span class="a">"YourPass"</span>;
+<span class="kw">const char</span>* <span class="v">apiKey</span>   = <span class="a">"YOUR_API_KEY"</span>;
+
+<span class="kw">#define</span> <span class="v">DHTPIN</span> <span class="p">4</span>
+<span class="kw">#define</span> <span class="v">DHTTYPE</span> <span class="p">DHT11</span>
+<span class="t">DHT</span> dht(<span class="v">DHTPIN</span>, <span class="v">DHTTYPE</span>);
+
+<span class="kw">void</span> <span class="t">setup</span>() {
+  Serial.begin(<span class="p">115200</span>);
+  WiFi.begin(<span class="v">ssid</span>, <span class="v">password</span>);
+  <span class="kw">while</span> (WiFi.status() != <span class="v">WL_CONNECTED</span>) delay(<span class="p">500</span>);
+  dht.begin();
+}
+
+<span class="kw">void</span> <span class="t">loop</span>() {
+  <span class="kw">float</span> t = dht.readTemperature();
+  <span class="kw">float</span> h = dht.readHumidity();
+
+  <span class="kw">if</span> (!isnan(t) && !isnan(h)) {
+    <span class="t">HTTPClient</span> http;
+    <span class="t">String</span> url = <span class="t">String</span>(<span class="a">"http://api.thingspeak.com/update?api_key="</span>)
+                 + <span class="v">apiKey</span>
+                 + <span class="a">"&field1="</span> + t
+                 + <span class="a">"&field2="</span> + h;
+    http.begin(url);
+    <span class="kw">int</span> code = http.GET();
+    Serial.println(<span class="a">"HTTP: "</span> + <span class="t">String</span>(code));
+    http.end();
+  }
+  delay(<span class="p">20000</span>); <span class="cm">// 20 seconds between updates</span>
+}</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Wiring: DHT11 to ESP32</h3>
+        <table class="wiring">
+          <thead><tr><th>DHT11 Pin</th><th>ESP32 Pin</th></tr></thead>
+          <tbody>
+            <tr><td>VCC</td><td>3.3V</td></tr>
+            <tr><td>DATA</td><td>GPIO 4</td></tr>
+            <tr><td>GND</td><td>GND</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout info">
+        <div class="callout-head">ThingSpeak Charts</div>
+        Log in to thingspeak.com, open your channel, and you'll see live line charts updating automatically as your ESP32 sends data.
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">What is the minimum update interval for a free ThingSpeak account?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">5 seconds</div>
+          <div class="quiz-opt" data-correct>15 seconds</div>
+          <div class="quiz-opt">60 seconds</div>
+          <div class="quiz-opt">No limit</div>
+        </div>
+        <div class="quiz-feedback" data-ok="Correct! Free accounts must wait at least 15 seconds between channel updates." data-bad="Free ThingSpeak accounts have a rate limit — check the lesson again."></div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 6-3 -->
+    <div class="lesson-page" id="lesson-6-3">
+      <span class="lesson-tag">Module 6 · Lesson 3</span>
+      <h1 class="lesson-title">Adafruit IO — Dashboards & Feeds</h1>
+      <p class="lesson-intro">Adafruit IO is a maker-friendly cloud platform with drag-and-drop dashboards, feed history, and MQTT support. It's perfect for building interactive IoT projects.</p>
+
+      <div class="block">
+        <h3>Adafruit IO Concepts</h3>
+        <div class="component-grid">
+          <div class="component-card"><strong>Feed</strong><br/>A named data stream — like "temperature" or "button-state". Each feed stores a history of values.</div>
+          <div class="component-card"><strong>Dashboard</strong><br/>A customisable web page of widgets — gauges, toggles, charts — connected to your feeds.</div>
+          <div class="component-card"><strong>AIO Key</strong><br/>Your secret API key. Used in code to authenticate publishes and subscribes.</div>
+          <div class="component-card"><strong>Triggers</strong><br/>Automated actions — send an email when a feed value exceeds a threshold.</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Publishing to Adafruit IO via MQTT</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">#include </span><span class="v">&lt;WiFi.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;Adafruit_MQTT.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;Adafruit_MQTT_Client.h&gt;</span>
+
+<span class="kw">#define</span> <span class="v">AIO_SERVER</span>   <span class="a">"io.adafruit.com"</span>
+<span class="kw">#define</span> <span class="v">AIO_PORT</span>     <span class="p">1883</span>
+<span class="kw">#define</span> <span class="v">AIO_USERNAME</span> <span class="a">"your_username"</span>
+<span class="kw">#define</span> <span class="v">AIO_KEY</span>      <span class="a">"your_aio_key"</span>
+
+<span class="t">WiFiClient</span> client;
+<span class="t">Adafruit_MQTT_Client</span> mqtt(&client, <span class="v">AIO_SERVER</span>, <span class="v">AIO_PORT</span>, <span class="v">AIO_USERNAME</span>, <span class="v">AIO_KEY</span>);
+<span class="t">Adafruit_MQTT_Publish</span> tempFeed(&mqtt, <span class="a">AIO_USERNAME "/feeds/temperature"</span>);
+
+<span class="kw">void</span> <span class="t">setup</span>() {
+  WiFi.begin(<span class="a">"SSID"</span>, <span class="a">"PASS"</span>);
+  <span class="kw">while</span> (WiFi.status() != <span class="v">WL_CONNECTED</span>) delay(<span class="p">500</span>);
+}
+
+<span class="kw">void</span> <span class="t">loop</span>() {
+  <span class="kw">if</span> (!mqtt.connected()) mqtt.connect();
+
+  <span class="kw">float</span> temp = <span class="p">28.5</span>; <span class="cm">// replace with real sensor read</span>
+  tempFeed.publish(temp);
+  delay(<span class="p">10000</span>);
+}</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Building a Dashboard</h3>
+        <ol>
+          <li>Log in to <strong>io.adafruit.com</strong> and create a Feed named <em>temperature</em></li>
+          <li>Go to <strong>Dashboards</strong> → New Dashboard</li>
+          <li>Add a <strong>Gauge</strong> block, link it to your temperature feed</li>
+          <li>Add a <strong>Line Chart</strong> to see history</li>
+          <li>Run your ESP32 — watch the gauge update live!</li>
+        </ol>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-head">Toggle Switches</div>
+        Add a <strong>Toggle</strong> widget to your dashboard connected to a feed named "led". Subscribe to that feed on your ESP32 and you have wireless LED control with a beautiful UI.
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">In Adafruit IO, what is a "feed"?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">A dashboard widget</div>
+          <div class="quiz-opt" data-correct>A named data stream that stores a history of values</div>
+          <div class="quiz-opt">A WiFi connection setting</div>
+          <div class="quiz-opt">An API key</div>
+        </div>
+        <div class="quiz-feedback" data-ok="Correct! Feeds are the core data streams in Adafruit IO — everything else connects to them." data-bad="Review the Adafruit IO concepts section."></div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 6-4 -->
+    <div class="lesson-page" id="lesson-6-4">
+      <span class="lesson-tag">Module 6 · Lesson 4</span>
+      <h1 class="lesson-title">Blynk — Mobile App for IoT</h1>
+      <p class="lesson-intro">Blynk lets you build a custom smartphone app for your IoT project in minutes — no app development knowledge needed. Drag widgets onto a canvas and connect them to your hardware.</p>
+
+      <div class="block">
+        <h3>How Blynk Works</h3>
+        <p>Blynk uses a cloud server as a relay between your phone app and your device. All communication goes through <strong>Virtual Pins</strong> — numbered data channels (V0, V1, V2...) that carry any value type.</p>
+        <ul>
+          <li>Your ESP32 writes to Virtual Pin → phone app updates</li>
+          <li>User taps a button in app → ESP32 receives the command</li>
+          <li>No port forwarding, no static IP required</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Blynk 2.0 Setup</h3>
+        <ol>
+          <li>Create account at <strong>blynk.cloud</strong></li>
+          <li>Add a new Template → choose ESP32</li>
+          <li>Create a Datastream (Virtual Pin V0, type: Double)</li>
+          <li>Add a gauge widget to the web/mobile dashboard, link to V0</li>
+          <li>Copy your <strong>Auth Token</strong> and Template ID</li>
+        </ol>
+      </div>
+
+      <div class="block">
+        <h3>ESP32 Code with Blynk</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">#define</span> <span class="v">BLYNK_TEMPLATE_ID</span>   <span class="a">"TMPLxxxxxx"</span>
+<span class="kw">#define</span> <span class="v">BLYNK_TEMPLATE_NAME</span> <span class="a">"My IoT Project"</span>
+<span class="kw">#define</span> <span class="v">BLYNK_AUTH_TOKEN</span>    <span class="a">"YourAuthToken"</span>
+
+<span class="t">#include </span><span class="v">&lt;BlynkSimpleEsp32.h&gt;</span>
+
+<span class="kw">char</span> ssid[] = <span class="a">"YourWiFi"</span>;
+<span class="kw">char</span> pass[] = <span class="a">"YourPass"</span>;
+
+<span class="t">BlynkTimer</span> timer;
+
+<span class="kw">void</span> sendSensor() {
+  <span class="kw">float</span> temp = <span class="p">27.3</span>; <span class="cm">// replace with actual sensor</span>
+  Blynk.virtualWrite(<span class="v">V0</span>, temp);
+}
+
+<span class="cm">// Called when app writes to V1 (e.g. toggle button)</span>
+<span class="v">BLYNK_WRITE</span>(<span class="v">V1</span>) {
+  <span class="kw">int</span> val = param.asInt();
+  digitalWrite(<span class="p">2</span>, val); <span class="cm">// control onboard LED</span>
+}
+
+<span class="kw">void</span> <span class="t">setup</span>() {
+  Serial.begin(<span class="p">115200</span>);
+  Blynk.begin(<span class="v">BLYNK_AUTH_TOKEN</span>, ssid, pass);
+  timer.setInterval(<span class="p">5000L</span>, sendSensor);
+  pinMode(<span class="p">2</span>, <span class="v">OUTPUT</span>);
+}
+
+<span class="kw">void</span> <span class="t">loop</span>() {
+  Blynk.run();
+  timer.run();
+}</div>
+        </div>
+      </div>
+
+      <div class="callout warn">
+        <div class="callout-head">Blynk Free Tier Limits</div>
+        The free Blynk plan allows 2 devices and limited datastreams. For classroom use, one account with shared credentials works, but avoid storing sensitive data.
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">What are "Virtual Pins" in Blynk?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">Physical GPIO pins on the ESP32</div>
+          <div class="quiz-opt" data-correct>Numbered data channels that pass values between the app and device</div>
+          <div class="quiz-opt">WiFi frequency channels</div>
+          <div class="quiz-opt">Simulated hardware for testing</div>
+        </div>
+        <div class="quiz-feedback" data-ok="Correct! Virtual Pins (V0, V1, V2...) are Blynk's abstraction for sending any data between the cloud, app, and your device." data-bad="Virtual Pins are Blynk-specific — re-read the 'How Blynk Works' section."></div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 6-5 -->
+    <div class="lesson-page" id="lesson-6-5">
+      <span class="lesson-tag">Module 6 · Lesson 5</span>
+      <h1 class="lesson-title">AWS IoT Core — Enterprise IoT at Scale</h1>
+      <p class="lesson-intro">AWS IoT Core is Amazon's managed IoT cloud service. It handles millions of devices, provides a powerful rules engine, and integrates with the full AWS ecosystem — databases, Lambda, machine learning, and more.</p>
+
+      <div class="block">
+        <h3>AWS IoT Core Architecture</h3>
+        <div class="component-grid">
+          <div class="component-card"><strong>Device Gateway</strong><br/>MQTT/HTTPS broker that accepts connections from devices worldwide</div>
+          <div class="component-card"><strong>Device Registry</strong><br/>Database of all registered Things — metadata, status, certificates</div>
+          <div class="component-card"><strong>Device Shadow</strong><br/>JSON document representing the last known state of a device, even when offline</div>
+          <div class="component-card"><strong>Rules Engine</strong><br/>SQL-like rules that route incoming messages to DynamoDB, Lambda, S3, SNS, etc.</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Security in AWS IoT</h3>
+        <p>Unlike Adafruit IO's API key approach, AWS IoT uses <strong>mutual TLS (mTLS)</strong> — both the server and device present certificates. Each device gets:</p>
+        <ul>
+          <li>A unique X.509 <strong>certificate</strong> (.crt file)</li>
+          <li>A <strong>private key</strong> (.key file)</li>
+          <li>The Amazon <strong>root CA</strong> certificate</li>
+        </ul>
+        <p>These three files are embedded in your device firmware. No username/password needed — certificate presence is the authentication.</p>
+      </div>
+
+      <div class="block">
+        <h3>Device Shadow Example</h3>
+        <p>A Device Shadow JSON looks like this. The "desired" state is what the cloud wants; "reported" is what the device last sent:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">JSON</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body">{
+  <span class="a">"state"</span>: {
+    <span class="a">"desired"</span>: {
+      <span class="a">"led"</span>: <span class="a">"on"</span>,
+      <span class="a">"fanSpeed"</span>: <span class="p">75</span>
+    },
+    <span class="a">"reported"</span>: {
+      <span class="a">"led"</span>: <span class="a">"off"</span>,
+      <span class="a">"fanSpeed"</span>: <span class="p">0</span>,
+      <span class="a">"temperature"</span>: <span class="p">32.1</span>
+    }
+  }
+}</div>
+        </div>
+        <p>When the device comes back online, it reads the shadow, sees the delta (desired ≠ reported), and acts accordingly — then updates "reported" to match.</p>
+      </div>
+
+      <div class="callout info">
+        <div class="callout-head">When to Use AWS IoT</div>
+        AWS IoT is overkill for a classroom project, but essential for a real product. If you're shipping 1,000+ devices to customers, you need device management, OTA firmware updates, audit logging, and scalable ingestion — all of which AWS IoT provides.
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">What problem does the AWS IoT "Device Shadow" solve?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">It backs up device firmware to S3</div>
+          <div class="quiz-opt">It mirrors device data to a second region</div>
+          <div class="quiz-opt" data-correct>It stores the last known device state so commands work even when the device is offline</div>
+          <div class="quiz-opt">It provides a graphical UI for the device</div>
+        </div>
+        <div class="quiz-feedback" data-ok="Correct! The shadow persists desired and reported state, so a device can catch up on missed commands when it reconnects." data-bad="Think about what happens when an IoT device loses connectivity temporarily."></div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+  </div><!-- .main -->
+</div><!-- .layout -->
+<script src="course.js"></script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 6: Data Structures | Python Course | AlCoders ATL</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">Al<span>Coders</span> ATL</a>
+  <ul><li><a href="index.html#curriculum">All Modules</a></li></ul>
+  <a href="module7.html" class="nav-start">Next Module →</a>
+</nav>
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="progress-bar"></div>
+    <div class="topbar">
+      <div class="breadcrumb">Module 6 → <span>Data Structures</span></div>
+      <div class="nav-btns">
+        <button class="nav-btn" id="prevBtn" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn" id="nextBtn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 6-1 Lists -->
+    <div class="lesson-page" id="lesson-6-1">
+      <div class="lesson-tag">Module 6 · Lesson 1</div>
+      <h1 class="lesson-title">Lists</h1>
+      <p class="lesson-intro">A list is an ordered, mutable collection of items. It can hold any data type — even mixed types. Lists are the most-used data structure in Python.</p>
+      <div class="block">
+        <h2>Creating Lists</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">fruits</span> <span class="t">= [</span><span class="s">"apple"</span><span class="t">, </span><span class="s">"banana"</span><span class="t">, </span><span class="s">"cherry"</span><span class="t">]</span>
+<span class="v">numbers</span> <span class="t">= [</span><span class="n">1</span><span class="t">, </span><span class="n">2</span><span class="t">, </span><span class="n">3</span><span class="t">, </span><span class="n">4</span><span class="t">, </span><span class="n">5</span><span class="t">]</span>
+<span class="v">mixed</span> <span class="t">= [</span><span class="n">1</span><span class="t">, </span><span class="s">"hello"</span><span class="t">, </span><span class="n">3.14</span><span class="t">, </span><span class="kw">True</span><span class="t">]</span>
+<span class="v">empty</span> <span class="t">= []</span>
+
+<span class="cm"># Access by index</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">fruits</span><span class="t">[</span><span class="n">0</span><span class="t">])</span>    <span class="cm"># apple</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">fruits</span><span class="t">[-</span><span class="n">1</span><span class="t">])</span>   <span class="cm"># cherry (last)</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">len</span><span class="t">(</span><span class="v">fruits</span><span class="t">))</span>  <span class="cm"># 3</span>
+
+<span class="cm"># Modify a list</span>
+<span class="v">fruits</span><span class="t">[</span><span class="n">1</span><span class="t">] = </span><span class="s">"blueberry"</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">fruits</span><span class="t">)</span>  <span class="cm"># ['apple', 'blueberry', 'cherry']</span></div>
+        </div>
+        <h2>Slicing</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">nums</span> <span class="t">= [</span><span class="n">0</span><span class="t">, </span><span class="n">1</span><span class="t">, </span><span class="n">2</span><span class="t">, </span><span class="n">3</span><span class="t">, </span><span class="n">4</span><span class="t">, </span><span class="n">5</span><span class="t">]</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">nums</span><span class="t">[</span><span class="n">1</span><span class="t">:</span><span class="n">4</span><span class="t">])</span>    <span class="cm"># [1, 2, 3]</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">nums</span><span class="t">[:</span><span class="n">3</span><span class="t">])</span>     <span class="cm"># [0, 1, 2]</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">nums</span><span class="t">[</span><span class="n">3</span><span class="t">:])</span>     <span class="cm"># [3, 4, 5]</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">nums</span><span class="t">[:</span><span class="t">:</span><span class="n">2</span><span class="t">])</span>    <span class="cm"># [0, 2, 4] — every 2nd item</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">nums</span><span class="t">[::-</span><span class="n">1</span><span class="t">])</span>  <span class="cm"># [5, 4, 3, 2, 1, 0] — reversed</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="6-1" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 6-2 List Methods -->
+    <div class="lesson-page" id="lesson-6-2">
+      <div class="lesson-tag">Module 6 · Lesson 2</div>
+      <h1 class="lesson-title">List Methods &amp; Slicing</h1>
+      <p class="lesson-intro">Lists come with many built-in methods for adding, removing, sorting, and searching items.</p>
+      <div class="block">
+        <h2>Essential List Methods</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">items</span> <span class="t">= [</span><span class="n">3</span><span class="t">, </span><span class="n">1</span><span class="t">, </span><span class="n">4</span><span class="t">, </span><span class="n">1</span><span class="t">, </span><span class="n">5</span><span class="t">]</span>
+
+<span class="v">items</span><span class="t">.</span><span class="fn">append</span><span class="t">(</span><span class="n">9</span><span class="t">)</span>          <span class="cm"># Add to end → [3,1,4,1,5,9]</span>
+<span class="v">items</span><span class="t">.</span><span class="fn">insert</span><span class="t">(</span><span class="n">0</span><span class="t">, </span><span class="n">99</span><span class="t">)</span>       <span class="cm"># Insert at index 0 → [99,3,1,4,...]</span>
+<span class="v">items</span><span class="t">.</span><span class="fn">remove</span><span class="t">(</span><span class="n">1</span><span class="t">)</span>           <span class="cm"># Remove first 1 found</span>
+<span class="v">popped</span> <span class="t">= </span><span class="v">items</span><span class="t">.</span><span class="fn">pop</span><span class="t">()</span>     <span class="cm"># Remove & return last item</span>
+<span class="v">popped2</span> <span class="t">= </span><span class="v">items</span><span class="t">.</span><span class="fn">pop</span><span class="t">(</span><span class="n">0</span><span class="t">)</span>   <span class="cm"># Remove & return item at index 0</span>
+
+<span class="v">items</span><span class="t">.</span><span class="fn">sort</span><span class="t">()</span>              <span class="cm"># Sort in place (ascending)</span>
+<span class="v">items</span><span class="t">.</span><span class="fn">sort</span><span class="t">(</span><span class="v">reverse</span><span class="t">=</span><span class="kw">True</span><span class="t">)</span>  <span class="cm"># Sort descending</span>
+<span class="v">items</span><span class="t">.</span><span class="fn">reverse</span><span class="t">()</span>           <span class="cm"># Reverse in place</span>
+
+<span class="fn">print</span><span class="t">(</span><span class="v">items</span><span class="t">.</span><span class="fn">count</span><span class="t">(</span><span class="n">1</span><span class="t">))</span>     <span class="cm"># How many 1s exist</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">items</span><span class="t">.</span><span class="fn">index</span><span class="t">(</span><span class="n">4</span><span class="t">))</span>     <span class="cm"># Index of first 4</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">sorted</span><span class="t">(</span><span class="v">items</span><span class="t">))</span>      <span class="cm"># Returns new sorted list, original unchanged</span>
+
+<span class="v">a</span> <span class="t">= [</span><span class="n">1</span><span class="t">, </span><span class="n">2</span><span class="t">]</span>
+<span class="v">b</span> <span class="t">= [</span><span class="n">3</span><span class="t">, </span><span class="n">4</span><span class="t">]</span>
+<span class="v">a</span><span class="t">.</span><span class="fn">extend</span><span class="t">(</span><span class="v">b</span><span class="t">)</span>               <span class="cm"># [1, 2, 3, 4] — add all from b</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">a</span> <span class="t">+ </span><span class="v">b</span><span class="t">)</span>               <span class="cm"># [1, 2, 3, 4, 3, 4] — concatenate</span></div>
+        </div>
+        <h2>Checking Membership</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">fruits</span> <span class="t">= [</span><span class="s">"apple"</span><span class="t">, </span><span class="s">"banana"</span><span class="t">, </span><span class="s">"cherry"</span><span class="t">]</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"apple"</span> <span class="kw">in</span> <span class="v">fruits</span><span class="t">)</span>      <span class="cm"># True</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"mango"</span> <span class="kw">not in</span> <span class="v">fruits</span><span class="t">)</span>  <span class="cm"># True</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="6-2" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 6-3 Tuples -->
+    <div class="lesson-page" id="lesson-6-3">
+      <div class="lesson-tag">Module 6 · Lesson 3</div>
+      <h1 class="lesson-title">Tuples</h1>
+      <p class="lesson-intro">Tuples are like lists, but immutable — once created, they cannot be changed. Use tuples for data that should never be modified.</p>
+      <div class="block">
+        <h2>Creating Tuples</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">point</span> <span class="t">= (</span><span class="n">3</span><span class="t">, </span><span class="n">7</span><span class="t">)</span>
+<span class="v">rgb</span> <span class="t">= (</span><span class="n">255</span><span class="t">, </span><span class="n">128</span><span class="t">, </span><span class="n">0</span><span class="t">)</span>
+<span class="v">single</span> <span class="t">= (</span><span class="n">42</span><span class="t">,)</span>    <span class="cm"># Note trailing comma — required for single-item tuple</span>
+<span class="v">empty</span> <span class="t">= ()</span>
+
+<span class="cm"># Access like list</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">point</span><span class="t">[</span><span class="n">0</span><span class="t">])</span>    <span class="cm"># 3</span>
+<span class="fn">print</span><span class="t">(</span><span class="fn">len</span><span class="t">(</span><span class="v">rgb</span><span class="t">))</span>   <span class="cm"># 3</span>
+
+<span class="cm"># Unpacking</span>
+<span class="v">x</span><span class="t">, </span><span class="v">y</span> <span class="t">= </span><span class="v">point</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">f"x=</span><span class="p">{x}</span><span class="s">, y=</span><span class="p">{y}</span><span class="s">"</span><span class="t">)</span>
+
+<span class="cm"># Immutable — this would raise TypeError:</span>
+<span class="cm"># point[0] = 10  ← not allowed!</span></div>
+        </div>
+        <h2>When to Use Tuples vs Lists</h2>
+        <table>
+          <thead><tr><th>Tuples</th><th>Lists</th></tr></thead>
+          <tbody>
+            <tr><td>Fixed data (coordinates, RGB)</td><td>Data that changes (shopping cart)</td></tr>
+            <tr><td>Dictionary keys (hashable)</td><td>Cannot be dict keys</td></tr>
+            <tr><td>Slightly faster</td><td>More methods available</td></tr>
+            <tr><td>Signals "don't modify this"</td><td>Signals "this may change"</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="6-3" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 6-4 Dictionaries -->
+    <div class="lesson-page" id="lesson-6-4">
+      <div class="lesson-tag">Module 6 · Lesson 4</div>
+      <h1 class="lesson-title">Dictionaries</h1>
+      <p class="lesson-intro">Dictionaries store key-value pairs. Look up a value by its key — like a real dictionary where you look up a word to find its meaning.</p>
+      <div class="block">
+        <h2>Creating and Using Dicts</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">student</span> <span class="t">= {</span>
+<span class="t">    </span><span class="s">"name"</span><span class="t">: </span><span class="s">"Alice"</span><span class="t">,</span>
+<span class="t">    </span><span class="s">"age"</span><span class="t">: </span><span class="n">20</span><span class="t">,</span>
+<span class="t">    </span><span class="s">"grade"</span><span class="t">: </span><span class="s">"A"</span>
+<span class="t">}</span>
+
+<span class="cm"># Access values</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">student</span><span class="t">[</span><span class="s">"name"</span><span class="t">])</span>           <span class="cm"># Alice</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">student</span><span class="t">.</span><span class="fn">get</span><span class="t">(</span><span class="s">"age"</span><span class="t">))</span>        <span class="cm"># 20</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">student</span><span class="t">.</span><span class="fn">get</span><span class="t">(</span><span class="s">"phone"</span><span class="t">, </span><span class="s">"N/A"</span><span class="t">))</span>  <span class="cm"># N/A (default if key missing)</span>
+
+<span class="cm"># Add / update</span>
+<span class="v">student</span><span class="t">[</span><span class="s">"email"</span><span class="t">] = </span><span class="s">"alice@example.com"</span>
+<span class="v">student</span><span class="t">[</span><span class="s">"age"</span><span class="t">] = </span><span class="n">21</span>
+
+<span class="cm"># Delete</span>
+<span class="kw">del</span> <span class="v">student</span><span class="t">[</span><span class="s">"grade"</span><span class="t">]</span>
+<span class="v">student</span><span class="t">.</span><span class="fn">pop</span><span class="t">(</span><span class="s">"email"</span><span class="t">)</span>
+
+<span class="cm"># Iterate</span>
+<span class="kw">for</span> <span class="v">key</span><span class="t">, </span><span class="v">value</span> <span class="kw">in</span> <span class="v">student</span><span class="t">.</span><span class="fn">items</span><span class="t">():</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">f"</span><span class="p">{key}</span><span class="s">: </span><span class="p">{value}</span><span class="s">"</span><span class="t">)</span>
+
+<span class="cm"># Check key exists</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"name"</span> <span class="kw">in</span> <span class="v">student</span><span class="t">)</span>  <span class="cm"># True</span></div>
+        </div>
+        <h2>Dict Methods</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">d</span> <span class="t">= {</span><span class="s">"a"</span><span class="t">: </span><span class="n">1</span><span class="t">, </span><span class="s">"b"</span><span class="t">: </span><span class="n">2</span><span class="t">, </span><span class="s">"c"</span><span class="t">: </span><span class="n">3</span><span class="t">}</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">d</span><span class="t">.</span><span class="fn">keys</span><span class="t">())</span>     <span class="cm"># dict_keys(['a', 'b', 'c'])</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">d</span><span class="t">.</span><span class="fn">values</span><span class="t">())</span>   <span class="cm"># dict_values([1, 2, 3])</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">d</span><span class="t">.</span><span class="fn">items</span><span class="t">())</span>    <span class="cm"># dict_items([('a',1),('b',2),('c',3)])</span>
+
+<span class="v">d2</span> <span class="t">= {</span><span class="s">"d"</span><span class="t">: </span><span class="n">4</span><span class="t">}</span>
+<span class="v">d</span><span class="t">.</span><span class="fn">update</span><span class="t">(</span><span class="v">d2</span><span class="t">)</span>       <span class="cm"># Merge d2 into d</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="6-4" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 6-5 Sets -->
+    <div class="lesson-page" id="lesson-6-5">
+      <div class="lesson-tag">Module 6 · Lesson 5</div>
+      <h1 class="lesson-title">Sets</h1>
+      <p class="lesson-intro">A set is an unordered collection of unique items. Perfect for removing duplicates and testing membership fast.</p>
+      <div class="block">
+        <h2>Creating and Using Sets</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">colours</span> <span class="t">= {</span><span class="s">"red"</span><span class="t">, </span><span class="s">"blue"</span><span class="t">, </span><span class="s">"green"</span><span class="t">, </span><span class="s">"blue"</span><span class="t">}</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">colours</span><span class="t">)</span>  <span class="cm"># {'red', 'blue', 'green'} — duplicate removed</span>
+
+<span class="v">colours</span><span class="t">.</span><span class="fn">add</span><span class="t">(</span><span class="s">"yellow"</span><span class="t">)</span>
+<span class="v">colours</span><span class="t">.</span><span class="fn">remove</span><span class="t">(</span><span class="s">"red"</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"blue"</span> <span class="kw">in</span> <span class="v">colours</span><span class="t">)</span>  <span class="cm"># True — O(1) lookup!</span>
+
+<span class="cm"># Remove duplicates from a list</span>
+<span class="v">dupes</span> <span class="t">= [</span><span class="n">1</span><span class="t">, </span><span class="n">2</span><span class="t">, </span><span class="n">2</span><span class="t">, </span><span class="n">3</span><span class="t">, </span><span class="n">3</span><span class="t">, </span><span class="n">3</span><span class="t">]</span>
+<span class="v">unique</span> <span class="t">= </span><span class="fn">list</span><span class="t">(</span><span class="fn">set</span><span class="t">(</span><span class="v">dupes</span><span class="t">))</span>  <span class="cm"># [1, 2, 3]</span></div>
+        </div>
+        <h2>Set Operations (Maths!)</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">a</span> <span class="t">= {</span><span class="n">1</span><span class="t">, </span><span class="n">2</span><span class="t">, </span><span class="n">3</span><span class="t">, </span><span class="n">4</span><span class="t">}</span>
+<span class="v">b</span> <span class="t">= {</span><span class="n">3</span><span class="t">, </span><span class="n">4</span><span class="t">, </span><span class="n">5</span><span class="t">, </span><span class="n">6</span><span class="t">}</span>
+
+<span class="fn">print</span><span class="t">(</span><span class="v">a</span> <span class="t">| </span><span class="v">b</span><span class="t">)</span>   <span class="cm"># {1,2,3,4,5,6} — union</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">a</span> <span class="t">&amp; </span><span class="v">b</span><span class="t">)</span>   <span class="cm"># {3, 4}        — intersection</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">a</span> <span class="t">- </span><span class="v">b</span><span class="t">)</span>   <span class="cm"># {1, 2}        — difference</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">a</span> <span class="t">^ </span><span class="v">b</span><span class="t">)</span>   <span class="cm"># {1,2,5,6}     — symmetric difference</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="6-5" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 6-6 List Comprehensions -->
+    <div class="lesson-page" id="lesson-6-6">
+      <div class="lesson-tag">Module 6 · Lesson 6</div>
+      <h1 class="lesson-title">List Comprehensions</h1>
+      <p class="lesson-intro">List comprehensions let you create new lists in a single, readable line. They're one of Python's most elegant features.</p>
+      <div class="block">
+        <h2>Basic Syntax</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># [expression for item in iterable]</span>
+
+<span class="cm"># Old way — loop</span>
+<span class="v">squares</span> <span class="t">= []</span>
+<span class="kw">for</span> <span class="v">x</span> <span class="kw">in</span> <span class="fn">range</span><span class="t">(</span><span class="n">1</span><span class="t">, </span><span class="n">6</span><span class="t">):</span>
+<span class="t">    </span><span class="v">squares</span><span class="t">.</span><span class="fn">append</span><span class="t">(</span><span class="v">x</span><span class="t">**</span><span class="n">2</span><span class="t">)</span>
+
+<span class="cm"># List comprehension — same result, one line!</span>
+<span class="v">squares</span> <span class="t">= [</span><span class="v">x</span><span class="t">**</span><span class="n">2</span> <span class="kw">for</span> <span class="v">x</span> <span class="kw">in</span> <span class="fn">range</span><span class="t">(</span><span class="n">1</span><span class="t">, </span><span class="n">6</span><span class="t">)]</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">squares</span><span class="t">)</span>  <span class="cm"># [1, 4, 9, 16, 25]</span>
+
+<span class="cm"># With a condition</span>
+<span class="v">evens</span> <span class="t">= [</span><span class="v">x</span> <span class="kw">for</span> <span class="v">x</span> <span class="kw">in</span> <span class="fn">range</span><span class="t">(</span><span class="n">1</span><span class="t">, </span><span class="n">11</span><span class="t">) </span><span class="kw">if</span> <span class="v">x</span> <span class="t">% </span><span class="n">2</span> <span class="t">== </span><span class="n">0</span><span class="t">]</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">evens</span><span class="t">)</span>   <span class="cm"># [2, 4, 6, 8, 10]</span>
+
+<span class="cm"># Transform strings</span>
+<span class="v">words</span> <span class="t">= [</span><span class="s">"hello"</span><span class="t">, </span><span class="s">"world"</span><span class="t">, </span><span class="s">"python"</span><span class="t">]</span>
+<span class="v">upper</span> <span class="t">= [</span><span class="v">w</span><span class="t">.</span><span class="fn">upper</span><span class="t">() </span><span class="kw">for</span> <span class="v">w</span> <span class="kw">in</span> <span class="v">words</span><span class="t">]</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">upper</span><span class="t">)</span>   <span class="cm"># ['HELLO', 'WORLD', 'PYTHON']</span>
+
+<span class="cm"># Dict comprehension</span>
+<span class="v">sq_dict</span> <span class="t">= {</span><span class="v">x</span><span class="t">: </span><span class="v">x</span><span class="t">**</span><span class="n">2</span> <span class="kw">for</span> <span class="v">x</span> <span class="kw">in</span> <span class="fn">range</span><span class="t">(</span><span class="n">1</span><span class="t">, </span><span class="n">6</span><span class="t">)}</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">sq_dict</span><span class="t">)</span> <span class="cm"># {1:1, 2:4, 3:9, 4:16, 5:25}</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="6-6" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 6-7 Nested -->
+    <div class="lesson-page" id="lesson-6-7">
+      <div class="lesson-tag">Module 6 · Lesson 7</div>
+      <h1 class="lesson-title">Nested Data Structures</h1>
+      <p class="lesson-intro">Real-world data is often complex — lists of dicts, dicts of lists, and deeper nesting. Python handles it naturally.</p>
+      <div class="block">
+        <h2>List of Dicts (Common Pattern)</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">students</span> <span class="t">= [</span>
+<span class="t">    {</span><span class="s">"name"</span><span class="t">: </span><span class="s">"Alice"</span><span class="t">, </span><span class="s">"score"</span><span class="t">: </span><span class="n">92</span><span class="t">},</span>
+<span class="t">    {</span><span class="s">"name"</span><span class="t">: </span><span class="s">"Bob"</span><span class="t">,   </span><span class="s">"score"</span><span class="t">: </span><span class="n">78</span><span class="t">},</span>
+<span class="t">    {</span><span class="s">"name"</span><span class="t">: </span><span class="s">"Charlie"</span><span class="t">, </span><span class="s">"score"</span><span class="t">: </span><span class="n">85</span><span class="t">},</span>
+<span class="t">]</span>
+
+<span class="cm"># Access</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">students</span><span class="t">[</span><span class="n">0</span><span class="t">][</span><span class="s">"name"</span><span class="t">])</span>  <span class="cm"># Alice</span>
+
+<span class="cm"># Loop through</span>
+<span class="kw">for</span> <span class="v">s</span> <span class="kw">in</span> <span class="v">students</span><span class="t">:</span>
+<span class="t">    </span><span class="fn">print</span><span class="t">(</span><span class="s">f"</span><span class="p">{s['name']}</span><span class="s">: </span><span class="p">{s['score']}</span><span class="s">"</span><span class="t">)</span>
+
+<span class="cm"># Sort by score</span>
+<span class="v">students</span><span class="t">.</span><span class="fn">sort</span><span class="t">(</span><span class="v">key</span><span class="t">=</span><span class="kw">lambda</span> <span class="v">s</span><span class="t">: </span><span class="v">s</span><span class="t">[</span><span class="s">"score"</span><span class="t">], </span><span class="v">reverse</span><span class="t">=</span><span class="kw">True</span><span class="t">)</span>
+
+<span class="cm"># Filter — only students with score >= 85</span>
+<span class="v">top</span> <span class="t">= [</span><span class="v">s</span> <span class="kw">for</span> <span class="v">s</span> <span class="kw">in</span> <span class="v">students</span> <span class="kw">if</span> <span class="v">s</span><span class="t">[</span><span class="s">"score"</span><span class="t">] &gt;= </span><span class="n">85</span><span class="t">]</span></div>
+        </div>
+        <h2>Dict of Lists</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">school</span> <span class="t">= {</span>
+<span class="t">    </span><span class="s">"Class A"</span><span class="t">: [</span><span class="s">"Alice"</span><span class="t">, </span><span class="s">"Bob"</span><span class="t">],</span>
+<span class="t">    </span><span class="s">"Class B"</span><span class="t">: [</span><span class="s">"Charlie"</span><span class="t">, </span><span class="s">"Diana"</span><span class="t">],</span>
+<span class="t">}</span>
+<span class="v">school</span><span class="t">[</span><span class="s">"Class A"</span><span class="t">].</span><span class="fn">append</span><span class="t">(</span><span class="s">"Eve"</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">school</span><span class="t">[</span><span class="s">"Class A"</span><span class="t">])</span>  <span class="cm"># ['Alice', 'Bob', 'Eve']</span></div>
+        </div>
+      </div>
+      <div class="callout tip">
+        <div><div class="callout-head">🎉 Module 6 Complete!</div><p>You now know Python's core data structures — lists, tuples, dicts, sets, and comprehensions. These form the foundation of almost every Python program. Module 7 goes deep on strings.</p></div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="6-7" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Module 7 →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>

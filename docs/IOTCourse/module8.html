@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Module 8: IoT Security — AlCoders IoT Course</title>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="breadcrumb"><span id="breadcrumb-text">Module 8</span></div>
+      <div class="topbar-nav">
+        <button class="nav-btn" onclick="prevLesson()">&#8592; Prev</button>
+        <button class="nav-btn" onclick="nextLesson()">Next &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 8-1 -->
+    <div class="lesson-page active" id="lesson-8-1">
+      <span class="lesson-tag">Module 8 · Lesson 1</span>
+      <h1 class="lesson-title">Why IoT Security Matters</h1>
+      <p class="lesson-intro">IoT devices sit at the intersection of the physical and digital worlds. A compromised thermostat can unlock doors. A hacked industrial sensor can shut down a factory. Security is not optional.</p>
+
+      <div class="block">
+        <h3>The IoT Attack Surface</h3>
+        <p>Every IoT device is potentially an entry point. The attack surface includes:</p>
+        <div class="component-grid">
+          <div class="component-card"><strong>Device Firmware</strong><br/>Unencrypted or unverified firmware can be replaced with malicious code</div>
+          <div class="component-card"><strong>Network Traffic</strong><br/>Unencrypted MQTT or HTTP traffic can be intercepted (man-in-the-middle)</div>
+          <div class="component-card"><strong>Cloud APIs</strong><br/>Weak API keys or no authentication allows anyone to inject fake data</div>
+          <div class="component-card"><strong>Physical Access</strong><br/>Devices in public places can be extracted, probed, or cloned</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Real-World IoT Attacks</h3>
+        <table>
+          <thead><tr><th>Attack</th><th>What Happened</th><th>Lesson</th></tr></thead>
+          <tbody>
+            <tr><td>Mirai Botnet (2016)</td><td>100,000+ cameras and routers hijacked using default passwords to DDoS major websites</td><td>Change default credentials!</td></tr>
+            <tr><td>Casino Fish Tank (2017)</td><td>Hackers entered a casino network through an internet-connected aquarium thermometer</td><td>Isolate IoT on separate networks</td></tr>
+            <tr><td>Jeep Cherokee (2015)</td><td>Researchers remotely controlled a moving car via its cellular-connected infotainment system</td><td>Air-gap safety-critical systems</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="block">
+        <h3>Security Principles for IoT</h3>
+        <ul>
+          <li><strong>Least privilege</strong> — devices should only have access to what they need</li>
+          <li><strong>Defence in depth</strong> — multiple layers: encryption + auth + network segmentation</li>
+          <li><strong>Fail secure</strong> — if something goes wrong, default to the safe state</li>
+          <li><strong>Update regularly</strong> — firmware updates patch newly discovered vulnerabilities</li>
+        </ul>
+      </div>
+
+      <div class="callout danger">
+        <div class="callout-head">Default Passwords Kill</div>
+        The number one IoT security mistake is leaving default usernames and passwords unchanged. "admin/admin" and "root/root" are the first credentials every attacker tries.
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">The Mirai Botnet attack succeeded primarily because of which security failure?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">Devices had no internet connection</div>
+          <div class="quiz-opt" data-correct>Devices were using default factory passwords</div>
+          <div class="quiz-opt">Attackers physically stole the devices</div>
+          <div class="quiz-opt">The cloud platform was unencrypted</div>
+        </div>
+        <div class="quiz-feedback" data-ok="Correct! Mirai exploited the fact that millions of devices still used factory-default credentials like admin/admin." data-bad="Review the Real-World IoT Attacks table — specifically the Mirai Botnet row."></div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 8-2 -->
+    <div class="lesson-page" id="lesson-8-2">
+      <span class="lesson-tag">Module 8 · Lesson 2</span>
+      <h1 class="lesson-title">Common IoT Vulnerabilities</h1>
+      <p class="lesson-intro">Understanding how attacks happen is the first step to preventing them. The OWASP IoT Top 10 catalogues the most common weaknesses found in real IoT products.</p>
+
+      <div class="block">
+        <h3>OWASP IoT Top 10 (Simplified)</h3>
+        <table>
+          <thead><tr><th>#</th><th>Vulnerability</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Weak / default passwords</td><td>admin:admin on router</td></tr>
+            <tr><td>2</td><td>Insecure network services</td><td>Telnet open on port 23</td></tr>
+            <tr><td>3</td><td>Insecure ecosystem interfaces</td><td>Unauthenticated REST API</td></tr>
+            <tr><td>4</td><td>Lack of secure update mechanism</td><td>Firmware downloaded over plain HTTP</td></tr>
+            <tr><td>5</td><td>Outdated components</td><td>Linux kernel 5 years old</td></tr>
+            <tr><td>6</td><td>Insufficient privacy protection</td><td>Location data sent unencrypted</td></tr>
+            <tr><td>7</td><td>Insecure data transfer</td><td>MQTT without TLS</td></tr>
+            <tr><td>8</td><td>Lack of physical hardening</td><td>UART debug port exposed</td></tr>
+            <tr><td>9</td><td>Insecure default settings</td><td>All ports open by default</td></tr>
+            <tr><td>10</td><td>Lack of physical hardening</td><td>Device runs as root</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="block">
+        <h3>Man-in-the-Middle Attack</h3>
+        <p>When your device sends data over plain HTTP or unencrypted MQTT, anyone on the same network can intercept and read it — or inject fake data.</p>
+        <p>The fix is <strong>TLS (Transport Layer Security)</strong>, the same encryption used by HTTPS websites. With TLS, even if traffic is intercepted, it can't be read or modified.</p>
+      </div>
+
+      <div class="block">
+        <h3>Hardcoded Credentials in Code</h3>
+        <p>Never hardcode passwords directly in source code that might be shared:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino — BAD Practice</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm">// ❌ BAD: password visible in source code</span>
+<span class="kw">const char</span>* <span class="v">password</span> = <span class="a">"mySecretPass123"</span>;
+
+<span class="cm">// ✅ BETTER: store in a separate file not committed to Git</span>
+<span class="t">#include </span><span class="v">"secrets.h"</span>  <span class="cm">// listed in .gitignore</span>
+<span class="cm">// secrets.h contains: const char* password = "mySecretPass123";</span></div>
+        </div>
+      </div>
+
+      <div class="callout warn">
+        <div class="callout-head">Don't Upload API Keys to GitHub</div>
+        Add <code>secrets.h</code> to your <code>.gitignore</code> file. Thousands of API keys are accidentally exposed on GitHub every day, and bots scan for them within minutes.
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">What does TLS protect against in IoT communications?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">Physical theft of the device</div>
+          <div class="quiz-opt">Firmware bugs</div>
+          <div class="quiz-opt" data-correct>Interception and tampering of data in transit (man-in-the-middle attacks)</div>
+          <div class="quiz-opt">Weak passwords on the cloud platform</div>
+        </div>
+        <div class="quiz-feedback" data-ok="Correct! TLS encrypts traffic in transit, so intercepted packets can't be read or forged." data-bad="TLS is specifically about protecting data as it travels over the network."></div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 8-3 -->
+    <div class="lesson-page" id="lesson-8-3">
+      <span class="lesson-tag">Module 8 · Lesson 3</span>
+      <h1 class="lesson-title">Encryption Basics for IoT</h1>
+      <p class="lesson-intro">Encryption scrambles data so only the intended recipient can read it. Two forms matter most for IoT: encryption in transit (TLS) and encryption at rest (AES on storage).</p>
+
+      <div class="block">
+        <h3>Symmetric vs Asymmetric Encryption</h3>
+        <table>
+          <thead><tr><th></th><th>Symmetric (AES)</th><th>Asymmetric (RSA / ECC)</th></tr></thead>
+          <tbody>
+            <tr><td>Keys</td><td>One shared secret key</td><td>Public key + private key pair</td></tr>
+            <tr><td>Speed</td><td>Very fast</td><td>Slower</td></tr>
+            <tr><td>Use in IoT</td><td>Encrypting stored data</td><td>TLS handshake, certificates</td></tr>
+            <tr><td>Problem</td><td>How to share the key securely?</td><td>Computationally heavier</td></tr>
+          </tbody>
+        </table>
+        <p>TLS actually uses both: asymmetric encryption to securely exchange a shared key, then symmetric (AES) for the actual data — best of both worlds.</p>
+      </div>
+
+      <div class="block">
+        <h3>MQTT over TLS (MQTTS)</h3>
+        <p>To use encrypted MQTT on ESP32, connect to port <strong>8883</strong> instead of 1883, and provide the server's CA certificate:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">#include </span><span class="v">&lt;WiFiClientSecure.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;PubSubClient.h&gt;</span>
+
+<span class="kw">const char</span>* <span class="v">caCert</span> = R<span class="a">"EOF(
+-----BEGIN CERTIFICATE-----
+... (paste your CA cert here) ...
+-----END CERTIFICATE-----
+)EOF"</span>;
+
+<span class="t">WiFiClientSecure</span> secureClient;
+<span class="t">PubSubClient</span>     mqtt(secureClient);
+
+<span class="kw">void</span> <span class="t">setup</span>() {
+  secureClient.setCACert(<span class="v">caCert</span>);
+  mqtt.setServer(<span class="a">"your-broker.com"</span>, <span class="p">8883</span>); <span class="cm">// TLS port</span>
+  mqtt.connect(<span class="a">"esp32-device"</span>);
+}</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Encrypting Stored Data with AES</h3>
+        <p>If you log sensitive data to an SD card, consider encrypting it. The <strong>AESLib</strong> Arduino library provides AES-128/256 encryption:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">#include </span><span class="v">&lt;AESLib.h&gt;</span>
+
+<span class="t">AESLib</span> aesLib;
+<span class="kw">byte</span> aesKey[] = {<span class="p">0x00</span>, <span class="p">0x01</span>, <span class="p">0x02</span>, ..., <span class="p">0x0F</span>}; <span class="cm">// 16-byte key</span>
+<span class="kw">byte</span> aesIV[]  = {<span class="p">0x00</span>, <span class="p">0x00</span>, <span class="p">0x00</span>, ..., <span class="p">0x00</span>}; <span class="cm">// 16-byte IV</span>
+
+<span class="kw">char</span> plaintext[]  = <span class="a">"Temp=28.5,Hum=65"</span>;
+<span class="kw">char</span> ciphertext[<span class="p">32</span>];
+aesLib.encrypt((<span class="kw">byte</span>*)plaintext, strlen(plaintext), (<span class="kw">byte</span>*)ciphertext, aesKey, <span class="p">128</span>, aesIV);</div>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <div class="callout-head">HTTPS is Already Encrypted</div>
+        When you use HTTPClient to call <code>https://</code> URLs in Arduino, you're already using TLS. Always prefer <code>https://</code> over <code>http://</code> for any API calls — especially those sending sensitive data.
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">Which port does MQTT over TLS (MQTTS) typically use?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">80</div>
+          <div class="quiz-opt">1883</div>
+          <div class="quiz-opt" data-correct>8883</div>
+          <div class="quiz-opt">443</div>
+        </div>
+        <div class="quiz-feedback" data-ok="Correct! Standard MQTT uses port 1883; MQTTS (encrypted) uses port 8883." data-bad="There's a standard port for encrypted MQTT — check the code example above."></div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 8-4 -->
+    <div class="lesson-page" id="lesson-8-4">
+      <span class="lesson-tag">Module 8 · Lesson 4</span>
+      <h1 class="lesson-title">Secure Firmware & OTA Updates</h1>
+      <p class="lesson-intro">Once a device is deployed, how do you fix security vulnerabilities? Over-the-Air (OTA) updates let you push new firmware without physical access — but the update mechanism itself must be secured.</p>
+
+      <div class="block">
+        <h3>Why OTA Updates Matter</h3>
+        <ul>
+          <li>Security patches can be pushed without recalling devices</li>
+          <li>New features can be added after deployment</li>
+          <li>Bug fixes reach every device simultaneously</li>
+          <li>Physical access to thousands of deployed devices is impractical</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Basic OTA Update on ESP32</h3>
+        <p>The Arduino <code>ArduinoOTA</code> library lets your ESP32 accept firmware uploads over Wi-Fi from the Arduino IDE:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">#include </span><span class="v">&lt;ArduinoOTA.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;WiFi.h&gt;</span>
+
+<span class="kw">void</span> <span class="t">setup</span>() {
+  WiFi.begin(<span class="a">"SSID"</span>, <span class="a">"PASS"</span>);
+  <span class="kw">while</span> (WiFi.status() != <span class="v">WL_CONNECTED</span>) delay(<span class="p">500</span>);
+
+  ArduinoOTA.setPassword(<span class="a">"ota_secret_pw"</span>); <span class="cm">// protect OTA access</span>
+  ArduinoOTA.setHostname(<span class="a">"my-iot-device"</span>);
+  ArduinoOTA.begin();
+}
+
+<span class="kw">void</span> <span class="t">loop</span>() {
+  ArduinoOTA.handle(); <span class="cm">// must call in loop to check for updates</span>
+  <span class="cm">// ... rest of your code</span>
+}</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Secure OTA Best Practices</h3>
+        <table>
+          <thead><tr><th>Practice</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td>Always set an OTA password</td><td>Without it, anyone on the network can flash your device</td></tr>
+            <tr><td>Verify firmware signatures</td><td>Prevents fake firmware being installed</td></tr>
+            <tr><td>Use HTTPS for download</td><td>Prevents man-in-the-middle replacing the firmware file</td></tr>
+            <tr><td>Roll back on failure</td><td>Keep a backup partition; revert if new firmware crashes</td></tr>
+            <tr><td>Version check before update</td><td>Don't downgrade to older (less secure) firmware</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout danger">
+        <div class="callout-head">Unsigned Firmware is Dangerous</div>
+        If your OTA update doesn't verify a cryptographic signature, an attacker who controls the network can serve malicious firmware to your device. For production devices, always sign firmware with a private key and verify on-device before applying.
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">Why is it important to set a password for ArduinoOTA?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">OTA requires a password to connect to Wi-Fi</div>
+          <div class="quiz-opt" data-correct>Without a password, anyone on the same network can reflash the device with any firmware</div>
+          <div class="quiz-opt">The Arduino IDE demands it</div>
+          <div class="quiz-opt">It encrypts the Wi-Fi connection</div>
+        </div>
+        <div class="quiz-feedback" data-ok="Correct! An unprotected OTA endpoint is a serious security hole — any device on the LAN could upload malicious firmware." data-bad="Think about who could abuse an unprotected OTA endpoint on a shared network."></div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 8-5 -->
+    <div class="lesson-page" id="lesson-8-5">
+      <span class="lesson-tag">Module 8 · Lesson 5</span>
+      <h1 class="lesson-title">IoT Security Best Practices</h1>
+      <p class="lesson-intro">Security isn't a single feature — it's a mindset applied throughout design, development, and deployment. This lesson consolidates the essential habits every IoT builder should follow.</p>
+
+      <div class="block">
+        <h3>The IoT Security Checklist</h3>
+        <table>
+          <thead><tr><th>Category</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td>Credentials</td><td>Change all default passwords. Use strong, unique passwords.</td></tr>
+            <tr><td>Credentials</td><td>Never hardcode passwords in source code. Use secrets.h + .gitignore.</td></tr>
+            <tr><td>Transport</td><td>Use HTTPS / MQTTS. Never plain HTTP or unencrypted MQTT for sensitive data.</td></tr>
+            <tr><td>Updates</td><td>Implement OTA updates with a password and firmware signature.</td></tr>
+            <tr><td>Network</td><td>Put IoT devices on a separate VLAN/guest network, isolated from computers.</td></tr>
+            <tr><td>Ports</td><td>Close all unused ports. Only open what's needed.</td></tr>
+            <tr><td>Data</td><td>Collect only the data you need. Delete when no longer needed.</td></tr>
+            <tr><td>Physical</td><td>Disable debug ports (UART, JTAG) in production firmware.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="block">
+        <h3>Network Segmentation</h3>
+        <p>One of the most effective IoT security measures costs nothing: put your IoT devices on a separate Wi-Fi network (most home routers have a "guest network" feature).</p>
+        <ul>
+          <li>If an IoT device is compromised, attackers can't reach your laptop or NAS</li>
+          <li>Limits the blast radius of any single breach</li>
+          <li>Easier to monitor unusual traffic from a dedicated IoT VLAN</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Privacy by Design</h3>
+        <p>Data minimisation — collecting only what you need — is both a security practice and a legal requirement under regulations like GDPR. Before adding a sensor, ask:</p>
+        <ul>
+          <li>Do we actually need this data?</li>
+          <li>How long should we keep it?</li>
+          <li>Who else can access it?</li>
+          <li>What happens if it leaks?</li>
+        </ul>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-head">Threat Modelling</div>
+        Before building any IoT system, spend 15 minutes asking: "Who might want to attack this? What could they gain? What would it cost them?" This simple exercise surfaces the biggest risks before any code is written.
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">What is network segmentation in the context of IoT security?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">Splitting data into encrypted segments</div>
+          <div class="quiz-opt">Using multiple cloud platforms simultaneously</div>
+          <div class="quiz-opt" data-correct>Placing IoT devices on a separate network, isolated from computers and other sensitive systems</div>
+          <div class="quiz-opt">Dividing MQTT messages into smaller packets</div>
+        </div>
+        <div class="quiz-feedback" data-ok="Correct! Isolating IoT devices on their own VLAN or guest network limits the damage if any single device is compromised." data-bad="Network segmentation is about physical/logical network isolation, not data splitting."></div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+  </div><!-- .main -->
+</div><!-- .layout -->
+<script src="course.js"></script>
+</body>
+</html>

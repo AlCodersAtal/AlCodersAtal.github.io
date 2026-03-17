@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlCoders — Module 3: Arduino Fundamentals</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<div class="progress-bar"></div>
+<div class="layout">
+<aside class="sidebar"></aside>
+<main class="main">
+<div class="topbar">
+  <div class="breadcrumb">Module 03 › <strong>Meet the Arduino Uno</strong></div>
+  <div class="topbar-nav"><button class="nav-btn" onclick="prevLesson()">← Prev</button><button class="nav-btn primary" onclick="nextLesson()">Next →</button></div>
+</div>
+
+<!-- L3-1 -->
+<div class="lesson-page" id="lesson-3-1">
+  <div class="lesson-tag">Module 03 · Lesson 1</div>
+  <h1 class="lesson-title">Meet the Arduino Uno</h1>
+  <p class="lesson-intro">The Arduino Uno is the most popular microcontroller board in the world — and the brain of your robot.</p>
+  <div class="block">
+    <h2>Key Parts of the Arduino Uno</h2>
+    <table>
+      <thead><tr><th>Part</th><th>What It Is</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ATmega328P chip</strong></td><td>The microcontroller — where your code runs at 16 MHz</td></tr>
+        <tr><td><strong>Digital Pins 0–13</strong></td><td>Can be INPUT or OUTPUT — read sensors, drive LEDs &amp; motors</td></tr>
+        <tr><td><strong>Analog Pins A0–A5</strong></td><td>Read 0–1023 values from sensors (0–5V range)</td></tr>
+        <tr><td><strong>PWM Pins ~3,5,6,9,10,11</strong></td><td>Simulate analog output — motor speed &amp; servo control</td></tr>
+        <tr><td><strong>5V &amp; 3.3V pins</strong></td><td>Power output rails for connected components</td></tr>
+        <tr><td><strong>GND pins</strong></td><td>Ground — the reference for all voltages</td></tr>
+        <tr><td><strong>USB Port</strong></td><td>Upload code from your computer, also powers the board</td></tr>
+        <tr><td><strong>VIN / Barrel Jack</strong></td><td>Power from a battery (7–12V recommended)</td></tr>
+        <tr><td><strong>Reset Button</strong></td><td>Restarts your sketch from the beginning</td></tr>
+      </tbody>
+    </table>
+    <div class="callout warn"><div class="callout-head">⚠️ Current Limits</div>Each digital pin can safely provide <strong>40mA max</strong>. All pins combined should not exceed 200mA. This is why motors must always use a separate driver board.</div>
+  </div>
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('3-2')">Next: Arduino IDE Setup →</button></div>
+</div>
+
+<!-- L3-2 -->
+<div class="lesson-page" id="lesson-3-2">
+  <div class="lesson-tag">Module 03 · Lesson 2</div>
+  <h1 class="lesson-title">Arduino IDE Setup</h1>
+  <p class="lesson-intro">The Arduino IDE is your coding environment — where you write, verify, and upload sketches to the board.</p>
+  <div class="block">
+    <h2>Installation Steps</h2>
+    <ol>
+      <li>Go to <code>arduino.cc/en/software</code> and download Arduino IDE 2.x for your operating system.</li>
+      <li>Run the installer with default settings. Accept any USB driver prompts on Windows.</li>
+      <li>Connect your Arduino Uno via USB cable.</li>
+      <li>In the IDE: <strong>Tools → Board → Arduino AVR Boards → Arduino Uno</strong>.</li>
+      <li>Go to <strong>Tools → Port</strong> and select your COM port (Windows: COM3/COM4 · Mac: /dev/cu.usbmodem…).</li>
+      <li>Open <strong>File → Examples → 01.Basics → Blink</strong> and click the Upload arrow (→).</li>
+    </ol>
+    <p>If the onboard LED next to pin 13 starts blinking — <strong>your setup is working!</strong></p>
+    <div class="callout tip"><div class="callout-head">💡 Port Not Showing?</div>Many cheap USB cables are charge-only and carry no data. Try a different cable. If still stuck, install the CH340 driver (needed for some Arduino clone boards).</div>
+    <hr class="divider">
+    <h2>IDE Anatomy</h2>
+    <ul>
+      <li><strong>Verify (✓)</strong> — Compiles your code and checks for errors. Does not upload.</li>
+      <li><strong>Upload (→)</strong> — Compiles and sends code to the board.</li>
+      <li><strong>Serial Monitor</strong> — Shows output from <code>Serial.print()</code>. Essential for debugging.</li>
+      <li><strong>Serial Plotter</strong> — Graphs numeric sensor data in real time.</li>
+    </ul>
+  </div>
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('3-3')">Next: Digital Pins &amp; Blink →</button></div>
+</div>
+
+<!-- L3-3 -->
+<div class="lesson-page" id="lesson-3-3">
+  <div class="lesson-tag">Module 03 · Lesson 3</div>
+  <h1 class="lesson-title">Digital Pins &amp; Blink</h1>
+  <p class="lesson-intro">Digital pins are binary — HIGH (5V) or LOW (0V). Controlling them is how you switch things on and off.</p>
+  <div class="block">
+    <h2>The Blink Sketch — Explained Line by Line</h2>
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="p">#define</span> LED_PIN <span class="v">13</span>   <span class="cm">// Onboard LED is on pin 13</span>
+
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="cm">// Runs ONCE when the board powers on</span>
+  <span class="a">pinMode</span>(LED_PIN, OUTPUT);
+}
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="cm">// Runs FOREVER in a cycle</span>
+  <span class="a">digitalWrite</span>(LED_PIN, HIGH);  <span class="cm">// Turn LED ON  (5V)</span>
+  <span class="a">delay</span>(<span class="v">1000</span>);                   <span class="cm">// Wait 1 second</span>
+  <span class="a">digitalWrite</span>(LED_PIN, LOW);   <span class="cm">// Turn LED OFF (0V)</span>
+  <span class="a">delay</span>(<span class="v">1000</span>);
+}</div>
+    </div>
+    <ul>
+      <li><code>setup()</code> — Runs <strong>once</strong> on power-on. Configure pins and start Serial here.</li>
+      <li><code>loop()</code> — Runs <strong>forever</strong>. Your main robot logic lives here.</li>
+      <li><code>pinMode()</code> — Tells a pin whether it's an INPUT or OUTPUT.</li>
+      <li><code>digitalWrite()</code> — Sets a pin HIGH (5V) or LOW (0V).</li>
+      <li><code>delay(ms)</code> — Pauses execution for the given number of milliseconds.</li>
+    </ul>
+    <div class="callout tip"><div class="callout-head">💡 Challenge: SOS Blink</div>Modify the sketch to blink SOS in Morse code: 3 short (200ms on) · 3 long (600ms on) · 3 short (200ms on). Add 400ms gaps between groups.</div>
+  </div>
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('3-4')">Next: Analog Pins &amp; Serial Monitor →</button></div>
+</div>
+
+<!-- L3-4 -->
+<div class="lesson-page" id="lesson-3-4">
+  <div class="lesson-tag">Module 03 · Lesson 4</div>
+  <h1 class="lesson-title">Analog Pins &amp; Serial Monitor</h1>
+  <p class="lesson-intro">Analog pins read continuous values — like light levels, temperature, or potentiometer position.</p>
+  <div class="block">
+    <h2>analogRead()</h2>
+    <p>The analog pins (A0–A5) convert voltage (0–5V) into a number from <strong>0 to 1023</strong> using a built-in 10-bit ADC.</p>
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">Arduino C++</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+      <div class="code-body"><span class="kw">void</span> <span class="a">setup</span>() {
+  Serial.<span class="a">begin</span>(<span class="v">9600</span>);  <span class="cm">// Start Serial communication at 9600 baud</span>
+}
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="kw">int</span> raw = <span class="a">analogRead</span>(A0);              <span class="cm">// Read pin A0 → 0 to 1023</span>
+  <span class="kw">float</span> voltage = raw * (<span class="v">5.0</span> / <span class="v">1023.0</span>);  <span class="cm">// Convert to volts</span>
+
+  Serial.<span class="a">print</span>(<span class="t">"Raw: "</span>);
+  Serial.<span class="a">print</span>(raw);
+  Serial.<span class="a">print</span>(<span class="t">"  Voltage: "</span>);
+  Serial.<span class="a">println</span>(voltage);
+
+  <span class="a">delay</span>(<span class="v">500</span>);
+}</div>
+    </div>
+    <p>Open the Serial Monitor (Ctrl+Shift+M) and set baud rate to <code>9600</code>. You'll see live readings every 500ms.</p>
+    <div class="callout warn"><div class="callout-head">⚠️ Baud Rate Must Match</div>The rate in <code>Serial.begin(9600)</code> must match the Serial Monitor dropdown setting. A mismatch produces garbled output like <code>������</code>.</div>
+    <div class="quiz-box">
+      <h4>Quick Check</h4>
+      <p class="quiz-q">If analogRead() returns 512, what is the approximate voltage on that pin?</p>
+      <div class="quiz-opt" data-correct="false">1.0V</div>
+      <div class="quiz-opt" data-correct="true">2.5V</div>
+      <div class="quiz-opt" data-correct="false">5.0V</div>
+      <div class="quiz-opt" data-correct="false">0V</div>
+      <div class="quiz-feedback" data-ok="✓ Correct! 512/1023 × 5V ≈ 2.5V — exactly half the reference voltage." data-bad="✗ Use: voltage = raw × (5.0/1023.0) = 512 × 0.00489 ≈ 2.5V"></div>
+    </div>
+  </div>
+  <div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><a href="module4.html" class="next-btn">Module 4: Programming →</a></div>
+</div>
+
+</main></div>
+<script src="course.js"></script>
+</body></html>

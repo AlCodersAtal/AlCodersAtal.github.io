@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AlCoders — Module 5: Sensors</title><link rel="stylesheet" href="course.css"></head>
+<body><div class="progress-bar"></div><div class="layout"><aside class="sidebar"></aside><main class="main">
+<div class="topbar"><div class="breadcrumb">Module 05 › <strong>Ultrasonic Sensor</strong></div><div class="topbar-nav"><button class="nav-btn" onclick="prevLesson()">← Prev</button><button class="nav-btn primary" onclick="nextLesson()">Next →</button></div></div>
+
+<div class="lesson-page" id="lesson-5-1">
+<div class="lesson-tag">Module 05 · Lesson 1</div><h1 class="lesson-title">Ultrasonic Distance Sensor (HC-SR04)</h1>
+<p class="lesson-intro">The HC-SR04 is the robot's eyes — it measures distance by sending ultrasonic pulses and timing their echo.</p>
+<div class="block">
+<h2>How It Works</h2>
+<p>Send a 10µs HIGH pulse to <strong>TRIG</strong>. The sensor emits a burst of 40kHz sound. The <strong>ECHO</strong> pin goes HIGH for as long as it takes the sound to travel to an object and return. Distance:</p>
+<div class="code-block"><div class="code-header"><span class="code-lang">Formula</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="code-body">distance_cm = pulse_duration_µs × 0.034 / 2
+<span class="cm">// ÷2 because sound travels TO the object AND BACK</span></div></div>
+<h2>Wiring</h2>
+<table class="wiring"><thead><tr><th>HC-SR04 Pin</th><th>Description</th><th>Connect To</th></tr></thead><tbody>
+<tr><td>VCC</td><td>Power</td><td>Arduino 5V</td></tr>
+<tr><td>GND</td><td>Ground</td><td>Arduino GND</td></tr>
+<tr><td>TRIG</td><td>Trigger pulse output</td><td>Arduino Pin 11</td></tr>
+<tr><td>ECHO</td><td>Echo input (goes HIGH)</td><td>Arduino Pin 12</td></tr>
+</tbody></table>
+<div class="code-block"><div class="code-header"><span class="code-lang">Arduino C++</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="code-body"><span class="p">#define</span> TRIG_PIN <span class="v">11</span>
+<span class="p">#define</span> ECHO_PIN <span class="v">12</span>
+
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="a">pinMode</span>(TRIG_PIN, OUTPUT);
+  <span class="a">pinMode</span>(ECHO_PIN, INPUT);
+  Serial.<span class="a">begin</span>(<span class="v">9600</span>);
+}
+
+<span class="kw">float</span> <span class="a">getDistance</span>() {
+  <span class="a">digitalWrite</span>(TRIG_PIN, LOW);  <span class="a">delayMicroseconds</span>(<span class="v">2</span>);
+  <span class="a">digitalWrite</span>(TRIG_PIN, HIGH); <span class="a">delayMicroseconds</span>(<span class="v">10</span>);
+  <span class="a">digitalWrite</span>(TRIG_PIN, LOW);
+  <span class="kw">long</span> dur = <span class="a">pulseIn</span>(ECHO_PIN, HIGH, <span class="v">30000</span>); <span class="cm">// 30ms timeout</span>
+  <span class="kw">return</span> dur ? dur * <span class="v">0.034</span> / <span class="v">2.0</span> : <span class="v">999</span>;
+}
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  Serial.<span class="a">print</span>(<span class="t">"Distance: "</span>); Serial.<span class="a">print</span>(<span class="a">getDistance</span>()); Serial.<span class="a">println</span>(<span class="t">" cm"</span>);
+  <span class="a">delay</span>(<span class="v">200</span>);
+}</div></div>
+<div class="callout tip"><div class="callout-head">💡 Always Use the Timeout</div>The 30,000µs timeout in <code>pulseIn()</code> prevents your code from freezing forever if no echo returns. Without it, pointing the sensor into open space will hang your program.</div>
+</div>
+<div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('5-2')">Next: IR Sensor →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-5-2">
+<div class="lesson-tag">Module 05 · Lesson 2</div><h1 class="lesson-title">IR Sensor</h1>
+<p class="lesson-intro">IR sensors detect surfaces and edges — perfect for line following and cliff detection.</p>
+<div class="block">
+<p>The module emits infrared light. A light/white surface reflects it → output <code>LOW</code>. A dark surface or gap absorbs it → output <code>HIGH</code>.</p>
+<table class="wiring"><thead><tr><th>IR Module Pin</th><th>Description</th><th>Connect To</th></tr></thead><tbody>
+<tr><td>VCC</td><td>Power</td><td>Arduino 5V</td></tr>
+<tr><td>GND</td><td>Ground</td><td>Arduino GND</td></tr>
+<tr><td>OUT</td><td>Digital output</td><td>Arduino Pin 7</td></tr>
+</tbody></table>
+<div class="code-block"><div class="code-header"><span class="code-lang">Arduino C++</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="code-body"><span class="p">#define</span> IR_PIN <span class="v">7</span>
+
+<span class="kw">void</span> <span class="a">setup</span>() { <span class="a">pinMode</span>(IR_PIN, INPUT); Serial.<span class="a">begin</span>(<span class="v">9600</span>); }
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="kw">if</span> (<span class="a">digitalRead</span>(IR_PIN) == LOW)
+    Serial.<span class="a">println</span>(<span class="t">"Surface detected!"</span>);
+  <span class="a">delay</span>(<span class="v">100</span>);
+}</div></div>
+<div class="callout info"><div class="callout-head">ℹ️ Adjustable Sensitivity</div>Most IR modules have a small blue potentiometer. Turn it with a screwdriver to adjust detection range (typically 0.5–3 cm).</div>
+</div>
+<div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('5-3')">Next: Reading &amp; Interpreting Data →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-5-3">
+<div class="lesson-tag">Module 05 · Lesson 3</div><h1 class="lesson-title">Reading &amp; Interpreting Sensor Data</h1>
+<p class="lesson-intro">Raw sensor data is noisy. Averaging and thresholding make your robot reliable.</p>
+<div class="block">
+<div class="code-block"><div class="code-header"><span class="code-lang">Arduino C++ — Averaging + Two-Level Threshold</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="code-body"><span class="cm">// Average 5 readings for stability</span>
+<span class="kw">float</span> <span class="a">getStableDistance</span>() {
+  <span class="kw">float</span> sum = <span class="v">0</span>;
+  <span class="kw">for</span> (<span class="kw">int</span> i = <span class="v">0</span>; i &lt; <span class="v">5</span>; i++) { sum += <span class="a">getDistance</span>(); <span class="a">delay</span>(<span class="v">10</span>); }
+  <span class="kw">return</span> sum / <span class="v">5</span>;
+}
+
+<span class="kw">const float</span> DANGER  = <span class="v">15.0</span>;  <span class="cm">// cm — stop and avoid</span>
+<span class="kw">const float</span> CAUTION = <span class="v">25.0</span>;  <span class="cm">// cm — slow down</span>
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="kw">float</span> d = <span class="a">getStableDistance</span>();
+  <span class="kw">if</span>      (d &lt; DANGER)  <span class="a">handleObstacle</span>();
+  <span class="kw">else if</span> (d &lt; CAUTION) <span class="a">slowDown</span>();
+  <span class="kw">else</span>                   <span class="a">driveForward</span>(<span class="v">200</span>);
+}</div></div>
+<div class="quiz-box"><h4>Quick Check</h4>
+<p class="quiz-q">Why do we average multiple sensor readings rather than using just one?</p>
+<div class="quiz-opt" data-correct="false">To make the code slower and more predictable</div>
+<div class="quiz-opt" data-correct="true">To reduce noise and get a more reliable value</div>
+<div class="quiz-opt" data-correct="false">Because a single reading is always completely wrong</div>
+<div class="quiz-feedback" data-ok="✓ Correct! Averaging smooths out random noise in sensor readings." data-bad="✗ Sensors have small random errors. Averaging cancels them out over multiple readings."></div>
+</div>
+</div>
+<div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><a href="module6.html" class="next-btn">Module 6: Motors &amp; Movement →</a></div>
+</div>
+
+</main></div><script src="course.js"></script></body></html>

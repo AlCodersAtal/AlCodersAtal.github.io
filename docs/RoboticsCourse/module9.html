@@ -1,0 +1,186 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AlCoders — Module 9: Final Project</title><link rel="stylesheet" href="course.css"></head>
+<body><div class="progress-bar"></div><div class="layout"><aside class="sidebar"></aside><main class="main">
+<div class="topbar"><div class="breadcrumb">Module 09 › <strong>Final Project: Obstacle-Avoiding Robot</strong></div><div class="topbar-nav"><button class="nav-btn" onclick="prevLesson()">← Prev</button><button class="nav-btn primary" onclick="nextLesson()">Next →</button></div></div>
+
+<div class="lesson-page" id="lesson-9-1">
+<div class="lesson-tag">Module 09 · Final Project · Lesson 1</div><h1 class="lesson-title">Project Overview &amp; Planning</h1>
+<p class="lesson-intro">Everything you've learned — electronics, Arduino, sensors, motors, state machines — comes together into one real autonomous robot.</p>
+<div class="block">
+<div class="project-box">
+  <h3>🤖 What You're Building</h3>
+  <p>A servo-scanning obstacle-avoiding robot that navigates freely without human input.</p>
+  <ol class="project-steps">
+    <li>Drives forward autonomously at full speed</li>
+    <li>Detects obstacles with HC-SR04 mounted on SG90 servo</li>
+    <li>Stops and reverses for 500ms when obstacle &lt; 15cm</li>
+    <li>Pans servo left and right to measure open space</li>
+    <li>Turns toward the clearer side</li>
+    <li>Resumes forward driving — forever</li>
+  </ol>
+</div>
+<h2>Bill of Materials</h2>
+<table><thead><tr><th>Component</th><th>Qty</th><th>Approx. Cost</th></tr></thead><tbody>
+<tr><td>Arduino Uno R3</td><td>1</td><td>₹500</td></tr>
+<tr><td>L298N Motor Driver Module</td><td>1</td><td>₹120</td></tr>
+<tr><td>TT Gear Motors with wheels</td><td>2</td><td>₹160</td></tr>
+<tr><td>Caster wheel</td><td>1</td><td>₹40</td></tr>
+<tr><td>2WD Acrylic Chassis Kit</td><td>1</td><td>₹250</td></tr>
+<tr><td>HC-SR04 Ultrasonic Sensor</td><td>1</td><td>₹60</td></tr>
+<tr><td>SG90 Servo Motor</td><td>1</td><td>₹80</td></tr>
+<tr><td>18650 battery holder + batteries</td><td>1</td><td>₹280</td></tr>
+<tr><td>Jumper wires, USB cable</td><td>—</td><td>₹110</td></tr>
+<tr><td><strong>Total</strong></td><td>—</td><td><strong>~₹1,600</strong></td></tr>
+</tbody></table>
+<div class="callout info"><div class="callout-head">ℹ️ Sourcing in India</div>Everything is available on Robu.in, Robocraze, or Amazon India. A bundled "Smart Car Robot Kit" (₹800–1200) often includes most parts cheaper.</div>
+</div>
+<div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('9-2')">Next: Hardware Assembly →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-9-2">
+<div class="lesson-tag">Module 09 · Final Project · Lesson 2</div><h1 class="lesson-title">Hardware Assembly</h1>
+<p class="lesson-intro">Step-by-step assembly. Work slowly — a neat build is a debuggable build.</p>
+<div class="block">
+<ol>
+  <li><strong>Chassis</strong> — Assemble the acrylic frame. Mount TT motors to rear brackets. Attach wheels. Install caster at the front.</li>
+  <li><strong>Mount L298N</strong> — Attach to the top plate. Connect motor wires: Left motor → OUT1/OUT2, Right → OUT3/OUT4.</li>
+  <li><strong>Mount Arduino</strong> — Secure to top plate. Connect a common GND wire between Arduino GND and L298N GND.</li>
+  <li><strong>Servo mount</strong> — Attach SG90 to the front of the chassis using a servo bracket. Mount HC-SR04 to the servo horn facing forward.</li>
+  <li><strong>Battery</strong> — Secure the battery holder underneath or at the rear for low centre of gravity.</li>
+  <li><strong>Wire everything</strong> — Follow the Master Wiring Table from Module 7 exactly. Use short jumper wires. Secure loose cables with a zip tie.</li>
+  <li><strong>Power test (no code yet)</strong> — Connect battery. L298N and Arduino power LEDs should light. If anything smells hot, disconnect immediately and check for short circuits.</li>
+</ol>
+<div class="callout warn"><div class="callout-head">⚠️ Do a Motor Spin Test First</div>Before full assembly, upload a simple motor test sketch to verify each motor spins in the correct direction. Much easier to swap wires before everything is bolted down.</div>
+</div>
+<div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('9-3')">Next: Complete Program →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-9-3">
+<div class="lesson-tag">Module 09 · Final Project · Lesson 3</div><h1 class="lesson-title">The Complete Program</h1>
+<p class="lesson-intro">The full production-ready sketch for your obstacle-avoiding robot. Every line is commented.</p>
+<div class="block">
+<div class="code-block"><div class="code-header"><span class="code-lang">Arduino C++ — Full Robot Sketch</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+<div class="code-body"><span class="cm">// ═══════════════════════════════════════════════════
+//  AlCoders ATL — Obstacle-Avoiding Robot
+//  Module 9 Final Project
+// ═══════════════════════════════════════════════════</span>
+
+<span class="p">#include</span> <span class="t">&lt;Servo.h&gt;</span>
+
+<span class="cm">// ── Pin Definitions ──────────────────────────────</span>
+<span class="p">#define</span> IN1  <span class="v">2</span>   <span class="p">#define</span> IN2  <span class="v">3</span>
+<span class="p">#define</span> IN3  <span class="v">4</span>   <span class="p">#define</span> IN4  <span class="v">5</span>
+<span class="p">#define</span> ENA  <span class="v">9</span>   <span class="p">#define</span> ENB  <span class="v">10</span>
+<span class="p">#define</span> TRIG <span class="v">11</span>  <span class="p">#define</span> ECHO <span class="v">12</span>
+<span class="p">#define</span> SERVO_PIN <span class="v">6</span>
+
+<span class="cm">// ── Tuning — adjust these to improve behaviour ───</span>
+<span class="kw">const int</span>  DRIVE_SPD  = <span class="v">200</span>;   <span class="cm">// 0–255 forward speed</span>
+<span class="kw">const int</span>  TURN_SPD   = <span class="v">180</span>;   <span class="cm">// spin speed</span>
+<span class="kw">const int</span>  REV_SPD    = <span class="v">150</span>;   <span class="cm">// reverse speed</span>
+<span class="kw">const float</span> STOP_DIST = <span class="v">15.0</span>; <span class="cm">// cm — stop threshold</span>
+<span class="kw">const long</span> REV_TIME   = <span class="v">500</span>;   <span class="cm">// ms to reverse</span>
+<span class="kw">const long</span> TURN_TIME  = <span class="v">450</span>;   <span class="cm">// ms to turn</span>
+
+<span class="cm">// ── States ───────────────────────────────────────</span>
+<span class="p">#define</span> ST_FORWARD <span class="v">0</span>
+<span class="p">#define</span> ST_REVERSE <span class="v">1</span>
+<span class="p">#define</span> ST_TURN    <span class="v">2</span>
+
+<span class="kw">int</span>           state = ST_FORWARD;
+<span class="kw">unsigned long</span> timer = <span class="v">0</span>;
+<span class="kw">int</span>           dir   = <span class="v">1</span>;
+Servo         servo;
+
+<span class="cm">// ── Setup ────────────────────────────────────────</span>
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="a">pinMode</span>(IN1,OUTPUT); <span class="a">pinMode</span>(IN2,OUTPUT);
+  <span class="a">pinMode</span>(IN3,OUTPUT); <span class="a">pinMode</span>(IN4,OUTPUT);
+  <span class="a">pinMode</span>(ENA,OUTPUT); <span class="a">pinMode</span>(ENB,OUTPUT);
+  <span class="a">pinMode</span>(TRIG,OUTPUT); <span class="a">pinMode</span>(ECHO,INPUT);
+  servo.<span class="a">attach</span>(SERVO_PIN); servo.<span class="a">write</span>(<span class="v">90</span>); <span class="a">delay</span>(<span class="v">500</span>);
+  Serial.<span class="a">begin</span>(<span class="v">9600</span>); Serial.<span class="a">println</span>(<span class="t">"AlCoders Robot — Ready!"</span>);
+}
+
+<span class="cm">// ── Distance Sensor ──────────────────────────────</span>
+<span class="kw">float</span> <span class="a">getDist</span>() {
+  <span class="a">digitalWrite</span>(TRIG,LOW); <span class="a">delayMicroseconds</span>(<span class="v">2</span>);
+  <span class="a">digitalWrite</span>(TRIG,HIGH); <span class="a">delayMicroseconds</span>(<span class="v">10</span>);
+  <span class="a">digitalWrite</span>(TRIG,LOW);
+  <span class="kw">long</span> d = <span class="a">pulseIn</span>(ECHO,HIGH,<span class="v">30000</span>);
+  <span class="kw">return</span> d ? d*<span class="v">0.034</span>/<span class="v">2.0</span> : <span class="v">200</span>;
+}
+
+<span class="cm">// ── Motor Functions ──────────────────────────────</span>
+<span class="kw">void</span> <span class="a">fwd</span>(<span class="kw">int</span> s){<span class="a">analogWrite</span>(ENA,s);<span class="a">analogWrite</span>(ENB,s);<span class="a">digitalWrite</span>(IN1,1);<span class="a">digitalWrite</span>(IN2,0);<span class="a">digitalWrite</span>(IN3,1);<span class="a">digitalWrite</span>(IN4,0);}
+<span class="kw">void</span> <span class="a">rev</span>(<span class="kw">int</span> s){<span class="a">analogWrite</span>(ENA,s);<span class="a">analogWrite</span>(ENB,s);<span class="a">digitalWrite</span>(IN1,0);<span class="a">digitalWrite</span>(IN2,1);<span class="a">digitalWrite</span>(IN3,0);<span class="a">digitalWrite</span>(IN4,1);}
+<span class="kw">void</span> <span class="a">sRight</span>(<span class="kw">int</span> s){<span class="a">analogWrite</span>(ENA,s);<span class="a">analogWrite</span>(ENB,s);<span class="a">digitalWrite</span>(IN1,1);<span class="a">digitalWrite</span>(IN2,0);<span class="a">digitalWrite</span>(IN3,0);<span class="a">digitalWrite</span>(IN4,1);}
+<span class="kw">void</span> <span class="a">sLeft</span>(<span class="kw">int</span> s){<span class="a">analogWrite</span>(ENA,s);<span class="a">analogWrite</span>(ENB,s);<span class="a">digitalWrite</span>(IN1,0);<span class="a">digitalWrite</span>(IN2,1);<span class="a">digitalWrite</span>(IN3,1);<span class="a">digitalWrite</span>(IN4,0);}
+<span class="kw">void</span> <span class="a">stop</span>(){<span class="a">analogWrite</span>(ENA,<span class="v">0</span>);<span class="a">analogWrite</span>(ENB,<span class="v">0</span>);}
+
+<span class="cm">// ── Scan: pan servo, return best direction ────────</span>
+<span class="kw">int</span> <span class="a">scan</span>() {
+  servo.<span class="a">write</span>(<span class="v">10</span>);  <span class="a">delay</span>(<span class="v">400</span>); <span class="kw">float</span> L = <span class="a">getDist</span>();
+  servo.<span class="a">write</span>(<span class="v">170</span>); <span class="a">delay</span>(<span class="v">400</span>); <span class="kw">float</span> R = <span class="a">getDist</span>();
+  servo.<span class="a">write</span>(<span class="v">90</span>);  <span class="a">delay</span>(<span class="v">300</span>);
+  Serial.<span class="a">print</span>(<span class="t">"L:"</span>); Serial.<span class="a">print</span>(L);
+  Serial.<span class="a">print</span>(<span class="t">" R:"</span>); Serial.<span class="a">println</span>(R);
+  <span class="kw">return</span> (L >= R) ? -<span class="v">1</span> : <span class="v">1</span>; <span class="cm">// -1=left, 1=right</span>
+}
+
+<span class="cm">// ── Main Loop ────────────────────────────────────</span>
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="kw">switch</span>(state) {
+    <span class="kw">case</span> ST_FORWARD: {
+      <span class="a">fwd</span>(DRIVE_SPD);
+      <span class="kw">float</span> d = <span class="a">getDist</span>();
+      Serial.<span class="a">print</span>(<span class="t">"Fwd:"</span>); Serial.<span class="a">println</span>(d);
+      <span class="kw">if</span> (d &lt; STOP_DIST) { <span class="a">stop</span>(); state=ST_REVERSE; timer=<span class="a">millis</span>(); }
+      <span class="kw">break</span>;
+    }
+    <span class="kw">case</span> ST_REVERSE:
+      <span class="a">rev</span>(REV_SPD);
+      <span class="kw">if</span> (<span class="a">millis</span>()-timer &gt;= REV_TIME) { <span class="a">stop</span>(); <span class="a">delay</span>(<span class="v">100</span>); dir=<span class="a">scan</span>(); state=ST_TURN; timer=<span class="a">millis</span>(); }
+      <span class="kw">break</span>;
+    <span class="kw">case</span> ST_TURN:
+      dir==<span class="v">1</span> ? <span class="a">sRight</span>(TURN_SPD) : <span class="a">sLeft</span>(TURN_SPD);
+      <span class="kw">if</span> (<span class="a">millis</span>()-timer &gt;= TURN_TIME) { <span class="a">stop</span>(); state=ST_FORWARD; }
+      <span class="kw">break</span>;
+  }
+}</div></div>
+</div>
+<div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('9-4')">Next: Testing &amp; Improvements →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-9-4">
+<div class="lesson-tag">Module 09 · Final Project · Lesson 4</div><h1 class="lesson-title">Testing &amp; Improvements</h1>
+<p class="lesson-intro">Your robot is alive! Now tune it, stress-test it, and push it further.</p>
+<div class="block">
+<h2>Testing Sequence</h2>
+<ol>
+  <li><strong>Upload &amp; open Serial Monitor</strong> — confirm distance readings are sensible before letting it drive.</li>
+  <li><strong>Bench test (held up)</strong> — verify all 4 motor functions: forward, backward, spin left, spin right.</li>
+  <li><strong>Hand obstacle test</strong> — place your hand 8 cm in front. Robot should stop, reverse, scan, and turn.</li>
+  <li><strong>Open floor test</strong> — let it run freely for 2 minutes. Watch for unexpected circles or stalls.</li>
+  <li><strong>Obstacle course</strong> — set up boxes in a maze. Robot should navigate autonomously.</li>
+</ol>
+<h2>Tuning Constants</h2>
+<table><thead><tr><th>Constant</th><th>Effect of Increasing</th></tr></thead><tbody>
+<tr><td><code>STOP_DIST</code></td><td>Robot stops further from obstacles (safer, slower)</td></tr>
+<tr><td><code>DRIVE_SPD</code></td><td>Robot drives faster (harder to stop in time)</td></tr>
+<tr><td><code>REV_TIME</code></td><td>Robot backs up further before scanning</td></tr>
+<tr><td><code>TURN_TIME</code></td><td>Robot turns further before resuming</td></tr>
+</tbody></table>
+<h2>Ideas for Next Steps</h2>
+<ul>
+  <li>Add a <strong>buzzer</strong> that beeps when an obstacle is detected.</li>
+  <li>Add a <strong>Bluetooth HC-05 module</strong> for remote override from your phone.</li>
+  <li>Add <strong>IR line sensors</strong> below the chassis for line-following mode.</li>
+  <li>Replace the timed turn with <strong>encoder feedback</strong> for precise angles.</li>
+  <li>Add an <strong>OLED display</strong> showing current state and distance.</li>
+</ul>
+<div class="callout tip"><div class="callout-head">🎉 Congratulations!</div>You just built a real autonomous robot from scratch. You've mastered electronics, microcontroller programming, sensor integration, motor control, and state machine logic. That's the same foundation used in professional robotics. Keep building!</div>
+</div>
+<div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><a href="index.html" class="next-btn">← Back to Course Overview</a></div>
+</div>
+
+</main></div><script src="course.js"></script></body></html>

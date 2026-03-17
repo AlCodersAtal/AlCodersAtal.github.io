@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AlCoders — Module 7: Chassis &amp; Power</title><link rel="stylesheet" href="course.css"></head>
+<body><div class="progress-bar"></div><div class="layout"><aside class="sidebar"></aside><main class="main">
+<div class="topbar"><div class="breadcrumb">Module 07 › <strong>Chassis Types</strong></div><div class="topbar-nav"><button class="nav-btn" onclick="prevLesson()">← Prev</button><button class="nav-btn primary" onclick="nextLesson()">Next →</button></div></div>
+
+<div class="lesson-page" id="lesson-7-1">
+<div class="lesson-tag">Module 07 · Lesson 1</div><h1 class="lesson-title">Chassis Types</h1>
+<p class="lesson-intro">The chassis is the skeleton of your robot — it determines how it moves and what it can carry.</p>
+<div class="block">
+<div class="component-grid">
+  <div class="component-card"><span class="comp-icon">🔵</span><span class="comp-name">2WD Kit</span><span class="comp-desc">2 motors + caster</span></div>
+  <div class="component-card"><span class="comp-icon">🟢</span><span class="comp-name">4WD Kit</span><span class="comp-desc">4 motors, more grip</span></div>
+  <div class="component-card"><span class="comp-icon">🟡</span><span class="comp-name">Tank Tracks</span><span class="comp-desc">All-terrain</span></div>
+  <div class="component-card"><span class="comp-icon">🟠</span><span class="comp-name">Omnidrive</span><span class="comp-desc">Sideways movement</span></div>
+</div>
+<p>For this course we use a <strong>2WD acrylic chassis kit</strong> — affordable (under ₹300), easy to assemble, and perfect for an obstacle-avoiding robot.</p>
+<h2>2WD Differential Steering</h2>
+<ul>
+  <li><strong>Both motors forward</strong> → drive straight</li>
+  <li><strong>Left backward + Right forward</strong> → spin left in place</li>
+  <li><strong>Right backward + Left forward</strong> → spin right in place</li>
+  <li><strong>Both backward</strong> → reverse</li>
+</ul>
+</div>
+<div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('7-2')">Next: Power Supply &amp; Battery →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-7-2">
+<div class="lesson-tag">Module 07 · Lesson 2</div><h1 class="lesson-title">Power Supply &amp; Battery</h1>
+<p class="lesson-intro">Getting power right is the difference between a reliable robot and a frustrating one.</p>
+<div class="block">
+<table><thead><tr><th>Component</th><th>Voltage</th><th>Peak Current</th></tr></thead><tbody>
+<tr><td>Arduino Uno (via VIN)</td><td>7–12V</td><td>~50mA</td></tr>
+<tr><td>Each TT DC Motor</td><td>3–6V</td><td>~400mA stall</td></tr>
+<tr><td>L298N motor driver</td><td>5–35V motor side</td><td>2A per channel max</td></tr>
+<tr><td>HC-SR04 Sensor</td><td>5V</td><td>~15mA</td></tr>
+<tr><td>SG90 Servo</td><td>4.8–6V</td><td>~900mA peak</td></tr>
+</tbody></table>
+<h2>Recommended Options</h2>
+<ul>
+  <li><strong>4× AA batteries (6V)</strong> — Simple, safe, no special charger needed. Great for beginners.</li>
+  <li><strong>2× 18650 Li-ion in series (7.4V)</strong> — Rechargeable, good capacity. Recommended.</li>
+  <li><strong>2S LiPo (7.4V)</strong> — Lightest and most powerful. Requires a dedicated LiPo charger.</li>
+</ul>
+<div class="callout warn"><div class="callout-head">⚠️ LiPo Safety</div>Never discharge a LiPo below 3V per cell. Never charge unattended. Store in a LiPo-safe bag. A swollen or damaged LiPo must be disposed of properly — never puncture it.</div>
+<div class="callout tip"><div class="callout-head">💡 One Battery For Everything</div>Connect battery to the L298N 12V and GND pins. The L298N's onboard regulator outputs 5V to power the Arduino too — one battery runs the entire robot.</div>
+</div>
+<div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><button class="next-btn" onclick="goto('7-3')">Next: Wiring the Full Robot →</button></div>
+</div>
+
+<div class="lesson-page" id="lesson-7-3">
+<div class="lesson-tag">Module 07 · Lesson 3</div><h1 class="lesson-title">Wiring the Full Robot</h1>
+<p class="lesson-intro">The master wiring reference — keep this open during assembly.</p>
+<div class="block">
+<table class="wiring"><thead><tr><th>From</th><th>Wire</th><th>To</th></tr></thead><tbody>
+<tr><td>Battery (+)</td><td>Red</td><td>L298N 12V</td></tr>
+<tr><td>Battery (−)</td><td>Black</td><td>L298N GND &amp; Arduino GND</td></tr>
+<tr><td>L298N 5V out</td><td>Red</td><td>Arduino 5V pin</td></tr>
+<tr><td>L298N OUT1/OUT2</td><td>—</td><td>Left motor</td></tr>
+<tr><td>L298N OUT3/OUT4</td><td>—</td><td>Right motor</td></tr>
+<tr><td>Arduino Pin 2</td><td>—</td><td>L298N IN1</td></tr>
+<tr><td>Arduino Pin 3 (~)</td><td>—</td><td>L298N IN2</td></tr>
+<tr><td>Arduino Pin 4</td><td>—</td><td>L298N IN3</td></tr>
+<tr><td>Arduino Pin 5 (~)</td><td>—</td><td>L298N IN4</td></tr>
+<tr><td>Arduino Pin 9 (~)</td><td>—</td><td>L298N ENA (remove jumper)</td></tr>
+<tr><td>Arduino Pin 10 (~)</td><td>—</td><td>L298N ENB (remove jumper)</td></tr>
+<tr><td>Arduino Pin 11</td><td>—</td><td>HC-SR04 TRIG</td></tr>
+<tr><td>Arduino Pin 12</td><td>—</td><td>HC-SR04 ECHO</td></tr>
+<tr><td>Arduino 5V</td><td>Red</td><td>HC-SR04 VCC &amp; Servo VCC (red)</td></tr>
+<tr><td>Arduino GND</td><td>Black</td><td>HC-SR04 GND &amp; Servo GND (brown)</td></tr>
+<tr><td>Arduino Pin 6</td><td>Orange</td><td>Servo signal wire</td></tr>
+</tbody></table>
+<div class="callout tip"><div class="callout-head">✅ Pre-Power Checklist</div>
+☐ All GND connections share a common ground<br>
+☐ Motor wires not short-circuiting against chassis metal<br>
+☐ ENA/ENB jumpers removed (using PWM pins instead)<br>
+☐ Battery polarity correct — red = positive<br>
+☐ Not connected to USB and battery at the same time
+</div>
+</div>
+<div class="lesson-footer"><button class="complete-btn" onclick="markDone(this)">✓ Mark Complete</button><a href="module8.html" class="next-btn">Module 8: Robot Logic →</a></div>
+</div>
+
+</main></div><script src="course.js"></script></body></html>

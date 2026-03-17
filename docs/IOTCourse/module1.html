@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 1: Introduction to IoT — AlCoders ATL</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<div id="mod-progress"></div>
+<nav class="top-nav">
+  <a class="logo" href="index.html">AlCoders ATL</a>
+  <ul>
+    <li><a href="index.html#curriculum">All Modules</a></li>
+    <li><a href="module2.html">Next Module →</a></li>
+  </ul>
+  <a class="nav-start" href="index.html">Course Home</a>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="breadcrumb">Module 1 › <span>Introduction to IoT</span></div>
+      <div class="nav-btns">
+        <button class="nav-btn" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn primary" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 1-1 -->
+    <div class="lesson-page active" id="lesson-1-1">
+      <div class="lesson-tag">Module 1 · Lesson 1</div>
+      <h1 class="lesson-title">What is IoT?</h1>
+      <p class="lesson-intro">IoT stands for Internet of Things — a revolutionary idea that everyday physical objects can connect to the internet, sense the world, and share data. Let's understand what that really means.</p>
+
+      <div class="block">
+        <h3>The Big Idea</h3>
+        <p>Think about your home. Your light switch, your fan, your door lock, your refrigerator — these are all "dumb" objects. They do one thing when you physically interact with them. Now imagine if all of these could:</p>
+        <ul>
+          <li>Connect to the internet</li>
+          <li>Know the current temperature, time, or who is home</li>
+          <li>Talk to each other and to your phone</li>
+          <li>Make decisions automatically</li>
+        </ul>
+        <p>That's the Internet of Things. Physical devices — "things" — connected to the internet, collecting data, and communicating with each other and with humans.</p>
+      </div>
+
+      <div class="block">
+        <h3>The Official Definition</h3>
+        <p>IoT is a network of physical objects (devices, vehicles, buildings, appliances) embedded with <strong>sensors, software, and connectivity</strong> that enables them to collect and exchange data over the internet.</p>
+        <div class="callout info"><div class="callout-head">💡 Key Insight</div>IoT bridges the gap between the physical world and the digital world. It gives objects a digital voice.</div>
+      </div>
+
+      <div class="block">
+        <h3>A Simple Example</h3>
+        <p>A basic IoT system has four parts working together:</p>
+        <ul>
+          <li><strong>Sensor:</strong> A temperature sensor reads 38°C (too hot!)</li>
+          <li><strong>Device:</strong> A small ESP32 microcontroller processes this reading</li>
+          <li><strong>Connectivity:</strong> The ESP32 sends this data over Wi-Fi to the internet</li>
+          <li><strong>Action:</strong> A server receives the data, sends you a phone alert, and turns on a fan</li>
+        </ul>
+        <div class="callout tip"><div class="callout-head">🌡️ Real Example</div>This is exactly how smart thermostats like Google Nest work — always sensing, always connected, always acting.</div>
+      </div>
+
+      <div class="block">
+        <h3>How Big is IoT?</h3>
+        <p>The IoT is enormous and growing rapidly:</p>
+        <ul>
+          <li>Over <strong>15 billion</strong> IoT devices were connected to the internet in 2023</li>
+          <li>Expected to grow to <strong>30 billion+</strong> by 2030</li>
+          <li>IoT generates <strong>trillions of bytes</strong> of data every day</li>
+          <li>Every sector uses IoT: homes, hospitals, factories, farms, cities</li>
+        </ul>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">What does "IoT" stand for?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">Internet of Technology</div>
+          <div class="quiz-opt" data-correct>Internet of Things</div>
+          <div class="quiz-opt">Integration of Terminals</div>
+          <div class="quiz-opt">Interface of Tools</div>
+        </div>
+        <div class="quiz-feedback" data-ok>✅ Correct! IoT = Internet of Things — physical objects connected to the internet.</div>
+        <div class="quiz-feedback" data-bad>❌ Not quite. IoT stands for Internet of Things.</div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 1-2 -->
+    <div class="lesson-page" id="lesson-1-2">
+      <div class="lesson-tag">Module 1 · Lesson 2</div>
+      <h1 class="lesson-title">History & Evolution of IoT</h1>
+      <p class="lesson-intro">IoT didn't appear overnight. It evolved over decades, driven by cheaper hardware, faster internet, and clever ideas. Let's trace the journey.</p>
+
+      <div class="block">
+        <h3>The First IoT Device (1982)</h3>
+        <p>The very first internet-connected device was a Coca-Cola vending machine at Carnegie Mellon University. Programmers connected it to the internet so they could check remotely whether drinks were cold and available — without walking to the machine. Simple, brilliant, and decades ahead of its time.</p>
+      </div>
+
+      <div class="block">
+        <h3>The Term "IoT" is Coined (1999)</h3>
+        <p>Kevin Ashton, a British technologist at Procter & Gamble, used the phrase "Internet of Things" in 1999. He was describing a system where physical objects had RFID tags and could be tracked automatically. He co-founded the Auto-ID Centre at MIT that laid the groundwork for modern IoT.</p>
+        <div class="callout info"><div class="callout-head">📌 Did You Know?</div>Kevin Ashton also helped develop the EPC (Electronic Product Code) standard still used in supply chain tracking today.</div>
+      </div>
+
+      <div class="block">
+        <h3>Key Milestones Timeline</h3>
+        <table>
+          <tr><th>Year</th><th>Milestone</th></tr>
+          <tr><td>1982</td><td>First internet-connected device (CMU Coke machine)</td></tr>
+          <tr><td>1999</td><td>Kevin Ashton coins "Internet of Things"</td></tr>
+          <tr><td>2000</td><td>LG announces first internet-connected refrigerator</td></tr>
+          <tr><td>2008</td><td>Number of connected devices surpasses world population</td></tr>
+          <tr><td>2010</td><td>Arduino becomes popular; hobbyist IoT era begins</td></tr>
+          <tr><td>2013</td><td>Google Glass, smart watches, wearable IoT explodes</td></tr>
+          <tr><td>2015</td><td>Amazon Echo launches; voice-controlled IoT goes mainstream</td></tr>
+          <tr><td>2017</td><td>Smart home devices become affordable for all</td></tr>
+          <tr><td>2020s</td><td>5G + AI + IoT converge; industrial and medical IoT boom</td></tr>
+        </table>
+      </div>
+
+      <div class="block">
+        <h3>What Made IoT Possible?</h3>
+        <p>Four technologies came together to make modern IoT real:</p>
+        <ul>
+          <li><strong>Cheap microcontrollers:</strong> A capable chip now costs less than ₹50</li>
+          <li><strong>Affordable sensors:</strong> A temperature sensor costs ₹30–₹80</li>
+          <li><strong>Ubiquitous Wi-Fi:</strong> Internet access is now everywhere</li>
+          <li><strong>Cloud computing:</strong> Storing and processing data from millions of devices became cheap</li>
+        </ul>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 1-3 -->
+    <div class="lesson-page" id="lesson-1-3">
+      <div class="lesson-tag">Module 1 · Lesson 3</div>
+      <h1 class="lesson-title">How IoT Works: Big Picture</h1>
+      <p class="lesson-intro">Understanding the full IoT architecture helps you design and debug any system. Every IoT system follows the same four-layer model.</p>
+
+      <div class="block">
+        <h3>The 4-Layer IoT Architecture</h3>
+        <p>Every IoT system — from a simple temperature sensor to a smart city — can be broken down into four layers:</p>
+        <ul>
+          <li><strong>Layer 1 – Perception (Sensing):</strong> Physical sensors and actuators that interact with the real world</li>
+          <li><strong>Layer 2 – Network (Connectivity):</strong> Wi-Fi, Bluetooth, cellular, or LoRa transmitting the data</li>
+          <li><strong>Layer 3 – Processing (Cloud/Fog):</strong> Servers, databases, and algorithms analysing the data</li>
+          <li><strong>Layer 4 – Application:</strong> The dashboard, mobile app, or automated action the user sees</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Data Flow: Sense → Connect → Process → Act</h3>
+        <p>Here's how data moves through a typical IoT system:</p>
+        <ol>
+          <li>A <strong>sensor</strong> measures something (temperature = 42°C)</li>
+          <li>A <strong>microcontroller</strong> (Arduino/ESP32) reads this value</li>
+          <li>The microcontroller <strong>formats the data</strong> (JSON: <code>{"temp": 42}</code>)</li>
+          <li>Data is sent over <strong>Wi-Fi → MQTT broker → Cloud server</strong></li>
+          <li>The cloud <strong>stores, analyses, and triggers actions</strong> (send alert, turn on fan)</li>
+          <li>The user sees the data on a <strong>dashboard or phone notification</strong></li>
+        </ol>
+        <div class="callout tip"><div class="callout-head">⚡ Speed</div>This entire flow — from sensing to action — can happen in under one second in a well-designed IoT system.</div>
+      </div>
+
+      <div class="block">
+        <h3>Edge vs Cloud Processing</h3>
+        <p>Not all processing happens in the cloud. Sometimes the device itself makes decisions:</p>
+        <ul>
+          <li><strong>Cloud processing:</strong> Data sent to a remote server for analysis. Best for complex tasks, historical data, dashboards.</li>
+          <li><strong>Edge processing:</strong> Data processed right on the device or local gateway. Best for speed, privacy, and offline operation.</li>
+        </ul>
+        <p>Example: A smart smoke detector processes locally (edge) to sound an alarm instantly — it doesn't wait for cloud confirmation.</p>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">Which layer of IoT architecture handles sensors and actuators?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">Network Layer</div>
+          <div class="quiz-opt">Application Layer</div>
+          <div class="quiz-opt" data-correct>Perception Layer</div>
+          <div class="quiz-opt">Processing Layer</div>
+        </div>
+        <div class="quiz-feedback" data-ok>✅ Correct! The Perception Layer is where physical sensing happens.</div>
+        <div class="quiz-feedback" data-bad>❌ Not quite. The Perception (Sensing) Layer handles sensors and actuators.</div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 1-4 -->
+    <div class="lesson-page" id="lesson-1-4">
+      <div class="lesson-tag">Module 1 · Lesson 4</div>
+      <h1 class="lesson-title">Real-World IoT Applications</h1>
+      <p class="lesson-intro">IoT is not just a concept — it's already deeply woven into industries worldwide. Understanding real applications helps you see what's possible.</p>
+
+      <div class="block">
+        <h3>Smart Homes</h3>
+        <p>The most visible IoT application. Smart homes use IoT to automate and remotely control home systems:</p>
+        <ul>
+          <li>Smart bulbs (Philips Hue) — adjust colour and brightness from your phone</li>
+          <li>Smart locks — unlock your door remotely or with your fingerprint</li>
+          <li>Smart thermostats (Nest) — learn your schedule and auto-adjust temperature</li>
+          <li>Smart security cameras — stream video and detect motion remotely</li>
+          <li>Smart speakers (Alexa, Google Home) — voice-controlled hub for everything</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Healthcare (Medical IoT)</h3>
+        <p>IoT is revolutionising healthcare:</p>
+        <ul>
+          <li>Wearable fitness trackers (Fitbit, Apple Watch) — monitor heart rate, sleep, steps</li>
+          <li>Remote patient monitoring — doctors track vitals from outside the hospital</li>
+          <li>Smart insulin pumps — automatically adjust insulin dosage</li>
+          <li>Hospital asset tracking — find equipment quickly with RFID tags</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Agriculture (Smart Farming)</h3>
+        <p>IoT is transforming farming in India and worldwide:</p>
+        <ul>
+          <li>Soil moisture sensors — irrigate only when soil is dry, saving water</li>
+          <li>Weather stations in fields — hyperlocal weather data for crop decisions</li>
+          <li>Drone monitoring — survey crops and detect disease from the air</li>
+          <li>Smart greenhouses — auto-control temperature, humidity, and lighting</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Industry 4.0 (Industrial IoT)</h3>
+        <p>Factories use IoT to become "smart factories":</p>
+        <ul>
+          <li>Predictive maintenance — sensors detect when machines will fail before they do</li>
+          <li>Supply chain tracking — monitor goods from factory to customer in real-time</li>
+          <li>Quality control — cameras and sensors detect defects on production lines</li>
+          <li>Energy optimisation — smart meters and sensors reduce electricity waste</li>
+        </ul>
+        <div class="callout info"><div class="callout-head">🏭 Scale</div>Industrial IoT (IIoT) is the largest segment — estimated at $500 billion+ by 2025.</div>
+      </div>
+
+      <div class="block">
+        <h3>Smart Cities</h3>
+        <ul>
+          <li>Smart traffic lights — adjust timing based on real-time traffic flow</li>
+          <li>Smart parking — sensors show you free parking spots on a map</li>
+          <li>Waste management — bins notify collectors when full</li>
+          <li>Smart street lights — dim when no one is around, save energy</li>
+          <li>Air quality monitoring — real-time pollution data for citizens</li>
+        </ul>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 1-5 -->
+    <div class="lesson-page" id="lesson-1-5">
+      <div class="lesson-tag">Module 1 · Lesson 5</div>
+      <h1 class="lesson-title">IoT Ecosystem & Players</h1>
+      <p class="lesson-intro">IoT is not one company or one technology — it's an entire ecosystem of hardware makers, software platforms, connectivity providers, and standards bodies.</p>
+
+      <div class="block">
+        <h3>The IoT Stack</h3>
+        <p>Think of IoT as a stack of layers, each provided by different players:</p>
+        <table>
+          <tr><th>Layer</th><th>What it does</th><th>Examples</th></tr>
+          <tr><td>Devices</td><td>Physical hardware</td><td>ESP32, Arduino, Raspberry Pi</td></tr>
+          <tr><td>Sensors</td><td>Measure the world</td><td>DHT11, PIR, BMP180</td></tr>
+          <tr><td>Connectivity</td><td>Move data</td><td>Wi-Fi, MQTT, LoRaWAN, 5G</td></tr>
+          <tr><td>Cloud Platform</td><td>Store, process, visualise</td><td>AWS IoT, Google Cloud, Azure IoT</td></tr>
+          <tr><td>Analytics</td><td>Derive insights</td><td>Grafana, ThingSpeak, Tableau</td></tr>
+          <tr><td>Applications</td><td>User interfaces</td><td>Blynk, Home Assistant, custom apps</td></tr>
+        </table>
+      </div>
+
+      <div class="block">
+        <h3>Major IoT Platform Players</h3>
+        <div class="component-grid">
+          <div class="component-card"><div class="cc-icon">🟠</div><h4>AWS IoT</h4><p>Amazon's enterprise IoT cloud — most widely used at scale</p></div>
+          <div class="component-card"><div class="cc-icon">🔵</div><h4>Azure IoT</h4><p>Microsoft's IoT hub with strong enterprise and edge support</p></div>
+          <div class="component-card"><div class="cc-icon">🟡</div><h4>Google Cloud IoT</h4><p>Google's IoT platform with powerful ML integration</p></div>
+          <div class="component-card"><div class="cc-icon">🟢</div><h4>ThingSpeak</h4><p>Free MATLAB-based platform, great for beginners</p></div>
+          <div class="component-card"><div class="cc-icon">🔴</div><h4>Adafruit IO</h4><p>Simple, maker-friendly cloud with free tier</p></div>
+          <div class="component-card"><div class="cc-icon">⚫</div><h4>Blynk</h4><p>Mobile-first IoT platform with drag-drop dashboards</p></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>IoT Standards & Protocols</h3>
+        <p>Devices from different manufacturers need to talk to each other. Standards make this possible:</p>
+        <ul>
+          <li><strong>MQTT:</strong> Lightweight messaging protocol, the backbone of IoT communication</li>
+          <li><strong>HTTP/REST:</strong> Web-style communication for IoT APIs</li>
+          <li><strong>Zigbee:</strong> Low-power mesh network for smart home devices</li>
+          <li><strong>Z-Wave:</strong> Another smart home protocol, used in door locks and sensors</li>
+          <li><strong>Matter:</strong> New universal smart home standard backed by Apple, Google, Amazon</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Your Role as an IoT Developer</h3>
+        <p>As you learn IoT, you'll work across multiple layers. You'll:</p>
+        <ul>
+          <li>Choose and program hardware boards (devices layer)</li>
+          <li>Connect sensors to measure the world</li>
+          <li>Write code to send data over MQTT or HTTP</li>
+          <li>Use cloud platforms to store and visualise data</li>
+          <li>Build user interfaces (dashboards, apps) for control</li>
+        </ul>
+        <div class="callout tip"><div class="callout-head">🚀 You're an IoT Full-Stack Developer!</div>An IoT developer works across hardware, firmware, networking, cloud, and UI — making you one of the most versatile tech roles available.</div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>

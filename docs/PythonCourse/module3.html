@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 3: Operators | Python Course | AlCoders ATL</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<nav class="top-nav">
+  <a href="index.html" class="nav-logo">Al<span>Coders</span> ATL</a>
+  <ul><li><a href="index.html#curriculum">All Modules</a></li></ul>
+  <a href="module4.html" class="nav-start">Next Module →</a>
+</nav>
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="progress-bar"></div>
+    <div class="topbar">
+      <div class="breadcrumb">Module 3 → <span>Operators &amp; Expressions</span></div>
+      <div class="nav-btns">
+        <button class="nav-btn" id="prevBtn" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn" id="nextBtn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <div class="lesson-page" id="lesson-3-1">
+      <div class="lesson-tag">Module 3 · Lesson 1</div>
+      <h1 class="lesson-title">Arithmetic Operators</h1>
+      <p class="lesson-intro">Arithmetic operators perform mathematical operations. You've seen some already — let's go deeper into all of them and their edge cases.</p>
+      <div class="block">
+        <h2>All Arithmetic Operators</h2>
+        <table>
+          <thead><tr><th>Operator</th><th>Name</th><th>Example</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr><td><code>+</code></td><td>Addition</td><td><code>10 + 3</code></td><td>13</td></tr>
+            <tr><td><code>-</code></td><td>Subtraction</td><td><code>10 - 3</code></td><td>7</td></tr>
+            <tr><td><code>*</code></td><td>Multiplication</td><td><code>10 * 3</code></td><td>30</td></tr>
+            <tr><td><code>/</code></td><td>Division</td><td><code>10 / 3</code></td><td>3.333...</td></tr>
+            <tr><td><code>//</code></td><td>Floor Division</td><td><code>10 // 3</code></td><td>3</td></tr>
+            <tr><td><code>%</code></td><td>Modulo (remainder)</td><td><code>10 % 3</code></td><td>1</td></tr>
+            <tr><td><code>**</code></td><td>Exponentiation</td><td><code>2 ** 8</code></td><td>256</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="block">
+        <h2>Augmented Assignment Operators</h2>
+        <p>These combine an arithmetic operation with assignment — a shorthand for updating a variable.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">x</span> <span class="t">= </span><span class="n">10</span>
+<span class="v">x</span> <span class="t">+= </span><span class="n">5</span>    <span class="cm"># x = x + 5 → 15</span>
+<span class="v">x</span> <span class="t">-= </span><span class="n">3</span>    <span class="cm"># x = x - 3 → 12</span>
+<span class="v">x</span> <span class="t">*= </span><span class="n">2</span>    <span class="cm"># x = x * 2 → 24</span>
+<span class="v">x</span> <span class="t">//= </span><span class="n">5</span>   <span class="cm"># x = x // 5 → 4</span>
+<span class="v">x</span> <span class="t">**= </span><span class="n">3</span>   <span class="cm"># x = x ** 3 → 64</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">x</span><span class="t">)</span>          <span class="cm"># 64</span></div>
+        </div>
+      </div>
+      <div class="block">
+        <h2>Practical: Even or Odd?</h2>
+        <p>The modulo operator is great for checking if a number is even or odd:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">num</span> <span class="t">= </span><span class="fn">int</span><span class="t">(</span><span class="fn">input</span><span class="t">(</span><span class="s">"Enter a number: "</span><span class="t">))</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">num</span> <span class="t">% </span><span class="n">2</span> <span class="t">== </span><span class="n">0</span><span class="t">)</span>   <span class="cm"># True if even, False if odd</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="3-1" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <div class="lesson-page" id="lesson-3-2">
+      <div class="lesson-tag">Module 3 · Lesson 2</div>
+      <h1 class="lesson-title">Comparison Operators</h1>
+      <p class="lesson-intro">Comparison operators compare two values and return a boolean (True or False). They're the backbone of all decision-making code.</p>
+      <div class="block">
+        <h2>All Comparison Operators</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">a</span><span class="t">, </span><span class="v">b</span> <span class="t">= </span><span class="n">10</span><span class="t">, </span><span class="n">5</span>
+
+<span class="fn">print</span><span class="t">(</span><span class="v">a</span> <span class="t">== </span><span class="v">b</span><span class="t">)</span>   <span class="cm"># False  — equal to</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">a</span> <span class="t">!= </span><span class="v">b</span><span class="t">)</span>   <span class="cm"># True   — not equal to</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">a</span> <span class="t">&gt; </span><span class="v">b</span><span class="t">)</span>    <span class="cm"># True   — greater than</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">a</span> <span class="t">&lt; </span><span class="v">b</span><span class="t">)</span>    <span class="cm"># False  — less than</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">a</span> <span class="t">&gt;= </span><span class="v">b</span><span class="t">)</span>   <span class="cm"># True   — greater than or equal</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">a</span> <span class="t">&lt;= </span><span class="v">b</span><span class="t">)</span>   <span class="cm"># False  — less than or equal</span>
+
+<span class="cm"># Chained comparisons — unique to Python!</span>
+<span class="v">age</span> <span class="t">= </span><span class="n">20</span>
+<span class="fn">print</span><span class="t">(</span><span class="n">18</span> <span class="t">&lt;= </span><span class="v">age</span> <span class="t">&lt; </span><span class="n">65</span><span class="t">)</span>   <span class="cm"># True — working age</span></div>
+        </div>
+      </div>
+      <div class="block">
+        <h2>== vs is</h2>
+        <p><code>==</code> checks if values are equal. <code>is</code> checks if they are the <em>same object in memory</em>. Use <code>is</code> only for <code>None</code>, <code>True</code>, <code>False</code>.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">x</span> <span class="t">= [</span><span class="n">1</span><span class="t">, </span><span class="n">2</span><span class="t">, </span><span class="n">3</span><span class="t">]</span>
+<span class="v">y</span> <span class="t">= [</span><span class="n">1</span><span class="t">, </span><span class="n">2</span><span class="t">, </span><span class="n">3</span><span class="t">]</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">x</span> <span class="t">== </span><span class="v">y</span><span class="t">)</span>    <span class="cm"># True   — same values</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">x</span> <span class="kw">is</span> <span class="v">y</span><span class="t">)</span>    <span class="cm"># False  — different objects in memory</span>
+<span class="fn">print</span><span class="t">(</span><span class="kw">None</span> <span class="kw">is</span> <span class="kw">None</span><span class="t">)</span>  <span class="cm"># True  — correct way to check None</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="3-2" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <div class="lesson-page" id="lesson-3-3">
+      <div class="lesson-tag">Module 3 · Lesson 3</div>
+      <h1 class="lesson-title">Logical Operators</h1>
+      <p class="lesson-intro">Logical operators combine multiple conditions. They let you ask questions like "is A true AND B true?" or "is A true OR B true?"</p>
+      <div class="block">
+        <h2>and, or, not</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># and — both must be True</span>
+<span class="fn">print</span><span class="t">(</span><span class="kw">True</span> <span class="kw">and</span> <span class="kw">True</span><span class="t">)</span>    <span class="cm"># True</span>
+<span class="fn">print</span><span class="t">(</span><span class="kw">True</span> <span class="kw">and</span> <span class="kw">False</span><span class="t">)</span>   <span class="cm"># False</span>
+<span class="fn">print</span><span class="t">(</span><span class="kw">False</span> <span class="kw">and</span> <span class="kw">False</span><span class="t">)</span>  <span class="cm"># False</span>
+
+<span class="cm"># or — at least one must be True</span>
+<span class="fn">print</span><span class="t">(</span><span class="kw">True</span> <span class="kw">or</span> <span class="kw">False</span><span class="t">)</span>    <span class="cm"># True</span>
+<span class="fn">print</span><span class="t">(</span><span class="kw">False</span> <span class="kw">or</span> <span class="kw">False</span><span class="t">)</span>   <span class="cm"># False</span>
+
+<span class="cm"># not — flips the boolean</span>
+<span class="fn">print</span><span class="t">(</span><span class="kw">not</span> <span class="kw">True</span><span class="t">)</span>           <span class="cm"># False</span>
+<span class="fn">print</span><span class="t">(</span><span class="kw">not</span> <span class="kw">False</span><span class="t">)</span>          <span class="cm"># True</span>
+
+<span class="cm"># Practical example</span>
+<span class="v">age</span> <span class="t">= </span><span class="n">20</span>
+<span class="v">has_id</span> <span class="t">= </span><span class="kw">True</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">age</span> <span class="t">&gt;= </span><span class="n">18</span> <span class="kw">and</span> <span class="v">has_id</span><span class="t">)</span>  <span class="cm"># True — allowed entry</span></div>
+        </div>
+      </div>
+      <div class="block">
+        <h2>Short-Circuit Evaluation</h2>
+        <p>Python evaluates <code>and</code>/<code>or</code> lazily — it stops as soon as the result is known.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm"># With 'and': if first is False, second is NOT evaluated</span>
+<span class="v">x</span> <span class="t">= </span><span class="n">0</span>
+<span class="fn">print</span><span class="t">(</span><span class="v">x</span> <span class="t">!= </span><span class="n">0</span> <span class="kw">and</span> <span class="n">10</span><span class="t">/</span><span class="v">x</span> <span class="t">&gt; </span><span class="n">1</span><span class="t">)</span>  <span class="cm"># False — no ZeroDivisionError!</span>
+
+<span class="cm"># With 'or': if first is True, second is NOT evaluated</span>
+<span class="fn">print</span><span class="t">(</span><span class="kw">True</span> <span class="kw">or</span> <span class="n">1</span><span class="t">/</span><span class="n">0</span><span class="t">)</span>  <span class="cm"># True — division never happens</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="3-3" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <div class="lesson-page" id="lesson-3-4">
+      <div class="lesson-tag">Module 3 · Lesson 4</div>
+      <h1 class="lesson-title">String Operations</h1>
+      <p class="lesson-intro">Strings support several operator-like operations. Let's also introduce f-strings — the modern way to embed values in strings.</p>
+      <div class="block">
+        <h2>f-strings (Formatted String Literals)</h2>
+        <p>f-strings (Python 3.6+) let you embed expressions directly inside strings. Prefix the string with <code>f</code> and put expressions in <code>{}</code>.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">name</span> <span class="t">= </span><span class="s">"Alice"</span>
+<span class="v">age</span> <span class="t">= </span><span class="n">25</span>
+<span class="v">score</span> <span class="t">= </span><span class="n">95.678</span>
+
+<span class="cm"># Old way — messy</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"Name: "</span> <span class="t">+ </span><span class="v">name</span> <span class="t">+ </span><span class="s">", Age: "</span> <span class="t">+ </span><span class="fn">str</span><span class="t">(</span><span class="v">age</span><span class="t">))</span>
+
+<span class="cm"># f-string — clean and powerful</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">f"Name: </span><span class="p">{name}</span><span class="s">, Age: </span><span class="p">{age}</span><span class="s">"</span><span class="t">)</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">f"Score: </span><span class="p">{score:.2f}</span><span class="s">"</span><span class="t">)</span>           <span class="cm"># 95.68 — 2 decimal places</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">f"Double age: </span><span class="p">{age * 2}</span><span class="s">"</span><span class="t">)</span>       <span class="cm"># expressions work too</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">f"</span><span class="p">{name.upper()}</span><span class="s"> is </span><span class="p">{age}</span><span class="s"> years old"</span><span class="t">)</span></div>
+        </div>
+      </div>
+      <div class="block">
+        <h2>in and not in</h2>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="v">text</span> <span class="t">= </span><span class="s">"Hello, World!"</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"World"</span> <span class="kw">in</span> <span class="v">text</span><span class="t">)</span>      <span class="cm"># True</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"Python"</span> <span class="kw">in</span> <span class="v">text</span><span class="t">)</span>     <span class="cm"># False</span>
+<span class="fn">print</span><span class="t">(</span><span class="s">"Python"</span> <span class="kw">not in</span> <span class="v">text</span><span class="t">)</span> <span class="cm"># True</span></div>
+        </div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="3-4" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <div class="lesson-page" id="lesson-3-5">
+      <div class="lesson-tag">Module 3 · Lesson 5</div>
+      <h1 class="lesson-title">Operator Precedence</h1>
+      <p class="lesson-intro">When multiple operators appear in one expression, Python follows rules about which to evaluate first — just like BODMAS in maths.</p>
+      <div class="block">
+        <h2>Precedence Order (Highest to Lowest)</h2>
+        <table>
+          <thead><tr><th>Priority</th><th>Operators</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>1 (highest)</td><td><code>()</code></td><td>Parentheses</td></tr>
+            <tr><td>2</td><td><code>**</code></td><td>Exponentiation</td></tr>
+            <tr><td>3</td><td><code>+x -x</code></td><td>Unary plus/minus</td></tr>
+            <tr><td>4</td><td><code>* / // %</code></td><td>Multiplication, division, modulo</td></tr>
+            <tr><td>5</td><td><code>+ -</code></td><td>Addition, subtraction</td></tr>
+            <tr><td>6</td><td><code>== != > < >= <=</code></td><td>Comparisons</td></tr>
+            <tr><td>7</td><td><code>not</code></td><td>Logical NOT</td></tr>
+            <tr><td>8</td><td><code>and</code></td><td>Logical AND</td></tr>
+            <tr><td>9 (lowest)</td><td><code>or</code></td><td>Logical OR</td></tr>
+          </tbody>
+        </table>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Python</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="fn">print</span><span class="t">(</span><span class="n">2</span> <span class="t">+ </span><span class="n">3</span> <span class="t">* </span><span class="n">4</span><span class="t">)</span>      <span class="cm"># 14  — * before +</span>
+<span class="fn">print</span><span class="t">((</span><span class="n">2</span> <span class="t">+ </span><span class="n">3</span><span class="t">) * </span><span class="n">4</span><span class="t">)</span>    <span class="cm"># 20  — () first</span>
+<span class="fn">print</span><span class="t">(</span><span class="n">2</span> <span class="t">** </span><span class="n">3</span> <span class="t">** </span><span class="n">2</span><span class="t">)</span>     <span class="cm"># 512 — ** right-associative: 2**(3**2)=2**9=512</span>
+<span class="fn">print</span><span class="t">(</span><span class="n">10</span> <span class="t">&gt; </span><span class="n">5</span> <span class="kw">and</span> <span class="n">3</span> <span class="t">&lt; </span><span class="n">7</span><span class="t">)</span>  <span class="cm"># True — comparisons before and</span></div>
+        </div>
+        <div class="callout tip">
+          <div><div class="callout-head">💡 Use Parentheses</div><p>When in doubt, use parentheses to make your intent explicit. It's better to be clear than clever.</p></div>
+        </div>
+      </div>
+      <div class="quiz-box">
+        <div class="quiz-q">What is the result of: 2 + 3 * 4 - 1?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">19</div>
+          <div class="quiz-opt" data-correct>13</div>
+          <div class="quiz-opt">24</div>
+          <div class="quiz-opt">20</div>
+        </div>
+        <div class="quiz-feedback" data-ok>✅ Correct! 3*4=12, then 2+12-1=13. Multiplication first!</div>
+        <div class="quiz-feedback" data-bad>❌ Remember operator precedence: * before + and -. So 3*4=12, then 2+12-1=13.</div>
+      </div>
+      <div class="callout tip">
+        <div><div class="callout-head">🎉 Module 3 Complete!</div><p>You now understand all Python operators. Module 4 puts this knowledge to work with control flow — making decisions and repeating actions.</p></div>
+      </div>
+      <div class="lesson-footer">
+        <button class="complete-btn" data-lesson="3-5" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Module 4 →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>

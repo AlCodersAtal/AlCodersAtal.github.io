@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 4: Connectivity & Protocols — AlCoders ATL</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<div id="mod-progress"></div>
+<nav class="top-nav">
+  <a class="logo" href="index.html">AlCoders ATL</a>
+  <ul>
+    <li><a href="module3.html">← Module 3</a></li>
+    <li><a href="index.html#curriculum">All Modules</a></li>
+    <li><a href="module5.html">Module 5 →</a></li>
+  </ul>
+  <a class="nav-start" href="index.html">Course Home</a>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="breadcrumb">Module 4 › <span>Connectivity & Protocols</span></div>
+      <div class="nav-btns">
+        <button class="nav-btn" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn primary" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 4-1 -->
+    <div class="lesson-page active" id="lesson-4-1">
+      <div class="lesson-tag">Module 4 · Lesson 1</div>
+      <h1 class="lesson-title">Wireless Communication Basics</h1>
+      <p class="lesson-intro">Connectivity is the defining characteristic of IoT. Without communication, a smart sensor is just a sensor. Understanding your options helps you pick the right one for each project.</p>
+
+      <div class="block">
+        <h3>The Connectivity Landscape</h3>
+        <p>IoT devices use many different wireless technologies. The choice depends on range, power, data rate, and cost:</p>
+        <table>
+          <tr><th>Technology</th><th>Range</th><th>Power</th><th>Data Rate</th><th>Best For</th></tr>
+          <tr><td>Wi-Fi</td><td>50–100m</td><td>High</td><td>Up to 600 Mbps</td><td>Home IoT, data-heavy</td></tr>
+          <tr><td>Bluetooth/BLE</td><td>10–100m</td><td>Low</td><td>1–3 Mbps</td><td>Wearables, beacons</td></tr>
+          <tr><td>Zigbee</td><td>10–100m</td><td>Very low</td><td>250 kbps</td><td>Smart home mesh</td></tr>
+          <tr><td>Z-Wave</td><td>30–100m</td><td>Low</td><td>100 kbps</td><td>Smart home security</td></tr>
+          <tr><td>LoRa / LoRaWAN</td><td>2–15 km</td><td>Very low</td><td>0.3–50 kbps</td><td>Agriculture, city IoT</td></tr>
+          <tr><td>4G/LTE</td><td>Nationwide</td><td>High</td><td>Up to 150 Mbps</td><td>Mobile, remote locations</td></tr>
+          <tr><td>5G</td><td>Nationwide</td><td>Medium</td><td>Up to 10 Gbps</td><td>Industrial, V2X, massive IoT</td></tr>
+          <tr><td>NB-IoT</td><td>Nationwide</td><td>Ultra low</td><td>26 kbps</td><td>Smart meters, trackers</td></tr>
+        </table>
+      </div>
+
+      <div class="block">
+        <h3>Choosing a Protocol — Quick Guide</h3>
+        <ul>
+          <li><strong>Home/office IoT:</strong> Wi-Fi (if plugged in) or Zigbee/BLE (if battery-powered)</li>
+          <li><strong>Wearables:</strong> Bluetooth LE</li>
+          <li><strong>Agricultural / long-range sensing:</strong> LoRa or NB-IoT</li>
+          <li><strong>Mobile asset tracking (vehicles):</strong> 4G/LTE or GPS + 4G</li>
+          <li><strong>Learning IoT:</strong> Wi-Fi — most supported, easiest to debug</li>
+        </ul>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 4-2 -->
+    <div class="lesson-page" id="lesson-4-2">
+      <div class="lesson-tag">Module 4 · Lesson 2</div>
+      <h1 class="lesson-title">Wi-Fi for IoT</h1>
+      <p class="lesson-intro">Wi-Fi is the most common IoT connectivity for home and office environments. The ESP32 has Wi-Fi built-in and the Arduino WiFi library makes it easy to use.</p>
+
+      <div class="block">
+        <h3>How Wi-Fi Works in IoT</h3>
+        <p>Your ESP32 connects to a Wi-Fi router like a phone or laptop. Once connected, it gets an IP address and can communicate with any server on the internet — sending sensor data, fetching commands, or hosting a local web server.</p>
+      </div>
+
+      <div class="block">
+        <h3>Connecting ESP32 to Wi-Fi</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino C (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">#include</span> <span class="p">&lt;WiFi.h&gt;</span>
+
+<span class="kw">const char</span>* <span class="v">ssid</span>     = <span class="p">"YourNetwork"</span>;
+<span class="kw">const char</span>* <span class="v">password</span> = <span class="p">"YourPassword"</span>;
+
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="a">Serial.begin</span>(<span class="v">115200</span>);
+  <span class="a">WiFi.begin</span>(<span class="v">ssid</span>, <span class="v">password</span>);
+
+  <span class="a">Serial.print</span>(<span class="p">"Connecting"</span>);
+  <span class="kw">while</span> (<span class="a">WiFi.status</span>() != <span class="p">WL_CONNECTED</span>) {
+    <span class="a">delay</span>(<span class="v">500</span>); <span class="a">Serial.print</span>(<span class="p">"."</span>);
+  }
+  <span class="a">Serial.println</span>(<span class="p">"\n✅ Connected!"</span>);
+  <span class="a">Serial.println</span>(<span class="a">WiFi.localIP</span>());
+}</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>ESP32 as a Web Server</h3>
+        <p>Your ESP32 can host a tiny web server. Anyone on your local network can open a browser, type the ESP32's IP, and see a webpage — or send commands to the device.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino C (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">#include</span> <span class="p">&lt;WiFi.h&gt;</span>
+<span class="kw">#include</span> <span class="p">&lt;WebServer.h&gt;</span>
+
+<span class="a">WebServer</span> <span class="v">server</span>(<span class="v">80</span>);
+
+<span class="kw">void</span> <span class="a">handleRoot</span>() {
+  <span class="v">server</span>.<span class="a">send</span>(<span class="v">200</span>, <span class="p">"text/html"</span>, <span class="p">"&lt;h1&gt;Hello from ESP32!&lt;/h1&gt;"</span>);
+}
+
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="cm">// ... WiFi connect code here ...</span>
+  <span class="v">server</span>.<span class="a">on</span>(<span class="p">"/"</span>, <span class="v">handleRoot</span>);
+  <span class="v">server</span>.<span class="a">begin</span>();
+  <span class="a">Serial.println</span>(<span class="p">"Web server started!"</span>);
+}
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="v">server</span>.<span class="a">handleClient</span>();
+}</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Wi-Fi Limitations in IoT</h3>
+        <ul>
+          <li><strong>Power hungry:</strong> Wi-Fi draws 160–260 mA during transmission — batteries drain fast</li>
+          <li><strong>Range:</strong> Typically 30–50m indoors</li>
+          <li><strong>Router required:</strong> Needs local Wi-Fi infrastructure</li>
+        </ul>
+        <div class="callout tip"><div class="callout-head">💡 Deep Sleep Solution</div>Use ESP32's deep sleep mode for battery projects. The device sleeps consuming only 10 µA, wakes up every N minutes, sends data over Wi-Fi, then goes back to sleep.</div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 4-3 -->
+    <div class="lesson-page" id="lesson-4-3">
+      <div class="lesson-tag">Module 4 · Lesson 3</div>
+      <h1 class="lesson-title">Bluetooth & BLE</h1>
+      <p class="lesson-intro">Bluetooth Low Energy (BLE) is the go-to for battery-powered devices that communicate with smartphones. The ESP32 has BLE built-in.</p>
+
+      <div class="block">
+        <h3>Classic Bluetooth vs BLE</h3>
+        <table>
+          <tr><th>Feature</th><th>Classic Bluetooth</th><th>BLE (Bluetooth Low Energy)</th></tr>
+          <tr><td>Power</td><td>High (1–100 mA)</td><td>Very low (0.01–0.5 mA)</td></tr>
+          <tr><td>Data rate</td><td>2–3 Mbps</td><td>125 kbps – 2 Mbps</td></tr>
+          <tr><td>Range</td><td>10–100m</td><td>10–100m</td></tr>
+          <tr><td>Use case</td><td>Audio streaming, file transfer</td><td>Sensors, wearables, beacons</td></tr>
+          <tr><td>Connection time</td><td>~6 seconds</td><td>~3 milliseconds</td></tr>
+        </table>
+        <div class="callout info"><div class="callout-head">📱 IoT Choice</div>For IoT, BLE is almost always the right choice. It's what fitness bands, smart watches, glucose monitors, and smart home sensors use.</div>
+      </div>
+
+      <div class="block">
+        <h3>BLE Concepts: GATT, Services, Characteristics</h3>
+        <p>BLE uses a client-server model called GATT (Generic Attribute Profile):</p>
+        <ul>
+          <li><strong>Server (ESP32):</strong> The device with data. Exposes "Services"</li>
+          <li><strong>Client (phone/PC):</strong> Reads data from the server</li>
+          <li><strong>Service:</strong> A group of related characteristics (like "Environmental Sensing Service")</li>
+          <li><strong>Characteristic:</strong> A single data point with a value (like "Temperature")</li>
+          <li><strong>UUID:</strong> Unique ID for each service and characteristic</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>ESP32 BLE Server Example</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino C (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">#include</span> <span class="p">&lt;BLEDevice.h&gt;</span>
+<span class="kw">#include</span> <span class="p">&lt;BLEServer.h&gt;</span>
+<span class="kw">#include</span> <span class="p">&lt;BLEUtils.h&gt;</span>
+
+<span class="kw">#define</span> <span class="v">SERVICE_UUID</span>    <span class="p">"12345678-1234-5678-1234-56789abcdef0"</span>
+<span class="kw">#define</span> <span class="v">CHAR_UUID</span>       <span class="p">"abcdef01-1234-5678-1234-56789abcdef0"</span>
+
+<span class="a">BLECharacteristic</span>* <span class="v">pCharacteristic</span>;
+
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="a">Serial.begin</span>(<span class="v">115200</span>);
+  <span class="a">BLEDevice::init</span>(<span class="p">"ESP32-IoT-Sensor"</span>);
+
+  <span class="a">BLEServer</span>* <span class="v">pServer</span>   = <span class="a">BLEDevice::createServer</span>();
+  <span class="a">BLEService</span>* <span class="v">pService</span> = <span class="v">pServer</span>-&gt;<span class="a">createService</span>(<span class="v">SERVICE_UUID</span>);
+  
+  <span class="v">pCharacteristic</span> = <span class="v">pService</span>-&gt;<span class="a">createCharacteristic</span>(
+    <span class="v">CHAR_UUID</span>, <span class="a">BLECharacteristic::PROPERTY_READ</span>
+  );
+  <span class="v">pCharacteristic</span>-&gt;<span class="a">setValue</span>(<span class="p">"Hello from ESP32!"</span>);
+  
+  <span class="v">pService</span>-&gt;<span class="a">start</span>();
+  <span class="v">pServer</span>-&gt;<span class="a">getAdvertising</span>()-&gt;<span class="a">start</span>();
+  <span class="a">Serial.println</span>(<span class="p">"BLE advertising... scan with nRF Connect app"</span>);
+}
+
+<span class="kw">void</span> <span class="a">loop</span>() { <span class="a">delay</span>(<span class="v">1000</span>); }</div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 4-4 -->
+    <div class="lesson-page" id="lesson-4-4">
+      <div class="lesson-tag">Module 4 · Lesson 4</div>
+      <h1 class="lesson-title">MQTT Protocol</h1>
+      <p class="lesson-intro">MQTT (Message Queuing Telemetry Transport) is the most popular IoT protocol. It's lightweight, efficient, and designed specifically for constrained devices and unreliable networks.</p>
+
+      <div class="block">
+        <h3>What is MQTT?</h3>
+        <p>MQTT is a publish-subscribe messaging protocol. Instead of devices talking directly to each other, they all communicate through a central <strong>broker</strong>:</p>
+        <ul>
+          <li><strong>Publisher:</strong> A device that sends (publishes) data to a topic</li>
+          <li><strong>Subscriber:</strong> A device or app that listens (subscribes) to a topic</li>
+          <li><strong>Broker:</strong> The server in the middle that routes messages (e.g., Mosquitto, HiveMQ)</li>
+          <li><strong>Topic:</strong> A string address for messages (e.g., <code>home/bedroom/temperature</code>)</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Why MQTT for IoT?</h3>
+        <ul>
+          <li>Tiny packet size — headers as small as 2 bytes</li>
+          <li>Works on slow, high-latency networks (3G, satellite)</li>
+          <li>QoS levels: 0 (fire and forget), 1 (at least once), 2 (exactly once)</li>
+          <li>Last Will message — broker notifies subscribers if a device disconnects unexpectedly</li>
+          <li>Retained messages — new subscribers get the last value immediately</li>
+        </ul>
+        <div class="callout info"><div class="callout-head">📊 Scale</div>A single MQTT broker can handle millions of concurrent connections. Facebook Messenger was originally built on MQTT.</div>
+      </div>
+
+      <div class="block">
+        <h3>ESP32 MQTT Publisher</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino C (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">#include</span> <span class="p">&lt;WiFi.h&gt;</span>
+<span class="kw">#include</span> <span class="p">&lt;PubSubClient.h&gt;</span>
+
+<span class="kw">const char</span>* <span class="v">ssid</span>       = <span class="p">"YourWiFi"</span>;
+<span class="kw">const char</span>* <span class="v">password</span>   = <span class="p">"YourPassword"</span>;
+<span class="kw">const char</span>* <span class="v">mqttServer</span> = <span class="p">"broker.hivemq.com"</span>;  <span class="cm">// Free public broker</span>
+<span class="kw">const int</span>   <span class="v">mqttPort</span>   = <span class="v">1883</span>;
+
+<span class="a">WiFiClient</span>    <span class="v">espClient</span>;
+<span class="a">PubSubClient</span>  <span class="v">client</span>(<span class="v">espClient</span>);
+
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="a">Serial.begin</span>(<span class="v">115200</span>);
+  <span class="a">WiFi.begin</span>(<span class="v">ssid</span>, <span class="v">password</span>);
+  <span class="kw">while</span> (<span class="a">WiFi.status</span>() != <span class="p">WL_CONNECTED</span>) <span class="a">delay</span>(<span class="v">500</span>);
+
+  <span class="v">client</span>.<span class="a">setServer</span>(<span class="v">mqttServer</span>, <span class="v">mqttPort</span>);
+  <span class="v">client</span>.<span class="a">connect</span>(<span class="p">"ESP32Client"</span>);
+  <span class="a">Serial.println</span>(<span class="p">"Connected to MQTT broker!"</span>);
+}
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="kw">float</span> <span class="v">temperature</span> = <span class="v">25.6</span>;  <span class="cm">// Replace with real sensor read</span>
+  <span class="kw">char</span> <span class="v">msg</span>[<span class="v">10</span>];
+  <span class="a">dtostrf</span>(<span class="v">temperature</span>, <span class="v">4</span>, <span class="v">1</span>, <span class="v">msg</span>);
+  
+  <span class="v">client</span>.<span class="a">publish</span>(<span class="p">"alcoders/sensor/temp"</span>, <span class="v">msg</span>);
+  <span class="a">Serial.print</span>(<span class="p">"Published: "</span>);
+  <span class="a">Serial.println</span>(<span class="v">msg</span>);
+  
+  <span class="a">delay</span>(<span class="v">5000</span>);  <span class="cm">// Publish every 5 seconds</span>
+}</div>
+        </div>
+        <p><strong>Library needed:</strong> Install "PubSubClient" by Nick O'Leary in Arduino Library Manager.</p>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 4-5 -->
+    <div class="lesson-page" id="lesson-4-5">
+      <div class="lesson-tag">Module 4 · Lesson 5</div>
+      <h1 class="lesson-title">HTTP & REST APIs in IoT</h1>
+      <p class="lesson-intro">HTTP is the same protocol your browser uses. IoT devices can use HTTP to send data to cloud APIs — simple, universal, and no special broker needed.</p>
+
+      <div class="block">
+        <h3>HTTP in IoT</h3>
+        <p>Your ESP32 can act as an HTTP client — making GET or POST requests to a server. This is how you send data to ThingSpeak, IFTTT, or any REST API.</p>
+        <ul>
+          <li><strong>GET request:</strong> Retrieve data from a server (or send simple values in URL)</li>
+          <li><strong>POST request:</strong> Send data to a server (usually in JSON body)</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Sending Data to ThingSpeak via HTTP</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino C (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">#include</span> <span class="p">&lt;WiFi.h&gt;</span>
+<span class="kw">#include</span> <span class="p">&lt;HTTPClient.h&gt;</span>
+
+<span class="kw">const char</span>* <span class="v">ssid</span>    = <span class="p">"YourWiFi"</span>;
+<span class="kw">const char</span>* <span class="v">pass</span>    = <span class="p">"YourPassword"</span>;
+<span class="kw">const char</span>* <span class="v">apiKey</span> = <span class="p">"YOUR_THINGSPEAK_API_KEY"</span>;
+
+<span class="kw">void</span> <span class="a">sendToCloud</span>(<span class="kw">float</span> <span class="v">temp</span>, <span class="kw">float</span> <span class="v">humidity</span>) {
+  <span class="a">HTTPClient</span> <span class="v">http</span>;
+  <span class="kw">String</span> <span class="v">url</span> = <span class="p">"http://api.thingspeak.com/update?api_key="</span>;
+  <span class="v">url</span> += <span class="v">apiKey</span>;
+  <span class="v">url</span> += <span class="p">"&field1="</span> + <span class="kw">String</span>(<span class="v">temp</span>);
+  <span class="v">url</span> += <span class="p">"&field2="</span> + <span class="kw">String</span>(<span class="v">humidity</span>);
+  
+  <span class="v">http</span>.<span class="a">begin</span>(<span class="v">url</span>);
+  <span class="kw">int</span> <span class="v">code</span> = <span class="v">http</span>.<span class="a">GET</span>();
+  <span class="a">Serial.print</span>(<span class="p">"HTTP response: "</span>);
+  <span class="a">Serial.println</span>(<span class="v">code</span>);
+  <span class="v">http</span>.<span class="a">end</span>();
+}
+
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="a">Serial.begin</span>(<span class="v">115200</span>);
+  <span class="a">WiFi.begin</span>(<span class="v">ssid</span>, <span class="v">pass</span>);
+  <span class="kw">while</span> (<span class="a">WiFi.status</span>() != <span class="p">WL_CONNECTED</span>) <span class="a">delay</span>(<span class="v">500</span>);
+}
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="a">sendToCloud</span>(<span class="v">25.5</span>, <span class="v">65.0</span>);  <span class="cm">// Replace with real sensor values</span>
+  <span class="a">delay</span>(<span class="v">15000</span>);  <span class="cm">// ThingSpeak free tier: 15 sec minimum interval</span>
+}</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>MQTT vs HTTP — When to Use Which</h3>
+        <table>
+          <tr><th>Scenario</th><th>Better Choice</th></tr>
+          <tr><td>Frequent small data (every second)</td><td>MQTT</td></tr>
+          <tr><td>Battery-powered, sleep cycles</td><td>HTTP (simpler, no persistent connection)</td></tr>
+          <tr><td>Two-way communication (device gets commands)</td><td>MQTT</td></tr>
+          <tr><td>Sending to a simple REST API</td><td>HTTP</td></tr>
+          <tr><td>Many devices, central broker</td><td>MQTT</td></tr>
+          <tr><td>Learning / getting started</td><td>HTTP (easier to understand)</td></tr>
+        </table>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">In MQTT, what is the "broker"?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">The IoT device that publishes sensor data</div>
+          <div class="quiz-opt">The mobile app that displays data</div>
+          <div class="quiz-opt" data-correct>The central server that routes messages between publishers and subscribers</div>
+          <div class="quiz-opt">A type of sensor protocol</div>
+        </div>
+        <div class="quiz-feedback" data-ok>✅ Correct! The broker is the middleman — it receives messages from publishers and routes them to all matching subscribers.</div>
+        <div class="quiz-feedback" data-bad>❌ Not quite. The broker is the central server — it routes messages from publishers to subscribers based on topic.</div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>

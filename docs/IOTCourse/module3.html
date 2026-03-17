@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 3: Sensors & Actuators — AlCoders ATL</title>
+<link rel="stylesheet" href="course.css">
+</head>
+<body>
+<div id="mod-progress"></div>
+<nav class="top-nav">
+  <a class="logo" href="index.html">AlCoders ATL</a>
+  <ul>
+    <li><a href="module2.html">← Module 2</a></li>
+    <li><a href="index.html#curriculum">All Modules</a></li>
+    <li><a href="module4.html">Module 4 →</a></li>
+  </ul>
+  <a class="nav-start" href="index.html">Course Home</a>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="breadcrumb">Module 3 › <span>Sensors & Actuators</span></div>
+      <div class="nav-btns">
+        <button class="nav-btn" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn primary" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- 3-1 -->
+    <div class="lesson-page active" id="lesson-3-1">
+      <div class="lesson-tag">Module 3 · Lesson 1</div>
+      <h1 class="lesson-title">What are Sensors?</h1>
+      <p class="lesson-intro">Sensors are the eyes, ears, nose, and skin of an IoT device. They convert physical phenomena into electrical signals that a microcontroller can read.</p>
+
+      <div class="block">
+        <h3>Sensors: The Physical-to-Digital Bridge</h3>
+        <p>A sensor converts a <strong>physical quantity</strong> (temperature, light, pressure, movement) into an <strong>electrical signal</strong> (voltage or current). The microcontroller reads this electrical signal and converts it to a digital number your code can use.</p>
+        <p>Example: A temperature sensor produces a voltage that varies with temperature. At 25°C it might output 2.5V. The ESP32's ADC reads this as a number from 0–4095, and your code maps that to degrees.</p>
+      </div>
+
+      <div class="block">
+        <h3>Analog vs Digital Sensors</h3>
+        <table>
+          <tr><th>Type</th><th>Output</th><th>Examples</th><th>Reading Pin</th></tr>
+          <tr><td>Analog</td><td>Variable voltage (0–5V)</td><td>LDR, soil sensor, MQ gas sensor</td><td>Analog pin (A0, ADC)</td></tr>
+          <tr><td>Digital</td><td>HIGH or LOW only</td><td>PIR, IR obstacle sensor, button</td><td>Digital pin</td></tr>
+          <tr><td>Protocol-based</td><td>Serial data packet</td><td>DHT11, BMP180, MPU6050</td><td>Specific protocol (1-Wire, I2C)</td></tr>
+        </table>
+      </div>
+
+      <div class="block">
+        <h3>Key Sensor Specifications</h3>
+        <p>When choosing a sensor, check these specs:</p>
+        <ul>
+          <li><strong>Range:</strong> What values can it measure? (e.g., DHT11: 0–50°C)</li>
+          <li><strong>Accuracy:</strong> How close to the real value? (DHT11: ±2°C)</li>
+          <li><strong>Resolution:</strong> Smallest change it can detect (1°C for DHT11)</li>
+          <li><strong>Response time:</strong> How fast does it react to changes?</li>
+          <li><strong>Operating voltage:</strong> 3.3V or 5V? (critical — wrong voltage can destroy sensor)</li>
+          <li><strong>Interface:</strong> Analog, digital, I2C, SPI, 1-Wire?</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Reading an Analog Sensor</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino C</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm">// Read an analog sensor on pin A0 (e.g., LDR or potentiometer)</span>
+<span class="kw">int</span> <span class="v">sensorPin</span> = <span class="p">A0</span>;
+<span class="kw">int</span> <span class="v">sensorValue</span>;
+
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="a">Serial.begin</span>(<span class="v">9600</span>);
+}
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="v">sensorValue</span> = <span class="a">analogRead</span>(<span class="v">sensorPin</span>);  <span class="cm">// 0 to 1023</span>
+  
+  <span class="cm">// Map to a meaningful range (e.g., 0–100%)</span>
+  <span class="kw">int</span> <span class="v">percentage</span> = <span class="a">map</span>(<span class="v">sensorValue</span>, <span class="v">0</span>, <span class="v">1023</span>, <span class="v">0</span>, <span class="v">100</span>);
+  
+  <span class="a">Serial.print</span>(<span class="p">"Sensor: "</span>);
+  <span class="a">Serial.print</span>(<span class="v">sensorValue</span>);
+  <span class="a">Serial.print</span>(<span class="p">" | Percent: "</span>);
+  <span class="a">Serial.println</span>(<span class="v">percentage</span>);
+  
+  <span class="a">delay</span>(<span class="v">500</span>);
+}</div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 3-2 -->
+    <div class="lesson-page" id="lesson-3-2">
+      <div class="lesson-tag">Module 3 · Lesson 2</div>
+      <h1 class="lesson-title">Temperature & Humidity Sensors</h1>
+      <p class="lesson-intro">Temperature and humidity sensors are the most common in IoT. They're used in weather stations, smart thermostats, greenhouses, server rooms, and more.</p>
+
+      <div class="block">
+        <h3>DHT11 — The Beginner's Choice</h3>
+        <p>The DHT11 is the classic beginner temperature & humidity sensor. It's cheap, easy to use, and widely available in India (₹30–₹50).</p>
+        <table>
+          <tr><th>Spec</th><th>DHT11</th><th>DHT22</th></tr>
+          <tr><td>Temp range</td><td>0–50°C</td><td>-40–80°C</td></tr>
+          <tr><td>Temp accuracy</td><td>±2°C</td><td>±0.5°C</td></tr>
+          <tr><td>Humidity range</td><td>20–90% RH</td><td>0–100% RH</td></tr>
+          <tr><td>Humidity accuracy</td><td>±5% RH</td><td>±2–5% RH</td></tr>
+          <tr><td>Sampling rate</td><td>1 Hz (1/sec)</td><td>0.5 Hz (1/2sec)</td></tr>
+          <tr><td>Price (approx)</td><td>₹30–50</td><td>₹120–200</td></tr>
+          <tr><td>Interface</td><td>1-Wire</td><td>1-Wire</td></tr>
+        </table>
+      </div>
+
+      <div class="block">
+        <h3>Wiring DHT11 to ESP32</h3>
+        <table class="wiring">
+          <tr><th>DHT11 Pin</th><th>ESP32 Pin</th><th>Notes</th></tr>
+          <tr><td>VCC</td><td>3.3V</td><td>Power supply</td></tr>
+          <tr><td>DATA</td><td>GPIO 4</td><td>Any digital GPIO</td></tr>
+          <tr><td>GND</td><td>GND</td><td>Ground</td></tr>
+        </table>
+        <div class="callout tip"><div class="callout-head">📌 Pull-up Resistor</div>Add a 10kΩ resistor between VCC and DATA pin. Most DHT11 modules already include this.</div>
+      </div>
+
+      <div class="block">
+        <h3>DHT11 Code with ESP32</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino C (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">#include</span> <span class="p">&lt;DHT.h&gt;</span>
+
+<span class="kw">#define</span> <span class="v">DHT_PIN</span>  <span class="v">4</span>
+<span class="kw">#define</span> <span class="v">DHT_TYPE</span> <span class="p">DHT11</span>
+
+<span class="a">DHT</span> <span class="v">dht</span>(<span class="v">DHT_PIN</span>, <span class="v">DHT_TYPE</span>);
+
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="a">Serial.begin</span>(<span class="v">115200</span>);
+  <span class="v">dht</span>.<span class="a">begin</span>();
+  <span class="a">Serial.println</span>(<span class="p">"DHT11 Ready!"</span>);
+}
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="a">delay</span>(<span class="v">2000</span>);  <span class="cm">// DHT11 needs 2 sec between reads</span>
+  
+  <span class="kw">float</span> <span class="v">temperature</span> = <span class="v">dht</span>.<span class="a">readTemperature</span>();
+  <span class="kw">float</span> <span class="v">humidity</span>    = <span class="v">dht</span>.<span class="a">readHumidity</span>();
+  
+  <span class="kw">if</span> (<span class="a">isnan</span>(<span class="v">temperature</span>) || <span class="a">isnan</span>(<span class="v">humidity</span>)) {
+    <span class="a">Serial.println</span>(<span class="p">"Sensor read error!"</span>);
+    <span class="kw">return</span>;
+  }
+  
+  <span class="a">Serial.print</span>(<span class="p">"Temperature: "</span>);
+  <span class="a">Serial.print</span>(<span class="v">temperature</span>);
+  <span class="a">Serial.print</span>(<span class="p">"°C  |  Humidity: "</span>);
+  <span class="a">Serial.print</span>(<span class="v">humidity</span>);
+  <span class="a">Serial.println</span>(<span class="p">"%"</span>);
+}</div>
+        </div>
+        <p><strong>Library needed:</strong> Install "DHT sensor library" by Adafruit in Arduino IDE's Library Manager.</p>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 3-3 -->
+    <div class="lesson-page" id="lesson-3-3">
+      <div class="lesson-tag">Module 3 · Lesson 3</div>
+      <h1 class="lesson-title">Motion & Proximity Sensors</h1>
+      <p class="lesson-intro">Motion and proximity sensors let your device know when something is near or moving. Essential for security systems, automatic lights, and presence detection.</p>
+
+      <div class="block">
+        <h3>PIR Sensor (Motion Detection)</h3>
+        <p>PIR = Passive Infrared Sensor. It detects movement by sensing changes in infrared radiation (heat) emitted by humans and animals. It doesn't emit anything — it passively listens.</p>
+        <ul>
+          <li>Detection range: up to 7 metres</li>
+          <li>Detection angle: ~110° cone</li>
+          <li>Output: Digital HIGH when motion detected</li>
+          <li>Operating voltage: 5V (most modules have a 3.3V-compatible output)</li>
+        </ul>
+        <div class="callout warn"><div class="callout-head">⚠️ Warm-up Time</div>PIR sensors take 30–60 seconds to warm up and stabilise after power-on. Don't check for motion immediately at startup.</div>
+      </div>
+
+      <div class="block">
+        <h3>PIR Code</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino C</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">int</span> <span class="v">pirPin</span>    = <span class="v">5</span>;
+<span class="kw">int</span> <span class="v">ledPin</span>    = <span class="v">13</span>;
+<span class="kw">int</span> <span class="v">pirState</span>  = <span class="p">LOW</span>;
+
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="a">pinMode</span>(<span class="v">pirPin</span>, <span class="p">INPUT</span>);
+  <span class="a">pinMode</span>(<span class="v">ledPin</span>, <span class="p">OUTPUT</span>);
+  <span class="a">Serial.begin</span>(<span class="v">9600</span>);
+  <span class="a">Serial.println</span>(<span class="p">"Warming up PIR sensor..."</span>);
+  <span class="a">delay</span>(<span class="v">30000</span>);  <span class="cm">// 30 sec warm-up</span>
+  <span class="a">Serial.println</span>(<span class="p">"PIR ready!"</span>);
+}
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="kw">int</span> <span class="v">val</span> = <span class="a">digitalRead</span>(<span class="v">pirPin</span>);
+  
+  <span class="kw">if</span> (<span class="v">val</span> == <span class="p">HIGH</span>) {
+    <span class="a">digitalWrite</span>(<span class="v">ledPin</span>, <span class="p">HIGH</span>);
+    <span class="kw">if</span> (<span class="v">pirState</span> == <span class="p">LOW</span>) {
+      <span class="a">Serial.println</span>(<span class="p">"🚨 Motion detected!"</span>);
+      <span class="v">pirState</span> = <span class="p">HIGH</span>;
+    }
+  } <span class="kw">else</span> {
+    <span class="a">digitalWrite</span>(<span class="v">ledPin</span>, <span class="p">LOW</span>);
+    <span class="kw">if</span> (<span class="v">pirState</span> == <span class="p">HIGH</span>) {
+      <span class="a">Serial.println</span>(<span class="p">"No motion."</span>);
+      <span class="v">pirState</span> = <span class="p">LOW</span>;
+    }
+  }
+}</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Ultrasonic Sensor (HC-SR04) — Distance Detection</h3>
+        <p>The HC-SR04 measures distance by sending ultrasonic pulses and timing the echo. Range: 2cm–400cm, accuracy ±3mm.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino C</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">#define</span> <span class="v">TRIG_PIN</span> <span class="v">9</span>
+<span class="kw">#define</span> <span class="v">ECHO_PIN</span> <span class="v">10</span>
+
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="a">Serial.begin</span>(<span class="v">9600</span>);
+  <span class="a">pinMode</span>(<span class="v">TRIG_PIN</span>, <span class="p">OUTPUT</span>);
+  <span class="a">pinMode</span>(<span class="v">ECHO_PIN</span>, <span class="p">INPUT</span>);
+}
+
+<span class="kw">long</span> <span class="a">getDistance</span>() {
+  <span class="a">digitalWrite</span>(<span class="v">TRIG_PIN</span>, <span class="p">LOW</span>);
+  <span class="a">delayMicroseconds</span>(<span class="v">2</span>);
+  <span class="a">digitalWrite</span>(<span class="v">TRIG_PIN</span>, <span class="p">HIGH</span>);
+  <span class="a">delayMicroseconds</span>(<span class="v">10</span>);
+  <span class="a">digitalWrite</span>(<span class="v">TRIG_PIN</span>, <span class="p">LOW</span>);
+  
+  <span class="kw">long</span> <span class="v">duration</span> = <span class="a">pulseIn</span>(<span class="v">ECHO_PIN</span>, <span class="p">HIGH</span>);
+  <span class="kw">return</span> <span class="v">duration</span> * <span class="v">0.034</span> / <span class="v">2</span>;  <span class="cm">// cm</span>
+}
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="kw">long</span> <span class="v">distance</span> = <span class="a">getDistance</span>();
+  <span class="a">Serial.print</span>(<span class="p">"Distance: "</span>);
+  <span class="a">Serial.print</span>(<span class="v">distance</span>);
+  <span class="a">Serial.println</span>(<span class="p">" cm"</span>);
+  <span class="a">delay</span>(<span class="v">500</span>);
+}</div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 3-4 -->
+    <div class="lesson-page" id="lesson-3-4">
+      <div class="lesson-tag">Module 3 · Lesson 4</div>
+      <h1 class="lesson-title">Light, Sound & Gas Sensors</h1>
+      <p class="lesson-intro">Light, sound, and gas sensors open up a new world of environmental sensing — perfect for smart city, safety, and home automation applications.</p>
+
+      <div class="block">
+        <h3>LDR — Light Dependent Resistor</h3>
+        <p>An LDR changes resistance based on light intensity. In bright light, resistance drops. In darkness, it rises significantly. Connect it with a 10kΩ resistor as a voltage divider to the analog input.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino C</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">int</span> <span class="v">ldrPin</span> = <span class="p">A0</span>;
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="kw">int</span> <span class="v">light</span> = <span class="a">analogRead</span>(<span class="v">ldrPin</span>);
+  <span class="kw">if</span> (<span class="v">light</span> < <span class="v">300</span>) {
+    <span class="a">Serial.println</span>(<span class="p">"It's dark — turn on the light!"</span>);
+  } <span class="kw">else</span> {
+    <span class="a">Serial.println</span>(<span class="p">"Enough light."</span>);
+  }
+  <span class="a">delay</span>(<span class="v">1000</span>);
+}</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Sound Sensor (KY-038)</h3>
+        <p>The KY-038 microphone module has both analog (sound level) and digital (threshold trigger) outputs. Use digital mode for clap detection, analog mode for measuring noise level.</p>
+        <div class="callout info"><div class="callout-head">🎙️ Use Case</div>Sound sensors are used in clap-activated switches, noise monitoring, and voice-activated triggers (not voice recognition — just sound presence detection).</div>
+      </div>
+
+      <div class="block">
+        <h3>MQ Gas Sensors</h3>
+        <p>The MQ series are affordable gas sensors, each calibrated for different gases:</p>
+        <div class="component-grid">
+          <div class="component-card"><div class="cc-icon">🔥</div><h4>MQ-2</h4><p>LPG, smoke, alcohol, propane</p></div>
+          <div class="component-card"><div class="cc-icon">💨</div><h4>MQ-3</h4><p>Alcohol (breathalyser)</p></div>
+          <div class="component-card"><div class="cc-icon">☠️</div><h4>MQ-7</h4><p>Carbon monoxide (CO)</p></div>
+          <div class="component-card"><div class="cc-icon">🌫️</div><h4>MQ-135</h4><p>Air quality (CO2, NH3, NOx)</p></div>
+        </div>
+        <div class="callout warn"><div class="callout-head">⚠️ Warm-up Required</div>MQ sensors need 20–60 seconds of warm-up after power-on before readings are accurate. They also draw 150–200mA — not suitable for battery power alone.</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino C</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">int</span> <span class="v">mq2Pin</span> = <span class="p">A0</span>;
+<span class="kw">int</span> <span class="v">threshold</span> = <span class="v">400</span>;  <span class="cm">// adjust for your environment</span>
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="kw">int</span> <span class="v">gasLevel</span> = <span class="a">analogRead</span>(<span class="v">mq2Pin</span>);
+  <span class="a">Serial.print</span>(<span class="p">"Gas level: "</span>);
+  <span class="a">Serial.println</span>(<span class="v">gasLevel</span>);
+  
+  <span class="kw">if</span> (<span class="v">gasLevel</span> > <span class="v">threshold</span>) {
+    <span class="a">Serial.println</span>(<span class="p">"⚠️ Gas detected! Alert!"</span>);
+    <span class="cm">// Trigger buzzer or send cloud alert</span>
+  }
+  <span class="a">delay</span>(<span class="v">1000</span>);
+}</div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 3-5 -->
+    <div class="lesson-page" id="lesson-3-5">
+      <div class="lesson-tag">Module 3 · Lesson 5</div>
+      <h1 class="lesson-title">Actuators: Motors, Relays & LEDs</h1>
+      <p class="lesson-intro">Sensors read the world; actuators change it. Actuators are the output side of IoT — they turn data into physical action.</p>
+
+      <div class="block">
+        <h3>Types of Actuators</h3>
+        <div class="component-grid">
+          <div class="component-card"><div class="cc-icon">💡</div><h4>LED</h4><p>Light indicator, status display, controllable lighting</p></div>
+          <div class="component-card"><div class="cc-icon">🔔</div><h4>Buzzer</h4><p>Audible alerts, alarms, simple tones</p></div>
+          <div class="component-card"><div class="cc-icon">⚡</div><h4>Relay</h4><p>Switch high-voltage loads (lights, fans, appliances)</p></div>
+          <div class="component-card"><div class="cc-icon">🔄</div><h4>DC Motor</h4><p>Rotation, wheels, fans, pumps</p></div>
+          <div class="component-card"><div class="cc-icon">🎯</div><h4>Servo Motor</h4><p>Precise angle control: doors, valves, robot joints</p></div>
+          <div class="component-card"><div class="cc-icon">💧</div><h4>Solenoid</h4><p>Electronic valve — open/close water/gas flow</p></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Relay Module — Controlling Mains Power</h3>
+        <p>A relay is an electrically operated switch. Your ESP32 (3.3V/5V) can control a relay, which then switches 230V AC mains safely. This is how smart plugs and smart switches work.</p>
+        <div class="callout danger"><div class="callout-head">⚠️ DANGER — High Voltage</div>The AC mains side of a relay carries 230V which is lethal. Never touch the AC wiring when powered. If you're not comfortable with mains wiring, use only low-voltage DC loads for learning.</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino C</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">int</span> <span class="v">relayPin</span> = <span class="v">8</span>;
+
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="a">pinMode</span>(<span class="v">relayPin</span>, <span class="p">OUTPUT</span>);
+  <span class="a">digitalWrite</span>(<span class="v">relayPin</span>, <span class="p">HIGH</span>);  <span class="cm">// Most relay modules: HIGH = OFF</span>
+}
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="a">digitalWrite</span>(<span class="v">relayPin</span>, <span class="p">LOW</span>);   <span class="cm">// Turn ON (activate relay)</span>
+  <span class="a">delay</span>(<span class="v">5000</span>);                   <span class="cm">// On for 5 seconds</span>
+  <span class="a">digitalWrite</span>(<span class="v">relayPin</span>, <span class="p">HIGH</span>);  <span class="cm">// Turn OFF</span>
+  <span class="a">delay</span>(<span class="v">5000</span>);                   <span class="cm">// Off for 5 seconds</span>
+}</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Servo Motor — Precise Positioning</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino C</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="kw">#include</span> <span class="p">&lt;Servo.h&gt;</span>
+
+<span class="a">Servo</span> <span class="v">myServo</span>;
+
+<span class="kw">void</span> <span class="a">setup</span>() {
+  <span class="v">myServo</span>.<span class="a">attach</span>(<span class="v">9</span>);  <span class="cm">// Servo signal wire to pin 9</span>
+}
+
+<span class="kw">void</span> <span class="a">loop</span>() {
+  <span class="v">myServo</span>.<span class="a">write</span>(<span class="v">0</span>);    <span class="cm">// Rotate to 0°</span>
+  <span class="a">delay</span>(<span class="v">1000</span>);
+  <span class="v">myServo</span>.<span class="a">write</span>(<span class="v">90</span>);   <span class="cm">// Rotate to 90°</span>
+  <span class="a">delay</span>(<span class="v">1000</span>);
+  <span class="v">myServo</span>.<span class="a">write</span>(<span class="v">180</span>);  <span class="cm">// Rotate to 180°</span>
+  <span class="a">delay</span>(<span class="v">1000</span>);
+}</div>
+        </div>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-q">What is the main purpose of a relay in an IoT system?</div>
+        <div class="quiz-opts">
+          <div class="quiz-opt">Measure current</div>
+          <div class="quiz-opt" data-correct>Switch high-voltage loads using a low-voltage signal</div>
+          <div class="quiz-opt">Amplify sensor signals</div>
+          <div class="quiz-opt">Store data temporarily</div>
+        </div>
+        <div class="quiz-feedback" data-ok>✅ Exactly right! A relay lets your 3.3V ESP32 safely control 230V appliances.</div>
+        <div class="quiz-feedback" data-bad>❌ Not quite. A relay is a switch — it lets a low-voltage MCU control high-voltage loads safely.</div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>

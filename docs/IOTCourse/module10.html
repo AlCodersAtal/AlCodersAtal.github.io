@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Module 10: Advanced IoT Projects — AlCoders IoT Course</title>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="breadcrumb"><span id="breadcrumb-text">Module 10</span></div>
+      <div class="topbar-nav">
+        <button class="nav-btn" onclick="prevLesson()">&#8592; Prev</button>
+        <button class="nav-btn" onclick="nextLesson()">Next &#8594;</button>
+      </div>
+    </div>
+
+    <!-- 10-1 -->
+    <div class="lesson-page active" id="lesson-10-1">
+      <span class="lesson-tag">Module 10 · Lesson 1</span>
+      <h1 class="lesson-title">Project: Smart Home Dashboard</h1>
+      <p class="lesson-intro">Build a multi-room smart home system: multiple ESP32 nodes send sensor data via MQTT to a Raspberry Pi hub, which runs Node-RED and displays a live dashboard with room temperatures, motion events, and device controls.</p>
+
+      <div class="block">
+        <h3>System Architecture</h3>
+        <ul>
+          <li><strong>ESP32 Node A</strong> (bedroom) — DHT11 temperature/humidity, publishes to <code>home/bedroom/temp</code></li>
+          <li><strong>ESP32 Node B</strong> (living room) — PIR motion + DHT11, publishes to <code>home/living/motion</code> and <code>home/living/temp</code></li>
+          <li><strong>Raspberry Pi</strong> — runs Mosquitto MQTT broker + Node-RED</li>
+          <li><strong>Node-RED Dashboard</strong> — charts, gauges, event log at <code>pi-ip:1880/ui</code></li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Multi-Room ESP32 Node Code</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino (ESP32 — Room Node)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">#include </span><span class="v">&lt;WiFi.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;PubSubClient.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;ArduinoJson.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;DHT.h&gt;</span>
+
+<span class="kw">const char</span>* mqttBroker = <span class="a">"192.168.1.100"</span>; <span class="cm">// Raspberry Pi IP</span>
+<span class="kw">const char</span>* roomId     = <span class="a">"bedroom"</span>;        <span class="cm">// change per node</span>
+
+<span class="t">DHT</span> dht(<span class="p">4</span>, <span class="p">DHT11</span>);
+<span class="t">WiFiClient</span> wc;
+<span class="t">PubSubClient</span> mqtt(wc);
+
+<span class="kw">void</span> <span class="t">setup</span>() {
+  dht.begin();
+  WiFi.begin(<span class="a">"SSID"</span>, <span class="a">"PASS"</span>);
+  <span class="kw">while</span> (WiFi.status() != <span class="v">WL_CONNECTED</span>) delay(<span class="p">500</span>);
+  mqtt.setServer(mqttBroker, <span class="p">1883</span>);
+  mqtt.connect(roomId); <span class="cm">// unique client ID per node</span>
+}
+
+<span class="kw">void</span> publishSensors() {
+  <span class="t">StaticJsonDocument</span>&lt;<span class="p">128</span>&gt; doc;
+  doc[<span class="a">"room"</span>]    = roomId;
+  doc[<span class="a">"temp"</span>]    = dht.readTemperature();
+  doc[<span class="a">"humidity"</span>] = dht.readHumidity();
+  doc[<span class="a">"uptime"</span>]   = millis() / <span class="p">1000</span>;
+
+  <span class="kw">char</span> buf[<span class="p">128</span>];
+  serializeJson(doc, buf);
+  <span class="t">String</span> topic = <span class="t">String</span>(<span class="a">"home/"</span>) + roomId + <span class="a">"/sensors"</span>;
+  mqtt.publish(topic.c_str(), buf);
+}
+
+<span class="kw">void</span> <span class="t">loop</span>() {
+  <span class="kw">if</span> (!mqtt.connected()) mqtt.connect(roomId);
+  mqtt.loop();
+  publishSensors();
+  delay(<span class="p">30000</span>);
+}</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Node-RED Flow Setup</h3>
+        <ol>
+          <li>Install Mosquitto on Raspberry Pi: <code>sudo apt install mosquitto mosquitto-clients</code></li>
+          <li>Install Node-RED: <code>bash &lt;(curl -sL https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered)</code></li>
+          <li>Install dashboard palette: <em>node-red-dashboard</em> from the palette manager</li>
+          <li>Add MQTT-in node → JSON node → Chart node for each room</li>
+          <li>Add a Text node for "Last motion detected" timestamps</li>
+          <li>Deploy and open <code>http://raspberry-pi-ip:1880/ui</code></li>
+        </ol>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-head">Unique MQTT Client IDs</div>
+        Each ESP32 node must connect with a unique client ID (e.g., "bedroom", "living-room"). If two devices use the same ID, one will kick the other off the broker.
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 10-2 -->
+    <div class="lesson-page" id="lesson-10-2">
+      <span class="lesson-tag">Module 10 · Lesson 2</span>
+      <h1 class="lesson-title">Project: GPS Asset Tracker</h1>
+      <p class="lesson-intro">Track the real-time location of a vehicle, bag, or pet using a GPS module + ESP32. Location is sent via MQTT or HTTP and plotted on a live Google Maps-powered web page.</p>
+
+      <div class="block">
+        <h3>Components Needed</h3>
+        <div class="component-grid">
+          <div class="component-card"><strong>ESP32</strong><br/>Wi-Fi (or add a SIM800L for cellular tracking)</div>
+          <div class="component-card"><strong>Neo-6M GPS Module</strong><br/>UART-based GPS receiver, ~5m accuracy</div>
+          <div class="component-card"><strong>Rechargeable Battery</strong><br/>18650 Li-ion with TP4056 charger</div>
+          <div class="component-card"><strong>Weatherproof Enclosure</strong><br/>To protect outdoor deployment</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>GPS Wiring (UART)</h3>
+        <table class="wiring">
+          <thead><tr><th>Neo-6M Pin</th><th>ESP32 Pin</th></tr></thead>
+          <tbody>
+            <tr><td>VCC</td><td>3.3V</td></tr>
+            <tr><td>GND</td><td>GND</td></tr>
+            <tr><td>TX</td><td>GPIO 16 (RX2)</td></tr>
+            <tr><td>RX</td><td>GPIO 17 (TX2)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="block">
+        <h3>GPS Parsing + Cloud Upload Code</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">#include </span><span class="v">&lt;TinyGPS++.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;WiFi.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;HTTPClient.h&gt;</span>
+
+<span class="t">TinyGPSPlus</span> gps;
+<span class="t">HardwareSerial</span> gpsSerial(<span class="p">2</span>); <span class="cm">// UART2</span>
+
+<span class="kw">void</span> <span class="t">setup</span>() {
+  Serial.begin(<span class="p">115200</span>);
+  gpsSerial.begin(<span class="p">9600</span>, <span class="v">SERIAL_8N1</span>, <span class="p">16</span>, <span class="p">17</span>);
+  WiFi.begin(<span class="a">"SSID"</span>, <span class="a">"PASS"</span>);
+  <span class="kw">while</span> (WiFi.status() != <span class="v">WL_CONNECTED</span>) delay(<span class="p">500</span>);
+}
+
+<span class="kw">void</span> sendLocation(<span class="kw">double</span> lat, <span class="kw">double</span> lng) {
+  <span class="t">HTTPClient</span> http;
+  <span class="t">String</span> url = <span class="t">String</span>(<span class="a">"https://api.thingspeak.com/update?api_key=YOUR_KEY"</span>)
+               + <span class="a">"&field1="</span> + lat + <span class="a">"&field2="</span> + lng;
+  http.begin(url);
+  http.GET();
+  http.end();
+}
+
+<span class="kw">void</span> <span class="t">loop</span>() {
+  <span class="kw">while</span> (gpsSerial.available())
+    gps.encode(gpsSerial.read());
+
+  <span class="kw">if</span> (gps.location.isUpdated() && gps.location.isValid()) {
+    <span class="kw">double</span> lat = gps.location.lat();
+    <span class="kw">double</span> lng = gps.location.lng();
+    Serial.printf(<span class="a">"Lat: %.6f, Lng: %.6f\n"</span>, lat, lng);
+    sendLocation(lat, lng);
+    delay(<span class="p">15000</span>); <span class="cm">// send every 15 seconds</span>
+  }
+}</div>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <div class="callout-head">First GPS Fix Takes Time</div>
+        Cold start (no previous fix) can take 1–5 minutes outdoors with clear sky view. Once a fix is acquired ("hot start"), subsequent fixes are much faster. The GPS LED blinks once per second when a fix is acquired.
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 10-3 -->
+    <div class="lesson-page" id="lesson-10-3">
+      <span class="lesson-tag">Module 10 · Lesson 3</span>
+      <h1 class="lesson-title">Project: Voice-Controlled IoT Devices</h1>
+      <p class="lesson-intro">Control your IoT devices with voice commands using Google Assistant and IFTTT. Say "Hey Google, turn on the fan" — and your ESP32 switches a relay.</p>
+
+      <div class="block">
+        <h3>How the Chain Works</h3>
+        <ul>
+          <li>You say a phrase to Google Assistant</li>
+          <li>Google Assistant triggers an IFTTT Applet</li>
+          <li>IFTTT publishes a message to an Adafruit IO feed via Webhooks</li>
+          <li>ESP32 subscribed to that feed receives the command and acts</li>
+        </ul>
+        <p>The total latency from voice to device is typically 1–3 seconds — good enough for home automation.</p>
+      </div>
+
+      <div class="block">
+        <h3>IFTTT Applet Setup</h3>
+        <ol>
+          <li>Create Applet: <strong>IF</strong> Google Assistant → "Say a phrase with a text ingredient"</li>
+          <li>Phrase: <em>"Turn $ the fan"</em> ($ = on/off)</li>
+          <li><strong>THEN</strong> Adafruit IO → Set feed value</li>
+          <li>Feed: <em>fan-control</em>, Value: <em>{{TextField}}</em></li>
+          <li>Repeat for lights, pump, etc.</li>
+        </ol>
+      </div>
+
+      <div class="block">
+        <h3>ESP32 — Subscribe and Control Relay</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino (ESP32)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">#include </span><span class="v">&lt;WiFi.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;Adafruit_MQTT.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;Adafruit_MQTT_Client.h&gt;</span>
+
+<span class="kw">#define</span> <span class="v">RELAY_PIN</span> <span class="p">26</span>
+<span class="kw">#define</span> <span class="v">AIO_USER</span>  <span class="a">"your_username"</span>
+<span class="kw">#define</span> <span class="v">AIO_KEY</span>   <span class="a">"your_aio_key"</span>
+
+<span class="t">WiFiClient</span> wc;
+<span class="t">Adafruit_MQTT_Client</span> mqtt(&wc, <span class="a">"io.adafruit.com"</span>, <span class="p">1883</span>, <span class="v">AIO_USER</span>, <span class="v">AIO_KEY</span>);
+<span class="t">Adafruit_MQTT_Subscribe</span> fanFeed(&mqtt, <span class="v">AIO_USER</span> <span class="a">"/feeds/fan-control"</span>);
+
+<span class="kw">void</span> <span class="t">setup</span>() {
+  pinMode(<span class="v">RELAY_PIN</span>, <span class="v">OUTPUT</span>);
+  digitalWrite(<span class="v">RELAY_PIN</span>, <span class="v">LOW</span>); <span class="cm">// relay off by default</span>
+  WiFi.begin(<span class="a">"SSID"</span>, <span class="a">"PASS"</span>);
+  <span class="kw">while</span> (WiFi.status() != <span class="v">WL_CONNECTED</span>) delay(<span class="p">500</span>);
+  mqtt.subscribe(&fanFeed);
+  mqtt.connect();
+}
+
+<span class="kw">void</span> <span class="t">loop</span>() {
+  <span class="kw">if</span> (!mqtt.connected()) mqtt.connect();
+
+  <span class="t">Adafruit_MQTT_Subscribe</span>* sub = mqtt.readSubscription(<span class="p">500</span>);
+  <span class="kw">if</span> (sub == &fanFeed) {
+    <span class="t">String</span> cmd = (<span class="kw">char</span>*)fanFeed.lastread;
+    cmd.toLowerCase();
+    <span class="kw">if</span> (cmd == <span class="a">"on"</span>) {
+      digitalWrite(<span class="v">RELAY_PIN</span>, <span class="v">HIGH</span>);
+      Serial.println(<span class="a">"Fan ON"</span>);
+    } <span class="kw">else if</span> (cmd == <span class="a">"off"</span>) {
+      digitalWrite(<span class="v">RELAY_PIN</span>, <span class="v">LOW</span>);
+      Serial.println(<span class="a">"Fan OFF"</span>);
+    }
+  }
+}</div>
+        </div>
+      </div>
+
+      <div class="callout warn">
+        <div class="callout-head">Relay Safety</div>
+        Relays switch mains voltage (220V in India). Always use a pre-built relay module with optocoupler isolation. Never touch relay terminals when the circuit is live. For classroom projects, only switch 5V/12V DC loads.
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 10-4 -->
+    <div class="lesson-page" id="lesson-10-4">
+      <span class="lesson-tag">Module 10 · Lesson 4</span>
+      <h1 class="lesson-title">Project: Industrial Environment Monitor</h1>
+      <p class="lesson-intro">Simulate an industrial IoT node: an ESP32 monitors temperature, humidity, gas levels, and machine vibration, publishes to AWS IoT Core via MQTT over TLS, and triggers SMS alerts when thresholds are crossed.</p>
+
+      <div class="block">
+        <h3>Sensor Suite</h3>
+        <div class="component-grid">
+          <div class="component-card"><strong>BME280</strong><br/>Temperature, humidity, pressure — I²C</div>
+          <div class="component-card"><strong>MQ-2 Gas Sensor</strong><br/>LPG, smoke, CO detection — analog</div>
+          <div class="component-card"><strong>MPU-6050 IMU</strong><br/>Accelerometer + gyroscope for vibration — I²C</div>
+          <div class="component-card"><strong>Buzzer</strong><br/>Local alarm — GPIO digital output</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Multi-Sensor JSON Payload</h3>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">Arduino (ESP32) — Payload Builder</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="t">#include </span><span class="v">&lt;ArduinoJson.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;Adafruit_BME280.h&gt;</span>
+<span class="t">#include </span><span class="v">&lt;Adafruit_MPU6050.h&gt;</span>
+
+<span class="t">Adafruit_BME280</span> bme;
+<span class="t">Adafruit_MPU6050</span> mpu;
+
+<span class="kw">void</span> buildAndPublish(<span class="t">PubSubClient</span>& mqtt) {
+  <span class="t">sensors_event_t</span> a, g, temp;
+  mpu.getEvent(&a, &g, &temp);
+
+  <span class="t">StaticJsonDocument</span>&lt;<span class="p">256</span>&gt; doc;
+  doc[<span class="a">"device"</span>]     = <span class="a">"factory-node-01"</span>;
+  doc[<span class="a">"temp"</span>]       = bme.readTemperature();
+  doc[<span class="a">"humidity"</span>]   = bme.readHumidity();
+  doc[<span class="a">"pressure"</span>]   = bme.readPressure() / <span class="p">100.0</span>;
+  doc[<span class="a">"gas_raw"</span>]    = analogRead(<span class="p">34</span>);
+  doc[<span class="a">"accel_x"</span>]   = a.acceleration.x;
+  doc[<span class="a">"accel_y"</span>]   = a.acceleration.y;
+  doc[<span class="a">"accel_z"</span>]   = a.acceleration.z;
+  doc[<span class="a">"timestamp"</span>] = millis();
+
+  <span class="kw">char</span> payload[<span class="p">256</span>];
+  serializeJson(doc, payload);
+  mqtt.publish(<span class="a">"factory/sensor/data"</span>, payload);
+
+  <span class="cm">// Local alarm for high gas levels</span>
+  <span class="kw">if</span> (doc[<span class="a">"gas_raw"</span>].as&lt;<span class="kw">int</span>&gt;() &gt; <span class="p">1800</span>) {
+    digitalWrite(<span class="p">25</span>, <span class="v">HIGH</span>); <span class="cm">// buzzer on</span>
+    delay(<span class="p">2000</span>);
+    digitalWrite(<span class="p">25</span>, <span class="v">LOW</span>);
+  }
+}</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>AWS IoT Rules Engine</h3>
+        <p>Once data arrives in AWS IoT Core, a Rules Engine SQL query can extract values and route them:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">AWS IoT Rule SQL</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <div class="code-body"><span class="cm">-- Route all sensor data to DynamoDB</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> <span class="a">'factory/sensor/data'</span>
+
+<span class="cm">-- Trigger SNS alert only when gas is high</span>
+<span class="kw">SELECT</span> device, gas_raw, timestamp
+<span class="kw">FROM</span> <span class="a">'factory/sensor/data'</span>
+<span class="kw">WHERE</span> gas_raw &gt; <span class="p">1800</span></div>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <div class="callout-head">AWS Free Tier</div>
+        AWS IoT Core free tier includes 500,000 messages/month and 2,250,000 minutes of connectivity. More than enough for a classroom project running for months.
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="next-btn" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- 10-5 -->
+    <div class="lesson-page" id="lesson-10-5">
+      <span class="lesson-tag">Module 10 · Lesson 5</span>
+      <h1 class="lesson-title">Capstone: Design Your Own IoT System</h1>
+      <p class="lesson-intro">Congratulations — you've reached the end of the AlCoders IoT course! This final lesson is your capstone: design and build a complete IoT solution of your own, from problem statement to working prototype.</p>
+
+      <div class="block">
+        <h3>The IoT Design Process</h3>
+        <ol>
+          <li><strong>Define the problem</strong> — What real-world problem are you solving? Who benefits?</li>
+          <li><strong>Identify sensors & actuators</strong> — What data do you need? What actions should the system take?</li>
+          <li><strong>Choose your platform</strong> — Cloud or local? MQTT or HTTP? Which dashboard?</li>
+          <li><strong>Design the data model</strong> — What JSON fields will you publish? What topics?</li>
+          <li><strong>Build incrementally</strong> — Get sensor reading working first. Add cloud. Add dashboard. Add alerts.</li>
+          <li><strong>Test edge cases</strong> — What happens when Wi-Fi drops? When sensors fail?</li>
+          <li><strong>Present and document</strong> — Write a README. Make a wiring diagram. Demo it!</li>
+        </ol>
+      </div>
+
+      <div class="block">
+        <h3>Capstone Project Ideas</h3>
+        <table>
+          <thead><tr><th>Project</th><th>Sensors</th><th>Platform</th><th>Impact</th></tr></thead>
+          <tbody>
+            <tr><td>School Air Quality Monitor</td><td>MQ-135 (CO₂), DHT22, dust sensor</td><td>ThingSpeak + Blynk alert</td><td>Alert teachers when CO₂ is high</td></tr>
+            <tr><td>Flood Early Warning</td><td>Ultrasonic HC-SR04, rain sensor</td><td>IFTTT → SMS</td><td>Alert community before flooding</td></tr>
+            <tr><td>Smart Irrigation</td><td>Soil moisture × 4, rain sensor</td><td>Adafruit IO + relay</td><td>Auto-water farm zones</td></tr>
+            <tr><td>Bicycle Anti-Theft</td><td>MPU-6050, GPS Neo-6M</td><td>Telegram bot alert</td><td>Alert owner if bike moves</td></tr>
+            <tr><td>Medicine Reminder Box</td><td>Servo, RTC DS3231, buzzer</td><td>Local (no cloud)</td><td>Dispense pill at set time</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="block">
+        <h3>Your IoT Journey — What You've Learned</h3>
+        <div class="component-grid">
+          <div class="component-card">🔌 <strong>Hardware</strong><br/>ESP32, Arduino, sensors, actuators, wiring, protocols (I²C, SPI, UART)</div>
+          <div class="component-card">📡 <strong>Connectivity</strong><br/>Wi-Fi, Bluetooth, MQTT, HTTP, REST APIs, cloud platforms</div>
+          <div class="component-card">☁️ <strong>Cloud</strong><br/>ThingSpeak, Adafruit IO, Blynk, AWS IoT Core, Node-RED</div>
+          <div class="component-card">🔒 <strong>Security</strong><br/>TLS, OTA updates, credential management, network segmentation</div>
+          <div class="component-card">📊 <strong>Data</strong><br/>JSON, logging, dashboards, alerts, IFTTT automation</div>
+          <div class="component-card">🛠️ <strong>Projects</strong><br/>Weather station, GPS tracker, smart home, voice control, industrial monitor</div>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-head">Keep Building!</div>
+        The best way to deepen your IoT skills is to build projects that solve real problems around you. Share your work on GitHub, enter the Atal Tinkering Marathon, or present at your school science fair. The maker community is waiting!
+      </div>
+
+      <div class="block">
+        <h3>Capstone Submission Checklist</h3>
+        <table>
+          <thead><tr><th>Item</th><th>Done?</th></tr></thead>
+          <tbody>
+            <tr><td>Problem statement written (1 paragraph)</td><td>☐</td></tr>
+            <tr><td>Block diagram of the system</td><td>☐</td></tr>
+            <tr><td>Wiring diagram / schematic</td><td>☐</td></tr>
+            <tr><td>Complete, commented Arduino code</td><td>☐</td></tr>
+            <tr><td>Working prototype demonstrated</td><td>☐</td></tr>
+            <tr><td>Cloud dashboard or alert working</td><td>☐</td></tr>
+            <tr><td>README with setup instructions</td><td>☐</td></tr>
+            <tr><td>Video demo (2–3 minutes)</td><td>☐</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="complete-btn" onclick="markDone(this)">🎉 Complete Course!</button>
+      </div>
+    </div>
+
+  </div><!-- .main -->
+</div><!-- .layout -->
+<script src="course.js"></script>
+</body>
+</html>
