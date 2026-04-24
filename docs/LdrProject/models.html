@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Project Models · AlCoders LDR Course</title>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<nav class="top-nav">
+  <button class="hamburger" aria-label="Menu">☰</button>
+  <a href="index.html" class="logo"><span class="logo-dot"></span>AlCoders</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="simulator.html">Simulator</a></li>
+    <li><a href="code.html">Code</a></li>
+    <li><a href="models.html" class="active">Projects</a></li>
+    <li><a href="quiz.html">Quiz</a></li>
+  </ul>
+  <a href="index.html" class="nav-start">← Home</a>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="breadcrumb">Projects › <span>6 Project Models</span></div>
+      <div class="topbar-nav">
+        <button class="nav-btn prev" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn next" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <div class="lesson-page active" data-id="models-1">
+      <span class="lesson-tag green">Projects · Build Ideas</span>
+      <h1 class="lesson-title">6 Projects to <em>Build</em></h1>
+      <p class="lesson-intro">From a simple auto lamp to a smart multi-sensor streetlight. Pick your level and start building.</p>
+
+      <div class="block">
+        <div class="models-grid">
+          <div class="model-card">
+            <div class="model-thumb" style="background:linear-gradient(135deg,#eff6ff,#dbeafe)">🌙</div>
+            <div class="model-info">
+              <div class="model-name">Auto Night Lamp</div>
+              <div class="model-desc">Classic starter. LED turns ON at dusk, OFF at dawn. Adjustable threshold via potentiometer.</div>
+              <div class="model-tags"><span class="model-tag">Beginner</span><span class="model-tag">1 LED</span><span class="model-tag">Threshold</span></div>
+            </div>
+          </div>
+          <div class="model-card">
+            <div class="model-thumb" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7)">📊</div>
+            <div class="model-info">
+              <div class="model-name">Light Meter Display</div>
+              <div class="model-desc">3 LEDs act as a visual light-level gauge — green, yellow, and red zones.</div>
+              <div class="model-tags"><span class="model-tag">Beginner</span><span class="model-tag">3 LEDs</span><span class="model-tag">Zones</span></div>
+            </div>
+          </div>
+          <div class="model-card">
+            <div class="model-thumb" style="background:linear-gradient(135deg,#fffbeb,#fef3c7)">🌟</div>
+            <div class="model-info">
+              <div class="model-name">Smooth PWM Dimmer</div>
+              <div class="model-desc">LED brightness inversely proportional to ambient light. Uses map() for silky dimming.</div>
+              <div class="model-tags"><span class="model-tag">Intermediate</span><span class="model-tag">PWM</span><span class="model-tag">map()</span></div>
+            </div>
+          </div>
+          <div class="model-card">
+            <div class="model-thumb" style="background:linear-gradient(135deg,#f0f9ff,#e0f2fe)">💻</div>
+            <div class="model-info">
+              <div class="model-name">Serial Plotter Logger</div>
+              <div class="model-desc">Stream LDR values to Arduino Serial Plotter for real-time graphing and calibration.</div>
+              <div class="model-tags"><span class="model-tag">Intermediate</span><span class="model-tag">Serial</span><span class="model-tag">Debug</span></div>
+            </div>
+          </div>
+          <div class="model-card">
+            <div class="model-thumb" style="background:linear-gradient(135deg,#fff1f2,#ffe4e6)">🚨</div>
+            <div class="model-info">
+              <div class="model-name">Light Alarm System</div>
+              <div class="model-desc">Trigger a buzzer and LED on sudden light change. Can be used as an anti-tamper sensor.</div>
+              <div class="model-tags"><span class="model-tag">Intermediate</span><span class="model-tag">Buzzer</span><span class="model-tag">Events</span></div>
+            </div>
+          </div>
+          <div class="model-card">
+            <div class="model-thumb" style="background:linear-gradient(135deg,#fdf4ff,#f3e8ff)">🎛</div>
+            <div class="model-info">
+              <div class="model-name">Smart Streetlight</div>
+              <div class="model-desc">Multiple LDRs + LED array with debounce, sensitivity pot, and averaging filter.</div>
+              <div class="model-tags"><span class="model-tag">Advanced</span><span class="model-tag">Multi-LDR</span><span class="model-tag">Debounce</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Difficulty Overview</div>
+        <div class="chart-section">
+          <div class="chart-row"><div class="chart-lbl">Auto Night Lamp</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:18%;background:var(--green)"></div></div><div class="chart-val">Easy</div></div>
+          <div class="chart-row"><div class="chart-lbl">Light Meter</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:28%;background:var(--green)"></div></div><div class="chart-val">Easy</div></div>
+          <div class="chart-row"><div class="chart-lbl">PWM Dimmer</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:46%;background:var(--accent)"></div></div><div class="chart-val">Medium</div></div>
+          <div class="chart-row"><div class="chart-lbl">Serial Logger</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:50%;background:var(--accent)"></div></div><div class="chart-val">Medium</div></div>
+          <div class="chart-row"><div class="chart-lbl">Light Alarm</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:65%;background:var(--accent2)"></div></div><div class="chart-val">Hard</div></div>
+          <div class="chart-row"><div class="chart-lbl">Smart Streetlight</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:85%;background:#dc2626"></div></div><div class="chart-val">Expert</div></div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="btn btn-primary" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="btn btn-outline" onclick="nextLesson()">Next: Quiz →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>

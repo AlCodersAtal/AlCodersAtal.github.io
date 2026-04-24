@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Course Quiz · AlCoders LDR Course</title>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<nav class="top-nav">
+  <button class="hamburger" aria-label="Menu">☰</button>
+  <a href="index.html" class="logo"><span class="logo-dot"></span>AlCoders</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="simulator.html">Simulator</a></li>
+    <li><a href="code.html">Code</a></li>
+    <li><a href="models.html">Projects</a></li>
+    <li><a href="quiz.html" class="active">Quiz</a></li>
+  </ul>
+  <a href="index.html" class="nav-start">← Home</a>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="breadcrumb">Quiz › <span>Knowledge Check</span></div>
+      <div class="topbar-nav">
+        <button class="nav-btn prev" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn next" onclick="nextLesson()" disabled>Next →</button>
+      </div>
+    </div>
+
+    <div class="lesson-page active" data-id="quiz-1">
+      <span class="lesson-tag purple">Knowledge Check · Quiz</span>
+      <h1 class="lesson-title">Course <em>Quiz</em></h1>
+      <p class="lesson-intro">Test your understanding of LDR circuits, Arduino coding, and circuit design. Score 4/4 to complete the course!</p>
+
+      <div class="block">
+        <!-- Q1 -->
+        <div class="quiz-box" data-question="q1">
+          <div class="quiz-q">1. When ambient light increases, what happens to an LDR's resistance?</div>
+          <div class="quiz-opts">
+            <button class="quiz-opt" data-correct="false">Resistance increases significantly</button>
+            <button class="quiz-opt" data-correct="true">Resistance decreases</button>
+            <button class="quiz-opt" data-correct="false">Resistance stays constant</button>
+            <button class="quiz-opt" data-correct="false">Resistance becomes infinite</button>
+          </div>
+          <div class="quiz-feedback" id="fb-q1">✓ Correct! LDRs are photoresistors — more photons = more free electrons = lower resistance. In the dark it can reach 1MΩ; in bright sunlight, just 1kΩ.</div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="quiz-box" data-question="q2">
+          <div class="quiz-q">2. Which Arduino function reads an analog pin and returns a value between 0 and 1023?</div>
+          <div class="quiz-opts">
+            <button class="quiz-opt" data-correct="false">digitalRead()</button>
+            <button class="quiz-opt" data-correct="true">analogRead()</button>
+            <button class="quiz-opt" data-correct="false">getAnalog()</button>
+            <button class="quiz-opt" data-correct="false">readPin()</button>
+          </div>
+          <div class="quiz-feedback" id="fb-q2">✓ Correct! analogRead() uses the 10-bit ADC to return 0–1023 from pins A0–A5. 0 = 0V, 1023 = 5V.</div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="quiz-box" data-question="q3">
+          <div class="quiz-q">3. Why is a 10kΩ resistor placed in series with the LDR?</div>
+          <div class="quiz-opts">
+            <button class="quiz-opt" data-correct="false">To make the LED glow brighter</button>
+            <button class="quiz-opt" data-correct="false">To filter electrical noise</button>
+            <button class="quiz-opt" data-correct="true">To form a voltage divider, converting resistance to a readable voltage</button>
+            <button class="quiz-opt" data-correct="false">To protect the LDR from overheating</button>
+          </div>
+          <div class="quiz-feedback" id="fb-q3">✓ Correct! The LDR + 10kΩ create a voltage divider. As LDR resistance changes with light, the midpoint voltage changes, which analogRead() measures.</div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="quiz-box" data-question="q4">
+          <div class="quiz-q">4. Which pins on Arduino Uno support analogWrite() for PWM output?</div>
+          <div class="quiz-opts">
+            <button class="quiz-opt" data-correct="false">Any digital pin (0–13)</button>
+            <button class="quiz-opt" data-correct="false">Only pin 13</button>
+            <button class="quiz-opt" data-correct="true">Only pins marked with ~ (3, 5, 6, 9, 10, 11)</button>
+            <button class="quiz-opt" data-correct="false">Only analog pins A0–A5</button>
+          </div>
+          <div class="quiz-feedback" id="fb-q4">✓ Correct! PWM is only available on the 6 pins marked with ~. Pin 13 (built-in LED) is NOT a PWM pin — always use pin 9, 10, or 11 for LED dimming.</div>
+        </div>
+
+        <!-- Score -->
+        <div class="quiz-score" id="quizScore">
+          <span class="score-big" id="scoreVal">0 / 4</span>
+          <span class="score-msg" id="scoreMsg"></span>
+        </div>
+
+        <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
+          <a href="module6.html" class="btn btn-ghost">← Review Module 6</a>
+          <a href="index.html" class="btn btn-outline">Back to Home →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>

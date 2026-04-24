@@ -34,8 +34,7 @@
     align-items: center;
     padding: 0 28px;
     transform: translateY(0);
-    transition: transform 0.38s cubic-bezier(.22,1,.36,1),
-                box-shadow 0.3s;
+    transition: transform 0.38s cubic-bezier(.22,1,.36,1), box-shadow 0.3s;
   }
   nav#mainNav::before {
     content: '';
@@ -45,10 +44,9 @@
     background: linear-gradient(90deg, var(--blue), var(--cyan), transparent 80%);
     opacity: 0.6;
   }
-  nav#mainNav.nav-hidden  { transform: translateY(calc(-1 * var(--nav-h) - 4px)); }
+  nav#mainNav.nav-hidden   { transform: translateY(calc(-1 * var(--nav-h) - 4px)); }
   nav#mainNav.nav-scrolled { box-shadow: 0 4px 32px rgba(24,119,243,0.13); }
 
-  /* Pushes page content below fixed nav */
   body { padding-top: var(--nav-h); }
 
   /* ─── BRAND ─────────────────────────────────── */
@@ -108,13 +106,10 @@
   }
   .nav-links > li > a:hover::after,
   .nav-links > li > a.nav-active::after { transform: scaleX(1); }
-  .nav-links > li > a:hover { color: var(--blue); background: rgba(24,119,243,0.06); }
+  .nav-links > li > a:hover      { color: var(--blue); background: rgba(24,119,243,0.06); }
   .nav-links > li > a.nav-active { color: var(--blue); background: rgba(24,119,243,0.07); }
 
-  .nav-dd-arrow {
-    font-size: 0.55rem; opacity: 0.5;
-    transition: transform 0.22s ease;
-  }
+  .nav-dd-arrow { font-size: 0.55rem; opacity: 0.5; transition: transform 0.22s ease; }
   .nav-links > li.nav-has-dd:hover .nav-dd-arrow { transform: rotate(180deg); }
 
   /* ─── DROPDOWN ──────────────────────────────── */
@@ -122,14 +117,11 @@
   .nav-dropdown {
     position: absolute; top: calc(100% + 8px); left: 0;
     background: #fff; border: 1px solid var(--border);
-    border-radius: 10px;
-    box-shadow: 0 12px 40px rgba(24,119,243,0.13);
-    min-width: 200px; list-style: none;
-    padding: 8px; margin: 0;
+    border-radius: 10px; box-shadow: 0 12px 40px rgba(24,119,243,0.13);
+    min-width: 200px; list-style: none; padding: 8px; margin: 0;
     opacity: 0; transform: translateY(-8px) scale(0.97);
     transform-origin: top left; pointer-events: none;
-    transition: opacity 0.22s cubic-bezier(.22,1,.36,1),
-                transform 0.22s cubic-bezier(.22,1,.36,1);
+    transition: opacity 0.22s cubic-bezier(.22,1,.36,1), transform 0.22s cubic-bezier(.22,1,.36,1);
   }
   .nav-links > li.nav-has-dd:hover .nav-dropdown {
     opacity: 1; transform: translateY(0) scale(1); pointer-events: auto;
@@ -147,9 +139,7 @@
   .nav-dd-sep { height: 1px; background: var(--border); margin: 6px 8px; }
 
   /* ─── RIGHT SIDE ─────────────────────────────── */
-  .nav-right {
-    display: flex; align-items: center; gap: 6px; margin-left: auto;
-  }
+  .nav-right { display: flex; align-items: center; gap: 6px; margin-left: auto; }
   .nav-icon-btn {
     width: 36px; height: 36px; border-radius: 8px;
     border: 1px solid var(--border); background: transparent;
@@ -161,8 +151,8 @@
   .nav-icon-btn:hover { background: rgba(24,119,243,0.07); color: var(--blue); border-color: rgba(24,119,243,0.25); }
   .nav-gear-btn { transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.35s; }
   .nav-gear-btn:hover { transform: rotate(65deg); background: rgba(24,119,243,0.07); color: var(--blue); border-color: rgba(24,119,243,0.25); }
-  .nav-gear-btn svg { width: 18px; height: 18px; fill: currentColor; }
 
+  /* ─── LOGIN / GREETING BUTTON ───────────────── */
   .nav-login-btn {
     display: inline-flex; align-items: center; gap: 7px;
     font-family: 'Rajdhani', sans-serif;
@@ -173,6 +163,7 @@
     border-radius: 7px; border: none; cursor: pointer;
     margin-left: 4px; position: relative; overflow: hidden;
     transition: background 0.18s, transform 0.14s, box-shadow 0.18s;
+    white-space: nowrap;
   }
   .nav-login-btn::after {
     content: ''; position: absolute; inset: 0;
@@ -182,10 +173,21 @@
   .nav-login-btn:hover::after { transform: translateX(100%); }
   .nav-login-btn:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(24,119,243,0.35); }
 
+  /* Greeting state */
+  .nav-login-btn.nav-greeting {
+    background: rgba(24,119,243,0.09);
+    color: var(--blue);
+    border: 1px solid rgba(24,119,243,0.25);
+  }
+  .nav-login-btn.nav-greeting:hover {
+    background: rgba(24,119,243,0.16);
+    box-shadow: none;
+    transform: translateY(-1px);
+  }
+
   /* ─── USER AVATAR ───────────────────────────── */
   .nav-avatar-wrap {
-    position: relative; display: none;
-    align-items: center; gap: 8px;
+    position: relative; display: none; align-items: center; gap: 8px;
   }
   .nav-avatar-wrap.nav-av-visible { display: flex; }
   .nav-avatar-circle {
@@ -215,17 +217,14 @@
     min-width: 200px; padding: 8px; list-style: none; margin: 0;
     opacity: 0; transform: translateY(-8px) scale(0.97);
     transform-origin: top right; pointer-events: none;
-    transition: opacity 0.22s cubic-bezier(.22,1,.36,1),
-                transform 0.22s cubic-bezier(.22,1,.36,1);
+    transition: opacity 0.22s cubic-bezier(.22,1,.36,1), transform 0.22s cubic-bezier(.22,1,.36,1);
   }
   .nav-avatar-wrap:hover .nav-av-dropdown {
     opacity: 1; transform: translateY(0) scale(1); pointer-events: auto;
   }
-  .nav-av-header {
-    padding: 10px 12px 8px; border-bottom: 1px solid var(--border); margin-bottom: 6px;
-  }
+  .nav-av-header { padding: 10px 12px 8px; border-bottom: 1px solid var(--border); margin-bottom: 6px; }
   .nav-av-uname { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1rem; color: var(--ink); }
-  .nav-av-role { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted); }
+  .nav-av-role  { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--muted); }
   .nav-av-dropdown li a {
     display: flex; align-items: center; gap: 10px;
     font-size: 0.88rem; color: var(--ink2); text-decoration: none;
@@ -251,17 +250,15 @@
     background: var(--ink2); border-radius: 2px;
     transition: transform 0.3s, opacity 0.3s, background 0.2s;
   }
-  .nav-hamburger.nav-hb-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--blue); }
+  .nav-hamburger.nav-hb-open span:nth-child(1) { transform: translateY(7px) rotate(45deg);  background: var(--blue); }
   .nav-hamburger.nav-hb-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
   .nav-hamburger.nav-hb-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--blue); }
 
   /* ─── SIDEBAR OVERLAY ───────────────────────── */
   .nav-overlay {
     position: fixed; inset: 0;
-    background: rgba(11,17,32,0.45);
-    backdrop-filter: blur(3px);
-    z-index: 998; opacity: 0; pointer-events: none;
-    transition: opacity 0.3s;
+    background: rgba(11,17,32,0.45); backdrop-filter: blur(3px);
+    z-index: 998; opacity: 0; pointer-events: none; transition: opacity 0.3s;
   }
   .nav-overlay.nav-ov-open { opacity: 1; pointer-events: auto; }
 
@@ -287,14 +284,9 @@
     display: flex; align-items: center; justify-content: center;
     font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.1rem; color: #fff;
   }
-  .nav-sb-brand-name {
-    font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--ink);
-  }
+  .nav-sb-brand-name { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--ink); }
   .nav-sb-brand-name span { color: var(--blue); }
-  .nav-sb-brand-sub {
-    font-family: 'IBM Plex Mono', monospace; font-size: 0.55rem;
-    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
-  }
+  .nav-sb-brand-sub { font-family: 'IBM Plex Mono', monospace; font-size: 0.55rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
   .nav-sb-close {
     margin-left: auto; width: 30px; height: 30px; border-radius: 6px;
     border: 1px solid var(--border); background: none; cursor: pointer;
@@ -319,15 +311,8 @@
   .nav-sb-uname { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--ink); }
   .nav-sb-urole { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); }
 
-  .nav-sb-section {
-    font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--muted); padding: 14px 18px 6px;
-  }
-  .nav-sb-links {
-    list-style: none; padding: 4px 10px; margin: 0;
-    display: flex; flex-direction: column; gap: 2px;
-  }
+  .nav-sb-section { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); padding: 14px 18px 6px; }
+  .nav-sb-links { list-style: none; padding: 4px 10px; margin: 0; display: flex; flex-direction: column; gap: 2px; }
   .nav-sb-links li a {
     display: flex; align-items: center; gap: 12px;
     font-family: 'Rajdhani', sans-serif; font-weight: 600;
@@ -423,25 +408,30 @@
         About Us <i class="fas fa-chevron-down nav-dd-arrow"></i>
       </a>
       <ul class="nav-dropdown">
-        <li><a href="about us.html#team">   <i class="fas fa-users"></i>       Our Team</a></li>
+        <li><a href="about us.html#team">    <i class="fas fa-users"></i>       Our Team</a></li>
         <li><a href="about us.html#mission1"><i class="fas fa-bullseye"></i>    Our Mission</a></li>
         <li class="nav-dd-sep"></li>
-        <li><a href="about us.html#aboutUs"><i class="fas fa-circle-info"></i> About AlCoders</a></li>
+        <li><a href="about us.html#aboutUs"> <i class="fas fa-circle-info"></i> About AlCoders</a></li>
       </ul>
     </li>
     <li><a href="More info.html" data-navpage="more">More Info</a></li>
   </ul>
 
   <div class="nav-right">
-    <a href="#" class="nav-icon-btn" onclick="showSearchPopup();return false;" title="Search">
+    <a href="#" class="nav-icon-btn" onclick="showSearchPopup(); return false;">
       <i class="fas fa-magnifying-glass"></i>
     </a>
     <a href="menu.html" class="nav-icon-btn nav-gear-btn" title="Settings">
       <i class="fas fa-gear"></i>
     </a>
+
+    <!-- Login / Greeting button — hidden on mobile via CSS -->
     <a href="loginpage.html" class="nav-login-btn" id="navLoginBtn">
-      <i class="fas fa-right-to-bracket"></i> <span>Login</span>
+      <i class="fas fa-right-to-bracket" id="navLoginIcon"></i>
+      <span id="navLoginBtnText">Login</span>
     </a>
+
+    <!-- Avatar dropdown — desktop only -->
     <div class="nav-avatar-wrap" id="navAvatarWrap">
       <div class="nav-avatar-circle" id="navAvatarInitial">A</div>
       <span class="nav-av-name" id="navUserName"></span>
@@ -450,8 +440,8 @@
           <div class="nav-av-uname" id="navAvDropName">AlCoder</div>
           <div class="nav-av-role">AlCoders Member</div>
         </div>
-        <li><a href="menu.html">    <i class="fas fa-gear"></i>                  Settings</a></li>
-        <li><a href="projects.html"><i class="fas fa-rocket"></i>                My Projects</a></li>
+        <li><a href="menu.html">     <i class="fas fa-gear"></i>                  Settings</a></li>
+        <li><a href="projects.html"> <i class="fas fa-rocket"></i>                My Projects</a></li>
         <li class="nav-dd-sep"></li>
         <li><a href="loginpage.html" class="nav-danger"><i class="fas fa-right-from-bracket"></i> Logout</a></li>
       </ul>
@@ -475,8 +465,7 @@
         nav.classList.toggle('nav-scrolled', y > 10);
         if (y > lastY && y > 80) nav.classList.add('nav-hidden');
         else nav.classList.remove('nav-hidden');
-        lastY = y;
-        ticking = false;
+        lastY = y; ticking = false;
       });
       ticking = true;
     }
@@ -485,8 +474,7 @@
 
 /* ── SIDEBAR ── */
 function navToggleSidebar() {
-  const open = document.getElementById('navSidebar').classList.contains('nav-sb-open');
-  open ? navCloseSidebar() : navOpenSidebar();
+  document.getElementById('navSidebar').classList.contains('nav-sb-open') ? navCloseSidebar() : navOpenSidebar();
 }
 function navOpenSidebar() {
   document.getElementById('navSidebar').classList.add('nav-sb-open');
@@ -513,20 +501,42 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') navCloseSide
   });
 })();
 
-/* ── USER AVATAR ── */
-(function(){
-  const username = localStorage.getItem('username');
-  if (!username) return;
-  const initial = username.charAt(0).toUpperCase();
-  document.getElementById('navLoginBtn').style.display = 'none';
+/* ── navSetUser ─────────────────────────────────────────────
+   Called by navAuth.js (loaded on each page as a normal
+   <script type="module">) once Firebase resolves the user.
+   Kept here so it runs in the page's global scope.
+─────────────────────────────────────────────────────────── */
+function navSetUser(name) {
+  if (!name) return;
+  const initial = name.charAt(0).toUpperCase();
+
+  /* Desktop: swap Login → "Hi, Name" */
+  const loginBtn  = document.getElementById('navLoginBtn');
+  const loginText = document.getElementById('navLoginBtnText');
+  const loginIcon = document.getElementById('navLoginIcon');
+  if (loginBtn && loginText && loginIcon) {
+    loginText.textContent = 'Hi, ' + name;
+    loginIcon.className   = 'fas fa-user';
+    loginBtn.href         = 'menu.html';
+    loginBtn.classList.add('nav-greeting');
+  }
+
+  /* Desktop: avatar circle + dropdown */
   const wrap = document.getElementById('navAvatarWrap');
-  wrap.classList.add('nav-av-visible');
-  document.getElementById('navAvatarInitial').textContent = initial;
-  document.getElementById('navUserName').textContent    = username;
-  document.getElementById('navAvDropName').textContent  = username;
-  document.getElementById('navSbUser').classList.add('nav-sb-user-visible');
-  document.getElementById('navSbAvInitial').textContent = initial;
-  document.getElementById('navSbUname').textContent     = username;
-  document.getElementById('navSbLoginWrap').style.display = 'none';
-})();
+  if (wrap) {
+    wrap.classList.add('nav-av-visible');
+    document.getElementById('navAvatarInitial').textContent = initial;
+    document.getElementById('navUserName').textContent      = name;
+    document.getElementById('navAvDropName').textContent    = name;
+  }
+
+  /* Mobile sidebar: show user panel, hide login button */
+  const sbUser = document.getElementById('navSbUser');
+  if (sbUser) {
+    sbUser.classList.add('nav-sb-user-visible');
+    document.getElementById('navSbAvInitial').textContent = initial;
+    document.getElementById('navSbUname').textContent     = name;
+    document.getElementById('navSbLoginWrap').style.display = 'none';
+  }
+}
 </script>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="module" content="1"/>
+<title>Module 1 — Introduction to LDR · AlCoders</title>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<nav class="top-nav">
+  <button class="hamburger" aria-label="Menu">☰</button>
+  <a href="index.html" class="logo"><span class="logo-dot"></span>AlCoders</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="simulator.html">Simulator</a></li>
+    <li><a href="code.html">Code</a></li>
+    <li><a href="models.html">Projects</a></li>
+    <li><a href="quiz.html">Quiz</a></li>
+  </ul>
+  <a href="index.html" class="nav-start">← Home</a>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="breadcrumb">Module 1 › <span>What is an LDR?</span></div>
+      <div class="topbar-nav">
+        <button class="nav-btn prev" onclick="prevLesson()" disabled>← Prev</button>
+        <button class="nav-btn next" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- LESSON 1-1 -->
+    <div class="lesson-page active" data-id="1-1">
+      <span class="lesson-tag">Theory · Module 1</span>
+      <h1 class="lesson-title">What is an <em>LDR</em>?</h1>
+      <p class="lesson-intro">Understand the physics behind light-dependent resistors before touching a single wire.</p>
+
+      <div class="block">
+        <div class="callout info">
+          <span class="callout-icon">💡</span>
+          <div class="callout-body">
+            <div class="callout-head">Key Concept</div>
+            <p>An LDR (Light Dependent Resistor), also called a photoresistor, is a component whose resistance <strong>decreases</strong> as light intensity increases.</p>
+          </div>
+        </div>
+        <div class="block-title">Core Properties</div>
+        <div class="component-grid">
+          <div class="component-card"><span class="component-icon">☀️</span><div class="component-name">In Bright Light</div><div class="component-desc">Resistance drops to as low as 1kΩ. Current flows easily through the circuit.</div></div>
+          <div class="component-card"><span class="component-icon">🌙</span><div class="component-name">In Darkness</div><div class="component-desc">Resistance rises up to 1MΩ. Current is heavily restricted.</div></div>
+          <div class="component-card"><span class="component-icon">⚡</span><div class="component-name">Photoconductivity</div><div class="component-desc">Photons knock electrons loose in semiconductor material, increasing free charge carriers.</div></div>
+          <div class="component-card"><span class="component-icon">🔬</span><div class="component-name">Material: CdS</div><div class="component-desc">Usually Cadmium Sulfide. Sensitive to visible light, peaking near 540nm (green-yellow).</div></div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="btn btn-primary" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="btn btn-outline" onclick="nextLesson()">Next Lesson →</button>
+      </div>
+    </div>
+
+    <!-- LESSON 1-2 -->
+    <div class="lesson-page" data-id="1-2">
+      <span class="lesson-tag">Theory · Module 1</span>
+      <h1 class="lesson-title">Resistance <em>Reference</em></h1>
+      <p class="lesson-intro">Know what analog values to expect from your LDR in different lighting conditions.</p>
+
+      <div class="block">
+        <div class="block-title">Resistance vs Light Reference Table</div>
+        <table>
+          <thead><tr><th>Condition</th><th>Light Level</th><th>Resistance</th><th>Arduino analogRead</th></tr></thead>
+          <tbody>
+            <tr><td>Full sunlight</td><td>Very bright</td><td class="pin-name">~1 kΩ</td><td class="pin-name">900–1023</td></tr>
+            <tr><td>Indoor daylight</td><td>Bright</td><td class="pin-name">~10 kΩ</td><td class="pin-name">600–900</td></tr>
+            <tr><td>Overcast room</td><td>Medium</td><td class="pin-name">~50 kΩ</td><td class="pin-name">300–600</td></tr>
+            <tr><td>Dim / twilight</td><td>Low</td><td class="pin-name">~200 kΩ</td><td class="pin-name">100–300</td></tr>
+            <tr><td>Complete darkness</td><td>None</td><td class="pin-name">~1 MΩ</td><td class="pin-name">0–100</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Real-World Applications</div>
+        <div class="component-grid">
+          <div class="component-card"><span class="component-icon">🌃</span><div class="component-name">Street Lights</div><div class="component-desc">Auto ON at dusk, OFF at dawn — no timer needed.</div></div>
+          <div class="component-card"><span class="component-icon">📸</span><div class="component-name">Camera Exposure</div><div class="component-desc">Older cameras set shutter time based on scene brightness.</div></div>
+          <div class="component-card"><span class="component-icon">🔆</span><div class="component-name">Screen Brightness</div><div class="component-desc">Phones auto-adjust display brightness based on ambient light.</div></div>
+          <div class="component-card"><span class="component-icon">🚨</span><div class="component-name">Alarm Systems</div><div class="component-desc">Detect laser beam breaks or sudden light changes.</div></div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="btn btn-primary" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="btn btn-outline" onclick="nextLesson()">Next: Circuit Wiring →</button>
+      </div>
+    </div>
+
+  </div><!-- .main -->
+</div><!-- .layout -->
+
+<script src="course.js"></script>
+</body>
+</html>

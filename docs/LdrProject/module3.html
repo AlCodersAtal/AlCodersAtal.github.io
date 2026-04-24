@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="module" content="3"/>
+<title>Module 3 — Analog Read & Threshold · AlCoders</title>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<nav class="top-nav">
+  <button class="hamburger" aria-label="Menu">☰</button>
+  <a href="index.html" class="logo"><span class="logo-dot"></span>AlCoders</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="simulator.html">Simulator</a></li>
+    <li><a href="code.html">Code</a></li>
+    <li><a href="models.html">Projects</a></li>
+    <li><a href="quiz.html">Quiz</a></li>
+  </ul>
+  <a href="index.html" class="nav-start">← Home</a>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="breadcrumb">Module 3 › <span>analogRead() Explained</span></div>
+      <div class="topbar-nav">
+        <button class="nav-btn prev" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn next" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- LESSON 3-1 -->
+    <div class="lesson-page active" data-id="3-1">
+      <span class="lesson-tag">Coding · Module 3</span>
+      <h1 class="lesson-title">analogRead() <em>Explained</em></h1>
+      <p class="lesson-intro">Understand the 10-bit ADC, voltage-to-number conversion, and how to set a useful darkness threshold.</p>
+
+      <div class="block">
+        <div class="callout info">
+          <span class="callout-icon">💡</span>
+          <div class="callout-body">
+            <div class="callout-head">What Does analogRead() Return?</div>
+            <p>analogRead(A0) returns a value from 0 to 1023 — 0 means 0V, 1023 means 5V. The LDR voltage divider converts light intensity into this range.</p>
+          </div>
+        </div>
+        <div class="step-list">
+          <div class="step-item"><div class="step-num">1</div><div class="step-content"><strong>10-Bit ADC</strong><span>Arduino has a 10-bit Analog-to-Digital Converter. 2¹⁰ = 1024 steps → values 0–1023.</span></div></div>
+          <div class="step-item"><div class="step-num">2</div><div class="step-content"><strong>Bright light → High value</strong><span>LDR resistance drops → voltage at A0 rises → analogRead returns ~900–1023.</span></div></div>
+          <div class="step-item"><div class="step-num">3</div><div class="step-content"><strong>Dark → Low value</strong><span>LDR resistance rises → voltage at A0 drops → analogRead returns ~0–200.</span></div></div>
+          <div class="step-item"><div class="step-num">4</div><div class="step-content"><strong>Setting a Threshold</strong><span>Pick a value (e.g. 500) — below this = dark → turn LED ON. Above = bright → LED OFF.</span></div></div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="btn btn-primary" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="btn btn-outline" onclick="nextLesson()">Next: Threshold Code →</button>
+      </div>
+    </div>
+
+    <!-- LESSON 3-2 -->
+    <div class="lesson-page" data-id="3-2">
+      <span class="lesson-tag">Coding · Module 3</span>
+      <h1 class="lesson-title">Threshold <em>Code</em></h1>
+      <p class="lesson-intro">Write your first LDR sketch — read the sensor, compare to threshold, switch the LED.</p>
+
+      <div class="block">
+        <div class="block-title">Basic Threshold Sketch</div>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">Arduino</span>
+            <span class="code-file">module3_threshold.ino</span>
+            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+          </div>
+          <div class="code-body"><span class="cmt">// Module 3 — Analog Read &amp; Threshold</span>
+
+<span class="kw">const int</span> <span class="var">ldrPin</span>    = A0;
+<span class="kw">const int</span> <span class="var">ledPin</span>    = 13;
+<span class="kw">const int</span> <span class="var">threshold</span> = 500; <span class="cmt">// Adjust based on your environment</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(<span class="var">ledPin</span>, OUTPUT);
+  <span class="fn">Serial</span>.<span class="fn">begin</span>(<span class="num">9600</span>);
+  <span class="fn">Serial</span>.<span class="fn">println</span>(<span class="str">"LDR Monitor started..."</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">int</span> <span class="var">ldrValue</span> = <span class="fn">analogRead</span>(<span class="var">ldrPin</span>);
+
+  <span class="fn">Serial</span>.<span class="fn">print</span>(<span class="str">"LDR Value: "</span>);
+  <span class="fn">Serial</span>.<span class="fn">print</span>(<span class="var">ldrValue</span>);
+  <span class="fn">Serial</span>.<span class="fn">print</span>(<span class="str">"  |  Status: "</span>);
+
+  <span class="kw">if</span> (<span class="var">ldrValue</span> &lt; <span class="var">threshold</span>) {
+    <span class="fn">digitalWrite</span>(<span class="var">ledPin</span>, HIGH);
+    <span class="fn">Serial</span>.<span class="fn">println</span>(<span class="str">"DARK - LED ON"</span>);
+  } <span class="kw">else</span> {
+    <span class="fn">digitalWrite</span>(<span class="var">ledPin</span>, LOW);
+    <span class="fn">Serial</span>.<span class="fn">println</span>(<span class="str">"BRIGHT - LED OFF"</span>);
+  }
+
+  <span class="fn">delay</span>(<span class="num">200</span>); <span class="cmt">// Read every 200ms</span>
+}</div>
+        </div>
+        <div class="callout warn">
+          <span class="callout-icon">⚠️</span>
+          <div class="callout-body">
+            <div class="callout-head">Calibration Tip</div>
+            <p>Open the Serial Monitor (Ctrl+Shift+M) at 9600 baud. Cover the LDR with your hand and note the value — that's your "dark" reading. Use the midpoint between bright and dark as your threshold.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="btn btn-primary" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="btn btn-outline" onclick="nextLesson()">Next: PWM Brightness →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>

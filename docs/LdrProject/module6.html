@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="module" content="6"/>
+<title>Module 6 — Final Project · AlCoders</title>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<nav class="top-nav">
+  <button class="hamburger" aria-label="Menu">☰</button>
+  <a href="index.html" class="logo"><span class="logo-dot"></span>AlCoders</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="simulator.html">Simulator</a></li>
+    <li><a href="code.html">Code</a></li>
+    <li><a href="models.html">Projects</a></li>
+    <li><a href="quiz.html">Quiz</a></li>
+  </ul>
+  <a href="index.html" class="nav-start">← Home</a>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="breadcrumb">Module 6 › <span>Final Project Intro</span></div>
+      <div class="topbar-nav">
+        <button class="nav-btn prev" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn next" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- LESSON 6-1 -->
+    <div class="lesson-page active" data-id="6-1">
+      <span class="lesson-tag warm">Project · Module 6</span>
+      <h1 class="lesson-title">Final Project <em>Intro</em></h1>
+      <p class="lesson-intro">Build a production-quality automatic night lamp with adjustable sensitivity, debounce filtering, and clean code structure.</p>
+
+      <div class="block">
+        <div class="callout warn">
+          <span class="callout-icon">🏆</span>
+          <div class="callout-body">
+            <div class="callout-head">Project: Auto Night Lamp</div>
+            <p>This final project combines everything: voltage divider wiring, analogRead, PWM brightness, debounce filtering, and adjustable threshold using a potentiometer.</p>
+          </div>
+        </div>
+        <div class="block-title">Extra Components Needed</div>
+        <div class="step-list">
+          <div class="step-item"><div class="step-num">+</div><div class="step-content"><strong>10kΩ Potentiometer</strong><span>Wiper to A1 pin. Used to set the darkness threshold dynamically without re-uploading code.</span></div></div>
+          <div class="step-item"><div class="step-num">+</div><div class="step-content"><strong>100µF Capacitor (optional)</strong><span>In parallel with LDR to smooth out rapid fluctuations from flickering lights or electrical noise.</span></div></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">What Makes This Production-Quality?</div>
+        <div class="project-box">
+          <div class="project-box-title">Quality Checklist</div>
+          <div class="project-steps">
+            <ol>
+              <li><strong>Smoothed Readings</strong> — 10-sample averaging eliminates noise spikes from fluorescent lights and electrical interference.</li>
+              <li><strong>Debounce Filter</strong> — Prevents rapid ON/OFF flicker when the LDR value hovers right at the threshold boundary.</li>
+              <li><strong>Adjustable Threshold</strong> — Potentiometer allows threshold adjustment (200–800) without modifying or re-uploading code.</li>
+              <li><strong>Proportional Brightness</strong> — LED dims smoothly based on how dark it is — brighter in deep dark, dimmer near the threshold.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="btn btn-primary" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="btn btn-outline" onclick="nextLesson()">Next: Full Code →</button>
+      </div>
+    </div>
+
+    <!-- LESSON 6-2 -->
+    <div class="lesson-page" data-id="6-2">
+      <span class="lesson-tag warm">Project · Module 6</span>
+      <h1 class="lesson-title">Full Project <em>Code</em></h1>
+      <p class="lesson-intro">The complete night_lamp_final.ino — copy, upload, and you're done.</p>
+
+      <div class="block">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">Arduino</span>
+            <span class="code-file">night_lamp_final.ino</span>
+            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+          </div>
+          <div class="code-body"><span class="cmt">// ===========================================</span>
+<span class="cmt">// AUTO NIGHT LAMP — Final Project</span>
+<span class="cmt">// Features: PWM dimming, adjustable threshold,</span>
+<span class="cmt">// debounce filter, Serial Monitor output</span>
+<span class="cmt">// ===========================================</span>
+
+<span class="kw">const int</span> <span class="var">ldrPin</span>     = A0; <span class="cmt">// LDR voltage divider</span>
+<span class="kw">const int</span> <span class="var">potPin</span>     = A1; <span class="cmt">// Potentiometer for threshold</span>
+<span class="kw">const int</span> <span class="var">ledPin</span>     = <span class="num">9</span>;  <span class="cmt">// PWM LED pin</span>
+
+<span class="kw">const int</span> <span class="var">SAMPLES</span>     = <span class="num">10</span>;  <span class="cmt">// Readings to average</span>
+<span class="kw">const int</span> <span class="var">DEBOUNCE_MS</span> = <span class="num">300</span>; <span class="cmt">// State debounce time</span>
+
+<span class="kw">bool</span>          <span class="var">ledState</span>   = <span class="kw">false</span>;
+<span class="kw">unsigned long</span> <span class="var">lastChange</span> = <span class="num">0</span>;
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(<span class="var">ledPin</span>, OUTPUT);
+  <span class="fn">Serial</span>.<span class="fn">begin</span>(<span class="num">9600</span>);
+  <span class="fn">Serial</span>.<span class="fn">println</span>(<span class="str">"Night Lamp Ready"</span>);
+}
+
+<span class="cmt">// Average multiple readings to reduce noise</span>
+<span class="kw">int</span> <span class="fn">smoothRead</span>(<span class="kw">int</span> <span class="var">pin</span>) {
+  <span class="kw">long</span> <span class="var">sum</span> = <span class="num">0</span>;
+  <span class="kw">for</span> (<span class="kw">int</span> <span class="var">i</span> = <span class="num">0</span>; <span class="var">i</span> &lt; <span class="var">SAMPLES</span>; <span class="var">i</span>++) {
+    <span class="var">sum</span> += <span class="fn">analogRead</span>(<span class="var">pin</span>);
+    <span class="fn">delay</span>(<span class="num">2</span>);
+  }
+  <span class="kw">return</span> <span class="var">sum</span> / <span class="var">SAMPLES</span>;
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">int</span> <span class="var">ldrValue</span>  = <span class="fn">smoothRead</span>(<span class="var">ldrPin</span>);
+  <span class="kw">int</span> <span class="var">potValue</span>  = <span class="fn">analogRead</span>(<span class="var">potPin</span>);
+  <span class="kw">int</span> <span class="var">threshold</span> = <span class="fn">map</span>(<span class="var">potValue</span>, <span class="num">0</span>, <span class="num">1023</span>, <span class="num">200</span>, <span class="num">800</span>);
+
+  <span class="kw">bool</span> <span class="var">shouldBeOn</span> = (<span class="var">ldrValue</span> &lt; <span class="var">threshold</span>);
+
+  <span class="cmt">// Debounce: only change state after DEBOUNCE_MS</span>
+  <span class="kw">if</span> (<span class="var">shouldBeOn</span> != <span class="var">ledState</span>) {
+    <span class="kw">if</span> (<span class="fn">millis</span>() - <span class="var">lastChange</span> &gt; <span class="var">DEBOUNCE_MS</span>) {
+      <span class="var">ledState</span>   = <span class="var">shouldBeOn</span>;
+      <span class="var">lastChange</span> = <span class="fn">millis</span>();
+    }
+  }
+
+  <span class="kw">if</span> (<span class="var">ledState</span>) {
+    <span class="kw">int</span> <span class="var">brightness</span> = <span class="fn">map</span>(<span class="var">ldrValue</span>, <span class="num">0</span>, <span class="var">threshold</span>, <span class="num">255</span>, <span class="num">50</span>);
+    <span class="var">brightness</span> = <span class="fn">constrain</span>(<span class="var">brightness</span>, <span class="num">0</span>, <span class="num">255</span>);
+    <span class="fn">analogWrite</span>(<span class="var">ledPin</span>, <span class="var">brightness</span>);
+  } <span class="kw">else</span> {
+    <span class="fn">analogWrite</span>(<span class="var">ledPin</span>, <span class="num">0</span>);
+  }
+
+  <span class="fn">Serial</span>.<span class="fn">print</span>(<span class="str">"LDR:"</span>);   <span class="fn">Serial</span>.<span class="fn">print</span>(<span class="var">ldrValue</span>);
+  <span class="fn">Serial</span>.<span class="fn">print</span>(<span class="str">" Thr:"</span>);  <span class="fn">Serial</span>.<span class="fn">print</span>(<span class="var">threshold</span>);
+  <span class="fn">Serial</span>.<span class="fn">print</span>(<span class="str">" LED:"</span>);  <span class="fn">Serial</span>.<span class="fn">println</span>(<span class="var">ledState</span> ? <span class="str">"ON"</span> : <span class="str">"OFF"</span>);
+}</div>
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <span class="callout-icon">🎉</span>
+        <div class="callout-body">
+          <div class="callout-head">Congratulations!</div>
+          <p>You've completed all 6 modules. Take the quiz to test your knowledge and earn your course completion badge.</p>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="btn btn-primary" onclick="markDone(this)">Mark Complete ✓</button>
+        <a href="quiz.html" class="btn btn-outline">Take the Quiz →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>

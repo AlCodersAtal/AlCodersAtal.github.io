@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="module" content="5"/>
+<title>Module 5 — Multiple LEDs & Patterns · AlCoders</title>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<nav class="top-nav">
+  <button class="hamburger" aria-label="Menu">☰</button>
+  <a href="index.html" class="logo"><span class="logo-dot"></span>AlCoders</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="simulator.html">Simulator</a></li>
+    <li><a href="code.html">Code</a></li>
+    <li><a href="models.html">Projects</a></li>
+    <li><a href="quiz.html">Quiz</a></li>
+  </ul>
+  <a href="index.html" class="nav-start">← Home</a>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="breadcrumb">Module 5 › <span>Light Meter Zones</span></div>
+      <div class="topbar-nav">
+        <button class="nav-btn prev" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn next" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- LESSON 5-1 -->
+    <div class="lesson-page active" data-id="5-1">
+      <span class="lesson-tag adv">Advanced · Module 5</span>
+      <h1 class="lesson-title">Light Meter <em>Zones</em></h1>
+      <p class="lesson-intro">Control three LEDs to create a visual light-level meter — each LED represents a lighting zone.</p>
+
+      <div class="block">
+        <div class="block-title">3-Zone Light Indicator</div>
+        <div class="led-zones">
+          <div class="led-zone"><div class="zone-dot g"></div><strong>Green LED</strong><span>Bright light<br>LDR &gt; 700</span></div>
+          <div class="led-zone"><div class="zone-dot y"></div><strong>Yellow LED</strong><span>Medium light<br>LDR 300–700</span></div>
+          <div class="led-zone"><div class="zone-dot r"></div><strong>Red LED</strong><span>Dark / dim<br>LDR &lt; 300</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Wiring the Extra LEDs</div>
+        <div class="step-list">
+          <div class="step-item"><div class="step-num" style="background:rgba(34,197,94,.15);color:#16a34a">G</div><div class="step-content"><strong>Green LED → Pin 11</strong><span>Anode through 220Ω to pin 11, cathode to GND.</span></div></div>
+          <div class="step-item"><div class="step-num" style="background:rgba(234,179,8,.15);color:#b45309">Y</div><div class="step-content"><strong>Yellow LED → Pin 10</strong><span>Anode through 220Ω to pin 10, cathode to GND.</span></div></div>
+          <div class="step-item"><div class="step-num" style="background:rgba(239,68,68,.15);color:#dc2626">R</div><div class="step-content"><strong>Red LED → Pin 9</strong><span>Anode through 220Ω to pin 9, cathode to GND.</span></div></div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="btn btn-primary" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="btn btn-outline" onclick="nextLesson()">Next: 3-LED Code →</button>
+      </div>
+    </div>
+
+    <!-- LESSON 5-2 -->
+    <div class="lesson-page" data-id="5-2">
+      <span class="lesson-tag adv">Advanced · Module 5</span>
+      <h1 class="lesson-title">3-LED <em>Code</em></h1>
+      <p class="lesson-intro">Clean, elegant Arduino code using boolean comparisons directly in digitalWrite() calls.</p>
+
+      <div class="block">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">Arduino</span>
+            <span class="code-file">module5_meter.ino</span>
+            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+          </div>
+          <div class="code-body"><span class="cmt">// Module 5 — 3-LED Light Meter</span>
+
+<span class="kw">const int</span> <span class="var">ldrPin</span>    = A0;
+<span class="kw">const int</span> <span class="var">ledGreen</span>  = <span class="num">11</span>; <span class="cmt">// Bright</span>
+<span class="kw">const int</span> <span class="var">ledYellow</span> = <span class="num">10</span>; <span class="cmt">// Medium</span>
+<span class="kw">const int</span> <span class="var">ledRed</span>    = <span class="num">9</span>;  <span class="cmt">// Dark</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(<span class="var">ledGreen</span>,  OUTPUT);
+  <span class="fn">pinMode</span>(<span class="var">ledYellow</span>, OUTPUT);
+  <span class="fn">pinMode</span>(<span class="var">ledRed</span>,    OUTPUT);
+  <span class="fn">Serial</span>.<span class="fn">begin</span>(<span class="num">9600</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">int</span> <span class="var">val</span> = <span class="fn">analogRead</span>(<span class="var">ldrPin</span>);
+  <span class="fn">Serial</span>.<span class="fn">println</span>(<span class="var">val</span>);
+
+  <span class="fn">digitalWrite</span>(<span class="var">ledGreen</span>,  <span class="var">val</span> &gt; <span class="num">700</span>);
+  <span class="fn">digitalWrite</span>(<span class="var">ledYellow</span>, (<span class="var">val</span> &gt;= <span class="num">300</span>) &amp;&amp; (<span class="var">val</span> &lt;= <span class="num">700</span>));
+  <span class="fn">digitalWrite</span>(<span class="var">ledRed</span>,    <span class="var">val</span> &lt; <span class="num">300</span>);
+
+  <span class="fn">delay</span>(<span class="num">100</span>);
+}</div>
+        </div>
+        <div class="callout tip">
+          <span class="callout-icon">✨</span>
+          <div class="callout-body">
+            <div class="callout-head">Clean Code Trick</div>
+            <p>In Arduino, <code>true</code> = HIGH = 1 and <code>false</code> = LOW = 0. Passing a boolean comparison directly to digitalWrite() is perfectly valid — and much more readable than an if/else chain.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="btn btn-primary" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="btn btn-outline" onclick="nextLesson()">Next: Final Project →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>

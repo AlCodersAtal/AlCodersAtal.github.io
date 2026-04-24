@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Live Simulator · AlCoders LDR Course</title>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<nav class="top-nav">
+  <button class="hamburger" aria-label="Menu">☰</button>
+  <a href="index.html" class="logo"><span class="logo-dot"></span>AlCoders</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="simulator.html" class="active">Simulator</a></li>
+    <li><a href="code.html">Code</a></li>
+    <li><a href="models.html">Projects</a></li>
+    <li><a href="quiz.html">Quiz</a></li>
+  </ul>
+  <a href="index.html" class="nav-start">← Home</a>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="breadcrumb">Tools › <span>Live Simulator</span></div>
+      <div class="topbar-nav">
+        <button class="nav-btn prev" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn next" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <div class="lesson-page active" data-id="sim-1">
+      <span class="lesson-tag purple">Interactive · Tools</span>
+      <h1 class="lesson-title">Live <em>Simulator</em></h1>
+      <p class="lesson-intro">Drag the slider and watch the LDR, analog values, and LED respond in real time — exactly like your Arduino circuit.</p>
+
+      <div class="block">
+        <div class="callout info">
+          <span class="callout-icon">⚡</span>
+          <div class="callout-body">
+            <div class="callout-head">How It Works</div>
+            <p>This simulator mirrors your actual Arduino circuit. Cover the LDR → resistance rises → LED turns on. Shine light → resistance falls → LED turns off.</p>
+          </div>
+        </div>
+
+        <div class="sim-panel">
+          <div class="sim-header">
+            <span class="sim-title-label">LDR → Arduino A0 → LED (Pin 9)</span>
+            <div class="sim-live"><div class="sim-dot"></div> Running</div>
+          </div>
+          <div class="sim-body">
+            <!-- Visualisation -->
+            <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+              <div class="ldr-viz">
+                <div class="ldr-sun" id="sunIcon">☀️</div>
+                <div class="ldr-connector"></div>
+                <div class="ldr-chip dark" id="ldrChip">
+                  <div class="ldr-spiral" id="ldrSpiral"></div>
+                </div>
+              </div>
+              <div class="sim-arrow-wrap">
+                <div class="sim-arrow-line"></div>
+                <div class="sim-arrow-lbl">Arduino</div>
+              </div>
+              <div class="led-viz">
+                <div class="led-dome" id="ledDome"></div>
+                <div class="led-legs"><div class="led-leg"></div><div class="led-leg"></div></div>
+                <div class="led-label-text" id="ledLabel">LED OFF</div>
+              </div>
+            </div>
+            <!-- Controls -->
+            <div class="sim-controls">
+              <div class="ctrl-row">
+                <span class="ctrl-label">Ambient Light Level</span>
+                <span class="ctrl-val" id="lightPct">50%</span>
+              </div>
+              <input type="range" class="sim-slider" id="lightSlider" min="0" max="100" value="50">
+              <div class="readings-grid">
+                <div class="reading-card">
+                  <div class="reading-lbl">LDR Resistance</div>
+                  <div class="reading-val blue" id="ldrRes">—</div>
+                </div>
+                <div class="reading-card">
+                  <div class="reading-lbl">Analog Read</div>
+                  <div class="reading-val" id="analogVal">—</div>
+                </div>
+                <div class="reading-card">
+                  <div class="reading-lbl">LED Status</div>
+                  <div class="reading-val grn" id="ledStatus">—</div>
+                </div>
+                <div class="reading-card">
+                  <div class="reading-lbl">LED Brightness</div>
+                  <div class="reading-val" id="ledBright">—</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">Resistance vs Light Intensity</div>
+        <div class="chart-section">
+          <div class="chart-row"><div class="chart-lbl">Full sunlight</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:4%;background:var(--accent)"></div></div><div class="chart-val">1 kΩ</div></div>
+          <div class="chart-row"><div class="chart-lbl">Indoor light</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:15%;background:var(--accent)"></div></div><div class="chart-val">10 kΩ</div></div>
+          <div class="chart-row"><div class="chart-lbl">Dim light</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:40%;background:var(--accent2)"></div></div><div class="chart-val">100 kΩ</div></div>
+          <div class="chart-row"><div class="chart-lbl">Twilight</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:65%;background:#7c3aed"></div></div><div class="chart-val">300 kΩ</div></div>
+          <div class="chart-row"><div class="chart-lbl">Complete dark</div><div class="chart-bar-wrap"><div class="chart-bar" style="width:100%;background:#dc2626"></div></div><div class="chart-val">1 MΩ</div></div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="btn btn-primary" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="btn btn-outline" onclick="nextLesson()">Next: Code Reference →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>

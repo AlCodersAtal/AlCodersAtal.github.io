@@ -906,6 +906,27 @@
         const data = snap.exists() ? snap.data() : {};
 
         const name  = data.name || user.displayName || 'User';
+        localStorage.setItem('alcName', name);
+        localStorage.setItem('alcName', name);
+
+// Update nav greeting instantly without page reload
+const loginBtn  = document.getElementById('navLoginBtn');
+const loginText = document.getElementById('navLoginBtnText');
+const loginIcon = document.getElementById('navLoginIcon');
+if (loginBtn && loginText && loginIcon) {
+  loginText.textContent = 'Hi, ' + name;
+  loginIcon.className   = 'fas fa-user';
+  loginBtn.href         = 'menu.html';
+  loginBtn.classList.add('nav-greeting');
+}
+const wrap = document.getElementById('navAvatarWrap');
+if (wrap) {
+  const initial = name.charAt(0).toUpperCase();
+  wrap.classList.add('nav-av-visible');
+  document.getElementById('navAvatarInitial').textContent = initial;
+  document.getElementById('navUserName').textContent      = name;
+  document.getElementById('navAvDropName').textContent    = name;
+}
         const uname = data.username || '';
         currentUsername = uname;
 

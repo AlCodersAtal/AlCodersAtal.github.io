@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="module" content="4"/>
+<title>Module 4 — PWM LED Brightness · AlCoders</title>
+<link rel="stylesheet" href="course.css"/>
+</head>
+<body>
+<nav class="top-nav">
+  <button class="hamburger" aria-label="Menu">☰</button>
+  <a href="index.html" class="logo"><span class="logo-dot"></span>AlCoders</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="simulator.html">Simulator</a></li>
+    <li><a href="code.html">Code</a></li>
+    <li><a href="models.html">Projects</a></li>
+    <li><a href="quiz.html">Quiz</a></li>
+  </ul>
+  <a href="index.html" class="nav-start">← Home</a>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar"></aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="breadcrumb">Module 4 › <span>What is PWM?</span></div>
+      <div class="topbar-nav">
+        <button class="nav-btn prev" onclick="prevLesson()">← Prev</button>
+        <button class="nav-btn next" onclick="nextLesson()">Next →</button>
+      </div>
+    </div>
+
+    <!-- LESSON 4-1 -->
+    <div class="lesson-page active" data-id="4-1">
+      <span class="lesson-tag">Coding · Module 4</span>
+      <h1 class="lesson-title">What is <em>PWM</em>?</h1>
+      <p class="lesson-intro">Pulse-Width Modulation lets you simulate analog output on digital pins — the key to smooth LED dimming.</p>
+
+      <div class="block">
+        <div class="callout info">
+          <span class="callout-icon">💡</span>
+          <div class="callout-body">
+            <div class="callout-head">PWM in a Nutshell</div>
+            <p>PWM rapidly switches a pin ON/OFF. The percentage of time it's ON (duty cycle) controls perceived brightness. 0% = off, 100% = full brightness. analogWrite() accepts 0–255.</p>
+          </div>
+        </div>
+        <div class="step-list">
+          <div class="step-item"><div class="step-num">~</div><div class="step-content"><strong>PWM Pins on Uno</strong><span>Only pins marked ~ support analogWrite(): 3, 5, 6, 9, 10, 11. Move your LED from pin 13 to pin 9.</span></div></div>
+          <div class="step-item"><div class="step-num">↔</div><div class="step-content"><strong>map() Function</strong><span>map(value, fromLow, fromHigh, toLow, toHigh) scales one range to another. Perfect for LDR → brightness.</span></div></div>
+          <div class="step-item"><div class="step-num">✅</div><div class="step-content"><strong>constrain() Function</strong><span>constrain(x, min, max) clamps a value within bounds — prevents values going outside 0–255.</span></div></div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="btn btn-primary" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="btn btn-outline" onclick="nextLesson()">Next: PWM Code →</button>
+      </div>
+    </div>
+
+    <!-- LESSON 4-2 -->
+    <div class="lesson-page" data-id="4-2">
+      <span class="lesson-tag">Coding · Module 4</span>
+      <h1 class="lesson-title">PWM Code &amp; <em>map()</em></h1>
+      <p class="lesson-intro">Use analogWrite() and map() to smoothly dim your LED in inverse proportion to ambient light.</p>
+
+      <div class="block">
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">Arduino</span>
+            <span class="code-file">module4_pwm.ino</span>
+            <button class="code-copy" onclick="copyCode(this)">Copy</button>
+          </div>
+          <div class="code-body"><span class="cmt">// Module 4 — Smooth PWM LED Brightness</span>
+<span class="cmt">// Move LED wire from pin 13 to pin 9 (~)</span>
+
+<span class="kw">const int</span> <span class="var">ldrPin</span> = A0;
+<span class="kw">const int</span> <span class="var">ledPin</span> = <span class="num">9</span>; <span class="cmt">// Must be a PWM pin ~</span>
+
+<span class="kw">void</span> <span class="fn">setup</span>() {
+  <span class="fn">pinMode</span>(<span class="var">ledPin</span>, OUTPUT);
+  <span class="fn">Serial</span>.<span class="fn">begin</span>(<span class="num">9600</span>);
+}
+
+<span class="kw">void</span> <span class="fn">loop</span>() {
+  <span class="kw">int</span> <span class="var">ldrValue</span>   = <span class="fn">analogRead</span>(<span class="var">ldrPin</span>);
+
+  <span class="cmt">// Invert: dark (low LDR value) = bright LED</span>
+  <span class="kw">int</span> <span class="var">brightness</span> = <span class="fn">map</span>(<span class="var">ldrValue</span>, <span class="num">0</span>, <span class="num">1023</span>, <span class="num">255</span>, <span class="num">0</span>);
+  <span class="var">brightness</span> = <span class="fn">constrain</span>(<span class="var">brightness</span>, <span class="num">0</span>, <span class="num">255</span>);
+
+  <span class="fn">analogWrite</span>(<span class="var">ledPin</span>, <span class="var">brightness</span>);
+
+  <span class="fn">Serial</span>.<span class="fn">print</span>(<span class="str">"LDR="</span>);
+  <span class="fn">Serial</span>.<span class="fn">print</span>(<span class="var">ldrValue</span>);
+  <span class="fn">Serial</span>.<span class="fn">print</span>(<span class="str">"  Brightness="</span>);
+  <span class="fn">Serial</span>.<span class="fn">println</span>(<span class="var">brightness</span>);
+
+  <span class="fn">delay</span>(<span class="num">50</span>); <span class="cmt">// Faster loop for smooth dimming</span>
+}</div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title">How map() Works Here</div>
+        <div class="step-list">
+          <div class="step-item"><div class="step-num">→</div><div class="step-content"><strong>ldrValue = 0 (pitch dark)</strong><span>map(0, 0, 1023, 255, 0) → brightness = 255 → LED fully ON</span></div></div>
+          <div class="step-item"><div class="step-num">→</div><div class="step-content"><strong>ldrValue = 512 (half light)</strong><span>map(512, 0, 1023, 255, 0) → brightness ≈ 128 → LED at half brightness</span></div></div>
+          <div class="step-item"><div class="step-num">→</div><div class="step-content"><strong>ldrValue = 1023 (full light)</strong><span>map(1023, 0, 1023, 255, 0) → brightness = 0 → LED fully OFF</span></div></div>
+        </div>
+      </div>
+
+      <div class="lesson-footer">
+        <button class="btn btn-primary" onclick="markDone(this)">Mark Complete ✓</button>
+        <button class="btn btn-outline" onclick="nextLesson()">Next: Multiple LEDs →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script src="course.js"></script>
+</body>
+</html>
